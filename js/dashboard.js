@@ -184,10 +184,61 @@ async function loadMathsProgress(){
     }
 
 }
+// =========================================================
+// LOAD ADDITIONAL MATHS PROGRESS
+// =========================================================
 
+async function loadAddMathsProgress(){
+
+    const docRef =
+        doc(db, "subjects", "addmaths");
+
+    const docSnap =
+        await getDoc(docRef);
+
+    if(docSnap.exists()){
+
+        const addMathsData =
+            docSnap.data();
+
+        let total =
+            addMathsData.chapters.length;
+
+        let completed =
+            addMathsData.chapters.filter(
+                chapter =>
+                    chapter.status === "Completed"
+            ).length;
+
+        let percent = 0;
+
+        if(total > 0){
+
+            percent =
+                Math.round(
+                    completed / total * 100
+                );
+
+        }
+
+        document.getElementById(
+            "addMathsProgressBar"
+        ).style.width =
+            percent + "%";
+
+        document.getElementById(
+            "addMathsProgressText"
+        ).innerText =
+            percent + "% Completed";
+
+    }
+
+}
 
 // =========================================================
 // START
 // =========================================================
 
 loadMathsProgress();
+
+loadAddMathsProgress();
