@@ -1,0 +1,108 @@
+// =========================================================
+// FILE: data/maths_progress.json
+// =========================================================
+{
+  "subject": "Maths",
+  "chapters": [
+
+    {
+      "form": "T2",
+      "chapter": "Patterns+Seq",
+      "chinese": "规律与数列",
+      "status": "Not Started",
+      "confidence": 0,
+      "last_updated": "2026-05-17"
+    },
+
+    {
+      "form": "T2",
+      "chapter": "Factorisation",
+      "chinese": "因式分解",
+      "status": "Not Started",
+      "confidence": 0,
+      "last_updated": "2026-05-17"
+    },
+
+    {
+      "form": "T2",
+      "chapter": "Algegraic Formulae",
+      "chinese": "代数公式",
+      "status": "Not Started",
+      "confidence": 0,
+      "last_updated": "2026-05-17"
+    },
+
+    {
+      "form": "T2",
+      "chapter": "Poligon",
+      "chinese": "多边形",
+      "status": "Not Started",
+      "confidence": 0,
+      "last_updated": "2026-05-17"
+    },
+
+    {
+      "form": "T2",
+      "chapter": "Circles",
+      "chinese": "圆",
+      "status": "Not Started",
+      "confidence": 0,
+      "last_updated": "2026-05-17"
+    },
+
+    {
+      "form": "T2",
+      "chapter": "3D Geo",
+      "chinese": "三维几何",
+      "status": "Not Started",
+      "confidence": 0,
+      "last_updated": "2026-05-17"
+    },
+
+    {
+      "form": "T2",
+      "chapter": "Coor",
+      "chinese": "坐标",
+      "status": "Not Started",
+      "confidence": 0,
+      "last_updated": "2026-05-17"
+    },
+
+    {
+      "form": "T2",
+      "chapter": "Graphs of Func",
+      "chinese": "函数图像",
+      "status": "Not Started",
+      "confidence": 0,
+      "last_updated": "2026-05-17"
+    },
+
+    {
+      "form": "T2",
+      "chapter": "Speed + Accer",
+      "chinese": "速度与加速度",
+      "status": "Not Started",
+      "confidence": 0,
+      "last_updated": "2026-05-17"
+    },
+
+    {
+      "form": "T4",
+      "chapter": "Quadratics Functions",
+      "chinese": "二次函数",
+      "status": "Not Started",
+      "confidence": 0,
+      "last_updated": "2026-05-17"
+    },
+
+    {
+      "form": "T5",
+      "chapter": "Matrices",
+      "chinese": "矩阵",
+      "status": "Not Started",
+      "confidence": 0,
+      "last_updated": "2026-05-17"
+    }
+
+  ]
+}
