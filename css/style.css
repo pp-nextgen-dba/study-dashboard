@@ -231,65 +231,84 @@ h2{
 
 }
 
+/* ===================================================== */
+/* STRATEGY SECTION SMALLER FONT */
+/* ===================================================== */
 
-/* ========================================================= */
-/* STRATEGY */
-/* ========================================================= */
-
-.strategy-box{
-
-    background:white;
-
-    padding:12px;
-
-    border-radius:10px;
-
-    box-shadow:0 2px 6px rgba(0,0,0,0.08);
-
-}
-
-
-.strategy-box ul{
-
-    padding-left:18px;
-
-    margin:0;
-
-}
-
-
-.strategy-box li{
-
-    margin-bottom:6px;
-
-    font-size:12px;
-
+.strategy-section h2{
+    font-size:20px;
 }
 
 .strategy-item{
     background:white;
-    padding:18px;
-    margin-bottom:20px;
-    border-radius:12px;
-    box-shadow:0 2px 8px rgba(0,0,0,0.08);
+    padding:14px;
+    margin-bottom:16px;
+    border-radius:10px;
+    box-shadow:0 2px 6px rgba(0,0,0,0.06);
 }
 
 .strategy-item h3{
     color:#0d6efd;
-    margin-bottom:10px;
+    margin-bottom:8px;
+    font-size:16px;
+}
+
+.strategy-item p{
+    font-size:13px;
+    line-height:1.6;
+    color:#444;
 }
 
 .strategy-item ul{
-    padding-left:20px;
+    padding-left:18px;
+}
+
+.strategy-item li{
+    font-size:13px;
+    margin-bottom:4px;
+    line-height:1.5;
 }
 
 .highlight-box{
     background:#f8f9fa;
     border-left:4px solid #0d6efd;
-    padding:12px;
-    margin-top:12px;
+    padding:10px;
+    margin-top:10px;
     border-radius:8px;
+    font-size:12px;
+    line-height:1.5;
 }
+
+
+/* ===================================================== */
+/* MOBILE OPTIMIZATION */
+/* ===================================================== */
+
+@media(max-width:768px){
+
+    .strategy-section h2{
+        font-size:18px;
+    }
+
+    .strategy-item{
+        padding:12px;
+    }
+
+    .strategy-item h3{
+        font-size:14px;
+    }
+
+    .strategy-item p,
+    .strategy-item li{
+        font-size:12px;
+    }
+
+    .highlight-box{
+        font-size:11px;
+    }
+
+}
+
 /* ========================================================= */
 /* TABLE */
 /* ========================================================= */
