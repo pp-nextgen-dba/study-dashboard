@@ -1,7 +1,52 @@
 // =========================================================
-// FILE: js/dashboard.js
-// FULL REPLACEMENT VERSION
+// FIREBASE IMPORTS
 // =========================================================
+
+import {
+    initializeApp
+}
+from
+"https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+
+import {
+    getFirestore,
+    doc,
+    getDoc
+}
+from
+"https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+
+// =========================================================
+// FIREBASE CONFIG
+// =========================================================
+
+const firebaseConfig = {
+
+    apiKey: "YOUR_API_KEY",
+
+    authDomain: "YOUR_AUTH_DOMAIN",
+
+    projectId: "YOUR_PROJECT_ID",
+
+    storageBucket: "YOUR_STORAGE_BUCKET",
+
+    messagingSenderId: "YOUR_MESSAGING_ID",
+
+    appId: "YOUR_APP_ID"
+
+};
+
+
+// =========================================================
+// INITIALIZE
+// =========================================================
+
+const app =
+    initializeApp(firebaseConfig);
+
+const db =
+    getFirestore(app);
 
 
 // =========================================================
@@ -54,12 +99,11 @@ const exams = [
 
 
 // =========================================================
-// EXAM COUNTDOWN
+// EXAM DISPLAY
 // =========================================================
 
 const examCards =
     document.getElementById("examCards");
-
 
 exams.forEach(exam => {
 
@@ -86,17 +130,13 @@ exams.forEach(exam => {
 
     card.innerHTML = `
 
-        <h3>
-            ${exam.name}
-        </h3>
+        <h3>${exam.name}</h3>
 
         <div class="days">
             ${diffDays}
         </div>
 
-        <p>
-            Days Remaining
-        </p>
+        <p>Days Remaining</p>
 
     `;
 
@@ -105,72 +145,55 @@ exams.forEach(exam => {
 });
 
 
-
 // =========================================================
-// MATHS PROGRESS
-// =========================================================
-
-let mathsData =
-    JSON.parse(
-        localStorage.getItem("mathsProgress")
-    );
-
-
-// =========================================================
-// IF DATA EXISTS
+// LOAD MATHS PROGRESS
 // =========================================================
 
-if(mathsData){
+async function loadMathsProgress(){
 
-    let total =
-        mathsData.chapters.length;
+    const docRef =
+        doc(db, "subjects", "maths");
 
-    let completed =
-        mathsData.chapters.filter(
-            chapter =>
-                chapter.status === "Completed"
-        ).length;
+    const docSnap =
+        await getDoc(docRef);
 
-    let percent =
-        Math.round(
-            completed / total * 100
-        );
+    if(docSnap.exists()){
 
+        const mathsData =
+            docSnap.data();
 
-    // =====================================================
-    // UPDATE BAR
-    // =====================================================
+        let total =
+            mathsData.chapters.length;
 
-    document.getElementById(
-        "mathsProgressBar"
-    ).style.width =
-        percent + "%";
+        let completed =
+            mathsData.chapters.filter(
+                chapter =>
+                    chapter.status === "Completed"
+            ).length;
 
+        let percent =
+            Math.round(
+                completed /
+                total * 100
+            );
 
-    // =====================================================
-    // UPDATE TEXT
-    // =====================================================
+        document.getElementById(
+            "mathsProgressBar"
+        ).style.width =
+            percent + "%";
 
-    document.getElementById(
-        "mathsProgressText"
-    ).innerText =
-        percent + "% Completed";
+        document.getElementById(
+            "mathsProgressText"
+        ).innerText =
+            percent + "% Completed";
 
-
-}else{
-
-
-    // =====================================================
-    // NO DATA YET
-    // =====================================================
-
-    document.getElementById(
-        "mathsProgressBar"
-    ).style.width = "0%";
-
-    document.getElementById(
-        "mathsProgressText"
-    ).innerText =
-        "0% Completed";
+    }
 
 }
+
+
+// =========================================================
+// START
+// =========================================================
+
+loadMathsProgress();
