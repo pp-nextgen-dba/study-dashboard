@@ -1,5 +1,5 @@
 <!-- ===================================================== -->
-<!-- MODERN SUBJECT DASHBOARD UI -->
+<!-- FULL MATHS DASHBOARD -->
 <!-- SAVE AS: subjects/maths.html -->
 <!-- ===================================================== -->
 
@@ -16,7 +16,7 @@ content="width=device-width, initial-scale=1.0">
 <title>Maths Progress Dashboard</title>
 
 <link rel="stylesheet"
-href="../css/style.css?v=10">
+href="../css/style.css?v=20">
 
 <style>
 
@@ -272,9 +272,7 @@ body{
 
 <div class="container">
 
-    <!-- ================================================= -->
     <!-- SUMMARY -->
-    <!-- ================================================= -->
 
     <div class="summary-grid">
 
@@ -304,9 +302,7 @@ body{
 
     </div>
 
-    <!-- ================================================= -->
     <!-- LEGEND -->
-    <!-- ================================================= -->
 
     <div class="legend">
 
@@ -329,18 +325,12 @@ body{
 
     </div>
 
-    <!-- ================================================= -->
     <!-- CONTENT -->
-    <!-- ================================================= -->
 
     <div id="content"></div>
 
 </div>
 
-
-<!-- ===================================================== -->
-<!-- FIREBASE -->
-<!-- ===================================================== -->
 
 <script type="module">
 
@@ -398,46 +388,291 @@ const db =
 
 const defaultData = {
 
-    subject:"Maths",
+subject:"Maths",
 
-    chapters:[
+chapters:[
 
-        {
-            form:"Form 2",
-            chapter:"Patterns & Sequences",
-            chinese:"规律与数列",
-            status:"In Progress"
-        },
+{
+form:"Form 2",
+chapter:"Patterns & Sequences",
+chinese:"规律与数列",
+status:"Not Started"
+},
 
-        {
-            form:"Form 2",
-            chapter:"Factorisation",
-            chinese:"因式分解",
-            status:"Not Started"
-        },
+{
+form:"Form 2",
+chapter:"Factorisation",
+chinese:"因式分解",
+status:"Not Started"
+},
 
-        {
-            form:"Form 2",
-            chapter:"Algebraic Formulae",
-            chinese:"代数公式",
-            status:"Mastered"
-        },
+{
+form:"Form 2",
+chapter:"Algebraic Formulae",
+chinese:"代数公式",
+status:"Not Started"
+},
 
-        {
-            form:"Form 2",
-            chapter:"Polygon",
-            chinese:"多边形",
-            status:"Mastered"
-        },
+{
+form:"Form 2",
+chapter:"Polygon",
+chinese:"多边形",
+status:"Not Started"
+},
 
-        {
-            form:"Form 2",
-            chapter:"Circles",
-            chinese:"圆",
-            status:"Mastered"
-        }
+{
+form:"Form 2",
+chapter:"Circles",
+chinese:"圆",
+status:"Not Started"
+},
 
-    ]
+{
+form:"Form 2",
+chapter:"3D Geometry",
+chinese:"三维几何",
+status:"Not Started"
+},
+
+{
+form:"Form 2",
+chapter:"Coordinates",
+chinese:"坐标",
+status:"Not Started"
+},
+
+{
+form:"Form 2",
+chapter:"Graphs of Functions",
+chinese:"函数图像",
+status:"Not Started"
+},
+
+{
+form:"Form 2",
+chapter:"Speed & Acceleration",
+chinese:"速度与加速度",
+status:"Not Started"
+},
+
+{
+form:"Form 2",
+chapter:"Gradient of Straight Lines",
+chinese:"斜率与直线方程",
+status:"Not Started"
+},
+
+{
+form:"Form 2",
+chapter:"Isometric Transformation",
+chinese:"等距变换",
+status:"Not Started"
+},
+
+{
+form:"Form 2",
+chapter:"Measures of Circle",
+chinese:"圆的测量",
+status:"Not Started"
+},
+
+{
+form:"Form 2",
+chapter:"Probability",
+chinese:"概率",
+status:"Not Started"
+},
+
+{
+form:"Form 3",
+chapter:"Indices",
+chinese:"指数",
+status:"Not Started"
+},
+
+{
+form:"Form 3",
+chapter:"Standard Form",
+chinese:"标准形式",
+status:"Not Started"
+},
+
+{
+form:"Form 3",
+chapter:"Consumer Investment",
+chinese:"消费数学：投资",
+status:"Not Started"
+},
+
+{
+form:"Form 3",
+chapter:"Scale Drawings",
+chinese:"比例绘图",
+status:"Not Started"
+},
+
+{
+form:"Form 3",
+chapter:"Trigonometric Ratios",
+chinese:"三角比",
+status:"Not Started"
+},
+
+{
+form:"Form 3",
+chapter:"Angles & Tangents of Circles",
+chinese:"圆的角与切线",
+status:"Not Started"
+},
+
+{
+form:"Form 3",
+chapter:"Plans & Elevations",
+chinese:"平面图与立体图",
+status:"Not Started"
+},
+
+{
+form:"Form 3",
+chapter:"Loci in 2 Dimensions",
+chinese:"二维轨迹",
+status:"Not Started"
+},
+
+{
+form:"Form 3",
+chapter:"Straight Lines",
+chinese:"直线",
+status:"Not Started"
+},
+
+{
+form:"Form 4",
+chapter:"Quadratic Functions",
+chinese:"二次函数",
+status:"Not Started"
+},
+
+{
+form:"Form 4",
+chapter:"Bases",
+chinese:"数制",
+status:"Not Started"
+},
+
+{
+form:"Form 4",
+chapter:"Logical Reasoning",
+chinese:"逻辑推理",
+status:"Not Started"
+},
+
+{
+form:"Form 4",
+chapter:"Sets",
+chinese:"集合",
+status:"Not Started"
+},
+
+{
+form:"Form 4",
+chapter:"Graph Networks",
+chinese:"图论网络",
+status:"Not Started"
+},
+
+{
+form:"Form 4",
+chapter:"Linear Inequalities",
+chinese:"线性不等式",
+status:"Not Started"
+},
+
+{
+form:"Form 4",
+chapter:"Motion Graphs",
+chinese:"运动图像",
+status:"Not Started"
+},
+
+{
+form:"Form 4",
+chapter:"Ungrouped Data",
+chinese:"未分组数据",
+status:"Not Started"
+},
+
+{
+form:"Form 4",
+chapter:"Probability",
+chinese:"概率",
+status:"Not Started"
+},
+
+{
+form:"Form 4",
+chapter:"Consumer Financial Management",
+chinese:"消费数学：财务管理",
+status:"Not Started"
+},
+
+{
+form:"Form 5",
+chapter:"Variation",
+chinese:"变分",
+status:"Not Started"
+},
+
+{
+form:"Form 5",
+chapter:"Matrices",
+chinese:"矩阵",
+status:"Not Started"
+},
+
+{
+form:"Form 5",
+chapter:"Consumer Insurance",
+chinese:"消费数学：保险",
+status:"Not Started"
+},
+
+{
+form:"Form 5",
+chapter:"Consumer Tax",
+chinese:"消费数学：税务",
+status:"Not Started"
+},
+
+{
+form:"Form 5",
+chapter:"Congruency",
+chinese:"全等",
+status:"Not Started"
+},
+
+{
+form:"Form 5",
+chapter:"Ratios & Trigonometric Functions",
+chinese:"比率与三角函数",
+status:"Not Started"
+},
+
+{
+form:"Form 5",
+chapter:"Grouped Data",
+chinese:"分组数据",
+status:"Not Started"
+},
+
+{
+form:"Form 5",
+chapter:"Mathematical Modelling",
+chinese:"数学建模",
+status:"Not Started"
+}
+
+]
 
 };
 
@@ -458,22 +693,19 @@ let data = defaultData;
 
 async function loadData(){
 
+    // =====================================================
+    // FORCE RESET NEW FULL CHAPTERS
+    // =====================================================
+
+    await setDoc(
+        docRef,
+        defaultData
+    );
+
     const snap =
         await getDoc(docRef);
 
-    if(snap.exists()){
-
-        data = snap.data();
-
-    }else{
-
-        await setDoc(
-            docRef,
-            defaultData
-        );
-
-        data = defaultData;
-    }
+    data = snap.data();
 
     render();
 
@@ -545,10 +777,6 @@ function render(){
     });
 
 
-    // =====================================================
-    // SUMMARY
-    // =====================================================
-
     document.getElementById(
         "masteredCount"
     ).innerText = mastered;
@@ -566,10 +794,6 @@ function render(){
     ).innerText =
         data.chapters.length;
 
-
-    // =====================================================
-    // FORMS
-    // =====================================================
 
     Object.keys(grouped).forEach(form=>{
 
@@ -634,7 +858,7 @@ function render(){
             );
 
 
-        chapters.forEach((chapter,index)=>{
+        chapters.forEach((chapter)=>{
 
             let cardClass="";
             let iconClass="";
@@ -696,11 +920,6 @@ function render(){
                 </div>
 
             `;
-
-
-            // =============================================
-            // CLICK TO CHANGE STATUS
-            // =============================================
 
             card.addEventListener(
                 "click",
