@@ -22,22 +22,16 @@ from
 // =========================================================
 // FIREBASE CONFIG
 // =========================================================
+// Your web app's Firebase configuration
+  const firebaseConfig = {
+    apiKey: "AIzaSyANWx-Uhq5uwgMqk1iaAB8NvBsQsUxAPjw",
+    authDomain: "study-dashboard-7ca48.firebaseapp.com",
+    projectId: "study-dashboard-7ca48",
+    storageBucket: "study-dashboard-7ca48.firebasestorage.app",
+    messagingSenderId: "745280498866",
+    appId: "1:745280498866:web:39534ba9c4de40a7db6dab"
+  };
 
-const firebaseConfig = {
-
-    apiKey: "YOUR_API_KEY",
-
-    authDomain: "YOUR_AUTH_DOMAIN",
-
-    projectId: "YOUR_PROJECT_ID",
-
-    storageBucket: "YOUR_STORAGE_BUCKET",
-
-    messagingSenderId: "YOUR_MESSAGING_ID",
-
-    appId: "YOUR_APP_ID"
-
-};
 
 
 // =========================================================
