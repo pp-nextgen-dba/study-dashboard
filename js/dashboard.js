@@ -101,11 +101,12 @@ const examCards =
 
 exams.forEach(exam => {
 
-    const today =
-        new Date();
+    const today = new Date();
+
+    today.setHours(0,0,0,0);
 
     const parts =
-    exam.date.split("-");
+        exam.date.split("-");
 
     const examDate =
         new Date(
@@ -113,7 +114,9 @@ exams.forEach(exam => {
             parts[1] - 1,
             parts[2]
         );
-    
+
+    examDate.setHours(0,0,0,0);
+
     const diffTime =
         examDate - today;
 
