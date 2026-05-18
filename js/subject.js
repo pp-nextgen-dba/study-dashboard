@@ -498,20 +498,10 @@ function renderTable(){
                     ${chapter.status==="Not Started"?"selected":""}>
                     Not Started
                     </option>
-
-                    <option value="Started"
-                    ${chapter.status==="Started"?"selected":""}>
-                    Started
-                    </option>
-
+       
                     <option value="In Progress"
                     ${chapter.status==="In Progress"?"selected":""}>
                     In Progress
-                    </option>
-
-                    <option value="Revision"
-                    ${chapter.status==="Revision"?"selected":""}>
-                    Revision
                     </option>
 
                     <option value="Completed"
