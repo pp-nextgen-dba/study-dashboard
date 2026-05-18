@@ -111,7 +111,7 @@ exams.forEach(exam => {
         examDate - today;
 
     const diffDays =
-        Math.ceil(
+        Math.floor(
             diffTime /
             (1000 * 60 * 60 * 24)
         );
