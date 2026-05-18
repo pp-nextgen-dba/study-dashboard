@@ -16,7 +16,7 @@ content="width=device-width, initial-scale=1.0">
 <title>Maths Progress Dashboard</title>
 
 <link rel="stylesheet"
-href="../css/style.css?v=20">
+href="../css/style.css?v=30">
 
 <style>
 
@@ -35,6 +35,29 @@ body{
 .container{
     max-width:1400px;
     margin:auto;
+}
+
+/* ===================================================== */
+/* BACK BUTTON */
+/* ===================================================== */
+
+.back-container{
+    margin-bottom:20px;
+}
+
+.back-button{
+    display:inline-block;
+    background:#0d6efd;
+    color:white;
+    padding:10px 18px;
+    border-radius:10px;
+    text-decoration:none;
+    font-size:14px;
+    transition:0.2s;
+}
+
+.back-button:hover{
+    background:#0b5ed7;
 }
 
 /* ===================================================== */
@@ -129,6 +152,7 @@ body{
     align-items:center;
     gap:20px;
     margin-bottom:20px;
+    flex-wrap:wrap;
 }
 
 .form-header h2{
@@ -139,6 +163,7 @@ body{
 
 .form-progress{
     flex:1;
+    min-width:200px;
 }
 
 .progress-bar{
@@ -153,7 +178,6 @@ body{
 .progress-fill{
     height:100%;
     background:#4f46e5;
-    width:0%;
     border-radius:20px;
 }
 
@@ -262,6 +286,10 @@ body{
         font-size:28px;
     }
 
+    .chapter-grid{
+        grid-template-columns:1fr;
+    }
+
 }
 
 </style>
@@ -275,16 +303,16 @@ body{
     <!-- BACK BUTTON -->
 
     <div class="back-container">
-    
+
         <a
             href="../index.html"
             class="back-button"
         >
             ← Back to Dashboard
         </a>
-    
+
     </div>
-    
+
     <!-- SUMMARY -->
 
     <div class="summary-grid">
@@ -366,15 +394,24 @@ from
 // =========================================================
 // FIREBASE CONFIG
 // =========================================================
+
 const firebaseConfig = {
+
     apiKey: "AIzaSyANWx-Uhq5uwgMqk1iaAB8NvBsQsUxAPjw",
+
     authDomain: "study-dashboard-7ca48.firebaseapp.com",
+
     projectId: "study-dashboard-7ca48",
+
     storageBucket: "study-dashboard-7ca48.firebasestorage.app",
+
     messagingSenderId: "745280498866",
+
     appId: "1:745280498866:web:39534ba9c4de40a7db6dab"
-  };
-    
+
+};
+
+
 // =========================================================
 // INIT
 // =========================================================
@@ -485,195 +522,6 @@ form:"Form 2",
 chapter:"Probability",
 chinese:"概率",
 status:"Not Started"
-},
-
-{
-form:"Form 3",
-chapter:"Indices",
-chinese:"指数",
-status:"Not Started"
-},
-
-{
-form:"Form 3",
-chapter:"Standard Form",
-chinese:"标准形式",
-status:"Not Started"
-},
-
-{
-form:"Form 3",
-chapter:"Consumer Investment",
-chinese:"消费数学：投资",
-status:"Not Started"
-},
-
-{
-form:"Form 3",
-chapter:"Scale Drawings",
-chinese:"比例绘图",
-status:"Not Started"
-},
-
-{
-form:"Form 3",
-chapter:"Trigonometric Ratios",
-chinese:"三角比",
-status:"Not Started"
-},
-
-{
-form:"Form 3",
-chapter:"Angles & Tangents of Circles",
-chinese:"圆的角与切线",
-status:"Not Started"
-},
-
-{
-form:"Form 3",
-chapter:"Plans & Elevations",
-chinese:"平面图与立体图",
-status:"Not Started"
-},
-
-{
-form:"Form 3",
-chapter:"Loci in 2 Dimensions",
-chinese:"二维轨迹",
-status:"Not Started"
-},
-
-{
-form:"Form 3",
-chapter:"Straight Lines",
-chinese:"直线",
-status:"Not Started"
-},
-
-{
-form:"Form 4",
-chapter:"Quadratic Functions",
-chinese:"二次函数",
-status:"Not Started"
-},
-
-{
-form:"Form 4",
-chapter:"Bases",
-chinese:"数制",
-status:"Not Started"
-},
-
-{
-form:"Form 4",
-chapter:"Logical Reasoning",
-chinese:"逻辑推理",
-status:"Not Started"
-},
-
-{
-form:"Form 4",
-chapter:"Sets",
-chinese:"集合",
-status:"Not Started"
-},
-
-{
-form:"Form 4",
-chapter:"Graph Networks",
-chinese:"图论网络",
-status:"Not Started"
-},
-
-{
-form:"Form 4",
-chapter:"Linear Inequalities",
-chinese:"线性不等式",
-status:"Not Started"
-},
-
-{
-form:"Form 4",
-chapter:"Motion Graphs",
-chinese:"运动图像",
-status:"Not Started"
-},
-
-{
-form:"Form 4",
-chapter:"Ungrouped Data",
-chinese:"未分组数据",
-status:"Not Started"
-},
-
-{
-form:"Form 4",
-chapter:"Probability",
-chinese:"概率",
-status:"Not Started"
-},
-
-{
-form:"Form 4",
-chapter:"Consumer Financial Management",
-chinese:"消费数学：财务管理",
-status:"Not Started"
-},
-
-{
-form:"Form 5",
-chapter:"Variation",
-chinese:"变分",
-status:"Not Started"
-},
-
-{
-form:"Form 5",
-chapter:"Matrices",
-chinese:"矩阵",
-status:"Not Started"
-},
-
-{
-form:"Form 5",
-chapter:"Consumer Insurance",
-chinese:"消费数学：保险",
-status:"Not Started"
-},
-
-{
-form:"Form 5",
-chapter:"Consumer Tax",
-chinese:"消费数学：税务",
-status:"Not Started"
-},
-
-{
-form:"Form 5",
-chapter:"Congruency",
-chinese:"全等",
-status:"Not Started"
-},
-
-{
-form:"Form 5",
-chapter:"Ratios & Trigonometric Functions",
-chinese:"比率与三角函数",
-status:"Not Started"
-},
-
-{
-form:"Form 5",
-chapter:"Grouped Data",
-chinese:"分组数据",
-status:"Not Started"
-},
-
-{
-form:"Form 5",
-chapter:"Mathematical Modelling",
-chinese:"数学建模",
-status:"Not Started"
 }
 
 ]
@@ -697,19 +545,23 @@ let data = defaultData;
 
 async function loadData(){
 
-    // =====================================================
-    // FORCE RESET NEW FULL CHAPTERS
-    // =====================================================
-
-    await setDoc(
-        docRef,
-        defaultData
-    );
-
     const snap =
         await getDoc(docRef);
 
-    data = snap.data();
+    if(snap.exists()){
+
+        data = snap.data();
+
+    }else{
+
+        await setDoc(
+            docRef,
+            defaultData
+        );
+
+        data = defaultData;
+
+    }
 
     render();
 
@@ -722,7 +574,22 @@ async function loadData(){
 
 async function saveData(){
 
-    await setDoc(docRef,data);
+    try{
+
+        await setDoc(docRef,data);
+
+        console.log(
+            "Saved successfully"
+        );
+
+    }catch(error){
+
+        console.error(
+            "Save failed:",
+            error
+        );
+
+    }
 
 }
 
@@ -815,6 +682,9 @@ function render(){
                 chapters.length * 100
             );
 
+        const safeFormId =
+            form.replace(/\s/g,'');
+
         const section =
             document.createElement("div");
 
@@ -849,7 +719,7 @@ function render(){
             </div>
 
             <div class="chapter-grid"
-            id="grid-${form}">
+            id="grid-${safeFormId}">
             </div>
 
         `;
@@ -858,7 +728,7 @@ function render(){
 
         const grid =
             document.getElementById(
-                `grid-${form}`
+                `grid-${safeFormId}`
             );
 
 
