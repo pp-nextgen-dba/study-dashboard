@@ -475,7 +475,7 @@ function renderTable(){
 
     data.chapters.forEach((chapter, index) => {
 
-        if(chapter.status === "Completed"){
+        if(chapter.status === "Mastered"){
             completed++;
         }
 
