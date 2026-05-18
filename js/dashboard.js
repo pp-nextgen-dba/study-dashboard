@@ -162,7 +162,7 @@ async function loadMathsProgress(){
         let completed =
             mathsData.chapters.filter(
                 chapter =>
-                    chapter.status === "Completed"
+                    chapter.status === "Mastered"
             ).length;
 
         let percent =
