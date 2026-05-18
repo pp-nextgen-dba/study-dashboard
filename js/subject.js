@@ -2,7 +2,7 @@
 // DEFAULT DATA
 // =========================================================
 
-const defaultData = {
+export const defaultData = {
 
     subject: "Maths",
 
