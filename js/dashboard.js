@@ -104,9 +104,16 @@ exams.forEach(exam => {
     const today =
         new Date();
 
-    const examDate =
-        new Date(exam.date);
+    const parts =
+    exam.date.split("-");
 
+    const examDate =
+        new Date(
+            parts[0],
+            parts[1] - 1,
+            parts[2]
+        );
+    
     const diffTime =
         examDate - today;
 
