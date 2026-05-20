@@ -4,6 +4,138 @@
 // =========================================================
 
 
+
+// =========================================================
+// CHEMISTRY
+// =========================================================
+
+export const chemistryData = {
+
+    subject:"Chemistry",
+
+    chapters:[
+
+        {
+            form:"T4",
+            chapter:"Intro to Chemistry",
+            chinese:"化学导论",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-20"
+        },
+
+        {
+            form:"T4",
+            chapter:"Matter and the Atomic Structure",
+            chinese:"物质与原子结构",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-20"
+        },
+
+        {
+            form:"T4",
+            chapter:"The Mole Concept Chemical Formula and Equation",
+            chinese:"摩尔概念、化学式与化学方程式",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-20"
+        },
+
+        {
+            form:"T4",
+            chapter:"The Periodic Table of Elements",
+            chinese:"元素周期表",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-20"
+        },
+
+        {
+            form:"T4",
+            chapter:"Chemical Bond",
+            chinese:"化学键",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-20"
+        },
+
+        {
+            form:"T4",
+            chapter:"Acid, Base and Salt",
+            chinese:"酸、碱与盐",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-20"
+        },
+
+        {
+            form:"T4",
+            chapter:"Rate of Reaction",
+            chinese:"反应速率",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-20"
+        },
+
+        {
+            form:"T4",
+            chapter:"Manufactured Substances in Industry",
+            chinese:"工业制造物质",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-20"
+        },
+
+        {
+            form:"T5",
+            chapter:"Redox Equilibrium",
+            chinese:"氧化还原平衡",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-20"
+        },
+
+        {
+            form:"T5",
+            chapter:"Carbon Compound",
+            chinese:"碳化合物",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-20"
+        },
+
+        {
+            form:"T5",
+            chapter:"Thermochemistry",
+            chinese:"热化学",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-20"
+        },
+
+        {
+            form:"T5",
+            chapter:"Polymer",
+            chinese:"聚合物",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-20"
+        },
+
+        {
+            form:"T5",
+            chapter:"Consumer and Industrial Chemistry",
+            chinese:"消费者与工业化学",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-20"
+        }
+
+    ]
+
+};
+
 // =========================================================
 // PHYSICS
 // =========================================================
