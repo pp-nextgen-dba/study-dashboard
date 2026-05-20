@@ -432,10 +432,10 @@ const db =
 // =========================================================
 
 const docRef =
-    doc(db,"subjects","physics");
+    doc(db,"subjects","chemistry");
 
 let data =
-    structuredClone(physicsData);
+    structuredClone(chemistryData);
 
 
 // =========================================================
@@ -459,7 +459,7 @@ async function loadData(){
         );
 
         data =
-            structuredClone(physicsData);
+            structuredClone(chemistryData);
 
     }
 
