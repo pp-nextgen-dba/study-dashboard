@@ -155,7 +155,7 @@ exams.forEach(exam => {
 // LOAD BIOLOGY PROGRESS
 // =========================================================
 
-async function loadMathsProgress(){
+async function loadBiologyProgress(){
 
     const docRef =
         doc(db, "subjects", "biology");
@@ -202,7 +202,7 @@ async function loadMathsProgress(){
 // LOAD CHEMISTRY PROGRESS
 // =========================================================
 
-async function loadMathsProgress(){
+async function loadChemistryProgress(){
 
     const docRef =
         doc(db, "subjects", "chemistry");
