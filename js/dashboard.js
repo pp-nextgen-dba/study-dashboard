@@ -257,6 +257,12 @@ async function loadSubjectProgress(
 Promise.all([
 
     loadSubjectProgress(
+    "science",
+    "scienceProgressBar",
+    "scienceProgressText"
+    ),
+    
+    loadSubjectProgress(
         "maths",
         "mathsProgressBar",
         "mathsProgressText"
