@@ -376,7 +376,7 @@ export const mathsData = {
 // GLOBAL DATA
 // =========================================================
 
-let data = defaultData;
+let data = mathsData;
 
 
 // =========================================================
