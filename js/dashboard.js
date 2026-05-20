@@ -151,6 +151,58 @@ exams.forEach(exam => {
 
 
 // =========================================================
+// LOAD CHEMISTRY PROGRESS
+// =========================================================
+
+async function loadChemistryProgress(){
+
+    const docRef =
+        doc(db, "subjects", "chemistry");
+
+    const docSnap =
+        await getDoc(docRef);
+
+    if(docSnap.exists()){
+
+        const chemistryData =
+            docSnap.data();
+
+        let total =
+            chemistryData.chapters.length;
+
+        let completed =
+            chemistryData.chapters.filter(
+                chapter =>
+                    chapter.status === "Mastered"
+            ).length;
+
+        let percent = 0;
+
+        if(total > 0){
+
+            percent =
+                Math.round(
+                    completed / total * 100
+                );
+
+        }
+
+        document.getElementById(
+            "chemistryProgressBar"
+        ).style.width =
+            percent + "%";
+
+        document.getElementById(
+            "chemistryProgressText"
+        ).innerText =
+            percent + "% Completed";
+
+    }
+
+}
+
+
+// =========================================================
 // LOAD PHYSICS PROGRESS
 // =========================================================
 
@@ -300,6 +352,8 @@ async function loadAddMathsProgress(){
 // =========================================================
 // START
 // =========================================================
+
+loadChemistryProgress();
 
 loadPhysicsProgress();
 
