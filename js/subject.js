@@ -4,7 +4,235 @@
 // =========================================================
 
 
+// =========================================================
+// SCIENCE
+// =========================================================
 
+export const scienceData = {
+
+    subject:"Science",
+
+    chapters:[
+
+        // =================================================
+        // T2
+        // =================================================
+
+        {
+            form:"T2",
+            chapter:"Biodiversity",
+            chinese:"生物多样性",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-20"
+        },
+
+        {
+            form:"T2",
+            chapter:"Ecosystem",
+            chinese:"生态系统",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-20"
+        },
+
+        {
+            form:"T2",
+            chapter:"Nutrition",
+            chinese:"营养",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-20"
+        },
+
+        {
+            form:"T2",
+            chapter:"Human Healthy",
+            chinese:"人体健康",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-20"
+        },
+
+        {
+            form:"T2",
+            chapter:"Water and Solutions",
+            chinese:"水与溶液",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-20"
+        },
+
+        {
+            form:"T2",
+            chapter:"Acid and Alkali",
+            chinese:"酸与碱",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-20"
+        },
+
+        {
+            form:"T2",
+            chapter:"Electricity and Magnetism",
+            chinese:"电与磁",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-20"
+        },
+
+        {
+            form:"T2",
+            chapter:"Force and Motion",
+            chinese:"力与运动",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-20"
+        },
+
+        {
+            form:"T2",
+            chapter:"Heat",
+            chinese:"热学",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-20"
+        },
+
+        {
+            form:"T2",
+            chapter:"Sound Wave",
+            chinese:"声波",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-20"
+        },
+
+        {
+            form:"T2",
+            chapter:"Stars and Galaxies in the Universe",
+            chinese:"宇宙中的恒星与星系",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-20"
+        },
+
+        {
+            form:"T2",
+            chapter:"Solar System",
+            chinese:"太阳系",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-20"
+        },
+
+        {
+            form:"T2",
+            chapter:"Meteoroid Asteroid and Comet",
+            chinese:"流星体、小行星与彗星",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-20"
+        },
+
+
+        // =================================================
+        // T3
+        // =================================================
+
+        {
+            form:"T3",
+            chapter:"Stimuli and Responses",
+            chinese:"刺激与反应",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-20"
+        },
+
+        {
+            form:"T3",
+            chapter:"Respiration",
+            chinese:"呼吸作用",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-20"
+        },
+
+        {
+            form:"T3",
+            chapter:"Transportation",
+            chinese:"运输系统",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-20"
+        },
+
+        {
+            form:"T3",
+            chapter:"Reactivity of Metals",
+            chinese:"金属的反应性",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-20"
+        },
+
+        {
+            form:"T3",
+            chapter:"Thermochemistry",
+            chinese:"热化学",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-20"
+        },
+
+        {
+            form:"T3",
+            chapter:"Electricity and Magnetism",
+            chinese:"电与磁",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-20"
+        },
+
+        {
+            form:"T3",
+            chapter:"Energy and Power",
+            chinese:"能量与功率",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-20"
+        },
+
+        {
+            form:"T3",
+            chapter:"Radioactivity",
+            chinese:"放射性",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-20"
+        },
+
+        {
+            form:"T3",
+            chapter:"Space Weather",
+            chinese:"太空气候",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-20"
+        },
+
+        {
+            form:"T3",
+            chapter:"Space Exploration",
+            chinese:"太空探索",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-20"
+        }
+
+    ]
+
+};
 
 // =========================================================
 // BIOLOGY
