@@ -149,6 +149,58 @@ exams.forEach(exam => {
 });
 
 
+
+// =========================================================
+// LOAD PHYSICS PROGRESS
+// =========================================================
+
+async function loadPhysicsProgress(){
+
+    const docRef =
+        doc(db, "subjects", "physics");
+
+    const docSnap =
+        await getDoc(docRef);
+
+    if(docSnap.exists()){
+
+        const physicsData =
+            docSnap.data();
+
+        let total =
+            physicsData.chapters.length;
+
+        let completed =
+            physicsData.chapters.filter(
+                chapter =>
+                    chapter.status === "Mastered"
+            ).length;
+
+        let percent = 0;
+
+        if(total > 0){
+
+            percent =
+                Math.round(
+                    completed / total * 100
+                );
+
+        }
+
+        document.getElementById(
+            "physicsProgressBar"
+        ).style.width =
+            percent + "%";
+
+        document.getElementById(
+            "physicsProgressText"
+        ).innerText =
+            percent + "% Completed";
+
+    }
+
+}
+
 // =========================================================
 // LOAD MATHS PROGRESS
 // =========================================================
@@ -248,6 +300,8 @@ async function loadAddMathsProgress(){
 // =========================================================
 // START
 // =========================================================
+
+loadPhysicsProgress();
 
 loadMathsProgress();
 
