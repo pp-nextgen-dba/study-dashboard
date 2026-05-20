@@ -4,6 +4,100 @@
 // =========================================================
 
 
+
+
+// =========================================================
+// PHYSICS
+// =========================================================
+
+export const physicsData = {
+
+    subject:"Physics",
+
+    chapters:[
+
+        {
+            form:"T4",
+            chapter:"Measurement",
+            status:"Not Started"
+        },
+
+        {
+            form:"T4",
+            chapter:"Force and Motion 1",
+            status:"Not Started"
+        },
+
+        {
+            form:"T4",
+            chapter:"Gravitation",
+            status:"Not Started"
+        },
+
+        {
+            form:"T4",
+            chapter:"Heat",
+            status:"Not Started"
+        },
+
+        {
+            form:"T4",
+            chapter:"Waves",
+            status:"Not Started"
+        },
+
+        {
+            form:"T4",
+            chapter:"Light and Optics",
+            status:"Not Started"
+        },
+
+        {
+            form:"T5",
+            chapter:"Force and Motion 2",
+            status:"Not Started"
+        },
+
+        {
+            form:"T5",
+            chapter:"Pressure",
+            status:"Not Started"
+        },
+
+        {
+            form:"T5",
+            chapter:"Electricity",
+            status:"Not Started"
+        },
+
+        {
+            form:"T5",
+            chapter:"Electromagnetism",
+            status:"Not Started"
+        },
+
+        {
+            form:"T5",
+            chapter:"Electronics",
+            status:"Not Started"
+        },
+
+        {
+            form:"T5",
+            chapter:"Nuclear Physics",
+            status:"Not Started"
+        },
+
+        {
+            form:"T5",
+            chapter:"Quantum Physics",
+            status:"Not Started"
+        }
+
+    ]
+
+};
+
 // =========================================================
 // MATHS
 // =========================================================
