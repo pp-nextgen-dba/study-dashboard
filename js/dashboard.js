@@ -151,52 +151,6 @@ exams.forEach(exam => {
 
 
 
-// =========================================================
-// LOAD BIOLOGY PROGRESS
-// =========================================================
-
-async function loadBiologyProgress(){
-
-    const docRef =
-        doc(db, "subjects", "biology");
-
-    const docSnap =
-        await getDoc(docRef);
-
-    if(docSnap.exists()){
-
-        const biologyData =
-            docSnap.data();
-
-        let total =
-            biologyData.chapters.length;
-
-        let completed =
-            biologyData.chapters.filter(
-                chapter =>
-                    chapter.status === "Mastered"
-            ).length;
-
-        let percent =
-            Math.round(
-                completed /
-                total * 100
-            );
-
-        document.getElementById(
-            "biologyProgressBar"
-        ).style.width =
-            percent + "%";
-
-        document.getElementById(
-            "biologyProgressText"
-        ).innerText =
-            percent + "% Completed";
-
-    }
-
-}
-
 
 // =========================================================
 // LOAD CHEMISTRY PROGRESS
