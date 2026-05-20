@@ -154,7 +154,7 @@ exams.forEach(exam => {
 // LOAD CHEMISTRY PROGRESS
 // =========================================================
 
-async function loadChemistryProgress(){
+async function loadMathsProgress(){
 
     const docRef =
         doc(db, "subjects", "chemistry");
@@ -176,16 +176,11 @@ async function loadChemistryProgress(){
                     chapter.status === "Mastered"
             ).length;
 
-        let percent = 0;
-
-        if(total > 0){
-
-            percent =
-                Math.round(
-                    completed / total * 100
-                );
-
-        }
+        let percent =
+            Math.round(
+                completed /
+                total * 100
+            );
 
         document.getElementById(
             "chemistryProgressBar"
@@ -200,7 +195,6 @@ async function loadChemistryProgress(){
     }
 
 }
-
 
 // =========================================================
 // LOAD PHYSICS PROGRESS
