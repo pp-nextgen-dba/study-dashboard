@@ -157,7 +157,7 @@ exams.forEach(exam => {
 async function loadChemistryProgress(){
 
     const docRef =
-        doc(db, "subjects", "Chemistry");
+        doc(db, "subjects", "chemistry");
 
     const docSnap =
         await getDoc(docRef);
