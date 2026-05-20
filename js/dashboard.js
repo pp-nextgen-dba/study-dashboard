@@ -11,25 +11,31 @@ from
 import {
     getFirestore,
     doc,
-    getDoc,
-    onSnapshot
+    getDoc
 }
 from
 "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
+
 // =========================================================
 // FIREBASE CONFIG
 // =========================================================
-// Your web app's Firebase configuration
-  const firebaseConfig = {
-    apiKey: "AIzaSyANWx-Uhq5uwgMqk1iaAB8NvBsQsUxAPjw",
-    authDomain: "study-dashboard-7ca48.firebaseapp.com",
-    projectId: "study-dashboard-7ca48",
-    storageBucket: "study-dashboard-7ca48.firebasestorage.app",
-    messagingSenderId: "745280498866",
-    appId: "1:745280498866:web:39534ba9c4de40a7db6dab"
-  };
 
+const firebaseConfig = {
+
+    apiKey: "AIzaSyANWx-Uhq5uwgMqk1iaAB8NvBsQsUxAPjw",
+
+    authDomain: "study-dashboard-7ca48.firebaseapp.com",
+
+    projectId: "study-dashboard-7ca48",
+
+    storageBucket: "study-dashboard-7ca48.firebasestorage.app",
+
+    messagingSenderId: "745280498866",
+
+    appId: "1:745280498866:web:39534ba9c4de40a7db6dab"
+
+};
 
 
 // =========================================================
@@ -101,7 +107,8 @@ const examCards =
 
 exams.forEach(exam => {
 
-    const today = new Date();
+    const today =
+        new Date();
 
     today.setHours(0,0,0,0);
 
@@ -149,258 +156,141 @@ exams.forEach(exam => {
 });
 
 
-
-
-
 // =========================================================
-// LOAD BIOLOGY PROGRESS
+// GENERIC SUBJECT LOADER
 // =========================================================
 
-async function loadBiologyProgress(){
+async function loadSubjectProgress(
+    firestoreName,
+    progressBarId,
+    progressTextId
+){
 
-    const docRef =
-        doc(db, "subjects", "biology");
+    try{
 
-    const docSnap =
-        await getDoc(docRef);
-
-    if(docSnap.exists()){
-
-        const biologyData =
-            docSnap.data();
-
-        let total =
-            biologyData.chapters.length;
-
-        let completed =
-            biologyData.chapters.filter(
-                chapter =>
-                    chapter.status === "Mastered"
-            ).length;
-
-        let percent =
-            Math.round(
-                completed /
-                total * 100
+        const docRef =
+            doc(
+                db,
+                "subjects",
+                firestoreName
             );
 
-        document.getElementById(
-            "biologyProgressBar"
-        ).style.width =
-            percent + "%";
-
-        document.getElementById(
-            "biologyProgressText"
-        ).innerText =
-            percent + "% Completed";
-
-    }
-
-}
-
-// =========================================================
-// LOAD CHEMISTRY PROGRESS
-// =========================================================
-
-async function loadChemistryProgress(){
-
-    const docRef =
-        doc(db, "subjects", "chemistry");
-
-    const docSnap =
-        await getDoc(docRef);
-
-    if(docSnap.exists()){
-
-        const chemistryData =
-            docSnap.data();
-
-        let total =
-            chemistryData.chapters.length;
-
-        let completed =
-            chemistryData.chapters.filter(
-                chapter =>
-                    chapter.status === "Mastered"
-            ).length;
-
-        let percent =
-            Math.round(
-                completed /
-                total * 100
-            );
-
-        document.getElementById(
-            "chemistryProgressBar"
-        ).style.width =
-            percent + "%";
-
-        document.getElementById(
-            "chemistryProgressText"
-        ).innerText =
-            percent + "% Completed";
-
-    }
-
-}
-
-// =========================================================
-// LOAD PHYSICS PROGRESS
-// =========================================================
-
-async function loadPhysicsProgress(){
-
-    const docRef =
-        doc(db, "subjects", "physics");
-
-    const docSnap =
-        await getDoc(docRef);
-
-    if(docSnap.exists()){
-
-        const physicsData =
-            docSnap.data();
-
-        let total =
-            physicsData.chapters.length;
-
-        let completed =
-            physicsData.chapters.filter(
-                chapter =>
-                    chapter.status === "Mastered"
-            ).length;
+        const docSnap =
+            await getDoc(docRef);
 
         let percent = 0;
 
-        if(total > 0){
+        if(docSnap.exists()){
 
-            percent =
-                Math.round(
-                    completed / total * 100
-                );
+            const subjectData =
+                docSnap.data();
+
+            let total = 0;
+
+            let completed = 0;
+
+            if(subjectData.chapters){
+
+                total =
+                    subjectData.chapters.length;
+
+                completed =
+                    subjectData.chapters.filter(
+                        chapter =>
+                            chapter.status === "Mastered"
+                    ).length;
+
+            }
+
+            if(total > 0){
+
+                percent =
+                    Math.round(
+                        completed / total * 100
+                    );
+
+            }
 
         }
 
-        document.getElementById(
-            "physicsProgressBar"
-        ).style.width =
-            percent + "%";
-
-        document.getElementById(
-            "physicsProgressText"
-        ).innerText =
-            percent + "% Completed";
-
-    }
-
-}
-
-// =========================================================
-// LOAD MATHS PROGRESS
-// =========================================================
-
-async function loadMathsProgress(){
-
-    const docRef =
-        doc(db, "subjects", "maths");
-
-    const docSnap =
-        await getDoc(docRef);
-
-    if(docSnap.exists()){
-
-        const mathsData =
-            docSnap.data();
-
-        let total =
-            mathsData.chapters.length;
-
-        let completed =
-            mathsData.chapters.filter(
-                chapter =>
-                    chapter.status === "Mastered"
-            ).length;
-
-        let percent =
-            Math.round(
-                completed /
-                total * 100
+        const progressBar =
+            document.getElementById(
+                progressBarId
             );
 
-        document.getElementById(
-            "mathsProgressBar"
-        ).style.width =
-            percent + "%";
+        const progressText =
+            document.getElementById(
+                progressTextId
+            );
 
-        document.getElementById(
-            "mathsProgressText"
-        ).innerText =
-            percent + "% Completed";
+        if(progressBar){
 
-    }
-
-}
-// =========================================================
-// LOAD ADDITIONAL MATHS PROGRESS
-// =========================================================
-
-async function loadAddMathsProgress(){
-
-    const docRef =
-        doc(db, "subjects", "addmaths");
-
-    const docSnap =
-        await getDoc(docRef);
-
-    if(docSnap.exists()){
-
-        const addMathsData =
-            docSnap.data();
-
-        let total =
-            addMathsData.chapters.length;
-
-        let completed =
-            addMathsData.chapters.filter(
-                chapter =>
-                    chapter.status === "Mastered"
-            ).length;
-
-        let percent = 0;
-
-        if(total > 0){
-
-            percent =
-                Math.round(
-                    completed / total * 100
-                );
+            progressBar.style.width =
+                percent + "%";
 
         }
 
-        document.getElementById(
-            "addMathsProgressBar"
-        ).style.width =
-            percent + "%";
+        if(progressText){
 
-        document.getElementById(
-            "addMathsProgressText"
-        ).innerText =
-            percent + "% Completed";
+            progressText.innerText =
+                percent + "% Completed";
+
+        }
+
+    }catch(error){
+
+        console.error(
+            "Progress Load Error:",
+            firestoreName,
+            error
+        );
 
     }
 
 }
+
 
 // =========================================================
 // START
 // =========================================================
 
-loadBiologyProgress();
+Promise.all([
 
-loadChemistryProgress();
+    loadSubjectProgress(
+        "maths",
+        "mathsProgressBar",
+        "mathsProgressText"
+    ),
 
-loadPhysicsProgress();
+    loadSubjectProgress(
+        "addmaths",
+        "addMathsProgressBar",
+        "addMathsProgressText"
+    ),
 
-loadMathsProgress();
+    loadSubjectProgress(
+        "physics",
+        "physicsProgressBar",
+        "physicsProgressText"
+    ),
 
-loadAddMathsProgress();
+    loadSubjectProgress(
+        "chemistry",
+        "chemistryProgressBar",
+        "chemistryProgressText"
+    ),
+
+    loadSubjectProgress(
+        "biology",
+        "biologyProgressBar",
+        "biologyProgressText"
+    )
+
+]).catch(error => {
+
+    console.error(
+        "Dashboard Startup Error:",
+        error
+    );
+
+});
