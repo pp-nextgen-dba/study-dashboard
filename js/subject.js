@@ -4,8 +4,6 @@
 // =========================================================
 
 
-
-
 // =========================================================
 // PHYSICS
 // =========================================================
@@ -19,84 +17,124 @@ export const physicsData = {
         {
             form:"T4",
             chapter:"Measurement",
-            status:"Not Started"
+            chinese:"测量",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-20"
         },
 
         {
             form:"T4",
             chapter:"Force and Motion 1",
-            status:"Not Started"
+            chinese:"力与运动 1",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-20"
         },
 
         {
             form:"T4",
             chapter:"Gravitation",
-            status:"Not Started"
+            chinese:"万有引力",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-20"
         },
 
         {
             form:"T4",
             chapter:"Heat",
-            status:"Not Started"
+            chinese:"热学",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-20"
         },
 
         {
             form:"T4",
             chapter:"Waves",
-            status:"Not Started"
+            chinese:"波",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-20"
         },
 
         {
             form:"T4",
             chapter:"Light and Optics",
-            status:"Not Started"
+            chinese:"光与光学",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-20"
         },
 
         {
             form:"T5",
             chapter:"Force and Motion 2",
-            status:"Not Started"
+            chinese:"力与运动 2",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-20"
         },
 
         {
             form:"T5",
             chapter:"Pressure",
-            status:"Not Started"
+            chinese:"压强",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-20"
         },
 
         {
             form:"T5",
             chapter:"Electricity",
-            status:"Not Started"
+            chinese:"电学",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-20"
         },
 
         {
             form:"T5",
             chapter:"Electromagnetism",
-            status:"Not Started"
+            chinese:"电磁学",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-20"
         },
 
         {
             form:"T5",
             chapter:"Electronics",
-            status:"Not Started"
+            chinese:"电子学",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-20"
         },
 
         {
             form:"T5",
             chapter:"Nuclear Physics",
-            status:"Not Started"
+            chinese:"核物理",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-20"
         },
 
         {
             form:"T5",
             chapter:"Quantum Physics",
-            status:"Not Started"
+            chinese:"量子物理",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-20"
         }
 
     ]
 
 };
+
 
 // =========================================================
 // MATHS
@@ -107,10 +145,6 @@ export const mathsData = {
     subject: "Maths",
 
     chapters: [
-
-        // =================================================
-        // T2
-        // =================================================
 
         {
             form:"T2",
@@ -224,264 +258,6 @@ export const mathsData = {
             form:"T2",
             chapter:"Probability",
             chinese:"概率",
-            status:"Not Started",
-            confidence:0,
-            last_updated:"2026-05-17"
-        },
-
-
-        // =================================================
-        // T3
-        // =================================================
-
-        {
-            form:"T3",
-            chapter:"Indices",
-            chinese:"指数",
-            status:"Not Started",
-            confidence:0,
-            last_updated:"2026-05-17"
-        },
-
-        {
-            form:"T3",
-            chapter:"Standard Form",
-            chinese:"标准形式",
-            status:"Not Started",
-            confidence:0,
-            last_updated:"2026-05-17"
-        },
-
-        {
-            form:"T3",
-            chapter:"Consumer Mathematics: Investment",
-            chinese:"消费数学：投资",
-            status:"Not Started",
-            confidence:0,
-            last_updated:"2026-05-17"
-        },
-
-        {
-            form:"T3",
-            chapter:"Scale Drawings",
-            chinese:"比例绘图",
-            status:"Not Started",
-            confidence:0,
-            last_updated:"2026-05-17"
-        },
-
-        {
-            form:"T3",
-            chapter:"Trigonometric Ratios",
-            chinese:"三角比",
-            status:"Not Started",
-            confidence:0,
-            last_updated:"2026-05-17"
-        },
-
-        {
-            form:"T3",
-            chapter:"Angles & Tangents of Circles",
-            chinese:"圆的角与切线",
-            status:"Not Started",
-            confidence:0,
-            last_updated:"2026-05-17"
-        },
-
-        {
-            form:"T3",
-            chapter:"Plans & Elevations",
-            chinese:"平面图与立体图",
-            status:"Not Started",
-            confidence:0,
-            last_updated:"2026-05-17"
-        },
-
-        {
-            form:"T3",
-            chapter:"Loci in Two Dimensions",
-            chinese:"二维轨迹",
-            status:"Not Started",
-            confidence:0,
-            last_updated:"2026-05-17"
-        },
-
-        {
-            form:"T3",
-            chapter:"Straight Lines",
-            chinese:"直线",
-            status:"Not Started",
-            confidence:0,
-            last_updated:"2026-05-17"
-        },
-
-
-        // =================================================
-        // T4
-        // =================================================
-
-        {
-            form:"T4",
-            chapter:"Quadratic Functions",
-            chinese:"二次函数",
-            status:"Not Started",
-            confidence:0,
-            last_updated:"2026-05-17"
-        },
-
-        {
-            form:"T4",
-            chapter:"Bases",
-            chinese:"数制",
-            status:"Not Started",
-            confidence:0,
-            last_updated:"2026-05-17"
-        },
-
-        {
-            form:"T4",
-            chapter:"Logical Reasoning",
-            chinese:"逻辑推理",
-            status:"Not Started",
-            confidence:0,
-            last_updated:"2026-05-17"
-        },
-
-        {
-            form:"T4",
-            chapter:"Sets",
-            chinese:"集合",
-            status:"Not Started",
-            confidence:0,
-            last_updated:"2026-05-17"
-        },
-
-        {
-            form:"T4",
-            chapter:"Graph Networks",
-            chinese:"图论网络",
-            status:"Not Started",
-            confidence:0,
-            last_updated:"2026-05-17"
-        },
-
-        {
-            form:"T4",
-            chapter:"Linear Inequalities",
-            chinese:"线性不等式",
-            status:"Not Started",
-            confidence:0,
-            last_updated:"2026-05-17"
-        },
-
-        {
-            form:"T4",
-            chapter:"Motion Graphs",
-            chinese:"运动图像",
-            status:"Not Started",
-            confidence:0,
-            last_updated:"2026-05-17"
-        },
-
-        {
-            form:"T4",
-            chapter:"Ungrouped Data",
-            chinese:"未分组数据",
-            status:"Not Started",
-            confidence:0,
-            last_updated:"2026-05-17"
-        },
-
-        {
-            form:"T4",
-            chapter:"Probability",
-            chinese:"概率",
-            status:"Not Started",
-            confidence:0,
-            last_updated:"2026-05-17"
-        },
-
-        {
-            form:"T4",
-            chapter:"Consumer Mathematics: Financial Management",
-            chinese:"消费数学：财务管理",
-            status:"Not Started",
-            confidence:0,
-            last_updated:"2026-05-17"
-        },
-
-
-        // =================================================
-        // T5
-        // =================================================
-
-        {
-            form:"T5",
-            chapter:"Variation",
-            chinese:"变分",
-            status:"Not Started",
-            confidence:0,
-            last_updated:"2026-05-17"
-        },
-
-        {
-            form:"T5",
-            chapter:"Matrices",
-            chinese:"矩阵",
-            status:"Not Started",
-            confidence:0,
-            last_updated:"2026-05-17"
-        },
-
-        {
-            form:"T5",
-            chapter:"Consumer Mathematics: Insurance",
-            chinese:"消费数学：保险",
-            status:"Not Started",
-            confidence:0,
-            last_updated:"2026-05-17"
-        },
-
-        {
-            form:"T5",
-            chapter:"Consumer Mathematics: Taxation",
-            chinese:"消费数学：税务",
-            status:"Not Started",
-            confidence:0,
-            last_updated:"2026-05-17"
-        },
-
-        {
-            form:"T5",
-            chapter:"Congruency",
-            chinese:"全等",
-            status:"Not Started",
-            confidence:0,
-            last_updated:"2026-05-17"
-        },
-
-        {
-            form:"T5",
-            chapter:"Ratios & Trigonometric Functions",
-            chinese:"比率与三角函数",
-            status:"Not Started",
-            confidence:0,
-            last_updated:"2026-05-17"
-        },
-
-        {
-            form:"T5",
-            chapter:"Grouped Data",
-            chinese:"分组数据",
-            status:"Not Started",
-            confidence:0,
-            last_updated:"2026-05-17"
-        },
-
-        {
-            form:"T5",
-            chapter:"Mathematical Modelling",
-            chinese:"数学建模",
             status:"Not Started",
             confidence:0,
             last_updated:"2026-05-17"
