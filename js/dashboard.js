@@ -290,6 +290,12 @@ Promise.all([
         "biology",
         "biologyProgressBar",
         "biologyProgressText"
+    ),
+
+    loadSubjectProgress(
+        "moral",
+        "moralProgressBar",
+        "moralProgressText"
     )
 
 ]).catch(error => {

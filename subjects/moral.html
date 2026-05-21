@@ -459,7 +459,7 @@ function mergeSeedChapters(subjectData){
             ])
         );
 
-    subjectData.chapters =
+    const seededChapters =
         moralData.chapters.map(seedChapter => {
 
             const existingChapter =
@@ -491,6 +491,25 @@ function mergeSeedChapters(subjectData){
             return existingChapter;
 
         });
+
+    const seedKeys =
+        new Set(
+            moralData.chapters.map(seedChapter =>
+                `${seedChapter.form}|${seedChapter.chapter}`
+            )
+        );
+
+    const extraExistingChapters =
+        subjectData.chapters.filter(chapter =>
+            !seedKeys.has(
+                `${chapter.form}|${chapter.chapter}`
+            )
+        );
+
+    subjectData.chapters = [
+        ...seededChapters,
+        ...extraExistingChapters
+    ];
 
     return changed;
 

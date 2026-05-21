@@ -765,6 +765,183 @@ export const physicsData = {
 
 
 // =========================================================
+// MORAL
+// =========================================================
+
+export const moralData = {
+
+    subject:"Pendidikan Moral",
+
+    chapters:[
+
+        {
+            form:"T2",
+            chapter:"Moral Values and Self Identity",
+            chinese:"道德价值与自我身份",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-22"
+        },
+
+        {
+            form:"T2",
+            chapter:"Responsibility to Family",
+            chinese:"对家庭的责任",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-22"
+        },
+
+        {
+            form:"T2",
+            chapter:"Respect and Good Manners",
+            chinese:"尊重与礼貌",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-22"
+        },
+
+        {
+            form:"T2",
+            chapter:"Friendship and Cooperation",
+            chinese:"友谊与合作",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-22"
+        },
+
+        {
+            form:"T2",
+            chapter:"Community Harmony",
+            chinese:"社区和谐",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-22"
+        },
+
+        {
+            form:"T3",
+            chapter:"Integrity in Daily Life",
+            chinese:"日常生活中的诚信",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-22"
+        },
+
+        {
+            form:"T3",
+            chapter:"Justice and Fairness",
+            chinese:"正义与公平",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-22"
+        },
+
+        {
+            form:"T3",
+            chapter:"Tolerance in a Diverse Society",
+            chinese:"多元社会中的宽容",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-22"
+        },
+
+        {
+            form:"T3",
+            chapter:"Environmental Responsibility",
+            chinese:"环境责任",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-22"
+        },
+
+        {
+            form:"T3",
+            chapter:"Patriotism and Citizenship",
+            chinese:"爱国精神与公民责任",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-22"
+        },
+
+        {
+            form:"T4",
+            chapter:"Moral Principles and Decision Making",
+            chinese:"道德原则与决策",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-22"
+        },
+
+        {
+            form:"T4",
+            chapter:"Human Rights and Responsibility",
+            chinese:"人权与责任",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-22"
+        },
+
+        {
+            form:"T4",
+            chapter:"Conflict Resolution",
+            chinese:"冲突解决",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-22"
+        },
+
+        {
+            form:"T4",
+            chapter:"Ethics in Technology",
+            chinese:"科技伦理",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-22"
+        },
+
+        {
+            form:"T5",
+            chapter:"Moral Leadership",
+            chinese:"道德领导",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-22"
+        },
+
+        {
+            form:"T5",
+            chapter:"Global Citizenship",
+            chinese:"全球公民意识",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-22"
+        },
+
+        {
+            form:"T5",
+            chapter:"Social Justice and Welfare",
+            chinese:"社会正义与福利",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-22"
+        },
+
+        {
+            form:"T5",
+            chapter:"National Unity and Peace",
+            chinese:"国家团结与和平",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-22"
+        }
+
+    ]
+
+};
+
+
+// =========================================================
 // MATHS
 // =========================================================
 
