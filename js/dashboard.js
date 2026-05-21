@@ -19,7 +19,8 @@ from
 
 import {
     moralData,
-    geografiData
+    geografiData,
+    historyData
 }
 from
 "./subject.js";
@@ -367,6 +368,13 @@ window.addEventListener(
         "geografiProgressBar",
         "geografiProgressText",
         geografiData
+    ],
+
+    [
+        "history",
+        "historyProgressBar",
+        "historyProgressText",
+        historyData
     ]
 
 ].forEach(subject =>

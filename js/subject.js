@@ -987,6 +987,363 @@ export const geografiData = {
 
 
 // =========================================================
+// HISTORY
+// =========================================================
+
+export const historyData = {
+
+    subject:"History",
+
+    chapters:[
+
+        {
+            form:"T2",
+            chapter:"Kerajaan Alam Melayu",
+            chinese:"",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-22"
+        },
+
+        {
+            form:"T2",
+            chapter:"Sistem Pemerintahan dan Kegiatan Ekonomi Masyarakat Kerajaan Alam Melayu",
+            chinese:"",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-22"
+        },
+
+        {
+            form:"T2",
+            chapter:"Sosiobudaya Masyarakat Kerajaan Alam Melayu",
+            chinese:"",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-22"
+        },
+
+        {
+            form:"T2",
+            chapter:"Agama, Kepercayaan dan Keunikan Warisan Masyarakat Kerajaan Alam Melayu",
+            chinese:"",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-22"
+        },
+
+        {
+            form:"T2",
+            chapter:"Kesultanan Melayu Melaka",
+            chinese:"",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-22"
+        },
+
+        {
+            form:"T2",
+            chapter:"Kesultanan Johor Riau",
+            chinese:"",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-22"
+        },
+
+        {
+            form:"T2",
+            chapter:"Kesultanan Melayu Pahang, Perak, Terengganu dan Selangor",
+            chinese:"",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-22"
+        },
+
+        {
+            form:"T2",
+            chapter:"Kerajaan Kedah, Kelantan, Negeri Sembilan dan Perlis",
+            chinese:"",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-22"
+        },
+
+        {
+            form:"T2",
+            chapter:"Warisan Kerajaan Kedah, Kelantan, Negeri Sembilan dan Perlis",
+            chinese:"",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-22"
+        },
+
+        {
+            form:"T2",
+            chapter:"Sarawak dan Sabah",
+            chinese:"",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-22"
+        },
+
+        {
+            form:"T3",
+            chapter:"Kedatangan Kuasa Barat",
+            chinese:"",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-22"
+        },
+
+        {
+            form:"T3",
+            chapter:"Pentadbiran Negeri-negeri Selat",
+            chinese:"",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-22"
+        },
+
+        {
+            form:"T3",
+            chapter:"Pentadbiran Negeri-negeri Melayu Bersekutu",
+            chinese:"",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-22"
+        },
+
+        {
+            form:"T3",
+            chapter:"Pentadbiran Negeri-negeri Melayu Tidak Bersekutu",
+            chinese:"",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-22"
+        },
+
+        {
+            form:"T3",
+            chapter:"Pentadbiran Barat di Sarawak dan Sabah",
+            chinese:"",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-22"
+        },
+
+        {
+            form:"T3",
+            chapter:"Kesan Pentadbiran Barat Terhadap Ekonomi dan Sosial",
+            chinese:"",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-22"
+        },
+
+        {
+            form:"T3",
+            chapter:"Penentangan Masyarakat Tempatan",
+            chinese:"",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-22"
+        },
+
+        {
+            form:"T3",
+            chapter:"Kebijaksanaan Raja dan Pembesar Melayu Menangani Cabaran Barat",
+            chinese:"",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-22"
+        },
+
+        {
+            form:"T4",
+            chapter:"Warisan Negara Bangsa",
+            chinese:"",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-22"
+        },
+
+        {
+            form:"T4",
+            chapter:"Kebangkitan Nasionalisme",
+            chinese:"",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-22"
+        },
+
+        {
+            form:"T4",
+            chapter:"Konflik Dunia dan Pendudukan Jepun di Negara Kita",
+            chinese:"",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-22"
+        },
+
+        {
+            form:"T4",
+            chapter:"Era Peralihan Kuasa British di Negara Kita",
+            chinese:"",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-22"
+        },
+
+        {
+            form:"T4",
+            chapter:"Persekutuan Tanah Melayu 1948",
+            chinese:"",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-22"
+        },
+
+        {
+            form:"T4",
+            chapter:"Ancaman Komunis dan Perisytiharan Darurat",
+            chinese:"",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-22"
+        },
+
+        {
+            form:"T4",
+            chapter:"Usaha ke Arah Kemerdekaan",
+            chinese:"",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-22"
+        },
+
+        {
+            form:"T4",
+            chapter:"Pilihan Raya",
+            chinese:"",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-22"
+        },
+
+        {
+            form:"T4",
+            chapter:"Perlembagaan Persekutuan Tanah Melayu 1957",
+            chinese:"",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-22"
+        },
+
+        {
+            form:"T4",
+            chapter:"Pemasyhuran Kemerdekaan",
+            chinese:"",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-22"
+        },
+
+        {
+            form:"T5",
+            chapter:"Kedaulatan Negara",
+            chinese:"",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-22"
+        },
+
+        {
+            form:"T5",
+            chapter:"Perlembagaan Persekutuan",
+            chinese:"",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-22"
+        },
+
+        {
+            form:"T5",
+            chapter:"Raja Berperlembagaan dan Demokrasi Berparlimen",
+            chinese:"",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-22"
+        },
+
+        {
+            form:"T5",
+            chapter:"Sistem Persekutuan",
+            chinese:"",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-22"
+        },
+
+        {
+            form:"T5",
+            chapter:"Pembentukan Malaysia",
+            chinese:"",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-22"
+        },
+
+        {
+            form:"T5",
+            chapter:"Cabaran Selepas Pembentukan Malaysia",
+            chinese:"",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-22"
+        },
+
+        {
+            form:"T5",
+            chapter:"Membina Kesejahteraan Negara",
+            chinese:"",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-22"
+        },
+
+        {
+            form:"T5",
+            chapter:"Membina Kemakmuran Negara",
+            chinese:"",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-22"
+        },
+
+        {
+            form:"T5",
+            chapter:"Dasar Luar Malaysia",
+            chinese:"",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-22"
+        },
+
+        {
+            form:"T5",
+            chapter:"Kecemerlangan Malaysia di Persada Dunia",
+            chinese:"",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-22"
+        }
+
+    ]
+
+};
+
+
+// =========================================================
 // MORAL
 // =========================================================
 
