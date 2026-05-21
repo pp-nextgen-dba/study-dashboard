@@ -17,14 +17,6 @@ import {
 from
 "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
-import {
-    moralData,
-    geografiData,
-    historyData
-}
-from
-"./subject.js";
-
 
 // =========================================================
 // FIREBASE CONFIG
@@ -114,55 +106,62 @@ const exams = [
 const examCards =
     document.getElementById("examCards");
 
-exams.forEach(exam => {
+if(
+    examCards &&
+    examCards.children.length === 0
+){
 
-    const today =
-        new Date();
+    exams.forEach(exam => {
 
-    today.setHours(0,0,0,0);
+        const today =
+            new Date();
 
-    const parts =
-        exam.date.split("-");
+        today.setHours(0,0,0,0);
 
-    const examDate =
-        new Date(
-            parts[0],
-            parts[1] - 1,
-            parts[2]
-        );
+        const parts =
+            exam.date.split("-");
 
-    examDate.setHours(0,0,0,0);
+        const examDate =
+            new Date(
+                parts[0],
+                parts[1] - 1,
+                parts[2]
+            );
 
-    const diffTime =
-        examDate - today;
+        examDate.setHours(0,0,0,0);
 
-    const diffDays =
-        Math.floor(
-            diffTime /
-            (1000 * 60 * 60 * 24)
-        );
+        const diffTime =
+            examDate - today;
 
-    const card =
-        document.createElement("div");
+        const diffDays =
+            Math.floor(
+                diffTime /
+                (1000 * 60 * 60 * 24)
+            );
 
-    card.className =
-        "exam-card";
+        const card =
+            document.createElement("div");
 
-    card.innerHTML = `
+        card.className =
+            "exam-card";
 
-        <h3>${exam.name}</h3>
+        card.innerHTML = `
 
-        <div class="days">
-            ${diffDays}
-        </div>
+            <h3>${exam.name}</h3>
 
-        <p>Days Remaining</p>
+            <div class="days">
+                ${diffDays}
+            </div>
 
-    `;
+            <p>Days Remaining</p>
 
-    examCards.appendChild(card);
+        `;
 
-});
+        examCards.appendChild(card);
+
+    });
+
+}
 
 
 // =========================================================
@@ -318,7 +317,7 @@ window.addEventListener(
 // START
 // =========================================================
 
-[
+const subjects = [
 
     [
         "science",
@@ -354,29 +353,66 @@ window.addEventListener(
         "biology",
         "biologyProgressBar",
         "biologyProgressText"
-    ],
+    ]
+
+];
+
+const seededSubjects = [
 
     [
         "moral",
         "moralProgressBar",
-        "moralProgressText",
-        moralData
+        "moralProgressText"
     ],
 
     [
         "geografi",
         "geografiProgressBar",
-        "geografiProgressText",
-        geografiData
+        "geografiProgressText"
     ],
 
     [
         "history",
         "historyProgressBar",
-        "historyProgressText",
-        historyData
+        "historyProgressText"
+    ],
+
+    [
+        "rekabentuk",
+        "rekaBentukProgressBar",
+        "rekaBentukProgressText"
     ]
 
-].forEach(subject =>
+];
+
+subjects.forEach(subject =>
     watchSubjectProgress(...subject)
 );
+
+import("./subject.js?v=5")
+    .then(subjectData => {
+
+        seededSubjects.forEach(subject =>
+            watchSubjectProgress(
+                ...subject,
+                subjectData[
+                    subject[0] === "rekabentuk"
+                        ? "rekaBentukData"
+                        : `${subject[0]}Data`
+                ]
+            )
+        );
+
+    })
+    .catch(error => {
+
+        console.error(
+            "Subject Seed Load Error:",
+            error
+        );
+
+        seededSubjects.forEach(subject =>
+            watchSubjectProgress(...subject)
+        );
+
+    });

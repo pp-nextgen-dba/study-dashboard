@@ -236,10 +236,27 @@ href="css/style.css">
 
             </a>
 
-            <div class="subject-card disabled">
+            <!-- Reka Bentuk -->
+
+            <a class="subject-card"
+            href="subjects/rekabentuk.html">
+
                 <h3>🛠️ Reka Bentuk</h3>
-                <p>Coming Soon</p>
-            </div>
+
+                <div class="progress-bar">
+
+                    <div
+                        class="progress-fill"
+                        id="rekaBentukProgressBar"
+                    ></div>
+
+                </div>
+
+                <p id="rekaBentukProgressText">
+                    0% Completed
+                </p>
+
+            </a>
 
             <!-- Physics -->
 
@@ -578,7 +595,112 @@ href="css/style.css">
 
 </div>
 
-<script type="module" src="js/dashboard.js?v=4"></script>
+<script>
+
+const exams = [
+
+    {
+        name: "Form 2 Final Exams",
+        date: "2026-11-01"
+    },
+
+    {
+        name: "Form 3 Mid Exams",
+        date: "2027-05-01"
+    },
+
+    {
+        name: "Form 3 Final Exams",
+        date: "2027-11-01"
+    },
+
+    {
+        name: "Form 4 Mid Exams",
+        date: "2028-05-01"
+    },
+
+    {
+        name: "Form 4 Final Exams",
+        date: "2028-11-01"
+    },
+
+    {
+        name: "Form 5 Mid Exams",
+        date: "2029-05-01"
+    },
+
+    {
+        name: "Form 5 Final Exams",
+        date: "2029-10-01"
+    },
+
+    {
+        name: "SPM Exams",
+        date: "2029-11-01"
+    }
+
+];
+
+const examCards =
+    document.getElementById("examCards");
+
+if(examCards){
+
+    exams.forEach(exam => {
+
+        const today =
+            new Date();
+
+        today.setHours(0,0,0,0);
+
+        const parts =
+            exam.date.split("-");
+
+        const examDate =
+            new Date(
+                parts[0],
+                parts[1] - 1,
+                parts[2]
+            );
+
+        examDate.setHours(0,0,0,0);
+
+        const diffTime =
+            examDate - today;
+
+        const diffDays =
+            Math.floor(
+                diffTime /
+                (1000 * 60 * 60 * 24)
+            );
+
+        const card =
+            document.createElement("div");
+
+        card.className =
+            "exam-card";
+
+        card.innerHTML = `
+
+            <h3>${exam.name}</h3>
+
+            <div class="days">
+                ${diffDays}
+            </div>
+
+            <p>Days Remaining</p>
+
+        `;
+
+        examCards.appendChild(card);
+
+    });
+
+}
+
+</script>
+
+<script type="module" src="js/dashboard.js?v=7"></script>
 
 </body>
 </html>

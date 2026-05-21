@@ -1344,6 +1344,129 @@ export const historyData = {
 
 
 // =========================================================
+// REKA BENTUK
+// =========================================================
+
+export const rekaBentukData = {
+
+    subject:"Reka Bentuk dan Teknologi",
+
+    chapters:[
+
+        {
+            form:"T2",
+            chapter:"Penyelesaian Masalah secara Inventif",
+            chinese:"发明式问题解决",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-22"
+        },
+
+        {
+            form:"T2",
+            chapter:"Aplikasi Teknologi",
+            chinese:"技术应用",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-22"
+        },
+
+        {
+            form:"T2",
+            chapter:"Teknologi Pembuatan",
+            chinese:"制造技术",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-22"
+        },
+
+        {
+            form:"T2",
+            chapter:"Reka Bentuk Mekanikal",
+            chinese:"机械设计",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-22"
+        },
+
+        {
+            form:"T2",
+            chapter:"Reka Bentuk Elektrik",
+            chinese:"电气设计",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-22"
+        },
+
+        {
+            form:"T2",
+            chapter:"Reka Bentuk Elektronik",
+            chinese:"电子设计",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-22"
+        },
+
+        {
+            form:"T2",
+            chapter:"Reka Bentuk Akuaponik",
+            chinese:"鱼菜共生设计",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-22"
+        },
+
+        {
+            form:"T2",
+            chapter:"Reka Bentuk Makanan",
+            chinese:"食品设计",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-22"
+        },
+
+        {
+            form:"T3",
+            chapter:"Aplikasi Teknologi",
+            chinese:"技术应用",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-22"
+        },
+
+        {
+            form:"T3",
+            chapter:"Reka Bentuk Mekatronik",
+            chinese:"机电一体化设计",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-22"
+        },
+
+        {
+            form:"T3",
+            chapter:"Pembangunan Produk",
+            chinese:"产品开发",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-22"
+        },
+
+        {
+            form:"T3",
+            chapter:"Reka Bentuk dalam Perniagaan",
+            chinese:"商业中的设计",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-22"
+        }
+
+    ]
+
+};
+
+
+// =========================================================
 // MORAL
 // =========================================================
 
