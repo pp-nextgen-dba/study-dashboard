@@ -438,6 +438,57 @@ let data =
     structuredClone(physicsData);
 
 
+function addMissingChineseLabels(subjectData){
+
+    if(!Array.isArray(subjectData.chapters)){
+
+        subjectData.chapters =
+            structuredClone(physicsData.chapters);
+
+        return true;
+
+    }
+
+    let changed = false;
+
+    const fallbackByChapter =
+        new Map(
+            physicsData.chapters.map(chapter => [
+                `${chapter.form}|${chapter.chapter}`,
+                chapter.chinese
+            ])
+        );
+
+    subjectData.chapters =
+        subjectData.chapters.map(chapter => {
+
+            if(chapter.chinese){
+                return chapter;
+            }
+
+            const chinese =
+                fallbackByChapter.get(
+                    `${chapter.form}|${chapter.chapter}`
+                );
+
+            if(!chinese){
+                return chapter;
+            }
+
+            changed = true;
+
+            return {
+                ...chapter,
+                chinese
+            };
+
+        });
+
+    return changed;
+
+}
+
+
 // =========================================================
 // LOAD
 // =========================================================
@@ -450,6 +501,12 @@ async function loadData(){
     if(snap.exists()){
 
         data = snap.data();
+
+        if(addMissingChineseLabels(data)){
+
+            await setDoc(docRef,data);
+
+        }
 
     }else{
 
