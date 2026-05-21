@@ -11,10 +11,18 @@ from
 import {
     getFirestore,
     doc,
-    getDoc
+    setDoc,
+    onSnapshot
 }
 from
 "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+import {
+    moralData,
+    geografiData
+}
+from
+"./subject.js";
 
 
 // =========================================================
@@ -157,152 +165,210 @@ exams.forEach(exam => {
 
 
 // =========================================================
-// GENERIC SUBJECT LOADER
+// SUBJECT PROGRESS
 // =========================================================
 
-async function loadSubjectProgress(
-    firestoreName,
+function updateSubjectProgress(
+    subjectData,
     progressBarId,
     progressTextId
 ){
 
-    try{
+    let percent = 0;
 
-        const docRef =
-            doc(
-                db,
-                "subjects",
-                firestoreName
+    let total = 0;
+
+    let completed = 0;
+
+    if(
+        subjectData &&
+        Array.isArray(subjectData.chapters)
+    ){
+
+        total =
+            subjectData.chapters.length;
+
+        completed =
+            subjectData.chapters.filter(
+                chapter =>
+                    chapter.status === "Mastered"
+            ).length;
+
+    }
+
+    if(total > 0){
+
+        percent =
+            Math.round(
+                completed / total * 100
             );
 
-        const docSnap =
-            await getDoc(docRef);
+    }
 
-        let percent = 0;
-
-        if(docSnap.exists()){
-
-            const subjectData =
-                docSnap.data();
-
-            let total = 0;
-
-            let completed = 0;
-
-            if(subjectData.chapters){
-
-                total =
-                    subjectData.chapters.length;
-
-                completed =
-                    subjectData.chapters.filter(
-                        chapter =>
-                            chapter.status === "Mastered"
-                    ).length;
-
-            }
-
-            if(total > 0){
-
-                percent =
-                    Math.round(
-                        completed / total * 100
-                    );
-
-            }
-
-        }
-
-        const progressBar =
-            document.getElementById(
-                progressBarId
-            );
-
-        const progressText =
-            document.getElementById(
-                progressTextId
-            );
-
-        if(progressBar){
-
-            progressBar.style.width =
-                percent + "%";
-
-        }
-
-        if(progressText){
-
-            progressText.innerText =
-                percent + "% Completed";
-
-        }
-
-    }catch(error){
-
-        console.error(
-            "Progress Load Error:",
-            firestoreName,
-            error
+    const progressBar =
+        document.getElementById(
+            progressBarId
         );
+
+    const progressText =
+        document.getElementById(
+            progressTextId
+        );
+
+    if(progressBar){
+
+        progressBar.style.width =
+            percent + "%";
+
+    }
+
+    if(progressText){
+
+        progressText.innerText =
+            percent + "% Completed";
 
     }
 
 }
+
+function watchSubjectProgress(
+    firestoreName,
+    progressBarId,
+    progressTextId,
+    seedData = null
+){
+
+    const docRef =
+        doc(
+            db,
+            "subjects",
+            firestoreName
+        );
+
+    return onSnapshot(
+        docRef,
+        async snapshot => {
+
+            if(snapshot.exists()){
+
+                updateSubjectProgress(
+                    snapshot.data(),
+                    progressBarId,
+                    progressTextId
+                );
+
+                return;
+
+            }
+
+            if(seedData){
+
+                try{
+
+                    await setDoc(
+                        docRef,
+                        seedData
+                    );
+
+                }catch(error){
+
+                    console.error(
+                        "Progress Seed Error:",
+                        firestoreName,
+                        error
+                    );
+
+                }
+
+            }
+
+            updateSubjectProgress(
+                null,
+                progressBarId,
+                progressTextId
+            );
+
+        },
+        error => {
+
+            console.error(
+                "Progress Sync Error:",
+                firestoreName,
+                error
+            );
+
+        }
+    );
+
+}
+
+window.addEventListener(
+    "error",
+    event => {
+        console.error(
+            "Dashboard Runtime Error:",
+            event.error || event.message
+        );
+    }
+);
 
 
 // =========================================================
 // START
 // =========================================================
 
-Promise.all([
+[
 
-    loadSubjectProgress(
-    "science",
-    "scienceProgressBar",
-    "scienceProgressText"
-    ),
-    
-    loadSubjectProgress(
+    [
+        "science",
+        "scienceProgressBar",
+        "scienceProgressText"
+    ],
+
+    [
         "maths",
         "mathsProgressBar",
         "mathsProgressText"
-    ),
+    ],
 
-    loadSubjectProgress(
+    [
         "addmaths",
         "addMathsProgressBar",
         "addMathsProgressText"
-    ),
+    ],
 
-    loadSubjectProgress(
+    [
         "physics",
         "physicsProgressBar",
         "physicsProgressText"
-    ),
+    ],
 
-    loadSubjectProgress(
+    [
         "chemistry",
         "chemistryProgressBar",
         "chemistryProgressText"
-    ),
+    ],
 
-    loadSubjectProgress(
+    [
         "biology",
         "biologyProgressBar",
         "biologyProgressText"
-    ),
+    ],
 
-    loadSubjectProgress(
+    [
         "moral",
         "moralProgressBar",
-        "moralProgressText"
-    )
+        "moralProgressText",
+        moralData
+    ],
 
-]).catch(error => {
+    [
+        "geografi",
+        "geografiProgressBar",
+        "geografiProgressText",
+        geografiData
+    ]
 
-    console.error(
-        "Dashboard Startup Error:",
-        error
-    );
-
-});
+].forEach(subject =>
+    watchSubjectProgress(...subject)
+);

@@ -765,6 +765,228 @@ export const physicsData = {
 
 
 // =========================================================
+// GEOGRAFI
+// =========================================================
+
+export const geografiData = {
+
+    subject:"Geografi",
+
+    chapters:[
+
+        {
+            form:"T2",
+            chapter:"Skala dan Jarak",
+            chinese:"",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-22"
+        },
+
+        {
+            form:"T2",
+            chapter:"Peta Topografi",
+            chinese:"",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-22"
+        },
+
+        {
+            form:"T2",
+            chapter:"Pengaruh Pergerakan Bumi Terhadap Cuaca dan Iklim",
+            chinese:"",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-22"
+        },
+
+        {
+            form:"T2",
+            chapter:"Cuaca dan Iklim di Malaysia",
+            chinese:"",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-22"
+        },
+
+        {
+            form:"T2",
+            chapter:"Pengangkutan di Malaysia",
+            chinese:"",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-22"
+        },
+
+        {
+            form:"T2",
+            chapter:"Telekomunikasi di Malaysia",
+            chinese:"",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-22"
+        },
+
+        {
+            form:"T2",
+            chapter:"Kepelbagaian Iklim dan Pengaruhnya Terhadap Kegiatan Manusia di Asia",
+            chinese:"",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-22"
+        },
+
+        {
+            form:"T2",
+            chapter:"Jenis dan Kemajuan Pengangkutan di Asia",
+            chinese:"",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-22"
+        },
+
+        {
+            form:"T2",
+            chapter:"Pemanasan Global",
+            chinese:"",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-22"
+        },
+
+        {
+            form:"T2",
+            chapter:"Teknologi Hijau",
+            chinese:"",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-22"
+        },
+
+        {
+            form:"T2",
+            chapter:"Panduan Kerja Lapangan",
+            chinese:"",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-22"
+        },
+
+        {
+            form:"T3",
+            chapter:"Jadual dan Graf",
+            chinese:"",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-22"
+        },
+
+        {
+            form:"T3",
+            chapter:"Carta Pai",
+            chinese:"",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-22"
+        },
+
+        {
+            form:"T3",
+            chapter:"Pengaruh Persekitaran Fizikal Terhadap Kepelbagaian Tumbuh-tumbuhan Semula Jadi dan Hidupan Liar",
+            chinese:"",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-22"
+        },
+
+        {
+            form:"T3",
+            chapter:"Tumbuh-tumbuhan Semula Jadi di Malaysia",
+            chinese:"",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-22"
+        },
+
+        {
+            form:"T3",
+            chapter:"Hidupan Liar di Malaysia",
+            chinese:"",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-22"
+        },
+
+        {
+            form:"T3",
+            chapter:"Sumber Semula Jadi di Malaysia",
+            chinese:"",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-22"
+        },
+
+        {
+            form:"T3",
+            chapter:"Kegiatan Ekonomi di Malaysia",
+            chinese:"",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-22"
+        },
+
+        {
+            form:"T3",
+            chapter:"Tumbuh-tumbuhan Semula Jadi dan Hidupan Liar di Dunia",
+            chinese:"",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-22"
+        },
+
+        {
+            form:"T3",
+            chapter:"Sumber Semula Jadi Utama dan Kerjasama Ekonomi di Dunia",
+            chinese:"",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-22"
+        },
+
+        {
+            form:"T3",
+            chapter:"Sumber Hutan",
+            chinese:"",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-22"
+        },
+
+        {
+            form:"T3",
+            chapter:"Kitar Semula",
+            chinese:"",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-22"
+        },
+
+        {
+            form:"T3",
+            chapter:"Panduan Kerja Lapangan",
+            chinese:"",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-22"
+        }
+
+    ]
+
+};
+
+
+// =========================================================
 // MORAL
 // =========================================================
 
