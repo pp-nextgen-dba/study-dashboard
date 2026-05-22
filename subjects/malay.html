@@ -391,7 +391,7 @@ import {
     malayData
 }
 from
-"../js/subject.js?v=9";
+"../js/subject.js?v=11";
     
 
 // =========================================================
@@ -438,6 +438,16 @@ let data =
     structuredClone(malayData);
 
 
+function normalizeChapterTitle(chapter){
+
+    return chapter.replace(
+        /^\[T[0-9,]+\]\s*/,
+        ""
+    );
+
+}
+
+
 function mergeSeedChapters(subjectData){
 
     let changed = false;
@@ -453,10 +463,25 @@ function mergeSeedChapters(subjectData){
 
     const existingByChapter =
         new Map(
-            subjectData.chapters.map(chapter => [
-                `${chapter.form}|${chapter.chapter}`,
-                chapter
-            ])
+            subjectData.chapters.flatMap(chapter => {
+
+                const normalizedTitle =
+                    normalizeChapterTitle(
+                        chapter.chapter
+                    );
+
+                return [
+                    [
+                        `${chapter.form}|${chapter.chapter}`,
+                        chapter
+                    ],
+                    [
+                        `${chapter.form}|${normalizedTitle}`,
+                        chapter
+                    ]
+                ];
+
+            })
         );
 
     subjectData.chapters =
@@ -477,12 +502,16 @@ function mergeSeedChapters(subjectData){
 
             }
 
-            if(existingChapter.chinese !== seedChapter.chinese){
+            if(
+                existingChapter.chapter !== seedChapter.chapter ||
+                existingChapter.chinese !== seedChapter.chinese
+            ){
 
                 changed = true;
 
                 return {
                     ...existingChapter,
+                    chapter:seedChapter.chapter,
                     chinese:seedChapter.chinese
                 };
 
