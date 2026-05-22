@@ -27,6 +27,10 @@ function reportWarning(message){
 }
 
 function camelDataName(subjectId){
+    if(subjectId === "addmaths"){
+        return "addMathsData";
+    }
+
     if(subjectId === "rekabentuk"){
         return "rekaBentukData";
     }
