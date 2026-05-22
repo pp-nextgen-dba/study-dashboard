@@ -1582,6 +1582,402 @@ export const englishData = {
             status:"Not Started",
             confidence:0,
             last_updated:"2026-05-22"
+        },
+
+        {
+            form:"Writing",
+            chapter:"Essay Structure",
+            chinese:"作文结构",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-22"
+        },
+
+        {
+            form:"Writing",
+            chapter:"Narrative Essay",
+            chinese:"记叙文",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-22"
+        },
+
+        {
+            form:"Writing",
+            chapter:"Descriptive Essay",
+            chinese:"描写文",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-22"
+        },
+
+        {
+            form:"Writing",
+            chapter:"Opinion Essay",
+            chinese:"观点文",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-22"
+        },
+
+        {
+            form:"Writing",
+            chapter:"Argumentative Essay",
+            chinese:"议论文",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-22"
+        },
+
+        {
+            form:"Writing",
+            chapter:"Formal Letter",
+            chinese:"正式信",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-22"
+        },
+
+        {
+            form:"Writing",
+            chapter:"Informal Email",
+            chinese:"非正式电邮",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-22"
+        },
+
+        {
+            form:"Writing",
+            chapter:"Report Writing",
+            chinese:"报告写作",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-22"
+        },
+
+        {
+            form:"Writing",
+            chapter:"Article Writing",
+            chinese:"文章写作",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-22"
+        },
+
+        {
+            form:"Writing",
+            chapter:"Summary Writing",
+            chinese:"摘要写作",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-22"
+        },
+
+        {
+            form:"Reading",
+            chapter:"Main Idea",
+            chinese:"主旨大意",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-22"
+        },
+
+        {
+            form:"Reading",
+            chapter:"Supporting Details",
+            chinese:"支持细节",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-22"
+        },
+
+        {
+            form:"Reading",
+            chapter:"Inference Questions",
+            chinese:"推论题",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-22"
+        },
+
+        {
+            form:"Reading",
+            chapter:"Vocabulary in Context",
+            chinese:"根据上下文理解词汇",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-22"
+        },
+
+        {
+            form:"Reading",
+            chapter:"Author's Tone and Purpose",
+            chinese:"作者语气与写作目的",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-22"
+        },
+
+        {
+            form:"Reading",
+            chapter:"Summary from Reading Text",
+            chinese:"阅读文本摘要",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-22"
+        },
+
+        {
+            form:"Grammar Precision",
+            chapter:"Subject-Verb Agreement",
+            chinese:"主谓一致",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-22"
+        },
+
+        {
+            form:"Grammar Precision",
+            chapter:"Articles",
+            chinese:"冠词",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-22"
+        },
+
+        {
+            form:"Grammar Precision",
+            chapter:"Prepositions",
+            chinese:"介词",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-22"
+        },
+
+        {
+            form:"Grammar Precision",
+            chapter:"Modals",
+            chinese:"情态动词",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-22"
+        },
+
+        {
+            form:"Grammar Precision",
+            chapter:"Active and Passive Voice",
+            chinese:"主动语态与被动语态",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-22"
+        },
+
+        {
+            form:"Grammar Precision",
+            chapter:"Direct and Indirect Speech",
+            chinese:"直接引语与间接引语",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-22"
+        },
+
+        {
+            form:"Grammar Precision",
+            chapter:"Conditionals",
+            chinese:"条件句",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-22"
+        },
+
+        {
+            form:"Grammar Precision",
+            chapter:"Relative Clauses",
+            chinese:"关系从句",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-22"
+        },
+
+        {
+            form:"Grammar Precision",
+            chapter:"Sentence Connectors",
+            chinese:"句子连接词",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-22"
+        },
+
+        {
+            form:"Grammar Precision",
+            chapter:"Common Grammar Errors",
+            chinese:"常见语法错误",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-22"
+        },
+
+        {
+            form:"Vocabulary & Style",
+            chapter:"Strong Verbs",
+            chinese:"有力动词",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-22"
+        },
+
+        {
+            form:"Vocabulary & Style",
+            chapter:"Better Adjectives",
+            chinese:"更精准的形容词",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-22"
+        },
+
+        {
+            form:"Vocabulary & Style",
+            chapter:"Useful Essay Phrases",
+            chinese:"实用作文短语",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-22"
+        },
+
+        {
+            form:"Vocabulary & Style",
+            chapter:"Linking Phrases",
+            chinese:"衔接短语",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-22"
+        },
+
+        {
+            form:"Vocabulary & Style",
+            chapter:"Idioms and Expressions",
+            chinese:"习语与表达",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-22"
+        },
+
+        {
+            form:"Vocabulary & Style",
+            chapter:"Avoiding Repetition",
+            chinese:"避免重复表达",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-22"
+        },
+
+        {
+            form:"Vocabulary & Style",
+            chapter:"Sentence Variety",
+            chinese:"句式变化",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-22"
+        },
+
+        {
+            form:"Speaking & Listening",
+            chapter:"Picture Description",
+            chinese:"图片描述",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-22"
+        },
+
+        {
+            form:"Speaking & Listening",
+            chapter:"Giving Opinions",
+            chinese:"表达观点",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-22"
+        },
+
+        {
+            form:"Speaking & Listening",
+            chapter:"Oral Presentation",
+            chinese:"口头报告",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-22"
+        },
+
+        {
+            form:"Speaking & Listening",
+            chapter:"Group Discussion",
+            chinese:"小组讨论",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-22"
+        },
+
+        {
+            form:"Speaking & Listening",
+            chapter:"Listening for Main Ideas",
+            chinese:"听取主旨",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-22"
+        },
+
+        {
+            form:"Speaking & Listening",
+            chapter:"Listening for Details",
+            chinese:"听取细节",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-22"
+        },
+
+        {
+            form:"Exam Practice",
+            chapter:"Timed Essay Practice",
+            chinese:"限时作文练习",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-22"
+        },
+
+        {
+            form:"Exam Practice",
+            chapter:"Timed Reading Practice",
+            chinese:"限时阅读练习",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-22"
+        },
+
+        {
+            form:"Exam Practice",
+            chapter:"Past Year Questions",
+            chinese:"历年试题",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-22"
+        },
+
+        {
+            form:"Exam Practice",
+            chapter:"Error Log Review",
+            chinese:"错题记录复习",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-22"
+        },
+
+        {
+            form:"Exam Practice",
+            chapter:"Full Mock Paper",
+            chinese:"完整模拟试卷",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-22"
         }
 
     ]
