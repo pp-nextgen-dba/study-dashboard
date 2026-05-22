@@ -241,6 +241,10 @@ body{
     flex-shrink:0;
 }
 
+.status-toggle{
+    cursor:pointer;
+}
+
 .icon-not{
     background:#999;
 }
@@ -262,6 +266,59 @@ body{
     font-size:13px;
     color:#666;
     margin-top:4px;
+}
+
+.concept-panel{
+    display:none;
+    background:white;
+    border:1px solid #d8dee8;
+    border-radius:14px;
+    padding:20px;
+    margin:0 0 30px 0;
+    box-shadow:0 2px 10px rgba(0,0,0,0.08);
+}
+
+.concept-panel.active{
+    display:block;
+}
+
+.concept-header{
+    display:flex;
+    justify-content:space-between;
+    gap:16px;
+    align-items:flex-start;
+    margin-bottom:14px;
+}
+
+.concept-title{
+    font-size:22px;
+    font-weight:bold;
+    color:#1f2937;
+}
+
+.concept-subtitle{
+    color:#666;
+    font-size:14px;
+    margin-top:4px;
+}
+
+.concept-close{
+    border:0;
+    background:#e5e7eb;
+    color:#222;
+    border-radius:8px;
+    padding:8px 12px;
+    cursor:pointer;
+}
+
+.concept-list{
+    margin:0;
+    padding-left:20px;
+}
+
+.concept-list li{
+    margin-bottom:8px;
+    line-height:1.45;
 }
 
 /* ===================================================== */
@@ -347,7 +404,7 @@ body{
 
     <div class="legend">
 
-        Click chapter to cycle status →
+        Click chapter to view formulas. Click status icon to cycle status →
 
         <span>
             <span class="dot gray"></span>
@@ -367,6 +424,11 @@ body{
     </div>
 
     <!-- CONTENT -->
+
+    <div
+        id="conceptPanel"
+        class="concept-panel"
+    ></div>
 
     <div id="content"></div>
 
@@ -445,6 +507,102 @@ const docRef =
 let data = mathsData;
 
 
+const chapterConcepts = {
+
+    "Patterns & Sequences":[
+        "Arithmetic sequence: Tn = a + (n - 1)d",
+        "Arithmetic sum: Sn = n/2[2a + (n - 1)d]",
+        "Geometric sequence: Tn = ar^(n - 1)",
+        "Look for constant difference, constant ratio, or repeating pattern."
+    ],
+
+    "Factorisation":[
+        "Common factor: ax + ay = a(x + y)",
+        "Difference of squares: a^2 - b^2 = (a - b)(a + b)",
+        "Perfect square: a^2 + 2ab + b^2 = (a + b)^2",
+        "Quadratic factorisation: find two numbers with product ac and sum b."
+    ],
+
+    "Algebraic Formulae":[
+        "Change subject by doing the same operation to both sides.",
+        "Expansion: a(b + c) = ab + ac",
+        "Substitution: replace variables carefully before simplifying.",
+        "Check units and brackets when using formulae."
+    ],
+
+    "Polygon":[
+        "Sum of interior angles: (n - 2) x 180 degrees",
+        "Each interior angle of regular polygon: [(n - 2) x 180] / n",
+        "Each exterior angle of regular polygon: 360 / n",
+        "Number of diagonals: n(n - 3) / 2"
+    ],
+
+    "Circles":[
+        "Circumference: C = 2*pi*r or pi*d",
+        "Area: A = pi*r^2",
+        "Arc length: theta/360 x 2*pi*r",
+        "Sector area: theta/360 x pi*r^2"
+    ],
+
+    "3D Geometry":[
+        "Prism volume: cross-sectional area x length",
+        "Cuboid volume: length x width x height",
+        "Cylinder volume: pi*r^2*h",
+        "Surface area: add areas of all exposed faces."
+    ],
+
+    "Coordinates":[
+        "Gradient: m = (y2 - y1) / (x2 - x1)",
+        "Midpoint: ((x1 + x2)/2, (y1 + y2)/2)",
+        "Distance: sqrt((x2 - x1)^2 + (y2 - y1)^2)",
+        "Horizontal lines have gradient 0; vertical lines have undefined gradient."
+    ],
+
+    "Graphs of Functions":[
+        "Straight line form: y = mx + c",
+        "m is gradient; c is y-intercept.",
+        "Quadratic graph y = ax^2 + bx + c is a parabola.",
+        "Solve graphically by finding intersections or x-intercepts."
+    ],
+
+    "Speed & Acceleration":[
+        "Speed = distance / time",
+        "Acceleration = change in velocity / time",
+        "Distance-time gradient gives speed.",
+        "Velocity-time gradient gives acceleration; area gives distance."
+    ],
+
+    "Gradient of Straight Lines":[
+        "Gradient: m = rise / run = (y2 - y1)/(x2 - x1)",
+        "Parallel lines have equal gradients.",
+        "Perpendicular gradients multiply to -1.",
+        "Equation of line: y - y1 = m(x - x1)"
+    ],
+
+    "Isometric Transformation":[
+        "Translation moves every point by the same vector.",
+        "Reflection flips points across a mirror line.",
+        "Rotation turns points around a centre by an angle.",
+        "Isometry preserves length, angle, shape, and size."
+    ],
+
+    "Measures of Circle":[
+        "Diameter = 2 x radius",
+        "Circumference: C = 2*pi*r",
+        "Area: A = pi*r^2",
+        "Use theta/360 for arc length and sector area questions."
+    ],
+
+    "Probability":[
+        "Probability = favourable outcomes / total outcomes",
+        "0 <= P(event) <= 1",
+        "Complement: P(not A) = 1 - P(A)",
+        "For independent events: P(A and B) = P(A) x P(B)"
+    ]
+
+};
+
+
 // =========================================================
 // LOAD
 // =========================================================
@@ -513,6 +671,71 @@ function nextStatus(current){
         return "Mastered";
 
     return "Not Started";
+
+}
+
+
+// =========================================================
+// CONCEPT DISPLAY
+// =========================================================
+
+function showChapterConcept(chapter){
+
+    const panel =
+        document.getElementById("conceptPanel");
+
+    const concepts =
+        chapterConcepts[chapter.chapter] || [
+            "Review the definition, key formulae, and common question types for this chapter.",
+            "Work through examples and keep an error log for mistakes."
+        ];
+
+    panel.classList.add("active");
+
+    panel.innerHTML = `
+
+        <div class="concept-header">
+
+            <div>
+                <div class="concept-title">
+                    ${chapter.chapter}
+                </div>
+
+                <div class="concept-subtitle">
+                    ${chapter.chinese}
+                </div>
+            </div>
+
+            <button
+                class="concept-close"
+                type="button"
+                id="conceptClose"
+            >
+                Close
+            </button>
+
+        </div>
+
+        <ul class="concept-list">
+            ${concepts.map(concept => `<li>${concept}</li>`).join("")}
+        </ul>
+
+    `;
+
+    document
+        .getElementById("conceptClose")
+        .addEventListener(
+            "click",
+            () => {
+                panel.classList.remove("active");
+                panel.innerHTML = "";
+            }
+        );
+
+    panel.scrollIntoView({
+        behavior:"smooth",
+        block:"start"
+    });
 
 }
 
@@ -681,6 +904,7 @@ function render(){
                     <div class="
                     status-icon
                     ${iconClass}
+                    status-toggle
                     ">
                         ${icon}
                     </div>
@@ -703,7 +927,18 @@ function render(){
 
             card.addEventListener(
                 "click",
-                async ()=>{
+                ()=>{
+
+                    showChapterConcept(chapter);
+
+                }
+            );
+
+            card.querySelector(".status-toggle").addEventListener(
+                "click",
+                async event =>{
+
+                    event.stopPropagation();
 
                     chapter.status =
                         nextStatus(
