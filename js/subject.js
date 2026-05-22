@@ -1467,6 +1467,129 @@ export const rekaBentukData = {
 
 
 // =========================================================
+// ENGLISH
+// =========================================================
+
+export const englishData = {
+
+    subject:"English",
+
+    chapters:[
+
+        {
+            form:"Tenses",
+            chapter:"Present Simple",
+            chinese:"一般现在时",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-22"
+        },
+
+        {
+            form:"Tenses",
+            chapter:"Present Continuous",
+            chinese:"现在进行时",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-22"
+        },
+
+        {
+            form:"Tenses",
+            chapter:"Present Perfect",
+            chinese:"现在完成时",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-22"
+        },
+
+        {
+            form:"Tenses",
+            chapter:"Present Perfect Continuous",
+            chinese:"现在完成进行时",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-22"
+        },
+
+        {
+            form:"Tenses",
+            chapter:"Past Simple",
+            chinese:"一般过去时",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-22"
+        },
+
+        {
+            form:"Tenses",
+            chapter:"Past Continuous",
+            chinese:"过去进行时",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-22"
+        },
+
+        {
+            form:"Tenses",
+            chapter:"Past Perfect",
+            chinese:"过去完成时",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-22"
+        },
+
+        {
+            form:"Tenses",
+            chapter:"Past Perfect Continuous",
+            chinese:"过去完成进行时",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-22"
+        },
+
+        {
+            form:"Tenses",
+            chapter:"Future Simple",
+            chinese:"一般将来时",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-22"
+        },
+
+        {
+            form:"Tenses",
+            chapter:"Future Continuous",
+            chinese:"将来进行时",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-22"
+        },
+
+        {
+            form:"Tenses",
+            chapter:"Future Perfect",
+            chinese:"将来完成时",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-22"
+        },
+
+        {
+            form:"Tenses",
+            chapter:"Future Perfect Continuous",
+            chinese:"将来完成进行时",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-22"
+        }
+
+    ]
+
+};
+
+
+// =========================================================
 // MORAL
 // =========================================================
 

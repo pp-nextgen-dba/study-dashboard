@@ -381,6 +381,12 @@ const seededSubjects = [
         "rekabentuk",
         "rekaBentukProgressBar",
         "rekaBentukProgressText"
+    ],
+
+    [
+        "english",
+        "englishProgressBar",
+        "englishProgressText"
     ]
 
 ];
@@ -389,7 +395,7 @@ subjects.forEach(subject =>
     watchSubjectProgress(...subject)
 );
 
-import("./subject.js?v=5")
+import("./subject.js?v=6")
     .then(subjectData => {
 
         seededSubjects.forEach(subject =>
