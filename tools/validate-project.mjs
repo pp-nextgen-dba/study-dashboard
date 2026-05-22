@@ -272,18 +272,6 @@ for(const subjectId of activeDashboardSubjectIds){
     validateDashboardCard(subject);
 }
 
-for(const file of [
-    "js/addmaths.js",
-    "js/firebase.js",
-    "subjects/maths_orig.html"
-]){
-    if(fs.existsSync(path.join(rootDir,file))){
-        reportWarning(
-            `${file}: appears to be legacy or unused`
-        );
-    }
-}
-
 for(const warning of warnings){
     console.warn(
         `WARN ${warning}`
