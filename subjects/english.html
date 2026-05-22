@@ -438,6 +438,71 @@ let data =
     structuredClone(englishData);
 
 
+function mergeSeedChapters(subjectData){
+
+    let changed = false;
+
+    if(!Array.isArray(subjectData.chapters)){
+
+        subjectData.chapters =
+            structuredClone(englishData.chapters);
+
+        return true;
+
+    }
+
+    const existingByChapter =
+        new Map(
+            subjectData.chapters.map(chapter => [
+                `${chapter.form}|${chapter.chapter}`,
+                chapter
+            ])
+        );
+
+    subjectData.chapters =
+        englishData.chapters.map(seedChapter => {
+
+            const existingChapter =
+                existingByChapter.get(
+                    `${seedChapter.form}|${seedChapter.chapter}`
+                );
+
+            if(!existingChapter){
+
+                changed = true;
+
+                return {
+                    ...seedChapter
+                };
+
+            }
+
+            if(existingChapter.chinese !== seedChapter.chinese){
+
+                changed = true;
+
+                return {
+                    ...existingChapter,
+                    chinese:seedChapter.chinese
+                };
+
+            }
+
+            return existingChapter;
+
+        });
+
+    if(subjectData.chapters.length !== englishData.chapters.length){
+
+        changed = true;
+
+    }
+
+    return changed;
+
+}
+
+
 // =========================================================
 // LOAD
 // =========================================================
@@ -450,6 +515,12 @@ async function loadData(){
     if(snap.exists()){
 
         data = snap.data();
+
+        if(mergeSeedChapters(data)){
+
+            await setDoc(docRef,data);
+
+        }
 
     }else{
 
