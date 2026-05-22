@@ -45,6 +45,17 @@ export const subjectRegistry = [
     },
 
     {
+        id:"chinese",
+        title:"Chinese",
+        icon:"🇨🇳",
+        href:"subjects/chinese.html",
+        progressBarId:"chineseProgressBar",
+        progressTextId:"chineseProgressText",
+        seedExport:"chineseData",
+        loadSeed:true
+    },
+
+    {
         id:"moral",
         title:"Moral",
         icon:"➕",

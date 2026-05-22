@@ -21,7 +21,7 @@ import {
     subjectRegistry
 }
 from
-"./subject-registry.js?v=1";
+"./subject-registry.js?v=2";
 
 
 // =========================================================
@@ -341,7 +341,7 @@ subjectsWithoutSeed.forEach(subject =>
     )
 );
 
-import("./subject.js?v=6")
+import("./subject.js?v=7")
     .then(subjectData => {
 
         subjectsWithSeed.forEach(subject =>

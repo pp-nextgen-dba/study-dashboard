@@ -1590,6 +1590,282 @@ export const englishData = {
 
 
 // =========================================================
+// CHINESE
+// =========================================================
+
+export const chineseData = {
+
+    subject:"Chinese",
+
+    chapters:[
+
+        {
+            form:"T2",
+            chapter:"现代文阅读理解",
+            chinese:"现代文理解与答题技巧",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-22"
+        },
+
+        {
+            form:"T2",
+            chapter:"文言文基础",
+            chinese:"基础文言词语与句子理解",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-22"
+        },
+
+        {
+            form:"T2",
+            chapter:"诗歌欣赏",
+            chinese:"诗歌主题、意象与感情分析",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-22"
+        },
+
+        {
+            form:"T2",
+            chapter:"词语与成语",
+            chinese:"词义、近义词、反义词与成语运用",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-22"
+        },
+
+        {
+            form:"T2",
+            chapter:"语法与标点",
+            chinese:"句子结构、病句修改与标点符号",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-22"
+        },
+
+        {
+            form:"T2",
+            chapter:"记叙文写作",
+            chinese:"人物、事件、情节与细节描写",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-22"
+        },
+
+        {
+            form:"T2",
+            chapter:"说明文写作",
+            chinese:"说明对象、顺序、方法与结构",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-22"
+        },
+
+        {
+            form:"T2",
+            chapter:"应用文写作",
+            chinese:"书信、通告、启事与短文格式",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-22"
+        },
+
+        {
+            form:"T2",
+            chapter:"聆听与口语表达",
+            chinese:"听力理解、复述与口头表达",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-22"
+        },
+
+        {
+            form:"T3",
+            chapter:"现代文深度阅读",
+            chinese:"文章结构、主旨与推论题训练",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-22"
+        },
+
+        {
+            form:"T3",
+            chapter:"文言文阅读理解",
+            chinese:"文言实词、虚词与句意翻译",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-22"
+        },
+
+        {
+            form:"T3",
+            chapter:"修辞手法",
+            chinese:"比喻、拟人、排比、夸张等手法",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-22"
+        },
+
+        {
+            form:"T3",
+            chapter:"作文结构与审题",
+            chinese:"审题、立意、段落安排与过渡",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-22"
+        },
+
+        {
+            form:"T3",
+            chapter:"议论文基础",
+            chinese:"论点、论据、论证与结论",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-22"
+        },
+
+        {
+            form:"T3",
+            chapter:"应用文格式",
+            chinese:"常见应用文格式与语气训练",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-22"
+        },
+
+        {
+            form:"T3",
+            chapter:"口试表达训练",
+            chinese:"看图说话、观点表达与互动回应",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-22"
+        },
+
+        {
+            form:"T4",
+            chapter:"SPM 现代文阅读",
+            chinese:"SPM 阅读题型与答题技巧",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-22"
+        },
+
+        {
+            form:"T4",
+            chapter:"SPM 文言文阅读",
+            chinese:"SPM 文言文理解、翻译与分析",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-22"
+        },
+
+        {
+            form:"T4",
+            chapter:"名句精华与文化知识",
+            chinese:"名句理解、文化常识与价值观",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-22"
+        },
+
+        {
+            form:"T4",
+            chapter:"议论文写作",
+            chinese:"议论文结构、论证方法与例子运用",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-22"
+        },
+
+        {
+            form:"T4",
+            chapter:"说明文与评论文",
+            chinese:"说明、分析、评价与观点表达",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-22"
+        },
+
+        {
+            form:"T4",
+            chapter:"应用文训练",
+            chinese:"SPM 应用文格式、内容与语言",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-22"
+        },
+
+        {
+            form:"T4",
+            chapter:"口试与听力训练",
+            chinese:"听力理解、口头表达与互动沟通",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-22"
+        },
+
+        {
+            form:"T5",
+            chapter:"SPM 阅读理解强化",
+            chinese:"综合阅读、推论、概括与评价题",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-22"
+        },
+
+        {
+            form:"T5",
+            chapter:"SPM 作文强化",
+            chinese:"审题、构思、内容深度与语言表达",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-22"
+        },
+
+        {
+            form:"T5",
+            chapter:"SPM 应用文强化",
+            chinese:"格式准确、重点完整与语气得体",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-22"
+        },
+
+        {
+            form:"T5",
+            chapter:"文学与文化复习",
+            chinese:"文学赏析、文化理解与价值观整理",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-22"
+        },
+
+        {
+            form:"T5",
+            chapter:"历年试题训练",
+            chinese:"按题型练习历年试题与评分标准",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-22"
+        },
+
+        {
+            form:"T5",
+            chapter:"模拟考试与改错",
+            chinese:"限时模拟、错题分析与答题改进",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-22"
+        }
+
+    ]
+
+};
+
+
+// =========================================================
 // MORAL
 // =========================================================
 

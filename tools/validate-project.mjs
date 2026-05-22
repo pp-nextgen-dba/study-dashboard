@@ -153,6 +153,7 @@ function validateSubjectData(subject, subjectData){
         if(
             chapter.chinese === "" &&
             [
+                "chinese",
                 "english",
                 "rekabentuk"
             ].includes(subjectId)
