@@ -56,6 +56,17 @@ export const subjectRegistry = [
     },
 
     {
+        id:"malay",
+        title:"Malay",
+        icon:"🇲🇾",
+        href:"subjects/malay.html",
+        progressBarId:"malayProgressBar",
+        progressTextId:"malayProgressText",
+        seedExport:"malayData",
+        loadSeed:true
+    },
+
+    {
         id:"moral",
         title:"Moral",
         icon:"➕",

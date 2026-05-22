@@ -2262,6 +2262,516 @@ export const chineseData = {
 
 
 // =========================================================
+// MALAY
+// =========================================================
+
+export const malayData = {
+
+    subject:"Malay",
+
+    chapters:[
+
+        {
+            form:"Listening & Speaking",
+            chapter:"Mendengar untuk Maklumat",
+            chinese:"聆听获取资料",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-22"
+        },
+
+        {
+            form:"Listening & Speaking",
+            chapter:"Mendengar untuk Idea Utama",
+            chinese:"聆听掌握主要内容",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-22"
+        },
+
+        {
+            form:"Listening & Speaking",
+            chapter:"Memberi Pendapat",
+            chinese:"表达意见",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-22"
+        },
+
+        {
+            form:"Listening & Speaking",
+            chapter:"Perbincangan Lisan",
+            chinese:"口头讨论",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-22"
+        },
+
+        {
+            form:"Listening & Speaking",
+            chapter:"Pembentangan Lisan",
+            chinese:"口头报告",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-22"
+        },
+
+        {
+            form:"Reading",
+            chapter:"Membaca Petikan Umum",
+            chinese:"阅读普通篇章",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-22"
+        },
+
+        {
+            form:"Reading",
+            chapter:"Mencari Isi Tersurat",
+            chinese:"找出明示内容",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-22"
+        },
+
+        {
+            form:"Reading",
+            chapter:"Mencari Isi Tersirat",
+            chinese:"找出隐含内容",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-22"
+        },
+
+        {
+            form:"Reading",
+            chapter:"Menentukan Idea Utama",
+            chinese:"确定主要思想",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-22"
+        },
+
+        {
+            form:"Reading",
+            chapter:"Membuat Inferens",
+            chinese:"作出推论",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-22"
+        },
+
+        {
+            form:"Reading",
+            chapter:"Maksud Perkataan dalam Konteks",
+            chinese:"根据上下文理解词义",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-22"
+        },
+
+        {
+            form:"Reading",
+            chapter:"Nada dan Tujuan Penulis",
+            chinese:"作者语气与写作目的",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-22"
+        },
+
+        {
+            form:"Writing",
+            chapter:"Perenggan Pendahuluan",
+            chinese:"开头段",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-22"
+        },
+
+        {
+            form:"Writing",
+            chapter:"Perenggan Isi",
+            chinese:"内容段",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-22"
+        },
+
+        {
+            form:"Writing",
+            chapter:"Perenggan Penutup",
+            chinese:"结尾段",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-22"
+        },
+
+        {
+            form:"Writing",
+            chapter:"Karangan Respons Terhad",
+            chinese:"限制性作文",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-22"
+        },
+
+        {
+            form:"Writing",
+            chapter:"Karangan Respons Terbuka",
+            chinese:"开放式作文",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-22"
+        },
+
+        {
+            form:"Writing",
+            chapter:"Karangan Berformat",
+            chinese:"格式作文",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-22"
+        },
+
+        {
+            form:"Writing",
+            chapter:"Karangan Tidak Berformat",
+            chinese:"非格式作文",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-22"
+        },
+
+        {
+            form:"Writing",
+            chapter:"Pengolahan Isi",
+            chinese:"内容展开",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-22"
+        },
+
+        {
+            form:"Writing",
+            chapter:"Penggunaan Penanda Wacana",
+            chinese:"话语标记的使用",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-22"
+        },
+
+        {
+            form:"Grammar",
+            chapter:"Kata Nama",
+            chinese:"名词",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-22"
+        },
+
+        {
+            form:"Grammar",
+            chapter:"Kata Kerja",
+            chinese:"动词",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-22"
+        },
+
+        {
+            form:"Grammar",
+            chapter:"Kata Adjektif",
+            chinese:"形容词",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-22"
+        },
+
+        {
+            form:"Grammar",
+            chapter:"Kata Tugas",
+            chinese:"虚词",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-22"
+        },
+
+        {
+            form:"Grammar",
+            chapter:"Imbuhan",
+            chinese:"词缀",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-22"
+        },
+
+        {
+            form:"Grammar",
+            chapter:"Frasa Nama",
+            chinese:"名词短语",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-22"
+        },
+
+        {
+            form:"Grammar",
+            chapter:"Frasa Kerja",
+            chinese:"动词短语",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-22"
+        },
+
+        {
+            form:"Grammar",
+            chapter:"Frasa Adjektif",
+            chinese:"形容词短语",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-22"
+        },
+
+        {
+            form:"Grammar",
+            chapter:"Frasa Sendi Nama",
+            chinese:"介词短语",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-22"
+        },
+
+        {
+            form:"Grammar",
+            chapter:"Ayat Tunggal",
+            chinese:"单句",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-22"
+        },
+
+        {
+            form:"Grammar",
+            chapter:"Ayat Majmuk",
+            chinese:"复句",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-22"
+        },
+
+        {
+            form:"Grammar",
+            chapter:"Ayat Aktif dan Ayat Pasif",
+            chinese:"主动句与被动句",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-22"
+        },
+
+        {
+            form:"Grammar",
+            chapter:"Cakap Ajuk dan Cakap Pindah",
+            chinese:"直接引语与间接引语",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-22"
+        },
+
+        {
+            form:"Grammar",
+            chapter:"Kesalahan Bahasa",
+            chinese:"语病与语言错误",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-22"
+        },
+
+        {
+            form:"Grammar",
+            chapter:"Peribahasa",
+            chinese:"谚语与成语",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-22"
+        },
+
+        {
+            form:"Literature",
+            chapter:"Sajak",
+            chinese:"现代诗",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-22"
+        },
+
+        {
+            form:"Literature",
+            chapter:"Syair",
+            chinese:"叙事诗",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-22"
+        },
+
+        {
+            form:"Literature",
+            chapter:"Pantun",
+            chinese:"班顿诗",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-22"
+        },
+
+        {
+            form:"Literature",
+            chapter:"Gurindam",
+            chinese:"格律诗",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-22"
+        },
+
+        {
+            form:"Literature",
+            chapter:"Prosa Tradisional",
+            chinese:"传统散文",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-22"
+        },
+
+        {
+            form:"Literature",
+            chapter:"Novel",
+            chinese:"小说",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-22"
+        },
+
+        {
+            form:"Literature",
+            chapter:"Gaya Bahasa",
+            chinese:"修辞手法",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-22"
+        },
+
+        {
+            form:"Literature",
+            chapter:"Nilai dan Pengajaran",
+            chinese:"价值观与教训",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-22"
+        },
+
+        {
+            form:"SPM Practice",
+            chapter:"Rumusan",
+            chinese:"摘要",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-22"
+        },
+
+        {
+            form:"SPM Practice",
+            chapter:"Pemahaman Petikan Umum",
+            chinese:"普通篇章理解",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-22"
+        },
+
+        {
+            form:"SPM Practice",
+            chapter:"Pemahaman Petikan Sastera",
+            chinese:"文学篇章理解",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-22"
+        },
+
+        {
+            form:"SPM Practice",
+            chapter:"Novel",
+            chinese:"小说题",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-22"
+        },
+
+        {
+            form:"SPM Practice",
+            chapter:"Sistem dan Aplikasi Bahasa",
+            chinese:"语言系统与应用",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-22"
+        },
+
+        {
+            form:"SPM Practice",
+            chapter:"Karangan Bahagian A",
+            chinese:"作文甲组",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-22"
+        },
+
+        {
+            form:"SPM Practice",
+            chapter:"Karangan Bahagian B",
+            chinese:"作文乙组",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-22"
+        },
+
+        {
+            form:"SPM Practice",
+            chapter:"Ujian Mendengar",
+            chinese:"听力测试",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-22"
+        },
+
+        {
+            form:"SPM Practice",
+            chapter:"Ujian Bertutur",
+            chinese:"口试",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-22"
+        },
+
+        {
+            form:"SPM Practice",
+            chapter:"Kertas Model SPM",
+            chinese:"SPM 模拟试卷",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-22"
+        },
+
+        {
+            form:"SPM Practice",
+            chapter:"Analisis Kesalahan",
+            chinese:"错误分析",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-22"
+        }
+
+    ]
+
+};
+
+
+// =========================================================
 // MORAL
 // =========================================================
 

@@ -155,6 +155,7 @@ function validateSubjectData(subject, subjectData){
             [
                 "chinese",
                 "english",
+                "malay",
                 "rekabentuk"
             ].includes(subjectId)
         ){
