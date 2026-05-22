@@ -26,18 +26,6 @@ function reportWarning(message){
     warnings.push(message);
 }
 
-function camelDataName(subjectId){
-    if(subjectId === "addmaths"){
-        return "addMathsData";
-    }
-
-    if(subjectId === "rekabentuk"){
-        return "rekaBentukData";
-    }
-
-    return `${subjectId}Data`;
-}
-
 function loadSubjectExports(){
     const source =
         readText("js/subject.js");
@@ -71,18 +59,28 @@ function loadSubjectExports(){
     );
 }
 
-function getSubjectIds(){
-    const dashboard =
-        readText("js/dashboard.js");
+function loadSubjectRegistry(){
+    const source =
+        readText("js/subject-registry.js");
 
-    const ids =
-        new Set();
+    const executable =
+        source.replace(
+            /export\s+const\s+subjectRegistry\s*=/,
+            "globalThis.subjectRegistry ="
+        );
 
-    for(const match of dashboard.matchAll(/\[\s*"([a-z0-9]+)"\s*,\s*"[^"]+ProgressBar"\s*,\s*"[^"]+ProgressText"/g)){
-        ids.add(match[1]);
-    }
+    const context =
+        vm.createContext({});
 
-    return [...ids];
+    vm.runInContext(
+        executable,
+        context,
+        {
+            filename:"js/subject-registry.js"
+        }
+    );
+
+    return context.subjectRegistry;
 }
 
 function getActiveDashboardSubjectIds(){
@@ -94,10 +92,13 @@ function getActiveDashboardSubjectIds(){
     ].map(match => match[1]);
 }
 
-function validateSubjectData(subjectId, subjectData){
+function validateSubjectData(subject, subjectData){
+    const subjectId =
+        subject.id;
+
     if(!subjectData){
         reportError(
-            `${subjectId}: missing ${camelDataName(subjectId)} export`
+            `${subjectId}: missing ${subject.seedExport} export`
         );
 
         return;
@@ -163,7 +164,10 @@ function validateSubjectData(subjectId, subjectData){
     });
 }
 
-function validateSubjectPage(subjectId){
+function validateSubjectPage(subject){
+    const subjectId =
+        subject.id;
+
     const pagePath =
         `subjects/${subjectId}.html`;
 
@@ -184,37 +188,33 @@ function validateSubjectPage(subjectId){
         );
     }
 
-    if(!page.includes(camelDataName(subjectId))){
+    if(!page.includes(subject.seedExport)){
         reportError(
-            `${subjectId}: page does not import ${camelDataName(subjectId)}`
+            `${subjectId}: page does not import ${subject.seedExport}`
         );
     }
 }
 
-function validateDashboardCard(subjectId){
+function validateDashboardCard(subject){
+    const subjectId =
+        subject.id;
+
     const index =
         readText("index.html");
 
-    if(!index.includes(`subjects/${subjectId}.html`)){
+    if(!index.includes(subject.href)){
         reportError(
             `${subjectId}: dashboard is missing subject link`
         );
     }
 
-    const progressId =
-        subjectId === "addmaths"
-            ? "addMaths"
-            : subjectId === "rekabentuk"
-                ? "rekaBentuk"
-                : subjectId;
-
-    if(!index.includes(`id="${progressId}ProgressBar"`)){
+    if(!index.includes(`id="${subject.progressBarId}"`)){
         reportError(
             `${subjectId}: dashboard missing progress bar id`
         );
     }
 
-    if(!index.includes(`id="${progressId}ProgressText"`)){
+    if(!index.includes(`id="${subject.progressTextId}"`)){
         reportError(
             `${subjectId}: dashboard missing progress text id`
         );
@@ -224,8 +224,13 @@ function validateDashboardCard(subjectId){
 const subjectExports =
     loadSubjectExports();
 
+const subjectRegistry =
+    loadSubjectRegistry();
+
 const subjectIds =
-    getSubjectIds();
+    subjectRegistry.map(subject =>
+        subject.id
+    );
 
 const activeDashboardSubjectIds =
     getActiveDashboardSubjectIds();
@@ -237,22 +242,34 @@ if(subjectIds.length === 0){
 }
 
 for(const subjectId of subjectIds){
+    const subject =
+        subjectRegistry.find(item =>
+            item.id === subjectId
+        );
+
     validateSubjectData(
-        subjectId,
-        subjectExports[camelDataName(subjectId)]
+        subject,
+        subjectExports[subject.seedExport]
     );
 }
 
 for(const subjectId of activeDashboardSubjectIds){
-    if(!subjectIds.includes(subjectId)){
-        reportError(
-            `${subjectId}: dashboard link is missing progress watcher`
+    const subject =
+        subjectRegistry.find(item =>
+            item.id === subjectId
         );
+
+    if(!subject){
+        reportError(
+            `${subjectId}: dashboard link is missing from subject registry`
+        );
+
+        continue;
     }
 
-    validateSubjectPage(subjectId);
+    validateSubjectPage(subject);
 
-    validateDashboardCard(subjectId);
+    validateDashboardCard(subject);
 }
 
 for(const file of [

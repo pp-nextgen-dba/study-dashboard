@@ -1,0 +1,124 @@
+export const subjectRegistry = [
+
+    {
+        id:"science",
+        title:"Science",
+        icon:"➕",
+        href:"subjects/science.html",
+        progressBarId:"scienceProgressBar",
+        progressTextId:"scienceProgressText",
+        seedExport:"scienceData",
+        loadSeed:false
+    },
+
+    {
+        id:"maths",
+        title:"Maths",
+        icon:"📐",
+        href:"subjects/maths.html",
+        progressBarId:"mathsProgressBar",
+        progressTextId:"mathsProgressText",
+        seedExport:"mathsData",
+        loadSeed:false
+    },
+
+    {
+        id:"addmaths",
+        title:"Add Maths",
+        icon:"➕",
+        href:"subjects/addmaths.html",
+        progressBarId:"addMathsProgressBar",
+        progressTextId:"addMathsProgressText",
+        seedExport:"addMathsData",
+        loadSeed:false
+    },
+
+    {
+        id:"english",
+        title:"English",
+        icon:"🇬🇧",
+        href:"subjects/english.html",
+        progressBarId:"englishProgressBar",
+        progressTextId:"englishProgressText",
+        seedExport:"englishData",
+        loadSeed:true
+    },
+
+    {
+        id:"moral",
+        title:"Moral",
+        icon:"➕",
+        href:"subjects/moral.html",
+        progressBarId:"moralProgressBar",
+        progressTextId:"moralProgressText",
+        seedExport:"moralData",
+        loadSeed:true
+    },
+
+    {
+        id:"history",
+        title:"History",
+        icon:"📜",
+        href:"subjects/history.html",
+        progressBarId:"historyProgressBar",
+        progressTextId:"historyProgressText",
+        seedExport:"historyData",
+        loadSeed:true
+    },
+
+    {
+        id:"geografi",
+        title:"Geografi",
+        icon:"🌎",
+        href:"subjects/geografi.html",
+        progressBarId:"geografiProgressBar",
+        progressTextId:"geografiProgressText",
+        seedExport:"geografiData",
+        loadSeed:true
+    },
+
+    {
+        id:"rekabentuk",
+        title:"Reka Bentuk",
+        icon:"🛠️",
+        href:"subjects/rekabentuk.html",
+        progressBarId:"rekaBentukProgressBar",
+        progressTextId:"rekaBentukProgressText",
+        seedExport:"rekaBentukData",
+        loadSeed:true
+    },
+
+    {
+        id:"physics",
+        title:"Physics",
+        icon:"➕",
+        href:"subjects/physics.html",
+        progressBarId:"physicsProgressBar",
+        progressTextId:"physicsProgressText",
+        seedExport:"physicsData",
+        loadSeed:false
+    },
+
+    {
+        id:"chemistry",
+        title:"Chemistry",
+        icon:"➕",
+        href:"subjects/chemistry.html",
+        progressBarId:"chemistryProgressBar",
+        progressTextId:"chemistryProgressText",
+        seedExport:"chemistryData",
+        loadSeed:false
+    },
+
+    {
+        id:"biology",
+        title:"Biology",
+        icon:"➕",
+        href:"subjects/biology.html",
+        progressBarId:"biologyProgressBar",
+        progressTextId:"biologyProgressText",
+        seedExport:"biologyData",
+        loadSeed:false
+    }
+
+];

@@ -17,6 +17,12 @@ import {
 from
 "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
+import {
+    subjectRegistry
+}
+from
+"./subject-registry.js?v=1";
+
 
 // =========================================================
 // FIREBASE CONFIG
@@ -317,95 +323,33 @@ window.addEventListener(
 // START
 // =========================================================
 
-const subjects = [
+const subjectsWithoutSeed =
+    subjectRegistry.filter(subject =>
+        !subject.loadSeed
+    );
 
-    [
-        "science",
-        "scienceProgressBar",
-        "scienceProgressText"
-    ],
+const subjectsWithSeed =
+    subjectRegistry.filter(subject =>
+        subject.loadSeed
+    );
 
-    [
-        "maths",
-        "mathsProgressBar",
-        "mathsProgressText"
-    ],
-
-    [
-        "addmaths",
-        "addMathsProgressBar",
-        "addMathsProgressText"
-    ],
-
-    [
-        "physics",
-        "physicsProgressBar",
-        "physicsProgressText"
-    ],
-
-    [
-        "chemistry",
-        "chemistryProgressBar",
-        "chemistryProgressText"
-    ],
-
-    [
-        "biology",
-        "biologyProgressBar",
-        "biologyProgressText"
-    ]
-
-];
-
-const seededSubjects = [
-
-    [
-        "moral",
-        "moralProgressBar",
-        "moralProgressText"
-    ],
-
-    [
-        "geografi",
-        "geografiProgressBar",
-        "geografiProgressText"
-    ],
-
-    [
-        "history",
-        "historyProgressBar",
-        "historyProgressText"
-    ],
-
-    [
-        "rekabentuk",
-        "rekaBentukProgressBar",
-        "rekaBentukProgressText"
-    ],
-
-    [
-        "english",
-        "englishProgressBar",
-        "englishProgressText"
-    ]
-
-];
-
-subjects.forEach(subject =>
-    watchSubjectProgress(...subject)
+subjectsWithoutSeed.forEach(subject =>
+    watchSubjectProgress(
+        subject.id,
+        subject.progressBarId,
+        subject.progressTextId
+    )
 );
 
 import("./subject.js?v=6")
     .then(subjectData => {
 
-        seededSubjects.forEach(subject =>
+        subjectsWithSeed.forEach(subject =>
             watchSubjectProgress(
-                ...subject,
-                subjectData[
-                    subject[0] === "rekabentuk"
-                        ? "rekaBentukData"
-                        : `${subject[0]}Data`
-                ]
+                subject.id,
+                subject.progressBarId,
+                subject.progressTextId,
+                subjectData[subject.seedExport]
             )
         );
 
@@ -417,8 +361,12 @@ import("./subject.js?v=6")
             error
         );
 
-        seededSubjects.forEach(subject =>
-            watchSubjectProgress(...subject)
+        subjectsWithSeed.forEach(subject =>
+            watchSubjectProgress(
+                subject.id,
+                subject.progressBarId,
+                subject.progressTextId
+            )
         );
 
     });
