@@ -3,7 +3,6 @@
 // =========================================================
 
 import { db } from "./firebase.js";
-import { onAuthStateChanged, signInWithGoogle, signOut } from "./auth.js";
 
 import {
     doc,
@@ -20,34 +19,6 @@ from
 "./subject-registry.js?v=3";
 
 
-// =========================================================
-// AUTH
-// =========================================================
-
-const authBtn     = document.getElementById("authBtn");
-const authMessage = document.getElementById("authMessage");
-
-if (new URLSearchParams(window.location.search).get("error") === "unauthorized") {
-    authMessage.textContent = "That account is not authorised to edit. Please sign in with the correct account.";
-}
-
-onAuthStateChanged((user) => {
-    authBtn.textContent = user ? "Sign Out" : "Sign In";
-    if (user) authMessage.textContent = "";
-});
-
-authBtn.addEventListener("click", async () => {
-    const { auth } = await import("./firebase.js");
-    if (auth.currentUser) {
-        signOut();
-    } else {
-        try {
-            await signInWithGoogle();
-        } catch (err) {
-            console.error("Sign-in failed:", err);
-        }
-    }
-});
 
 
 // =========================================================
