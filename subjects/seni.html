@@ -1,5 +1,5 @@
 <!-- ===================================================== -->
-<!-- FILE: subjects/chinese.html -->
+<!-- FILE: subjects/seni.html -->
 <!-- ===================================================== -->
 
 <!DOCTYPE html>
@@ -12,7 +12,7 @@
 <meta name="viewport"
 content="width=device-width, initial-scale=1.0">
 
-<title>Chinese Dashboard</title>
+<title>Seni Dashboard</title>
 
 <link rel="stylesheet"
 href="../css/style.css?v=30">
@@ -89,21 +89,10 @@ body{
     letter-spacing:1px;
 }
 
-.mastered{
-    color:#198754;
-}
-
-.progress{
-    color:#d97706;
-}
-
-.notstarted{
-    color:#777;
-}
-
-.total{
-    color:#0d6efd;
-}
+.mastered{ color:#198754; }
+.progress{ color:#d97706; }
+.notstarted{ color:#777; }
+.total{ color:#0d6efd; }
 
 /* ===================================================== */
 /* LEGEND */
@@ -126,17 +115,9 @@ body{
     margin-right:5px;
 }
 
-.gray{
-    background:#aaa;
-}
-
-.orange{
-    background:#d97706;
-}
-
-.green{
-    background:#198754;
-}
+.gray{ background:#aaa; }
+.orange{ background:#d97706; }
+.green{ background:#198754; }
 
 /* ===================================================== */
 /* FORM SECTION */
@@ -157,7 +138,7 @@ body{
 .form-header h2{
     font-size:42px;
     margin:0;
-    color:#2563eb;
+    color:#be185d;
 }
 
 .form-progress{
@@ -176,7 +157,7 @@ body{
 
 .progress-fill{
     height:100%;
-    background:#2563eb;
+    background:#be185d;
     border-radius:20px;
 }
 
@@ -208,9 +189,7 @@ body{
     transform:translateY(-2px);
 }
 
-.chapter-card.not-started{
-    background:white;
-}
+.chapter-card.not-started{ background:white; }
 
 .chapter-card.in-progress{
     background:#fff7ed;
@@ -240,17 +219,9 @@ body{
     flex-shrink:0;
 }
 
-.icon-not{
-    background:#999;
-}
-
-.icon-progress{
-    background:#d97706;
-}
-
-.icon-mastered{
-    background:#198754;
-}
+.icon-not{ background:#999; }
+.icon-progress{ background:#d97706; }
+.icon-mastered{ background:#198754; }
 
 .chapter-title{
     font-size:18px;
@@ -263,25 +234,15 @@ body{
 
 @media(max-width:768px){
 
-    body{
-        padding:12px;
-    }
+    body{ padding:12px; }
 
-    .form-header h2{
-        font-size:30px;
-    }
+    .form-header h2{ font-size:30px; }
 
-    .chapter-title{
-        font-size:15px;
-    }
+    .chapter-title{ font-size:15px; }
 
-    .summary-card h2{
-        font-size:28px;
-    }
+    .summary-card h2{ font-size:28px; }
 
-    .chapter-grid{
-        grid-template-columns:1fr;
-    }
+    .chapter-grid{ grid-template-columns:1fr; }
 
 }
 
@@ -382,7 +343,7 @@ from
 "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
 import {
-    chineseData
+    seniData
 }
 from
 "../js/subject.js?v=12";
@@ -396,10 +357,10 @@ await requireAuth("../index.html");
 // =========================================================
 
 const docRef =
-    doc(db,"subjects","chinese");
+    doc(db,"subjects","seni");
 
 let data =
-    structuredClone(chineseData);
+    structuredClone(seniData);
 
 
 // =========================================================
@@ -419,11 +380,11 @@ async function loadData(){
 
         await setDoc(
             docRef,
-            chineseData
+            seniData
         );
 
         data =
-            structuredClone(chineseData);
+            structuredClone(seniData);
 
     }
 
@@ -589,27 +550,21 @@ function render(){
             let icon="";
 
             if(chapter.status==="Not Started"){
-
                 cardClass="not-started";
                 iconClass="icon-not";
                 icon="○";
-
             }
 
             if(chapter.status==="In Progress"){
-
                 cardClass="in-progress";
                 iconClass="icon-progress";
                 icon="◉";
-
             }
 
             if(chapter.status==="Mastered"){
-
                 cardClass="mastered";
                 iconClass="icon-mastered";
                 icon="✓";
-
             }
 
             const card =
@@ -617,11 +572,6 @@ function render(){
 
             card.className =
                 `chapter-card ${cardClass}`;
-
-            const chapterSubtitle =
-                chapter.chinese
-                    ? `<div class="chapter-cn">${chapter.chinese}</div>`
-                    : "";
 
             card.innerHTML = `
 
@@ -635,16 +585,10 @@ function render(){
                     </div>
 
                     <div>
-
                         <div class="chapter-title">
                             ${chapter.chapter}
                         </div>
-
-                        ${chapterSubtitle}
-
                     </div>
-
-                </div>
 
                 </div>
 

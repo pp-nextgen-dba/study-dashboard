@@ -15,6 +15,9 @@ content="width=device-width, initial-scale=1.0">
 
 <title>Study Progress Dashboard</title>
 
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#0d6efd">
+
 <link rel="stylesheet"
 href="css/style.css">
 
@@ -71,9 +74,17 @@ href="css/style.css">
 
     <section class="subject-section">
 
-        <h2>
-            📚 Subjects Progress Overview
-        </h2>
+        <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:12px; margin-bottom:16px;">
+
+            <h2 style="margin:0;">
+                📚 Subjects Progress Overview
+            </h2>
+
+            <button id="exportBtn" style="padding:8px 16px; background:#0d6efd; color:#fff; border:none; border-radius:6px; cursor:pointer; font-size:14px;">
+                ⬇ Export Progress
+            </button>
+
+        </div>
 
         <div class="subject-grid">
 
@@ -382,10 +393,25 @@ href="css/style.css">
             </a>
 
             
-            <div class="subject-card disabled">
+            <a class="subject-card"
+            href="subjects/seni.html">
+
                 <h3>🎨 Seni</h3>
-                <p>Coming Soon</p>
-            </div>
+
+                <div class="progress-bar">
+
+                    <div
+                        class="progress-fill"
+                        id="seniProgressBar"
+                    ></div>
+
+                </div>
+
+                <p id="seniProgressText">
+                    0% Completed
+                </p>
+
+            </a>
 
         </div>
 
@@ -755,6 +781,12 @@ if(examCards){
 </script>
 
 <script type="module" src="js/dashboard.js?v=12"></script>
+
+<script>
+if ("serviceWorker" in navigator) {
+    navigator.serviceWorker.register("/sw.js");
+}
+</script>
 
 </div> <!-- /appContent -->
 

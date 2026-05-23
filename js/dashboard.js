@@ -7,10 +7,14 @@ import { db } from "./firebase.js";
 import {
     doc,
     setDoc,
-    onSnapshot
+    onSnapshot,
+    getDocs,
+    collection
 }
 from
 "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+
 
 import {
     subjectRegistry
@@ -306,7 +310,7 @@ subjectsWithoutSeed.forEach(subject =>
     )
 );
 
-import("./subject.js?v=11")
+import("./subject.js?v=12")
     .then(subjectData => {
 
         subjectsWithSeed.forEach(subject =>
@@ -335,3 +339,34 @@ import("./subject.js?v=11")
         );
 
     });
+
+
+// =========================================================
+// EXPORT
+// =========================================================
+
+document.getElementById("exportBtn").addEventListener("click", async () => {
+
+    const snapshot = await getDocs(collection(db, "subjects"));
+
+    const exportData = {};
+
+    snapshot.forEach(docSnap => {
+        exportData[docSnap.id] = docSnap.data();
+    });
+
+    const blob = new Blob(
+        [JSON.stringify(exportData, null, 2)],
+        { type: "application/json" }
+    );
+
+    const url = URL.createObjectURL(blob);
+    const a   = document.createElement("a");
+
+    a.href     = url;
+    a.download = `study-progress-${new Date().toISOString().slice(0,10)}.json`;
+
+    a.click();
+    URL.revokeObjectURL(url);
+
+});

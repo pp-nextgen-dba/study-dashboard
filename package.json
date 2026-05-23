@@ -1,0 +1,11 @@
+{
+  "name": "study-dashboard",
+  "version": "1.0.0",
+  "description": "Study progress tracker for Malaysian Form 2-5 and SPM exam preparation",
+  "scripts": {
+    "validate": "node tools/validate-project.mjs"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

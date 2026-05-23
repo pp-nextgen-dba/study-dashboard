@@ -451,7 +451,7 @@ import {
     mathsData
 }
 from
-"../js/subject.js";
+"../js/subject.js?v=12";
 
 import { requireAuth } from "../js/auth.js";
 await requireAuth("../index.html");
@@ -607,6 +607,7 @@ async function saveData(){
 
     try{
 
+        data.last_saved = new Date().toISOString();
         await setDoc(docRef,data);
 
         console.log(

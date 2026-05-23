@@ -141,6 +141,17 @@ export const subjectRegistry = [
         progressTextId:"biologyProgressText",
         seedExport:"biologyData",
         loadSeed:false
+    },
+
+    {
+        id:"seni",
+        title:"Seni",
+        icon:"🎨",
+        href:"subjects/seni.html",
+        progressBarId:"seniProgressBar",
+        progressTextId:"seniProgressText",
+        seedExport:"seniData",
+        loadSeed:true
     }
 
 ];

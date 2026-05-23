@@ -385,7 +385,7 @@ import {
     malayData
 }
 from
-"../js/subject.js?v=11";
+"../js/subject.js?v=12";
 
 import { requireAuth } from "../js/auth.js";
 await requireAuth("../index.html");
@@ -511,7 +511,8 @@ async function loadData(){
 
         if(mergeSeedChapters(data)){
 
-            await setDoc(docRef,data);
+            data.last_saved = new Date().toISOString();
+    await setDoc(docRef,data);
 
         }
 
@@ -538,6 +539,7 @@ async function loadData(){
 
 async function saveData(){
 
+    data.last_saved = new Date().toISOString();
     await setDoc(docRef,data);
 
 }

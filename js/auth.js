@@ -1,5 +1,12 @@
-const CORRECT_PIN = "9999";
+// SHA-256 hash of the PIN. Generated with: crypto.subtle.digest("SHA-256", new TextEncoder().encode("9999"))
+// To change the PIN, replace this hash with the SHA-256 of the new PIN.
+const CORRECT_PIN_HASH = "4a44dc15364204a80fe80e9039455cc1608281820fe2b24f1e5233ade6af1dd5";
 const SESSION_KEY = "study_dashboard_auth";
+
+async function hashPin(pin) {
+    const buffer = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(pin));
+    return Array.from(new Uint8Array(buffer)).map(b => b.toString(16).padStart(2, "0")).join("");
+}
 
 export function isAuthenticated() {
     return sessionStorage.getItem(SESSION_KEY) === "1";
@@ -35,8 +42,9 @@ export function requireAuth() {
         const error = overlay.querySelector("#pinError");
         const btn   = overlay.querySelector("#pinSubmit");
 
-        const attempt = () => {
-            if (input.value === CORRECT_PIN) {
+        const attempt = async () => {
+            const hash = await hashPin(input.value);
+            if (hash === CORRECT_PIN_HASH) {
                 sessionStorage.setItem(SESSION_KEY, "1");
                 overlay.remove();
                 resolve();

@@ -3255,3 +3255,109 @@ export const addMathsData = {
     ]
 
 };
+
+export const seniData = {
+
+    subject:"Seni",
+
+    chapters:[
+
+        {
+            form:"T2",
+            chapter:"Asas Seni Reka",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-23"
+        },
+
+        {
+            form:"T2",
+            chapter:"Menggambar",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-23"
+        },
+
+        {
+            form:"T2",
+            chapter:"Membuat Corak dan Rekaan",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-23"
+        },
+
+        {
+            form:"T2",
+            chapter:"Membentuk dan Membuat Binaan",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-23"
+        },
+
+        {
+            form:"T2",
+            chapter:"Kraf Tradisional",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-23"
+        },
+
+        {
+            form:"T2",
+            chapter:"Apresiasi Seni",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-23"
+        },
+
+        {
+            form:"T3",
+            chapter:"Asas Seni Reka",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-23"
+        },
+
+        {
+            form:"T3",
+            chapter:"Menggambar",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-23"
+        },
+
+        {
+            form:"T3",
+            chapter:"Membuat Corak dan Rekaan",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-23"
+        },
+
+        {
+            form:"T3",
+            chapter:"Membentuk dan Membuat Binaan",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-23"
+        },
+
+        {
+            form:"T3",
+            chapter:"Kraf Tradisional",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-23"
+        },
+
+        {
+            form:"T3",
+            chapter:"Apresiasi Seni",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-23"
+        }
+
+    ]
+
+};
