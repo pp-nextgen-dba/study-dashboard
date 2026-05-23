@@ -54,12 +54,13 @@ index.html (dashboard)
 - **`index.html` / `dashboard.js`** — publicly viewable by anyone, no PIN required.
 - **`subjects/*.html`** — each page calls `await requireAuth()` at startup, which shows a PIN overlay before allowing edits. The PIN is verified client-side and stored in `sessionStorage` for the duration of the browser session.
 - **`js/auth.js`** — contains `CORRECT_PIN` and exports `requireAuth()` and `isAuthenticated()`. To change the PIN, update `CORRECT_PIN` in this file.
+- **`js/firebase.js`** — calls `signInAnonymously()` at startup so Firestore security rules (`request.auth != null`) are satisfied for reads without requiring the user to log in. **Anonymous sign-in must be enabled in the Firebase Console** (Authentication → Sign-in method → Anonymous → Enable), otherwise progress bars will show 0%.
 
-**Firestore security rules** (set in Firebase Console — currently open for reads, unrestricted writes since auth is PIN-based):
+**Firestore security rules:**
 ```
 match /subjects/{subjectId} {
-  allow read: if true;
-  allow write: if true;
+  allow read: if request.auth != null;
+  allow write: if request.auth != null;
 }
 ```
 
