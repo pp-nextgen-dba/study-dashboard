@@ -10,6 +10,8 @@ A static Progressive Web App for tracking study progress for Malaysian Form 2–
 
 **Validate project integrity:**
 ```bash
+npm run validate
+# or directly:
 node tools/validate-project.mjs
 ```
 Run this after modifying `js/subject.js`, `js/subject-registry.js`, or `index.html` to catch data inconsistencies, missing fields, duplicate chapters, and broken references.
@@ -35,11 +37,19 @@ index.html (dashboard)
 
 ### Key Files
 
-- **`js/subject.js`** — Master data source. Exports 13 named objects (e.g. `mathsData`, `physicsData`), each containing an array of chapters with `form`, `chapter`, `status`, `confidence`, and `last_updated` fields. This is the single source of truth for curriculum content.
+- **`js/firebase.js`** — Single source for Firebase initialisation. Exports `db` (Firestore). Also calls `signInAnonymously()` at startup so Firestore security rules pass for unauthenticated visitors.
+- **`js/auth.js`** — PIN-based auth. Exports `requireAuth()` and `isAuthenticated()`. The PIN is stored as a SHA-256 hash (`CORRECT_PIN_HASH`). To change the PIN, replace the hash with the SHA-256 of the new value.
+- **`js/subject.js`** — Master data source. Exports 14 named objects (e.g. `mathsData`, `seniData`), each containing an array of chapters with `form`, `chapter`, `status`, `confidence`, and `last_updated` fields.
 - **`js/subject-registry.js`** — Maps each subject to its Firestore collection key, HTML progress bar element IDs, href, and whether to auto-seed Firestore (`loadSeed: true/false`).
-- **`js/dashboard.js`** — Initialises Firebase, sets up `onSnapshot` listeners for real-time progress updates, and auto-seeds Firestore documents for subjects where `loadSeed: true`.
-- **`subjects/*.html`** — One page per subject. Each page reads/writes its Firestore document directly and imports seed data from `subject.js`.
+- **`js/dashboard.js`** — Sets up `onSnapshot` listeners for real-time progress updates, auto-seeds Firestore documents, and handles the Export Progress button.
+- **`subjects/*.html`** — One page per subject (14 total, including Seni). Each page calls `await requireAuth()`, reads/writes its Firestore document, and writes `data.last_saved` (ISO timestamp) on every save.
+- **`manifest.json`** — PWA manifest for home screen install. Requires icon files at `icons/icon-192.png` and `icons/icon-512.png`.
+- **`sw.js`** — Service worker. Caches all static assets on install; serves cached assets offline. Firestore API calls bypass the cache (network-first).
 - **`tools/validate-project.mjs`** — Node.js ESM script that cross-checks exports in `subject.js`, entries in `subject-registry.js`, links in `index.html`, and existence of subject pages. Exits with code 1 on errors.
+
+### Subjects
+
+14 subjects: Maths, Add Maths, Science, Physics, Chemistry, Biology, English, Chinese, Malay, Moral, History, Geografi, Reka Bentuk, **Seni** (T2–T3).
 
 ### Adding a New Subject
 
@@ -47,14 +57,24 @@ index.html (dashboard)
 2. Add an entry to `js/subject-registry.js` (set `loadSeed: true` to auto-seed Firestore)
 3. Create `subjects/<name>.html` following the pattern of existing subject pages
 4. Add a subject card to `index.html` with matching progress bar IDs
-5. Run `node tools/validate-project.mjs` to verify everything is wired correctly
+5. Add the page path to the `STATIC_ASSETS` array in `sw.js`
+6. Run `npm run validate` to verify everything is wired correctly
+
+### Changing the PIN
+
+The PIN is hashed with SHA-256 in `js/auth.js`. To change it:
+1. Generate the SHA-256 hash of the new PIN (use browser DevTools: `await crypto.subtle.digest("SHA-256", new TextEncoder().encode("NEWPIN"))` then convert to hex)
+2. Replace `CORRECT_PIN_HASH` in `js/auth.js`
+
+### Export Progress
+
+The **Export Progress** button on the dashboard downloads all Firestore subject data as a dated JSON file (`study-progress-YYYY-MM-DD.json`).
 
 ### Authentication & Authorisation
 
 - **`index.html` / `dashboard.js`** — publicly viewable by anyone, no PIN required.
-- **`subjects/*.html`** — each page calls `await requireAuth()` at startup, which shows a PIN overlay before allowing edits. The PIN is verified client-side and stored in `sessionStorage` for the duration of the browser session.
-- **`js/auth.js`** — contains `CORRECT_PIN` and exports `requireAuth()` and `isAuthenticated()`. To change the PIN, update `CORRECT_PIN` in this file.
-- **`js/firebase.js`** — calls `signInAnonymously()` at startup so Firestore security rules (`request.auth != null`) are satisfied for reads without requiring the user to log in. **Anonymous sign-in must be enabled in the Firebase Console** (Authentication → Sign-in method → Anonymous → Enable), otherwise progress bars will show 0%.
+- **`subjects/*.html`** — each page calls `await requireAuth()` at startup, showing a PIN overlay before allowing edits. PIN verification is stored in `sessionStorage` for the session.
+- **`js/firebase.js`** — calls `signInAnonymously()` at startup. **Anonymous sign-in must be enabled in the Firebase Console** (Authentication → Sign-in method → Anonymous → Enable), otherwise progress bars will show 0%.
 
 **Firestore security rules:**
 ```
@@ -67,5 +87,5 @@ match /subjects/{subjectId} {
 ### Firebase
 
 - Credentials are hardcoded in `js/firebase.js` (public project; access is controlled via Firestore security rules).
-- Firestore structure: `subjects/{subjectId}` — each document holds the chapters array for that subject.
+- Firestore structure: `subjects/{subjectId}` — each document holds the chapters array and a `last_saved` ISO timestamp updated on every write.
 - SDK version: Firebase v10.12.2, loaded from CDN (no npm install needed).
