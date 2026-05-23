@@ -21,35 +21,27 @@ from
 
 
 // =========================================================
-// AUTH GATE
+// AUTH
 // =========================================================
 
-const loginOverlay = document.getElementById("loginOverlay");
-const appContent   = document.getElementById("appContent");
-const signOutBtn   = document.getElementById("signOutBtn");
-const googleBtn    = document.getElementById("googleSignInBtn");
-const loginError   = document.getElementById("loginError");
+const authBtn = document.getElementById("authBtn");
 
 onAuthStateChanged((user) => {
-    if (user) {
-        loginOverlay.style.display = "none";
-        appContent.style.display   = "block";
+    authBtn.textContent = user ? "Sign Out" : "Sign In";
+});
+
+authBtn.addEventListener("click", async () => {
+    const { auth } = await import("./firebase.js");
+    if (auth.currentUser) {
+        signOut();
     } else {
-        loginOverlay.style.display = "flex";
-        appContent.style.display   = "none";
+        try {
+            await signInWithGoogle();
+        } catch (err) {
+            console.error("Sign-in failed:", err);
+        }
     }
 });
-
-googleBtn.addEventListener("click", async () => {
-    try {
-        await signInWithGoogle();
-    } catch (err) {
-        loginError.textContent = "Sign-in failed. Please try again.";
-        loginError.style.display = "block";
-    }
-});
-
-signOutBtn.addEventListener("click", () => signOut());
 
 
 // =========================================================
