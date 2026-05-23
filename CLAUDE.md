@@ -51,19 +51,15 @@ index.html (dashboard)
 
 ### Authentication & Authorisation
 
-- **`js/firebase.js`** — exports both `db` (Firestore) and `auth` (Firebase Auth). Single source for all Firebase initialisation.
-- **`js/auth.js`** — exports `requireAuth()`, `signInWithGoogle()`, `signOut()`, and `AUTHORIZED_EMAILS`. The authorised email list is defined here.
-- **`index.html` / `dashboard.js`** — publicly viewable by anyone. A Sign In / Sign Out button in the header reflects auth state.
-- **`subjects/*.html`** — each page calls `await requireAuth("../index.html")` at startup. Users not in `AUTHORIZED_EMAILS` are redirected to the dashboard with `?error=unauthorized`. Currently authorised: `lersi9999@gmail.com`, `psi9999@gmail.com`.
+- **`index.html` / `dashboard.js`** — publicly viewable by anyone, no PIN required.
+- **`subjects/*.html`** — each page calls `await requireAuth()` at startup, which shows a PIN overlay before allowing edits. The PIN is verified client-side and stored in `sessionStorage` for the duration of the browser session.
+- **`js/auth.js`** — contains `CORRECT_PIN` and exports `requireAuth()` and `isAuthenticated()`. To change the PIN, update `CORRECT_PIN` in this file.
 
-To add or remove an authorised editor, update the `AUTHORIZED_EMAILS` array in `js/auth.js` and the matching Firestore security rules in the Firebase Console.
-
-**Firestore security rules:**
+**Firestore security rules** (set in Firebase Console — currently open for reads, unrestricted writes since auth is PIN-based):
 ```
 match /subjects/{subjectId} {
   allow read: if true;
-  allow write: if request.auth != null &&
-    request.auth.token.email in ["lersi9999@gmail.com", "psi9999@gmail.com"];
+  allow write: if true;
 }
 ```
 
