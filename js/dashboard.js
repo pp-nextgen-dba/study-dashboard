@@ -2,14 +2,9 @@
 // FIREBASE IMPORTS
 // =========================================================
 
-import {
-    initializeApp
-}
-from
-"https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import { db } from "./firebase.js";
 
 import {
-    getFirestore,
     doc,
     setDoc,
     onSnapshot
@@ -22,38 +17,6 @@ import {
 }
 from
 "./subject-registry.js?v=3";
-
-
-// =========================================================
-// FIREBASE CONFIG
-// =========================================================
-
-const firebaseConfig = {
-
-    apiKey: "AIzaSyANWx-Uhq5uwgMqk1iaAB8NvBsQsUxAPjw",
-
-    authDomain: "study-dashboard-7ca48.firebaseapp.com",
-
-    projectId: "study-dashboard-7ca48",
-
-    storageBucket: "study-dashboard-7ca48.firebasestorage.app",
-
-    messagingSenderId: "745280498866",
-
-    appId: "1:745280498866:web:39534ba9c4de40a7db6dab"
-
-};
-
-
-// =========================================================
-// INITIALIZE
-// =========================================================
-
-const app =
-    initializeApp(firebaseConfig);
-
-const db =
-    getFirestore(app);
 
 
 // =========================================================
