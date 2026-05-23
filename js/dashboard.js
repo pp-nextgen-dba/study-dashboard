@@ -3,6 +3,7 @@
 // =========================================================
 
 import { db } from "./firebase.js";
+import { onAuthStateChanged, signInWithGoogle, signOut } from "./auth.js";
 
 import {
     doc,
@@ -17,6 +18,38 @@ import {
 }
 from
 "./subject-registry.js?v=3";
+
+
+// =========================================================
+// AUTH GATE
+// =========================================================
+
+const loginOverlay = document.getElementById("loginOverlay");
+const appContent   = document.getElementById("appContent");
+const signOutBtn   = document.getElementById("signOutBtn");
+const googleBtn    = document.getElementById("googleSignInBtn");
+const loginError   = document.getElementById("loginError");
+
+onAuthStateChanged((user) => {
+    if (user) {
+        loginOverlay.style.display = "none";
+        appContent.style.display   = "block";
+    } else {
+        loginOverlay.style.display = "flex";
+        appContent.style.display   = "none";
+    }
+});
+
+googleBtn.addEventListener("click", async () => {
+    try {
+        await signInWithGoogle();
+    } catch (err) {
+        loginError.textContent = "Sign-in failed. Please try again.";
+        loginError.style.display = "block";
+    }
+});
+
+signOutBtn.addEventListener("click", () => signOut());
 
 
 // =========================================================
