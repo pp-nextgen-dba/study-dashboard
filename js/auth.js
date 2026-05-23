@@ -1,4 +1,4 @@
-const CORRECT_PIN = "9881";
+const CORRECT_PIN = "9999";
 const SESSION_KEY = "study_dashboard_auth";
 
 export function isAuthenticated() {
