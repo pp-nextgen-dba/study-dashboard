@@ -49,8 +49,26 @@ index.html (dashboard)
 4. Add a subject card to `index.html` with matching progress bar IDs
 5. Run `node tools/validate-project.mjs` to verify everything is wired correctly
 
+### Authentication & Authorisation
+
+- **`js/firebase.js`** — exports both `db` (Firestore) and `auth` (Firebase Auth). Single source for all Firebase initialisation.
+- **`js/auth.js`** — exports `requireAuth()`, `signInWithGoogle()`, `signOut()`, and `AUTHORIZED_EMAILS`. The authorised email list is defined here.
+- **`index.html` / `dashboard.js`** — publicly viewable by anyone. A Sign In / Sign Out button in the header reflects auth state.
+- **`subjects/*.html`** — each page calls `await requireAuth("../index.html")` at startup. Users not in `AUTHORIZED_EMAILS` are redirected to the dashboard with `?error=unauthorized`. Currently authorised: `lersi9999@gmail.com`, `psi9999@gmail.com`.
+
+To add or remove an authorised editor, update the `AUTHORIZED_EMAILS` array in `js/auth.js` and the matching Firestore security rules in the Firebase Console.
+
+**Firestore security rules:**
+```
+match /subjects/{subjectId} {
+  allow read: if true;
+  allow write: if request.auth != null &&
+    request.auth.token.email in ["lersi9999@gmail.com", "psi9999@gmail.com"];
+}
+```
+
 ### Firebase
 
-- Credentials are hardcoded in `js/dashboard.js` (public project; access is controlled via Firestore security rules).
+- Credentials are hardcoded in `js/firebase.js` (public project; access is controlled via Firestore security rules).
 - Firestore structure: `subjects/{subjectId}` — each document holds the chapters array for that subject.
 - SDK version: Firebase v10.12.2, loaded from CDN (no npm install needed).
