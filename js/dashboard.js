@@ -24,10 +24,16 @@ from
 // AUTH
 // =========================================================
 
-const authBtn = document.getElementById("authBtn");
+const authBtn     = document.getElementById("authBtn");
+const authMessage = document.getElementById("authMessage");
+
+if (new URLSearchParams(window.location.search).get("error") === "unauthorized") {
+    authMessage.textContent = "That account is not authorised to edit. Please sign in with the correct account.";
+}
 
 onAuthStateChanged((user) => {
     authBtn.textContent = user ? "Sign Out" : "Sign In";
+    if (user) authMessage.textContent = "";
 });
 
 authBtn.addEventListener("click", async () => {
