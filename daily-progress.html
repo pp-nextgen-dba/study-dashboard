@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
+
+<title>Daily Subject Progress</title>
+
+<link
+    rel="stylesheet"
+    href="css/style.css"
+>
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <header class="daily-header">
+
+        <a
+            class="back-btn"
+            href="index.html"
+        >
+            Back to Dashboard
+        </a>
+
+        <h1>
+            Daily Subject Progress
+        </h1>
+
+        <p class="subtitle">
+            Click subjects to save what was completed for each day.
+        </p>
+
+    </header>
+
+    <main class="daily-layout">
+
+        <section class="daily-panel">
+
+            <div class="section-heading">
+                <h2>Update Day</h2>
+                <p id="saveStatus">Ready</p>
+            </div>
+
+            <label class="field-label" for="studyDate">
+                Date
+            </label>
+
+            <input
+                class="date-input"
+                type="date"
+                id="studyDate"
+            >
+
+            <div class="subject-picker" id="subjectPicker"></div>
+
+        </section>
+
+        <section class="month-panel">
+
+            <div class="section-heading">
+                <h2>This Month</h2>
+                <p id="monthRange"></p>
+            </div>
+
+            <div class="month-summary">
+
+                <div>
+                    <span id="monthDaysCount">0</span>
+                    <p>days studied</p>
+                </div>
+
+                <div>
+                    <span id="monthSubjectCount">0</span>
+                    <p>subject ticks</p>
+                </div>
+
+                <div>
+                    <span id="monthBestCount">0</span>
+                    <p>best day</p>
+                </div>
+
+            </div>
+
+            <div
+                class="month-grid"
+                id="monthGrid"
+            ></div>
+
+        </section>
+
+    </main>
+
+    <section class="subject-month-panel">
+
+        <div class="section-heading">
+            <h2>Subject Monthly Progress</h2>
+            <p>How many days each subject was done this month</p>
+        </div>
+
+        <div
+            class="subject-month-list"
+            id="subjectMonthList"
+        ></div>
+
+    </section>
+
+</div>
+
+<script
+    type="module"
+    src="js/daily-progress.js?v=1"
+></script>
+
+</body>
+</html>
