@@ -65,6 +65,28 @@ h1{
 
 }
 
+.dashboard-version{
+
+    display:inline-block;
+
+    margin:8px 0 0;
+
+    padding:5px 10px;
+
+    border:1px solid #d0d7de;
+
+    border-radius:6px;
+
+    background:#fff;
+
+    color:#57606a;
+
+    font-size:12px;
+
+    font-weight:bold;
+
+}
+
 
 /* ========================================================= */
 /* SECTION TITLES */
