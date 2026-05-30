@@ -402,7 +402,7 @@ import {
     historyData
 }
 from
-"../js/subject.js?v=12";
+"../js/subject.js?v=13";
 
 import { requireAuth } from "../js/auth.js";
 await requireAuth("../index.html");
@@ -416,7 +416,66 @@ const docRef =
     doc(db,"subjects","history");
 
 let data =
-    structuredClone(historyData);
+    cloneData(historyData);
+
+function cloneData(value){
+
+    if(typeof structuredClone === "function"){
+        return structuredClone(value);
+    }
+
+    return JSON.parse(JSON.stringify(value));
+
+}
+
+function chapterKey(chapter){
+
+    return `${chapter.form}::${chapter.chapter}`;
+
+}
+
+function mergeSeedData(savedData, seedData){
+
+    const saved =
+        cloneData(savedData);
+
+    const seed =
+        cloneData(seedData);
+
+    const savedByChapter =
+        new Map(
+            (saved.chapters || []).map(chapter=>[
+                chapterKey(chapter),
+                chapter
+            ])
+        );
+
+    const mergedChapters =
+        seed.chapters.map(seedChapter=>({
+            ...seedChapter,
+            ...(savedByChapter.get(chapterKey(seedChapter)) || {})
+        }));
+
+    const seedKeys =
+        new Set(
+            seed.chapters.map(chapterKey)
+        );
+
+    const extraSavedChapters =
+        (saved.chapters || []).filter(
+            chapter=>!seedKeys.has(chapterKey(chapter))
+        );
+
+    return {
+        ...seed,
+        ...saved,
+        chapters:[
+            ...mergedChapters,
+            ...extraSavedChapters
+        ]
+    };
+
+}
 
 
 // =========================================================
@@ -430,7 +489,16 @@ async function loadData(){
 
     if(snap.exists()){
 
-        data = snap.data();
+        data =
+            mergeSeedData(
+                snap.data(),
+                historyData
+            );
+
+        await setDoc(
+            docRef,
+            data
+        );
 
     }else{
 
@@ -440,7 +508,7 @@ async function loadData(){
         );
 
         data =
-            structuredClone(historyData);
+            cloneData(historyData);
 
     }
 
