@@ -1036,6 +1036,7 @@ export const historyData = {
             form:"T2",
             chapter:"Kesultanan Melayu Melaka",
             chinese:"",
+            resourceUrl:"../history/melaka_chapter5.html",
             status:"Not Started",
             confidence:0,
             last_updated:"2026-05-22"

@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+<title>Bab 5 — Kesultanan Melayu Melaka</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{font-size:17px}
+  body{font-family:'Nunito',sans-serif;background:#f0f4ff;color:#1e293b;line-height:1.5}
+
+  /* HERO */
+  .hero{background:#1e3a5f;padding:28px 20px 38px;text-align:center;position:relative;overflow:hidden}
+  .hero::after{content:'';position:absolute;bottom:-24px;left:0;right:0;height:48px;background:#f0f4ff;border-radius:50% 50% 0 0/48px 48px 0 0}
+  .hero-badge{display:inline-block;background:rgba(255,255,255,.15);color:#bfdbfe;font-size:13px;letter-spacing:2px;padding:5px 16px;border-radius:20px;margin-bottom:12px}
+  .hero-title{font-size:26px;font-weight:800;color:#fff;line-height:1.25;margin-bottom:6px}
+  .hero-sub{font-size:16px;color:#93c5fd;margin-bottom:4px}
+  .hero-zh{font-family:'Noto Sans SC',sans-serif;font-size:15px;color:#67e8f9;letter-spacing:3px;margin-bottom:32px}
+  .hero-stats{display:flex;justify-content:center;gap:32px;position:relative;z-index:1}
+  .stat-num{font-size:28px;font-weight:800;color:#fff;text-align:center}
+  .stat-lbl{font-size:12px;color:#bfdbfe;text-align:center}
+
+  /* LANG LEGEND */
+  .lang-legend{display:flex;justify-content:center;gap:12px;padding:12px 16px;background:#fff;border-bottom:2px solid #e5e7eb}
+  .legend-dot{display:flex;align-items:center;gap:6px;font-size:13px;font-weight:700}
+  .dot{width:14px;height:14px;border-radius:4px;flex-shrink:0}
+
+  /* TOOLBAR */
+  .toolbar{background:#fff;padding:12px 16px;display:flex;gap:10px;align-items:center;border-bottom:2px solid #e5e7eb;position:sticky;top:0;z-index:100;box-shadow:0 2px 8px rgba(0,0,0,.08)}
+  .lbtn{flex:1;padding:9px 4px;font-size:13px;font-weight:800;font-family:'Nunito',sans-serif;border:2px solid;border-radius:24px;cursor:pointer;transition:all .15s;text-align:center;opacity:.45}
+  .lbtn.on{opacity:1}
+  .lbtn-my{border-color:#b45309;background:#fef3c7;color:#78350f}
+  .lbtn-my.on{background:#d97706;color:#fff;border-color:#d97706}
+  .lbtn-en{border-color:#1d4ed8;background:#dbeafe;color:#1e3a8a}
+  .lbtn-en.on{background:#2563eb;color:#fff;border-color:#2563eb}
+  .lbtn-zh{border-color:#059669;background:#d1fae5;color:#064e3b}
+  .lbtn-zh.on{background:#059669;color:#fff;border-color:#059669}
+  .quiz-btn{padding:9px 14px;font-size:13px;font-weight:800;font-family:'Nunito',sans-serif;border-radius:24px;background:#7c3aed;color:#fff;border:none;cursor:pointer;white-space:nowrap}
+  .quiz-btn.active{background:#dc2626}
+
+  /* WRAP */
+  .wrap{padding:16px 16px 60px}
+
+  /* SECTION CARDS */
+  .sec{border-radius:18px;margin-bottom:14px;overflow:hidden;border:2px solid transparent}
+  .sec-header{display:flex;align-items:center;gap:14px;padding:16px 16px 14px;cursor:pointer;user-select:none;-webkit-tap-highlight-color:transparent}
+  .sec-icon{width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0}
+  .sec-info{flex:1;min-width:0}
+  .sec-num{font-size:12px;font-weight:700;letter-spacing:1px;margin-bottom:3px;text-transform:uppercase}
+  .sec-title-my{font-size:16px;font-weight:800;line-height:1.3;color:#78350f}
+  .sec-title-en{font-size:14px;font-weight:700;font-style:italic;color:#1e3a8a;margin-top:2px}
+  .sec-title-zh{font-family:'Noto Sans SC',sans-serif;font-size:13px;color:#064e3b;margin-top:2px;letter-spacing:1px}
+  .sec-chev{font-size:22px;color:#94a3b8;transition:transform .25s;flex-shrink:0;font-style:normal}
+  .sec-chev.open{transform:rotate(180deg)}
+  .sec-body{display:none;padding:0 14px 14px}
+  .sec-body.open{display:block}
+
+  /* LANGUAGE COLOR SYSTEM */
+  /* Malay = warm amber/gold */
+  .my{background:#fffbeb;border-left:5px solid #d97706;border-radius:0 10px 10px 0;padding:10px 12px;margin-bottom:6px}
+  .my-label{font-size:10px;font-weight:800;letter-spacing:2px;color:#92400e;text-transform:uppercase;margin-bottom:4px}
+  .my-text{font-size:15px;font-weight:700;color:#78350f;line-height:1.5}
+
+  /* English = cool blue */
+  .en{background:#eff6ff;border-left:5px solid #2563eb;border-radius:0 10px 10px 0;padding:10px 12px;margin-bottom:6px}
+  .en-label{font-size:10px;font-weight:800;letter-spacing:2px;color:#1d4ed8;text-transform:uppercase;margin-bottom:4px}
+  .en-text{font-size:15px;font-weight:600;color:#1e3a8a;line-height:1.5;font-style:italic}
+
+  /* Chinese = fresh green */
+  .zh{background:#ecfdf5;border-left:5px solid #059669;border-radius:0 10px 10px 0;padding:10px 12px;margin-bottom:10px}
+  .zh-label{font-size:10px;font-weight:800;letter-spacing:2px;color:#047857;text-transform:uppercase;margin-bottom:4px}
+  .zh-text{font-family:'Noto Sans SC',sans-serif;font-size:14px;font-weight:500;color:#064e3b;line-height:1.7;letter-spacing:1px}
+
+  /* MEMORY BOX */
+  .mem{margin-top:8px;border-radius:14px;padding:14px;background:#f1f5f9;border:2px solid #cbd5e1}
+  .mem-lbl{font-size:12px;letter-spacing:2px;font-weight:800;margin-bottom:10px;color:#475569;text-transform:uppercase}
+  .pills{display:flex;flex-wrap:wrap;gap:8px}
+  .pill{padding:7px 12px;border-radius:24px;font-size:12px;font-weight:800;border:2px solid;line-height:1}
+  .pill-my{background:#fef3c7;border-color:#d97706;color:#78350f}
+  .pill-en{background:#dbeafe;border-color:#2563eb;color:#1e3a8a;font-style:italic}
+  .pill-zh{background:#d1fae5;border-color:#059669;color:#064e3b;font-family:'Noto Sans SC',sans-serif;letter-spacing:1px}
+
+  /* EXAM BOX */
+  .exam-box{margin-top:10px;border-radius:14px;overflow:hidden;border:2px solid #7c3aed}
+  .exam-header{background:#7c3aed;padding:10px 14px}
+  .exam-lbl{font-size:12px;letter-spacing:2px;font-weight:800;color:#ede9fe;text-transform:uppercase}
+  .exam-my{background:#fffbeb;border-left:5px solid #d97706;padding:10px 14px}
+  .exam-my-text{font-size:14px;font-weight:700;color:#78350f;line-height:1.6}
+  .exam-en{background:#eff6ff;border-left:5px solid #2563eb;padding:10px 14px}
+  .exam-en-text{font-size:14px;font-weight:600;color:#1e3a8a;line-height:1.6;font-style:italic}
+  .exam-zh{background:#ecfdf5;border-left:5px solid #059669;padding:10px 14px}
+  .exam-zh-text{font-family:'Noto Sans SC',sans-serif;font-size:13px;font-weight:500;color:#064e3b;line-height:1.8;letter-spacing:1px}
+
+  /* OFFICIALS GRID */
+  .off-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-bottom:12px}
+  .off{border-radius:14px;overflow:hidden;border:2px solid #c4b5fd}
+  .off-head{background:#7c3aed;padding:10px 12px}
+  .off-name{font-size:14px;font-weight:800;color:#fff}
+  .off-zh-name{font-family:'Noto Sans SC',sans-serif;font-size:12px;color:#ddd6fe;margin-top:2px;letter-spacing:1px}
+  .off-roles{padding:8px 10px;background:#f5f3ff}
+  .off-role{font-size:12px;font-weight:600;color:#4c1d95;font-style:italic;padding:3px 0;border-bottom:1px dashed #c4b5fd;line-height:1.4}
+  .off-role:last-child{border-bottom:none}
+
+  /* IMPORTANCE GRID */
+  .imp-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-bottom:12px}
+  .imp{border-radius:14px;overflow:hidden;border:2px solid}
+  .imp.full{grid-column:span 2}
+  .imp-head{padding:8px 12px}
+  .imp-asp{font-size:13px;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:#fff}
+  .imp-body{padding:8px 12px}
+  .imp-en{font-size:12px;font-weight:600;color:#1e3a8a;font-style:italic;margin-bottom:4px;line-height:1.5}
+  .imp-zh{font-family:'Noto Sans SC',sans-serif;font-size:12px;color:#064e3b;line-height:1.6;letter-spacing:1px}
+  .imp-pol{border-color:#dc2626}.imp-pol .imp-head{background:#dc2626}.imp-pol .imp-body{background:#fff5f5}
+  .imp-eco{border-color:#d97706}.imp-eco .imp-head{background:#d97706}.imp-eco .imp-body{background:#fffbeb}
+  .imp-soc{border-color:#059669}.imp-soc .imp-head{background:#059669}.imp-soc .imp-body{background:#ecfdf5}
+
+  /* MEMORY MAP */
+  .map-item{border-radius:14px;overflow:hidden;margin-bottom:10px;border:2px solid #e2e8f0}
+  .map-my{background:#fef3c7;padding:9px 14px;border-bottom:1px solid #fde68a}
+  .map-my-text{font-size:14px;font-weight:800;color:#78350f}
+  .map-en{background:#dbeafe;padding:9px 14px;border-bottom:1px solid #bfdbfe}
+  .map-en-text{font-size:14px;font-weight:600;color:#1e3a8a;font-style:italic}
+  .map-zh{background:#d1fae5;padding:9px 14px}
+  .map-zh-text{font-family:'Noto Sans SC',sans-serif;font-size:13px;font-weight:500;color:#064e3b;letter-spacing:1px}
+
+  /* QUIZ */
+  .quiz-wrap{display:none;padding:16px 16px 60px}
+  .quiz-wrap.open{display:block}
+  .qcard{border-radius:18px;padding:20px;margin-bottom:14px;border:2px solid #e5e7eb;background:#fff}
+  .q-progress{height:8px;background:#e5e7eb;border-radius:8px;margin-bottom:16px;overflow:hidden}
+  .q-bar{height:100%;background:#7c3aed;border-radius:8px;transition:width .3s}
+  .q-num{font-size:13px;font-weight:700;letter-spacing:1px;color:#7c3aed;text-transform:uppercase;margin-bottom:10px}
+  .q-text{font-size:16px;font-weight:800;color:#1e293b;line-height:1.55;margin-bottom:20px}
+  .q-text .q-my{color:#78350f}
+  .q-text .q-en{color:#1e3a8a;font-style:italic;font-size:14px;font-weight:600}
+  .q-opts{display:flex;flex-direction:column;gap:10px}
+  .q-opt{padding:13px 16px;border-radius:12px;font-size:14px;font-weight:700;font-family:'Nunito',sans-serif;cursor:pointer;border:2px solid #e5e7eb;background:#f9fafb;text-align:left;transition:all .15s;line-height:1.4}
+  .q-opt:active{transform:scale(.98)}
+  .q-opt.correct{background:#dcfce7;border-color:#16a34a;color:#14532d}
+  .q-opt.wrong{background:#fee2e2;border-color:#dc2626;color:#7f1d1d}
+  .q-result{border-radius:18px;padding:24px;text-align:center;background:#1e293b;margin-bottom:14px}
+  .q-score-num{font-size:56px;font-weight:800;color:#fbbf24;margin-bottom:4px}
+  .q-score-of{font-size:16px;color:#94a3b8;margin-bottom:10px}
+  .q-msg{font-size:17px;font-weight:700;color:#f8fafc;margin-bottom:20px;line-height:1.4}
+  .q-btn{display:block;width:100%;padding:14px;border-radius:14px;font-size:16px;font-weight:800;font-family:'Nunito',sans-serif;cursor:pointer;border:none;margin-bottom:10px}
+  .q-retry{background:#7c3aed;color:#fff}
+  .q-back{background:#f1f5f9;color:#334155}
+
+  /* FOOTER */
+  .footer{text-align:center;font-size:13px;color:#94a3b8;padding:20px;letter-spacing:1px}
+
+  /* SECTION THEMES — header bg only */
+  .s1 .sec-header{background:#fef3c7} .s1{background:#fffdf0;border-color:#f59e0b} .s1 .sec-num{color:#b45309} .s1 .sec-icon{background:#d97706}
+  .s2 .sec-header{background:#ede9fe} .s2{background:#faf9ff;border-color:#7c3aed} .s2 .sec-num{color:#5b21b6} .s2 .sec-icon{background:#7c3aed}
+  .s3 .sec-header{background:#dcfce7} .s3{background:#f8fffe;border-color:#16a34a} .s3 .sec-num{color:#14532d} .s3 .sec-icon{background:#15803d}
+  .s4 .sec-header{background:#fee2e2} .s4{background:#fff8f8;border-color:#dc2626} .s4 .sec-num{color:#7f1d1d} .s4 .sec-icon{background:#b91c1c}
+  .s5 .sec-header{background:#e0f2fe} .s5{background:#f7fbff;border-color:#0284c7} .s5 .sec-num{color:#0c4a6e} .s5 .sec-icon{background:#0369a1}
+  .s6 .sec-header{background:#fce7f3} .s6{background:#fff8fd;border-color:#be185d} .s6 .sec-num{color:#831843} .s6 .sec-icon{background:#9d174d}
+  .sstar .sec-header{background:#1e293b} .sstar{background:#0f172a;border-color:#f59e0b} .sstar .sec-num{color:#94a3b8} .sstar .sec-icon{background:#f59e0b} .sstar .sec-body{background:#0f172a}
+
+  /* HIDE CLASSES */
+  .hide-my .my,.hide-my .exam-my,.hide-my .map-my,.hide-my .sec-title-my,.hide-my .pill-my{display:none}
+  .hide-en .en,.hide-en .exam-en,.hide-en .map-en,.hide-en .sec-title-en,.hide-en .pill-en,.hide-en .off-roles,.hide-en .imp-en{display:none}
+  .hide-zh .zh,.hide-zh .exam-zh,.hide-zh .map-zh,.hide-zh .sec-title-zh,.hide-zh .pill-zh,.hide-zh .off-zh-name,.hide-zh .imp-zh{display:none}
+</style>
+</head>
+<body id="app">
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-badge">Sejarah &middot; Tingkatan 2 &middot; Bab 5</div>
+  <div class="hero-title">Kesultanan Melayu Melaka</div>
+  <div class="hero-sub">The Malay Sultanate of Melaka</div>
+  <div class="hero-zh">马六甲马来王朝</div>
+  <div class="hero-stats">
+    <div><div class="stat-num">15</div><div class="stat-lbl">Topics</div></div>
+    <div><div class="stat-num">3</div><div class="stat-lbl">Languages</div></div>
+    <div><div class="stat-num">8</div><div class="stat-lbl">Quiz Qs</div></div>
+  </div>
+</div>
+
+<!-- LANGUAGE LEGEND -->
+<div class="lang-legend">
+  <div class="legend-dot"><div class="dot" style="background:#d97706"></div><span style="color:#78350f">Melayu</span></div>
+  <div class="legend-dot"><div class="dot" style="background:#2563eb"></div><span style="color:#1e3a8a">English</span></div>
+  <div class="legend-dot"><div class="dot" style="background:#059669"></div><span style="color:#064e3b;font-family:'Noto Sans SC',sans-serif">中文</span></div>
+</div>
+
+<!-- TOOLBAR -->
+<div class="toolbar">
+  <button class="lbtn lbtn-my on" onclick="tgl('my',this)">&#x1F7E1; Melayu</button>
+  <button class="lbtn lbtn-en on" onclick="tgl('en',this)">&#x1F535; English</button>
+  <button class="lbtn lbtn-zh on" onclick="tgl('zh',this)">&#x1F7E2; 中文</button>
+  <button class="quiz-btn" id="qbtn" onclick="toggleQuiz()">&#9997; Quiz</button>
+</div>
+
+<!-- NOTES -->
+<div class="wrap" id="notes">
+
+  <!-- SECTION 1 -->
+  <div class="sec s1">
+    <div class="sec-header" onclick="exp(this)">
+      <div class="sec-icon">&#128205;</div>
+      <div class="sec-info">
+        <div class="sec-num">Topik 1</div>
+        <div class="sec-title-my">Pengasasan Melaka oleh Parameswara</div>
+        <div class="sec-title-en">Founding of Melaka by Parameswara</div>
+        <div class="sec-title-zh">拜里米苏拉建立马六甲</div>
+      </div>
+      <span class="sec-chev open">&#8964;</span>
+    </div>
+    <div class="sec-body open">
+
+      <div class="my"><div class="my-label">&#x1F7E1; Bahasa Melayu</div><div class="my-text">Parameswara memilih Melaka kerana kedudukannya strategik.</div></div>
+      <div class="en"><div class="en-label">&#x1F535; English</div><div class="en-text">Parameswara chose Melaka for its strategic location.</div></div>
+      <div class="zh"><div class="zh-label">&#x1F7E2; 中文</div><div class="zh-text">拜里米苏拉选择马六甲，因为它的地理位置优越。</div></div>
+
+      <div class="my"><div class="my-label">&#x1F7E1; Bahasa Melayu</div><div class="my-text">Melaka terletak di laluan perdagangan utama antara timur dan barat.</div></div>
+      <div class="en"><div class="en-label">&#x1F535; English</div><div class="en-text">Melaka was on the main trade route between East and West.</div></div>
+      <div class="zh"><div class="zh-label">&#x1F7E2; 中文</div><div class="zh-text">马六甲位于东西方主要贸易路线之间。</div></div>
+
+      <div class="my"><div class="my-label">&#x1F7E1; Bahasa Melayu</div><div class="my-text">Bentuk muka bumi berbukit-bukau &mdash; sesuai sebagai benteng pertahanan.</div></div>
+      <div class="en"><div class="en-label">&#x1F535; English</div><div class="en-text">Hilly terrain &mdash; suitable as a defensive fortress.</div></div>
+      <div class="zh"><div class="zh-label">&#x1F7E2; 中文</div><div class="zh-text">丘陵地形，适合作为防御据点。</div></div>
+
+      <div class="mem">
+        <div class="mem-lbl">&#129504; Memory Keywords</div>
+        <div class="pills">
+          <span class="pill pill-my">Strategik</span>
+          <span class="pill pill-en">Strategic</span>
+          <span class="pill pill-zh">战略位置</span>
+          <span class="pill pill-my">Perdagangan</span>
+          <span class="pill pill-en">Trade</span>
+          <span class="pill pill-zh">贸易</span>
+          <span class="pill pill-my">Berbukit</span>
+          <span class="pill pill-en">Hilly</span>
+          <span class="pill pill-zh">丘陵</span>
+          <span class="pill pill-my">Pertahanan</span>
+          <span class="pill pill-en">Defence</span>
+          <span class="pill pill-zh">防御</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 2 -->
+  <div class="sec s2">
+    <div class="sec-header" onclick="exp(this)">
+      <div class="sec-icon">&#128081;</div>
+      <div class="sec-info">
+        <div class="sec-num">Topik 2</div>
+        <div class="sec-title-my">Peranan Raja dalam Kesultanan</div>
+        <div class="sec-title-en">Role of the King in the Sultanate</div>
+        <div class="sec-title-zh">国王在王朝的角色</div>
+      </div>
+      <span class="sec-chev">&#8964;</span>
+    </div>
+    <div class="sec-body">
+      <div class="my"><div class="my-label">&#x1F7E1; Bahasa Melayu</div><div class="my-text">Simbol perpaduan dan kemakmuran.</div></div>
+      <div class="en"><div class="en-label">&#x1F535; English</div><div class="en-text">Symbol of unity and prosperity.</div></div>
+      <div class="zh"><div class="zh-label">&#x1F7E2; 中文</div><div class="zh-text">团结与繁荣的象征。</div></div>
+
+      <div class="my"><div class="my-label">&#x1F7E1; Bahasa Melayu</div><div class="my-text">Ketua angkatan tentera.</div></div>
+      <div class="en"><div class="en-label">&#x1F535; English</div><div class="en-text">Head of the army.</div></div>
+      <div class="zh"><div class="zh-label">&#x1F7E2; 中文</div><div class="zh-text">军队统帅。</div></div>
+
+      <div class="my"><div class="my-label">&#x1F7E1; Bahasa Melayu</div><div class="my-text">Mengetuai hubungan diplomatik.</div></div>
+      <div class="en"><div class="en-label">&#x1F535; English</div><div class="en-text">Led diplomatic relations.</div></div>
+      <div class="zh"><div class="zh-label">&#x1F7E2; 中文</div><div class="zh-text">负责外交关系。</div></div>
+
+      <div class="my"><div class="my-label">&#x1F7E1; Bahasa Melayu</div><div class="my-text">Menyelaraskan kegiatan ekonomi.</div></div>
+      <div class="en"><div class="en-label">&#x1F535; English</div><div class="en-text">Coordinated economic activities.</div></div>
+      <div class="zh"><div class="zh-label">&#x1F7E2; 中文</div><div class="zh-text">协调经济活动。</div></div>
+
+      <div class="my"><div class="my-label">&#x1F7E1; Bahasa Melayu</div><div class="my-text">Ketua agama Islam dan menegakkan keadilan.</div></div>
+      <div class="en"><div class="en-label">&#x1F535; English</div><div class="en-text">Head of Islam and upheld justice.</div></div>
+      <div class="zh"><div class="zh-label">&#x1F7E2; 中文</div><div class="zh-text">伊斯兰教领袖，维护公正。</div></div>
+
+      <div class="mem">
+        <div class="mem-lbl">&#129504; Memory Keywords</div>
+        <div class="pills">
+          <span class="pill pill-my">Perpaduan</span><span class="pill pill-en">Unity</span><span class="pill pill-zh">团结</span>
+          <span class="pill pill-my">Tentera</span><span class="pill pill-en">Army</span><span class="pill pill-zh">军队</span>
+          <span class="pill pill-my">Diplomatik</span><span class="pill pill-en">Diplomacy</span><span class="pill pill-zh">外交</span>
+          <span class="pill pill-my">Ekonomi</span><span class="pill pill-en">Economy</span><span class="pill pill-zh">经济</span>
+          <span class="pill pill-my">Agama</span><span class="pill pill-en">Religion</span><span class="pill pill-zh">宗教</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 3 -->
+  <div class="sec s3">
+    <div class="sec-header" onclick="exp(this)">
+      <div class="sec-icon">&#11088;</div>
+      <div class="sec-info">
+        <div class="sec-num">Topik 3</div>
+        <div class="sec-title-my">Sifat Parameswara yang Patut Dicontohi</div>
+        <div class="sec-title-en">Admirable Qualities of Parameswara</div>
+        <div class="sec-title-zh">拜里米苏拉值得学习的品质</div>
+      </div>
+      <span class="sec-chev">&#8964;</span>
+    </div>
+    <div class="sec-body">
+      <div class="my"><div class="my-label">&#x1F7E1; Bahasa Melayu</div><div class="my-text">Berwawasan &bull; Berani meneroka &bull; Mempunyai keyakinan &bull; Kepimpinan &bull; Keberanian</div></div>
+      <div class="en"><div class="en-label">&#x1F535; English</div><div class="en-text">Visionary &bull; Brave to explore &bull; Confident &bull; Leadership &bull; Courage</div></div>
+      <div class="zh"><div class="zh-label">&#x1F7E2; 中文</div><div class="zh-text">有远见 &bull; 勇于探索 &bull; 有信心 &bull; 领导能力 &bull; 勇敢</div></div>
+
+      <div class="exam-box">
+        <div class="exam-header"><div class="exam-lbl">&#9997; Exam Sentence / Ayat Exam / 考试句子</div></div>
+        <div class="exam-my"><div class="exam-my-text">Kita mestilah berwawasan, berani meneroka bidang baharu, mempunyai keyakinan yang tinggi serta memiliki nilai kepimpinan dan keberanian.</div></div>
+        <div class="exam-en"><div class="exam-en-text">We must be visionary, brave to explore new fields, highly confident, and have leadership and courage.</div></div>
+        <div class="exam-zh"><div class="exam-zh-text">我们必须有远见，勇于探索新领域，拥有高度信心，并具备领导能力和勇气。</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 4 -->
+  <div class="sec s2">
+    <div class="sec-header" onclick="exp(this)">
+      <div class="sec-icon">&#128101;</div>
+      <div class="sec-info">
+        <div class="sec-num">Topik 4</div>
+        <div class="sec-title-my">Sistem Pembesar Empat Lipatan</div>
+        <div class="sec-title-en">Fourfold Dignitary System</div>
+        <div class="sec-title-zh">四重官职制度</div>
+      </div>
+      <span class="sec-chev">&#8964;</span>
+    </div>
+    <div class="sec-body">
+      <div class="off-grid">
+        <div class="off">
+          <div class="off-head"><div class="off-name">Bendahara</div><div class="off-zh-name">宰相 / 首席大臣</div></div>
+          <div class="off-roles"><div class="off-role">Adviser to the king</div><div class="off-role">Chief minister</div><div class="off-role">Army chief of staff</div><div class="off-role">Chief judge</div><div class="off-role">Acting sultan</div></div>
+        </div>
+        <div class="off">
+          <div class="off-head"><div class="off-name">Penghulu Bendahari</div><div class="off-zh-name">财政主管</div></div>
+          <div class="off-roles"><div class="off-role">Tax/tribute collector</div><div class="off-role">Chief treasurer</div><div class="off-role">Head palace admin</div><div class="off-role">Chief harbour master</div></div>
+        </div>
+        <div class="off">
+          <div class="off-head"><div class="off-name">Temenggung</div><div class="off-zh-name">治安官</div></div>
+          <div class="off-roles"><div class="off-role">Maintained safety</div><div class="off-role">Maintained peace</div></div>
+        </div>
+        <div class="off">
+          <div class="off-head"><div class="off-name">Laksamana</div><div class="off-zh-name">海军统帅</div></div>
+          <div class="off-roles"><div class="off-role">Head of the navy</div><div class="off-role">Protected sea routes</div></div>
+        </div>
+      </div>
+      <div class="mem">
+        <div class="mem-lbl">&#129504; Acronym: B &ndash; P &ndash; T &ndash; L</div>
+        <div class="pills">
+          <span class="pill pill-my">Bendahara</span><span class="pill pill-zh">宰相</span>
+          <span class="pill pill-my">Penghulu</span><span class="pill pill-zh">财政官</span>
+          <span class="pill pill-my">Temenggung</span><span class="pill pill-zh">治安官</span>
+          <span class="pill pill-my">Laksamana</span><span class="pill pill-zh">海军</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 5 -->
+  <div class="sec s5">
+    <div class="sec-header" onclick="exp(this)">
+      <div class="sec-icon">&#128200;</div>
+      <div class="sec-info">
+        <div class="sec-num">Topik 5</div>
+        <div class="sec-title-my">Kesan Sistem Pembesar Empat Lipatan</div>
+        <div class="sec-title-en">Effects of the Fourfold System</div>
+        <div class="sec-title-zh">四重官职制度的影响</div>
+      </div>
+      <span class="sec-chev">&#8964;</span>
+    </div>
+    <div class="sec-body">
+      <div class="my"><div class="my-label">&#x1F7E1; Bahasa Melayu</div><div class="my-text">Mewujudkan sistem pentadbiran yang mantap, tersusun dan berkesan.</div></div>
+      <div class="en"><div class="en-label">&#x1F535; English</div><div class="en-text">Created a strong, organised and effective administrative system.</div></div>
+      <div class="zh"><div class="zh-label">&#x1F7E2; 中文</div><div class="zh-text">建立稳固、有组织和有效率的行政制度。</div></div>
+
+      <div class="my"><div class="my-label">&#x1F7E1; Bahasa Melayu</div><div class="my-text">Meningkatkan kemakmuran negeri. Melaka menjadi sebuah empayar yang kuat.</div></div>
+      <div class="en"><div class="en-label">&#x1F535; English</div><div class="en-text">Increased state prosperity. Melaka became a powerful empire.</div></div>
+      <div class="zh"><div class="zh-label">&#x1F7E2; 中文</div><div class="zh-text">提高国家繁荣。马六甲成为强大帝国。</div></div>
+
+      <div class="exam-box">
+        <div class="exam-header"><div class="exam-lbl">&#9997; Exam Sentence / Ayat Exam / 考试句子</div></div>
+        <div class="exam-my"><div class="exam-my-text">Sistem Pembesar Empat Lipatan mewujudkan pentadbiran yang mantap, tersusun dan berkesan serta menjadikan Melaka sebuah empayar yang kuat.</div></div>
+        <div class="exam-en"><div class="exam-en-text">The Fourfold Dignitary System created a strong, organised, effective administration and made Melaka a powerful empire.</div></div>
+        <div class="exam-zh"><div class="exam-zh-text">四重官职制度建立稳固、有组织和有效率的行政体系，使马六甲成为强大帝国。</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 6 -->
+  <div class="sec s4">
+    <div class="sec-header" onclick="exp(this)">
+      <div class="sec-icon">&#9878;</div>
+      <div class="sec-info">
+        <div class="sec-num">Topik 6</div>
+        <div class="sec-title-my">Hukum Kanun Melaka</div>
+        <div class="sec-title-en">Melaka Legal Code</div>
+        <div class="sec-title-zh">马六甲法典</div>
+      </div>
+      <span class="sec-chev">&#8964;</span>
+    </div>
+    <div class="sec-body">
+      <div class="my"><div class="my-label">&#x1F7E1; Bahasa Melayu</div><div class="my-text">Mengatur sistem undang-undang &bull; Menjamin keamanan negeri &bull; Menjamin keselamatan rakyat &bull; Mengukuhkan pentadbiran kerajaan.</div></div>
+      <div class="en"><div class="en-label">&#x1F535; English</div><div class="en-text">Organised the legal system &bull; Ensured peace &bull; Guaranteed safety of the people &bull; Strengthened government administration.</div></div>
+      <div class="zh"><div class="zh-label">&#x1F7E2; 中文</div><div class="zh-text">规范法律制度 &bull; 保障国家和平 &bull; 保障人民安全 &bull; 加强政府治理。</div></div>
+
+      <div class="mem">
+        <div class="mem-lbl">&#129504; Memory Keywords</div>
+        <div class="pills">
+          <span class="pill pill-my">Undang-undang</span><span class="pill pill-en">Law</span><span class="pill pill-zh">法律</span>
+          <span class="pill pill-my">Keamanan</span><span class="pill pill-en">Peace</span><span class="pill pill-zh">和平</span>
+          <span class="pill pill-my">Keselamatan</span><span class="pill pill-en">Safety</span><span class="pill pill-zh">安全</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 7 -->
+  <div class="sec s6">
+    <div class="sec-header" onclick="exp(this)">
+      <div class="sec-icon">&#9790;</div>
+      <div class="sec-info">
+        <div class="sec-num">Topik 7</div>
+        <div class="sec-title-my">Penyebaran Agama Islam</div>
+        <div class="sec-title-en">Spread of Islam</div>
+        <div class="sec-title-zh">伊斯兰教的传播</div>
+      </div>
+      <span class="sec-chev">&#8964;</span>
+    </div>
+    <div class="sec-body">
+      <div class="my"><div class="my-label">&#x1F7E1; Bahasa Melayu</div><div class="my-text">1. Pengislaman pemerintah &nbsp; 2. Perkahwinan &nbsp; 3. Peranan ulama dan mubaligh &nbsp; 4. Perdagangan &nbsp; 5. Peluasan kuasa</div></div>
+      <div class="en"><div class="en-label">&#x1F535; English</div><div class="en-text">1. Conversion of rulers &nbsp; 2. Marriage &nbsp; 3. Scholars and missionaries &nbsp; 4. Trade &nbsp; 5. Expansion of power</div></div>
+      <div class="zh"><div class="zh-label">&#x1F7E2; 中文</div><div class="zh-text">1. 统治者皈依 &nbsp; 2. 婚姻 &nbsp; 3. 宗教学者和传教士 &nbsp; 4. 贸易 &nbsp; 5. 扩张势力</div></div>
+
+      <div class="exam-box">
+        <div class="exam-header"><div class="exam-lbl">&#9997; Exam Sentence / Ayat Exam / 考试句子</div></div>
+        <div class="exam-my"><div class="exam-my-text">Agama Islam tersebar melalui pengislaman pemerintah, perkahwinan, peranan ulama dan mubaligh, perdagangan serta peluasan kuasa.</div></div>
+        <div class="exam-en"><div class="exam-en-text">Islam spread through conversion of rulers, marriage, scholars and missionaries, trade, and expansion of power.</div></div>
+        <div class="exam-zh"><div class="exam-zh-text">伊斯兰教通过统治者皈依、婚姻、宗教学者、贸易及势力扩张传播。</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 8-10 -->
+  <div class="sec s1">
+    <div class="sec-header" onclick="exp(this)">
+      <div class="sec-icon">&#9875;</div>
+      <div class="sec-info">
+        <div class="sec-num">Topik 8 &ndash; 10</div>
+        <div class="sec-title-my">Perdagangan, Mata Wang &amp; Orang Laut</div>
+        <div class="sec-title-en">Trade, Currency &amp; Orang Laut</div>
+        <div class="sec-title-zh">贸易、货币与海民</div>
+      </div>
+      <span class="sec-chev">&#8964;</span>
+    </div>
+    <div class="sec-body">
+      <div class="my"><div class="my-label">&#x1F7E1; Bahasa Melayu</div><div class="my-text">Melaka mempunyai kedudukan strategik di Selat Melaka. Dikunjungi pedagang dari seluruh dunia.</div></div>
+      <div class="en"><div class="en-label">&#x1F535; English</div><div class="en-text">Melaka had a strategic location at the Strait of Melaka. Visited by traders from around the world.</div></div>
+      <div class="zh"><div class="zh-label">&#x1F7E2; 中文</div><div class="zh-text">马六甲位于马六甲海峡，吸引世界各地商人。</div></div>
+
+      <div class="my"><div class="my-label">&#x1F7E1; Bahasa Melayu</div><div class="my-text">Mata wang: jongkong timah (Calains), serbuk emas, kulit siput, emas dan perak.</div></div>
+      <div class="en"><div class="en-label">&#x1F535; English</div><div class="en-text">Currency: tin ingots (Calains), gold dust, cowrie shells, gold and silver coins.</div></div>
+      <div class="zh"><div class="zh-label">&#x1F7E2; 中文</div><div class="zh-text">货币：锡锭（Calains）、金沙、贝壳、金币和银币。</div></div>
+
+      <div class="my"><div class="my-label">&#x1F7E1; Bahasa Melayu</div><div class="my-text">Orang Laut: pelayar cekap, tentera laut, menjamin keselamatan pedagang.</div></div>
+      <div class="en"><div class="en-label">&#x1F535; English</div><div class="en-text">Orang Laut: skilled sailors, naval soldiers, protected traders at sea.</div></div>
+      <div class="zh"><div class="zh-label">&#x1F7E2; 中文</div><div class="zh-text">海民：熟练水手、海军士兵、保障商人安全。</div></div>
+
+      <div class="mem">
+        <div class="mem-lbl">&#129504; Memory Keywords</div>
+        <div class="pills">
+          <span class="pill pill-my">Selat Melaka</span><span class="pill pill-en">Strait of Melaka</span><span class="pill pill-zh">马六甲海峡</span>
+          <span class="pill pill-my">Calains</span><span class="pill pill-en">Tin currency</span><span class="pill pill-zh">锡币</span>
+          <span class="pill pill-my">Orang Laut</span><span class="pill pill-en">Sea people</span><span class="pill pill-zh">海民</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 11 -->
+  <div class="sec s5">
+    <div class="sec-header" onclick="exp(this)">
+      <div class="sec-icon">&#127758;</div>
+      <div class="sec-info">
+        <div class="sec-num">Topik 11</div>
+        <div class="sec-title-my">Hubungan Melaka dengan China</div>
+        <div class="sec-title-en">Melaka's Relationship with China</div>
+        <div class="sec-title-zh">马六甲与中国的关系</div>
+      </div>
+      <span class="sec-chev">&#8964;</span>
+    </div>
+    <div class="sec-body">
+      <div class="my"><div class="my-label">&#x1F7E1; Bahasa Melayu</div><div class="my-text">China mengurniakan payung kuning, cap mohor, dan sepersalinan pakaian kepada Sultan Melaka sebagai tanda pengiktirafan.</div></div>
+      <div class="en"><div class="en-label">&#x1F535; English</div><div class="en-text">China granted a yellow umbrella, official seal, and royal clothing to the Sultan of Melaka as a sign of recognition.</div></div>
+      <div class="zh"><div class="zh-label">&#x1F7E2; 中文</div><div class="zh-text">中国赐予马六甲苏丹黄伞、印玺和一套服装，作为承认的象征。</div></div>
+
+      <div class="mem">
+        <div class="mem-lbl">&#129504; Payung + Cap + Pakaian = Pengiktirafan</div>
+        <div class="pills">
+          <span class="pill pill-my">Payung kuning</span><span class="pill pill-en">Yellow umbrella</span><span class="pill pill-zh">黄伞</span>
+          <span class="pill pill-my">Cap mohor</span><span class="pill pill-en">Official seal</span><span class="pill pill-zh">印玺</span>
+          <span class="pill pill-my">Pakaian</span><span class="pill pill-en">Royal clothing</span><span class="pill pill-zh">服装</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 12-13 -->
+  <div class="sec s3">
+    <div class="sec-header" onclick="exp(this)">
+      <div class="sec-icon">&#127922;</div>
+      <div class="sec-info">
+        <div class="sec-num">Topik 12 &ndash; 13</div>
+        <div class="sec-title-my">Pembentukan &amp; Kepentingan Empayar</div>
+        <div class="sec-title-en">Formation &amp; Importance of the Empire</div>
+        <div class="sec-title-zh">帝国的形成与重要性</div>
+      </div>
+      <span class="sec-chev">&#8964;</span>
+    </div>
+    <div class="sec-body">
+      <div class="my"><div class="my-label">&#x1F7E1; Bahasa Melayu</div><div class="my-text">Empayar dibentuk melalui: Penaklukan &bull; Perkahwinan &bull; Naungan (Lingga, Patani, Kedah)</div></div>
+      <div class="en"><div class="en-label">&#x1F535; English</div><div class="en-text">Empire formed through: Conquest &bull; Marriage &bull; Protection (Lingga, Patani, Kedah)</div></div>
+      <div class="zh"><div class="zh-label">&#x1F7E2; 中文</div><div class="zh-text">帝国通过：征服 &bull; 婚姻 &bull; 庇护（林加、北大年、吉打）</div></div>
+
+      <div class="imp-grid">
+        <div class="imp imp-pol">
+          <div class="imp-head"><div class="imp-asp">Politik / Politics / 政治</div></div>
+          <div class="imp-body"><div class="imp-en">Strengthened relations with conquered states.</div><div class="imp-zh">加强与被征服地区的关系。</div></div>
+        </div>
+        <div class="imp imp-eco">
+          <div class="imp-head"><div class="imp-asp">Ekonomi / Economy / 经济</div></div>
+          <div class="imp-body"><div class="imp-en">Obtained spices, tin ore and agriculture.</div><div class="imp-zh">获得香料、锡矿和农产品。</div></div>
+        </div>
+        <div class="imp imp-soc full">
+          <div class="imp-head"><div class="imp-asp">Sosial / Social / 社会</div></div>
+          <div class="imp-body"><div class="imp-en">Cultural assimilation: local + Arab + Indian + Chinese + Malay cultures.</div><div class="imp-zh">本地文化与阿拉伯、印度、中国和马来文化融合。</div></div>
+        </div>
+      </div>
+
+      <div class="exam-box">
+        <div class="exam-header"><div class="exam-lbl">&#9997; Exam Sentence / Ayat Exam / 考试句子</div></div>
+        <div class="exam-my"><div class="exam-my-text">Kesultanan Melayu Melaka membentuk empayar melalui penaklukan, perkahwinan dan naungan.</div></div>
+        <div class="exam-en"><div class="exam-en-text">The Malay Sultanate of Melaka formed an empire through conquest, marriage and protection.</div></div>
+        <div class="exam-zh"><div class="exam-zh-text">马六甲通过征服、婚姻和庇护关系形成帝国。</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 14-15 -->
+  <div class="sec s6">
+    <div class="sec-header" onclick="exp(this)">
+      <div class="sec-icon">&#127987;</div>
+      <div class="sec-info">
+        <div class="sec-num">Topik 14 &ndash; 15</div>
+        <div class="sec-title-my">Keselamatan, Perpaduan &amp; Malaysia</div>
+        <div class="sec-title-en">Security, Unity &amp; Malaysia Today</div>
+        <div class="sec-title-zh">安全、团结与当今马来西亚</div>
+      </div>
+      <span class="sec-chev">&#8964;</span>
+    </div>
+    <div class="sec-body">
+      <div class="my"><div class="my-label">&#x1F7E1; Bahasa Melayu</div><div class="my-text">Keamanan negara adalah satu nikmat yang tidak boleh diambil mudah. Kemerdekaan terletak pada perpaduan rakyat.</div></div>
+      <div class="en"><div class="en-label">&#x1F535; English</div><div class="en-text">National peace is a blessing not to be taken for granted. Independence depends on the unity of the people.</div></div>
+      <div class="zh"><div class="zh-label">&#x1F7E2; 中文</div><div class="zh-text">国家和平是不能轻视的福气。独立建立在人民团结之上。</div></div>
+
+      <div class="my"><div class="my-label">&#x1F7E1; Bahasa Melayu</div><div class="my-text">Cabaran: Persaingan dari Singapura dan Vietnam. Langkah: Tingkatkan logistik, pelbagaikan eksport.</div></div>
+      <div class="en"><div class="en-label">&#x1F535; English</div><div class="en-text">Challenge: Competition from Singapore &amp; Vietnam. Steps: Improve logistics, diversify exports.</div></div>
+      <div class="zh"><div class="zh-label">&#x1F7E2; 中文</div><div class="zh-text">挑战：来自新加坡和越南的竞争。方法：提升物流，多元化出口。</div></div>
+    </div>
+  </div>
+
+  <!-- MEMORY MAP -->
+  <div class="sec sstar">
+    <div class="sec-header" onclick="exp(this)">
+      <div class="sec-icon">&#128161;</div>
+      <div class="sec-info">
+        <div class="sec-num" style="color:#f59e0b">Peta Hafalan</div>
+        <div class="sec-title-my" style="color:#fef3c7;font-size:15px">Super Compact Memory Map</div>
+        <div class="sec-title-en" style="color:#93c5fd;font-style:italic;font-size:13px">Peta Hafalan Ringkas</div>
+        <div class="sec-title-zh" style="color:#6ee7b7;font-size:12px">超简短记忆图</div>
+      </div>
+      <span class="sec-chev" style="color:#475569">&#8964;</span>
+    </div>
+    <div class="sec-body">
+      <div class="map-item">
+        <div class="map-my"><div class="map-my-text">Melaka strategik — laluan perdagangan, berbukit, pertahanan</div></div>
+        <div class="map-en"><div class="map-en-text">Melaka was strategic — trade route, hilly, defensive</div></div>
+        <div class="map-zh"><div class="map-zh-text">马六甲位置优越 — 贸易路线、丘陵、防御</div></div>
+      </div>
+      <div class="map-item">
+        <div class="map-my"><div class="map-my-text">Raja: perpaduan, tentera, diplomatik, ekonomi, agama, keadilan</div></div>
+        <div class="map-en"><div class="map-en-text">King: unity, army, diplomacy, economy, religion, justice</div></div>
+        <div class="map-zh"><div class="map-zh-text">国王：团结、军队、外交、经济、宗教、公正</div></div>
+      </div>
+      <div class="map-item">
+        <div class="map-my"><div class="map-my-text">Pembesar B-P-T-L bantu pentadbiran</div></div>
+        <div class="map-en"><div class="map-en-text">Officials B-P-T-L helped administration</div></div>
+        <div class="map-zh"><div class="map-zh-text">官员 B-P-T-L 协助治理</div></div>
+      </div>
+      <div class="map-item">
+        <div class="map-my"><div class="map-my-text">Hukum Kanun Melaka: undang-undang, keamanan, keselamatan</div></div>
+        <div class="map-en"><div class="map-en-text">Melaka Legal Code: law, peace, safety</div></div>
+        <div class="map-zh"><div class="map-zh-text">马六甲法典：法律、和平、安全</div></div>
+      </div>
+      <div class="map-item">
+        <div class="map-my"><div class="map-my-text">Islam tersebar melalui 5 cara</div></div>
+        <div class="map-en"><div class="map-en-text">Islam spread through 5 ways</div></div>
+        <div class="map-zh"><div class="map-zh-text">伊斯兰通过五种途径传播</div></div>
+      </div>
+      <div class="map-item">
+        <div class="map-my"><div class="map-my-text">China beri payung + cap + pakaian = pengiktirafan</div></div>
+        <div class="map-en"><div class="map-en-text">China: umbrella + seal + clothing = recognition</div></div>
+        <div class="map-zh"><div class="map-zh-text">黄伞 + 印玺 + 服装 = 承认</div></div>
+      </div>
+      <div class="map-item">
+        <div class="map-my"><div class="map-my-text">Empayar: penaklukan + perkahwinan + naungan</div></div>
+        <div class="map-en"><div class="map-en-text">Empire: conquest + marriage + protection</div></div>
+        <div class="map-zh"><div class="map-zh-text">征服 + 婚姻 + 庇护 = 帝国</div></div>
+      </div>
+
+      <div class="exam-box" style="margin-top:14px">
+        <div class="exam-header"><div class="exam-lbl">&#9997; Best Exam Template / 最佳考试句型</div></div>
+        <div class="exam-my"><div class="exam-my-text">Hal ini penting kerana dapat mengukuhkan pentadbiran, menjamin keselamatan, meningkatkan kemakmuran dan menjadikan Melaka sebuah empayar yang kuat.</div></div>
+        <div class="exam-en"><div class="exam-en-text">This was important because it strengthened administration, guaranteed safety, increased prosperity and made Melaka a strong empire.</div></div>
+        <div class="exam-zh"><div class="exam-zh-text">这非常重要，因为它加强行政管理，保障安全，提高繁荣，并使马六甲成为强大帝国。</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">Bab 5 &middot; Sejarah Tingkatan 2 &middot; 第五章</div>
+</div>
+
+<!-- QUIZ -->
+<div class="quiz-wrap" id="quiz">
+  <div id="qwrap"></div>
+</div>
+
+<script>
+var hiddenLang={my:false,en:false,zh:false};
+function tgl(lang,btn){
+  hiddenLang[lang]=!hiddenLang[lang];
+  document.getElementById('app').classList.toggle('hide-'+lang,hiddenLang[lang]);
+  btn.classList.toggle('on',!hiddenLang[lang]);
+}
+function exp(hdr){
+  var b=hdr.nextElementSibling;
+  var c=hdr.querySelector('.sec-chev');
+  var o=b.classList.toggle('open');
+  c.classList.toggle('open',o);
+}
+
+var quizOn=false;
+var qs=[
+  {q:'Mengapa Parameswara memilih Melaka?\nWhy did Parameswara choose Melaka?',
+   opts:['Kerana dekat China / Near China','Kerana kedudukannya strategik / Strategic location','Kerana ada sungai besar / Large river','Kerana tanah yang subur / Fertile land'],ans:1},
+  {q:'Jawatan yang menjaga keselamatan dan keamanan?\nWhich official maintained safety and peace?',
+   opts:['Bendahara','Penghulu Bendahari','Temenggung','Laksamana'],ans:2},
+  {q:'Siapa ketua angkatan laut Melaka?\nWho was head of the Melaka navy?',
+   opts:['Bendahara','Temenggung','Penghulu Bendahari','Laksamana'],ans:3},
+  {q:'Mata wang timah Melaka dikenali sebagai?\nMelaka\'s tin currency was known as?',
+   opts:['Dinar','Calains','Dirham','Ringgit'],ans:1},
+  {q:'Melaka membentuk empayar melalui?\nMelaka formed its empire through?',
+   opts:['Perang sahaja / War only','Perdagangan sahaja / Trade only','Penaklukan, perkahwinan dan naungan / Conquest, marriage and protection','Pinjaman dari China / Loans from China'],ans:2},
+  {q:'Apakah China berikan kepada Sultan sebagai pengiktirafan?\nWhat did China give the Sultan as recognition?',
+   opts:['Senjata api / Firearms','Payung kuning, cap mohor, pakaian / Umbrella, seal, clothing','Wang emas / Gold coins','Kapal perang / Warships'],ans:1},
+  {q:'Agama Islam tersebar melalui berapa cara?\nIslam spread through how many ways?',
+   opts:['3 cara / 3 ways','4 cara / 4 ways','5 cara / 5 ways','6 cara / 6 ways'],ans:2},
+  {q:'Kata kunci untuk Hukum Kanun Melaka?\nMemory keyword for Melaka Legal Code?',
+   opts:['Pelayar + Tentera + Strategi','Undang-undang + Keamanan + Keselamatan','Perdagangan + Naungan + Kuasa','Diplomatik + Ekonomi + Agama'],ans:1}
+];
+var qi=0,score=0,answered=false;
+
+function toggleQuiz(){
+  quizOn=!quizOn;
+  document.getElementById('notes').style.display=quizOn?'none':'block';
+  document.getElementById('quiz').classList.toggle('open',quizOn);
+  var btn=document.getElementById('qbtn');
+  btn.classList.toggle('active',quizOn);
+  btn.innerHTML=quizOn?'&#128218; Notes':'&#9997; Quiz';
+  if(quizOn){qi=0;score=0;renderQ();}
+}
+function renderQ(){
+  answered=false;
+  var d=document.getElementById('qwrap');
+  if(qi>=qs.length){
+    var pct=Math.round(score/qs.length*100);
+    var msg=pct>=80?'Excellent! Hebat! &#127881;':pct>=60?'Good job! Cuba lagi! &#128077;':'Terus belajar! Keep going! &#128170;';
+    d.innerHTML='<div class="q-result"><div class="q-score-num">'+score+'/'+qs.length+'</div><div class="q-score-of">'+pct+'%</div><div class="q-msg">'+msg+'</div></div><button class="q-btn q-retry" onclick="restartQ()">&#128260; Cuba lagi / Try again</button><button class="q-btn q-back" onclick="toggleQuiz()" style="margin-top:10px">&#128218; Balik ke nota / Back to notes</button>';
+    return;
+  }
+  var q=qs[qi];
+  var prog=Math.round((qi/qs.length)*100);
+  var lines=q.q.split('\n');
+  var qtxt='<div class="q-my">'+lines[0]+'</div>';
+  if(lines[1]) qtxt+='<div class="q-en" style="margin-top:6px">'+lines[1]+'</div>';
+  var opts=q.opts.map(function(o,i){return '<button class="q-opt" onclick="answer('+i+')">'+o+'</button>';}).join('');
+  d.innerHTML='<div class="q-progress"><div class="q-bar" style="width:'+prog+'%"></div></div><div class="qcard"><div class="q-num">Soalan '+(qi+1)+' / '+qs.length+'</div><div class="q-text">'+qtxt+'</div><div class="q-opts">'+opts+'</div></div>';
+}
+function answer(i){
+  if(answered)return;
+  answered=true;
+  var q=qs[qi];
+  var btns=document.querySelectorAll('.q-opt');
+  btns[q.ans].classList.add('correct');
+  if(i!==q.ans) btns[i].classList.add('wrong');
+  else score++;
+  for(var j=0;j<btns.length;j++) btns[j].onclick=null;
+  setTimeout(function(){qi++;renderQ();},1400);
+}
+function restartQ(){qi=0;score=0;renderQ();}
+</script>
+</body>
+</html>
