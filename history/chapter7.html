@@ -10,6 +10,11 @@
 html{font-size:16px}
 body{font-family:'Nunito',sans-serif;background:#f0f4ff;color:#1e293b;line-height:1.5}
 
+/* TOP NAV */
+.top-nav{background:#fff;padding:10px 16px;border-bottom:2px solid #e5e7eb;position:sticky;top:0;z-index:120}
+.dashboard-link{display:inline-flex;align-items:center;gap:6px;padding:8px 12px;border-radius:8px;background:#1d4ed8;color:#fff;font-size:13px;font-weight:800;text-decoration:none}
+.dashboard-link:hover{background:#1e40af}
+
 /* HERO */
 .hero{background:linear-gradient(135deg,#1e3a5f,#1a5276);padding:26px 18px 40px;text-align:center;position:relative;overflow:hidden}
 .hero::after{content:'';position:absolute;bottom:-24px;left:0;right:0;height:48px;background:#f0f4ff;border-radius:50% 50% 0 0/48px 48px 0 0}
@@ -162,6 +167,9 @@ body{font-family:'Nunito',sans-serif;background:#f0f4ff;color:#1e293b;line-heigh
 </style>
 </head>
 <body id="app">
+<div class="top-nav">
+  <a class="dashboard-link" href="../index.html">&larr; Back to Dashboard</a>
+</div>
 
 <!-- HERO -->
 <div class="hero">

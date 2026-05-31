@@ -1055,6 +1055,7 @@ export const historyData = {
             form:"T2",
             chapter:"Kesultanan Melayu Pahang, Perak, Terengganu dan Selangor",
             chinese:"",
+            resourceUrl:"../history/chapter7.html",
             status:"Not Started",
             confidence:0,
             last_updated:"2026-05-22"
