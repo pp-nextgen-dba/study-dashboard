@@ -21,7 +21,10 @@ const STATIC_ASSETS = [
     "/subjects/moral.html",
     "/subjects/history.html",
     "/subjects/geografi.html",
-    "/subjects/rekabentuk.html"
+    "/subjects/rekabentuk.html",
+    "/subjects/seni.html",
+    "/daily-progress.html",
+    "/js/daily-progress.js"
 ];
 
 self.addEventListener("install", event => {
