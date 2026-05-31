@@ -1,0 +1,788 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+<title>Bab 8 — Kerajaan Kedah, Kelantan, Negeri Sembilan dan Perlis</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html{font-size:16px}
+body{font-family:'Nunito',sans-serif;background:#f0f4ff;color:#1e293b;line-height:1.5}
+
+.hero{background:linear-gradient(135deg,#3b1f6e,#1e3a5f);padding:26px 18px 40px;text-align:center;position:relative;overflow:hidden}
+.hero::after{content:'';position:absolute;bottom:-24px;left:0;right:0;height:48px;background:#f0f4ff;border-radius:50% 50% 0 0/48px 48px 0 0}
+.hero-badge{display:inline-block;background:rgba(255,255,255,.15);color:#bfdbfe;font-size:12px;letter-spacing:2px;padding:4px 14px;border-radius:20px;margin-bottom:10px}
+.hero-title{font-size:18px;font-weight:800;color:#fff;line-height:1.3;margin-bottom:4px}
+.hero-sub{font-size:13px;color:#93c5fd;margin-bottom:3px}
+.hero-zh{font-family:'Noto Sans SC',sans-serif;font-size:12px;color:#67e8f9;letter-spacing:2px;margin-bottom:30px}
+.hero-stats{display:flex;justify-content:center;gap:24px;position:relative;z-index:1}
+.stat-num{font-size:24px;font-weight:800;color:#fff;text-align:center}
+.stat-lbl{font-size:11px;color:#bfdbfe;text-align:center}
+
+.lang-legend{display:flex;justify-content:center;gap:14px;padding:10px 16px;background:#fff;border-bottom:1px solid #e5e7eb}
+.legend-dot{display:flex;align-items:center;gap:5px;font-size:12px;font-weight:700}
+.dot{width:12px;height:12px;border-radius:3px;flex-shrink:0}
+
+.lang-bar{background:#fff;padding:10px 14px;display:flex;gap:8px;align-items:center;border-bottom:2px solid #e5e7eb;position:sticky;top:0;z-index:200;box-shadow:0 2px 8px rgba(0,0,0,.08)}
+.lbtn{flex:1;padding:8px 4px;font-size:12px;font-weight:800;font-family:'Nunito',sans-serif;border:2px solid;border-radius:20px;cursor:pointer;text-align:center;opacity:.4;transition:all .15s}
+.lbtn.on{opacity:1}
+.lbtn-my{border-color:#b45309;background:#fef3c7;color:#78350f}
+.lbtn-my.on{background:#d97706;color:#fff;border-color:#d97706}
+.lbtn-en{border-color:#1d4ed8;background:#dbeafe;color:#1e3a8a}
+.lbtn-en.on{background:#2563eb;color:#fff;border-color:#2563eb}
+.lbtn-zh{border-color:#059669;background:#d1fae5;color:#064e3b}
+.lbtn-zh.on{background:#059669;color:#fff;border-color:#059669}
+
+.tabs{display:flex;overflow-x:auto;background:#1e293b;-webkit-overflow-scrolling:touch;scrollbar-width:none;position:sticky;top:53px;z-index:199}
+.tabs::-webkit-scrollbar{display:none}
+.tab{flex:0 0 auto;padding:11px 14px;font-size:12px;font-weight:800;font-family:'Nunito',sans-serif;color:#94a3b8;background:transparent;border:none;cursor:pointer;border-bottom:3px solid transparent;white-space:nowrap;transition:all .2s}
+.tab-kd.active{color:#fbbf24;border-bottom-color:#d97706}
+.tab-kl.active{color:#6ee7b7;border-bottom-color:#059669}
+.tab-ns.active{color:#c4b5fd;border-bottom-color:#7c3aed}
+.tab-pl.active{color:#fca5a5;border-bottom-color:#dc2626}
+.tab-hub.active{color:#93c5fd;border-bottom-color:#2563eb}
+.tab-dag.active{color:#f9a8d4;border-bottom-color:#be185d}
+.tab-mm.active{color:#fde68a;border-bottom-color:#f59e0b}
+
+.panel{display:none;padding:12px 12px 60px}
+.panel.active{display:block}
+
+/* TRI-LANGUAGE */
+.tri{border-radius:12px;overflow:hidden;margin-bottom:10px;border:2px solid #e2e8f0}
+.tri-my{background:#fffbeb;border-left:5px solid #d97706;padding:9px 12px}
+.tri-my-lbl{font-size:10px;font-weight:800;letter-spacing:2px;color:#92400e;text-transform:uppercase;margin-bottom:3px}
+.tri-my-text{font-size:14px;font-weight:700;color:#78350f;line-height:1.5}
+.tri-en{background:#eff6ff;border-left:5px solid #2563eb;padding:9px 12px}
+.tri-en-lbl{font-size:10px;font-weight:800;letter-spacing:2px;color:#1d4ed8;text-transform:uppercase;margin-bottom:3px}
+.tri-en-text{font-size:14px;font-weight:600;color:#1e3a8a;line-height:1.5;font-style:italic}
+.tri-zh{background:#ecfdf5;border-left:5px solid #059669;padding:9px 12px}
+.tri-zh-lbl{font-size:10px;font-weight:800;letter-spacing:2px;color:#047857;text-transform:uppercase;margin-bottom:3px}
+.tri-zh-text{font-family:'Noto Sans SC',sans-serif;font-size:13px;font-weight:500;color:#064e3b;line-height:1.7;letter-spacing:1px}
+
+/* SECTION CARDS */
+.sec{border-radius:16px;margin-bottom:12px;overflow:hidden;border:2px solid}
+.sec-header{display:flex;align-items:center;gap:12px;padding:14px;cursor:pointer;user-select:none;-webkit-tap-highlight-color:transparent}
+.sec-icon{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0}
+.sec-info{flex:1}
+.sec-num{font-size:10px;font-weight:800;letter-spacing:1px;margin-bottom:2px;text-transform:uppercase}
+.sec-title-my{font-size:15px;font-weight:800;line-height:1.25;color:#78350f}
+.sec-title-en{font-size:12px;font-weight:700;font-style:italic;color:#1e3a8a;margin-top:2px}
+.sec-title-zh{font-family:'Noto Sans SC',sans-serif;font-size:11px;color:#064e3b;margin-top:2px;letter-spacing:1px}
+.sec-chev{font-size:20px;color:#94a3b8;transition:transform .25s;flex-shrink:0}
+.sec-chev.open{transform:rotate(180deg)}
+.sec-body{display:none;padding:0 12px 12px}
+.sec-body.open{display:block}
+
+/* TIMELINE */
+.timeline{position:relative;padding-left:26px;margin-bottom:10px}
+.timeline::before{content:'';position:absolute;left:9px;top:4px;bottom:4px;width:2px;background:#e2e8f0}
+.titem{position:relative;margin-bottom:14px}
+.titem::before{content:'';position:absolute;left:-20px;top:5px;width:11px;height:11px;border-radius:50%;border:2px solid;background:#fff}
+.tnum{font-size:10px;font-weight:800;letter-spacing:1px;text-transform:uppercase;margin-bottom:3px}
+
+/* KEY HIGHLIGHTS */
+.kp{background:#fef3c7;color:#92400e;font-weight:800;padding:1px 5px;border-radius:5px;font-size:13px}
+.kdate{background:#dbeafe;color:#1e3a8a;font-weight:700;padding:1px 5px;border-radius:5px;font-size:13px}
+.kplace{background:#d1fae5;color:#064e3b;font-weight:700;padding:1px 5px;border-radius:5px;font-size:13px}
+.kitem{background:#ede9fe;color:#4c1d95;font-weight:700;padding:1px 5px;border-radius:5px;font-size:13px}
+
+/* MEMORY BOX */
+.mem{border-radius:12px;padding:12px;background:#f1f5f9;border:2px solid #cbd5e1;margin-top:10px}
+.mem-lbl{font-size:11px;letter-spacing:2px;font-weight:800;margin-bottom:8px;color:#475569;text-transform:uppercase}
+.pills{display:flex;flex-wrap:wrap;gap:6px}
+.pill-my{padding:5px 10px;border-radius:20px;font-size:12px;font-weight:800;border:2px solid #d97706;background:#fef3c7;color:#78350f}
+.pill-en{padding:5px 10px;border-radius:20px;font-size:12px;font-weight:700;border:2px solid #2563eb;background:#dbeafe;color:#1e3a8a;font-style:italic}
+.pill-zh{padding:5px 10px;border-radius:20px;font-size:11px;font-weight:700;border:2px solid #059669;background:#d1fae5;color:#064e3b;font-family:'Noto Sans SC',sans-serif;letter-spacing:1px}
+
+/* BULLET LIST */
+.blist{list-style:none;padding:0;margin-bottom:6px}
+.blist li{font-size:13px;font-weight:600;line-height:1.5;padding:4px 0 4px 14px;position:relative;border-bottom:1px dashed rgba(0,0,0,.07)}
+.blist li:last-child{border-bottom:none}
+.blist li::before{content:'▸';position:absolute;left:0;font-size:11px}
+
+/* STATE THEMES */
+.kd{background:#fffbeb;border-color:#f59e0b}.kd .sec-header{background:#fef3c7}.kd .sec-icon{background:#d97706}.kd .sec-num{color:#92400e}.kd .sec-body{border-top:2px dashed #fde68a}.kd .titem::before{border-color:#d97706}.kd .tnum{color:#92400e}.kd .timeline::before{background:#fde68a}
+.kl{background:#ecfdf5;border-color:#059669}.kl .sec-header{background:#d1fae5}.kl .sec-icon{background:#059669}.kl .sec-num{color:#047857}.kl .sec-body{border-top:2px dashed #6ee7b7}.kl .titem::before{border-color:#059669}.kl .tnum{color:#047857}.kl .timeline::before{background:#6ee7b7}
+.ns{background:#f5f3ff;border-color:#7c3aed}.ns .sec-header{background:#ede9fe}.ns .sec-icon{background:#7c3aed}.ns .sec-num{color:#5b21b6}.ns .sec-body{border-top:2px dashed #c4b5fd}.ns .titem::before{border-color:#7c3aed}.ns .tnum{color:#5b21b6}.ns .timeline::before{background:#c4b5fd}
+.pl{background:#fff5f5;border-color:#dc2626}.pl .sec-header{background:#fee2e2}.pl .sec-icon{background:#dc2626}.pl .sec-num{color:#b91c1c}.pl .sec-body{border-top:2px dashed #fca5a5}.pl .titem::before{border-color:#dc2626}.pl .tnum{color:#b91c1c}.pl .timeline::before{background:#fca5a5}
+.hub{background:#eff6ff;border-color:#2563eb}.hub .sec-header{background:#dbeafe}.hub .sec-icon{background:#2563eb}.hub .sec-num{color:#1d4ed8}.hub .sec-body{border-top:2px dashed #bfdbfe}
+.dag{background:#fdf2f8;border-color:#be185d}.dag .sec-header{background:#fce7f3}.dag .sec-icon{background:#be185d}.dag .sec-num{color:#831843}.dag .sec-body{border-top:2px dashed #fbcfe8}
+
+/* COMPARISON TABLE */
+.comp-wrap{overflow-x:auto;margin-bottom:10px;border-radius:12px}
+.comp-table{width:100%;border-collapse:collapse;font-size:12px}
+.comp-table th{padding:8px 10px;font-size:10px;font-weight:800;letter-spacing:1px;text-transform:uppercase;text-align:center;color:#fff}
+.comp-table td{padding:8px 10px;vertical-align:top;line-height:1.4;border-bottom:1px solid rgba(0,0,0,.06)}
+.comp-table tr:last-child td{border-bottom:none}
+.th-kd{background:#d97706}.th-kl{background:#059669}.th-ns{background:#7c3aed}.th-pl{background:#dc2626}
+.td-kd{background:#fffbeb;color:#78350f;font-weight:600}.td-kl{background:#ecfdf5;color:#064e3b;font-weight:600}
+.td-ns{background:#f5f3ff;color:#3b0764;font-weight:600}.td-pl{background:#fff5f5;color:#7f1d1d;font-weight:600}
+.td-label{font-size:10px;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:#475569;background:#f8fafc;padding:6px 10px}
+
+/* FLOWCHART */
+.flow-box{border-radius:12px;padding:10px 14px;font-size:13px;font-weight:700;text-align:center;margin-bottom:6px}
+.flow-arrow{text-align:center;font-size:20px;color:#94a3b8;margin-bottom:6px}
+.flow-branches{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px}
+.flow-branch{border-radius:10px;padding:10px 12px;font-size:12px;font-weight:600;line-height:1.4}
+
+/* MEMORY MAP */
+.mmap-item{border-radius:14px;overflow:hidden;margin-bottom:10px;border:2px solid #e2e8f0;box-shadow:0 2px 8px rgba(0,0,0,.06)}
+.mmap-my{background:#fef3c7;padding:9px 14px;border-bottom:1px solid #fde68a}
+.mmap-my-text{font-size:14px;font-weight:800;color:#78350f}
+.mmap-en{background:#dbeafe;padding:9px 14px;border-bottom:1px solid #bfdbfe}
+.mmap-en-text{font-size:13px;font-weight:600;color:#1e3a8a;font-style:italic}
+.mmap-zh{background:#d1fae5;padding:9px 14px}
+.mmap-zh-text{font-family:'Noto Sans SC',sans-serif;font-size:12px;font-weight:500;color:#064e3b;letter-spacing:1px}
+.mmap-header{background:#0f172a;padding:14px;text-align:center;border-radius:14px 14px 0 0}
+.mmap-h-title{font-size:15px;font-weight:800;color:#fbbf24;margin-bottom:2px}
+.mmap-h-en{font-size:12px;color:#94a3b8;font-style:italic}
+.mmap-h-zh{font-family:'Noto Sans SC',sans-serif;font-size:11px;color:#6ee7b7;letter-spacing:2px;margin-top:2px}
+
+/* EXAM BOX */
+.exam-box{border-radius:14px;overflow:hidden;border:2px solid #7c3aed;margin-top:10px}
+.exam-hdr{background:#7c3aed;padding:9px 14px}
+.exam-lbl{font-size:10px;letter-spacing:2px;font-weight:800;color:#ede9fe;text-transform:uppercase}
+.exam-my{background:#fffbeb;border-left:5px solid #d97706;padding:9px 14px}
+.exam-my-t{font-size:13px;font-weight:700;color:#78350f;line-height:1.6}
+.exam-en{background:#eff6ff;border-left:5px solid #2563eb;padding:9px 14px}
+.exam-en-t{font-size:13px;font-weight:600;color:#1e3a8a;line-height:1.6;font-style:italic}
+.exam-zh{background:#ecfdf5;border-left:5px solid #059669;padding:9px 14px}
+.exam-zh-t{font-family:'Noto Sans SC',sans-serif;font-size:12px;font-weight:500;color:#064e3b;line-height:1.8;letter-spacing:1px}
+
+/* HIDE */
+.hide-my .tri-my,.hide-my .mmap-my,.hide-my .exam-my,.hide-my .sec-title-my,.hide-my .pill-my{display:none}
+.hide-en .tri-en,.hide-en .mmap-en,.hide-en .exam-en,.hide-en .sec-title-en,.hide-en .pill-en{display:none}
+.hide-zh .tri-zh,.hide-zh .mmap-zh,.hide-zh .exam-zh,.hide-zh .sec-title-zh,.hide-zh .pill-zh{display:none}
+
+.footer{text-align:center;font-size:12px;color:#94a3b8;padding:14px;letter-spacing:1px}
+.top-nav{background:#fff;padding:10px 16px;border-bottom:2px solid #e5e7eb;position:sticky;top:0;z-index:120}
+.dashboard-link{display:inline-flex;align-items:center;gap:6px;padding:8px 12px;border-radius:8px;background:#1d4ed8;color:#fff;font-size:13px;font-weight:800;text-decoration:none}
+.dashboard-link:hover{background:#1e40af}
+</style>
+</head>
+<body id="app">
+<div class="top-nav">
+  <a class="dashboard-link" href="../index.html">&larr; Back to Dashboard</a>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-badge">Sejarah &middot; Tingkatan 3 &middot; Bab 8</div>
+  <div class="hero-title">Kerajaan Kedah, Kelantan,<br>Negeri Sembilan &amp; Perlis</div>
+  <div class="hero-sub">Kingdoms of Kedah, Kelantan, N. Sembilan &amp; Perlis</div>
+  <div class="hero-zh">吉打、吉兰丹、森美兰与玻璃市王国</div>
+  <div class="hero-stats">
+    <div><div class="stat-num">4</div><div class="stat-lbl">Kingdoms</div></div>
+    <div><div class="stat-num">3</div><div class="stat-lbl">Languages</div></div>
+    <div><div class="stat-num">7</div><div class="stat-lbl">Tabs</div></div>
+  </div>
+</div>
+
+<!-- LANG LEGEND -->
+<div class="lang-legend">
+  <div class="legend-dot"><div class="dot" style="background:#d97706"></div><span style="color:#78350f">Melayu</span></div>
+  <div class="legend-dot"><div class="dot" style="background:#2563eb"></div><span style="color:#1e3a8a">English</span></div>
+  <div class="legend-dot"><div class="dot" style="background:#059669"></div><span style="color:#064e3b;font-family:'Noto Sans SC',sans-serif">中文</span></div>
+</div>
+
+<!-- LANG BAR -->
+<div class="lang-bar">
+  <button class="lbtn lbtn-my on" onclick="tgl('my',this)">&#x1F7E1; Melayu</button>
+  <button class="lbtn lbtn-en on" onclick="tgl('en',this)">&#x1F535; English</button>
+  <button class="lbtn lbtn-zh on" onclick="tgl('zh',this)">&#x1F7E2; 中文</button>
+</div>
+
+<!-- TABS -->
+<div class="tabs">
+  <button class="tab tab-kd active" onclick="showPanel('kd',this)">&#9733; Kedah</button>
+  <button class="tab tab-kl" onclick="showPanel('kl',this)">&#9790; Kelantan</button>
+  <button class="tab tab-ns" onclick="showPanel('ns',this)">&#127774; N.Sembilan</button>
+  <button class="tab tab-pl" onclick="showPanel('pl',this)">&#127984; Perlis</button>
+  <button class="tab tab-hub" onclick="showPanel('hub',this)">&#127919; Hubungan</button>
+  <button class="tab tab-dag" onclick="showPanel('dag',this)">&#128176; Dagangan</button>
+  <button class="tab tab-mm" onclick="showPanel('mm',this)">&#11088; Memory Map</button>
+</div>
+
+<!-- ══════════ KEDAH ══════════ -->
+<div id="panel-kd" class="panel active">
+  <div class="sec kd">
+    <div class="sec-header" onclick="exp(this)">
+      <div class="sec-icon">&#9733;</div>
+      <div class="sec-info">
+        <div class="sec-num">8.1</div>
+        <div class="sec-title-my">Pengasasan Kerajaan Kedah</div>
+        <div class="sec-title-en">Founding of the Kingdom of Kedah</div>
+        <div class="sec-title-zh">吉打王国的建立</div>
+      </div>
+      <span class="sec-chev open">&#8964;</span>
+    </div>
+    <div class="sec-body open">
+      <div class="timeline kd">
+
+        <div class="titem">
+          <div class="tnum">Asal-usul / Origin / 起源</div>
+          <div class="tri">
+            <div class="tri-my"><div class="tri-my-lbl">&#x1F7E1; Melayu</div><div class="tri-my-text">Kerajaan Kedah diasaskan oleh keturunan raja yang datang dari <span class="kp">Parsi</span>. Merupakan kerajaan <strong>terawal</strong> diasaskan di negara kita.</div></div>
+            <div class="tri-en"><div class="tri-en-lbl">&#x1F535; English</div><div class="tri-en-text">The Kingdom of Kedah was founded by royal descendants from <span class="kp">Persia</span>. It is the <strong>earliest</strong> kingdom established in our country.</div></div>
+            <div class="tri-zh"><div class="tri-zh-lbl">&#x1F7E2; 中文</div><div class="tri-zh-text">吉打王国由来自<span class="kp">波斯</span>的王室后裔建立，是我国<strong>最早</strong>建立的王国。</div></div>
+          </div>
+        </div>
+
+        <div class="titem">
+          <div class="tnum">&#126; 630 M</div>
+          <div class="tri">
+            <div class="tri-my"><div class="tri-my-lbl">&#x1F7E1; Melayu</div><div class="tri-my-text"><span class="kp">Maharaja Derbar Raja</span> datang dari Parsi ke <span class="kplace">Kuala Sungai Merbok, Kedah</span>. Ketua orang Melayu Kedah — <span class="kp">Tan Dermadewa</span> dan <span class="kp">Tun Perkasa</span> — melantiknya menjadi Raja Kedah.</div></div>
+            <div class="tri-en"><div class="tri-en-lbl">&#x1F535; English</div><div class="tri-en-text"><span class="kp">Maharaja Derbar Raja</span> came from Persia to <span class="kplace">Kuala Sungai Merbok, Kedah</span>. Kedah Malay chiefs — <span class="kp">Tan Dermadewa</span> and <span class="kp">Tun Perkasa</span> — appointed him as Raja of Kedah.</div></div>
+            <div class="tri-zh"><div class="tri-zh-lbl">&#x1F7E2; 中文</div><div class="tri-zh-text"><span class="kp">大君德巴拉惹</span>从波斯来到<span class="kplace">吉打默波河口</span>。吉打马来首领<span class="kp">Tan Dermadewa</span>和<span class="kp">Tun Perkasa</span>拥立他为吉打拉惹。</div></div>
+          </div>
+        </div>
+
+        <div class="titem">
+          <div class="tnum">Alat Kebesaran / Regalia / 皇家宝物</div>
+          <div class="tri">
+            <div class="tri-my"><div class="tri-my-lbl">&#x1F7E1; Melayu</div><div class="tri-my-text">Pemasyhuran Maharaja Derbar Raja disusuli pengiktirafan alat kebesaran dari Parsi — <span class="kitem">nobat</span>. Kini diwarisi sebagai alat kebesaran Kerajaan Kedah.</div></div>
+            <div class="tri-en"><div class="tri-en-lbl">&#x1F535; English</div><div class="tri-en-text">Proclamation of Maharaja Derbar Raja followed by recognition of royal regalia from Persia — <span class="kitem">nobat</span> drums. Now inherited as Kedah royal regalia.</div></div>
+            <div class="tri-zh"><div class="tri-zh-lbl">&#x1F7E2; 中文</div><div class="tri-zh-text">大君德巴拉惹的宣告伴随着来自波斯的王室宝物认可——<span class="kitem">nobat鼓</span>，现为吉打王室宝物。</div></div>
+          </div>
+        </div>
+
+        <div class="titem">
+          <div class="tnum">Perkembangan / Growth / 发展</div>
+          <div class="tri">
+            <div class="tri-my"><div class="tri-my-lbl">&#x1F7E1; Melayu</div><div class="tri-my-text">Kawasan pemerintahan berkembang melalui <strong>pembukaan kota</strong> dan <strong>pusat pentadbiran baharu</strong>. Tindakan ini juga menghadapi ancaman dari dalam dan luar.</div></div>
+            <div class="tri-en"><div class="tri-en-lbl">&#x1F535; English</div><div class="tri-en-text">Territory expanded through <strong>establishing new towns</strong> and <strong>new administrative centres</strong> — also a strategy against internal and external threats.</div></div>
+            <div class="tri-zh"><div class="tri-zh-lbl">&#x1F7E2; 中文</div><div class="tri-zh-text">通过<strong>建立新城镇</strong>和<strong>新行政中心</strong>扩大统治区域，同时应对内外威胁。</div></div>
+          </div>
+        </div>
+
+        <div class="titem">
+          <div class="tnum">1282</div>
+          <div class="tri">
+            <div class="tri-my"><div class="tri-my-lbl">&#x1F7E1; Melayu</div><div class="tri-my-text"><span class="kplace">Kota Siputih</span> dibuka oleh <span class="kp">Tunku Ahmad (Raja Ahmad)</span> bagi menghadapi ancaman Siam dan Acheh di utara. Kemudian menjadi tempat bersemayam Sultan Kedah ke-6, <span class="kp">Sultan Ibrahim</span> (1321–1373).</div></div>
+            <div class="tri-en"><div class="tri-en-lbl">&#x1F535; English</div><div class="tri-en-text"><span class="kplace">Kota Siputih</span> opened by <span class="kp">Tunku Ahmad</span> against Siamese and Acehnese threats. Later became the residence of the 6th Sultan of Kedah, <span class="kp">Sultan Ibrahim</span> (1321–1373).</div></div>
+            <div class="tri-zh"><div class="tri-zh-lbl">&#x1F7E2; 中文</div><div class="tri-zh-text"><span class="kplace">Kota Siputih</span>由<span class="kp">东姑阿末</span>建立以抵御暹罗和亚齐威胁。后来成为第六任吉打苏丹<span class="kp">苏丹易卜拉欣</span>（1321–1373）的驻地。</div></div>
+          </div>
+        </div>
+
+        <div class="titem">
+          <div class="tnum">1710–1778 — Sultan Masyhur / Famous Sultan / 著名苏丹</div>
+          <div class="tri">
+            <div class="tri-my"><div class="tri-my-lbl">&#x1F7E1; Melayu</div><div class="tri-my-text"><span class="kp">Sultan Muhammad Jiwa Zainal Abidin Mu'adzim Shah II</span> (Sultan Kedah ke-19) — pemerintah yang masyhur. Mengasaskan <span class="kplace">Alor Setar</span> sehingga diisytihar sebagai ibu negeri Kedah.</div></div>
+            <div class="tri-en"><div class="tri-en-lbl">&#x1F535; English</div><div class="tri-en-text"><span class="kp">Sultan Muhammad Jiwa Zainal Abidin Mu'adzim Shah II</span> (19th Sultan of Kedah) — famous ruler. Founded <span class="kplace">Alor Setar</span>, declared as the state capital of Kedah.</div></div>
+            <div class="tri-zh"><div class="tri-zh-lbl">&#x1F7E2; 中文</div><div class="tri-zh-text"><span class="kp">苏丹穆罕默德吉瓦扎纳尔阿比丁二世</span>（第19任吉打苏丹）——著名统治者。建立<span class="kplace">亚罗士打</span>并宣布为吉打首府。</div></div>
+          </div>
+        </div>
+
+        <div class="titem">
+          <div class="tnum">Pusat Perdagangan / Trade Centre / 贸易中心</div>
+          <div class="tri">
+            <div class="tri-my"><div class="tri-my-lbl">&#x1F7E1; Melayu</div><div class="tri-my-text">Kedudukan <span class="kplace">Kuala Sungai Merbok</span> dan <span class="kplace">Gunung Jerai</span> menarik pedagang, menjadikan Kedah pusat perdagangan. Kerajaan Kedah (abad ke-7) kekal hingga kini — penggantian pemerintah daripada jurai keturunan pengasasnya.</div></div>
+            <div class="tri-en"><div class="tri-en-lbl">&#x1F535; English</div><div class="tri-en-text">Location of <span class="kplace">Kuala Sungai Merbok</span> and <span class="kplace">Gunung Jerai</span> attracted traders, making Kedah a trade centre. Kedah (founded 7th century) continues today — rulers descended from founders.</div></div>
+            <div class="tri-zh"><div class="tri-zh-lbl">&#x1F7E2; 中文</div><div class="tri-zh-text"><span class="kplace">默波河口</span>和<span class="kplace">吉打峰</span>的位置吸引商人，使吉打成为贸易中心。吉打（7世纪建立）延续至今，统治者为创国者后裔。</div></div>
+          </div>
+        </div>
+
+      </div>
+      <div class="mem">
+        <div class="mem-lbl">&#129504; Memory Keywords</div>
+        <div class="pills">
+          <span class="pill-my">Pengasas: Maharaja Derbar Raja (Parsi)</span>
+          <span class="pill-en">Founder: Maharaja Derbar Raja (Persia)</span>
+          <span class="pill-zh">建国者：大君德巴拉惹（波斯）</span>
+          <span class="pill-my">Tahun: ~630M</span>
+          <span class="pill-en">Year: ~630 AD</span>
+          <span class="pill-zh">年份：约公元630年</span>
+          <span class="pill-my">Ibu negeri: Alor Setar</span>
+          <span class="pill-en">Capital: Alor Setar</span>
+          <span class="pill-zh">首都：亚罗士打</span>
+          <span class="pill-my">Alat kebesaran: Nobat</span>
+          <span class="pill-en">Regalia: Nobat drums</span>
+          <span class="pill-zh">宝物：Nobat鼓</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ KELANTAN ══════════ -->
+<div id="panel-kl" class="panel">
+  <div class="sec kl">
+    <div class="sec-header" onclick="exp(this)">
+      <div class="sec-icon">&#9790;</div>
+      <div class="sec-info">
+        <div class="sec-num">8.1</div>
+        <div class="sec-title-my">Pengasasan Kerajaan Kelantan</div>
+        <div class="sec-title-en">Founding of the Kingdom of Kelantan</div>
+        <div class="sec-title-zh">吉兰丹王国的建立</div>
+      </div>
+      <span class="sec-chev open">&#8964;</span>
+    </div>
+    <div class="sec-body open">
+      <div class="timeline kl">
+
+        <div class="titem">
+          <div class="tnum">Asal-usul / Origin / 起源</div>
+          <div class="tri">
+            <div class="tri-my"><div class="tri-my-lbl">&#x1F7E1; Melayu</div><div class="tri-my-text">Kelantan wilayah yang pernah dikuasai dan bergabung dengan kerajaan <span class="kp">Patani</span>. Pengasasan kerajaan Kelantan hasil daripada <strong>penyatuan dua wilayah</strong> oleh putera pemerintah tempatan.</div></div>
+            <div class="tri-en"><div class="tri-en-lbl">&#x1F535; English</div><div class="tri-en-text">Kelantan was once controlled by and merged with the kingdom of <span class="kp">Patani</span>. The kingdom of Kelantan was founded through the <strong>unification of two territories</strong> by a local ruling prince.</div></div>
+            <div class="tri-zh"><div class="tri-zh-lbl">&#x1F7E2; 中文</div><div class="tri-zh-text">吉兰丹曾受<span class="kp">北大年</span>王国控制并合并。吉兰丹王国由当地王子通过<strong>统一两个地区</strong>而建立。</div></div>
+          </div>
+        </div>
+
+        <div class="titem">
+          <div class="tnum">Patani Besar / Greater Patani / 大北大年</div>
+          <div class="tri">
+            <div class="tri-my"><div class="tri-my-lbl">&#x1F7E1; Melayu</div><div class="tri-my-text">Kelantan merupakan sebahagian daripada <strong>Negara Patani Besar</strong> yang diasaskan oleh <span class="kp">Raja Sakti I</span>.</div></div>
+            <div class="tri-en"><div class="tri-en-lbl">&#x1F535; English</div><div class="tri-en-text">Kelantan was part of <strong>Greater Patani</strong> founded by <span class="kp">Raja Sakti I</span>.</div></div>
+            <div class="tri-zh"><div class="tri-zh-lbl">&#x1F7E2; 中文</div><div class="tri-zh-text">吉兰丹是<span class="kp">拉惹沙迪一世</span>建立的<strong>大北大年国</strong>的一部分。</div></div>
+          </div>
+        </div>
+
+        <div class="titem">
+          <div class="tnum">1670 — Perpecahan / Split / 分裂</div>
+          <div class="tri">
+            <div class="tri-my"><div class="tri-my-lbl">&#x1F7E1; Melayu</div><div class="tri-my-text">Kemangkatan Raja Bahar (pemerintah terakhir Patani) menyebabkan Kelantan berpecah kepada dua:<br>(a) <span class="kp">Kelantan Barat</span> di <span class="kplace">Kota Kubang Labu</span><br>(b) <span class="kp">Kelantan Timur</span> di <span class="kplace">Kota Pangkalan Datu</span></div></div>
+            <div class="tri-en"><div class="tri-en-lbl">&#x1F535; English</div><div class="tri-en-text">Death of Raja Bahar (last ruler of Patani) caused Kelantan to split into two:<br>(a) <span class="kp">West Kelantan</span> at <span class="kplace">Kota Kubang Labu</span><br>(b) <span class="kp">East Kelantan</span> at <span class="kplace">Kota Pangkalan Datu</span></div></div>
+            <div class="tri-zh"><div class="tri-zh-lbl">&#x1F7E2; 中文</div><div class="tri-zh-text">拉惹巴哈尔（最后一任北大年统治者）逝世，吉兰丹分裂为两部分：<br>(a) <span class="kp">西吉兰丹</span>在<span class="kplace">Kota Kubang Labu</span><br>(b) <span class="kp">东吉兰丹</span>在<span class="kplace">Kota Pangkalan Datu</span></div></div>
+          </div>
+        </div>
+
+        <div class="titem">
+          <div class="tnum">Penyatuan / Unification / 统一</div>
+          <div class="tri">
+            <div class="tri-my"><div class="tri-my-lbl">&#x1F7E1; Melayu</div><div class="tri-my-text"><span class="kp">Long Yunus</span>, putera pemerintah Kelantan Barat, berjaya menyatukan Kelantan. Pada tahun <span class="kdate">1762</span>, Long Yunus menaiki takhta dengan gelaran <span class="kp">Yang di-Pertuan Kelantan</span>.</div></div>
+            <div class="tri-en"><div class="tri-en-lbl">&#x1F535; English</div><div class="tri-en-text"><span class="kp">Long Yunus</span>, prince of West Kelantan, successfully unified Kelantan. In <span class="kdate">1762</span>, Long Yunus ascended the throne as <span class="kp">Yang di-Pertuan Kelantan</span>.</div></div>
+            <div class="tri-zh"><div class="tri-zh-lbl">&#x1F7E2; 中文</div><div class="tri-zh-text"><span class="kp">龙尤努斯</span>，西吉兰丹王子，成功统一吉兰丹。<span class="kdate">1762年</span>，龙尤努斯以<span class="kp">吉兰丹最高元首</span>称号登基。</div></div>
+          </div>
+        </div>
+
+        <div class="titem">
+          <div class="tnum">1777 — Pembangunan / Development / 发展</div>
+          <div class="tri">
+            <div class="tri-my"><div class="tri-my-lbl">&#x1F7E1; Melayu</div><div class="tri-my-text">Pusat pentadbiran di <span class="kplace">Kota Galoh</span> dan pembinaan simbol pentadbiran Islam di Kelantan — <span class="kitem">Masjid Kampung Laut</span>.</div></div>
+            <div class="tri-en"><div class="tri-en-lbl">&#x1F535; English</div><div class="tri-en-text">Administrative centre at <span class="kplace">Kota Galoh</span> and construction of Islamic administrative symbol in Kelantan — <span class="kitem">Masjid Kampung Laut</span>.</div></div>
+            <div class="tri-zh"><div class="tri-zh-lbl">&#x1F7E2; 中文</div><div class="tri-zh-text">行政中心在<span class="kplace">Kota Galoh</span>，兴建吉兰丹伊斯兰行政象征——<span class="kitem">甘榜劳清真寺</span>。</div></div>
+          </div>
+        </div>
+
+      </div>
+      <div class="mem">
+        <div class="mem-lbl">&#129504; Memory Keywords</div>
+        <div class="pills">
+          <span class="pill-my">Asal: Patani Besar (Raja Sakti I)</span>
+          <span class="pill-en">Origin: Greater Patani (Raja Sakti I)</span>
+          <span class="pill-zh">起源：大北大年（拉惹沙迪一世）</span>
+          <span class="pill-my">Berpecah: 1670 → Barat &amp; Timur</span>
+          <span class="pill-en">Split: 1670 → West &amp; East</span>
+          <span class="pill-zh">分裂：1670年→东西两部</span>
+          <span class="pill-my">Bersatu: Long Yunus, 1762</span>
+          <span class="pill-en">Unified: Long Yunus, 1762</span>
+          <span class="pill-zh">统一：龙尤努斯，1762年</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ NEGERI SEMBILAN ══════════ -->
+<div id="panel-ns" class="panel">
+  <div class="sec ns">
+    <div class="sec-header" onclick="exp(this)">
+      <div class="sec-icon">&#127774;</div>
+      <div class="sec-info">
+        <div class="sec-num">8.1</div>
+        <div class="sec-title-my">Pengasasan Kerajaan Negeri Sembilan</div>
+        <div class="sec-title-en">Founding of Negeri Sembilan</div>
+        <div class="sec-title-zh">森美兰王国的建立</div>
+      </div>
+      <span class="sec-chev open">&#8964;</span>
+    </div>
+    <div class="sec-body open">
+      <div class="timeline ns">
+
+        <div class="titem">
+          <div class="tnum">Asal-usul / Origin / 起源</div>
+          <div class="tri">
+            <div class="tri-my"><div class="tri-my-lbl">&#x1F7E1; Melayu</div><div class="tri-my-text">Pada asalnya, Negeri Sembilan merupakan naungan <span class="kp">Kesultanan Johor Riau</span>. Sejak awal abad ke-15, masyarakat <span class="kp">Minangkabau</span> dari Sumatera merantau dan mendiami Negeri Sembilan.</div></div>
+            <div class="tri-en"><div class="tri-en-lbl">&#x1F535; English</div><div class="tri-en-text">Originally, Negeri Sembilan was a vassal of <span class="kp">Johor Riau Sultanate</span>. Since the early 15th century, the <span class="kp">Minangkabau</span> people from Sumatra migrated and settled in Negeri Sembilan.</div></div>
+            <div class="tri-zh"><div class="tri-zh-lbl">&#x1F7E2; 中文</div><div class="tri-zh-text">起初，森美兰是<span class="kp">柔佛廖内苏丹国</span>的附属国。自15世纪初，来自苏门答腊的<span class="kp">米南加保</span>人移居森美兰。</div></div>
+          </div>
+        </div>
+
+        <div class="titem">
+          <div class="tnum">1770 — Utusan / Envoy / 使团</div>
+          <div class="tri">
+            <div class="tri-my"><div class="tri-my-lbl">&#x1F7E1; Melayu</div><div class="tri-my-text">Empat Penghulu Luak (Sungai Ujong, Jelebu, Johoi, Rembau) menghantar utusan untuk menjemput anak raja Minangkabau untuk dirajakan.</div></div>
+            <div class="tri-en"><div class="tri-en-lbl">&#x1F535; English</div><div class="tri-en-text">Four Penghulu Luak (Sungai Ujong, Jelebu, Johoi, Rembau) sent envoys to invite a Minangkabau royal prince to be their ruler.</div></div>
+            <div class="tri-zh"><div class="tri-zh-lbl">&#x1F7E2; 中文</div><div class="tri-zh-text">四个Luak首领（双溪乌戎、芦骨、Johoi、林茂）派遣使团邀请米南加保王子来统治。</div></div>
+          </div>
+        </div>
+
+        <div class="titem">
+          <div class="tnum">Raja Melewar</div>
+          <div class="tri">
+            <div class="tri-my"><div class="tri-my-lbl">&#x1F7E1; Melayu</div><div class="tri-my-text">Raja Minangkabau bersetuju dan menghantar <span class="kp">Raja Melewar</span> sebagai pemerintah Negeri Sembilan.</div></div>
+            <div class="tri-en"><div class="tri-en-lbl">&#x1F535; English</div><div class="tri-en-text">The Minangkabau Raja agreed and sent <span class="kp">Raja Melewar</span> as ruler of Negeri Sembilan.</div></div>
+            <div class="tri-zh"><div class="tri-zh-lbl">&#x1F7E2; 中文</div><div class="tri-zh-text">米南加保拉惹同意并派遣<span class="kp">拉惹美乐华</span>担任森美兰统治者。</div></div>
+          </div>
+        </div>
+
+        <div class="titem">
+          <div class="tnum">1773 — Pengasasan / Founding / 建国</div>
+          <div class="tri">
+            <div class="tri-my"><div class="tri-my-lbl">&#x1F7E1; Melayu</div><div class="tri-my-text">Raja Melewar mengasas Negeri Sembilan berpusat di <span class="kplace">Seri Menanti</span> dengan gelaran <span class="kp">Yamtuan Seri Menanti</span>, mendapat pengiktirafan Kesultanan Johor Riau.</div></div>
+            <div class="tri-en"><div class="tri-en-lbl">&#x1F535; English</div><div class="tri-en-text">Raja Melewar founded Negeri Sembilan centred at <span class="kplace">Seri Menanti</span> with the title <span class="kp">Yamtuan Seri Menanti</span>, recognised by the Johor Riau Sultanate.</div></div>
+            <div class="tri-zh"><div class="tri-zh-lbl">&#x1F7E2; 中文</div><div class="tri-zh-text">拉惹美乐华以<span class="kplace">芙蓉斯里默南提</span>为中心建立森美兰，称号<span class="kp">Yamtuan Seri Menanti</span>，获柔佛廖内苏丹国承认。</div></div>
+          </div>
+        </div>
+
+        <div class="titem">
+          <div class="tnum">Sistem Pemerintahan / Governance / 管治制度</div>
+          <div class="tri">
+            <div class="tri-my"><div class="tri-my-lbl">&#x1F7E1; Melayu</div><div class="tri-my-text">Tradisi melantik pemerintah dari Minangkabau berakhir dengan kemangkatan <span class="kp">Yamtuan Lenggang</span>. Pertabalan <span class="kp">Yamtuan Radin</span> (1830) — bermulanya <strong>sistem penggantian waris pemerintah</strong>. Kuasa memilih Yantuan ditentukan oleh <span class="kp">Undang Yang Empat</span> (Sungai Ujong, Jelebu, Johoi, Rembau).</div></div>
+            <div class="tri-en"><div class="tri-en-lbl">&#x1F535; English</div><div class="tri-en-text">Tradition of appointing Minangkabau rulers ended with the death of <span class="kp">Yamtuan Lenggang</span>. Enthronement of <span class="kp">Yamtuan Radin</span> (1830) began the <strong>hereditary succession system</strong>. Power to select the Yamtuan held by <span class="kp">Undang Yang Empat</span> (four chiefs).</div></div>
+            <div class="tri-zh"><div class="tri-zh-lbl">&#x1F7E2; 中文</div><div class="tri-zh-text">从米南加保任命统治者的传统随<span class="kp">Yamtuan Lenggang</span>逝世而结束。<span class="kp">Yamtuan Radin</span>登基（1830年）开始了<strong>世袭制度</strong>。选择Yamtuan的权力由<span class="kp">四大首领</span>掌控。</div></div>
+          </div>
+        </div>
+
+        <div class="titem">
+          <div class="tnum">Seri Menanti</div>
+          <div class="tri">
+            <div class="tri-my"><div class="tri-my-lbl">&#x1F7E1; Melayu</div><div class="tri-my-text"><span class="kplace">Seri Menanti</span> kekal menjadi tempat bersemayam Yamtuan Besar hingga kini, manakala istana di <span class="kplace">Seremban</span> merupakan <strong>istana hinggap</strong>.</div></div>
+            <div class="tri-en"><div class="tri-en-lbl">&#x1F535; English</div><div class="tri-en-text"><span class="kplace">Seri Menanti</span> remains the permanent residence of the Yamtuan Besar, while the palace in <span class="kplace">Seremban</span> is the <strong>temporary royal palace</strong>.</div></div>
+            <div class="tri-zh"><div class="tri-zh-lbl">&#x1F7E2; 中文</div><div class="tri-zh-text"><span class="kplace">芙蓉斯里默南提</span>至今仍是Yamtuan Besar的永久驻地，而<span class="kplace">芙蓉</span>的宫殿是<strong>临时王宫</strong>。</div></div>
+          </div>
+        </div>
+
+      </div>
+      <div class="mem">
+        <div class="mem-lbl">&#129504; Memory Keywords</div>
+        <div class="pills">
+          <span class="pill-my">Pengasas: Raja Melewar (Minangkabau)</span>
+          <span class="pill-en">Founder: Raja Melewar (Minangkabau)</span>
+          <span class="pill-zh">建国者：拉惹美乐华（米南加保）</span>
+          <span class="pill-my">Tahun: 1773</span>
+          <span class="pill-en">Year: 1773</span>
+          <span class="pill-zh">年份：1773年</span>
+          <span class="pill-my">Pusat: Seri Menanti</span>
+          <span class="pill-en">Capital: Seri Menanti</span>
+          <span class="pill-zh">首都：斯里默南提</span>
+          <span class="pill-my">Undang Yang Empat memilih Yamtuan</span>
+          <span class="pill-en">Undang Yang Empat selects Yamtuan</span>
+          <span class="pill-zh">四大首领选择Yamtuan</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ PERLIS ══════════ -->
+<div id="panel-pl" class="panel">
+  <div class="sec pl">
+    <div class="sec-header" onclick="exp(this)">
+      <div class="sec-icon">&#127984;</div>
+      <div class="sec-info">
+        <div class="sec-num">8.1</div>
+        <div class="sec-title-my">Pengasasan Kerajaan Perlis</div>
+        <div class="sec-title-en">Founding of the Kingdom of Perlis</div>
+        <div class="sec-title-zh">玻璃市王国的建立</div>
+      </div>
+      <span class="sec-chev open">&#8964;</span>
+    </div>
+    <div class="sec-body open">
+      <div class="timeline pl">
+
+        <div class="titem">
+          <div class="tnum">Asal-usul / Origin / 起源</div>
+          <div class="tri">
+            <div class="tri-my"><div class="tri-my-lbl">&#x1F7E1; Melayu</div><div class="tri-my-text">Sejarah pembentukan Perlis melibatkan pengaruh <span class="kp">Kedah</span> dan <span class="kp">Siam</span>. Perlis merupakan sebahagian daripada wilayah Kedah pada peringkat awal.</div></div>
+            <div class="tri-en"><div class="tri-en-lbl">&#x1F535; English</div><div class="tri-en-text">History of Perlis involves the influence of <span class="kp">Kedah</span> and <span class="kp">Siam</span>. Perlis was initially part of Kedah territory.</div></div>
+            <div class="tri-zh"><div class="tri-zh-lbl">&#x1F7E2; 中文</div><div class="tri-zh-text">玻璃市的历史涉及<span class="kp">吉打</span>和<span class="kp">暹罗</span>的影响。玻璃市最初是吉打领土的一部分。</div></div>
+          </div>
+        </div>
+
+        <div class="titem">
+          <div class="tnum">Pembangunan Awal / Early Development / 早期发展</div>
+          <div class="tri">
+            <div class="tri-my"><div class="tri-my-lbl">&#x1F7E1; Melayu</div><div class="tri-my-text">Sultan Kedah ke-14 — <span class="kp">Sultan Muhyiddin Mansur Shah</span> (1651–1661) membina <span class="kplace">Kota Sena</span> menjadi asas perkembangan bandar <span class="kplace">Kangar</span>. Sultan Kedah ke-15 — <span class="kp">Sultan Dhiauddin Mukarram Shah I</span> (1661–1688) membangunkan <span class="kplace">Kota Kayang</span> merangkumi pelabuhan Kuala Perlis dan Kota Keran.</div></div>
+            <div class="tri-en"><div class="tri-en-lbl">&#x1F535; English</div><div class="tri-en-text">14th Sultan of Kedah — <span class="kp">Sultan Muhyiddin Mansur Shah</span> (1651–1661) built <span class="kplace">Kota Sena</span>, foundation for <span class="kplace">Kangar</span>. 15th Sultan — <span class="kp">Sultan Dhiauddin Mukarram Shah I</span> (1661–1688) built <span class="kplace">Kota Kayang</span> covering Kuala Perlis port.</div></div>
+            <div class="tri-zh"><div class="tri-zh-lbl">&#x1F7E2; 中文</div><div class="tri-zh-text">第14任吉打苏丹<span class="kp">苏丹穆希丁曼苏尔沙</span>（1651–1661）建立<span class="kplace">Kota Sena</span>，为<span class="kplace">干杰</span>发展奠基。第15任苏丹建立<span class="kplace">Kota Kayang</span>涵盖玻璃市河港口。</div></div>
+          </div>
+        </div>
+
+        <div class="titem">
+          <div class="tnum">1798–1804 — Kota Kayang II</div>
+          <div class="tri">
+            <div class="tri-my"><div class="tri-my-lbl">&#x1F7E1; Melayu</div><div class="tri-my-text">Sultan Kedah ke-21 — <span class="kp">Sultan Dhiauddin Mukarram Shah II</span> membangunkan <span class="kplace">Kota Kayang II</span> dan membentuk <span class="kplace">Mukim Arau</span> dengan melantik <span class="kp">Syed Harun Jamalullail</span> sebagai Penghulu.</div></div>
+            <div class="tri-en"><div class="tri-en-lbl">&#x1F535; English</div><div class="tri-en-text">21st Sultan of Kedah — <span class="kp">Sultan Dhiauddin Mukarram Shah II</span> built <span class="kplace">Kota Kayang II</span> and formed <span class="kplace">Mukim Arau</span>, appointing <span class="kp">Syed Harun Jamalullail</span> as Penghulu.</div></div>
+            <div class="tri-zh"><div class="tri-zh-lbl">&#x1F7E2; 中文</div><div class="tri-zh-text">第21任吉打苏丹建立<span class="kplace">Kota Kayang II</span>并组建<span class="kplace">Mukim Arau</span>，任命<span class="kp">赛哈伦占玛鲁拉</span>为首领。</div></div>
+          </div>
+        </div>
+
+        <div class="titem">
+          <div class="tnum">1839 — Pecahan Siam / Siamese Division / 暹罗分治</div>
+          <div class="tri">
+            <div class="tri-my"><div class="tri-my-lbl">&#x1F7E1; Melayu</div><div class="tri-my-text">Di bawah pengaruh Siam (1839), wilayah Kedah dipecahkan kepada empat unit: Setul, Perlis, Kubang Pasu dan Kedah. Perlis ditadbir oleh <span class="kp">Syed Hussin Jamalullail</span>.</div></div>
+            <div class="tri-en"><div class="tri-en-lbl">&#x1F535; English</div><div class="tri-en-text">Under Siamese influence (1839), Kedah territory was divided into four units: Setul, Perlis, Kubang Pasu and Kedah. Perlis was administered by <span class="kp">Syed Hussin Jamalullail</span>.</div></div>
+            <div class="tri-zh"><div class="tri-zh-lbl">&#x1F7E2; 中文</div><div class="tri-zh-text">在暹罗影响下（1839年），吉打领土分为四个行政单位：实都、玻璃市、瓜邦巴素和吉打。玻璃市由<span class="kp">赛胡申占玛鲁拉</span>管辖。</div></div>
+          </div>
+        </div>
+
+        <div class="titem">
+          <div class="tnum">1843 — Pengasasan / Founding / 建国</div>
+          <div class="tri">
+            <div class="tri-my"><div class="tri-my-lbl">&#x1F7E1; Melayu</div><div class="tri-my-text">Siam mengiktiraf <span class="kp">Syed Hussin Jamalullail</span> sebagai pemerintah Perlis dengan gelaran <span class="kp">Phya Songkhram Ramu Wichit Willis Asmara Phya Pelit</span>. Beliau menjadikan <span class="kplace">Arau</span> pusat pentadbiran. Keturunan Jamalullail bergelar <span class="kp">Raja Perlis</span> hingga kini.</div></div>
+            <div class="tri-en"><div class="tri-en-lbl">&#x1F535; English</div><div class="tri-en-text">Siam recognised <span class="kp">Syed Hussin Jamalullail</span> as ruler of Perlis with the title <span class="kp">Phya Songkhram Ramu Wichit Willis Asmara Phya Pelit</span>. He made <span class="kplace">Arau</span> the administrative centre. His descendants hold the title <span class="kp">Raja Perlis</span> to this day.</div></div>
+            <div class="tri-zh"><div class="tri-zh-lbl">&#x1F7E2; 中文</div><div class="tri-zh-text">暹罗承认<span class="kp">赛胡申占玛鲁拉</span>为玻璃市统治者，封号<span class="kp">Phya Songkhram...</span>。他以<span class="kplace">阿鲁</span>为行政中心。其后裔至今持有<span class="kp">玻璃市拉惹</span>称号。</div></div>
+          </div>
+        </div>
+
+      </div>
+      <div class="mem">
+        <div class="mem-lbl">&#129504; Memory Keywords</div>
+        <div class="pills">
+          <span class="pill-my">Pengaruh: Kedah + Siam</span>
+          <span class="pill-en">Influence: Kedah + Siam</span>
+          <span class="pill-zh">影响：吉打+暹罗</span>
+          <span class="pill-my">Pengasas: Syed Hussin Jamalullail (1843)</span>
+          <span class="pill-en">Founder: Syed Hussin Jamalullail (1843)</span>
+          <span class="pill-zh">建国者：赛胡申占玛鲁拉（1843）</span>
+          <span class="pill-my">Pusat: Arau</span>
+          <span class="pill-en">Capital: Arau</span>
+          <span class="pill-zh">首都：阿鲁</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ HUBUNGAN ══════════ -->
+<div id="panel-hub" class="panel">
+
+  <div class="sec hub">
+    <div class="sec-header" onclick="exp(this)">
+      <div class="sec-icon">&#127919;</div>
+      <div class="sec-info">
+        <div class="sec-num">8.2</div>
+        <div class="sec-title-my">Asas &amp; Tujuan Hubungan Luar</div>
+        <div class="sec-title-en">Basis &amp; Purpose of External Relations</div>
+        <div class="sec-title-zh">外交关系的基础与目的</div>
+      </div>
+      <span class="sec-chev open">&#8964;</span>
+    </div>
+    <div class="sec-body open">
+      <div class="tri" style="margin-bottom:10px">
+        <div class="tri-my"><div class="tri-my-lbl">&#x1F7E1; Tujuan</div><div class="tri-my-text">(a) Memperkukuhkan <strong>kedaulatan</strong> pada peringkat awal. (b) Mendapatkan <strong>pengiktirafan</strong> dengan menghantar utusan. (c) Menjamin <strong>kestabilan</strong> dalam negeri untuk kemakmuran.</div></div>
+        <div class="tri-en"><div class="tri-en-lbl">&#x1F535; Purpose</div><div class="tri-en-text">(a) Strengthen <strong>sovereignty</strong> at early stage. (b) Gain <strong>recognition</strong> by sending envoys. (c) Ensure <strong>stability</strong> for national prosperity.</div></div>
+        <div class="tri-zh"><div class="tri-zh-lbl">&#x1F7E2; 目的</div><div class="tri-zh-text">(a) 在早期阶段巩固<strong>主权</strong>。(b) 通过派遣使团获得<strong>承认</strong>。(c) 确保国内<strong>稳定</strong>以促进繁荣。</div></div>
+      </div>
+
+      <div class="tri" style="margin-bottom:10px">
+        <div class="tri-my"><div class="tri-my-lbl">&#x1F7E1; 3 Asas Hubungan</div><div class="tri-my-text"><strong>Keserumpunan:</strong> Hubungan wujud kerana persamaan bahasa dan budaya. Persamaan memudahkan interaksi. Perlu toleransi budaya.<br><strong>Geografi:</strong> Sempadan antara negeri memudahkan perhubungan. Sungai penting sebagai laluan perdagangan. Pelabuhan di pinggir sungai mendorong hubungan.<br><strong>Agama:</strong> Berlaku kerana penerimaan Islam. Kegiatan keagamaan diperkukuhkan dengan peranan ulama. Penuntut berkongsi institusi pendidikan agama.</div></div>
+        <div class="tri-en"><div class="tri-en-lbl">&#x1F535; 3 Bases of Relations</div><div class="tri-en-text"><strong>Keserumpunan (Common roots):</strong> Relations exist due to shared language and culture. Similarity eases interaction. Need tolerance for different cultures.<br><strong>Geography:</strong> Shared borders ease communication. Rivers as trade routes. Riverbank ports encourage relations.<br><strong>Religion:</strong> Occurred due to adoption of Islam. Religious activities strengthened by role of scholars. Students shared religious education institutions.</div></div>
+        <div class="tri-zh"><div class="tri-zh-lbl">&#x1F7E2; 三大关系基础</div><div class="tri-zh-text"><strong>同源性：</strong>因语言和文化相同而建立关系，相同点促进互动，需包容不同文化。<br><strong>地理：</strong>共同边界便于沟通，河流是贸易通道，河边港口促进关系。<br><strong>宗教：</strong>因接受伊斯兰教而发生，宗教活动由学者加强，学生共享宗教教育机构。</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sec hub">
+    <div class="sec-header" onclick="exp(this)">
+      <div class="sec-icon">&#128081;</div>
+      <div class="sec-info">
+        <div class="sec-num">8.2</div>
+        <div class="sec-title-my">Hubungan Diplomatik: Pengiktirafan, Pertahanan &amp; Perkahwinan</div>
+        <div class="sec-title-en">Diplomatic Relations: Recognition, Defence &amp; Marriage</div>
+        <div class="sec-title-zh">外交关系：承认、防御与婚姻</div>
+      </div>
+      <span class="sec-chev">&#8964;</span>
+    </div>
+    <div class="sec-body">
+
+      <div class="tri" style="margin-bottom:8px">
+        <div class="tri-my"><div class="tri-my-lbl">&#x1F7E1; Pengiktirafan — Tujuan: Mengabsahkan sultan sebagai pemerintah</div><div class="tri-my-text">• Abad ke-15: Sultan Mahmud Shah (Melaka) mengiktiraf Kedah sebagai kerajaan berdaulat. Kedah mengakui pertuanan Sultan Melaka.<br>• 1755: Sultan Terengganu mengiktiraf Kelantan yang disatukan di bawah Long Yunus.</div></div>
+        <div class="tri-en"><div class="tri-en-lbl">&#x1F535; Recognition — Purpose: Legitimise the sultan as ruler</div><div class="tri-en-text">• 15th century: Sultan Mahmud Shah (Melaka) recognised Kedah as a sovereign state. Kedah acknowledged the sovereignty of the Sultan of Melaka.<br>• 1755: Sultan of Terengganu recognised unified Kelantan under Long Yunus.</div></div>
+        <div class="tri-zh"><div class="tri-zh-lbl">&#x1F7E2; 承认 — 目的：使苏丹作为统治者合法化</div><div class="tri-zh-text">• 15世纪：马六甲苏丹马哈茂德沙承认吉打为主权国家，吉打承认马六甲苏丹的主权。<br>• 1755年：登嘉楼苏丹承认龙尤努斯统一的吉兰丹。</div></div>
+      </div>
+
+      <div class="tri" style="margin-bottom:8px">
+        <div class="tri-my"><div class="tri-my-lbl">&#x1F7E1; Pertahanan — Aspek penting kelangsungan kerajaan</div><div class="tri-my-text">• Long Yunus mendapat bantuan ketenteraan daripada Terengganu dan Reman (Hulu Perak) untuk menyatukan Kelantan.<br>• Long Gaffar (Perdana Menteri + Panglima Perang Kelantan) membantu mengekalkan keamanan.</div></div>
+        <div class="tri-en"><div class="tri-en-lbl">&#x1F535; Defence — Key for kingdom survival</div><div class="tri-en-text">• Long Yunus received military assistance from Terengganu and Reman (Hulu Perak) to unify Kelantan.<br>• Long Gaffar (Prime Minister + War Commander of Kelantan) helped maintain peace.</div></div>
+        <div class="tri-zh"><div class="tri-zh-lbl">&#x1F7E2; 防御 — 王国生存的关键</div><div class="tri-zh-text">• 龙尤努斯获得登嘉楼和Reman（上霹雳）的军事援助以统一吉兰丹。<br>• 龙嘉法尔（吉兰丹首相兼战争司令）协助维持和平。</div></div>
+      </div>
+
+      <div class="tri">
+        <div class="tri-my"><div class="tri-my-lbl">&#x1F7E1; Perkahwinan — Amalan tradisi, mengukuhkan hubungan &amp; kedaulatan</div><div class="tri-my-text">• Puteri Kelantan, <span class="kp">Onang Kening</span> dikahwinkan dengan Sultan Mahmud Shah (Melaka) → putera: Raja Muzaffar (Sultan Perak pertama).<br>• Puteri Long Yunus, <span class="kp">Che' Ku Wan</span> dikahwinkan dengan Tengku Muhammad (putera Sultan Terengganu).<br>• Raja Perlis, <span class="kp">Raja Syed Hussin</span> berkahwin dengan Tengku Nor Asiah (cucunda Sultan Abdullah Mukarram Shah, Sultan Kedah ke-20).</div></div>
+        <div class="tri-en"><div class="tri-en-lbl">&#x1F535; Marriage — Traditional practice, strengthens relations &amp; sovereignty</div><div class="tri-en-text">• Kelantan princess <span class="kp">Onang Kening</span> married Sultan Mahmud Shah (Melaka) → son: Raja Muzaffar (1st Sultan of Perak).<br>• Long Yunus' princess <span class="kp">Che' Ku Wan</span> married Tengku Muhammad (son of the Sultan of Terengganu).<br>• Perlis Raja <span class="kp">Raja Syed Hussin</span> married Tengku Nor Asiah (granddaughter of Sultan Kedah ke-20).</div></div>
+        <div class="tri-zh"><div class="tri-zh-lbl">&#x1F7E2; 婚姻 — 传统习俗，加强关系与主权</div><div class="tri-zh-text">• 吉兰丹公主<span class="kp">Onang Kening</span>嫁给马六甲苏丹马哈茂德沙→儿子：拉惹穆扎法（第一任霹雳苏丹）。<br>• 龙尤努斯公主<span class="kp">Che' Ku Wan</span>嫁给登嘉楼苏丹之子。<br>• 玻璃市拉惹<span class="kp">赛胡申</span>娶第20任吉打苏丹的孙女。</div></div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ DAGANGAN ══════════ -->
+<div id="panel-dag" class="panel">
+
+  <div class="sec dag">
+    <div class="sec-header" onclick="exp(this)">
+      <div class="sec-icon">&#128176;</div>
+      <div class="sec-info">
+        <div class="sec-num">8.2</div>
+        <div class="sec-title-my">Hubungan Perdagangan — Pelabuhan &amp; Barang Dagangan</div>
+        <div class="sec-title-en">Trade Relations — Ports &amp; Trade Goods</div>
+        <div class="sec-title-zh">贸易关系——港口与贸易商品</div>
+      </div>
+      <span class="sec-chev open">&#8964;</span>
+    </div>
+    <div class="sec-body open">
+
+      <div class="tri" style="margin-bottom:10px">
+        <div class="tri-my"><div class="tri-my-lbl">&#x1F7E1; Pelabuhan</div><div class="tri-my-text">Hubungan antara kerajaan berlaku melalui aktiviti perdagangan di pelabuhan. Pelabuhan ini menjadi asas kepada pembentukan hubungan dengan pedagang tempatan dan luar (Melaka, Perak, Johor, Siam, China, Arab, Kemboja).</div></div>
+        <div class="tri-en"><div class="tri-en-lbl">&#x1F535; Ports</div><div class="tri-en-text">Relations between kingdoms occurred through trade activities at ports. Ports became the basis for forming relations with local and foreign traders (Melaka, Perak, Johor, Siam, China, Arab, Cambodia).</div></div>
+        <div class="tri-zh"><div class="tri-zh-lbl">&#x1F7E2; 港口</div><div class="tri-zh-text">王国间的关系通过港口贸易活动建立。港口成为与当地和外国商人（马六甲、霹雳、柔佛、暹罗、中国、阿拉伯、柬埔寨）建立关系的基础。</div></div>
+      </div>
+
+      <div class="comp-wrap">
+        <table class="comp-table">
+          <thead><tr><th class="th-kd">Kedah</th><th class="th-kl">Kelantan</th><th class="th-ns">N. Sembilan</th><th class="th-pl">Perlis</th></tr></thead>
+          <tbody>
+            <tr>
+              <td class="td-kd"><strong>Pelabuhan:</strong><br>• Lembah Bujang &amp; Kuala Merbok (Sg. Merbok)<br>• Kuala Muda (Sg. Muda)<br><strong>Mata Wang:</strong> Sultan Muhammad Jiwa (1472–1506) memperkemaskan penggunaan mata wang.</td>
+              <td class="td-kl"><strong>Pelabuhan:</strong><br>• Pangkalan Galoh (Sg. Kelantan) = Pangkalan Permata<br><strong>Mata Wang:</strong> Sejak 1181, menggunakan mata wang logam dinar.</td>
+              <td class="td-ns"><strong>Pelabuhan:</strong><br>• Pangkalan di Sungai Linggi<br>• Pedagang Rembau menguasai perdagangan dengan pedagang luar.</td>
+              <td class="td-pl"><strong>Pelabuhan:</strong><br>• Pelabuhan Kuala Perlis (Sg. Perlis)<br>• Pekan Kangar di pertemuan cabang anak Sungai Perlis.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="comp-wrap">
+        <table class="comp-table">
+          <thead><tr><th class="th-kd">Kedah — Barang</th><th class="th-kl">Kelantan — Barang</th><th class="th-ns">N. Sembilan — Barang</th><th class="th-pl">Perlis — Barang</th></tr></thead>
+          <tbody>
+            <tr>
+              <td class="td-kd">Beras, garam, damar, kapur barus, emas urai. Pembekal gading &amp; gajah (entrepot). Perak &amp; Melaka membawa arang kayu, papan, ikan kering.</td>
+              <td class="td-kl">Emas — dikunjungi pedagang luar &amp; dalam Kepulauan Melayu.</td>
+              <td class="td-ns">Bijih timah, sirih, kayu gaharu, kapur barus — dengan Johor &amp; Melaka.</td>
+              <td class="td-pl">Beras &amp; bijih timah — dengan negeri jiran &amp; Siam.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+<!-- ══════════ MEMORY MAP ══════════ -->
+<div id="panel-mm" class="panel">
+
+  <div style="background:#0f172a;border-radius:16px;overflow:hidden;margin-bottom:12px">
+    <div class="mmap-header">
+      <div class="mmap-h-title">&#11088; Super Compact Memory Map</div>
+      <div class="mmap-h-en">Peta Hafalan Ringkas — Bab 8</div>
+      <div class="mmap-h-zh">超简短记忆图 — 第八章</div>
+    </div>
+
+    <div style="padding:14px">
+
+      <!-- QUICK COMPARE TABLE -->
+      <div style="background:#1e293b;border-radius:12px;padding:12px;margin-bottom:12px">
+        <div style="font-size:11px;font-weight:800;letter-spacing:2px;color:#f59e0b;text-transform:uppercase;margin-bottom:10px">&#128203; 4 Kerajaan — Quick Compare / 四王国快速对比</div>
+        <div class="comp-wrap">
+          <table class="comp-table">
+            <thead><tr><th style="background:#334155;color:#94a3b8;text-align:left;font-size:10px;padding:7px 8px">Aspek</th><th class="th-kd">Kedah</th><th class="th-kl">Kelantan</th><th class="th-ns">N. Sembilan</th><th class="th-pl">Perlis</th></tr></thead>
+            <tbody>
+              <tr><td class="td-label">Pengasas</td><td class="td-kd">Maharaja Derbar Raja</td><td class="td-kl">Long Yunus</td><td class="td-ns">Raja Melewar</td><td class="td-pl">Syed Hussin Jamalullail</td></tr>
+              <tr><td class="td-label">Tahun</td><td class="td-kd">~630 M</td><td class="td-kl">1762</td><td class="td-ns">1773</td><td class="td-pl">1843</td></tr>
+              <tr><td class="td-label">Pusat</td><td class="td-kd">Alor Setar</td><td class="td-kl">Kota Galoh</td><td class="td-ns">Seri Menanti</td><td class="td-pl">Arau</td></tr>
+              <tr><td class="td-label">Asal</td><td class="td-kd">Keturunan Parsi</td><td class="td-kl">Pecahan Patani Besar</td><td class="td-ns">Minangkabau</td><td class="td-pl">Pengaruh Kedah &amp; Siam</td></tr>
+              <tr><td class="td-label">Unik</td><td class="td-kd">Tertua di M'sia, Nobat dari Parsi</td><td class="td-kl">Berpecah 1670, Bersatu 1762</td><td class="td-ns">Undang Yang Empat memilih Yamtuan</td><td class="td-pl">Keturunan Jamalullail = Raja Perlis</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- MEMORY ITEMS -->
+      <div class="mmap-item">
+        <div class="mmap-my"><div class="mmap-my-text">Kedah: Kerajaan TERTUA ← Parsi (Maharaja Derbar Raja, ~630M) → Nobat → Alor Setar (ibu negeri)</div></div>
+        <div class="mmap-en"><div class="mmap-en-text">Kedah: OLDEST kingdom ← Persia (Maharaja Derbar Raja, ~630 AD) → Nobat regalia → Alor Setar (capital)</div></div>
+        <div class="mmap-zh"><div class="mmap-zh-text">吉打：最古老王国 ← 波斯（大君德巴拉惹，约公元630年）→ Nobat鼓 → 亚罗士打（首都）</div></div>
+      </div>
+
+      <div class="mmap-item">
+        <div class="mmap-my"><div class="mmap-my-text">Kelantan: Patani Besar → Berpecah 1670 (Barat + Timur) → Long Yunus menyatukan (1762) → Yang di-Pertuan Kelantan</div></div>
+        <div class="mmap-en"><div class="mmap-en-text">Kelantan: Greater Patani → Split 1670 (West + East) → Long Yunus unified (1762) → Yang di-Pertuan Kelantan</div></div>
+        <div class="mmap-zh"><div class="mmap-zh-text">吉兰丹：大北大年→1670年分裂（东+西）→龙尤努斯统一（1762年）→吉兰丹最高元首</div></div>
+      </div>
+
+      <div class="mmap-item">
+        <div class="mmap-my"><div class="mmap-my-text">N. Sembilan: Minangkabau (Johor Riau naungan) → 4 Penghulu Luak → Raja Melewar (1773, Seri Menanti) → Undang Yang Empat pilih Yamtuan</div></div>
+        <div class="mmap-en"><div class="mmap-en-text">N. Sembilan: Minangkabau (Johor Riau vassal) → 4 Luak chiefs → Raja Melewar (1773, Seri Menanti) → Undang Yang Empat selects Yamtuan</div></div>
+        <div class="mmap-zh"><div class="mmap-zh-text">森美兰：米南加保（柔佛附属国）→4个Luak首领→拉惹美乐华（1773，斯里默南提）→四大首领选Yamtuan</div></div>
+      </div>
+
+      <div class="mmap-item">
+        <div class="mmap-my"><div class="mmap-my-text">Perlis: Wilayah Kedah → Siam pecahkan (1839) → Syed Hussin Jamalullail (1843, Arau) → Raja Perlis hingga kini</div></div>
+        <div class="mmap-en"><div class="mmap-en-text">Perlis: Part of Kedah → Siam divided (1839) → Syed Hussin Jamalullail (1843, Arau) → Raja Perlis to this day</div></div>
+        <div class="mmap-zh"><div class="mmap-zh-text">玻璃市：吉打领土→暹罗分割（1839年）→赛胡申占玛鲁拉（1843年，阿鲁）→玻璃市拉惹至今</div></div>
+      </div>
+
+      <div class="mmap-item">
+        <div class="mmap-my"><div class="mmap-my-text">Hubungan: 3 Asas (Keserumpunan + Geografi + Agama) → 3 Cara Diplomatik (Pengiktirafan + Pertahanan + Perkahwinan)</div></div>
+        <div class="mmap-en"><div class="mmap-en-text">Relations: 3 Bases (Common roots + Geography + Religion) → 3 Diplomatic ways (Recognition + Defence + Marriage)</div></div>
+        <div class="mmap-zh"><div class="mmap-zh-text">关系：3大基础（同源性+地理+宗教）→3种外交方式（承认+防御+婚姻）</div></div>
+      </div>
+
+      <div class="mmap-item">
+        <div class="mmap-my"><div class="mmap-my-text">Perdagangan: Kedah (beras, gading, gajah) | Kelantan (emas, dinar sejak 1181) | N.Sembilan (bijih timah, sirih) | Perlis (beras, bijih timah)</div></div>
+        <div class="mmap-en"><div class="mmap-en-text">Trade: Kedah (rice, ivory, elephants) | Kelantan (gold, dinar since 1181) | N.Sembilan (tin, betel) | Perlis (rice, tin)</div></div>
+        <div class="mmap-zh"><div class="mmap-zh-text">贸易：吉打（米、象牙、大象）| 吉兰丹（黄金，1181年起用第纳尔）| 森美兰（锡矿、蒌叶）| 玻璃市（米、锡矿）</div></div>
+      </div>
+
+      <div class="mmap-item">
+        <div class="mmap-my"><div class="mmap-my-text">Perkahwinan Penting: Onang Kening (Kelantan) + Sultan Mahmud Shah (Melaka) → Raja Muzaffar (Sultan Perak 1)</div></div>
+        <div class="mmap-en"><div class="mmap-en-text">Key Marriage: Onang Kening (Kelantan) + Sultan Mahmud Shah (Melaka) → Raja Muzaffar (1st Sultan of Perak)</div></div>
+        <div class="mmap-zh"><div class="mmap-zh-text">重要婚姻：Onang Kening（吉兰丹）+ 马六甲苏丹马哈茂德沙 → 拉惹穆扎法（第一任霹雳苏丹）</div></div>
+      </div>
+
+      <!-- EXAM BOX -->
+      <div class="exam-box">
+        <div class="exam-hdr"><div class="exam-lbl">&#9997; Exam Template / Ayat Peperiksaan / 考试句型</div></div>
+        <div class="exam-my"><div class="exam-my-t">Kerajaan [Negeri] diasaskan oleh [Pengasas] pada [Tahun] dengan pusat pemerintahan di [Tempat]. Hubungan dengan negeri-negeri Melayu yang lain terjalin melalui pengiktirafan, pertahanan dan perkahwinan bagi memperkukuhkan kedaulatan kerajaan.</div></div>
+        <div class="exam-en"><div class="exam-en-t">The Kingdom of [State] was founded by [Founder] in [Year] with its capital at [Place]. Relations with other Malay states were established through recognition, defence and marriage to strengthen the sovereignty of the kingdom.</div></div>
+        <div class="exam-zh"><div class="exam-zh-t">【州名】王国由【建国者】于【年份】建立，首都位于【地点】。通过承认、防御和婚姻与其他马来州建立关系，以巩固王国主权。</div></div>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+<div class="footer">Bab 8 &middot; Sejarah Tingkatan 3 &middot; 第八章</div>
+
+<script>
+var hiddenLang={my:false,en:false,zh:false};
+function tgl(lang,btn){
+  hiddenLang[lang]=!hiddenLang[lang];
+  document.getElementById('app').classList.toggle('hide-'+lang,hiddenLang[lang]);
+  btn.classList.toggle('on',!hiddenLang[lang]);
+}
+function showPanel(id,btn){
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById('panel-'+id).classList.add('active');
+  btn.classList.add('active');
+  window.scrollTo(0,document.querySelector('.tabs').offsetTop-60);
+}
+function exp(hdr){
+  var b=hdr.nextElementSibling;
+  var c=hdr.querySelector('.sec-chev');
+  var o=b.classList.toggle('open');
+  c.classList.toggle('open',o);
+}
+</script>
+</body>
+</html>
