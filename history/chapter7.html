@@ -1,0 +1,839 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+<title>Bab 7 — Kesultanan Pahang, Perak, Terengganu dan Selangor</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html{font-size:16px}
+body{font-family:'Nunito',sans-serif;background:#f0f4ff;color:#1e293b;line-height:1.5}
+
+/* HERO */
+.hero{background:linear-gradient(135deg,#1e3a5f,#1a5276);padding:26px 18px 40px;text-align:center;position:relative;overflow:hidden}
+.hero::after{content:'';position:absolute;bottom:-24px;left:0;right:0;height:48px;background:#f0f4ff;border-radius:50% 50% 0 0/48px 48px 0 0}
+.hero-badge{display:inline-block;background:rgba(255,255,255,.15);color:#bfdbfe;font-size:12px;letter-spacing:2px;padding:4px 14px;border-radius:20px;margin-bottom:10px}
+.hero-title{font-size:19px;font-weight:800;color:#fff;line-height:1.3;margin-bottom:4px}
+.hero-sub{font-size:13px;color:#93c5fd;margin-bottom:3px}
+.hero-zh{font-family:'Noto Sans SC',sans-serif;font-size:12px;color:#67e8f9;letter-spacing:2px;margin-bottom:30px}
+.hero-stats{display:flex;justify-content:center;gap:24px;position:relative;z-index:1}
+.stat-num{font-size:24px;font-weight:800;color:#fff;text-align:center}
+.stat-lbl{font-size:11px;color:#bfdbfe;text-align:center}
+
+/* LANG LEGEND */
+.lang-legend{display:flex;justify-content:center;gap:14px;padding:10px 16px;background:#fff;border-bottom:1px solid #e5e7eb}
+.legend-dot{display:flex;align-items:center;gap:5px;font-size:12px;font-weight:700}
+.dot{width:12px;height:12px;border-radius:3px;flex-shrink:0}
+
+/* LANG TOOLBAR */
+.lang-bar{background:#fff;padding:10px 14px;display:flex;gap:8px;align-items:center;border-bottom:2px solid #e5e7eb;position:sticky;top:0;z-index:200;box-shadow:0 2px 8px rgba(0,0,0,.08)}
+.lbtn{flex:1;padding:8px 4px;font-size:12px;font-weight:800;font-family:'Nunito',sans-serif;border:2px solid;border-radius:20px;cursor:pointer;text-align:center;opacity:.4;transition:all .15s}
+.lbtn.on{opacity:1}
+.lbtn-my{border-color:#b45309;background:#fef3c7;color:#78350f}
+.lbtn-my.on{background:#d97706;color:#fff;border-color:#d97706}
+.lbtn-en{border-color:#1d4ed8;background:#dbeafe;color:#1e3a8a}
+.lbtn-en.on{background:#2563eb;color:#fff;border-color:#2563eb}
+.lbtn-zh{border-color:#059669;background:#d1fae5;color:#064e3b}
+.lbtn-zh.on{background:#059669;color:#fff;border-color:#059669}
+
+/* STATE TABS */
+.tabs{display:flex;overflow-x:auto;background:#1e293b;-webkit-overflow-scrolling:touch;scrollbar-width:none;position:sticky;top:53px;z-index:199}
+.tabs::-webkit-scrollbar{display:none}
+.tab{flex:0 0 auto;padding:11px 16px;font-size:12px;font-weight:800;font-family:'Nunito',sans-serif;color:#94a3b8;background:transparent;border:none;cursor:pointer;border-bottom:3px solid transparent;white-space:nowrap;transition:all .2s}
+.tab-ph.active{color:#fbbf24;border-bottom-color:#d97706}
+.tab-pk.active{color:#93c5fd;border-bottom-color:#2563eb}
+.tab-tg.active{color:#6ee7b7;border-bottom-color:#059669}
+.tab-sl.active{color:#fca5a5;border-bottom-color:#dc2626}
+.tab-ws.active{color:#c4b5fd;border-bottom-color:#7c3aed}
+.tab-ek.active{color:#f9a8d4;border-bottom-color:#be185d}
+.tab-mm.active{color:#fde68a;border-bottom-color:#f59e0b}
+
+/* PANELS */
+.panel{display:none;padding:12px 12px 60px}
+.panel.active{display:block}
+
+/* TRI-LANGUAGE BLOCK */
+.tri{border-radius:12px;overflow:hidden;margin-bottom:10px;border:2px solid #e2e8f0}
+.tri-my{background:#fffbeb;border-left:5px solid #d97706;padding:9px 12px}
+.tri-my-lbl{font-size:10px;font-weight:800;letter-spacing:2px;color:#92400e;text-transform:uppercase;margin-bottom:3px}
+.tri-my-text{font-size:14px;font-weight:700;color:#78350f;line-height:1.5}
+.tri-en{background:#eff6ff;border-left:5px solid #2563eb;padding:9px 12px}
+.tri-en-lbl{font-size:10px;font-weight:800;letter-spacing:2px;color:#1d4ed8;text-transform:uppercase;margin-bottom:3px}
+.tri-en-text{font-size:14px;font-weight:600;color:#1e3a8a;line-height:1.5;font-style:italic}
+.tri-zh{background:#ecfdf5;border-left:5px solid #059669;padding:9px 12px}
+.tri-zh-lbl{font-size:10px;font-weight:800;letter-spacing:2px;color:#047857;text-transform:uppercase;margin-bottom:3px}
+.tri-zh-text{font-family:'Noto Sans SC',sans-serif;font-size:13px;font-weight:500;color:#064e3b;line-height:1.7;letter-spacing:1px}
+
+/* SECTION CARDS */
+.sec{border-radius:16px;margin-bottom:12px;overflow:hidden;border:2px solid}
+.sec-header{display:flex;align-items:center;gap:12px;padding:14px;cursor:pointer;user-select:none;-webkit-tap-highlight-color:transparent}
+.sec-icon{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0}
+.sec-info{flex:1}
+.sec-num{font-size:10px;font-weight:800;letter-spacing:1px;margin-bottom:2px;text-transform:uppercase}
+.sec-title-my{font-size:15px;font-weight:800;line-height:1.25;color:#78350f}
+.sec-title-en{font-size:12px;font-weight:700;font-style:italic;color:#1e3a8a;margin-top:2px}
+.sec-title-zh{font-family:'Noto Sans SC',sans-serif;font-size:11px;color:#064e3b;margin-top:2px;letter-spacing:1px}
+.sec-chev{font-size:20px;color:#94a3b8;transition:transform .25s;flex-shrink:0}
+.sec-chev.open{transform:rotate(180deg)}
+.sec-body{display:none;padding:0 12px 12px}
+.sec-body.open{display:block}
+
+/* TIMELINE */
+.timeline{position:relative;padding-left:26px;margin-bottom:10px}
+.timeline::before{content:'';position:absolute;left:9px;top:4px;bottom:4px;width:2px;background:#e2e8f0}
+.titem{position:relative;margin-bottom:14px}
+.titem::before{content:'';position:absolute;left:-20px;top:5px;width:11px;height:11px;border-radius:50%;border:2px solid;background:#fff}
+.tnum{font-size:10px;font-weight:800;letter-spacing:1px;text-transform:uppercase;margin-bottom:3px}
+
+/* KEYS */
+.kp{background:#fef3c7;color:#92400e;font-weight:800;padding:1px 5px;border-radius:5px;font-size:13px}
+.kdate{background:#dbeafe;color:#1e3a8a;font-weight:700;padding:1px 5px;border-radius:5px;font-size:13px}
+.kplace{background:#d1fae5;color:#064e3b;font-weight:700;padding:1px 5px;border-radius:5px;font-size:13px}
+.kitem{background:#ede9fe;color:#4c1d95;font-weight:700;padding:1px 5px;border-radius:5px;font-size:13px}
+
+/* MEMORY BOX */
+.mem{border-radius:12px;padding:12px;background:#f1f5f9;border:2px solid #cbd5e1;margin-top:10px}
+.mem-lbl{font-size:11px;letter-spacing:2px;font-weight:800;margin-bottom:8px;color:#475569;text-transform:uppercase}
+.pills{display:flex;flex-wrap:wrap;gap:6px}
+.pill-my{padding:5px 10px;border-radius:20px;font-size:12px;font-weight:800;border:2px solid #d97706;background:#fef3c7;color:#78350f}
+.pill-en{padding:5px 10px;border-radius:20px;font-size:12px;font-weight:700;border:2px solid #2563eb;background:#dbeafe;color:#1e3a8a;font-style:italic}
+.pill-zh{padding:5px 10px;border-radius:20px;font-size:11px;font-weight:700;border:2px solid #059669;background:#d1fae5;color:#064e3b;font-family:'Noto Sans SC',sans-serif;letter-spacing:1px}
+
+/* BULLET LIST */
+.blist{list-style:none;padding:0;margin-bottom:6px}
+.blist li{font-size:13px;font-weight:600;line-height:1.5;padding:4px 0 4px 14px;position:relative;border-bottom:1px dashed rgba(0,0,0,.07)}
+.blist li:last-child{border-bottom:none}
+.blist li::before{content:'▸';position:absolute;left:0;font-size:11px}
+
+/* SUB SECTION */
+.sub-sec{border-radius:10px;padding:10px 12px;margin-bottom:8px;border:1.5px solid}
+.sub-title{font-size:11px;font-weight:800;letter-spacing:1px;text-transform:uppercase;margin-bottom:6px}
+
+/* COMPARISON TABLE */
+.comp-wrap{overflow-x:auto;margin-bottom:10px;border-radius:12px}
+.comp-table{width:100%;border-collapse:collapse;font-size:12px}
+.comp-table th{padding:8px 10px;font-size:10px;font-weight:800;letter-spacing:1px;text-transform:uppercase;text-align:center;color:#fff}
+.comp-table td{padding:8px 10px;vertical-align:top;line-height:1.4;border-bottom:1px solid rgba(0,0,0,.06)}
+.comp-table tr:last-child td{border-bottom:none}
+.th-ph{background:#d97706}.th-pk{background:#2563eb}.th-tg{background:#059669}.th-sl{background:#dc2626}
+.td-ph{background:#fffbeb;color:#78350f;font-weight:600}.td-pk{background:#eff6ff;color:#1e3a8a;font-weight:600}
+.td-tg{background:#ecfdf5;color:#064e3b;font-weight:600}.td-sl{background:#fff5f5;color:#7f1d1d;font-weight:600}
+.td-label{font-size:10px;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:#475569;background:#f8fafc;padding:6px 10px}
+
+/* MEMORY MAP */
+.mmap-item{border-radius:14px;overflow:hidden;margin-bottom:10px;border:2px solid #e2e8f0;box-shadow:0 2px 8px rgba(0,0,0,.06)}
+.mmap-my{background:#fef3c7;padding:9px 14px;border-bottom:1px solid #fde68a}
+.mmap-my-text{font-size:14px;font-weight:800;color:#78350f}
+.mmap-en{background:#dbeafe;padding:9px 14px;border-bottom:1px solid #bfdbfe}
+.mmap-en-text{font-size:13px;font-weight:600;color:#1e3a8a;font-style:italic}
+.mmap-zh{background:#d1fae5;padding:9px 14px}
+.mmap-zh-text{font-family:'Noto Sans SC',sans-serif;font-size:12px;font-weight:500;color:#064e3b;letter-spacing:1px}
+.mmap-header{background:#1e293b;padding:14px;text-align:center;border-radius:14px 14px 0 0}
+.mmap-h-title{font-size:15px;font-weight:800;color:#fbbf24;margin-bottom:2px}
+.mmap-h-en{font-size:12px;color:#94a3b8;font-style:italic}
+.mmap-h-zh{font-family:'Noto Sans SC',sans-serif;font-size:11px;color:#6ee7b7;letter-spacing:2px;margin-top:2px}
+
+/* EXAM BOX */
+.exam-box{border-radius:14px;overflow:hidden;border:2px solid #7c3aed;margin-top:10px}
+.exam-hdr{background:#7c3aed;padding:9px 14px}
+.exam-lbl{font-size:10px;letter-spacing:2px;font-weight:800;color:#ede9fe;text-transform:uppercase}
+.exam-my{background:#fffbeb;border-left:5px solid #d97706;padding:9px 14px}
+.exam-my-t{font-size:13px;font-weight:700;color:#78350f;line-height:1.6}
+.exam-en{background:#eff6ff;border-left:5px solid #2563eb;padding:9px 14px}
+.exam-en-t{font-size:13px;font-weight:600;color:#1e3a8a;line-height:1.6;font-style:italic}
+.exam-zh{background:#ecfdf5;border-left:5px solid #059669;padding:9px 14px}
+.exam-zh-t{font-family:'Noto Sans SC',sans-serif;font-size:12px;font-weight:500;color:#064e3b;line-height:1.8;letter-spacing:1px}
+
+/* STATE THEMES - section */
+.ph{background:#fffbeb;border-color:#f59e0b}.ph .sec-header{background:#fef3c7}.ph .sec-icon{background:#d97706}.ph .sec-num{color:#92400e}.ph .sec-body{border-top:2px dashed #fde68a}.ph .titem::before{border-color:#d97706}.ph .tnum{color:#92400e}.ph .timeline::before{background:#fde68a}
+.pk{background:#eff6ff;border-color:#2563eb}.pk .sec-header{background:#dbeafe}.pk .sec-icon{background:#2563eb}.pk .sec-num{color:#1d4ed8}.pk .sec-body{border-top:2px dashed #bfdbfe}.pk .titem::before{border-color:#2563eb}.pk .tnum{color:#1d4ed8}.pk .timeline::before{background:#bfdbfe}
+.tg{background:#ecfdf5;border-color:#059669}.tg .sec-header{background:#d1fae5}.tg .sec-icon{background:#059669}.tg .sec-num{color:#047857}.tg .sec-body{border-top:2px dashed #6ee7b7}.tg .titem::before{border-color:#059669}.tg .tnum{color:#047857}.tg .timeline::before{background:#6ee7b7}
+.sl{background:#fff5f5;border-color:#dc2626}.sl .sec-header{background:#fee2e2}.sl .sec-icon{background:#dc2626}.sl .sec-num{color:#b91c1c}.sl .sec-body{border-top:2px dashed #fca5a5}.sl .titem::before{border-color:#dc2626}.sl .tnum{color:#b91c1c}.sl .timeline::before{background:#fca5a5}
+.ws{background:#f5f3ff;border-color:#7c3aed}.ws .sec-header{background:#ede9fe}.ws .sec-icon{background:#7c3aed}.ws .sec-num{color:#5b21b6}.ws .sec-body{border-top:2px dashed #c4b5fd}
+.ek{background:#fdf2f8;border-color:#be185d}.ek .sec-header{background:#fce7f3}.ek .sec-icon{background:#be185d}.ek .sec-num{color:#831843}.ek .sec-body{border-top:2px dashed #fbcfe8}
+
+/* HIDE CLASSES */
+.hide-my .tri-my,.hide-my .mmap-my,.hide-my .exam-my,.hide-my .sec-title-my,.hide-my .pill-my{display:none}
+.hide-en .tri-en,.hide-en .mmap-en,.hide-en .exam-en,.hide-en .sec-title-en,.hide-en .pill-en{display:none}
+.hide-zh .tri-zh,.hide-zh .mmap-zh,.hide-zh .exam-zh,.hide-zh .sec-title-zh,.hide-zh .pill-zh{display:none}
+
+.footer{text-align:center;font-size:12px;color:#94a3b8;padding:14px;letter-spacing:1px}
+</style>
+</head>
+<body id="app">
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-badge">Sejarah &middot; Tingkatan 3 &middot; Bab 7</div>
+  <div class="hero-title">Kesultanan Pahang, Perak,<br>Terengganu &amp; Selangor</div>
+  <div class="hero-sub">Sultanates of Pahang, Perak, Terengganu &amp; Selangor</div>
+  <div class="hero-zh">彭亨、霹雳、登嘉楼与雪兰莪苏丹国</div>
+  <div class="hero-stats">
+    <div><div class="stat-num">4</div><div class="stat-lbl">Sultanates</div></div>
+    <div><div class="stat-num">3</div><div class="stat-lbl">Languages</div></div>
+    <div><div class="stat-num">7</div><div class="stat-lbl">Tabs</div></div>
+  </div>
+</div>
+
+<!-- LANG LEGEND -->
+<div class="lang-legend">
+  <div class="legend-dot"><div class="dot" style="background:#d97706"></div><span style="color:#78350f">Melayu</span></div>
+  <div class="legend-dot"><div class="dot" style="background:#2563eb"></div><span style="color:#1e3a8a">English</span></div>
+  <div class="legend-dot"><div class="dot" style="background:#059669"></div><span style="color:#064e3b;font-family:'Noto Sans SC',sans-serif">中文</span></div>
+</div>
+
+<!-- LANG BAR -->
+<div class="lang-bar">
+  <button class="lbtn lbtn-my on" onclick="tgl('my',this)">&#x1F7E1; Melayu</button>
+  <button class="lbtn lbtn-en on" onclick="tgl('en',this)">&#x1F535; English</button>
+  <button class="lbtn lbtn-zh on" onclick="tgl('zh',this)">&#x1F7E2; 中文</button>
+</div>
+
+<!-- TABS -->
+<div class="tabs">
+  <button class="tab tab-ph active" onclick="showPanel('ph',this)">&#127981; Pahang</button>
+  <button class="tab tab-pk" onclick="showPanel('pk',this)">&#128081; Perak</button>
+  <button class="tab tab-tg" onclick="showPanel('tg',this)">&#9790; Terengganu</button>
+  <button class="tab tab-sl" onclick="showPanel('sl',this)">&#127968; Selangor</button>
+  <button class="tab tab-ws" onclick="showPanel('ws',this)">&#128218; Warisan</button>
+  <button class="tab tab-ek" onclick="showPanel('ek',this)">&#128176; Ekonomi</button>
+  <button class="tab tab-mm" onclick="showPanel('mm',this)">&#11088; Memory Map</button>
+</div>
+
+<!-- ════════ PAHANG ════════ -->
+<div id="panel-ph" class="panel active">
+
+  <div class="sec ph">
+    <div class="sec-header" onclick="exp(this)">
+      <div class="sec-icon">&#127981;</div>
+      <div class="sec-info">
+        <div class="sec-num">7.1</div>
+        <div class="sec-title-my">Pengasasan Kesultanan Pahang</div>
+        <div class="sec-title-en">Founding of the Pahang Sultanate</div>
+        <div class="sec-title-zh">彭亨苏丹国的建立</div>
+      </div>
+      <span class="sec-chev open">&#8964;</span>
+    </div>
+    <div class="sec-body open">
+      <div class="timeline ph">
+
+        <div class="titem">
+          <div class="tnum">Asal-usul / Origin / 起源</div>
+          <div class="tri">
+            <div class="tri-my"><div class="tri-my-lbl">&#x1F7E1; Melayu</div><div class="tri-my-text">Diasaskan oleh keluarga diraja <span class="kp">Kesultanan Melayu Melaka</span> pada zaman kegemilangan kerajaan tersebut.</div></div>
+            <div class="tri-en"><div class="tri-en-lbl">&#x1F535; English</div><div class="tri-en-text">Founded by the royal family of the <span class="kp">Malay Sultanate of Melaka</span> during its golden age.</div></div>
+            <div class="tri-zh"><div class="tri-zh-lbl">&#x1F7E2; 中文</div><div class="tri-zh-text">由<span class="kp">马六甲马来苏丹国</span>皇室在其鼎盛时期建立。</div></div>
+          </div>
+        </div>
+
+        <div class="titem">
+          <div class="tnum">Abad ke-15 / 15th Century / 15世纪</div>
+          <div class="tri">
+            <div class="tri-my"><div class="tri-my-lbl">&#x1F7E1; Melayu</div><div class="tri-my-text"><span class="kp">Seri Bija Diraja</span> dilantik wakil mentadbir Pahang. <span class="kp">Raja Muhammad</span> (putera Sultan Mansur Shah) dihantar untuk ditabalkan sebagai Sultan Pahang.</div></div>
+            <div class="tri-en"><div class="tri-en-lbl">&#x1F535; English</div><div class="tri-en-text"><span class="kp">Seri Bija Diraja</span> appointed as representative to administer Pahang. <span class="kp">Raja Muhammad</span> (son of Sultan Mansur Shah) sent to be enthroned as Sultan of Pahang.</div></div>
+            <div class="tri-zh"><div class="tri-zh-lbl">&#x1F7E2; 中文</div><div class="tri-zh-text"><span class="kp">Seri Bija Diraja</span> 被任命为彭亨行政代表。<span class="kp">拉惹穆罕默德</span>（苏丹曼苏尔沙的儿子）被派去登基为彭亨苏丹。</div></div>
+          </div>
+        </div>
+
+        <div class="titem">
+          <div class="tnum">1470 — Pengasasan / Founding / 建国</div>
+          <div class="tri">
+            <div class="tri-my"><div class="tri-my-lbl">&#x1F7E1; Melayu</div><div class="tri-my-text">Raja Muhammad menjadi pengasas dengan gelaran <span class="kp">Sultan Muhammad Shah</span>. Pusat pemerintahan di <span class="kplace">Pekan</span>. Wilayah: Sedili Besar hingga Terengganu.</div></div>
+            <div class="tri-en"><div class="tri-en-lbl">&#x1F535; English</div><div class="tri-en-text">Raja Muhammad became founder with the title <span class="kp">Sultan Muhammad Shah</span>. Capital at <span class="kplace">Pekan</span>. Territory: Sedili Besar to Terengganu.</div></div>
+            <div class="tri-zh"><div class="tri-zh-lbl">&#x1F7E2; 中文</div><div class="tri-zh-text">拉惹穆罕默德以<span class="kp">苏丹穆罕默德沙</span>称号建国。首都在<span class="kplace">北根</span>，领土从Sedili Besar延伸至登嘉楼。</div></div>
+          </div>
+        </div>
+
+        <div class="titem">
+          <div class="tnum">1495–1512</div>
+          <div class="tri">
+            <div class="tri-my"><div class="tri-my-lbl">&#x1F7E1; Melayu</div><div class="tri-my-text"><span class="kp">Sultan Abdul Jamil Shah</span> — sultan ketiga yang masyhur. Mempertahankan Pahang daripada ancaman Siam bersama Kesultanan Melayu Melaka.</div></div>
+            <div class="tri-en"><div class="tri-en-lbl">&#x1F535; English</div><div class="tri-en-text"><span class="kp">Sultan Abdul Jamil Shah</span> — famous third sultan. Defended Pahang from Siamese threats together with the Malay Sultanate of Melaka.</div></div>
+            <div class="tri-zh"><div class="tri-zh-lbl">&#x1F7E2; 中文</div><div class="tri-zh-text"><span class="kp">苏丹阿都占米沙</span>——著名的第三任苏丹。与马六甲苏丹国共同抵御暹罗威胁。</div></div>
+          </div>
+        </div>
+
+        <div class="titem">
+          <div class="tnum">1614–1884</div>
+          <div class="tri">
+            <div class="tri-my"><div class="tri-my-lbl">&#x1F7E1; Melayu</div><div class="tri-my-text">Pahang diperintah oleh Kesultanan Johor Riau kerana <span class="kp">Sultan Abdul Ghafur Muhaiyuddin Shah</span> (1592–1614) tidak meninggalkan waris. Pahang menjadi pegangan Bendahara Johor.</div></div>
+            <div class="tri-en"><div class="tri-en-lbl">&#x1F535; English</div><div class="tri-en-text">Pahang ruled by Johor Riau Sultanate as <span class="kp">Sultan Abdul Ghafur Muhaiyuddin Shah</span> (1592–1614) left no heir. Pahang became territory of the Johor Bendahara.</div></div>
+            <div class="tri-zh"><div class="tri-zh-lbl">&#x1F7E2; 中文</div><div class="tri-zh-text">因<span class="kp">苏丹阿都嘉化</span>（1592–1614）无嗣，彭亨由柔佛廖内苏丹国管辖，成为柔佛本达哈拉领地。</div></div>
+          </div>
+        </div>
+
+        <div class="titem">
+          <div class="tnum">12 Dis 1884</div>
+          <div class="tri">
+            <div class="tri-my"><div class="tri-my-lbl">&#x1F7E1; Melayu</div><div class="tri-my-text"><span class="kp">Bendahara Siwa Raja Wan Ahmad</span> mengasaskan Kesultanan Pahang baharu, ditabalkan dengan gelaran <span class="kp">Sultan Ahmad al-Muazzam Shah</span>.</div></div>
+            <div class="tri-en"><div class="tri-en-lbl">&#x1F535; English</div><div class="tri-en-text"><span class="kp">Bendahara Siwa Raja Wan Ahmad</span> founded the new Pahang Sultanate, enthroned as <span class="kp">Sultan Ahmad al-Muazzam Shah</span>.</div></div>
+            <div class="tri-zh"><div class="tri-zh-lbl">&#x1F7E2; 中文</div><div class="tri-zh-text"><span class="kp">本达哈拉西瓦拉惹万阿末</span>建立新彭亨苏丹国，登基称号为<span class="kp">苏丹艾哈迈德·穆阿扎姆沙</span>。</div></div>
+          </div>
+        </div>
+
+      </div>
+      <div class="mem">
+        <div class="mem-lbl">&#129504; Memory Keywords</div>
+        <div class="pills">
+          <span class="pill-my">Pengasas: Sultan Muhammad Shah</span>
+          <span class="pill-en">Founder: Sultan Muhammad Shah</span>
+          <span class="pill-zh">建国者：苏丹穆罕默德沙</span>
+          <span class="pill-my">Pusat: Pekan</span>
+          <span class="pill-en">Capital: Pekan</span>
+          <span class="pill-zh">首都：北根</span>
+          <span class="pill-my">Tahun: 1470</span>
+          <span class="pill-en">Year: 1470</span>
+          <span class="pill-zh">年份：1470</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════ PERAK ════════ -->
+<div id="panel-pk" class="panel">
+  <div class="sec pk">
+    <div class="sec-header" onclick="exp(this)">
+      <div class="sec-icon">&#128081;</div>
+      <div class="sec-info">
+        <div class="sec-num">7.1</div>
+        <div class="sec-title-my">Pengasasan Kesultanan Perak</div>
+        <div class="sec-title-en">Founding of the Perak Sultanate</div>
+        <div class="sec-title-zh">霹雳苏丹国的建立</div>
+      </div>
+      <span class="sec-chev open">&#8964;</span>
+    </div>
+    <div class="sec-body open">
+      <div class="timeline pk">
+
+        <div class="titem">
+          <div class="tnum">Asal-usul / Origin / 起源</div>
+          <div class="tri">
+            <div class="tri-my"><div class="tri-my-lbl">&#x1F7E1; Melayu</div><div class="tri-my-text">Lahir setelah berakhirnya Kesultanan Melayu Melaka. Perak merupakan wilayah naungan Melaka pada abad ke-15.</div></div>
+            <div class="tri-en"><div class="tri-en-lbl">&#x1F535; English</div><div class="tri-en-text">Born after the fall of the Malay Sultanate of Melaka. Perak was a vassal state of Melaka in the 15th century.</div></div>
+            <div class="tri-zh"><div class="tri-zh-lbl">&#x1F7E2; 中文</div><div class="tri-zh-text">马六甲苏丹国覆灭后成立。霹雳在15世纪是马六甲的附属国。</div></div>
+          </div>
+        </div>
+
+        <div class="titem">
+          <div class="tnum">Selepas Portugis / After Portuguese / 葡萄牙攻占后</div>
+          <div class="tri">
+            <div class="tri-my"><div class="tri-my-lbl">&#x1F7E1; Melayu</div><div class="tri-my-text">Serangan Portugis menyebabkan <span class="kp">Sultan Mahmud Shah</span> dan keluarga meninggalkan Melaka, bersemayam di <span class="kplace">Kampar, Sumatera</span>.</div></div>
+            <div class="tri-en"><div class="tri-en-lbl">&#x1F535; English</div><div class="tri-en-text">Portuguese attack caused <span class="kp">Sultan Mahmud Shah</span> and family to flee Melaka and reside in <span class="kplace">Kampar, Sumatra</span>.</div></div>
+            <div class="tri-zh"><div class="tri-zh-lbl">&#x1F7E2; 中文</div><div class="tri-zh-text">葡萄牙入侵导致<span class="kp">苏丹马哈茂德沙</span>携家眷离开马六甲，迁居<span class="kplace">苏门答腊甘巴</span>。</div></div>
+          </div>
+        </div>
+
+        <div class="titem">
+          <div class="tnum">Penjemputan / Invitation / 邀请</div>
+          <div class="tri">
+            <div class="tri-my"><div class="tri-my-lbl">&#x1F7E1; Melayu</div><div class="tri-my-text">Pembesar Perak — <span class="kp">Tun Saban</span> dan <span class="kp">Nakhoda Kassim</span> — menjemput putera Sultan Mahmud Shah, <span class="kp">Raja Muzaffar</span>, untuk ditabalkan sebagai Sultan Perak.</div></div>
+            <div class="tri-en"><div class="tri-en-lbl">&#x1F535; English</div><div class="tri-en-text">Perak chiefs <span class="kp">Tun Saban</span> and <span class="kp">Nakhoda Kassim</span> invited <span class="kp">Raja Muzaffar</span>, son of Sultan Mahmud Shah, to be enthroned as Sultan of Perak.</div></div>
+            <div class="tri-zh"><div class="tri-zh-lbl">&#x1F7E2; 中文</div><div class="tri-zh-text">霹雳大臣<span class="kp">敦沙班</span>与<span class="kp">拿督卡欣</span>邀请苏丹马哈茂德沙之子<span class="kp">拉惹穆扎法</span>登基为霹雳苏丹。</div></div>
+          </div>
+        </div>
+
+        <div class="titem">
+          <div class="tnum">Alat Kebesaran / Royal Regalia / 皇家宝物</div>
+          <div class="tri">
+            <div class="tri-my"><div class="tri-my-lbl">&#x1F7E1; Melayu</div><div class="tri-my-text">Raja Muzaffar membawa: <span class="kitem">pedang Cura Si Manja Kini</span>, <span class="kitem">keris</span>, <span class="kitem">cap mohor</span>, <span class="kitem">nobat</span> dan <span class="kitem">Surat Ciri</span>.</div></div>
+            <div class="tri-en"><div class="tri-en-lbl">&#x1F535; English</div><div class="tri-en-text">Raja Muzaffar brought: <span class="kitem">Cura Si Manja Kini sword</span>, <span class="kitem">kris</span>, <span class="kitem">royal seal</span>, <span class="kitem">nobat drums</span> and <span class="kitem">Surat Ciri</span>.</div></div>
+            <div class="tri-zh"><div class="tri-zh-lbl">&#x1F7E2; 中文</div><div class="tri-zh-text">拉惹穆扎法携带：<span class="kitem">Cura Si Manja Kini宝剑</span>、<span class="kitem">短剑</span>、<span class="kitem">王玺</span>、<span class="kitem">nobat鼓</span>和<span class="kitem">Surat Ciri</span>。</div></div>
+          </div>
+        </div>
+
+        <div class="titem">
+          <div class="tnum">1528 — Pengasasan / Founding / 建国</div>
+          <div class="tri">
+            <div class="tri-my"><div class="tri-my-lbl">&#x1F7E1; Melayu</div><div class="tri-my-text">Raja Muzaffar mengasaskan Kesultanan Perak dengan gelaran <span class="kp">Sultan Muzaffar Shah</span>. Pusat pemerintahan di <span class="kplace">Tanah Abang, pesisir Sungai Perak</span>. Keturunannya mewarisi takhta hingga hari ini.</div></div>
+            <div class="tri-en"><div class="tri-en-lbl">&#x1F535; English</div><div class="tri-en-text">Raja Muzaffar founded the Perak Sultanate as <span class="kp">Sultan Muzaffar Shah</span>. Capital at <span class="kplace">Tanah Abang, Perak River bank</span>. His descendants reign to this day.</div></div>
+            <div class="tri-zh"><div class="tri-zh-lbl">&#x1F7E2; 中文</div><div class="tri-zh-text">拉惹穆扎法以<span class="kp">苏丹穆扎法沙</span>称号建立霹雳苏丹国。首都在<span class="kplace">霹雳河畔坦纳阿邦</span>。其后裔世袭至今。</div></div>
+          </div>
+        </div>
+
+        <div class="titem">
+          <div class="tnum">1752–1765</div>
+          <div class="tri">
+            <div class="tri-my"><div class="tri-my-lbl">&#x1F7E1; Melayu</div><div class="tri-my-text"><span class="kp">Sultan Iskandar Dzulkarnain</span> (Sultan Perak ke-15) memperkemaskan sistem pentadbiran dan mula menggunapakai <span class="kitem">Undang-Undang 99 Perak</span>.</div></div>
+            <div class="tri-en"><div class="tri-en-lbl">&#x1F535; English</div><div class="tri-en-text"><span class="kp">Sultan Iskandar Dzulkarnain</span> (15th Sultan of Perak) strengthened administration and introduced the <span class="kitem">Perak Laws of 99</span>.</div></div>
+            <div class="tri-zh"><div class="tri-zh-lbl">&#x1F7E2; 中文</div><div class="tri-zh-text"><span class="kp">苏丹伊斯干达·祖卡纳因</span>（第15任霹雳苏丹）强化行政，采用<span class="kitem">霹雳九十九条法律</span>。</div></div>
+          </div>
+        </div>
+
+      </div>
+      <div class="mem">
+        <div class="mem-lbl">&#129504; Memory Keywords</div>
+        <div class="pills">
+          <span class="pill-my">Pengasas: Sultan Muzaffar Shah</span>
+          <span class="pill-en">Founder: Sultan Muzaffar Shah</span>
+          <span class="pill-zh">建国者：苏丹穆扎法沙</span>
+          <span class="pill-my">Tahun: 1528</span>
+          <span class="pill-en">Year: 1528</span>
+          <span class="pill-zh">年份：1528</span>
+          <span class="pill-my">Pusat: Tanah Abang</span>
+          <span class="pill-en">Capital: Tanah Abang</span>
+          <span class="pill-zh">首都：坦纳阿邦</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════ TERENGGANU ════════ -->
+<div id="panel-tg" class="panel">
+  <div class="sec tg">
+    <div class="sec-header" onclick="exp(this)">
+      <div class="sec-icon">&#9790;</div>
+      <div class="sec-info">
+        <div class="sec-num">7.1</div>
+        <div class="sec-title-my">Pengasasan Kesultanan Terengganu</div>
+        <div class="sec-title-en">Founding of the Terengganu Sultanate</div>
+        <div class="sec-title-zh">登嘉楼苏丹国的建立</div>
+      </div>
+      <span class="sec-chev open">&#8964;</span>
+    </div>
+    <div class="sec-body open">
+      <div class="timeline tg">
+
+        <div class="titem">
+          <div class="tnum">Asal-usul / Origin / 起源</div>
+          <div class="tri">
+            <div class="tri-my"><div class="tri-my-lbl">&#x1F7E1; Melayu</div><div class="tri-my-text">Awal abad ke-18: diasaskan oleh keluarga diraja susur galur <span class="kp">Bendahara Johor Riau</span>. Sejak abad ke-16, Terengganu merupakan wilayah naungan Kesultanan Johor Riau.</div></div>
+            <div class="tri-en"><div class="tri-en-lbl">&#x1F535; English</div><div class="tri-en-text">Early 18th century: founded by royal family from the lineage of <span class="kp">Johor Riau Bendahara</span>. Since the 16th century, Terengganu was a vassal of the Johor Riau Sultanate.</div></div>
+            <div class="tri-zh"><div class="tri-zh-lbl">&#x1F7E2; 中文</div><div class="tri-zh-text">18世纪初：由<span class="kp">柔佛廖内本达哈拉</span>皇族建立。自16世纪起，登嘉楼是柔佛廖内的附属国。</div></div>
+          </div>
+        </div>
+
+        <div class="titem">
+          <div class="tnum">1708 — Penganugerahan / Grant / 赐封</div>
+          <div class="tri">
+            <div class="tri-my"><div class="tri-my-lbl">&#x1F7E1; Melayu</div><div class="tri-my-text"><span class="kp">Sultan Abdul Jalil</span> menganugerahkan Terengganu kepada <span class="kp">Tun Zainal Abidin</span> — putera angkat Raja Patani. Raja Patani menyediakan kelengkapan pertabalan.</div></div>
+            <div class="tri-en"><div class="tri-en-lbl">&#x1F535; English</div><div class="tri-en-text"><span class="kp">Sultan Abdul Jalil</span> granted Terengganu to <span class="kp">Tun Zainal Abidin</span> — adopted son of the Raja of Patani. The Raja of Patani provided coronation equipment.</div></div>
+            <div class="tri-zh"><div class="tri-zh-lbl">&#x1F7E2; 中文</div><div class="tri-zh-text"><span class="kp">苏丹阿都贾利</span>将登嘉楼赐给<span class="kp">敦扎纳尔阿比丁</span>——北大年拉惹的养子。北大年拉惹提供登基器具。</div></div>
+          </div>
+        </div>
+
+        <div class="titem">
+          <div class="tnum">Alat Kebesaran / Royal Regalia / 皇家宝物</div>
+          <div class="tri">
+            <div class="tri-my"><div class="tri-my-lbl">&#x1F7E1; Melayu</div><div class="tri-my-text">Tun Zainal Abidin berangkat diiringi 80 orang termasuk <span class="kp">Qadhi Wan Mahmud</span> dan <span class="kp">Che Buang</span>. Alat kebesaran: <span class="kitem">keris diraja</span> dan <span class="kitem">keris panjang Nang Chayam</span>.</div></div>
+            <div class="tri-en"><div class="tri-en-lbl">&#x1F535; English</div><div class="tri-en-text">Tun Zainal Abidin travelled with 80 people including <span class="kp">Qadhi Wan Mahmud</span> and <span class="kp">Che Buang</span>. Regalia: <span class="kitem">royal kris</span> and <span class="kitem">Nang Chayam long kris</span>.</div></div>
+            <div class="tri-zh"><div class="tri-zh-lbl">&#x1F7E2; 中文</div><div class="tri-zh-text">敦扎纳尔阿比丁携80人出发，包括<span class="kp">法官万马哈茂</span>与<span class="kp">Che Buang</span>。宝物：<span class="kitem">皇家短剑</span>与<span class="kitem">Nang Chayam长剑</span>。</div></div>
+          </div>
+        </div>
+
+        <div class="titem">
+          <div class="tnum">1708 — Pengasasan / Founding / 建国</div>
+          <div class="tri">
+            <div class="tri-my"><div class="tri-my-lbl">&#x1F7E1; Melayu</div><div class="tri-my-text">Tun Zainal Abidin menjadi pengasas dengan gelaran <span class="kp">Sultan Zainal Abidin I</span>. Pusat pemerintahan di <span class="kplace">Tanjung Baru, Kuala Berang</span>. Wilayah: Kemaman hingga Besut.</div></div>
+            <div class="tri-en"><div class="tri-en-lbl">&#x1F535; English</div><div class="tri-en-text">Tun Zainal Abidin became founder as <span class="kp">Sultan Zainal Abidin I</span>. Capital at <span class="kplace">Tanjung Baru, Kuala Berang</span>. Territory: Kemaman to Besut.</div></div>
+            <div class="tri-zh"><div class="tri-zh-lbl">&#x1F7E2; 中文</div><div class="tri-zh-text">敦扎纳尔阿比丁以<span class="kp">苏丹扎纳尔阿比丁一世</span>称号建国。首都在<span class="kplace">瓜拉勿朗丹绒峇鲁</span>。领土：格马曼至勿述。</div></div>
+          </div>
+        </div>
+
+        <div class="titem">
+          <div class="tnum">1881–1918 — Sultan Masyhur / Famous Sultan / 著名苏丹</div>
+          <div class="tri">
+            <div class="tri-my"><div class="tri-my-lbl">&#x1F7E1; Melayu</div><div class="tri-my-text"><span class="kp">Sultan Zainal Abidin III</span> membawa pemodenan Terengganu. Sumbangan: Undang-Undang Diri Kerajaan, Istana Maziah, pasukan polis, sistem sukat &amp; timbang, mahkamah syariah.</div></div>
+            <div class="tri-en"><div class="tri-en-lbl">&#x1F535; English</div><div class="tri-en-text"><span class="kp">Sultan Zainal Abidin III</span> modernised Terengganu. Contributions: State Constitution, Istana Maziah, police force, weights &amp; measures system, syariah court.</div></div>
+            <div class="tri-zh"><div class="tri-zh-lbl">&#x1F7E2; 中文</div><div class="tri-zh-text"><span class="kp">苏丹扎纳尔阿比丁三世</span>使登嘉楼现代化。贡献：国家宪法、Maziah宫、警队、度量衡制度、伊斯兰法庭。</div></div>
+          </div>
+        </div>
+
+      </div>
+      <div class="mem">
+        <div class="mem-lbl">&#129504; Memory Keywords</div>
+        <div class="pills">
+          <span class="pill-my">Pengasas: Sultan Zainal Abidin I</span>
+          <span class="pill-en">Founder: Sultan Zainal Abidin I</span>
+          <span class="pill-zh">建国者：苏丹扎纳尔阿比丁一世</span>
+          <span class="pill-my">Tahun: 1708</span>
+          <span class="pill-en">Year: 1708</span>
+          <span class="pill-zh">年份：1708</span>
+          <span class="pill-my">Pusat: Tanjung Baru</span>
+          <span class="pill-en">Capital: Tanjung Baru</span>
+          <span class="pill-zh">首都：丹绒峇鲁</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════ SELANGOR ════════ -->
+<div id="panel-sl" class="panel">
+  <div class="sec sl">
+    <div class="sec-header" onclick="exp(this)">
+      <div class="sec-icon">&#127968;</div>
+      <div class="sec-info">
+        <div class="sec-num">7.1</div>
+        <div class="sec-title-my">Pengasasan Kesultanan Selangor</div>
+        <div class="sec-title-en">Founding of the Selangor Sultanate</div>
+        <div class="sec-title-zh">雪兰莪苏丹国的建立</div>
+      </div>
+      <span class="sec-chev open">&#8964;</span>
+    </div>
+    <div class="sec-body open">
+      <div class="timeline sl">
+
+        <div class="titem">
+          <div class="tnum">Asal-usul / Origin / 起源</div>
+          <div class="tri">
+            <div class="tri-my"><div class="tri-my-lbl">&#x1F7E1; Melayu</div><div class="tri-my-text">Diasaskan oleh keluarga diraja <span class="kp">Bugis</span> yang berpengaruh dalam Kesultanan Johor Riau pada abad ke-18. Sejak abad ke-16, Selangor merupakan wilayah naungan Johor Riau.</div></div>
+            <div class="tri-en"><div class="tri-en-lbl">&#x1F535; English</div><div class="tri-en-text">Founded by the influential <span class="kp">Bugis</span> royal family within the Johor Riau Sultanate in the 18th century. Since the 16th century, Selangor was a vassal of Johor Riau.</div></div>
+            <div class="tri-zh"><div class="tri-zh-lbl">&#x1F7E2; 中文</div><div class="tri-zh-text">由18世纪柔佛廖内苏丹国内具影响力的<span class="kp">武吉斯</span>皇族建立。自16世纪起，雪兰莪是柔佛廖内的附属国。</div></div>
+          </div>
+        </div>
+
+        <div class="titem">
+          <div class="tnum">Daeng Chelak</div>
+          <div class="tri">
+            <div class="tri-my"><div class="tri-my-lbl">&#x1F7E1; Melayu</div><div class="tri-my-text"><span class="kp">Daeng Chelak</span> (keturunan Bugis) menjadi <span class="kp">Yang Di-Pertuan Muda Kesultanan Johor-Riau</span>. Puteranya, <span class="kp">Raja Lumu</span>, menghadap Sultan Perak untuk pengiktirafan.</div></div>
+            <div class="tri-en"><div class="tri-en-lbl">&#x1F535; English</div><div class="tri-en-text"><span class="kp">Daeng Chelak</span> (Bugis descendant) became <span class="kp">Yang Di-Pertuan Muda of Johor-Riau</span>. His son <span class="kp">Raja Lumu</span> sought recognition from the Sultan of Perak.</div></div>
+            <div class="tri-zh"><div class="tri-zh-lbl">&#x1F7E2; 中文</div><div class="tri-zh-text"><span class="kp">当吉拉</span>（武吉斯后裔）成为<span class="kp">柔佛廖内副王</span>。其子<span class="kp">拉惹鲁穆</span>向霹雳苏丹寻求承认。</div></div>
+          </div>
+        </div>
+
+        <div class="titem">
+          <div class="tnum">Pertabalan / Coronation / 登基</div>
+          <div class="tri">
+            <div class="tri-my"><div class="tri-my-lbl">&#x1F7E1; Melayu</div><div class="tri-my-text"><span class="kp">Sultan Mahmud Shah</span> (Sultan Perak) menabalkan Raja Lumu sebagai <span class="kp">Sultan Selangor</span> dan menganugerahkan <span class="kitem">nobat</span> dan <span class="kitem">cap mohor</span>.</div></div>
+            <div class="tri-en"><div class="tri-en-lbl">&#x1F535; English</div><div class="tri-en-text"><span class="kp">Sultan Mahmud Shah</span> (Sultan of Perak) enthroned Raja Lumu as <span class="kp">Sultan of Selangor</span> and granted him <span class="kitem">nobat drums</span> and <span class="kitem">royal seal</span>.</div></div>
+            <div class="tri-zh"><div class="tri-zh-lbl">&#x1F7E2; 中文</div><div class="tri-zh-text"><span class="kp">苏丹马哈茂德沙</span>（霹雳苏丹）册封拉惹鲁穆为<span class="kp">雪兰莪苏丹</span>，赐予<span class="kitem">nobat鼓</span>与<span class="kitem">王玺</span>。</div></div>
+          </div>
+        </div>
+
+        <div class="titem">
+          <div class="tnum">1766 — Pengasasan / Founding / 建国</div>
+          <div class="tri">
+            <div class="tri-my"><div class="tri-my-lbl">&#x1F7E1; Melayu</div><div class="tri-my-text">Kesultanan Selangor diasaskan oleh Raja Lumu dengan gelaran <span class="kp">Sultan Salehuddin Shah</span>. Pusat pemerintahan di <span class="kplace">Kuala Selangor</span>.</div></div>
+            <div class="tri-en"><div class="tri-en-lbl">&#x1F535; English</div><div class="tri-en-text">Selangor Sultanate founded by Raja Lumu as <span class="kp">Sultan Salehuddin Shah</span>. Capital at <span class="kplace">Kuala Selangor</span>.</div></div>
+            <div class="tri-zh"><div class="tri-zh-lbl">&#x1F7E2; 中文</div><div class="tri-zh-text">拉惹鲁穆以<span class="kp">苏丹沙里胡丁沙</span>称号建立雪兰莪苏丹国。首都在<span class="kplace">瓜拉雪兰莪</span>。</div></div>
+          </div>
+        </div>
+
+        <div class="titem">
+          <div class="tnum">1898–1938 — Sultan Masyhur / Famous Sultan / 著名苏丹</div>
+          <div class="tri">
+            <div class="tri-my"><div class="tri-my-lbl">&#x1F7E1; Melayu</div><div class="tri-my-text"><span class="kp">Sultan Ala'iddin Suleiman Shah</span> — Sultan Selangor yang masyhur. Sumbangan: pembinaan jalan raya, landasan kereta api, rumah dan kedai meningkat.</div></div>
+            <div class="tri-en"><div class="tri-en-lbl">&#x1F535; English</div><div class="tri-en-text"><span class="kp">Sultan Ala'iddin Suleiman Shah</span> — famous Sultan of Selangor. Contributions: road construction, railway tracks, growth of houses and shops.</div></div>
+            <div class="tri-zh"><div class="tri-zh-lbl">&#x1F7E2; 中文</div><div class="tri-zh-text"><span class="kp">苏丹阿拉乌丁苏莱曼沙</span>——著名雪兰莪苏丹。贡献：修建道路、铁路，房屋和商店增加。</div></div>
+          </div>
+        </div>
+
+      </div>
+      <div class="mem">
+        <div class="mem-lbl">&#129504; Memory Keywords</div>
+        <div class="pills">
+          <span class="pill-my">Pengasas: Sultan Salehuddin Shah</span>
+          <span class="pill-en">Founder: Sultan Salehuddin Shah</span>
+          <span class="pill-zh">建国者：苏丹沙里胡丁沙</span>
+          <span class="pill-my">Tahun: 1766</span>
+          <span class="pill-en">Year: 1766</span>
+          <span class="pill-zh">年份：1766</span>
+          <span class="pill-my">Asal: Keturunan Bugis</span>
+          <span class="pill-en">Origin: Bugis descendants</span>
+          <span class="pill-zh">起源：武吉斯后裔</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════ WARISAN ════════ -->
+<div id="panel-ws" class="panel">
+
+  <div class="sec ws">
+    <div class="sec-header" onclick="exp(this)">
+      <div class="sec-icon">&#128081;</div>
+      <div class="sec-info">
+        <div class="sec-num">7.2</div>
+        <div class="sec-title-my">Sistem Pemerintahan</div>
+        <div class="sec-title-en">Government System Heritage</div>
+        <div class="sec-title-zh">政府制度遗产</div>
+      </div>
+      <span class="sec-chev open">&#8964;</span>
+    </div>
+    <div class="sec-body open">
+      <div class="tri" style="margin-bottom:10px">
+        <div class="tri-my"><div class="tri-my-lbl">&#x1F7E1; Melayu</div><div class="tri-my-text">Sultan sebagai tonggak utama kerajaan. Penggantian pemerintah berasaskan Adat Temenggung. Di Perak: sistem penggiliran (7 peringkat).</div></div>
+        <div class="tri-en"><div class="tri-en-lbl">&#x1F535; English</div><div class="tri-en-text">Sultan as the main pillar of government. Succession based on Adat Temenggung. In Perak: rotational system (7 levels).</div></div>
+        <div class="tri-zh"><div class="tri-zh-lbl">&#x1F7E2; 中文</div><div class="tri-zh-text">苏丹是政府的主要支柱。继承制度基于Adat Temenggung习俗。在霹雳：轮换制度（7个级别）。</div></div>
+      </div>
+
+      <div class="comp-wrap">
+        <table class="comp-table">
+          <thead><tr><th style="background:#475569;text-align:left;padding:8px 10px;font-size:10px">Negeri</th><th class="th-ph">Pahang</th><th class="th-pk">Perak</th><th class="th-tg">Terengganu</th><th class="th-sl">Selangor</th></tr></thead>
+          <tbody>
+            <tr><td class="td-label">Waris Ganti</td><td class="td-ph">Tengku Mahkota</td><td class="td-pk">Sistem penggiliran 7 peringkat</td><td class="td-tg">Yang Di-Pertuan Muda</td><td class="td-sl">Raja Muda</td></tr>
+            <tr><td class="td-label">Badan Pilih</td><td class="td-ph">Jumaah Pangkuan Diraja</td><td class="td-pk">Dewan Negara Perak</td><td class="td-tg">Dewan Pangkuan Diraja</td><td class="td-sl">Dewan di-Raja</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="sub-sec" style="background:#eff6ff;border-color:#2563eb;margin-bottom:8px">
+        <div class="sub-title" style="color:#1d4ed8">&#128081; Perak — Sistem Penggiliran</div>
+        <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:4px">
+          <div style="font-size:12px;font-weight:700;color:#1e3a8a;padding:3px 0">(a) Sultan</div><div style="font-size:12px;font-weight:700;color:#1e3a8a;padding:3px 0">(e) Raja Kecil Sulong</div>
+          <div style="font-size:12px;font-weight:700;color:#1e3a8a;padding:3px 0">(b) Raja Muda</div><div style="font-size:12px;font-weight:700;color:#1e3a8a;padding:3px 0">(f) Raja Kecil Tengah</div>
+          <div style="font-size:12px;font-weight:700;color:#1e3a8a;padding:3px 0">(c) Raja Di Hilir</div><div style="font-size:12px;font-weight:700;color:#1e3a8a;padding:3px 0">(g) Raja Kecil Bongsu</div>
+          <div style="font-size:12px;font-weight:700;color:#1e3a8a;padding:3px 0">(d) Raja Kecil Besar</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sec ws">
+    <div class="sec-header" onclick="exp(this)">
+      <div class="sec-icon">&#9790;</div>
+      <div class="sec-info">
+        <div class="sec-num">7.2</div>
+        <div class="sec-title-my">Agama Islam, Perundangan &amp; Adat</div>
+        <div class="sec-title-en">Islam, Law &amp; Customs Heritage</div>
+        <div class="sec-title-zh">伊斯兰、法律与习俗遗产</div>
+      </div>
+      <span class="sec-chev">&#8964;</span>
+    </div>
+    <div class="sec-body">
+      <div class="tri" style="margin-bottom:10px">
+        <div class="tri-my"><div class="tri-my-lbl">&#x1F7E1; Agama Islam</div><div class="tri-my-text">Islam agama utama dan agama Persekutuan. Sultan ketua agama negeri. Institusi agama penting. Di Selangor, mufti adalah anggota Dewan di-Raja.</div></div>
+        <div class="tri-en"><div class="tri-en-lbl">&#x1F535; Islam</div><div class="tri-en-text">Islam is the main religion and the Federal religion. Sultan is head of religion in each state. Religious institutions are important. In Selangor, the mufti is a member of the Dewan di-Raja.</div></div>
+        <div class="tri-zh"><div class="tri-zh-lbl">&#x1F7E2; 伊斯兰</div><div class="tri-zh-text">伊斯兰是主要宗教及联邦宗教。苏丹是各州宗教首领。宗教机构很重要。在雪兰莪，穆夫提是Dewan di-Raja的成员。</div></div>
+      </div>
+      <div class="tri" style="margin-bottom:10px">
+        <div class="tri-my"><div class="tri-my-lbl">&#x1F7E1; Perundangan</div><div class="tri-my-text">Hukum Kanun Melaka menjadi asas — termasuk Hukum Kanun Pahang dan Undang-Undang 99 Perak. Undang-Undang Tubuh Kerajaan Negeri dibuat untuk menyesuaikan perubahan.</div></div>
+        <div class="tri-en"><div class="tri-en-lbl">&#x1F535; Law</div><div class="tri-en-text">Melaka Legal Code became the foundation — including Pahang Legal Code and Perak Laws of 99. State Constitutions were created to adapt to changes.</div></div>
+        <div class="tri-zh"><div class="tri-zh-lbl">&#x1F7E2; 法律</div><div class="tri-zh-text">马六甲法典成为基础——包括彭亨法典与霹雳九十九条法律。各州宪法为适应变化而制定。</div></div>
+      </div>
+      <div class="tri">
+        <div class="tri-my"><div class="tri-my-lbl">&#x1F7E1; Adat Istiadat</div><div class="tri-my-text">Adat Keputeraan (melenggang perut, bercukur, berendoi) → Adat Perkahwinan (merisik, meminang, pernikahan, persandingan) → Istiadat Pemakaman (berkabung, Seraja Diraja).</div></div>
+        <div class="tri-en"><div class="tri-en-lbl">&#x1F535; Customs</div><div class="tri-en-text">Birth customs (belly massage ritual, head shaving, cradle ceremony) → Wedding customs (inquiry, proposal, marriage, wedding dais) → Funeral rites (mourning period, royal funeral bier).</div></div>
+        <div class="tri-zh"><div class="tri-zh-lbl">&#x1F7E2; 习俗</div><div class="tri-zh-text">诞生习俗（摇腹仪式、剃头、摇篮礼）→ 婚礼习俗（求亲、提亲、婚礼、拜堂）→ 丧葬礼仪（服丧、皇家棺架）。</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sec ws">
+    <div class="sec-header" onclick="exp(this)">
+      <div class="sec-icon">&#128221;</div>
+      <div class="sec-info">
+        <div class="sec-num">7.2</div>
+        <div class="sec-title-my">Persuratan</div>
+        <div class="sec-title-en">Literary Heritage</div>
+        <div class="sec-title-zh">文学遗产</div>
+      </div>
+      <span class="sec-chev">&#8964;</span>
+    </div>
+    <div class="sec-body">
+      <div class="tri">
+        <div class="tri-my"><div class="tri-my-lbl">&#x1F7E1; Karya Sejarah</div><div class="tri-my-text">• <em>Hikayat Pahang</em> (Haji Muhammad Nor) — sejarah Pahang abad ke-19<br>• <em>Misa Melayu</em> (Raja Chulan) — sejarah Perak abad ke-18<br>• <em>Syair Tawarikh Zainal Abidin Ketiga</em> (Tengku Dalam Kalthum) — Terengganu abad ke-19/20<br>• <em>Kenang-Kenangan Selangor</em> (Wan Muhammad Amin) — Selangor abad ke-19/20</div></div>
+        <div class="tri-en"><div class="tri-en-lbl">&#x1F535; Historical Works</div><div class="tri-en-text">• <em>Hikayat Pahang</em> — history of Pahang, 19th century<br>• <em>Misa Melayu</em> — history of Perak, 18th century<br>• <em>Syair Tawarikh Zainal Abidin Ketiga</em> — Terengganu 19th/20th century<br>• <em>Kenang-Kenangan Selangor</em> — Selangor 19th/20th century</div></div>
+        <div class="tri-zh"><div class="tri-zh-lbl">&#x1F7E2; 历史著作</div><div class="tri-zh-text">• <em>彭亨传奇</em>——19世纪彭亨史<br>• <em>Misa Melayu</em>——18世纪霹雳史<br>• <em>扎纳尔阿比丁三世诗歌史记</em>——登嘉楼19/20世纪<br>• <em>雪兰莪回忆录</em>——雪兰莪19/20世纪</div></div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ════════ EKONOMI ════════ -->
+<div id="panel-ek" class="panel">
+
+  <div class="sec ek">
+    <div class="sec-header" onclick="exp(this)">
+      <div class="sec-icon">&#9875;</div>
+      <div class="sec-info">
+        <div class="sec-num">7.2</div>
+        <div class="sec-title-my">Pelabuhan &amp; Perdagangan</div>
+        <div class="sec-title-en">Ports and Trade</div>
+        <div class="sec-title-zh">港口与贸易</div>
+      </div>
+      <span class="sec-chev open">&#8964;</span>
+    </div>
+    <div class="sec-body open">
+      <div class="tri">
+        <div class="tri-my"><div class="tri-my-lbl">&#x1F7E1; Melayu</div><div class="tri-my-text">Perak (Kuala Sungai Perak) dan Selangor (Kuala Selangor) — kedudukan strategik di Selat Melaka. Hasil dagangan utama: bijih timah. Kuala Terengganu — pelabuhan entrepot (emas, bijih timah, kain sutera, senjata, gula, hasil hutan). Pelabuhan diuruskan oleh syahbandar. Sistem cukai dilaksanakan.</div></div>
+        <div class="tri-en"><div class="tri-en-lbl">&#x1F535; English</div><div class="tri-en-text">Perak (Kuala Sungai Perak) and Selangor (Kuala Selangor) — strategic at Strait of Melaka. Main trade: tin ore. Kuala Terengganu — entrepot port (gold, tin, silk, weapons, sugar, forest produce). Ports managed by harbour masters. Tax system implemented.</div></div>
+        <div class="tri-zh"><div class="tri-zh-lbl">&#x1F7E2; 中文</div><div class="tri-zh-text">霹雳（霹雳河口）与雪兰莪（雪兰莪河口）——马六甲海峡战略要地。主要贸易品：锡矿。瓜拉登嘉楼——转口港（黄金、锡矿、丝绸、武器、糖、森林产品）。港口由港务长管理。实施税收制度。</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sec ek">
+    <div class="sec-header" onclick="exp(this)">
+      <div class="sec-icon">&#128176;</div>
+      <div class="sec-info">
+        <div class="sec-num">7.2</div>
+        <div class="sec-title-my">Mata Wang</div>
+        <div class="sec-title-en">Currency by State</div>
+        <div class="sec-title-zh">各州货币</div>
+      </div>
+      <span class="sec-chev">&#8964;</span>
+    </div>
+    <div class="sec-body">
+      <div class="comp-wrap">
+        <table class="comp-table">
+          <thead><tr><th class="th-ph">Pahang</th><th class="th-pk">Perak</th><th class="th-tg">Terengganu</th><th class="th-sl">Selangor</th></tr></thead>
+          <tbody>
+            <tr>
+              <td class="td-ph"><strong>Pitis</strong> (timah) &amp; <strong>Tampang</strong></td>
+              <td class="td-pk"><strong>Bidor</strong> — bongkah timah (sejak abad ke-17)</td>
+              <td class="td-tg"><strong>Kupang emas</strong> (Sultan Zainal Abidin I) &amp; <strong>Pitis</strong></td>
+              <td class="td-sl"><strong>Syiling</strong> (Sultan Ibrahim Shah)</td>
+            </tr>
+            <tr>
+              <td class="td-ph">Pitis &amp; Tampang<br><span style="font-size:11px;font-style:italic">锡币与银锭</span></td>
+              <td class="td-pk">Bidor tin ingots<br><span style="font-size:11px;font-style:italic">锡锭（bidor）</span></td>
+              <td class="td-tg">Gold kupang &amp; Pitis<br><span style="font-size:11px;font-style:italic">金铜钱与铜币</span></td>
+              <td class="td-sl">Coins (syiling)<br><span style="font-size:11px;font-style:italic">银币</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="sec ek">
+    <div class="sec-header" onclick="exp(this)">
+      <div class="sec-icon">&#127807;</div>
+      <div class="sec-info">
+        <div class="sec-num">7.2</div>
+        <div class="sec-title-my">Ekonomi Sara Diri</div>
+        <div class="sec-title-en">Subsistence Economy</div>
+        <div class="sec-title-zh">自给自足经济</div>
+      </div>
+      <span class="sec-chev">&#8964;</span>
+    </div>
+    <div class="sec-body">
+      <div class="tri" style="margin-bottom:8px">
+        <div class="tri-my"><div class="tri-my-lbl">&#x1F7E1; Melayu</div><div class="tri-my-text">Pertanian, penternakan, perlombongan, mengutip hasil hutan dan perikanan bagi menampung kehidupan seharian.</div></div>
+        <div class="tri-en"><div class="tri-en-lbl">&#x1F535; English</div><div class="tri-en-text">Agriculture, animal husbandry, mining, forest produce gathering and fishing to sustain daily life.</div></div>
+        <div class="tri-zh"><div class="tri-zh-lbl">&#x1F7E2; 中文</div><div class="tri-zh-text">农业、畜牧业、采矿、采集林产品和渔业，以维持日常生活。</div></div>
+      </div>
+      <div class="comp-wrap">
+        <table class="comp-table">
+          <thead><tr><th class="th-ph">Pahang</th><th class="th-pk">Perak</th><th class="th-tg">Terengganu</th><th class="th-sl">Selangor</th></tr></thead>
+          <tbody>
+            <tr>
+              <td class="td-ph">—</td>
+              <td class="td-pk">Perlombongan <strong>bijih timah</strong>. Hasil hutan: rotan, sumbu badak, kayu kayan.</td>
+              <td class="td-tg">Tanaman <strong>lada hitam</strong> &amp; perlombongan emas.</td>
+              <td class="td-sl">Tanaman <strong>padi</strong> &amp; tanaman sampingan (buah &amp; sayur).</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ════════ MEMORY MAP ════════ -->
+<div id="panel-mm" class="panel">
+
+  <div style="background:#0f172a;border-radius:16px;overflow:hidden;margin-bottom:12px">
+    <div class="mmap-header">
+      <div class="mmap-h-title">&#11088; Super Compact Memory Map</div>
+      <div class="mmap-h-en">Peta Hafalan Ringkas — Bab 7</div>
+      <div class="mmap-h-zh">超简短记忆图 — 第七章</div>
+    </div>
+
+    <div style="padding:14px">
+
+      <!-- COMPARISON TABLE dark -->
+      <div style="background:#1e293b;border-radius:12px;padding:12px;margin-bottom:12px">
+        <div style="font-size:11px;font-weight:800;letter-spacing:2px;color:#f59e0b;text-transform:uppercase;margin-bottom:10px">&#128203; 4 Kesultanan — Quick Compare / 四苏丹国快速对比</div>
+        <div class="comp-wrap">
+          <table class="comp-table">
+            <thead><tr><th style="background:#334155;color:#94a3b8;text-align:left;font-size:10px;padding:7px 8px">Aspek</th><th class="th-ph">Pahang</th><th class="th-pk">Perak</th><th class="th-tg">Terengganu</th><th class="th-sl">Selangor</th></tr></thead>
+            <tbody>
+              <tr><td class="td-label">Pengasas</td><td class="td-ph">Sultan Muhammad Shah</td><td class="td-pk">Sultan Muzaffar Shah</td><td class="td-tg">Sultan Zainal Abidin I</td><td class="td-sl">Sultan Salehuddin Shah</td></tr>
+              <tr><td class="td-label">Tahun</td><td class="td-ph">1470</td><td class="td-pk">1528</td><td class="td-tg">1708</td><td class="td-sl">1766</td></tr>
+              <tr><td class="td-label">Pusat</td><td class="td-ph">Pekan</td><td class="td-pk">Tanah Abang</td><td class="td-tg">Tanjung Baru</td><td class="td-sl">Kuala Selangor</td></tr>
+              <tr><td class="td-label">Asal</td><td class="td-ph">Keturunan Melaka</td><td class="td-pk">Keturunan Melaka</td><td class="td-tg">Bendahara Johor Riau</td><td class="td-sl">Keturunan Bugis</td></tr>
+              <tr><td class="td-label">Mata Wang</td><td class="td-ph">Pitis, Tampang</td><td class="td-pk">Bidor (timah)</td><td class="td-tg">Kupang emas</td><td class="td-sl">Syiling</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- MEMORY ITEMS -->
+      <div class="mmap-item">
+        <div class="mmap-my"><div class="mmap-my-text">Pahang: Melaka &#8594; Sultan Muhammad Shah (1470) &#8594; Pusat: Pekan</div></div>
+        <div class="mmap-en"><div class="mmap-en-text">Pahang: From Melaka → Sultan Muhammad Shah (1470) → Capital: Pekan</div></div>
+        <div class="mmap-zh"><div class="mmap-zh-text">彭亨：来自马六甲 → 苏丹穆罕默德沙（1470）→ 首都：北根</div></div>
+      </div>
+
+      <div class="mmap-item">
+        <div class="mmap-my"><div class="mmap-my-text">Perak: Melaka jatuh &#8594; Raja Muzaffar (1528) &#8594; Pusat: Tanah Abang &#8594; Pedang Cura Si Manja Kini</div></div>
+        <div class="mmap-en"><div class="mmap-en-text">Perak: Melaka fell → Raja Muzaffar (1528) → Capital: Tanah Abang → Cura Si Manja Kini sword</div></div>
+        <div class="mmap-zh"><div class="mmap-zh-text">霹雳：马六甲沦陷 → 拉惹穆扎法（1528）→ 首都：坦纳阿邦 → Cura Si Manja Kini宝剑</div></div>
+      </div>
+
+      <div class="mmap-item">
+        <div class="mmap-my"><div class="mmap-my-text">Terengganu: Bendahara Johor Riau &#8594; Tun Zainal Abidin (1708) &#8594; Pusat: Tanjung Baru</div></div>
+        <div class="mmap-en"><div class="mmap-en-text">Terengganu: Johor Riau Bendahara → Tun Zainal Abidin (1708) → Capital: Tanjung Baru</div></div>
+        <div class="mmap-zh"><div class="mmap-zh-text">登嘉楼：柔佛本达哈拉 → 敦扎纳尔阿比丁（1708）→ 首都：丹绒峇鲁</div></div>
+      </div>
+
+      <div class="mmap-item">
+        <div class="mmap-my"><div class="mmap-my-text">Selangor: Bugis &#8594; Raja Lumu / Sultan Salehuddin Shah (1766) &#8594; Pusat: Kuala Selangor</div></div>
+        <div class="mmap-en"><div class="mmap-en-text">Selangor: Bugis → Raja Lumu / Sultan Salehuddin Shah (1766) → Capital: Kuala Selangor</div></div>
+        <div class="mmap-zh"><div class="mmap-zh-text">雪兰莪：武吉斯 → 拉惹鲁穆/苏丹沙里胡丁沙（1766）→ 首都：瓜拉雪兰莪</div></div>
+      </div>
+
+      <div class="mmap-item">
+        <div class="mmap-my"><div class="mmap-my-text">Warisan: Sultan = tonggak kerajaan + ketua agama. Undang-undang berasas Hukum Kanun Melaka. Adat: keputeraan + perkahwinan + pemakaman.</div></div>
+        <div class="mmap-en"><div class="mmap-en-text">Heritage: Sultan = pillar of govt + head of religion. Laws based on Melaka Legal Code. Customs: birth + marriage + funeral.</div></div>
+        <div class="mmap-zh"><div class="mmap-zh-text">遗产：苏丹=政府支柱+宗教首领。法律基于马六甲法典。习俗：诞生+婚姻+丧葬。</div></div>
+      </div>
+
+      <div class="mmap-item">
+        <div class="mmap-my"><div class="mmap-my-text">Ekonomi: Perak (bijih timah + bidor), Pahang (pitis+tampang), Terengganu (kupang emas + entrepot), Selangor (padi + syiling).</div></div>
+        <div class="mmap-en"><div class="mmap-en-text">Economy: Perak (tin ore + bidor), Pahang (pitis+tampang), Terengganu (gold kupang + entrepot), Selangor (rice + syiling coins).</div></div>
+        <div class="mmap-zh"><div class="mmap-zh-text">经济：霹雳（锡矿+bidor）、彭亨（pitis+tampang）、登嘉楼（金铜钱+转口港）、雪兰莪（稻米+银币）。</div></div>
+      </div>
+
+      <div class="mmap-item">
+        <div class="mmap-my"><div class="mmap-my-text">Perak unik: Sistem penggiliran takhta 7 peringkat — Sultan, Raja Muda, Raja Di Hilir, Raja Kecil Besar, Raja Kecil Sulong, Raja Kecil Tengah, Raja Kecil Bongsu.</div></div>
+        <div class="mmap-en"><div class="mmap-en-text">Perak unique: Rotational throne system — 7 levels from Sultan down to Raja Kecil Bongsu.</div></div>
+        <div class="mmap-zh"><div class="mmap-zh-text">霹雳特色：7级轮换继承制度——从苏丹到Raja Kecil Bongsu。</div></div>
+      </div>
+
+      <!-- EXAM BOX -->
+      <div class="exam-box">
+        <div class="exam-hdr"><div class="exam-lbl">&#9997; Exam Template / Ayat Peperiksaan / 考试句型</div></div>
+        <div class="exam-my"><div class="exam-my-t">Kesultanan [Negeri] diasaskan oleh [Pengasas] pada tahun [Tahun] dengan pusat pemerintahan di [Tempat]. Legasi Kesultanan Melayu Melaka diteruskan melalui sistem pemerintahan, agama Islam, perundangan, adat istiadat dan ekonomi.</div></div>
+        <div class="exam-en"><div class="exam-en-t">The [State] Sultanate was founded by [Founder] in [Year] with its capital at [Place]. The legacy of the Malay Sultanate of Melaka was continued through the system of government, Islam, laws, customs and economy.</div></div>
+        <div class="exam-zh"><div class="exam-zh-t">【州名】苏丹国由【建国者】于【年份】建立，首都位于【地点】。马六甲马来苏丹国的遗产通过政府制度、伊斯兰教、法律、习俗和经济延续下去。</div></div>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+<div class="footer">Bab 7 &middot; Sejarah Tingkatan 3 &middot; 第七章</div>
+
+<script>
+var hiddenLang={my:false,en:false,zh:false};
+function tgl(lang,btn){
+  hiddenLang[lang]=!hiddenLang[lang];
+  document.getElementById('app').classList.toggle('hide-'+lang,hiddenLang[lang]);
+  btn.classList.toggle('on',!hiddenLang[lang]);
+}
+function showPanel(id,btn){
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById('panel-'+id).classList.add('active');
+  btn.classList.add('active');
+  window.scrollTo(0,document.querySelector('.tabs').offsetTop-60);
+}
+function exp(hdr){
+  var b=hdr.nextElementSibling;
+  var c=hdr.querySelector('.sec-chev');
+  var o=b.classList.toggle('open');
+  c.classList.toggle('open',o);
+}
+</script>
+</body>
+</html>
