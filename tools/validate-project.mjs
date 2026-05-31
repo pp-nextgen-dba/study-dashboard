@@ -4,7 +4,7 @@ import vm from "node:vm";
 
 const rootDir =
     path.resolve(
-        path.dirname(new URL(import.meta.url).pathname),
+        path.dirname(new URL(import.meta.url).pathname.replace(/^\/([A-Za-z]:)/, "$1")),
         ".."
     );
 
