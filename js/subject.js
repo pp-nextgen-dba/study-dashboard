@@ -1027,6 +1027,7 @@ export const historyData = {
             form:"T2",
             chapter:"Agama, Kepercayaan dan Keunikan Warisan Masyarakat Kerajaan Alam Melayu",
             chinese:"",
+            resourceUrl:"../history/t2_chapter4.html",
             status:"Not Started",
             confidence:0,
             last_updated:"2026-05-22"

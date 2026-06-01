@@ -1,0 +1,823 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+<title>Tingkatan 2 Bab 4 — Agama, Kepercayaan dan Keunikan Warisan Masyarakat Kerajaan Alam Melayu</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html{font-size:16px}
+body{font-family:'Nunito',sans-serif;background:#f0f4ff;color:#1e293b;line-height:1.5}
+
+.hero{background:linear-gradient(135deg,#4c1d95,#1e3a5f);padding:26px 18px 40px;text-align:center;position:relative;overflow:hidden}
+.hero::after{content:'';position:absolute;bottom:-24px;left:0;right:0;height:48px;background:#f0f4ff;border-radius:50% 50% 0 0/48px 48px 0 0}
+.hero-badge{display:inline-block;background:rgba(255,255,255,.15);color:#ddd6fe;font-size:12px;letter-spacing:2px;padding:4px 14px;border-radius:20px;margin-bottom:10px}
+.hero-title{font-size:17px;font-weight:800;color:#fff;line-height:1.3;margin-bottom:4px}
+.hero-sub{font-size:13px;color:#c4b5fd;margin-bottom:3px}
+.hero-zh{font-family:'Noto Sans SC',sans-serif;font-size:12px;color:#67e8f9;letter-spacing:2px;margin-bottom:30px}
+.hero-stats{display:flex;justify-content:center;gap:24px;position:relative;z-index:1}
+.stat-num{font-size:24px;font-weight:800;color:#fff;text-align:center}
+.stat-lbl{font-size:11px;color:#ddd6fe;text-align:center}
+
+.lang-legend{display:flex;justify-content:center;gap:14px;padding:10px 16px;background:#fff;border-bottom:1px solid #e5e7eb}
+.legend-dot{display:flex;align-items:center;gap:5px;font-size:12px;font-weight:700}
+.dot{width:12px;height:12px;border-radius:3px;flex-shrink:0}
+
+.lang-bar{background:#fff;padding:10px 14px;display:flex;gap:8px;align-items:center;border-bottom:2px solid #e5e7eb;position:sticky;top:0;z-index:200;box-shadow:0 2px 8px rgba(0,0,0,.08)}
+.lbtn{flex:1;padding:8px 4px;font-size:12px;font-weight:800;font-family:'Nunito',sans-serif;border:2px solid;border-radius:20px;cursor:pointer;text-align:center;opacity:.4;transition:all .15s}
+.lbtn.on{opacity:1}
+.lbtn-my{border-color:#b45309;background:#fef3c7;color:#78350f}
+.lbtn-my.on{background:#d97706;color:#fff;border-color:#d97706}
+.lbtn-en{border-color:#1d4ed8;background:#dbeafe;color:#1e3a8a}
+.lbtn-en.on{background:#2563eb;color:#fff;border-color:#2563eb}
+.lbtn-zh{border-color:#059669;background:#d1fae5;color:#064e3b}
+.lbtn-zh.on{background:#059669;color:#fff;border-color:#059669}
+
+.tabs{display:flex;overflow-x:auto;background:#1e293b;-webkit-overflow-scrolling:touch;scrollbar-width:none;position:sticky;top:53px;z-index:199}
+.tabs::-webkit-scrollbar{display:none}
+.tab{flex:0 0 auto;padding:11px 14px;font-size:12px;font-weight:800;font-family:'Nunito',sans-serif;color:#94a3b8;background:transparent;border:none;cursor:pointer;border-bottom:3px solid transparent;white-space:nowrap;transition:all .2s}
+.tab-agama.active{color:#fbbf24;border-bottom-color:#d97706}
+.tab-kerajaan.active{color:#6ee7b7;border-bottom-color:#059669}
+.tab-pemerintah.active{color:#c4b5fd;border-bottom-color:#7c3aed}
+.tab-ekonomi.active{color:#93c5fd;border-bottom-color:#2563eb}
+.tab-sosio.active{color:#fca5a5;border-bottom-color:#dc2626}
+.tab-mm.active{color:#fde68a;border-bottom-color:#f59e0b}
+
+.panel{display:none;padding:12px 12px 60px}
+.panel.active{display:block}
+
+.tri{border-radius:12px;overflow:hidden;margin-bottom:10px;border:2px solid #e2e8f0}
+.tri-my{background:#fffbeb;border-left:5px solid #d97706;padding:9px 12px}
+.tri-my-lbl{font-size:10px;font-weight:800;letter-spacing:2px;color:#92400e;text-transform:uppercase;margin-bottom:3px}
+.tri-my-text{font-size:14px;font-weight:700;color:#78350f;line-height:1.5}
+.tri-en{background:#eff6ff;border-left:5px solid #2563eb;padding:9px 12px}
+.tri-en-lbl{font-size:10px;font-weight:800;letter-spacing:2px;color:#1d4ed8;text-transform:uppercase;margin-bottom:3px}
+.tri-en-text{font-size:14px;font-weight:600;color:#1e3a8a;line-height:1.5;font-style:italic}
+.tri-zh{background:#ecfdf5;border-left:5px solid #059669;padding:9px 12px}
+.tri-zh-lbl{font-size:10px;font-weight:800;letter-spacing:2px;color:#047857;text-transform:uppercase;margin-bottom:3px}
+.tri-zh-text{font-family:'Noto Sans SC',sans-serif;font-size:13px;font-weight:500;color:#064e3b;line-height:1.7;letter-spacing:1px}
+
+.sec{border-radius:16px;margin-bottom:12px;overflow:hidden;border:2px solid}
+.sec-header{display:flex;align-items:center;gap:12px;padding:14px;cursor:pointer;user-select:none;-webkit-tap-highlight-color:transparent}
+.sec-icon{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0}
+.sec-info{flex:1}
+.sec-num{font-size:10px;font-weight:800;letter-spacing:1px;margin-bottom:2px;text-transform:uppercase}
+.sec-title-my{font-size:15px;font-weight:800;line-height:1.25;color:#78350f}
+.sec-title-en{font-size:12px;font-weight:700;font-style:italic;color:#1e3a8a;margin-top:2px}
+.sec-title-zh{font-family:'Noto Sans SC',sans-serif;font-size:11px;color:#064e3b;margin-top:2px;letter-spacing:1px}
+.sec-chev{font-size:20px;color:#94a3b8;transition:transform .25s;flex-shrink:0}
+.sec-chev.open{transform:rotate(180deg)}
+.sec-body{display:none;padding:0 12px 12px}
+.sec-body.open{display:block}
+
+.mem{border-radius:12px;padding:12px;background:#f1f5f9;border:2px solid #cbd5e1;margin-top:10px}
+.mem-lbl{font-size:11px;letter-spacing:2px;font-weight:800;margin-bottom:8px;color:#475569;text-transform:uppercase}
+.pills{display:flex;flex-wrap:wrap;gap:6px}
+.pill-my{padding:5px 10px;border-radius:20px;font-size:12px;font-weight:800;border:2px solid #d97706;background:#fef3c7;color:#78350f}
+.pill-en{padding:5px 10px;border-radius:20px;font-size:12px;font-weight:700;border:2px solid #2563eb;background:#dbeafe;color:#1e3a8a;font-style:italic}
+.pill-zh{padding:5px 10px;border-radius:20px;font-size:11px;font-weight:700;border:2px solid #059669;background:#d1fae5;color:#064e3b;font-family:'Noto Sans SC',sans-serif;letter-spacing:1px}
+
+.blist{list-style:none;padding:0;margin-bottom:6px}
+.blist li{font-size:13px;font-weight:600;line-height:1.5;padding:4px 0 4px 14px;position:relative;border-bottom:1px dashed rgba(0,0,0,.07)}
+.blist li:last-child{border-bottom:none}
+.blist li::before{content:'▸';position:absolute;left:0;font-size:11px}
+
+.sub-sec{border-radius:10px;padding:10px 12px;margin-bottom:8px;border:1.5px solid}
+.sub-title{font-size:11px;font-weight:800;letter-spacing:1px;text-transform:uppercase;margin-bottom:6px}
+
+.kp{background:#fef3c7;color:#92400e;font-weight:800;padding:1px 5px;border-radius:5px;font-size:13px}
+.kplace{background:#d1fae5;color:#064e3b;font-weight:700;padding:1px 5px;border-radius:5px;font-size:13px}
+.kitem{background:#ede9fe;color:#4c1d95;font-weight:700;padding:1px 5px;border-radius:5px;font-size:13px}
+
+.comp-wrap{overflow-x:auto;margin-bottom:10px;border-radius:12px}
+.comp-table{width:100%;border-collapse:collapse;font-size:12px}
+.comp-table th{padding:8px 10px;font-size:10px;font-weight:800;letter-spacing:1px;text-transform:uppercase;text-align:left;color:#fff}
+.comp-table td{padding:8px 10px;vertical-align:top;line-height:1.4;border-bottom:1px solid rgba(0,0,0,.06)}
+.comp-table tr:last-child td{border-bottom:none}
+
+.mmap-item{border-radius:14px;overflow:hidden;margin-bottom:10px;border:2px solid #e2e8f0;box-shadow:0 2px 8px rgba(0,0,0,.06)}
+.mmap-my{background:#fef3c7;padding:9px 14px;border-bottom:1px solid #fde68a}
+.mmap-my-text{font-size:14px;font-weight:800;color:#78350f}
+.mmap-en{background:#dbeafe;padding:9px 14px;border-bottom:1px solid #bfdbfe}
+.mmap-en-text{font-size:13px;font-weight:600;color:#1e3a8a;font-style:italic}
+.mmap-zh{background:#d1fae5;padding:9px 14px}
+.mmap-zh-text{font-family:'Noto Sans SC',sans-serif;font-size:12px;font-weight:500;color:#064e3b;letter-spacing:1px}
+.mmap-header{background:#0f172a;padding:14px;text-align:center;border-radius:14px 14px 0 0}
+.mmap-h-title{font-size:15px;font-weight:800;color:#fbbf24;margin-bottom:2px}
+.mmap-h-en{font-size:12px;color:#94a3b8;font-style:italic}
+.mmap-h-zh{font-family:'Noto Sans SC',sans-serif;font-size:11px;color:#6ee7b7;letter-spacing:2px;margin-top:2px}
+
+.exam-box{border-radius:14px;overflow:hidden;border:2px solid #7c3aed;margin-top:10px}
+.exam-hdr{background:#7c3aed;padding:9px 14px}
+.exam-lbl{font-size:10px;letter-spacing:2px;font-weight:800;color:#ede9fe;text-transform:uppercase}
+.exam-my{background:#fffbeb;border-left:5px solid #d97706;padding:9px 14px}
+.exam-my-t{font-size:13px;font-weight:700;color:#78350f;line-height:1.6}
+.exam-en{background:#eff6ff;border-left:5px solid #2563eb;padding:9px 14px}
+.exam-en-t{font-size:13px;font-weight:600;color:#1e3a8a;line-height:1.6;font-style:italic}
+.exam-zh{background:#ecfdf5;border-left:5px solid #059669;padding:9px 14px}
+.exam-zh-t{font-family:'Noto Sans SC',sans-serif;font-size:12px;font-weight:500;color:#064e3b;line-height:1.8;letter-spacing:1px}
+
+/* SECTION THEMES */
+.s-a{background:#fdf4ff;border-color:#a855f7}.s-a .sec-header{background:#f3e8ff}.s-a .sec-icon{background:#9333ea}.s-a .sec-num{color:#6b21a8}.s-a .sec-body{border-top:2px dashed #e9d5ff}
+.s-b{background:#fffbeb;border-color:#f59e0b}.s-b .sec-header{background:#fef3c7}.s-b .sec-icon{background:#d97706}.s-b .sec-num{color:#92400e}.s-b .sec-body{border-top:2px dashed #fde68a}
+.s-c{background:#ecfdf5;border-color:#059669}.s-c .sec-header{background:#d1fae5}.s-c .sec-icon{background:#059669}.s-c .sec-num{color:#047857}.s-c .sec-body{border-top:2px dashed #6ee7b7}
+.s-d{background:#eff6ff;border-color:#2563eb}.s-d .sec-header{background:#dbeafe}.s-d .sec-icon{background:#2563eb}.s-d .sec-num{color:#1d4ed8}.s-d .sec-body{border-top:2px dashed #bfdbfe}
+.s-e{background:#fff5f5;border-color:#dc2626}.s-e .sec-header{background:#fee2e2}.s-e .sec-icon{background:#dc2626}.s-e .sec-num{color:#b91c1c}.s-e .sec-body{border-top:2px dashed #fca5a5}
+.s-f{background:#f5f3ff;border-color:#7c3aed}.s-f .sec-header{background:#ede9fe}.s-f .sec-icon{background:#7c3aed}.s-f .sec-num{color:#5b21b6}.s-f .sec-body{border-top:2px dashed #c4b5fd}
+
+.hide-my .tri-my,.hide-my .mmap-my,.hide-my .exam-my,.hide-my .sec-title-my,.hide-my .pill-my{display:none}
+.hide-en .tri-en,.hide-en .mmap-en,.hide-en .exam-en,.hide-en .sec-title-en,.hide-en .pill-en{display:none}
+.hide-zh .tri-zh,.hide-zh .mmap-zh,.hide-zh .exam-zh,.hide-zh .sec-title-zh,.hide-zh .pill-zh{display:none}
+
+.footer{text-align:center;font-size:12px;color:#94a3b8;padding:14px;letter-spacing:1px}
+</style>
+</head>
+<body id="app">
+
+<div class="hero">
+  <div class="hero-badge">Sejarah &middot; Tingkatan 2 &middot; Bab 4</div>
+  <div class="hero-title">Agama, Kepercayaan dan Keunikan Warisan<br>Masyarakat Kerajaan Alam Melayu</div>
+  <div class="hero-sub">Religion, Beliefs &amp; Unique Heritage of Malay World Kingdoms</div>
+  <div class="hero-zh">马来世界王国的宗教、信仰与独特遗产</div>
+  <div class="hero-stats">
+    <div><div class="stat-num">2</div><div class="stat-lbl">Sections</div></div>
+    <div><div class="stat-num">3</div><div class="stat-lbl">Languages</div></div>
+    <div><div class="stat-num">6</div><div class="stat-lbl">Tabs</div></div>
+  </div>
+</div>
+
+<div class="lang-legend">
+  <div class="legend-dot"><div class="dot" style="background:#d97706"></div><span style="color:#78350f">Melayu</span></div>
+  <div class="legend-dot"><div class="dot" style="background:#2563eb"></div><span style="color:#1e3a8a">English</span></div>
+  <div class="legend-dot"><div class="dot" style="background:#059669"></div><span style="color:#064e3b;font-family:'Noto Sans SC',sans-serif">中文</span></div>
+</div>
+
+<div class="lang-bar">
+  <button class="lbtn lbtn-my on" onclick="tgl('my',this)">&#x1F7E1; Melayu</button>
+  <button class="lbtn lbtn-en on" onclick="tgl('en',this)">&#x1F535; English</button>
+  <button class="lbtn lbtn-zh on" onclick="tgl('zh',this)">&#x1F7E2; 中文</button>
+</div>
+
+<div class="tabs">
+  <button class="tab tab-agama active" onclick="showPanel('agama',this)">&#9792; Agama Awal</button>
+  <button class="tab tab-kerajaan" onclick="showPanel('kerajaan',this)">&#127963; Kerajaan</button>
+  <button class="tab tab-pemerintah" onclick="showPanel('pemerintah',this)">&#128081; Pemerintahan</button>
+  <button class="tab tab-ekonomi" onclick="showPanel('ekonomi',this)">&#128176; Ekonomi</button>
+  <button class="tab tab-sosio" onclick="showPanel('sosio',this)">&#128221; Sosiobudaya</button>
+  <button class="tab tab-mm" onclick="showPanel('mm',this)">&#11088; Memory Map</button>
+</div>
+
+<!-- ════════ AGAMA AWAL ════════ -->
+<div id="panel-agama" class="panel active">
+
+  <div class="sec s-a">
+    <div class="sec-header" onclick="exp(this)">
+      <div class="sec-icon">&#9792;</div>
+      <div class="sec-info">
+        <div class="sec-num">4.1</div>
+        <div class="sec-title-my">Kepercayaan Awal: Animisme &amp; Dinamisme</div>
+        <div class="sec-title-en">Early Beliefs: Animism &amp; Dynamism</div>
+        <div class="sec-title-zh">早期信仰：万物有灵论与活力论</div>
+      </div>
+      <span class="sec-chev open">&#8964;</span>
+    </div>
+    <div class="sec-body open">
+      <div class="tri">
+        <div class="tri-my"><div class="tri-my-lbl">&#x1F7E1; Animisme</div><div class="tri-my-text">
+          (i) Kepercayaan terhadap makhluk halus.<br>
+          (ii) Menyembah roh nenek moyang yang telah meninggal dunia — dipanggil <span class="kitem">hyang</span>.<br>
+          (iii) Memastikan keluarga yang masih hidup mendapat kebaikan dan menghindari kesusahan di dunia.<br>
+          (iv) Kepercayaan bahawa setiap makhluk, hidupan dan tumbuhan memiliki roh atau semangat.
+        </div></div>
+        <div class="tri-en"><div class="tri-en-lbl">&#x1F535; Animism</div><div class="tri-en-text">
+          (i) Belief in spiritual beings / spirits.<br>
+          (ii) Worship of ancestors' souls after death — called <span class="kitem">hyang</span>.<br>
+          (iii) To ensure living family members gain blessings and avoid hardship.<br>
+          (iv) Belief that every creature, living being and plant possesses a soul or spirit.
+        </div></div>
+        <div class="tri-zh"><div class="tri-zh-lbl">&#x1F7E2; 万物有灵论</div><div class="tri-zh-text">
+          (i) 相信精灵/神灵的存在。<br>
+          (ii) 崇拜已故祖先的灵魂，称为<span class="kitem">hyang</span>。<br>
+          (iii) 确保在世家人获得福祉，避免苦难。<br>
+          (iv) 相信每个生物、动植物都拥有灵魂或精神。
+        </div></div>
+      </div>
+
+      <div class="tri">
+        <div class="tri-my"><div class="tri-my-lbl">&#x1F7E1; Dinamisme</div><div class="tri-my-text">
+          (i) Kepercayaan terhadap kekuatan yang dikenali sebagai <span class="kitem">mana</span> atau semangat.<br>
+          (ii) Setiap benda dan makhluk dianggap mempunyai <em>mana</em> yang boleh mempengaruhi kehidupan seseorang.<br>
+          (iii) Upacara pemujaan semangat tanaman dilakukan agar mendapat hasil tanaman yang subur dan banyak.
+        </div></div>
+        <div class="tri-en"><div class="tri-en-lbl">&#x1F535; Dynamism</div><div class="tri-en-text">
+          (i) Belief in a supernatural power known as <span class="kitem">mana</span> or spirit force.<br>
+          (ii) Every object and creature is believed to have <em>mana</em> that can influence one's life.<br>
+          (iii) Rituals to worship crop spirits were performed to ensure abundant and fertile harvests.
+        </div></div>
+        <div class="tri-zh"><div class="tri-zh-lbl">&#x1F7E2; 活力论</div><div class="tri-zh-text">
+          (i) 相信称为<span class="kitem">mana</span>的超自然力量或精神力。<br>
+          (ii) 每个物体和生物都被认为拥有可影响人生的<em>mana</em>。<br>
+          (iii) 举行崇拜作物精神的仪式，以确保丰收。
+        </div></div>
+      </div>
+
+      <div class="mem">
+        <div class="mem-lbl">&#129504; Memory Keywords</div>
+        <div class="pills">
+          <span class="pill-my">Animisme = roh/semangat makhluk</span>
+          <span class="pill-en">Animism = souls of beings</span>
+          <span class="pill-zh">万物有灵论=生物灵魂</span>
+          <span class="pill-my">Dinamisme = mana (kekuatan)</span>
+          <span class="pill-en">Dynamism = mana (power)</span>
+          <span class="pill-zh">活力论=mana（超自然力）</span>
+          <span class="pill-my">hyang = roh nenek moyang</span>
+          <span class="pill-en">hyang = ancestral spirit</span>
+          <span class="pill-zh">hyang = 祖先灵魂</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sec s-b">
+    <div class="sec-header" onclick="exp(this)">
+      <div class="sec-icon">&#127758;</div>
+      <div class="sec-info">
+        <div class="sec-num">4.1</div>
+        <div class="sec-title-my">Penyebaran Agama Hindu, Buddha dan Islam</div>
+        <div class="sec-title-en">Spread of Hinduism, Buddhism &amp; Islam</div>
+        <div class="sec-title-zh">印度教、佛教与伊斯兰教的传播</div>
+      </div>
+      <span class="sec-chev">&#8964;</span>
+    </div>
+    <div class="sec-body">
+      <div class="tri">
+        <div class="tri-my"><div class="tri-my-lbl">&#x1F7E1; Fakta Utama</div><div class="tri-my-text">
+          • Agama Hindu dan Buddha tersebar sebelum Masihi (SM), Islam tersebar mulai abad ke-7.<br>
+          • Agama Hindu dan Buddha mempengaruhi: Funan, Champa, Srivijaya, Angkor, Majapahit, Kedah Tua dan Gangga Nagara.<br>
+          • Islam tiba di Alam Melayu mulai abad ke-7 dan diamalkan oleh: Champa, Majapahit, Kedah dan Pasai.<br>
+          • Penyebaran berkait rapat dengan peranan <strong>mubaligh, pemerintah</strong> dan <strong>perdagangan antarabangsa</strong>.
+        </div></div>
+        <div class="tri-en"><div class="tri-en-lbl">&#x1F535; Key Facts</div><div class="tri-en-text">
+          • Hinduism and Buddhism spread before the Common Era (BCE), Islam spread from the 7th century.<br>
+          • Hindu and Buddhist influence on: Funan, Champa, Srivijaya, Angkor, Majapahit, Old Kedah and Gangga Nagara.<br>
+          • Islam arrived in the Malay World from the 7th century — practised by Champa, Majapahit, Kedah and Pasai.<br>
+          • Spread closely linked to roles of <strong>missionaries, rulers</strong> and <strong>international trade</strong>.
+        </div></div>
+        <div class="tri-zh"><div class="tri-zh-lbl">&#x1F7E2; 主要事实</div><div class="tri-zh-text">
+          • 印度教和佛教在公元前传播，伊斯兰教从7世纪开始传播。<br>
+          • 印度教和佛教影响：扶南、占婆、室利佛逝、吴哥、满者伯夷、古吉打和冈伽纳加拉。<br>
+          • 伊斯兰教从7世纪抵达马来世界，在占婆、满者伯夷、吉打和巴赛传播。<br>
+          • 传播与<strong>传教士、统治者</strong>和<strong>国际贸易</strong>密切相关。
+        </div></div>
+      </div>
+      <div class="tri">
+        <div class="tri-my"><div class="tri-my-lbl">&#x1F7E1; Warisan Berterusan</div><div class="tri-my-text">Pengaruh budaya Hindu dan Buddha seperti sistem pemerintahan, bahasa, persuratan dan seni bina masih lagi diamalkan dalam kehidupan masyarakat Melayu, namun <strong>disesuaikan dengan agama Islam</strong>.</div></div>
+        <div class="tri-en"><div class="tri-en-lbl">&#x1F535; Continuing Heritage</div><div class="tri-en-text">Hindu and Buddhist cultural influences such as governance systems, language, literature and architecture are still practised in Malay society but <strong>adapted to Islam</strong>.</div></div>
+        <div class="tri-zh"><div class="tri-zh-lbl">&#x1F7E2; 持续遗产</div><div class="tri-zh-text">印度教和佛教的文化影响，如治理制度、语言、文学和建筑，仍在马来社会中实践，但已<strong>适应伊斯兰教</strong>。</div></div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ════════ KERAJAAN ════════ -->
+<div id="panel-kerajaan" class="panel">
+
+  <div class="sec s-b">
+    <div class="sec-header" onclick="exp(this)">
+      <div class="sec-icon">&#127963;</div>
+      <div class="sec-info">
+        <div class="sec-num">4.1</div>
+        <div class="sec-title-my">Perkembangan Agama mengikut Kerajaan</div>
+        <div class="sec-title-en">Religious Development by Kingdom</div>
+        <div class="sec-title-zh">各王国宗教发展</div>
+      </div>
+      <span class="sec-chev open">&#8964;</span>
+    </div>
+    <div class="sec-body open">
+
+      <!-- FUNAN -->
+      <div class="sub-sec" style="background:#fef3c7;border-color:#f59e0b;margin-bottom:8px">
+        <div class="sub-title" style="color:#92400e">&#127981; Kerajaan Funan / Kingdom of Funan / 扶南王国</div>
+        <div class="tri">
+          <div class="tri-my"><div class="tri-my-lbl">&#x1F7E1;</div><div class="tri-my-text">• Agama Hindu dan Buddha tersebar sejak abad pertama.<br>• Raja <span class="kp">Fan Shih-man</span> memainkan peranan penting dalam perkembangan agama Buddha.<br>• <span class="kitem">Candi Go Cay Thi</span> — candi tinggalan kerajaan Funan.</div></div>
+          <div class="tri-en"><div class="tri-en-lbl">&#x1F535;</div><div class="tri-en-text">• Hinduism and Buddhism spread from the 1st century.<br>• King <span class="kp">Fan Shih-man</span> played an important role in Buddhism's development.<br>• <span class="kitem">Candi Go Cay Thi</span> — temple relic of Funan.</div></div>
+          <div class="tri-zh"><div class="tri-zh-lbl">&#x1F7E2;</div><div class="tri-zh-text">• 印度教和佛教从第一世纪开始传播。<br>• 国王<span class="kp">范师蔓</span>在佛教发展中发挥重要作用。<br>• <span class="kitem">Go Cay Thi神庙</span>——扶南王国遗址。</div></div>
+        </div>
+      </div>
+
+      <!-- ANGKOR -->
+      <div class="sub-sec" style="background:#fef3c7;border-color:#f59e0b;margin-bottom:8px">
+        <div class="sub-title" style="color:#92400e">&#127963; Kerajaan Angkor / Kingdom of Angkor / 吴哥王国</div>
+        <div class="tri">
+          <div class="tri-my"><div class="tri-my-lbl">&#x1F7E1;</div><div class="tri-my-text">• Agama Hindu anutan utama sejak kerajaan diasaskan.<br>• Kegemilangan agama Hindu semasa pemerintahan <span class="kp">Suryavarman II</span>.<br>• Candi Hindu terkenal: <span class="kitem">Angkor Wat</span>.<br>• Semasa pemerintahan <span class="kp">Jayavarman VII</span> (abad ke-12), agama <strong>Buddha</strong> menjadi agama utama.</div></div>
+          <div class="tri-en"><div class="tri-en-lbl">&#x1F535;</div><div class="tri-en-text">• Hinduism was the main religion since the kingdom's founding.<br>• Height of Hinduism during <span class="kp">Suryavarman II</span>'s rule.<br>• Famous Hindu temple: <span class="kitem">Angkor Wat</span>.<br>• During <span class="kp">Jayavarman VII</span> (12th century), <strong>Buddhism</strong> became the main religion.</div></div>
+          <div class="tri-zh"><div class="tri-zh-lbl">&#x1F7E2;</div><div class="tri-zh-text">• 印度教自建国以来一直是主要宗教。<br>• 印度教在<span class="kp">苏利耶跋摩二世</span>统治期间达到鼎盛。<br>• 著名印度教神庙：<span class="kitem">吴哥窟</span>。<br>• <span class="kp">阇耶跋摩七世</span>（12世纪）时期，<strong>佛教</strong>成为主要宗教。</div></div>
+        </div>
+      </div>
+
+      <!-- CHAMPA -->
+      <div class="sub-sec" style="background:#fef3c7;border-color:#f59e0b;margin-bottom:8px">
+        <div class="sub-title" style="color:#92400e">&#127963; Kerajaan Champa / Kingdom of Champa / 占婆王国</div>
+        <div class="tri">
+          <div class="tri-my"><div class="tri-my-lbl">&#x1F7E1;</div><div class="tri-my-text">• Agama Hindu tersebar sejak abad ke-4 semasa pemerintahan <span class="kp">Bhadravarman</span>.<br>• Candi Hindu: <span class="kitem">Siva-Bhadresvara</span> di Lembah Mi Son, juga di Po Nagar.<br>• Agama Buddha dibuktikan oleh penemuan <span class="kitem">Candi Dong Duong</span>.<br>• Islam tersebar — dibuktikan: <span class="kitem">batu nisan bertarikh 1039</span> dan <span class="kitem">batu bersurat bertarikh 1035</span>. Tersebar luas semasa pemerintahan Sultan Zainal Abidin (abad ke-14).</div></div>
+          <div class="tri-en"><div class="tri-en-lbl">&#x1F535;</div><div class="tri-en-text">• Hinduism spread from the 4th century during <span class="kp">Bhadravarman</span>'s rule.<br>• Hindu temples: <span class="kitem">Siva-Bhadresvara</span> in Mi Son Valley and Po Nagar.<br>• Buddhism evidenced by discovery of <span class="kitem">Candi Dong Duong</span>.<br>• Islam spread — evidenced by: <span class="kitem">gravestone dated 1039</span> and <span class="kitem">inscribed stone dated 1035</span>. Widespread during Sultan Zainal Abidin's rule (14th century).</div></div>
+          <div class="tri-zh"><div class="tri-zh-lbl">&#x1F7E2;</div><div class="tri-zh-text">• 印度教从4世纪<span class="kp">跋陀罗跋摩</span>统治时期开始传播。<br>• 印度教神庙：Mi Son山谷的<span class="kitem">湿婆-跋陀罗湿婆神庙</span>。<br>• 佛教由发现<span class="kitem">铜鼓寺庙</span>证明。<br>• 伊斯兰教传播——由<span class="kitem">1039年墓碑</span>和<span class="kitem">1035年铭文石</span>证明。在苏丹扎纳尔阿比丁统治期间广泛传播。</div></div>
+        </div>
+      </div>
+
+      <!-- SRIVIJAYA -->
+      <div class="sub-sec" style="background:#dbeafe;border-color:#2563eb;margin-bottom:8px">
+        <div class="sub-title" style="color:#1d4ed8">&#127963; Kerajaan Srivijaya / Kingdom of Srivijaya / 室利佛逝王国</div>
+        <div class="tri">
+          <div class="tri-my"><div class="tri-my-lbl">&#x1F7E1;</div><div class="tri-my-text">• Pusat kegiatan agama Buddha pada abad ke-7.<br>• <span class="kp">Pendeta I-Tsing</span> dari China datang ke Srivijaya untuk mempelajari bahasa Sanskrit dan menterjemahkan kitab-kitab agama Buddha.<br>• Tinggalan candi: <span class="kitem">Candi Muara Jambi</span>, <span class="kitem">Candi Bahal</span> dan <span class="kitem">Candi Muara Takus</span>.</div></div>
+          <div class="tri-en"><div class="tri-en-lbl">&#x1F535;</div><div class="tri-en-text">• Centre of Buddhist activities in the 7th century.<br>• <span class="kp">Monk I-Tsing</span> from China came to Srivijaya to study Sanskrit and translate Buddhist scriptures.<br>• Temple relics: <span class="kitem">Candi Muara Jambi</span>, <span class="kitem">Candi Bahal</span> and <span class="kitem">Candi Muara Takus</span>.</div></div>
+          <div class="tri-zh"><div class="tri-zh-lbl">&#x1F7E2;</div><div class="tri-zh-text">• 7世纪佛教活动中心。<br>• 中国僧侣<span class="kp">义净</span>来到室利佛逝学习梵文，翻译佛经。<br>• 神庙遗址：<span class="kitem">穆阿拉占碑寺庙</span>、<span class="kitem">巴哈尔寺庙</span>和<span class="kitem">穆阿拉达库斯寺庙</span>。</div></div>
+        </div>
+      </div>
+
+      <!-- MAJAPAHIT -->
+      <div class="sub-sec" style="background:#fef3c7;border-color:#f59e0b;margin-bottom:8px">
+        <div class="sub-title" style="color:#92400e">&#127963; Kerajaan Majapahit / Kingdom of Majapahit / 满者伯夷王国</div>
+        <div class="tri">
+          <div class="tri-my"><div class="tri-my-lbl">&#x1F7E1;</div><div class="tri-my-text">• Dipengaruhi agama Hindu dan Buddha secara serentak.<br>• Disatukan oleh <span class="kp">Hayam Wuruk</span> (abad ke-14) — dikenali sebagai <span class="kitem">Tripaksa</span>.<br>• Candi terkenal: <span class="kitem">Candi Jabong</span>, <span class="kitem">Candi Sukuh</span> dan <span class="kitem">Candi Brahu</span>.<br>• Islam tersebar sejak abad ke-14. <span class="kp">Wu Ping</span> (pegawai Ming) dilantik sebagai wakil tetap. <span class="kp">Gan Eng Chou</span> dilantik ketua kaum Cina di Tuban — beragama Islam.<br>• Kerajaan Demak muncul sebagai pusat pengajian Islam terbesar di Jawa (abad ke-16).</div></div>
+          <div class="tri-en"><div class="tri-en-lbl">&#x1F535;</div><div class="tri-en-text">• Influenced by Hinduism and Buddhism simultaneously.<br>• Unified by <span class="kp">Hayam Wuruk</span> (14th century) — known as <span class="kitem">Tripaksa</span>.<br>• Famous temples: <span class="kitem">Candi Jabong</span>, <span class="kitem">Candi Sukuh</span>, <span class="kitem">Candi Brahu</span>.<br>• Islam spread from 14th century. <span class="kp">Wu Ping</span> (Ming official) was a Muslim permanent representative. <span class="kp">Gan Eng Chou</span> appointed as Chinese community leader in Tuban — a Muslim.<br>• Demak Kingdom emerged as largest Islamic centre in Java (16th century).</div></div>
+          <div class="tri-zh"><div class="tri-zh-lbl">&#x1F7E2;</div><div class="tri-zh-text">• 同时受印度教和佛教影响。<br>• 由<span class="kp">哈亚姆·武鲁克</span>（14世纪）统一，称为<span class="kitem">Tripaksa</span>。<br>• 著名神庙：<span class="kitem">Jabong神庙</span>、<span class="kitem">Sukuh神庙</span>、<span class="kitem">Brahu神庙</span>。<br>• 伊斯兰教从14世纪传播。<span class="kp">吴平</span>（明朝官员）被任命为常驻代表。<span class="kp">颜英楚</span>任杜板华人社区领袖，皆为穆斯林。<br>• 淡目王国成为爪哇最大伊斯兰研究中心（16世纪）。</div></div>
+        </div>
+      </div>
+
+      <!-- KEDAH TUA -->
+      <div class="sub-sec" style="background:#d1fae5;border-color:#059669;margin-bottom:8px">
+        <div class="sub-title" style="color:#047857">&#9733; Kerajaan Kedah Tua / Old Kedah / 古吉打王国</div>
+        <div class="tri">
+          <div class="tri-my"><div class="tri-my-lbl">&#x1F7E1;</div><div class="tri-my-text">• Agama Buddha diamalkan sejak abad ke-5 (anutan utama). Agama Hindu turut tersebar.<br>• Abad ke-12: Kedah Tua mula menerima pengaruh agama Islam.<br>• <span class="kp">Maharaja Derbar Raja II</span> (pemerintah Kedah ke-9) memeluk Islam pada tahun <strong>1136</strong>.</div></div>
+          <div class="tri-en"><div class="tri-en-lbl">&#x1F535;</div><div class="tri-en-text">• Buddhism practised since 5th century (main religion). Hinduism also spread.<br>• 12th century: Old Kedah began accepting Islamic influence.<br>• <span class="kp">Maharaja Derbar Raja II</span> (9th ruler of Kedah) embraced Islam in <strong>1136</strong>.</div></div>
+          <div class="tri-zh"><div class="tri-zh-lbl">&#x1F7E2;</div><div class="tri-zh-text">• 佛教从5世纪开始实践（主要宗教），印度教也传播。<br>• 12世纪：古吉打开始接受伊斯兰影响。<br>• <span class="kp">大君德巴拉惹二世</span>（第9任吉打统治者）于<strong>1136年</strong>皈依伊斯兰教。</div></div>
+        </div>
+      </div>
+
+      <!-- GANGGA NAGARA -->
+      <div class="sub-sec" style="background:#d1fae5;border-color:#059669">
+        <div class="sub-title" style="color:#047857">&#127963; Kerajaan Gangga Nagara / 冈伽纳加拉王国</div>
+        <div class="tri">
+          <div class="tri-my"><div class="tri-my-lbl">&#x1F7E1;</div><div class="tri-my-text">• Agama Buddha merupakan anutan utama.<br>• Buktinya: penemuan <span class="kitem">arca-arca Buddha di Lembah Kinta</span>, <span class="kitem">patung Buddha</span> dan <span class="kitem">Avalokitesvara di Bidor</span>.<br>• Arca-arca bertarikh abad ke-6 hingga ke-9 Masihi.</div></div>
+          <div class="tri-en"><div class="tri-en-lbl">&#x1F535;</div><div class="tri-en-text">• Buddhism was the main religion.<br>• Evidence: discovery of <span class="kitem">Buddha statues in Kinta Valley</span>, <span class="kitem">Buddha figurines</span> and <span class="kitem">Avalokitesvara in Bidor</span>.<br>• Statues dated 6th to 9th century AD.</div></div>
+          <div class="tri-zh"><div class="tri-zh-lbl">&#x1F7E2;</div><div class="tri-zh-text">• 佛教是主要宗教。<br>• 证据：发现<span class="kitem">近打谷佛像</span>、<span class="kitem">佛陀雕像</span>和<span class="kitem">比都观世音菩萨</span>。<br>• 雕像年代为公元6至9世纪。</div></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- ════════ PEMERINTAHAN ════════ -->
+<div id="panel-pemerintah" class="panel">
+
+  <div class="sec s-c">
+    <div class="sec-header" onclick="exp(this)">
+      <div class="sec-icon">&#128081;</div>
+      <div class="sec-info">
+        <div class="sec-num">4.2</div>
+        <div class="sec-title-my">Sistem Pemerintahan Beraja</div>
+        <div class="sec-title-en">Royal Government System</div>
+        <div class="sec-title-zh">君主政府制度</div>
+      </div>
+      <span class="sec-chev open">&#8964;</span>
+    </div>
+    <div class="sec-body open">
+
+      <div class="tri">
+        <div class="tri-my"><div class="tri-my-lbl">&#x1F7E1; Ciri-ciri Sistem Beraja</div><div class="tri-my-text">
+          • Mengasimilasikan pengaruh agama dalam pentadbiran.<br>
+          • Raja menjadi <strong>tonggak utama</strong> kerajaan.<br>
+          • Rakyat taat setia yang tidak berbelah bahagi.
+        </div></div>
+        <div class="tri-en"><div class="tri-en-lbl">&#x1F535; Features of Royal System</div><div class="tri-en-text">
+          • Assimilates religious influence in administration.<br>
+          • The King is the <strong>main pillar</strong> of the kingdom.<br>
+          • People give undivided loyalty.
+        </div></div>
+        <div class="tri-zh"><div class="tri-zh-lbl">&#x1F7E2; 君主制度特征</div><div class="tri-zh-text">
+          • 将宗教影响融入行政管理。<br>
+          • 国王是王国的<strong>主要支柱</strong>。<br>
+          • 人民给予绝对忠诚。
+        </div></div>
+      </div>
+
+      <div class="tri">
+        <div class="tri-my"><div class="tri-my-lbl">&#x1F7E1; Pemilihan Raja</div><div class="tri-my-text">
+          1. Berasaskan keturunan.<br>
+          2. Keturunan raja dianggap <strong>suci dan berdaulat</strong>.<br>
+          3. Boleh dipilih dalam kalangan tentera (seperti Funan dan Champa).<br>
+          4. Wanita diraja boleh menjadi pemerintah (seperti di Majapahit).
+        </div></div>
+        <div class="tri-en"><div class="tri-en-lbl">&#x1F535; Selection of King</div><div class="tri-en-text">
+          1. Based on lineage.<br>
+          2. Royal lineage considered <strong>sacred and sovereign</strong>.<br>
+          3. Can be selected from military (like Funan and Champa).<br>
+          4. Royal women can be rulers (like in Majapahit).
+        </div></div>
+        <div class="tri-zh"><div class="tri-zh-lbl">&#x1F7E2; 国王选拔</div><div class="tri-zh-text">
+          1. 基于血统。<br>
+          2. 王室血统被视为<strong>神圣且有主权</strong>。<br>
+          3. 可从军队中选拔（如扶南和占婆）。<br>
+          4. 王室女性可成为统治者（如满者伯夷）。
+        </div></div>
+      </div>
+
+      <div class="tri">
+        <div class="tri-my"><div class="tri-my-lbl">&#x1F7E1; Kedudukan &amp; Gelaran Raja</div><div class="tri-my-text">
+          • Raja dianggap <strong>titisan dewa</strong>, mesti dihormati. Tidak boleh menderhaka.<br>
+          • Islam memperkenalkan konsep <span class="kitem">khalifah</span>.<br>
+          • Gelaran Hindu/Buddha: <strong>Raja dan Maharaja</strong>. Islam: <strong>Sultan</strong>.<br>
+          • Gelaran menggambarkan kebesaran kuasa: Raja di Gunung, Maharaja di Pulau.<br>
+          • Penggunaan gelaran Sanskrit <strong>"varman"</strong>: contohnya Funan, Champa, Angkor dan Srivijaya.
+        </div></div>
+        <div class="tri-en"><div class="tri-en-lbl">&#x1F535; Status &amp; Titles of Kings</div><div class="tri-en-text">
+          • King considered <strong>divine incarnation</strong>, must be respected. Cannot commit treason.<br>
+          • Islam introduced the concept of <span class="kitem">khalifah</span> (caliph).<br>
+          • Hindu/Buddhist titles: <strong>Raja and Maharaja</strong>. Islam: <strong>Sultan</strong>.<br>
+          • Titles reflect the greatness of power: King of the Mountain, Maharaja of the Island.<br>
+          • Use of Sanskrit title <strong>"varman"</strong>: e.g. Funan, Champa, Angkor and Srivijaya.
+        </div></div>
+        <div class="tri-zh"><div class="tri-zh-lbl">&#x1F7E2; 国王地位与称号</div><div class="tri-zh-text">
+          • 国王被视为<strong>神的化身</strong>，必须受到尊重，不可叛逆。<br>
+          • 伊斯兰教引入<span class="kitem">哈里发</span>概念。<br>
+          • 印度教/佛教称号：<strong>拉惹和马哈拉惹</strong>。伊斯兰：<strong>苏丹</strong>。<br>
+          • 称号反映权力的伟大：山中之王、岛之马哈拉惹。<br>
+          • 梵文称号<strong>"varman"</strong>：如扶南、占婆、吴哥和室利佛逝。
+        </div></div>
+      </div>
+
+      <div class="mem">
+        <div class="mem-lbl">&#129504; Memory Keywords</div>
+        <div class="pills">
+          <span class="pill-my">Hindu/Buddha: Raja, Maharaja, varman</span>
+          <span class="pill-en">Hindu/Buddhist: Raja, Maharaja, varman</span>
+          <span class="pill-zh">印度教/佛教：拉惹、马哈拉惹、varman</span>
+          <span class="pill-my">Islam: Sultan, Khalifah</span>
+          <span class="pill-en">Islam: Sultan, Khalifah (Caliph)</span>
+          <span class="pill-zh">伊斯兰：苏丹、哈里发</span>
+          <span class="pill-my">Raja = titisan dewa (tidak boleh derhaka)</span>
+          <span class="pill-en">King = divine incarnation (no treason)</span>
+          <span class="pill-zh">国王=神的化身（不可叛逆）</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sec s-c">
+    <div class="sec-header" onclick="exp(this)">
+      <div class="sec-icon">&#127981;</div>
+      <div class="sec-info">
+        <div class="sec-num">4.2</div>
+        <div class="sec-title-my">Kebijaksanaan Pemerintah — Memilih Pusat Pemerintahan</div>
+        <div class="sec-title-en">Rulers' Wisdom — Choosing the Capital</div>
+        <div class="sec-title-zh">统治者的智慧——选择首都</div>
+      </div>
+      <span class="sec-chev">&#8964;</span>
+    </div>
+    <div class="sec-body">
+      <div class="tri">
+        <div class="tri-my"><div class="tri-my-lbl">&#x1F7E1; 6 Faktor Pemilihan Pusat Pemerintahan</div><div class="tri-my-text">
+          1. <strong>Lokasi strategik</strong> sebagai pusat pemerintahan, petempatan dan pelabuhan.<br>
+          2. Memperkembangkan kegiatan pertanian di kawasan subur.<br>
+          3. Sungai berfungsi sebagai <strong>laluan pengangkutan utama</strong>.<br>
+          4. Memilih tempat yang menjadi laluan antarabangsa (timur-barat): <span class="kplace">Oc Eo</span> di Funan, <span class="kplace">Palembang</span> di Srivijaya.<br>
+          5. Mengutamakan petunjuk arah bagi memudahkan pedagang singgah di pelabuhan seperti bukit, gunung atau teluk.<br>
+          6. Bukit dan teluk membantu dalam aspek <strong>pertahanan</strong>.
+        </div></div>
+        <div class="tri-en"><div class="tri-en-lbl">&#x1F535; 6 Factors for Capital Selection</div><div class="tri-en-text">
+          1. <strong>Strategic location</strong> as centre of government, settlement and port.<br>
+          2. Develop agricultural activities in fertile areas.<br>
+          3. Rivers function as <strong>main transport routes</strong>.<br>
+          4. Choose locations on international trade routes (East-West): <span class="kplace">Oc Eo</span> in Funan, <span class="kplace">Palembang</span> in Srivijaya.<br>
+          5. Prioritise navigational landmarks for traders: hills, mountains or bays.<br>
+          6. Hills and bays assist in <strong>defence</strong>.
+        </div></div>
+        <div class="tri-zh"><div class="tri-zh-lbl">&#x1F7E2; 选择首都的6个因素</div><div class="tri-zh-text">
+          1. <strong>战略位置</strong>作为政府中心、定居点和港口。<br>
+          2. 在肥沃地区发展农业活动。<br>
+          3. 河流充当<strong>主要运输路线</strong>。<br>
+          4. 选择国际贸易路线（东西方）上的地点：扶南<span class="kplace">奥克尔</span>，室利佛逝<span class="kplace">巨港</span>。<br>
+          5. 优先考虑导航地标方便商人停靠：山丘、山脉或海湾。<br>
+          6. 山丘和海湾有助于<strong>防御</strong>。
+        </div></div>
+      </div>
+
+      <div class="tri">
+        <div class="tri-my"><div class="tri-my-lbl">&#x1F7E1; Hubungan Diplomatik</div><div class="tri-my-text">
+          1. <strong>Hubungan persahabatan:</strong> Srivijaya menghantar utusan ke China (abad ke-7). Majapahit menjalinkan persahabatan dengan China (abad ke-14).<br>
+          2. <strong>Bantuan ketenteraan atau senjata:</strong> Maharaja Chola dari India menghantar bantuan tentera ke Srivijaya (abad ke-11).<br>
+          3. <strong>Perkahwinan:</strong> Raden Wijaya (Majapahit) berkahwin dengan puteri kerajaan Singhasari (abad ke-13).
+        </div></div>
+        <div class="tri-en"><div class="tri-en-lbl">&#x1F535; Diplomatic Relations</div><div class="tri-en-text">
+          1. <strong>Friendship:</strong> Srivijaya sent envoys to China (7th century). Majapahit formed friendship with China (14th century).<br>
+          2. <strong>Military/weapons aid:</strong> Maharaja Chola from India sent military aid to Srivijaya (11th century).<br>
+          3. <strong>Marriage:</strong> Raden Wijaya (Majapahit) married a princess of the Singhasari kingdom (13th century).
+        </div></div>
+        <div class="tri-zh"><div class="tri-zh-lbl">&#x1F7E2; 外交关系</div><div class="tri-zh-text">
+          1. <strong>友好关系：</strong>室利佛逝向中国派遣使团（7世纪）。满者伯夷与中国建立友好关系（14世纪）。<br>
+          2. <strong>军事/武器援助：</strong>印度朱罗王朝向室利佛逝提供军事援助（11世纪）。<br>
+          3. <strong>婚姻：</strong>拉登维查亚（满者伯夷）娶新柯沙里王国公主（13世纪）。
+        </div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════ EKONOMI ════════ -->
+<div id="panel-ekonomi" class="panel">
+
+  <div class="sec s-d">
+    <div class="sec-header" onclick="exp(this)">
+      <div class="sec-icon">&#128176;</div>
+      <div class="sec-info">
+        <div class="sec-num">4.2</div>
+        <div class="sec-title-my">Kegiatan Ekonomi</div>
+        <div class="sec-title-en">Economic Activities</div>
+        <div class="sec-title-zh">经济活动</div>
+      </div>
+      <span class="sec-chev open">&#8964;</span>
+    </div>
+    <div class="sec-body open">
+
+      <div class="tri">
+        <div class="tri-my"><div class="tri-my-lbl">&#x1F7E1; 1. Memanfaatkan Kesuburan Tanah</div><div class="tri-my-text">
+          Menjalankan kegiatan <strong>pertanian</strong>. Kawasan pertanian utama: Lembah Sungai Mekong, Sungai Musi, Sungai Bengawan Solo dan Sungai Brantas.
+        </div></div>
+        <div class="tri-en"><div class="tri-en-lbl">&#x1F535; 1. Utilising Fertile Land</div><div class="tri-en-text">
+          Conducting <strong>agricultural</strong> activities. Main agricultural areas: Mekong River Valley, Musi River, Bengawan Solo River and Brantas River.
+        </div></div>
+        <div class="tri-zh"><div class="tri-zh-lbl">&#x1F7E2; 1. 利用土地肥沃</div><div class="tri-zh-text">
+          开展<strong>农业</strong>活动。主要农业区：湄公河流域、穆西河、梭罗河和布兰塔斯河。
+        </div></div>
+      </div>
+
+      <div class="tri">
+        <div class="tri-my"><div class="tri-my-lbl">&#x1F7E1; 2. Mencipta Sistem Pengairan</div><div class="tri-my-text">
+          Memiliki kemahiran mencipta sistem pengairan seperti <span class="kitem">baray</span> dan sistem saliran untuk memastikan bekalan air mencukupi. Mengusahakan tanaman utama seperti <strong>padi dan tanaman sampingan</strong>.
+        </div></div>
+        <div class="tri-en"><div class="tri-en-lbl">&#x1F535; 2. Creating Irrigation Systems</div><div class="tri-en-text">
+          Skilled in creating irrigation systems like <span class="kitem">baray</span> (reservoirs) and canal systems to ensure sufficient water supply. Main crop: <strong>rice and secondary crops</strong>.
+        </div></div>
+        <div class="tri-zh"><div class="tri-zh-lbl">&#x1F7E2; 2. 创建灌溉系统</div><div class="tri-zh-text">
+          擅长创建灌溉系统如<span class="kitem">baray（水库）</span>和运河系统确保充足供水。主要作物：<strong>水稻和副作物</strong>。
+        </div></div>
+      </div>
+
+      <div class="tri">
+        <div class="tri-my"><div class="tri-my-lbl">&#x1F7E1; 3. Membina Pelabuhan — 3 Jenis</div><div class="tri-my-text">
+          Mendirikan pelabuhan di lokasi strategik dan mudah dikunjungi pedagang dari timur dan barat.<br>
+          <strong>(a) Pembekal:</strong> Pelabuhan persinggahan — membekalkan bahan dagangan dan bekalan makanan kepada pedagang.<br>
+          <strong>(b) Pelabuhan Kerajaan:</strong> Pelabuhan pembekal yang berkembang apabila wujudnya pentadbiran atau kerajaan di pelabuhan tersebut.<br>
+          <strong>(c) Pelabuhan Entrepot:</strong> Tumpuan pedagang — pengumpul, pengendali dan pengedar barang dagangan daripada pedagang serantau dan antarabangsa.
+        </div></div>
+        <div class="tri-en"><div class="tri-en-lbl">&#x1F535; 3. Building Ports — 3 Types</div><div class="tri-en-text">
+          Establish ports in strategic locations easily visited by Eastern and Western traders.<br>
+          <strong>(a) Supplier Port:</strong> Transit port — supplies trade goods and food supplies to traders.<br>
+          <strong>(b) Royal Port:</strong> Supplier port that develops when an administration or kingdom is established at the port.<br>
+          <strong>(c) Entrepot Port:</strong> Traders' hub — collects, manages and distributes goods from regional and international traders.
+        </div></div>
+        <div class="tri-zh"><div class="tri-zh-lbl">&#x1F7E2; 3. 建立港口——3种类型</div><div class="tri-zh-text">
+          在战略位置建立港口，方便东西方商人到访。<br>
+          <strong>(a) 供应港：</strong>中转港——向商人提供贸易商品和食物供应。<br>
+          <strong>(b) 王国港口：</strong>当港口建立行政或王国时发展起来的供应港。<br>
+          <strong>(c) 转口港：</strong>商人聚集地——收集、管理和分发来自区域和国际商人的货物。
+        </div></div>
+      </div>
+
+      <div class="mem">
+        <div class="mem-lbl">&#129504; Memory: 3 Kegiatan Ekonomi Utama</div>
+        <div class="pills">
+          <span class="pill-my">Pertanian (baray + padi)</span>
+          <span class="pill-en">Agriculture (baray + rice)</span>
+          <span class="pill-zh">农业（水库+水稻）</span>
+          <span class="pill-my">Pengairan (sistem baray)</span>
+          <span class="pill-en">Irrigation (baray system)</span>
+          <span class="pill-zh">灌溉（baray系统）</span>
+          <span class="pill-my">Pelabuhan: Pembekal + Kerajaan + Entrepot</span>
+          <span class="pill-en">Port: Supplier + Royal + Entrepot</span>
+          <span class="pill-zh">港口：供应港+王国港+转口港</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════ SOSIOBUDAYA ════════ -->
+<div id="panel-sosio" class="panel">
+
+  <div class="sec s-e">
+    <div class="sec-header" onclick="exp(this)">
+      <div class="sec-icon">&#128221;</div>
+      <div class="sec-info">
+        <div class="sec-num">4.2</div>
+        <div class="sec-title-my">Perkembangan Sosiobudaya</div>
+        <div class="sec-title-en">Sociocultural Development</div>
+        <div class="sec-title-zh">社会文化发展</div>
+      </div>
+      <span class="sec-chev open">&#8964;</span>
+    </div>
+    <div class="sec-body open">
+
+      <div class="tri">
+        <div class="tri-my"><div class="tri-my-lbl">&#x1F7E1; 1. Sistem Tulisan dan Bahasa</div><div class="tri-my-text">
+          Mengambil pengaruh luar: tulisan <span class="kitem">Palava</span> dan <span class="kitem">Kawi</span> digunakan sebagai medium tulisan bahasa tempatan dan Sanskrit. Huruf-huruf Arab disesuaikan sehingga terbentuk <strong>tulisan Jawi</strong>.
+        </div></div>
+        <div class="tri-en"><div class="tri-en-lbl">&#x1F535; 1. Writing and Language System</div><div class="tri-en-text">
+          Adopted foreign influences: <span class="kitem">Palava</span> and <span class="kitem">Kawi</span> scripts used as medium for local language and Sanskrit. Arabic letters were adapted to form <strong>Jawi script</strong>.
+        </div></div>
+        <div class="tri-zh"><div class="tri-zh-lbl">&#x1F7E2; 1. 文字与语言系统</div><div class="tri-zh-text">
+          吸收外来影响：<span class="kitem">帕拉瓦文</span>和<span class="kitem">卡维文</span>用作当地语言和梵文的书写媒介。阿拉伯字母经适应形成<strong>爪夷文</strong>。
+        </div></div>
+      </div>
+
+      <div class="tri">
+        <div class="tri-my"><div class="tri-my-lbl">&#x1F7E1; 2. Persuratan</div><div class="tri-my-text">
+          Pada awalnya, kegiatan ini berkembang dalam bentuk <span class="kitem">batu bersurat</span> sehingga lahirnya karya dalam bentuk <strong>manuskrip</strong>.
+        </div></div>
+        <div class="tri-en"><div class="tri-en-lbl">&#x1F535; 2. Literature</div><div class="tri-en-text">
+          Initially, this activity developed in the form of <span class="kitem">inscribed stones</span> until literary works emerged in the form of <strong>manuscripts</strong>.
+        </div></div>
+        <div class="tri-zh"><div class="tri-zh-lbl">&#x1F7E2; 2. 文学</div><div class="tri-zh-text">
+          最初，这种活动以<span class="kitem">铭文石</span>形式发展，直至出现<strong>手稿</strong>形式的文学作品。
+        </div></div>
+      </div>
+
+      <div class="tri">
+        <div class="tri-my"><div class="tri-my-lbl">&#x1F7E1; 3. Seni Bina</div><div class="tri-my-text">
+          Dihasilkan bagi memudahkan kegiatan <strong>pertanian, pelayaran, perdagangan dan keagamaan</strong>. Seni bina ini mewujudkan <span class="kitem">petukang-petukang kapal</span> yang handal.
+        </div></div>
+        <div class="tri-en"><div class="tri-en-lbl">&#x1F535; 3. Architecture</div><div class="tri-en-text">
+          Produced to facilitate <strong>agricultural, navigation, trade and religious</strong> activities. This architecture created skilled <span class="kitem">shipbuilders</span>.
+        </div></div>
+        <div class="tri-zh"><div class="tri-zh-lbl">&#x1F7E2; 3. 建筑</div><div class="tri-zh-text">
+          为促进<strong>农业、航海、贸易和宗教</strong>活动而建造。这种建筑造就了技艺精湛的<span class="kitem">造船工匠</span>。
+        </div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sec s-f">
+    <div class="sec-header" onclick="exp(this)">
+      <div class="sec-icon">&#128591;</div>
+      <div class="sec-info">
+        <div class="sec-num">4.2</div>
+        <div class="sec-title-my">Amalan Beragama</div>
+        <div class="sec-title-en">Religious Practices</div>
+        <div class="sec-title-zh">宗教实践</div>
+      </div>
+      <span class="sec-chev">&#8964;</span>
+    </div>
+    <div class="sec-body">
+      <div class="tri">
+        <div class="tri-my"><div class="tri-my-lbl">&#x1F7E1; 6 Amalan Beragama</div><div class="tri-my-text">
+          1. Mengamalkan sikap terbuka dalam amalan beragama dan bebas mengamalkan agama masing-masing.<br>
+          2. Sifat <strong>toleransi</strong>.<br>
+          3. Agama menjadi <strong>simbol penyatuan</strong> raja dan rakyat.<br>
+          4. Kedudukan golongan agama adalah istimewa — dilantik sebagai <strong>pentadbir dan penasihat</strong> pemerintah.<br>
+          5. Pembinaan candi sebagai lambang keagungan kerajaan, pusat ibadat, tempat pemujaan roh nenek moyang dan pusat perhimpunan para pendeta.<br>
+          6. Masjid dibina selepas tersebar Islam — pusat ibadat, <strong>pusat pendidikan</strong> dan pusat kebajikan masyarakat.
+        </div></div>
+        <div class="tri-en"><div class="tri-en-lbl">&#x1F535; 6 Religious Practices</div><div class="tri-en-text">
+          1. Open attitude in religious practices — free to practise own religion.<br>
+          2. Spirit of <strong>tolerance</strong>.<br>
+          3. Religion as <strong>symbol of unity</strong> between king and people.<br>
+          4. Religious figures hold special status — appointed as <strong>administrators and advisers</strong> to rulers.<br>
+          5. Temple construction as symbol of kingdom's greatness, place of worship, veneration of ancestors and gathering place for priests.<br>
+          6. Mosque construction after Islam spread — centre of worship, <strong>education</strong> and community welfare.
+        </div></div>
+        <div class="tri-zh"><div class="tri-zh-lbl">&#x1F7E2; 6大宗教实践</div><div class="tri-zh-text">
+          1. 宗教实践持开放态度——自由信仰各自的宗教。<br>
+          2. <strong>宽容</strong>精神。<br>
+          3. 宗教成为国王与人民之间的<strong>团结象征</strong>。<br>
+          4. 宗教人士地位特殊——被任命为统治者的<strong>行政人员和顾问</strong>。<br>
+          5. 神庙建造象征王国的伟大，是礼拜场所、祭祀祖先之地和僧侣聚会地点。<br>
+          6. 伊斯兰教传播后建造清真寺——礼拜中心、<strong>教育中心</strong>和社区福利中心。
+        </div></div>
+      </div>
+
+      <div class="mem">
+        <div class="mem-lbl">&#129504; Memory: Candi vs Masjid</div>
+        <div class="pills">
+          <span class="pill-my">Candi = Hindu/Buddha = pusat ibadat + nenek moyang + pendeta</span>
+          <span class="pill-en">Temple = Hindu/Buddhist = worship + ancestors + priests</span>
+          <span class="pill-zh">神庙=印度/佛教=礼拜+祭祖+僧侣</span>
+          <span class="pill-my">Masjid = Islam = ibadat + pendidikan + kebajikan</span>
+          <span class="pill-en">Mosque = Islam = worship + education + welfare</span>
+          <span class="pill-zh">清真寺=伊斯兰=礼拜+教育+福利</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════ MEMORY MAP ════════ -->
+<div id="panel-mm" class="panel">
+  <div style="background:#0f172a;border-radius:16px;overflow:hidden;margin-bottom:12px">
+    <div class="mmap-header">
+      <div class="mmap-h-title">&#11088; Super Compact Memory Map</div>
+      <div class="mmap-h-en">Peta Hafalan Ringkas — Tingkatan 2 Bab 4</div>
+      <div class="mmap-h-zh">超简短记忆图 — 中二第四章</div>
+    </div>
+    <div style="padding:14px">
+
+      <!-- RELIGION BY KINGDOM TABLE -->
+      <div style="background:#1e293b;border-radius:12px;padding:12px;margin-bottom:12px">
+        <div style="font-size:11px;font-weight:800;letter-spacing:2px;color:#f59e0b;text-transform:uppercase;margin-bottom:10px">&#128203; Agama mengikut Kerajaan / Religion by Kingdom</div>
+        <div class="comp-wrap">
+          <table class="comp-table">
+            <thead><tr>
+              <th style="background:#334155;color:#94a3b8;font-size:10px;padding:7px 8px">Kerajaan</th>
+              <th style="background:#b45309;color:#fff;font-size:10px;padding:7px 8px">Hindu</th>
+              <th style="background:#1d4ed8;color:#fff;font-size:10px;padding:7px 8px">Buddha</th>
+              <th style="background:#059669;color:#fff;font-size:10px;padding:7px 8px">Islam</th>
+              <th style="background:#7c3aed;color:#fff;font-size:10px;padding:7px 8px">Bukti / Evidence</th>
+            </tr></thead>
+            <tbody>
+              <tr><td style="font-weight:800;color:#fbbf24;background:#1e293b;font-size:12px">Funan</td><td style="background:#1e293b;color:#fde68a;font-size:12px">&#10003;</td><td style="background:#1e293b;color:#93c5fd;font-size:12px">&#10003;</td><td style="background:#1e293b;color:#6ee7b7;font-size:12px">&#8212;</td><td style="background:#1e293b;color:#94a3b8;font-size:11px">Candi Go Cay Thi; Fan Shih-man</td></tr>
+              <tr><td style="font-weight:800;color:#fbbf24;background:#0f172a;font-size:12px">Angkor</td><td style="background:#0f172a;color:#fde68a;font-size:12px">&#10003;&#10003;</td><td style="background:#0f172a;color:#93c5fd;font-size:12px">&#10003;</td><td style="background:#0f172a;color:#6ee7b7;font-size:12px">&#8212;</td><td style="background:#0f172a;color:#94a3b8;font-size:11px">Angkor Wat; Jayavarman VII (Buddha)</td></tr>
+              <tr><td style="font-weight:800;color:#fbbf24;background:#1e293b;font-size:12px">Champa</td><td style="background:#1e293b;color:#fde68a;font-size:12px">&#10003;</td><td style="background:#1e293b;color:#93c5fd;font-size:12px">&#10003;</td><td style="background:#1e293b;color:#6ee7b7;font-size:12px">&#10003;</td><td style="background:#1e293b;color:#94a3b8;font-size:11px">Batu nisan 1039; batu bersurat 1035</td></tr>
+              <tr><td style="font-weight:800;color:#fbbf24;background:#0f172a;font-size:12px">Srivijaya</td><td style="background:#0f172a;color:#fde68a;font-size:12px">&#8212;</td><td style="background:#0f172a;color:#93c5fd;font-size:12px">&#10003;&#10003;</td><td style="background:#0f172a;color:#6ee7b7;font-size:12px">&#8212;</td><td style="background:#0f172a;color:#94a3b8;font-size:11px">Candi Muara Jambi; Pendeta I-Tsing</td></tr>
+              <tr><td style="font-weight:800;color:#fbbf24;background:#1e293b;font-size:12px">Majapahit</td><td style="background:#1e293b;color:#fde68a;font-size:12px">&#10003;</td><td style="background:#1e293b;color:#93c5fd;font-size:12px">&#10003;</td><td style="background:#1e293b;color:#6ee7b7;font-size:12px">&#10003;</td><td style="background:#1e293b;color:#94a3b8;font-size:11px">Tripaksa; Wu Ping; Demak (abad 16)</td></tr>
+              <tr><td style="font-weight:800;color:#fbbf24;background:#0f172a;font-size:12px">Kedah Tua</td><td style="background:#0f172a;color:#fde68a;font-size:12px">&#10003;</td><td style="background:#0f172a;color:#93c5fd;font-size:12px">&#10003;&#10003;</td><td style="background:#0f172a;color:#6ee7b7;font-size:12px">&#10003;</td><td style="background:#0f172a;color:#94a3b8;font-size:11px">Maharaja Derbar Raja II memeluk Islam 1136</td></tr>
+              <tr><td style="font-weight:800;color:#fbbf24;background:#1e293b;font-size:12px">Gangga Nagara</td><td style="background:#1e293b;color:#fde68a;font-size:12px">&#8212;</td><td style="background:#1e293b;color:#93c5fd;font-size:12px">&#10003;&#10003;</td><td style="background:#1e293b;color:#6ee7b7;font-size:12px">&#8212;</td><td style="background:#1e293b;color:#94a3b8;font-size:11px">Arca Buddha Lembah Kinta; Avalokitesvara Bidor</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="mmap-item">
+        <div class="mmap-my"><div class="mmap-my-text">Kepercayaan Awal: Animisme (hyang = roh nenek moyang) + Dinamisme (mana = kekuatan ghaib)</div></div>
+        <div class="mmap-en"><div class="mmap-en-text">Early Beliefs: Animism (hyang = ancestral spirits) + Dynamism (mana = supernatural power)</div></div>
+        <div class="mmap-zh"><div class="mmap-zh-text">早期信仰：万物有灵论（hyang=祖先灵魂）+ 活力论（mana=超自然力量）</div></div>
+      </div>
+
+      <div class="mmap-item">
+        <div class="mmap-my"><div class="mmap-my-text">Penyebaran: Hindu/Buddha (sebelum Masihi) → Islam (abad ke-7) → melalui mubaligh + pemerintah + perdagangan</div></div>
+        <div class="mmap-en"><div class="mmap-en-text">Spread: Hinduism/Buddhism (before CE) → Islam (7th century) → through missionaries + rulers + trade</div></div>
+        <div class="mmap-zh"><div class="mmap-zh-text">传播：印度教/佛教（公元前）→ 伊斯兰（7世纪）→ 通过传教士+统治者+贸易</div></div>
+      </div>
+
+      <div class="mmap-item">
+        <div class="mmap-my"><div class="mmap-my-text">Pemerintahan: Hindu/Buddha = Raja/Maharaja/varman (titisan dewa) → Islam = Sultan/Khalifah</div></div>
+        <div class="mmap-en"><div class="mmap-en-text">Government: Hindu/Buddhist = Raja/Maharaja/varman (divine) → Islam = Sultan/Khalifah (Caliph)</div></div>
+        <div class="mmap-zh"><div class="mmap-zh-text">政府：印度/佛教=拉惹/马哈拉惹/varman（神圣）→ 伊斯兰=苏丹/哈里发</div></div>
+      </div>
+
+      <div class="mmap-item">
+        <div class="mmap-my"><div class="mmap-my-text">Ekonomi: Pertanian (baray) + Pengairan + Pelabuhan 3 jenis (Pembekal / Kerajaan / Entrepot)</div></div>
+        <div class="mmap-en"><div class="mmap-en-text">Economy: Agriculture (baray) + Irrigation + 3 port types (Supplier / Royal / Entrepot)</div></div>
+        <div class="mmap-zh"><div class="mmap-zh-text">经济：农业（水库）+ 灌溉 + 3种港口（供应港/王国港/转口港）</div></div>
+      </div>
+
+      <div class="mmap-item">
+        <div class="mmap-my"><div class="mmap-my-text">Sosiobudaya: Tulisan (Palava/Kawi → Jawi) + Persuratan (batu bersurat → manuskrip) + Seni Bina (candi → masjid)</div></div>
+        <div class="mmap-en"><div class="mmap-en-text">Sociocultural: Script (Palava/Kawi → Jawi) + Literature (inscribed stone → manuscript) + Architecture (temple → mosque)</div></div>
+        <div class="mmap-zh"><div class="mmap-zh-text">社会文化：文字（帕拉瓦/卡维→爪夷文）+ 文学（铭文石→手稿）+ 建筑（神庙→清真寺）</div></div>
+      </div>
+
+      <div class="mmap-item">
+        <div class="mmap-my"><div class="mmap-my-text">Amalan Beragama: Toleransi + Agama = simbol penyatuan + Candi (ibadat/nenek moyang/pendeta) + Masjid (ibadat/pendidikan/kebajikan)</div></div>
+        <div class="mmap-en"><div class="mmap-en-text">Religious Practice: Tolerance + Religion = symbol of unity + Temple (worship/ancestors/priests) + Mosque (worship/education/welfare)</div></div>
+        <div class="mmap-zh"><div class="mmap-zh-text">宗教实践：宽容 + 宗教=团结象征 + 神庙（礼拜/祭祖/僧侣）+ 清真寺（礼拜/教育/福利）</div></div>
+      </div>
+
+      <div class="exam-box">
+        <div class="exam-hdr"><div class="exam-lbl">&#9997; Exam Template / 考试句型</div></div>
+        <div class="exam-my"><div class="exam-my-t">Agama Hindu, Buddha dan Islam telah tersebar di Alam Melayu melalui peranan mubaligh, pemerintah dan perdagangan antarabangsa, dan meninggalkan warisan yang masih diamalkan hingga kini.</div></div>
+        <div class="exam-en"><div class="exam-en-t">Hinduism, Buddhism and Islam spread in the Malay World through the roles of missionaries, rulers and international trade, leaving a legacy that is still practised today.</div></div>
+        <div class="exam-zh"><div class="exam-zh-t">印度教、佛教和伊斯兰教通过传教士、统治者和国际贸易在马来世界传播，留下至今仍在实践的遗产。</div></div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div class="footer">Tingkatan 2 &middot; Bab 4 &middot; 中二第四章</div>
+
+<script>
+var hiddenLang={my:false,en:false,zh:false};
+function tgl(lang,btn){
+  hiddenLang[lang]=!hiddenLang[lang];
+  document.getElementById('app').classList.toggle('hide-'+lang,hiddenLang[lang]);
+  btn.classList.toggle('on',!hiddenLang[lang]);
+}
+function showPanel(id,btn){
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById('panel-'+id).classList.add('active');
+  btn.classList.add('active');
+  window.scrollTo(0,document.querySelector('.tabs').offsetTop-60);
+}
+function exp(hdr){
+  var b=hdr.nextElementSibling;
+  var c=hdr.querySelector('.sec-chev');
+  var o=b.classList.toggle('open');
+  c.classList.toggle('open',o);
+}
+</script>
+</body>
+</html>
