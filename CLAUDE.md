@@ -51,6 +51,18 @@ index.html (dashboard)
 
 14 subjects: Maths, Add Maths, Science, Physics, Chemistry, Biology, English, Chinese, Malay, Moral, History, Geografi, Reka Bentuk, **Seni** (T2–T3).
 
+### Adding a Chapter Notes Page
+
+When asked to wire up a chapter notes HTML file (e.g. "add history chapter 4"):
+
+**Before making any changes**, confirm the HTML file exists on disk. If it is missing, stop and tell the user to upload the file first — do not create or write the HTML.
+
+Once the file is confirmed present:
+1. Find the matching chapter entry in `js/subject.js` and add `resourceUrl: "../<dir>/<file>.html"`
+2. Add the path to `STATIC_ASSETS` in `sw.js`
+3. Run `npm run validate` — this checks the `resourceUrl` file exists on disk
+4. Commit and push
+
 ### Adding a New Subject
 
 1. Add chapter data export to `js/subject.js`

@@ -163,6 +163,15 @@ function validateSubjectData(subject, subjectData){
                 `${prefix}: chinese translation is required`
             );
         }
+
+        if(chapter.resourceUrl){
+            const resolved = chapter.resourceUrl.replace(/^\.\.\//, "");
+            if(!fs.existsSync(path.join(rootDir, resolved))){
+                reportError(
+                    `${prefix}: resourceUrl file not found: ${chapter.resourceUrl}`
+                );
+            }
+        }
     });
 }
 
