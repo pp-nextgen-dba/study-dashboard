@@ -1,0 +1,890 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+<title>Reka Bentuk Elektronik — Mikropengawal & Litar Elektronik</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html{font-size:16px}
+body{font-family:'Nunito',sans-serif;background:#f0f4ff;color:#1e293b;line-height:1.5}
+
+.hero{background:linear-gradient(135deg,#064e3b,#1e3a5f);padding:26px 18px 40px;text-align:center;position:relative;overflow:hidden}
+.hero::after{content:'';position:absolute;bottom:-24px;left:0;right:0;height:48px;background:#f0f4ff;border-radius:50% 50% 0 0/48px 48px 0 0}
+.hero-badge{display:inline-block;background:rgba(255,255,255,.15);color:#6ee7b7;font-size:12px;letter-spacing:2px;padding:4px 14px;border-radius:20px;margin-bottom:10px}
+.hero-title{font-size:18px;font-weight:800;color:#fff;line-height:1.3;margin-bottom:4px}
+.hero-sub{font-size:13px;color:#93c5fd;margin-bottom:3px}
+.hero-zh{font-family:'Noto Sans SC',sans-serif;font-size:12px;color:#67e8f9;letter-spacing:2px;margin-bottom:28px}
+.hero-stats{display:flex;justify-content:center;gap:24px;position:relative;z-index:1}
+.stat-num{font-size:24px;font-weight:800;color:#fff;text-align:center}
+.stat-lbl{font-size:11px;color:#a7f3d0;text-align:center}
+
+.lang-legend{display:flex;justify-content:center;gap:14px;padding:10px 16px;background:#fff;border-bottom:1px solid #e5e7eb}
+.legend-dot{display:flex;align-items:center;gap:5px;font-size:12px;font-weight:700}
+.dot{width:12px;height:12px;border-radius:3px;flex-shrink:0}
+
+.lang-bar{background:#fff;padding:10px 14px;display:flex;gap:8px;align-items:center;border-bottom:2px solid #e5e7eb;position:sticky;top:0;z-index:200;box-shadow:0 2px 8px rgba(0,0,0,.08)}
+.lbtn{flex:1;padding:8px 4px;font-size:12px;font-weight:800;font-family:'Nunito',sans-serif;border:2px solid;border-radius:20px;cursor:pointer;text-align:center;opacity:.4;transition:all .15s}
+.lbtn.on{opacity:1}
+.lbtn-my{border-color:#b45309;background:#fef3c7;color:#78350f}
+.lbtn-my.on{background:#d97706;color:#fff;border-color:#d97706}
+.lbtn-en{border-color:#1d4ed8;background:#dbeafe;color:#1e3a8a}
+.lbtn-en.on{background:#2563eb;color:#fff;border-color:#2563eb}
+.lbtn-zh{border-color:#059669;background:#d1fae5;color:#064e3b}
+.lbtn-zh.on{background:#059669;color:#fff;border-color:#059669}
+
+.tabs{display:flex;overflow-x:auto;background:#1e293b;-webkit-overflow-scrolling:touch;scrollbar-width:none;position:sticky;top:53px;z-index:199}
+.tabs::-webkit-scrollbar{display:none}
+.tab{flex:0 0 auto;padding:11px 14px;font-size:12px;font-weight:800;font-family:'Nunito',sans-serif;color:#94a3b8;background:transparent;border:none;cursor:pointer;border-bottom:3px solid transparent;white-space:nowrap;transition:all .2s}
+.tab-micro.active{color:#6ee7b7;border-bottom-color:#059669}
+.tab-parts.active{color:#fbbf24;border-bottom-color:#d97706}
+.tab-design.active{color:#93c5fd;border-bottom-color:#2563eb}
+.tab-comp.active{color:#c4b5fd;border-bottom-color:#7c3aed}
+.tab-prog.active{color:#fca5a5;border-bottom-color:#dc2626}
+.tab-conn.active{color:#f9a8d4;border-bottom-color:#be185d}
+.tab-test.active{color:#fde68a;border-bottom-color:#f59e0b}
+.tab-mm.active{color:#bfdbfe;border-bottom-color:#60a5fa}
+
+.panel{display:none;padding:12px 12px 60px}
+.panel.active{display:block}
+
+/* TRI-LANGUAGE BLOCKS */
+.tri{border-radius:12px;overflow:hidden;margin-bottom:10px;border:2px solid #e2e8f0}
+.tri-my{background:#fffbeb;border-left:5px solid #d97706;padding:9px 12px}
+.tri-my-lbl{font-size:10px;font-weight:800;letter-spacing:2px;color:#92400e;text-transform:uppercase;margin-bottom:3px}
+.tri-my-text{font-size:14px;font-weight:700;color:#78350f;line-height:1.5}
+.tri-en{background:#eff6ff;border-left:5px solid #2563eb;padding:9px 12px}
+.tri-en-lbl{font-size:10px;font-weight:800;letter-spacing:2px;color:#1d4ed8;text-transform:uppercase;margin-bottom:3px}
+.tri-en-text{font-size:14px;font-weight:600;color:#1e3a8a;line-height:1.5;font-style:italic}
+.tri-zh{background:#ecfdf5;border-left:5px solid #059669;padding:9px 12px}
+.tri-zh-lbl{font-size:10px;font-weight:800;letter-spacing:2px;color:#047857;text-transform:uppercase;margin-bottom:3px}
+.tri-zh-text{font-family:'Noto Sans SC',sans-serif;font-size:13px;font-weight:500;color:#064e3b;line-height:1.7;letter-spacing:1px}
+
+/* SECTION CARDS */
+.sec{border-radius:16px;margin-bottom:12px;overflow:hidden;border:2px solid}
+.sec-header{display:flex;align-items:center;gap:12px;padding:14px;cursor:pointer;user-select:none;-webkit-tap-highlight-color:transparent}
+.sec-icon{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;color:#fff}
+.sec-info{flex:1}
+.sec-num{font-size:10px;font-weight:800;letter-spacing:1px;margin-bottom:2px;text-transform:uppercase}
+.sec-title-my{font-size:15px;font-weight:800;line-height:1.25;color:#78350f}
+.sec-title-en{font-size:12px;font-weight:700;font-style:italic;color:#1e3a8a;margin-top:2px}
+.sec-title-zh{font-family:'Noto Sans SC',sans-serif;font-size:11px;color:#064e3b;margin-top:2px;letter-spacing:1px}
+.sec-chev{font-size:20px;color:#94a3b8;transition:transform .25s;flex-shrink:0}
+.sec-chev.open{transform:rotate(180deg)}
+.sec-body{display:none;padding:0 12px 14px}
+.sec-body.open{display:block}
+
+/* TABLE */
+.tbl-wrap{overflow-x:auto;margin-bottom:10px;border-radius:12px}
+.tbl{width:100%;border-collapse:collapse;font-size:12px}
+.tbl th{padding:9px 10px;font-size:10px;font-weight:800;letter-spacing:1px;text-transform:uppercase;text-align:left;color:#fff}
+.tbl td{padding:8px 10px;vertical-align:top;line-height:1.4;border-bottom:1px solid rgba(0,0,0,.07)}
+.tbl tr:last-child td{border-bottom:none}
+.tbl-gr th{background:#059669}.tbl-gr td:nth-child(1){font-weight:800;color:#064e3b;background:#d1fae5}.tbl-gr td{background:#f0fdf4}
+.tbl-am th{background:#d97706}.tbl-am td:nth-child(1){font-weight:800;color:#78350f;background:#fef3c7}.tbl-am td{background:#fffbeb}
+.tbl-bl th{background:#2563eb}.tbl-bl td:nth-child(1){font-weight:800;color:#1e3a8a;background:#dbeafe}.tbl-bl td{background:#eff6ff}
+.tbl-pu th{background:#7c3aed}.tbl-pu td:nth-child(1){font-weight:800;color:#3b0764;background:#ede9fe}.tbl-pu td{background:#f5f3ff}
+.tbl-dk th{background:#1e293b;color:#94a3b8}.tbl-dk td:nth-child(1){font-weight:800;color:#fff;background:#334155;font-size:12px}.tbl-dk td{background:#0f172a;color:#e2e8f0;font-size:12px}
+
+/* SECTION THEMES */
+.s-gr{background:#f0fdf4;border-color:#059669}.s-gr .sec-header{background:#d1fae5}.s-gr .sec-icon{background:#059669}.s-gr .sec-num{color:#047857}.s-gr .sec-body{border-top:2px dashed #6ee7b7}
+.s-am{background:#fffbeb;border-color:#f59e0b}.s-am .sec-header{background:#fef3c7}.s-am .sec-icon{background:#d97706}.s-am .sec-num{color:#92400e}.s-am .sec-body{border-top:2px dashed #fde68a}
+.s-bl{background:#eff6ff;border-color:#2563eb}.s-bl .sec-header{background:#dbeafe}.s-bl .sec-icon{background:#2563eb}.s-bl .sec-num{color:#1d4ed8}.s-bl .sec-body{border-top:2px dashed #bfdbfe}
+.s-pu{background:#f5f3ff;border-color:#7c3aed}.s-pu .sec-header{background:#ede9fe}.s-pu .sec-icon{background:#7c3aed}.s-pu .sec-num{color:#5b21b6}.s-pu .sec-body{border-top:2px dashed #c4b5fd}
+.s-rd{background:#fff5f5;border-color:#dc2626}.s-rd .sec-header{background:#fee2e2}.s-rd .sec-icon{background:#dc2626}.s-rd .sec-num{color:#b91c1c}.s-rd .sec-body{border-top:2px dashed #fca5a5}
+.s-pk{background:#fdf2f8;border-color:#be185d}.s-pk .sec-header{background:#fce7f3}.s-pk .sec-icon{background:#be185d}.s-pk .sec-num{color:#831843}.s-pk .sec-body{border-top:2px dashed #fbcfe8}
+
+/* STEP */
+.step{border-radius:10px;padding:11px 13px;margin-bottom:8px;border-left:5px solid}
+.step-num{font-size:11px;font-weight:800;letter-spacing:1px;text-transform:uppercase;margin-bottom:4px}
+
+/* TIP / MUST */
+.tip{background:#fef9c3;border:1.5px solid #fbbf24;border-radius:10px;padding:10px 13px;margin-bottom:8px}
+.tip-lbl{font-size:11px;font-weight:800;color:#92400e;letter-spacing:1px;text-transform:uppercase;margin-bottom:5px}
+.must{background:#ecfdf5;border:1.5px solid #059669;border-radius:10px;padding:10px 13px;margin-bottom:8px}
+.must-lbl{font-size:11px;font-weight:800;color:#047857;letter-spacing:1px;text-transform:uppercase;margin-bottom:5px}
+
+/* CMD BOX */
+.cmd-box{background:#1e293b;border-radius:12px;padding:12px;margin-bottom:10px}
+.cmd-title{font-size:11px;font-weight:800;letter-spacing:2px;color:#f59e0b;text-transform:uppercase;margin-bottom:8px}
+.cmd-row{display:flex;gap:0;margin-bottom:5px;border-radius:8px;overflow:hidden}
+.cmd-name{background:#334155;color:#fbbf24;font-size:12px;font-weight:800;padding:7px 10px;min-width:130px;flex-shrink:0;line-height:1.3}
+.cmd-desc-my{background:#1e293b;color:#fde68a;font-size:12px;font-weight:700;padding:7px 8px;flex:1;line-height:1.3;border-bottom:1px solid #0f172a}
+.cmd-desc-en{background:#172554;color:#93c5fd;font-size:12px;font-weight:600;padding:7px 8px;flex:1;line-height:1.3;font-style:italic;border-bottom:1px solid #0f172a}
+.cmd-desc-zh{background:#052e16;color:#6ee7b7;font-family:'Noto Sans SC',sans-serif;font-size:11px;font-weight:500;padding:7px 8px;flex:1;line-height:1.3}
+.cmd-multi{flex:1;display:flex;flex-direction:column}
+
+/* FLOW */
+.flow{display:flex;align-items:center;gap:6px;margin-bottom:10px;flex-wrap:wrap}
+.flow-box{background:#1e3a5f;color:#93c5fd;font-size:12px;font-weight:800;padding:10px 12px;border-radius:10px;text-align:center;border:2px solid #2563eb;min-width:80px}
+.flow-arrow{font-size:20px;color:#64748b}
+
+/* CODE BOX */
+.code-box{background:#0f172a;border-radius:12px;padding:14px;margin-bottom:10px;font-family:monospace;font-size:13px;line-height:1.8;color:#e2e8f0}
+
+/* MEMORY MAP */
+.mmap-item{border-radius:14px;overflow:hidden;margin-bottom:10px;border:2px solid #e2e8f0;box-shadow:0 2px 6px rgba(0,0,0,.06)}
+.mmap-my{background:#fef3c7;padding:9px 14px;border-bottom:1px solid #fde68a}
+.mmap-my-text{font-size:14px;font-weight:800;color:#78350f}
+.mmap-en{background:#dbeafe;padding:9px 14px;border-bottom:1px solid #bfdbfe}
+.mmap-en-text{font-size:13px;font-weight:600;color:#1e3a8a;font-style:italic}
+.mmap-zh{background:#d1fae5;padding:9px 14px}
+.mmap-zh-text{font-family:'Noto Sans SC',sans-serif;font-size:12px;font-weight:500;color:#064e3b;letter-spacing:1px}
+.mmap-header{background:#0f172a;padding:14px;text-align:center;border-radius:14px 14px 0 0}
+.mmap-h-title{font-size:15px;font-weight:800;color:#6ee7b7;margin-bottom:2px}
+.mmap-h-en{font-size:12px;color:#94a3b8;font-style:italic}
+.mmap-h-zh{font-family:'Noto Sans SC',sans-serif;font-size:11px;color:#a7f3d0;letter-spacing:2px;margin-top:2px}
+
+/* EXAM BOX */
+.exam-box{border-radius:14px;overflow:hidden;border:2px solid #7c3aed;margin-top:10px}
+.exam-hdr{background:#7c3aed;padding:9px 14px}
+.exam-lbl{font-size:10px;letter-spacing:2px;font-weight:800;color:#ede9fe;text-transform:uppercase}
+.exam-my{background:#fffbeb;border-left:5px solid #d97706;padding:9px 14px}
+.exam-my-t{font-size:13px;font-weight:700;color:#78350f;line-height:1.6}
+.exam-en{background:#eff6ff;border-left:5px solid #2563eb;padding:9px 14px}
+.exam-en-t{font-size:13px;font-weight:600;color:#1e3a8a;line-height:1.6;font-style:italic}
+.exam-zh{background:#ecfdf5;border-left:5px solid #059669;padding:9px 14px}
+.exam-zh-t{font-family:'Noto Sans SC',sans-serif;font-size:12px;font-weight:500;color:#064e3b;line-height:1.8;letter-spacing:1px}
+
+/* HIDE */
+.hide-my .tri-my,.hide-my .mmap-my,.hide-my .exam-my,.hide-my .sec-title-my,.hide-my .cmd-desc-my{display:none}
+.hide-en .tri-en,.hide-en .mmap-en,.hide-en .exam-en,.hide-en .sec-title-en,.hide-en .cmd-desc-en{display:none}
+.hide-zh .tri-zh,.hide-zh .mmap-zh,.hide-zh .exam-zh,.hide-zh .sec-title-zh,.hide-zh .cmd-desc-zh{display:none}
+
+.footer{text-align:center;font-size:12px;color:#94a3b8;padding:14px;letter-spacing:1px}
+</style>
+</head>
+<body id="app">
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-badge">Reka Bentuk &amp; Teknologi &middot; Topik 2.4</div>
+  <div class="hero-title">Reka Bentuk Elektronik<br>Mikropengawal &amp; Litar Elektronik</div>
+  <div class="hero-sub">Electronic Design — Microcontroller &amp; Electronic Circuits</div>
+  <div class="hero-zh">电子设计——微控制器与电子线路</div>
+  <div class="hero-stats">
+    <div><div class="stat-num">3</div><div class="stat-lbl">Bahagian</div></div>
+    <div><div class="stat-num">3</div><div class="stat-lbl">Bahasa</div></div>
+    <div><div class="stat-num">8</div><div class="stat-lbl">Tabs</div></div>
+  </div>
+</div>
+
+<!-- LANG LEGEND -->
+<div class="lang-legend">
+  <div class="legend-dot"><div class="dot" style="background:#d97706"></div><span style="color:#78350f">Melayu</span></div>
+  <div class="legend-dot"><div class="dot" style="background:#2563eb"></div><span style="color:#1e3a8a">English</span></div>
+  <div class="legend-dot"><div class="dot" style="background:#059669"></div><span style="color:#064e3b;font-family:'Noto Sans SC',sans-serif">中文</span></div>
+</div>
+
+<!-- LANG BAR -->
+<div class="lang-bar">
+  <button class="lbtn lbtn-my on" onclick="tgl('my',this)">&#x1F7E1; Melayu</button>
+  <button class="lbtn lbtn-en on" onclick="tgl('en',this)">&#x1F535; English</button>
+  <button class="lbtn lbtn-zh on" onclick="tgl('zh',this)">&#x1F7E2; 中文</button>
+</div>
+
+<!-- TABS -->
+<div class="tabs">
+  <button class="tab tab-micro active" onclick="showPanel('micro',this)">&#128187; Mikropengawal</button>
+  <button class="tab tab-parts" onclick="showPanel('parts',this)">&#9881; Bahagian</button>
+  <button class="tab tab-design" onclick="showPanel('design',this)">&#128209; Reka Bentuk</button>
+  <button class="tab tab-comp" onclick="showPanel('comp',this)">&#128268; Komponen</button>
+  <button class="tab tab-prog" onclick="showPanel('prog',this)">&#128221; Pengaturcaraan</button>
+  <button class="tab tab-conn" onclick="showPanel('conn',this)">&#128268; Penyambungan</button>
+  <button class="tab tab-test" onclick="showPanel('test',this)">&#9989; Ujian</button>
+  <button class="tab tab-mm" onclick="showPanel('mm',this)">&#11088; Memory Map</button>
+</div>
+
+<!-- ════════ MIKROPENGAWAL ════════ -->
+<div id="panel-micro" class="panel active">
+
+  <div class="sec s-gr">
+    <div class="sec-header" onclick="exp(this)">
+      <div class="sec-icon">&#128187;</div>
+      <div class="sec-info">
+        <div class="sec-num">2.4A</div>
+        <div class="sec-title-my">Mikropengawal (Microcontroller)</div>
+        <div class="sec-title-en">Microcontroller — control device in one chip</div>
+        <div class="sec-title-zh">微控制器——单芯片控制装置</div>
+      </div>
+      <span class="sec-chev open">&#8964;</span>
+    </div>
+    <div class="sec-body open">
+      <div class="tri">
+        <div class="tri-my"><div class="tri-my-lbl">&#x1F7E1; Definisi</div><div class="tri-my-text">Sebuah <strong>litar yang direka bentuk</strong> menggunakan komponen elektronik tertentu. Merupakan <strong>peranti kawalan dalam satu cip</strong> yang mengandungi CPU, RAM, ROM dan port I/O. Mengawal peranti elektronik berdasarkan <strong>pengaturcaraan yang telah dimuatkan</strong>.<br>Contoh: Kawalan pintu pagar automatik, mesin basuh.</div></div>
+        <div class="tri-en"><div class="tri-en-lbl">&#x1F535; Definition</div><div class="tri-en-text">A <strong>designed circuit</strong> using specific electronic components. A <strong>control device in one chip</strong> containing CPU, RAM, ROM and I/O ports. Controls electronic devices based on <strong>pre-loaded program</strong>.<br>Example: Automatic gate control, washing machine.</div></div>
+        <div class="tri-zh"><div class="tri-zh-lbl">&#x1F7E2; 定义</div><div class="tri-zh-text">使用特定电子元件设计的<strong>电路</strong>。包含CPU、RAM、ROM和I/O端口的<strong>单芯片控制装置</strong>。根据<strong>预装程序</strong>控制电子装置。<br>例子：自动门控制、洗衣机。</div></div>
+      </div>
+      <div class="tip">
+        <div class="tip-lbl">&#128161; Tip PLUS</div>
+        <div class="tri">
+          <div class="tri-my"><div class="tri-my-text">Mikropengawal = komputer kecil yang menerima, memproses isyarat dan menghasilkan output.</div></div>
+          <div class="tri-en"><div class="tri-en-text">Microcontroller = small computer that receives, processes signals and produces output.</div></div>
+          <div class="tri-zh"><div class="tri-zh-text">微控制器=接收、处理信号并产生输出的小型计算机。</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sec s-am">
+    <div class="sec-header" onclick="exp(this)">
+      <div class="sec-icon">&#128250;</div>
+      <div class="sec-info">
+        <div class="sec-num">2.4A</div>
+        <div class="sec-title-my">Mikropemproses vs Mikropengawal</div>
+        <div class="sec-title-en">Microprocessor vs Microcontroller</div>
+        <div class="sec-title-zh">微处理器与微控制器的比较</div>
+      </div>
+      <span class="sec-chev">&#8964;</span>
+    </div>
+    <div class="sec-body">
+      <div class="tri">
+        <div class="tri-my"><div class="tri-my-lbl">&#x1F7E1; Mikropemproses</div><div class="tri-my-text">Peranti pemprosesan mikro dalam satu cip. Digunakan bersama <strong>cip-cip sokongan</strong> (Input, Output, RAM, ROM) yang berada di luar melalui <em>System Bus</em>. Berfungsi melakukan <strong>kawalan yang besar</strong>. Contoh: Kawalan komputer.</div></div>
+        <div class="tri-en"><div class="tri-en-lbl">&#x1F535; Microprocessor</div><div class="tri-en-text">Micro processing device in one chip. Used with <strong>supporting chips</strong> (Input, Output, RAM, ROM) outside via <em>System Bus</em>. Performs <strong>large-scale control</strong>. Example: Computer control.</div></div>
+        <div class="tri-zh"><div class="tri-zh-lbl">&#x1F7E2; 微处理器</div><div class="tri-zh-text">单芯片微处理装置。与外部<strong>支持芯片</strong>（输入、输出、RAM、ROM）通过系统总线配合使用。执行<strong>大规模控制</strong>。例子：计算机控制。</div></div>
+      </div>
+      <div class="tbl-wrap">
+        <table class="tbl tbl-gr">
+          <thead><tr><th>Aspek / Aspect / 方面</th><th>Mikropengawal / Microcontroller / 微控制器</th><th>Mikropemproses / Microprocessor / 微处理器</th></tr></thead>
+          <tbody>
+            <tr><td>Komponen / Components / 组件</td><td>CPU+RAM+ROM+I/O dalam 1 cip / all in 1 chip / 集成在一个芯片</td><td>CPU sahaja / CPU only / 仅CPU</td></tr>
+            <tr><td>Cip sokongan / Support chips / 支持芯片</td><td>Tidak perlu / Not needed / 不需要</td><td>Diperlukan di luar / Needed externally / 需要外部</td></tr>
+            <tr><td>Kawalan / Control / 控制</td><td>Mudah/kecil / Simple/small / 简单</td><td>Besar/kompleks / Large/complex / 复杂</td></tr>
+            <tr><td>Contoh / Example / 例子</td><td>Pintu pagar, mesin basuh / Gate, washing machine / 自动门、洗衣机</td><td>Komputer / Computer / 计算机</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════ BAHAGIAN ════════ -->
+<div id="panel-parts" class="panel">
+
+  <div class="sec s-am">
+    <div class="sec-header" onclick="exp(this)">
+      <div class="sec-icon">&#9881;</div>
+      <div class="sec-info">
+        <div class="sec-num">2.4B</div>
+        <div class="sec-title-my">3 Bahagian Mikropengawal</div>
+        <div class="sec-title-en">3 Sections of Microcontroller</div>
+        <div class="sec-title-zh">微控制器的三个部分</div>
+      </div>
+      <span class="sec-chev open">&#8964;</span>
+    </div>
+    <div class="sec-body open">
+      <div class="flow">
+        <div class="flow-box">&#128268;<br>INPUT<br><span style="font-size:10px;color:#bfdbfe">Bahagian Input<br>输入部分</span></div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-box">&#129504;<br>CPU/PROSES<br><span style="font-size:10px;color:#bfdbfe">ROM + RAM<br>处理部分</span></div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-box">&#128161;<br>OUTPUT<br><span style="font-size:10px;color:#bfdbfe">Bahagian Output<br>输出部分</span></div>
+      </div>
+      <div style="text-align:center;font-size:11px;color:#64748b;margin-bottom:12px;font-style:italic">↕ Bekalan Kuasa 12V / Power Supply / 12V电源</div>
+
+      <!-- INPUT -->
+      <div class="tri">
+        <div class="tri-my"><div class="tri-my-lbl">&#x1F7E1; &#9398; Bahagian Input</div><div class="tri-my-text">
+          Menerima isyarat dan menghantar ke CPU.<br>
+          <strong>Input Digital:</strong> menghasilkan isyarat digital.<br>
+          Contoh: Suis tekan tutup, suis tekan buka, suis mikro, penderia pergerakan, penderia air.<br>
+          <strong>Input Analog:</strong> menghasilkan isyarat analog.<br>
+          Contoh: Penderia jarak inframerah, perintang peka cahaya (LDR), penderia suhu.
+        </div></div>
+        <div class="tri-en"><div class="tri-en-lbl">&#x1F535; &#9398; Input Section</div><div class="tri-en-text">
+          Receives signals and sends to CPU.<br>
+          <strong>Digital Input:</strong> produces digital signals.<br>
+          Example: Push-close switch, push-open switch, micro switch, motion sensor, water sensor.<br>
+          <strong>Analog Input:</strong> produces analog signals.<br>
+          Example: Infrared distance sensor, LDR (light dependent resistor), temperature sensor.
+        </div></div>
+        <div class="tri-zh"><div class="tri-zh-lbl">&#x1F7E2; &#9398; 输入部分</div><div class="tri-zh-text">
+          接收信号并发送到CPU。<br>
+          <strong>数字输入：</strong>产生数字信号。<br>
+          例子：按压关闭开关、按压开启开关、微动开关、运动传感器、水传感器。<br>
+          <strong>模拟输入：</strong>产生模拟信号。<br>
+          例子：红外线距离传感器、光敏电阻（LDR）、温度传感器。
+        </div></div>
+      </div>
+
+      <!-- PROCESS -->
+      <div class="tri">
+        <div class="tri-my"><div class="tri-my-lbl">&#x1F7E1; &#9399; Bahagian Proses (CPU)</div><div class="tri-my-text">
+          • CPU memproses berdasarkan atur cara dalam <strong>ROM</strong> (simpan kekal).<br>
+          • <strong>RAM</strong> menyimpan data sementara (terpadam bila kuasa dimatikan).<br>
+          • Isyarat dari input → CPU → menghasilkan isyarat kepada output.
+        </div></div>
+        <div class="tri-en"><div class="tri-en-lbl">&#x1F535; &#9399; Process Section (CPU)</div><div class="tri-en-text">
+          • CPU processes based on program in <strong>ROM</strong> (permanent storage).<br>
+          • <strong>RAM</strong> stores data temporarily (erased when power off).<br>
+          • Signal from input → CPU → produces signal to output.
+        </div></div>
+        <div class="tri-zh"><div class="tri-zh-lbl">&#x1F7E2; &#9399; 处理部分（CPU）</div><div class="tri-zh-text">
+          • CPU根据<strong>ROM</strong>中的程序处理（永久存储）。<br>
+          • <strong>RAM</strong>临时存储数据（断电时清除）。<br>
+          • 输入信号 → CPU → 产生信号至输出。
+        </div></div>
+      </div>
+
+      <!-- OUTPUT -->
+      <div class="tri">
+        <div class="tri-my"><div class="tri-my-lbl">&#x1F7E1; &#9400; Bahagian Output</div><div class="tri-my-text">
+          Menerima isyarat daripada CPU dan menghantar kepada peranti output untuk dilaksanakan.<br>
+          Contoh peranti output: Diod pemancar cahaya (LED), Motor arus terus (DC), Pembaz (Buzzer Piezo), Geganti (Relay).
+        </div></div>
+        <div class="tri-en"><div class="tri-en-lbl">&#x1F535; &#9400; Output Section</div><div class="tri-en-text">
+          Receives signal from CPU and sends to output devices to execute.<br>
+          Output device examples: LED, DC Motor, Buzzer (Piezo), Relay.
+        </div></div>
+        <div class="tri-zh"><div class="tri-zh-lbl">&#x1F7E2; &#9400; 输出部分</div><div class="tri-zh-text">
+          从CPU接收信号并发送到输出装置执行。<br>
+          输出装置例子：发光二极管（LED）、直流电机、蜂鸣器、继电器。
+        </div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PIN TABLE -->
+  <div class="sec s-bl">
+    <div class="sec-header" onclick="exp(this)">
+      <div class="sec-icon">&#128268;</div>
+      <div class="sec-info">
+        <div class="sec-num">2.4B</div>
+        <div class="sec-title-my">Pin-pin pada Papan Litar Mikropengawal</div>
+        <div class="sec-title-en">Pins on Microcontroller Circuit Board</div>
+        <div class="sec-title-zh">微控制器电路板上的引脚</div>
+      </div>
+      <span class="sec-chev">&#8964;</span>
+    </div>
+    <div class="sec-body">
+      <div class="tri" style="margin-bottom:10px">
+        <div class="tri-my"><div class="tri-my-lbl">&#x1F7E1; Reset</div><div class="tri-my-text">Disambungkan pada 5 VDC. Apabila disambungkan ke bumi (0 VDC), mikropengawal akan <strong>diset semula</strong>.</div></div>
+        <div class="tri-en"><div class="tri-en-lbl">&#x1F535; Reset</div><div class="tri-en-text">Connected at 5 VDC. When connected to ground (0 VDC), the microcontroller will be <strong>reset</strong>.</div></div>
+        <div class="tri-zh"><div class="tri-zh-lbl">&#x1F7E2; Reset（复位）</div><div class="tri-zh-text">连接在5 VDC。当连接到地（0 VDC）时，微控制器将<strong>复位</strong>。</div></div>
+      </div>
+      <div class="tri" style="margin-bottom:10px">
+        <div class="tri-my"><div class="tri-my-lbl">&#x1F7E1; VDD</div><div class="tri-my-text">Pin bekalan kuasa pada mikropengawal. Disambungkan dengan sumber kuasa arus terus <strong>5 V (5 VDC)</strong>.</div></div>
+        <div class="tri-en"><div class="tri-en-lbl">&#x1F535; VDD</div><div class="tri-en-text">Power supply pin on microcontroller. Connected to DC power source <strong>5 V (5 VDC)</strong>.</div></div>
+        <div class="tri-zh"><div class="tri-zh-lbl">&#x1F7E2; VDD（电源引脚）</div><div class="tri-zh-text">微控制器上的电源引脚，连接到直流电源<strong>5V（5 VDC）</strong>。</div></div>
+      </div>
+      <div class="tri" style="margin-bottom:10px">
+        <div class="tri-my"><div class="tri-my-lbl">&#x1F7E1; AIN1–AIN5 (Input Analog)</div><div class="tri-my-text">Input analog pada papan litar. Disambung dengan penderia analog (voltan 0–5 VDC). Nilai voltan analog ditukar ke digital oleh <strong>penukar analog-digital</strong>.</div></div>
+        <div class="tri-en"><div class="tri-en-lbl">&#x1F535; AIN1–AIN5 (Analog Input)</div><div class="tri-en-text">Analog input on circuit board. Connected to analog sensors (voltage 0–5 VDC). Analog voltage converted to digital by <strong>analog-to-digital converter</strong>.</div></div>
+        <div class="tri-zh"><div class="tri-zh-lbl">&#x1F7E2; AIN1–AIN5（模拟输入）</div><div class="tri-zh-text">电路板上的模拟输入。连接到模拟传感器（电压0–5 VDC）。模拟电压由<strong>模数转换器</strong>转换为数字值。</div></div>
+      </div>
+      <div class="tri" style="margin-bottom:10px">
+        <div class="tri-my"><div class="tri-my-lbl">&#x1F7E1; DIN1–DIN4 (Input Digital)</div><div class="tri-my-text">Input digital pada papan litar. Pin telah disambungkan dengan <strong>perintang tetap 10 kΩ</strong>.</div></div>
+        <div class="tri-en"><div class="tri-en-lbl">&#x1F535; DIN1–DIN4 (Digital Input)</div><div class="tri-en-text">Digital input on circuit board. Pins already connected with <strong>fixed resistor 10 kΩ</strong>.</div></div>
+        <div class="tri-zh"><div class="tri-zh-lbl">&#x1F7E2; DIN1–DIN4（数字输入）</div><div class="tri-zh-text">电路板上的数字输入，引脚已连接<strong>固定电阻10 kΩ</strong>。</div></div>
+      </div>
+      <div class="tri" style="margin-bottom:10px">
+        <div class="tri-my"><div class="tri-my-lbl">&#x1F7E1; DOUT1–DOUT6 (Output Digital)</div><div class="tri-my-text">Output digital pada papan litar. <strong>ON</strong> = 5 VDC (max 20 mA). <strong>OFF</strong> = 0 VDC (0 mA).</div></div>
+        <div class="tri-en"><div class="tri-en-lbl">&#x1F535; DOUT1–DOUT6 (Digital Output)</div><div class="tri-en-text">Digital output on circuit board. <strong>ON</strong> = 5 VDC (max 20 mA). <strong>OFF</strong> = 0 VDC (0 mA).</div></div>
+        <div class="tri-zh"><div class="tri-zh-lbl">&#x1F7E2; DOUT1–DOUT6（数字输出）</div><div class="tri-zh-text">电路板上的数字输出。<strong>开</strong> = 5 VDC（最大20 mA）。<strong>关</strong> = 0 VDC（0 mA）。</div></div>
+      </div>
+      <div class="tri">
+        <div class="tri-my"><div class="tri-my-lbl">&#x1F7E1; VSS</div><div class="tri-my-text">Pin bumi mikropengawal. Pin disambung ke <strong>terminal negatif bekalan kuasa</strong>.</div></div>
+        <div class="tri-en"><div class="tri-en-lbl">&#x1F535; VSS</div><div class="tri-en-text">Microcontroller ground pin. Pin connected to <strong>negative terminal of power supply</strong>.</div></div>
+        <div class="tri-zh"><div class="tri-zh-lbl">&#x1F7E2; VSS（接地引脚）</div><div class="tri-zh-text">微控制器接地引脚，连接到<strong>电源负极</strong>。</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════ REKA BENTUK ════════ -->
+<div id="panel-design" class="panel">
+
+  <div class="sec s-bl">
+    <div class="sec-header" onclick="exp(this)">
+      <div class="sec-icon">&#128209;</div>
+      <div class="sec-info">
+        <div class="sec-num">2.4C</div>
+        <div class="sec-title-my">2 Jenis Lakaran Reka Bentuk Litar</div>
+        <div class="sec-title-en">2 Types of Circuit Design Drawings</div>
+        <div class="sec-title-zh">两种电路设计图</div>
+      </div>
+      <span class="sec-chev open">&#8964;</span>
+    </div>
+    <div class="sec-body open">
+      <div class="tri">
+        <div class="tri-my"><div class="tri-my-lbl">&#x1F7E1; A — Gambar Rajah Blok</div><div class="tri-my-text">Menerangkan secara ringkas cara sistem beroperasi. Setiap blok dilabel mengikut nama peranti. Format: <strong>Input → Proses → Output</strong> + Bekalan Kuasa.</div></div>
+        <div class="tri-en"><div class="tri-en-lbl">&#x1F535; A — Block Diagram</div><div class="tri-en-text">Briefly explains how the system operates. Each block labelled by device name. Format: <strong>Input → Process → Output</strong> + Power Supply.</div></div>
+        <div class="tri-zh"><div class="tri-zh-lbl">&#x1F7E2; A — 方框图</div><div class="tri-zh-text">简要说明系统的运作方式。每个方框按设备名称标注。格式：<strong>输入→处理→输出</strong>+电源。</div></div>
+      </div>
+      <div class="tri">
+        <div class="tri-my"><div class="tri-my-lbl">&#x1F7E1; B — Lakaran Litar Skematik</div><div class="tri-my-text">Lakaran menggunakan <strong>simbol yang telah ditetapkan</strong>. Menunjukkan aliran kendalian bagi litar elektronik. Memudahkan pengguna memilih komponen untuk litar sebenar.</div></div>
+        <div class="tri-en"><div class="tri-en-lbl">&#x1F535; B — Schematic Circuit Drawing</div><div class="tri-en-text">Drawing using <strong>standardised symbols</strong>. Shows the control flow for electronic circuits. Helps users select components for the actual circuit.</div></div>
+        <div class="tri-zh"><div class="tri-zh-lbl">&#x1F7E2; B — 原理图</div><div class="tri-zh-text">使用<strong>规定符号</strong>的图纸。显示电子线路的控制流程。帮助用户为实际电路选择元件。</div></div>
+      </div>
+      <div class="must">
+        <div class="must-lbl">&#127919; Mesti Tahu / Must Know / 必须知道</div>
+        <div class="tri">
+          <div class="tri-my"><div class="tri-my-text">Litar skematik memudahkan pengguna memilih komponen untuk litar sebenar.</div></div>
+          <div class="tri-en"><div class="tri-en-text">Schematic circuit helps users select components for the actual circuit.</div></div>
+          <div class="tri-zh"><div class="tri-zh-text">原理图帮助用户为实际电路选择元件。</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════ KOMPONEN ════════ -->
+<div id="panel-comp" class="panel">
+
+  <div class="sec s-pu">
+    <div class="sec-header" onclick="exp(this)">
+      <div class="sec-icon">&#128268;</div>
+      <div class="sec-info">
+        <div class="sec-num">2.4D</div>
+        <div class="sec-title-my">Komponen Papan Litar Mikropengawal</div>
+        <div class="sec-title-en">Microcontroller Circuit Board Components</div>
+        <div class="sec-title-zh">微控制器电路板元件</div>
+      </div>
+      <span class="sec-chev open">&#8964;</span>
+    </div>
+    <div class="sec-body open">
+      <div class="tri"><div class="tri-my"><div class="tri-my-lbl">&#x1F7E1; Bateri 12V</div><div class="tri-my-text">Membekalkan bekalan kuasa 12V kepada papan litar elektronik mikropengawal.</div></div><div class="tri-en"><div class="tri-en-lbl">&#x1F535;</div><div class="tri-en-text">Supplies 12V power to the microcontroller circuit board.</div></div><div class="tri-zh"><div class="tri-zh-lbl">&#x1F7E2; 12V电池</div><div class="tri-zh-text">为微控制器电路板提供12V电源。</div></div></div>
+      <div class="tri"><div class="tri-my"><div class="tri-my-lbl">&#x1F7E1; Pengatur Voltan LM7805</div><div class="tri-my-text">Merendahkan nilai voltan daripada <strong>7V–20V kepada 5V</strong>.</div></div><div class="tri-en"><div class="tri-en-lbl">&#x1F535;</div><div class="tri-en-text">Reduces voltage from <strong>7V–20V to 5V</strong>.</div></div><div class="tri-zh"><div class="tri-zh-lbl">&#x1F7E2; 稳压器LM7805</div><div class="tri-zh-text">将电压从<strong>7V–20V降至5V</strong>。</div></div></div>
+      <div class="tri"><div class="tri-my"><div class="tri-my-lbl">&#x1F7E1; Perintang Tetap 10 kΩ</div><div class="tri-my-text">Mengawal dan mengehadkan arus elektrik. Disambung pada suis tekan tutup (input digital).</div></div><div class="tri-en"><div class="tri-en-lbl">&#x1F535;</div><div class="tri-en-text">Controls and limits electric current. Connected to push-close switch (digital input).</div></div><div class="tri-zh"><div class="tri-zh-lbl">&#x1F7E2; 固定电阻10 kΩ</div><div class="tri-zh-text">控制和限制电流。连接到按压关闭开关（数字输入）。</div></div></div>
+      <div class="tri"><div class="tri-my"><div class="tri-my-lbl">&#x1F7E1; Perintang Tetap 1 kΩ</div><div class="tri-my-text">Mengawal atau mengehadkan arus elektrik pada <strong>diod pemancar cahaya (LED)</strong>.</div></div><div class="tri-en"><div class="tri-en-lbl">&#x1F535;</div><div class="tri-en-text">Controls or limits electric current on <strong>LED (light emitting diode)</strong>.</div></div><div class="tri-zh"><div class="tri-zh-lbl">&#x1F7E2; 固定电阻1 kΩ</div><div class="tri-zh-text">控制或限制<strong>发光二极管（LED）</strong>上的电流。</div></div></div>
+      <div class="tri"><div class="tri-my"><div class="tri-my-lbl">&#x1F7E1; Modul Bluetooth</div><div class="tri-my-text">Menerima dan menghantar isyarat antara dua peralatan.</div></div><div class="tri-en"><div class="tri-en-lbl">&#x1F535;</div><div class="tri-en-text">Receives and transmits signals between two devices.</div></div><div class="tri-zh"><div class="tri-zh-lbl">&#x1F7E2; 蓝牙模块</div><div class="tri-zh-text">在两个设备之间接收和发送信号。</div></div></div>
+      <div class="tri"><div class="tri-my"><div class="tri-my-lbl">&#x1F7E1; Diod Pemancar Cahaya (LED)</div><div class="tri-my-text">Menghasilkan cahaya apabila arus elektrik mengalir melaluinya.</div></div><div class="tri-en"><div class="tri-en-lbl">&#x1F535;</div><div class="tri-en-text">Produces light when electric current flows through it.</div></div><div class="tri-zh"><div class="tri-zh-lbl">&#x1F7E2; 发光二极管（LED）</div><div class="tri-zh-text">当电流流过时发出光。</div></div></div>
+      <div class="tri"><div class="tri-my"><div class="tri-my-lbl">&#x1F7E1; Kristal 20 MHz</div><div class="tri-my-text">Menjana jam (clock signal) untuk mikropengawal.</div></div><div class="tri-en"><div class="tri-en-lbl">&#x1F535;</div><div class="tri-en-text">Generates clock signal for the microcontroller.</div></div><div class="tri-zh"><div class="tri-zh-lbl">&#x1F7E2; 20 MHz晶振</div><div class="tri-zh-text">为微控制器产生时钟信号。</div></div></div>
+
+      <div style="margin-top:10px">
+        <div style="font-size:12px;font-weight:800;color:#5b21b6;margin-bottom:6px;letter-spacing:1px;text-transform:uppercase">Input vs Output Litar LED Berkelip</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+          <div style="background:#f5f3ff;border:1.5px solid #c4b5fd;border-radius:10px;padding:10px">
+            <div style="font-size:11px;font-weight:800;color:#5b21b6;margin-bottom:5px">INPUT / 输入</div>
+            <div class="tri-my" style="background:transparent;border:none;padding:2px 0"><div class="tri-my-text" style="font-size:12px">Suis tekan tutup + Perintang 10 kΩ</div></div>
+            <div class="tri-en" style="background:transparent;border:none;padding:2px 0"><div class="tri-en-text" style="font-size:12px">Push-close switch + 10 kΩ resistor</div></div>
+            <div class="tri-zh" style="background:transparent;border:none;padding:2px 0"><div class="tri-zh-text" style="font-size:12px">按压关闭开关 + 10kΩ电阻</div></div>
+          </div>
+          <div style="background:#f5f3ff;border:1.5px solid #c4b5fd;border-radius:10px;padding:10px">
+            <div style="font-size:11px;font-weight:800;color:#5b21b6;margin-bottom:5px">OUTPUT / 输出</div>
+            <div class="tri-my" style="background:transparent;border:none;padding:2px 0"><div class="tri-my-text" style="font-size:12px">Diod pemancar cahaya (LED) + Perintang 1 kΩ</div></div>
+            <div class="tri-en" style="background:transparent;border:none;padding:2px 0"><div class="tri-en-text" style="font-size:12px">LED (light emitting diode) + 1 kΩ resistor</div></div>
+            <div class="tri-zh" style="background:transparent;border:none;padding:2px 0"><div class="tri-zh-text" style="font-size:12px">发光二极管（LED）+ 1kΩ电阻</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════ PENGATURCARAAN ════════ -->
+<div id="panel-prog" class="panel">
+
+  <div class="sec s-rd">
+    <div class="sec-header" onclick="exp(this)">
+      <div class="sec-icon">&#128221;</div>
+      <div class="sec-info">
+        <div class="sec-num">2.4E</div>
+        <div class="sec-title-my">Perisian &amp; Kumpulan Arahan (Magnetcode M5)</div>
+        <div class="sec-title-en">Software &amp; Command Groups (Magnetcode M5)</div>
+        <div class="sec-title-zh">软件与指令组（Magnetcode M5）</div>
+      </div>
+      <span class="sec-chev open">&#8964;</span>
+    </div>
+    <div class="sec-body open">
+      <div class="tri">
+        <div class="tri-my"><div class="tri-my-lbl">&#x1F7E1; Litar Simulasi</div><div class="tri-my-text">Litar yang hampir menyerupai litar sebenar. Digunakan untuk melihat cara sistem berfungsi <strong>sebelum sistem sebenar dihasilkan</strong>. Perisian: <strong>Magnetcode M5</strong> (Pemprosesan Pengaturcaraan secara Teks).</div></div>
+        <div class="tri-en"><div class="tri-en-lbl">&#x1F535; Simulation Circuit</div><div class="tri-en-text">Circuit that closely resembles the actual circuit. Used to see how the system works <strong>before the actual system is produced</strong>. Software: <strong>Magnetcode M5</strong> (Text-based Programming).</div></div>
+        <div class="tri-zh"><div class="tri-zh-lbl">&#x1F7E2; 模拟电路</div><div class="tri-zh-text">与实际电路非常相似的电路。用于在<strong>实际系统制造之前</strong>了解系统运作方式。软件：<strong>Magnetcode M5</strong>（文本编程处理）。</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sec s-rd">
+    <div class="sec-header" onclick="exp(this)">
+      <div class="sec-icon">&#128187;</div>
+      <div class="sec-info">
+        <div class="sec-num">2.4E</div>
+        <div class="sec-title-my">Arahan Atur Cara &amp; Fungsinya</div>
+        <div class="sec-title-en">Program Commands &amp; Functions</div>
+        <div class="sec-title-zh">编程指令与功能</div>
+      </div>
+      <span class="sec-chev">&#8964;</span>
+    </div>
+    <div class="sec-body">
+      <!-- DECISION -->
+      <div class="cmd-box" style="margin-bottom:10px">
+        <div class="cmd-title">Decision Group / 决策组</div>
+        <div class="cmd-row">
+          <div class="cmd-name">End If</div>
+          <div class="cmd-multi">
+            <div class="cmd-desc-my">Menamatkan arahan 'If'</div>
+            <div class="cmd-desc-en">Ends the 'If' command</div>
+            <div class="cmd-desc-zh">结束'If'指令</div>
+          </div>
+        </div>
+        <div class="cmd-row">
+          <div class="cmd-name">If ButtonA1 = Pressed</div>
+          <div class="cmd-multi">
+            <div class="cmd-desc-my">Mengesan sama ada butang tertentu ditekan pada antara muka</div>
+            <div class="cmd-desc-en">Detects if a specific button is pressed on the interface</div>
+            <div class="cmd-desc-zh">检测界面上是否按下特定按钮</div>
+          </div>
+        </div>
+        <div class="cmd-row">
+          <div class="cmd-name">If C_Ain1 = 0</div>
+          <div class="cmd-multi">
+            <div class="cmd-desc-my">Jika nilai penderia analog sepadan dengan syarat, isyarat akan diproses</div>
+            <div class="cmd-desc-en">If analog sensor value matches condition, signal will be processed</div>
+            <div class="cmd-desc-zh">如果模拟传感器值符合条件，将处理信号</div>
+          </div>
+        </div>
+        <div class="cmd-row">
+          <div class="cmd-name">If C_Din1 = 1</div>
+          <div class="cmd-multi">
+            <div class="cmd-desc-my">Jika nilai input digital sepadan dengan syarat, isyarat akan diproses</div>
+            <div class="cmd-desc-en">If digital input value matches condition, signal will be processed</div>
+            <div class="cmd-desc-zh">如果数字输入值符合条件，将处理信号</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- OTHER -->
+      <div class="cmd-box" style="margin-bottom:10px">
+        <div class="cmd-title">Other Group / 其他组</div>
+        <div class="cmd-row">
+          <div class="cmd-name">Goto = 1</div>
+          <div class="cmd-multi">
+            <div class="cmd-desc-my">Pergi ke barisan tertentu untuk ulang arahan. Diletak di bahagian akhir.</div>
+            <div class="cmd-desc-en">Go to specific line to repeat commands. Placed at the end.</div>
+            <div class="cmd-desc-zh">跳转到特定行重复指令，置于末尾。</div>
+          </div>
+        </div>
+        <div class="cmd-row">
+          <div class="cmd-name">Timer = 1 sec</div>
+          <div class="cmd-multi">
+            <div class="cmd-desc-my">Menunggu seketika berdasarkan tempoh masa yang ditetapkan</div>
+            <div class="cmd-desc-en">Wait for a moment based on the set time duration</div>
+            <div class="cmd-desc-zh">根据设定的时间等待片刻</div>
+          </div>
+        </div>
+        <div class="cmd-row">
+          <div class="cmd-name">~Note</div>
+          <div class="cmd-multi">
+            <div class="cmd-desc-my">Digunakan untuk menulis/mencatat pengaturcaraan yang dibina</div>
+            <div class="cmd-desc-en">Used to write/note the program being built</div>
+            <div class="cmd-desc-zh">用于记录所编写的程序</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CONTROLLER I/O -->
+      <div class="cmd-box">
+        <div class="cmd-title">Controller I/O Group / 控制器I/O组</div>
+        <div class="cmd-row">
+          <div class="cmd-name">Dout1 = On/Off</div>
+          <div class="cmd-multi">
+            <div class="cmd-desc-my">Arahan hidupkan atau matikan DOUT1 (output digital)</div>
+            <div class="cmd-desc-en">Command to turn on or off DOUT1 (digital output)</div>
+            <div class="cmd-desc-zh">开启或关闭DOUT1（数字输出）的指令</div>
+          </div>
+        </div>
+        <div class="cmd-row">
+          <div class="cmd-name">Read_Controller</div>
+          <div class="cmd-multi">
+            <div class="cmd-desc-my">Membaca semua nilai peranti input daripada papan litar elektronik</div>
+            <div class="cmd-desc-en">Reads all input device values from the electronic circuit board</div>
+            <div class="cmd-desc-zh">读取电子电路板上所有输入装置的值</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sec s-rd">
+    <div class="sec-header" onclick="exp(this)">
+      <div class="sec-icon">&#127381;</div>
+      <div class="sec-info">
+        <div class="sec-num">2.4E</div>
+        <div class="sec-title-my">Contoh Pengaturcaraan LED Berkelip</div>
+        <div class="sec-title-en">Sample Program: Blinking LED</div>
+        <div class="sec-title-zh">闪烁LED编程示例</div>
+      </div>
+      <span class="sec-chev">&#8964;</span>
+    </div>
+    <div class="sec-body">
+      <div class="tri" style="margin-bottom:10px">
+        <div class="tri-my"><div class="tri-my-lbl">&#x1F7E1; Pengaturcaraan Simulasi (16 baris)</div><div class="tri-my-text">Merancang pengaturcaraan untuk menghasilkan blok simulasi diod pemancar cahaya (LED) berkelip apabila suis ditekan.</div></div>
+        <div class="tri-en"><div class="tri-en-lbl">&#x1F535; Simulation Program (16 lines)</div><div class="tri-en-text">Design program to produce simulation block of blinking LED when switch is pressed.</div></div>
+        <div class="tri-zh"><div class="tri-zh-lbl">&#x1F7E2; 模拟程序（16行）</div><div class="tri-zh-text">设计程序，在按下开关时产生闪烁LED的模拟块。</div></div>
+      </div>
+      <div class="code-box">
+        <span style="color:#94a3b8">1.</span> ~Note memaparkan blok simulasi<br>
+        <span style="color:#94a3b8">2.</span> ButtonA1_Show = On<br>
+        <span style="color:#94a3b8">3.</span> ButtonC1_Show = On<br>
+        <span style="color:#94a3b8">4.</span> ButtonA1_Show_Text = Suis tekan tutup<br>
+        <span style="color:#94a3b8">5.</span> ButtonA1_Update<br>
+        <span style="color:#94a3b8">6.</span> ButtonC1_Show_Text = Diod pemancar cahaya<br>
+        <span style="color:#94a3b8">7.</span> ButtonC1_Update<br>
+        <span style="color:#94a3b8">8.</span> ~Note pengaturcaraan blok berkelip<br>
+        <span style="color:#fbbf24">9.</span> If ButtonA1 = Pressed<br>
+        <span style="color:#fbbf24">10.</span> ButtonC1_Show = On<br>
+        <span style="color:#fbbf24">11.</span> Timer = 1 sec<br>
+        <span style="color:#fbbf24">12.</span> ButtonC1_Show = Off<br>
+        <span style="color:#fbbf24">13.</span> Timer = 1 sec<br>
+        <span style="color:#fbbf24">14.</span> Goto = 10<br>
+        <span style="color:#fbbf24">15.</span> End If<br>
+        <span style="color:#94a3b8">16.</span> Goto = 1
+      </div>
+      <div class="tri" style="margin-bottom:10px">
+        <div class="tri-my"><div class="tri-my-lbl">&#x1F7E1; Pengaturcaraan Papan Litar Bluetooth</div><div class="tri-my-text">Menulis pengaturcaraan mudah berdasarkan penyambungan litar input dan output pada papan litar Bluetooth.</div></div>
+        <div class="tri-en"><div class="tri-en-lbl">&#x1F535; Bluetooth Circuit Board Program</div><div class="tri-en-text">Write simple program based on input and output circuit connections on Bluetooth circuit board.</div></div>
+        <div class="tri-zh"><div class="tri-zh-lbl">&#x1F7E2; 蓝牙电路板程序</div><div class="tri-zh-text">根据蓝牙电路板上输入和输出电路连接编写简单程序。</div></div>
+      </div>
+      <div class="code-box">
+        <span style="color:#94a3b8">1.</span> ~Note LED Berkelip<br>
+        <span style="color:#94a3b8">2.</span> Read_Controller<br>
+        <span style="color:#fbbf24">3.</span> If C_Din1 = 1<br>
+        <span style="color:#fbbf24">4.</span> Dout1 = On<br>
+        <span style="color:#fbbf24">5.</span> Timer = 1 sec<br>
+        <span style="color:#fbbf24">6.</span> Dout1 = Off<br>
+        <span style="color:#fbbf24">7.</span> Timer = 1 sec<br>
+        <span style="color:#94a3b8">8.</span> Goto = 4<br>
+        <span style="color:#fbbf24">9.</span> End If<br>
+        <span style="color:#94a3b8">10.</span> Goto = 1
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════ PENYAMBUNGAN ════════ -->
+<div id="panel-conn" class="panel">
+
+  <div class="sec s-pk">
+    <div class="sec-header" onclick="exp(this)">
+      <div class="sec-icon">&#128268;</div>
+      <div class="sec-info">
+        <div class="sec-num">2.4F</div>
+        <div class="sec-title-my">6 Langkah Penyambungan Litar kepada Mikropengawal</div>
+        <div class="sec-title-en">6 Steps to Connect Circuit to Microcontroller</div>
+        <div class="sec-title-zh">6步连接电路到微控制器</div>
+      </div>
+      <span class="sec-chev open">&#8964;</span>
+    </div>
+    <div class="sec-body open">
+      <div class="tri"><div class="tri-my"><div class="tri-my-lbl">&#x1F7E1; Langkah 1</div><div class="tri-my-text">Baca dan fahami <strong>lakaran litar skematik</strong>.</div></div><div class="tri-en"><div class="tri-en-lbl">&#x1F535; Step 1</div><div class="tri-en-text">Read and understand the <strong>schematic circuit drawing</strong>.</div></div><div class="tri-zh"><div class="tri-zh-lbl">&#x1F7E2; 步骤1</div><div class="tri-zh-text">阅读并理解<strong>原理图</strong>。</div></div></div>
+      <div class="tri"><div class="tri-my"><div class="tri-my-lbl">&#x1F7E1; Langkah 2</div><div class="tri-my-text">Sediakan komponen, peranti, bahan dan papan litar elektronik mikropengawal yang diperlukan.</div></div><div class="tri-en"><div class="tri-en-lbl">&#x1F535; Step 2</div><div class="tri-en-text">Prepare the necessary components, devices, materials and microcontroller circuit board.</div></div><div class="tri-zh"><div class="tri-zh-lbl">&#x1F7E2; 步骤2</div><div class="tri-zh-text">准备所需的元件、装置、材料和微控制器电路板。</div></div></div>
+      <div class="tri"><div class="tri-my"><div class="tri-my-lbl">&#x1F7E1; Langkah 3</div><div class="tri-my-text">Bina <strong>litar input dan litar output</strong>.</div></div><div class="tri-en"><div class="tri-en-lbl">&#x1F535; Step 3</div><div class="tri-en-text">Build the <strong>input circuit and output circuit</strong>.</div></div><div class="tri-zh"><div class="tri-zh-lbl">&#x1F7E2; 步骤3</div><div class="tri-zh-text">建立<strong>输入电路和输出电路</strong>。</div></div></div>
+      <div class="tri"><div class="tri-my"><div class="tri-my-lbl">&#x1F7E1; Langkah 4</div><div class="tri-my-text">Sambungkan litar input dan output menggunakan <strong>wayar pelompat dan soket (female)</strong> pada plag (male) papan litar.</div></div><div class="tri-en"><div class="tri-en-lbl">&#x1F535; Step 4</div><div class="tri-en-text">Connect input and output circuits using <strong>jumper wires and female sockets</strong> to the male plugs on the circuit board.</div></div><div class="tri-zh"><div class="tri-zh-lbl">&#x1F7E2; 步骤4</div><div class="tri-zh-text">使用<strong>跳线和母头插座</strong>将输入和输出电路连接到电路板的公头插座。</div></div></div>
+      <div class="tri"><div class="tri-my"><div class="tri-my-lbl">&#x1F7E1; Langkah 5</div><div class="tri-my-text">Pastikan litar input dan output dipasang pada <strong>plag (male) yang betul</strong> pada papan litar.</div></div><div class="tri-en"><div class="tri-en-lbl">&#x1F535; Step 5</div><div class="tri-en-text">Ensure input and output circuits are connected to the <strong>correct male plugs</strong> on the circuit board.</div></div><div class="tri-zh"><div class="tri-zh-lbl">&#x1F7E2; 步骤5</div><div class="tri-zh-text">确保输入和输出电路连接到电路板上<strong>正确的公头插座</strong>。</div></div></div>
+      <div class="tri"><div class="tri-my"><div class="tri-my-lbl">&#x1F7E1; Langkah 6</div><div class="tri-my-text">Semak penyambungan litar berdasarkan <strong>lakaran litar skematik</strong>.</div></div><div class="tri-en"><div class="tri-en-lbl">&#x1F535; Step 6</div><div class="tri-en-text">Check the circuit connections based on the <strong>schematic circuit drawing</strong>.</div></div><div class="tri-zh"><div class="tri-zh-lbl">&#x1F7E2; 步骤6</div><div class="tri-zh-text">根据<strong>原理图</strong>检查电路连接。</div></div></div>
+    </div>
+  </div>
+
+  <div class="sec s-pk">
+    <div class="sec-header" onclick="exp(this)">
+      <div class="sec-icon">&#128241;</div>
+      <div class="sec-info">
+        <div class="sec-num">2.4F</div>
+        <div class="sec-title-my">7 Langkah Penyambungan Bluetooth</div>
+        <div class="sec-title-en">7 Steps for Bluetooth Connection</div>
+        <div class="sec-title-zh">7步蓝牙连接</div>
+      </div>
+      <span class="sec-chev">&#8964;</span>
+    </div>
+    <div class="sec-body">
+      <div class="tri"><div class="tri-my"><div class="tri-my-lbl">&#x1F7E1; Langkah 1</div><div class="tri-my-text">Tekan <strong>[+]</strong> pada Home → buka Add → tekan kumpulan arahan.</div></div><div class="tri-en"><div class="tri-en-lbl">&#x1F535; Step 1</div><div class="tri-en-text">Press <strong>[+]</strong> on Home → open Add → press command group.</div></div><div class="tri-zh"><div class="tri-zh-lbl">&#x1F7E2; 步骤1</div><div class="tri-zh-text">在主页按<strong>[+]</strong>→ 打开Add → 按指令组。</div></div></div>
+      <div class="tri"><div class="tri-my"><div class="tri-my-lbl">&#x1F7E1; Langkah 2</div><div class="tri-my-text">Tekan <strong>[✓]</strong> untuk memasukkan arahan atur cara ke dalam perisian.</div></div><div class="tri-en"><div class="tri-en-lbl">&#x1F535; Step 2</div><div class="tri-en-text">Press <strong>[✓]</strong> to enter program commands into the software.</div></div><div class="tri-zh"><div class="tri-zh-lbl">&#x1F7E2; 步骤2</div><div class="tri-zh-text">按<strong>[✓]</strong>将程序指令输入软件。</div></div></div>
+      <div class="tri"><div class="tri-my"><div class="tri-my-lbl">&#x1F7E1; Langkah 3</div><div class="tri-my-text">Hidupkan suis papan litar (ON) → LED modul Bluetooth berkelip menunjukkan papan litar <strong>telah ON</strong>.</div></div><div class="tri-en"><div class="tri-en-lbl">&#x1F535; Step 3</div><div class="tri-en-text">Turn on circuit board switch (ON) → Bluetooth LED blinks indicating board is <strong>ON</strong>.</div></div><div class="tri-zh"><div class="tri-zh-lbl">&#x1F7E2; 步骤3</div><div class="tri-zh-text">打开电路板开关（ON）→ 蓝牙LED闪烁表示电路板<strong>已开启</strong>。</div></div></div>
+      <div class="tri"><div class="tri-my"><div class="tri-my-lbl">&#x1F7E1; Langkah 4</div><div class="tri-my-text">Lihat ID modul Bluetooth dan pastikan dalam keadaan <strong>ON</strong> untuk proses penetapan.</div></div><div class="tri-en"><div class="tri-en-lbl">&#x1F535; Step 4</div><div class="tri-en-text">View Bluetooth module ID and ensure it is <strong>ON</strong> for the pairing process.</div></div><div class="tri-zh"><div class="tri-zh-lbl">&#x1F7E2; 步骤4</div><div class="tri-zh-text">查看蓝牙模块ID，确保处于<strong>开启</strong>状态以进行配对。</div></div></div>
+      <div class="tri"><div class="tri-my"><div class="tri-my-lbl">&#x1F7E1; Langkah 5</div><div class="tri-my-text">Tekan <strong>Run</strong> → tekan OK. ID Bluetooth akan dipaparkan. Jika tidak, tekan <strong>SEARCH</strong>.</div></div><div class="tri-en"><div class="tri-en-lbl">&#x1F535; Step 5</div><div class="tri-en-text">Press <strong>Run</strong> → press OK. Bluetooth ID will appear. If not, press <strong>SEARCH</strong>.</div></div><div class="tri-zh"><div class="tri-zh-lbl">&#x1F7E2; 步骤5</div><div class="tri-zh-text">按<strong>Run</strong>→ 按OK。蓝牙ID将显示。若未显示，按<strong>SEARCH</strong>。</div></div></div>
+      <div class="tri"><div class="tri-my"><div class="tri-my-lbl">&#x1F7E1; Langkah 6</div><div class="tri-my-text">Klik pada ID Bluetooth dan masukkan nombor <strong>PIN: 1234</strong> untuk penetapan.</div></div><div class="tri-en"><div class="tri-en-lbl">&#x1F535; Step 6</div><div class="tri-en-text">Click on Bluetooth ID and enter <strong>PIN: 1234</strong> for pairing.</div></div><div class="tri-zh"><div class="tri-zh-lbl">&#x1F7E2; 步骤6</div><div class="tri-zh-text">点击蓝牙ID，输入<strong>PIN：1234</strong>进行配对。</div></div></div>
+      <div class="tri"><div class="tri-my"><div class="tri-my-lbl">&#x1F7E1; Langkah 7</div><div class="tri-my-text">Tekan suis → Diod pemancar cahaya <strong>berkelip</strong> dan terpadam bila bekalan kuasa atau pengaturcaraan smartphone dimatikan.</div></div><div class="tri-en"><div class="tri-en-lbl">&#x1F535; Step 7</div><div class="tri-en-text">Press switch → LED <strong>blinks</strong> and goes off when power supply or smartphone program is turned off.</div></div><div class="tri-zh"><div class="tri-zh-lbl">&#x1F7E2; 步骤7</div><div class="tri-zh-text">按开关→ LED<strong>闪烁</strong>，断电或关闭手机程序时熄灭。</div></div></div>
+
+      <div class="tip">
+        <div class="tip-lbl">&#128276; Reminder</div>
+        <div class="tri">
+          <div class="tri-my"><div class="tri-my-text">PIN Bluetooth: <strong>1234</strong> | Voltan operasi: <strong>10V–18V</strong> | Pastikan LED modul Bluetooth berkelip sebelum memulakan.</div></div>
+          <div class="tri-en"><div class="tri-en-text">Bluetooth PIN: <strong>1234</strong> | Operating voltage: <strong>10V–18V</strong> | Ensure Bluetooth module LED is blinking before starting.</div></div>
+          <div class="tri-zh"><div class="tri-zh-text">蓝牙PIN：<strong>1234</strong> | 工作电压：<strong>10V–18V</strong> | 开始前确认蓝牙模块LED在闪烁。</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════ UJIAN ════════ -->
+<div id="panel-test" class="panel">
+
+  <div class="sec s-am">
+    <div class="sec-header" onclick="exp(this)">
+      <div class="sec-icon">&#9989;</div>
+      <div class="sec-info">
+        <div class="sec-num">2.4G</div>
+        <div class="sec-title-my">Pengujian Kefungsian Litar Elektronik</div>
+        <div class="sec-title-en">Testing Electronic Circuit Functionality</div>
+        <div class="sec-title-zh">电子线路功能测试</div>
+      </div>
+      <span class="sec-chev open">&#8964;</span>
+    </div>
+    <div class="sec-body open">
+      <div class="tri">
+        <div class="tri-my"><div class="tri-my-lbl">&#x1F7E1; Tujuan Pengujian</div><div class="tri-my-text">Dilakukan bagi memastikan:<br>• <strong>Kekutuban penyambungan</strong> adalah betul<br>• <strong>Komponen</strong> litar adalah betul<br>• <strong>Peranti berfungsi</strong> dengan baik</div></div>
+        <div class="tri-en"><div class="tri-en-lbl">&#x1F535; Purpose of Testing</div><div class="tri-en-text">Done to ensure:<br>• <strong>Polarity of connections</strong> is correct<br>• Circuit <strong>components</strong> are correct<br>• <strong>Devices function</strong> properly</div></div>
+        <div class="tri-zh"><div class="tri-zh-lbl">&#x1F7E2; 测试目的</div><div class="tri-zh-text">用于确保：<br>• <strong>连接极性</strong>正确<br>• 线路<strong>元件</strong>正确<br>• <strong>装置正常工作</strong></div></div>
+      </div>
+      <div class="tbl-wrap">
+        <table class="tbl tbl-am">
+          <thead><tr><th>Litar / Circuit / 线路</th><th>Kekutuban / Polarity / 极性</th><th>Komponen / Component / 元件</th><th>Meter Pelbagai / Multimeter / 万用表</th></tr></thead>
+          <tbody>
+            <tr><td>Input</td><td>Betul / Correct / 正确</td><td>Suis tekan tutup / Push-close switch / 按压关闭开关</td><td>Berfungsi / Working / 正常</td></tr>
+            <tr><td rowspan="2">Output</td><td rowspan="2">Betul / Correct / 正确</td><td>Perintang tetap / Fixed resistor / 固定电阻</td><td rowspan="2">Berfungsi / Working / 正常</td></tr>
+            <tr><td>Diod pemancar cahaya / LED</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="tip">
+        <div class="tip-lbl">&#128161; Tip PLUS</div>
+        <div class="tri">
+          <div class="tri-my"><div class="tri-my-text">Uji penyambungan litar input dan output <strong>sebelum pengoperasian</strong>. Jika projek tidak berfungsi, gunakan <strong>meter pelbagai</strong>.</div></div>
+          <div class="tri-en"><div class="tri-en-text">Test input and output circuit connections <strong>before operation</strong>. If project does not work, use a <strong>multimeter</strong>.</div></div>
+          <div class="tri-zh"><div class="tri-zh-text"><strong>操作前</strong>测试输入输出电路连接。若项目不工作，使用<strong>万用表</strong>。</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sec s-am">
+    <div class="sec-header" onclick="exp(this)">
+      <div class="sec-icon">&#128200;</div>
+      <div class="sec-info">
+        <div class="sec-num">2.4G</div>
+        <div class="sec-title-my">Penilaian &amp; Penambahbaikan Reka Bentuk</div>
+        <div class="sec-title-en">Evaluation &amp; Design Improvement</div>
+        <div class="sec-title-zh">评估与设计改进</div>
+      </div>
+      <span class="sec-chev">&#8964;</span>
+    </div>
+    <div class="sec-body">
+      <div class="tri">
+        <div class="tri-my"><div class="tri-my-lbl">&#x1F7E1; Penilaian</div><div class="tri-my-text">Dilakukan bagi memastikan litar elektronik <strong>berfungsi seperti dikehendaki</strong>. Contoh: Apabila suis ditekan → LED berkelip-kelip.</div></div>
+        <div class="tri-en"><div class="tri-en-lbl">&#x1F535; Evaluation</div><div class="tri-en-text">Done to ensure the electronic circuit <strong>functions as required</strong>. Example: When switch pressed → LED blinks.</div></div>
+        <div class="tri-zh"><div class="tri-zh-lbl">&#x1F7E2; 评估</div><div class="tri-zh-text">确保电子线路<strong>按要求运作</strong>。例子：按下开关→LED闪烁。</div></div>
+      </div>
+      <div class="tri">
+        <div class="tri-my"><div class="tri-my-lbl">&#x1F7E1; Penambahbaikan</div><div class="tri-my-text">Dilakukan supaya reka bentuk dapat <strong>berfungsi dengan lebih baik</strong> untuk memenuhi kehendak pelanggan.<br>• Output: Tambah LED <strong>berlainan warna</strong><br>• Input: Gantikan dengan <strong>penderia lain</strong></div></div>
+        <div class="tri-en"><div class="tri-en-lbl">&#x1F535; Improvement</div><div class="tri-en-text">Done so design can <strong>function better</strong> to meet customer requirements.<br>• Output: Add LEDs in <strong>different colours</strong><br>• Input: Replace with <strong>other sensors</strong></div></div>
+        <div class="tri-zh"><div class="tri-zh-lbl">&#x1F7E2; 改进</div><div class="tri-zh-text">使设计能<strong>更好地运作</strong>以满足客户需求。<br>• 输出：添加<strong>不同颜色</strong>LED<br>• 输入：更换为<strong>其他传感器</strong></div></div>
+      </div>
+      <div class="must">
+        <div class="must-lbl">&#127919; Mesti Tahu / Must Know / 必须知道</div>
+        <div class="tri">
+          <div class="tri-my"><div class="tri-my-text">Penambahbaikan reka bentuk litar elektronik dilakukan pada <strong>peranti input dan peranti output</strong>.</div></div>
+          <div class="tri-en"><div class="tri-en-text">Electronic circuit design improvement is done on <strong>input devices and output devices</strong>.</div></div>
+          <div class="tri-zh"><div class="tri-zh-text">电子线路设计改进在<strong>输入装置和输出装置</strong>上进行。</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════ MEMORY MAP ════════ -->
+<div id="panel-mm" class="panel">
+  <div style="background:#0f172a;border-radius:16px;overflow:hidden;margin-bottom:12px">
+    <div class="mmap-header">
+      <div class="mmap-h-title">&#11088; Super Compact Memory Map</div>
+      <div class="mmap-h-en">Reka Bentuk Elektronik — Quick Reference</div>
+      <div class="mmap-h-zh">电子设计——快速参考</div>
+    </div>
+    <div style="padding:14px">
+
+      <!-- COMPARISON TABLE -->
+      <div style="background:#1e293b;border-radius:12px;padding:12px;margin-bottom:12px">
+        <div style="font-size:11px;font-weight:800;letter-spacing:2px;color:#6ee7b7;text-transform:uppercase;margin-bottom:10px">&#128203; Mikropengawal vs Mikropemproses</div>
+        <div class="tbl-wrap">
+          <table class="tbl tbl-dk">
+            <thead><tr><th>Aspek</th><th>Mikropengawal</th><th>Mikropemproses</th></tr></thead>
+            <tbody>
+              <tr><td>Komponen</td><td style="color:#6ee7b7">CPU+RAM+ROM+I/O dalam 1 cip<br><span style="color:#a7f3d0;font-style:italic;font-size:11px">All in 1 chip / 集成一芯片</span></td><td style="color:#fde68a">CPU sahaja / CPU only / 仅CPU</td></tr>
+              <tr><td>Kawalan</td><td style="color:#6ee7b7">Mudah/kecil / Simple / 简单</td><td style="color:#fde68a">Besar/kompleks / Complex / 复杂</td></tr>
+              <tr><td>Contoh</td><td style="color:#6ee7b7">Pintu pagar, mesin basuh<br><span style="font-style:italic;font-size:11px">Gate, washing machine / 自动门、洗衣机</span></td><td style="color:#fde68a">Komputer / Computer / 计算机</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="mmap-item">
+        <div class="mmap-my"><div class="mmap-my-text">3 Bahagian: INPUT (terima isyarat) → CPU/PROSES (ROM=kekal, RAM=sementara) → OUTPUT (laksana)</div></div>
+        <div class="mmap-en"><div class="mmap-en-text">3 Sections: INPUT (receive signals) → CPU/PROCESS (ROM=permanent, RAM=temporary) → OUTPUT (execute)</div></div>
+        <div class="mmap-zh"><div class="mmap-zh-text">三部分：输入（接收信号）→ CPU/处理（ROM=永久，RAM=临时）→ 输出（执行）</div></div>
+      </div>
+
+      <div class="mmap-item">
+        <div class="mmap-my"><div class="mmap-my-text">Input Digital: suis, penderia pergerakan, penderia air. Input Analog: LDR, penderia suhu, penderia jarak inframerah</div></div>
+        <div class="mmap-en"><div class="mmap-en-text">Digital Input: switches, motion sensor, water sensor. Analog Input: LDR, temperature sensor, infrared distance sensor</div></div>
+        <div class="mmap-zh"><div class="mmap-zh-text">数字输入：开关、运动传感器、水传感器。模拟输入：光敏电阻、温度传感器、红外线距离传感器</div></div>
+      </div>
+
+      <div class="mmap-item">
+        <div class="mmap-my"><div class="mmap-my-text">Output: LED, Motor DC, Pembaz (Buzzer), Geganti (Relay). Perintang 1kΩ = hadkan arus LED. Perintang 10kΩ = sambung pada suis input digital</div></div>
+        <div class="mmap-en"><div class="mmap-en-text">Output: LED, DC Motor, Buzzer, Relay. 1kΩ resistor = limits LED current. 10kΩ resistor = connected to digital input switch</div></div>
+        <div class="mmap-zh"><div class="mmap-zh-text">输出：LED、直流电机、蜂鸣器、继电器。1kΩ电阻=限制LED电流。10kΩ电阻=连接数字输入开关</div></div>
+      </div>
+
+      <div class="mmap-item">
+        <div class="mmap-my"><div class="mmap-my-text">Pin penting: VDD=5V bekalan | AIN=input analog (0–5V) | DIN=input digital (10kΩ) | DOUT=output digital (5V/20mA) | VSS=bumi</div></div>
+        <div class="mmap-en"><div class="mmap-en-text">Key pins: VDD=5V supply | AIN=analog input (0–5V) | DIN=digital input (10kΩ) | DOUT=digital output (5V/20mA) | VSS=ground</div></div>
+        <div class="mmap-zh"><div class="mmap-zh-text">重要引脚：VDD=5V电源 | AIN=模拟输入（0–5V）| DIN=数字输入（10kΩ）| DOUT=数字输出（5V/20mA）| VSS=接地</div></div>
+      </div>
+
+      <div class="mmap-item">
+        <div class="mmap-my"><div class="mmap-my-text">Arahan pengaturcaraan: If (Decision) + Dout/Timer (Controller I/O) + Goto + End If + ~Note (catatan) + Read_Controller</div></div>
+        <div class="mmap-en"><div class="mmap-en-text">Program commands: If (Decision) + Dout/Timer (Controller I/O) + Goto + End If + ~Note (comment) + Read_Controller</div></div>
+        <div class="mmap-zh"><div class="mmap-zh-text">编程指令：If（决策）+ Dout/Timer（控制器I/O）+ Goto + End If + ~Note（注释）+ Read_Controller</div></div>
+      </div>
+
+      <div class="mmap-item">
+        <div class="mmap-my"><div class="mmap-my-text">Bluetooth: PIN=1234 | Voltan=10–18V | LED modul berkelip = papan litar ON | Tekan SEARCH jika ID tidak muncul</div></div>
+        <div class="mmap-en"><div class="mmap-en-text">Bluetooth: PIN=1234 | Voltage=10–18V | Module LED blinking = board ON | Press SEARCH if ID not shown</div></div>
+        <div class="mmap-zh"><div class="mmap-zh-text">蓝牙：PIN=1234 | 电压=10–18V | 模块LED闪烁=电路板开启 | 若ID未显示按SEARCH</div></div>
+      </div>
+
+      <div class="mmap-item">
+        <div class="mmap-my"><div class="mmap-my-text">Pengujian = kekutuban betul + komponen betul + meter pelbagai. Penambahbaikan = output (LED warna lain) + input (ganti penderia)</div></div>
+        <div class="mmap-en"><div class="mmap-en-text">Testing = correct polarity + correct components + multimeter. Improvement = output (different colour LED) + input (replace sensor)</div></div>
+        <div class="mmap-zh"><div class="mmap-zh-text">测试=极性正确+元件正确+万用表。改进=输出（不同颜色LED）+输入（更换传感器）</div></div>
+      </div>
+
+      <!-- EXAM BOX -->
+      <div class="exam-box">
+        <div class="exam-hdr"><div class="exam-lbl">&#9997; Exam Template / 考试句型</div></div>
+        <div class="exam-my"><div class="exam-my-t">Mikropengawal terdiri daripada bahagian input, proses dan output. Pengaturcaraan yang dimuatkan dalam ROM membolehkan CPU memproses isyarat input dan menghasilkan isyarat output untuk mengawal peranti elektronik.</div></div>
+        <div class="exam-en"><div class="exam-en-t">A microcontroller consists of input, process and output sections. The program loaded in ROM enables the CPU to process input signals and produce output signals to control electronic devices.</div></div>
+        <div class="exam-zh"><div class="exam-zh-t">微控制器由输入、处理和输出三部分组成。装载在ROM中的程序使CPU能够处理输入信号，并产生输出信号来控制电子装置。</div></div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div class="footer">Reka Bentuk Elektronik &middot; Topik 2.4 &middot; 电子设计</div>
+
+<script>
+var hiddenLang={my:false,en:false,zh:false};
+function tgl(lang,btn){
+  hiddenLang[lang]=!hiddenLang[lang];
+  document.getElementById('app').classList.toggle('hide-'+lang,hiddenLang[lang]);
+  btn.classList.toggle('on',!hiddenLang[lang]);
+}
+function showPanel(id,btn){
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById('panel-'+id).classList.add('active');
+  btn.classList.add('active');
+  window.scrollTo(0,document.querySelector('.tabs').offsetTop-60);
+}
+function exp(hdr){
+  var b=hdr.nextElementSibling;
+  var c=hdr.querySelector('.sec-chev');
+  var o=b.classList.toggle('open');
+  c.classList.toggle('open',o);
+}
+</script>
+</body>
+</html>
