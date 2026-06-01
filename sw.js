@@ -26,7 +26,8 @@ const STATIC_ASSETS = [
     "/daily-progress.html",
     "/js/daily-progress.js",
     "/history/t2_chapter8.html",
-    "/history/t2_chapter9.html"
+    "/history/t2_chapter9.html",
+    "/rbt/t2_akuaponik.html"
 ];
 
 self.addEventListener("install", event => {

@@ -1,0 +1,994 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nota Peperiksaan – Sistem Akuaponik | RDT</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:       #0b1120;
+    --surface:  #111c2e;
+    --card:     #162035;
+    --border:   #1e3050;
+    --accent1:  #00d4ff;   /* cyan  – Raft  */
+    --accent2:  #00e596;   /* green – Ebb & Flow */
+    --accent3:  #ff8c42;   /* orange – NFT  */
+    --accent4:  #a78bfa;   /* violet – general */
+    --text:     #e2eaf5;
+    --muted:    #7a90b0;
+    --danger:   #ff4d6d;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    padding: 0 0 60px;
+    line-height: 1.65;
+  }
+
+  /* ── HERO ────────────────────────────────── */
+  .hero {
+    background: linear-gradient(135deg, #061020 0%, #0d1e38 60%, #0b2040 100%);
+    border-bottom: 1px solid var(--border);
+    padding: 48px 32px 40px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(0,212,255,.12) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .subject-tag {
+    display: inline-block;
+    font-size: .7rem;
+    font-weight: 500;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    background: rgba(0,212,255,.12);
+    border: 1px solid rgba(0,212,255,.3);
+    color: var(--accent1);
+    padding: 4px 14px;
+    border-radius: 99px;
+    margin-bottom: 20px;
+  }
+  .hero h1 {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(1.9rem, 5vw, 3.2rem);
+    font-weight: 800;
+    line-height: 1.15;
+    letter-spacing: -.02em;
+    color: #fff;
+  }
+  .hero h1 span { color: var(--accent1); }
+  .hero-sub {
+    margin-top: 12px;
+    font-size: .95rem;
+    color: var(--muted);
+  }
+
+  /* ── NAV PILLS ───────────────────────────── */
+  .nav-pills {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    padding: 28px 20px 0;
+  }
+  .nav-pills a {
+    text-decoration: none;
+    font-size: .82rem;
+    font-weight: 500;
+    padding: 7px 18px;
+    border-radius: 99px;
+    border: 1px solid var(--border);
+    color: var(--muted);
+    transition: all .2s;
+  }
+  .nav-pills a:hover { border-color: currentColor; color: #fff; }
+  .nav-pills a.c1 { color: var(--accent1); border-color: rgba(0,212,255,.3); }
+  .nav-pills a.c2 { color: var(--accent2); border-color: rgba(0,229,150,.3); }
+  .nav-pills a.c3 { color: var(--accent3); border-color: rgba(255,140,66,.3); }
+
+  /* ── WRAPPER ─────────────────────────────── */
+  .wrapper {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  /* ── SECTION TITLE ───────────────────────── */
+  .sec-label {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 48px 0 20px;
+  }
+  .sec-label .dot {
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+  .sec-label h2 {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.4rem;
+    font-weight: 800;
+    letter-spacing: -.01em;
+  }
+  .sec-label .num {
+    font-size: .75rem;
+    font-weight: 700;
+    letter-spacing: .1em;
+    color: var(--muted);
+    margin-left: auto;
+    white-space: nowrap;
+  }
+
+  /* ── CARD ────────────────────────────────── */
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    overflow: hidden;
+    margin-bottom: 16px;
+    transition: transform .2s, box-shadow .2s;
+  }
+  .card:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(0,0,0,.4); }
+  .card-head {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px 20px;
+    border-bottom: 1px solid var(--border);
+  }
+  .card-head .icon {
+    width: 36px; height: 36px;
+    border-radius: 8px;
+    display: grid; place-items: center;
+    font-size: 1.1rem;
+    flex-shrink: 0;
+  }
+  .card-head h3 {
+    font-family: 'Syne', sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+  }
+  .card-body { padding: 18px 20px; }
+
+  /* ── DEFINITION ──────────────────────────── */
+  .definition {
+    background: rgba(255,255,255,.04);
+    border-left: 3px solid var(--accent4);
+    border-radius: 0 8px 8px 0;
+    padding: 12px 16px;
+    font-size: .92rem;
+    margin-bottom: 16px;
+    font-style: italic;
+    color: #c8d8ee;
+  }
+  .definition .zh {
+    display: block;
+    margin-top: 4px;
+    font-size: .82rem;
+    color: var(--muted);
+    font-style: normal;
+  }
+
+  /* ── TWO-COL GRID ────────────────────────── */
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  @media(max-width:600px){ .grid2 { grid-template-columns: 1fr; } }
+
+  /* ── PROS / CONS ─────────────────────────── */
+  .pro-con h4 {
+    font-size: .78rem;
+    font-weight: 700;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .pro-con.pros h4 { color: var(--accent2); }
+  .pro-con.cons h4 { color: var(--danger); }
+  .pro-con ul { list-style: none; }
+  .pro-con ul li {
+    font-size: .88rem;
+    padding: 4px 0;
+    padding-left: 20px;
+    position: relative;
+    color: #bfd0e8;
+  }
+  .pro-con.pros ul li::before { content: '✓'; position: absolute; left: 0; color: var(--accent2); font-weight: 700; }
+  .pro-con.cons ul li::before { content: '✗'; position: absolute; left: 0; color: var(--danger); font-weight: 700; }
+
+  /* ── DETAIL LIST ─────────────────────────── */
+  .detail-list { list-style: none; }
+  .detail-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: .9rem;
+    padding: 7px 0;
+    border-bottom: 1px solid rgba(255,255,255,.05);
+    color: #c8d8ee;
+  }
+  .detail-list li:last-child { border-bottom: none; }
+  .detail-list li .bullet {
+    width: 20px; height: 20px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    display: grid; place-items: center;
+    font-size: .65rem;
+    font-weight: 700;
+    margin-top: 2px;
+  }
+
+  /* ── BADGE ───────────────────────────────── */
+  .badge {
+    display: inline-block;
+    font-size: .7rem;
+    font-weight: 600;
+    padding: 2px 10px;
+    border-radius: 99px;
+    margin-left: 6px;
+    vertical-align: middle;
+  }
+
+  /* ── COMPARISON TABLE ────────────────────── */
+  .compare-wrap { overflow-x: auto; }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: .85rem;
+    min-width: 500px;
+  }
+  thead tr {
+    background: var(--surface);
+    border-bottom: 2px solid var(--border);
+  }
+  thead th {
+    padding: 12px 14px;
+    text-align: left;
+    font-family: 'Syne', sans-serif;
+    font-size: .82rem;
+    font-weight: 700;
+    letter-spacing: .03em;
+  }
+  tbody tr {
+    border-bottom: 1px solid var(--border);
+    transition: background .15s;
+  }
+  tbody tr:hover { background: rgba(255,255,255,.03); }
+  tbody td { padding: 11px 14px; color: #b8ccdf; }
+  tbody td:first-child { color: var(--text); font-weight: 500; }
+
+  /* colour accents on header cells */
+  .th-r { color: var(--accent1) !important; }
+  .th-e { color: var(--accent2) !important; }
+  .th-n { color: var(--accent3) !important; }
+
+  /* ── EXAM TIPS ───────────────────────────── */
+  .tips-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px,1fr)); gap: 12px; }
+  .tip-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 16px;
+    position: relative;
+    overflow: hidden;
+  }
+  .tip-card::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0;
+    height: 3px;
+  }
+  .tip-card.t1::before { background: var(--accent1); }
+  .tip-card.t2::before { background: var(--accent2); }
+  .tip-card.t3::before { background: var(--accent3); }
+  .tip-card.t4::before { background: var(--accent4); }
+  .tip-num {
+    font-family: 'Syne', sans-serif;
+    font-size: 2rem;
+    font-weight: 800;
+    opacity: .08;
+    position: absolute; top: 8px; right: 12px;
+    line-height: 1;
+  }
+  .tip-card h4 { font-size: .88rem; font-weight: 700; margin-bottom: 6px; }
+  .tip-card p { font-size: .82rem; color: var(--muted); line-height: 1.5; }
+
+  /* ── FLOW DIAGRAM (CSS-only) ─────────────── */
+  .flow {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    flex-wrap: wrap;
+    margin: 12px 0;
+  }
+  .flow-box {
+    background: rgba(255,255,255,.06);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 8px 14px;
+    font-size: .82rem;
+    text-align: center;
+    flex: 1;
+    min-width: 90px;
+  }
+  .flow-arrow {
+    color: var(--muted);
+    font-size: 1.1rem;
+    padding: 0 4px;
+    flex-shrink: 0;
+  }
+
+  /* ── KEYWORD PILL ────────────────────────── */
+  .kw {
+    display: inline-block;
+    font-size: .78rem;
+    font-weight: 600;
+    padding: 2px 9px;
+    border-radius: 5px;
+    margin: 2px 2px 4px 0;
+  }
+
+  .top-nav{background:#111c2e;padding:10px 16px;border-bottom:1px solid #1e3050;position:sticky;top:0;z-index:120}
+  .dashboard-link{display:inline-flex;align-items:center;gap:6px;padding:8px 12px;border-radius:8px;background:#1d4ed8;color:#fff;font-size:13px;font-weight:700;text-decoration:none;font-family:'DM Sans',sans-serif}
+  .dashboard-link:hover{background:#1e40af}
+
+  /* ── FOOTER ──────────────────────────────── */
+  footer {
+    text-align: center;
+    margin-top: 60px;
+    padding: 24px;
+    border-top: 1px solid var(--border);
+    font-size: .8rem;
+    color: var(--muted);
+  }
+  footer span { color: var(--accent4); }
+</style>
+</head>
+<body>
+<div class="top-nav">
+  <a class="dashboard-link" href="../index.html">&larr; Back to Dashboard</a>
+</div>
+
+<!-- ═══════════════════════════════════ HERO -->
+<div class="hero">
+  <div class="subject-tag">Rekabentuk Dan Teknologi (RDT)</div>
+  <h1>Sistem <span>Akuaponik</span><br>— Nota Peperiksaan</h1>
+  <p class="hero-sub">3 Sistem Utama • Raft · Ebb &amp; Flow · NFT &nbsp;|&nbsp; 水培鱼菜共生系统考试笔记</p>
+</div>
+
+<!-- NAV -->
+<div class="nav-pills">
+  <a href="#intro">Pengenalan</a>
+  <a href="#raft" class="c1">① Raft</a>
+  <a href="#ebb" class="c2">② Ebb &amp; Flow</a>
+  <a href="#nft" class="c3">③ NFT</a>
+  <a href="#compare">Perbandingan</a>
+  <a href="#tips">Tips Peperiksaan</a>
+  <a href="#memmap" style="color:#f7c948;border-color:rgba(247,201,72,.3)">🧠 Mind Map</a>
+</div>
+
+<div class="wrapper">
+
+  <!-- ═══════════════════════════════ INTRO -->
+  <div id="intro" class="sec-label">
+    <div class="dot" style="background:var(--accent4)"></div>
+    <h2>Pengenalan Akuaponik</h2>
+    <span class="num">ASAS</span>
+  </div>
+
+  <div class="card">
+    <div class="card-head">
+      <div class="icon" style="background:rgba(167,139,250,.15);color:var(--accent4)">🌿</div>
+      <h3>Apa itu Akuaponik?</h3>
+    </div>
+    <div class="card-body">
+      <div class="definition">
+        Akuaponik ialah sistem pertanian bersepadu yang menggabungkan <strong>akuakultur</strong> (ternakan ikan) dan <strong>hidroponik</strong> (penanaman tanaman tanpa tanah) dalam satu ekosistem yang saling bergantungan.
+        <span class="zh">水培鱼菜共生 — 将鱼类养殖与无土栽培植物相结合的综合农业系统。</span>
+      </div>
+      <div class="flow">
+        <div class="flow-box">🐟 Ikan<br><small>hasilkan sisa</small></div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-box">🦠 Bakteria<br><small>urai amonia</small></div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-box">🌱 Tanaman<br><small>serap nutrien</small></div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-box">💧 Air bersih<br><small>kembali ke ikan</small></div>
+      </div>
+      <p style="font-size:.85rem;color:var(--muted);margin-top:8px">Kitaran ini berulang secara berterusan — tiada baja kimia, sedikit air terbuang. 循环往复，不需化肥，节约用水。</p>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════ 1 – RAFT -->
+  <div id="raft" class="sec-label">
+    <div class="dot" style="background:var(--accent1)"></div>
+    <h2 style="color:var(--accent1)">① Sistem Raft (Deep Water Culture)</h2>
+    <span class="num">SISTEM 1 / 3</span>
+  </div>
+
+  <div class="card" style="border-color:rgba(0,212,255,.25)">
+    <div class="card-head" style="border-color:rgba(0,212,255,.15)">
+      <div class="icon" style="background:rgba(0,212,255,.12);color:var(--accent1)">🛶</div>
+      <h3>Sistem Raft — Rakit Terapung</h3>
+      <span class="badge" style="background:rgba(0,212,255,.1);color:var(--accent1)">DWC</span>
+    </div>
+    <div class="card-body">
+      <div class="definition">
+        Tanaman ditanam di atas rakit (styrofoam / polystyrene) yang terapung di atas air yang kaya dengan nutrien. Akar terus terbenam dalam air sepenuhnya.
+        <span class="zh">植物种在漂浮于富含营养水面上的浮板中，根部全程浸泡于水中。</span>
+      </div>
+
+      <ul class="detail-list">
+        <li>
+          <span class="bullet" style="background:rgba(0,212,255,.15);color:var(--accent1)">①</span>
+          <span><strong>Cara kerja:</strong> Rakit bercengkam dengan lubang-lubang kecil di mana pokok diletakkan dalam net pot. Akar terjulur ke bawah masuk ke dalam air bernutrien.</span>
+        </li>
+        <li>
+          <span class="bullet" style="background:rgba(0,212,255,.15);color:var(--accent1)">②</span>
+          <span><strong>Oksigen:</strong> Pam udara (air pump / aerator) digunakan untuk membekalkan oksigen ke dalam air supaya akar tidak membusuk.</span>
+        </li>
+        <li>
+          <span class="bullet" style="background:rgba(0,212,255,.15);color:var(--accent1)">③</span>
+          <span><strong>Tanaman sesuai:</strong> Selada (lettuce), bayam, kangkung, sawi, herba — tanaman ringan &amp; cepat membesar.</span>
+        </li>
+        <li>
+          <span class="bullet" style="background:rgba(0,212,255,.15);color:var(--accent1)">④</span>
+          <span><strong>Saiz tangki:</strong> Biasanya tangki panjang &amp; cetek untuk memaksimumkan permukaan rakit.</span>
+        </li>
+      </ul>
+
+      <div class="grid2" style="margin-top:16px">
+        <div class="pro-con pros">
+          <h4>✅ Kelebihan</h4>
+          <ul>
+            <li>Mudah dibina &amp; diselenggara</li>
+            <li>Kos pembinaan rendah</li>
+            <li>Stabil — air banyak = buffer suhu &amp; pH</li>
+            <li>Sesuai untuk pemula</li>
+            <li>Hasil tinggi untuk sayuran daun</li>
+          </ul>
+        </div>
+        <div class="pro-con cons">
+          <h4>❌ Kelemahan</h4>
+          <ul>
+            <li>Hanya sesuai tanaman ringan sahaja</li>
+            <li>Penyebaran penyakit mudah berlaku</li>
+            <li>Memerlukan aerator berterusan</li>
+            <li>Penggantian tanaman perlu hati-hati</li>
+          </ul>
+        </div>
+      </div>
+
+      <div style="margin-top:14px">
+        <p style="font-size:.78rem;color:var(--muted);margin-bottom:6px;font-weight:600;text-transform:uppercase;letter-spacing:.08em">Kata Kunci Peperiksaan</p>
+        <span class="kw" style="background:rgba(0,212,255,.12);color:var(--accent1)">rakit terapung</span>
+        <span class="kw" style="background:rgba(0,212,255,.12);color:var(--accent1)">Deep Water Culture</span>
+        <span class="kw" style="background:rgba(0,212,255,.12);color:var(--accent1)">net pot</span>
+        <span class="kw" style="background:rgba(0,212,255,.12);color:var(--accent1)">aerator</span>
+        <span class="kw" style="background:rgba(0,212,255,.12);color:var(--accent1)">akar terbenam</span>
+        <span class="kw" style="background:rgba(0,212,255,.12);color:var(--accent1)">styrofoam</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════ 2 – EBB & FLOW -->
+  <div id="ebb" class="sec-label">
+    <div class="dot" style="background:var(--accent2)"></div>
+    <h2 style="color:var(--accent2)">② Sistem Ebb &amp; Flow (Flood &amp; Drain)</h2>
+    <span class="num">SISTEM 2 / 3</span>
+  </div>
+
+  <div class="card" style="border-color:rgba(0,229,150,.25)">
+    <div class="card-head" style="border-color:rgba(0,229,150,.15)">
+      <div class="icon" style="background:rgba(0,229,150,.12);color:var(--accent2)">🌊</div>
+      <h3>Sistem Ebb &amp; Flow — Banjir &amp; Saliran</h3>
+      <span class="badge" style="background:rgba(0,229,150,.1);color:var(--accent2)">Flood &amp; Drain</span>
+    </div>
+    <div class="card-body">
+      <div class="definition">
+        Air bernutrien mengalir masuk ke dalam bekas penanaman secara berkala (banjir), kemudian disalirkan keluar secara automatik selepas tempoh tertentu (saliran). Proses ini berulang mengikut jadual waktu.
+        <span class="zh">营养水定时泵入种植床（淹水），随后自动排出（退水）。循环定时重复进行。</span>
+      </div>
+
+      <ul class="detail-list">
+        <li>
+          <span class="bullet" style="background:rgba(0,229,150,.15);color:var(--accent2)">①</span>
+          <span><strong>Timer (Pemasa):</strong> Pam air dikawal oleh pemasa (timer). Biasanya ditetapkan 2–4 kali sehari bergantung kepada jenis tanaman.</span>
+        </li>
+        <li>
+          <span class="bullet" style="background:rgba(0,229,150,.15);color:var(--accent2)">②</span>
+          <span><strong>Media tanam:</strong> Gravel, batu leca (LECA / expanded clay), perlite — memberi sokongan fizikal kepada tanaman.</span>
+        </li>
+        <li>
+          <span class="bullet" style="background:rgba(0,229,150,.15);color:var(--accent2)">③</span>
+          <span><strong>Kitaran oksigen:</strong> Apabila air disalirkan keluar, udara (oksigen) masuk ke dalam media &amp; merawat akar — sangat sihat untuk zon akar.</span>
+        </li>
+        <li>
+          <span class="bullet" style="background:rgba(0,229,150,.15);color:var(--accent2)">④</span>
+          <span><strong>Tanaman sesuai:</strong> Lebih fleksibel — tomato, cili, timun, terung, strawberi, herba.</span>
+        </li>
+      </ul>
+
+      <!-- Flow cycle -->
+      <div style="margin:14px 0 8px">
+        <p style="font-size:.78rem;color:var(--muted);margin-bottom:8px;font-weight:600;text-transform:uppercase;letter-spacing:.08em">Kitaran Ebb &amp; Flow</p>
+        <div class="flow">
+          <div class="flow-box" style="border-color:rgba(0,229,150,.3)">⏱ Timer<br><small>aktif</small></div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-box" style="border-color:rgba(0,229,150,.3)">💧 Air masuk<br><small>banjir</small></div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-box" style="border-color:rgba(0,229,150,.3)">🪴 Akar<br><small>serap nutrien</small></div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-box" style="border-color:rgba(0,229,150,.3)">🌬 Air keluar<br><small>saliran</small></div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-box" style="border-color:rgba(0,229,150,.3)">🌿 Akar<br><small>ambil O₂</small></div>
+        </div>
+      </div>
+
+      <div class="grid2" style="margin-top:16px">
+        <div class="pro-con pros">
+          <h4>✅ Kelebihan</h4>
+          <ul>
+            <li>Sesuai pelbagai jenis tanaman</li>
+            <li>Akar mendapat oksigen &amp; nutrien</li>
+            <li>Fleksibel — mudah ubah suai</li>
+            <li>Cocok untuk tanaman berbuah</li>
+          </ul>
+        </div>
+        <div class="pro-con cons">
+          <h4>❌ Kelemahan</h4>
+          <ul>
+            <li>Bergantung sepenuhnya pada timer</li>
+            <li>Jika pam rosak, tanaman layu cepat</li>
+            <li>Kos lebih tinggi (media + pam)</li>
+            <li>Penyelenggaraan lebih kompleks</li>
+          </ul>
+        </div>
+      </div>
+
+      <div style="margin-top:14px">
+        <p style="font-size:.78rem;color:var(--muted);margin-bottom:6px;font-weight:600;text-transform:uppercase;letter-spacing:.08em">Kata Kunci Peperiksaan</p>
+        <span class="kw" style="background:rgba(0,229,150,.12);color:var(--accent2)">banjir &amp; saliran</span>
+        <span class="kw" style="background:rgba(0,229,150,.12);color:var(--accent2)">Flood &amp; Drain</span>
+        <span class="kw" style="background:rgba(0,229,150,.12);color:var(--accent2)">pemasa / timer</span>
+        <span class="kw" style="background:rgba(0,229,150,.12);color:var(--accent2)">media tanam</span>
+        <span class="kw" style="background:rgba(0,229,150,.12);color:var(--accent2)">batu leca</span>
+        <span class="kw" style="background:rgba(0,229,150,.12);color:var(--accent2)">kitaran berkala</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════ 3 – NFT -->
+  <div id="nft" class="sec-label">
+    <div class="dot" style="background:var(--accent3)"></div>
+    <h2 style="color:var(--accent3)">③ Sistem NFT (Nutrient Film Technique)</h2>
+    <span class="num">SISTEM 3 / 3</span>
+  </div>
+
+  <div class="card" style="border-color:rgba(255,140,66,.25)">
+    <div class="card-head" style="border-color:rgba(255,140,66,.15)">
+      <div class="icon" style="background:rgba(255,140,66,.12);color:var(--accent3)">📐</div>
+      <h3>Sistem NFT — Teknik Filem Nutrien</h3>
+      <span class="badge" style="background:rgba(255,140,66,.1);color:var(--accent3)">Nutrient Film Technique</span>
+    </div>
+    <div class="card-body">
+      <div class="definition">
+        Air bernutrien mengalir secara berterusan dalam lapisan nipis (filem) di sepanjang saluran condong (tilted channel/gutter). Hanya sebahagian kecil akar terkena air — bahagian atas akar terdedah kepada udara.
+        <span class="zh">营养水在倾斜管道底部形成薄薄的水膜持续流动。只有少量根部浸水，上部根系暴露在空气中获取氧气。</span>
+      </div>
+
+      <ul class="detail-list">
+        <li>
+          <span class="bullet" style="background:rgba(255,140,66,.15);color:var(--accent3)">①</span>
+          <span><strong>Saluran condong:</strong> Paip PVC / gutter dipasang pada sudut condong (kira-kira 1–3°) supaya air mengalir secara graviti dari atas ke bawah secara berterusan.</span>
+        </li>
+        <li>
+          <span class="bullet" style="background:rgba(255,140,66,.15);color:var(--accent3)">②</span>
+          <span><strong>Pam berterusan:</strong> Air dipam dari tangki ikan ke bahagian atas saluran dan kembali semula ke tangki — kitaran terbuka dan berterusan.</span>
+        </li>
+        <li>
+          <span class="bullet" style="background:rgba(255,140,66,.15);color:var(--accent3)">③</span>
+          <span><strong>Lapisan air nipis:</strong> Tebal air dalam saluran hanya 1–3 mm sahaja. Ini memastikan akar mendapat nutrien DAN oksigen secara serentak.</span>
+        </li>
+        <li>
+          <span class="bullet" style="background:rgba(255,140,66,.15);color:var(--accent3)">④</span>
+          <span><strong>Tanaman sesuai:</strong> Terbaik untuk sayuran daun ringan — selada, bayam, herba. <em>Tidak sesuai untuk tanaman besar/berat.</em></span>
+        </li>
+        <li>
+          <span class="bullet" style="background:rgba(255,140,66,.15);color:var(--accent3)">⑤</span>
+          <span><strong>Tiada media tanam:</strong> NFT biasanya tidak menggunakan media tanam. Tanaman disokong oleh net pot sahaja dalam lubang saluran.</span>
+        </li>
+      </ul>
+
+      <div class="grid2" style="margin-top:16px">
+        <div class="pro-con pros">
+          <h4>✅ Kelebihan</h4>
+          <ul>
+            <li>Penggunaan air sangat cekap</li>
+            <li>Akar mendapat nutrien + O₂ serentak</li>
+            <li>Ringan — mudah dipasang secara menegak</li>
+            <li>Tiada media tanam diperlukan</li>
+            <li>Sesuai untuk penanaman komersial</li>
+          </ul>
+        </div>
+        <div class="pro-con cons">
+          <h4>❌ Kelemahan</h4>
+          <ul>
+            <li>Tanaman mudah layu jika pam terhenti</li>
+            <li>Buffer nutrien rendah</li>
+            <li>Tidak sesuai tanaman besar / akar tebal</li>
+            <li>Saluran mudah tersumbat</li>
+          </ul>
+        </div>
+      </div>
+
+      <div style="margin-top:14px">
+        <p style="font-size:.78rem;color:var(--muted);margin-bottom:6px;font-weight:600;text-transform:uppercase;letter-spacing:.08em">Kata Kunci Peperiksaan</p>
+        <span class="kw" style="background:rgba(255,140,66,.12);color:var(--accent3)">filem nutrien nipis</span>
+        <span class="kw" style="background:rgba(255,140,66,.12);color:var(--accent3)">Nutrient Film Technique</span>
+        <span class="kw" style="background:rgba(255,140,66,.12);color:var(--accent3)">saluran condong</span>
+        <span class="kw" style="background:rgba(255,140,66,.12);color:var(--accent3)">aliran berterusan</span>
+        <span class="kw" style="background:rgba(255,140,66,.12);color:var(--accent3)">1–3 mm air</span>
+        <span class="kw" style="background:rgba(255,140,66,.12);color:var(--accent3)">tiada media</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════ COMPARISON TABLE -->
+  <div id="compare" class="sec-label">
+    <div class="dot" style="background:var(--accent4)"></div>
+    <h2>Jadual Perbandingan 3 Sistem</h2>
+    <span class="num">RINGKASAN</span>
+  </div>
+
+  <div class="card">
+    <div class="card-body" style="padding:0">
+      <div class="compare-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Ciri / Feature</th>
+              <th class="th-r">① Raft</th>
+              <th class="th-e">② Ebb &amp; Flow</th>
+              <th class="th-n">③ NFT</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Kaedah air</td>
+              <td>Akar terbenam sepenuhnya</td>
+              <td>Banjir berkala (timer)</td>
+              <td>Filem nipis berterusan</td>
+            </tr>
+            <tr>
+              <td>Media tanam</td>
+              <td>Tiada (net pot sahaja)</td>
+              <td>Ya (gravel / batu leca)</td>
+              <td>Biasanya tiada</td>
+            </tr>
+            <tr>
+              <td>Bekalan oksigen akar</td>
+              <td>Melalui aerator</td>
+              <td>Semasa fasa saliran</td>
+              <td>Akar atas terdedah udara</td>
+            </tr>
+            <tr>
+              <td>Kerumitan sistem</td>
+              <td>Rendah ⭐</td>
+              <td>Sederhana ⭐⭐</td>
+              <td>Sederhana-Tinggi ⭐⭐⭐</td>
+            </tr>
+            <tr>
+              <td>Jenis tanaman</td>
+              <td>Sayuran daun ringan</td>
+              <td>Pelbagai (termasuk buah)</td>
+              <td>Sayuran daun ringan</td>
+            </tr>
+            <tr>
+              <td>Kecekapan air</td>
+              <td>Sederhana</td>
+              <td>Sederhana</td>
+              <td>Sangat tinggi ✅</td>
+            </tr>
+            <tr>
+              <td>Risiko layu jika pam rosak</td>
+              <td>Rendah (banyak air)</td>
+              <td>Sederhana</td>
+              <td>Tinggi ⚠️</td>
+            </tr>
+            <tr>
+              <td>Kos awal</td>
+              <td>Rendah</td>
+              <td>Sederhana</td>
+              <td>Sederhana–Tinggi</td>
+            </tr>
+            <tr>
+              <td>Sesuai untuk</td>
+              <td>Pemula, sekolah</td>
+              <td>Hobi, ladang kecil</td>
+              <td>Komersial, ruang terhad</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════ EXAM TIPS -->
+  <div id="tips" class="sec-label">
+    <div class="dot" style="background:var(--danger)"></div>
+    <h2>Tips Peperiksaan Penting ⚡</h2>
+    <span class="num">EXAM TIPS</span>
+  </div>
+
+  <div class="tips-grid">
+    <div class="tip-card t1">
+      <div class="tip-num">01</div>
+      <h4 style="color:var(--accent1)">Bezakan 3 Sistem</h4>
+      <p>Ingat perbezaan cara air bergerak: Raft = terendam penuh; Ebb & Flow = banjir berkala; NFT = filem nipis mengalir.</p>
+    </div>
+    <div class="tip-card t2">
+      <div class="tip-num">02</div>
+      <h4 style="color:var(--accent2)">Fungsi Bakteria</h4>
+      <p>Bakteria Nitrosomonas tukar amonia → nitrit. Bakteria Nitrobacter tukar nitrit → nitrat (sesuai untuk tanaman).</p>
+    </div>
+    <div class="tip-card t3">
+      <div class="tip-num">03</div>
+      <h4 style="color:var(--accent3)">Peranan Pam</h4>
+      <p>Setiap sistem bergantung pada pam. NFT paling berisiko jika pam rosak kerana tiada simpanan air/media.</p>
+    </div>
+    <div class="tip-card t4">
+      <div class="tip-num">04</div>
+      <h4 style="color:var(--accent4)">3 Komponen Utama</h4>
+      <p>Semua sistem akuaponik ada: <strong>tangki ikan</strong>, <strong>sistem penapisan</strong>, dan <strong>bekas/saluran penanaman</strong>.</p>
+    </div>
+    <div class="tip-card t1">
+      <div class="tip-num">05</div>
+      <h4 style="color:var(--accent1)">pH Optimum</h4>
+      <p>pH 6.8–7.2 adalah optimum untuk akuaponik — sesuai untuk ikan, bakteria, dan tanaman secara serentak.</p>
+    </div>
+    <div class="tip-card t2">
+      <div class="tip-num">06</div>
+      <h4 style="color:var(--accent2)">Kelebihan Akuaponik</h4>
+      <p>Jimat air (sehingga 90%), tiada baja kimia, dua produk (ikan + sayuran), mesra alam. 节水高达90%，绿色有机。</p>
+    </div>
+    <div class="tip-card t3">
+      <div class="tip-num">07</div>
+      <h4 style="color:var(--accent3)">Soalan Lukisan</h4>
+      <p>Jika soalan minta lukis — tunjukkan arah aliran air dengan anak panah dan labelkan setiap komponen dengan jelas.</p>
+    </div>
+    <div class="tip-card t4">
+      <div class="tip-num">08</div>
+      <h4 style="color:var(--accent4)">Istilah BI / BM</h4>
+      <p>Biasanya soalan guna BM tetapi istilah teknikal dalam BI diterima: <em>Raft / DWC, Ebb & Flow, Nutrient Film Technique.</em></p>
+    </div>
+  </div>
+
+  <!-- Bonus: quick recall -->
+  <div class="card" style="margin-top:24px;border-color:rgba(255,77,109,.2)">
+    <div class="card-head" style="border-color:rgba(255,77,109,.15)">
+      <div class="icon" style="background:rgba(255,77,109,.12);color:var(--danger)">🔥</div>
+      <h3>Ingatan Pantas — "Ayat Mudah"</h3>
+    </div>
+    <div class="card-body">
+      <ul class="detail-list">
+        <li>
+          <span class="bullet" style="background:rgba(0,212,255,.15);color:var(--accent1)">R</span>
+          <span><strong>Raft</strong> — "<em>Rakit terapung, akar terbenam, aerator berterus-terusan.</em>" 浮板漂浮，根全浸水，气泵供氧。</span>
+        </li>
+        <li>
+          <span class="bullet" style="background:rgba(0,229,150,.15);color:var(--accent2)">E</span>
+          <span><strong>Ebb &amp; Flow</strong> — "<em>Banjir dan surut, timer yang atur, media leca sokong akar.</em>" 定时淹水退水，陶粒介质支撑。</span>
+        </li>
+        <li>
+          <span class="bullet" style="background:rgba(255,140,66,.15);color:var(--accent3)">N</span>
+          <span><strong>NFT</strong> — "<em>Air filem nipis, condong sentiasa mengalir, akar atas ambil udara.</em>" 薄膜水流，斜管持续循环，上层根部呼吸空气。</span>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+
+  <!-- ═══════════════════════════════ MEMORY MAP -->
+  <div id="memmap" class="sec-label">
+    <div class="dot" style="background:#f7c948"></div>
+    <h2 style="color:#f7c948">Peta Ingatan — Mind Map 🧠</h2>
+    <span class="num">VISUAL</span>
+  </div>
+
+  <div class="card" style="border-color:rgba(247,201,72,.2)">
+    <div class="card-head" style="border-color:rgba(247,201,72,.15)">
+      <div class="icon" style="background:rgba(247,201,72,.12);color:#f7c948">🗺</div>
+      <h3>Peta Minda Sistem Akuaponik</h3>
+      <span class="badge" style="background:rgba(247,201,72,.1);color:#f7c948">Interactive</span>
+    </div>
+    <div class="card-body" style="padding:0 0 8px">
+
+      <!-- SVG Mind Map -->
+      <div style="overflow-x:auto;padding:8px 0">
+      <svg id="mindmap" viewBox="0 0 860 620" width="100%" style="min-width:480px;display:block;margin:0 auto" font-family="'DM Sans',sans-serif">
+        <defs>
+          <!-- glow filters -->
+          <filter id="glow-c" x="-40%" y="-40%" width="180%" height="180%">
+            <feGaussianBlur stdDeviation="6" result="blur"/>
+            <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+          </filter>
+          <filter id="glow1" x="-40%" y="-40%" width="180%" height="180%">
+            <feGaussianBlur stdDeviation="4" result="blur"/>
+            <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+          </filter>
+          <!-- branch gradients -->
+          <linearGradient id="lg1" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0%" stop-color="#a78bfa"/>
+            <stop offset="100%" stop-color="#00d4ff"/>
+          </linearGradient>
+          <linearGradient id="lg2" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0%" stop-color="#a78bfa"/>
+            <stop offset="100%" stop-color="#00e596"/>
+          </linearGradient>
+          <linearGradient id="lg3" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0%" stop-color="#a78bfa"/>
+            <stop offset="100%" stop-color="#ff8c42"/>
+          </linearGradient>
+        </defs>
+
+        <!-- ── CONNECTOR LINES (draw behind nodes) ── -->
+
+        <!-- centre → Raft (top-left area) -->
+        <path d="M430,310 C370,270 250,210 195,185" stroke="url(#lg1)" stroke-width="2.5" fill="none" stroke-dasharray="5,3" opacity=".7"/>
+        <!-- centre → Ebb & Flow (bottom-left) -->
+        <path d="M430,320 C380,350 250,390 195,415" stroke="url(#lg2)" stroke-width="2.5" fill="none" stroke-dasharray="5,3" opacity=".7"/>
+        <!-- centre → NFT (right) -->
+        <path d="M430,310 C500,290 620,210 665,185" stroke="url(#lg3)" stroke-width="2.5" fill="none" stroke-dasharray="5,3" opacity=".7"/>
+
+        <!-- Raft → sub nodes -->
+        <line x1="155" y1="175" x2="80"  y2="112" stroke="#00d4ff" stroke-width="1.5" opacity=".45"/>
+        <line x1="155" y1="175" x2="65"  y2="178" stroke="#00d4ff" stroke-width="1.5" opacity=".45"/>
+        <line x1="155" y1="175" x2="82"  y2="242" stroke="#00d4ff" stroke-width="1.5" opacity=".45"/>
+
+        <!-- Ebb → sub nodes -->
+        <line x1="155" y1="415" x2="68"  y2="358" stroke="#00e596" stroke-width="1.5" opacity=".45"/>
+        <line x1="155" y1="415" x2="62"  y2="420" stroke="#00e596" stroke-width="1.5" opacity=".45"/>
+        <line x1="155" y1="415" x2="70"  y2="482" stroke="#00e596" stroke-width="1.5" opacity=".45"/>
+
+        <!-- NFT → sub nodes -->
+        <line x1="700" y1="175" x2="778" y2="112" stroke="#ff8c42" stroke-width="1.5" opacity=".45"/>
+        <line x1="700" y1="175" x2="792" y2="178" stroke="#ff8c42" stroke-width="1.5" opacity=".45"/>
+        <line x1="700" y1="175" x2="780" y2="244" stroke="#ff8c42" stroke-width="1.5" opacity=".45"/>
+
+        <!-- centre → bottom branches (shared facts) -->
+        <path d="M430,320 C430,370 340,450 310,480" stroke="#a78bfa" stroke-width="1.8" fill="none" opacity=".5" stroke-dasharray="4,3"/>
+        <path d="M430,320 C430,370 520,450 550,480" stroke="#a78bfa" stroke-width="1.8" fill="none" opacity=".5" stroke-dasharray="4,3"/>
+        <path d="M430,320 C430,400 430,460 430,495" stroke="#f7c948" stroke-width="1.8" fill="none" opacity=".5" stroke-dasharray="4,3"/>
+
+        <!-- ── CENTRE NODE ── -->
+        <circle cx="430" cy="312" r="68" fill="#1a2a4a" stroke="#a78bfa" stroke-width="2.5" filter="url(#glow-c)"/>
+        <circle cx="430" cy="312" r="62" fill="#0f1d36" stroke="rgba(167,139,250,.2)" stroke-width="1"/>
+        <text x="430" y="300" text-anchor="middle" fill="#a78bfa" font-size="11" font-weight="700" letter-spacing=".08em">AKUAPONIK</text>
+        <text x="430" y="316" text-anchor="middle" fill="#fff" font-size="13" font-weight="700">3 Sistem</text>
+        <text x="430" y="332" text-anchor="middle" fill="#7a90b0" font-size="9.5">水培鱼菜共生</text>
+
+        <!-- ── RAFT NODE ── -->
+        <ellipse cx="160" cy="178" rx="72" ry="36" fill="#0d2a3a" stroke="#00d4ff" stroke-width="2" filter="url(#glow1)"/>
+        <text x="160" y="173" text-anchor="middle" fill="#00d4ff" font-size="12" font-weight="700">① RAFT</text>
+        <text x="160" y="188" text-anchor="middle" fill="#7a90b0" font-size="9">Deep Water Culture</text>
+
+        <!-- Raft sub-nodes -->
+        <rect x="20" y="88" width="118" height="46" rx="8" fill="#0b1f2e" stroke="rgba(0,212,255,.35)" stroke-width="1.2"/>
+        <text x="79" y="108" text-anchor="middle" fill="#e2eaf5" font-size="9.5" font-weight="600">Akar terbenam</text>
+        <text x="79" y="122" text-anchor="middle" fill="#7a90b0" font-size="8.5">sepenuhnya dalam air</text>
+
+        <rect x="10" y="152" width="110" height="44" rx="8" fill="#0b1f2e" stroke="rgba(0,212,255,.35)" stroke-width="1.2"/>
+        <text x="65" y="171" text-anchor="middle" fill="#e2eaf5" font-size="9.5" font-weight="600">Aerator / Pam Udara</text>
+        <text x="65" y="185" text-anchor="middle" fill="#7a90b0" font-size="8.5">bekalkan O₂ berterusan</text>
+
+        <rect x="18" y="218" width="126" height="44" rx="8" fill="#0b1f2e" stroke="rgba(0,212,255,.35)" stroke-width="1.2"/>
+        <text x="81" y="237" text-anchor="middle" fill="#e2eaf5" font-size="9.5" font-weight="600">Tanaman: Selada, Bayam</text>
+        <text x="81" y="251" text-anchor="middle" fill="#7a90b0" font-size="8.5">Sayuran daun ringan</text>
+
+        <!-- ── EBB & FLOW NODE ── -->
+        <ellipse cx="160" cy="415" rx="72" ry="36" fill="#0d2e1e" stroke="#00e596" stroke-width="2" filter="url(#glow1)"/>
+        <text x="160" y="410" text-anchor="middle" fill="#00e596" font-size="11.5" font-weight="700">② EBB &amp; FLOW</text>
+        <text x="160" y="425" text-anchor="middle" fill="#7a90b0" font-size="9">Flood &amp; Drain</text>
+
+        <!-- Ebb sub-nodes -->
+        <rect x="10" y="328" width="116" height="46" rx="8" fill="#0b2418" stroke="rgba(0,229,150,.35)" stroke-width="1.2"/>
+        <text x="68" y="348" text-anchor="middle" fill="#e2eaf5" font-size="9.5" font-weight="600">Timer / Pemasa</text>
+        <text x="68" y="362" text-anchor="middle" fill="#7a90b0" font-size="8.5">kawal kitar banjir-saliran</text>
+
+        <rect x="8" y="392" width="110" height="46" rx="8" fill="#0b2418" stroke="rgba(0,229,150,.35)" stroke-width="1.2"/>
+        <text x="63" y="412" text-anchor="middle" fill="#e2eaf5" font-size="9.5" font-weight="600">Media: Batu Leca</text>
+        <text x="63" y="426" text-anchor="middle" fill="#7a90b0" font-size="8.5">gravel / expanded clay</text>
+
+        <rect x="10" y="456" width="126" height="44" rx="8" fill="#0b2418" stroke="rgba(0,229,150,.35)" stroke-width="1.2"/>
+        <text x="73" y="474" text-anchor="middle" fill="#e2eaf5" font-size="9.5" font-weight="600">Tanaman: Tomato, Cili</text>
+        <text x="73" y="488" text-anchor="middle" fill="#7a90b0" font-size="8.5">tanaman berbuah sesuai</text>
+
+        <!-- ── NFT NODE ── -->
+        <ellipse cx="700" cy="178" rx="72" ry="36" fill="#2a1a0a" stroke="#ff8c42" stroke-width="2" filter="url(#glow1)"/>
+        <text x="700" y="173" text-anchor="middle" fill="#ff8c42" font-size="12" font-weight="700">③ NFT</text>
+        <text x="700" y="188" text-anchor="middle" fill="#7a90b0" font-size="9">Nutrient Film Technique</text>
+
+        <!-- NFT sub-nodes -->
+        <rect x="722" y="88" width="118" height="46" rx="8" fill="#221508" stroke="rgba(255,140,66,.35)" stroke-width="1.2"/>
+        <text x="781" y="108" text-anchor="middle" fill="#e2eaf5" font-size="9.5" font-weight="600">Saluran Condong</text>
+        <text x="781" y="122" text-anchor="middle" fill="#7a90b0" font-size="8.5">air mengalir secara graviti</text>
+
+        <rect x="736" y="152" width="118" height="46" rx="8" fill="#221508" stroke="rgba(255,140,66,.35)" stroke-width="1.2"/>
+        <text x="795" y="172" text-anchor="middle" fill="#e2eaf5" font-size="9.5" font-weight="600">Filem Air Nipis</text>
+        <text x="795" y="186" text-anchor="middle" fill="#7a90b0" font-size="8.5">1–3 mm, berterusan</text>
+
+        <rect x="720" y="218" width="124" height="44" rx="8" fill="#221508" stroke="rgba(255,140,66,.35)" stroke-width="1.2"/>
+        <text x="782" y="237" text-anchor="middle" fill="#e2eaf5" font-size="9.5" font-weight="600">Tiada Media Tanam</text>
+        <text x="782" y="251" text-anchor="middle" fill="#7a90b0" font-size="8.5">net pot sahaja</text>
+
+        <!-- ── SHARED BOTTOM NODES ── -->
+        <!-- Bakteria -->
+        <rect x="218" y="470" width="136" height="62" rx="10" fill="#161030" stroke="rgba(167,139,250,.4)" stroke-width="1.5"/>
+        <text x="286" y="492" text-anchor="middle" fill="#a78bfa" font-size="10" font-weight="700">🦠 Bakteria</text>
+        <text x="286" y="507" text-anchor="middle" fill="#c8d8ee" font-size="8.5">Amonia → Nitrit</text>
+        <text x="286" y="520" text-anchor="middle" fill="#c8d8ee" font-size="8.5">Nitrit → Nitrat</text>
+
+        <!-- pH -->
+        <rect x="364" y="478" width="132" height="54" rx="10" fill="#161030" stroke="rgba(247,201,72,.4)" stroke-width="1.5"/>
+        <text x="430" y="499" text-anchor="middle" fill="#f7c948" font-size="10" font-weight="700">pH Optimum</text>
+        <text x="430" y="514" text-anchor="middle" fill="#c8d8ee" font-size="9">6.8 – 7.2</text>
+
+        <!-- Ikan -->
+        <rect x="506" y="470" width="136" height="62" rx="10" fill="#161030" stroke="rgba(167,139,250,.4)" stroke-width="1.5"/>
+        <text x="574" y="492" text-anchor="middle" fill="#a78bfa" font-size="10" font-weight="700">🐟 Ikan (Sisa)</text>
+        <text x="574" y="507" text-anchor="middle" fill="#c8d8ee" font-size="8.5">hasilkan amonia</text>
+        <text x="574" y="520" text-anchor="middle" fill="#c8d8ee" font-size="8.5">→ nutrien tanaman</text>
+
+        <!-- ── LEGEND ── -->
+        <rect x="320" y="556" width="220" height="52" rx="10" fill="rgba(255,255,255,.03)" stroke="rgba(255,255,255,.08)" stroke-width="1"/>
+        <text x="430" y="574" text-anchor="middle" fill="#7a90b0" font-size="8.5" font-weight="600" letter-spacing=".06em">KOMPONEN DIKONGSI</text>
+        <circle cx="345" cy="588" r="4" fill="#a78bfa"/>
+        <text x="353" y="592" fill="#7a90b0" font-size="8">Bakteria Nitrifikasi</text>
+        <circle cx="430" cy="588" r="4" fill="#f7c948"/>
+        <text x="438" y="592" fill="#7a90b0" font-size="8">pH 6.8–7.2</text>
+        <circle cx="505" cy="588" r="4" fill="#a78bfa"/>
+        <text x="513" y="592" fill="#7a90b0" font-size="8">Kitaran Air</text>
+      </svg>
+      </div>
+
+      <!-- Tap/click legend below map -->
+      <div style="display:flex;flex-wrap:wrap;gap:10px;padding:12px 20px 16px;border-top:1px solid var(--border)">
+        <div style="display:flex;align-items:center;gap:7px;font-size:.8rem">
+          <span style="width:28px;height:3px;background:var(--accent1);border-radius:2px;display:inline-block"></span>
+          <span style="color:var(--accent1)">Raft (DWC)</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:7px;font-size:.8rem">
+          <span style="width:28px;height:3px;background:var(--accent2);border-radius:2px;display:inline-block"></span>
+          <span style="color:var(--accent2)">Ebb &amp; Flow</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:7px;font-size:.8rem">
+          <span style="width:28px;height:3px;background:var(--accent3);border-radius:2px;display:inline-block"></span>
+          <span style="color:var(--accent3)">NFT</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:7px;font-size:.8rem">
+          <span style="width:28px;height:3px;background:var(--accent4);border-radius:2px;display:inline-block;border-style:dashed"></span>
+          <span style="color:var(--accent4)">Dikongsi semua sistem</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /wrapper -->
+
+<footer>
+  Nota Peperiksaan RDT &nbsp;·&nbsp; Sistem Akuaponik &nbsp;·&nbsp; 水培鱼菜共生系统<br>
+  <span>Raft · Ebb &amp; Flow · NFT</span> &nbsp;|&nbsp; Semua hak untuk pembelajaran sahaja.
+</footer>
+
+</body>
+</html>

@@ -1415,6 +1415,7 @@ export const rekaBentukData = {
             form:"T2",
             chapter:"Reka Bentuk Akuaponik",
             chinese:"鱼菜共生设计",
+            resourceUrl:"../rbt/t2_akuaponik.html",
             status:"Not Started",
             confidence:0,
             last_updated:"2026-05-22"
