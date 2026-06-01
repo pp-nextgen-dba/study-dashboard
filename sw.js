@@ -28,7 +28,8 @@ const STATIC_ASSETS = [
     "/history/t2_chapter4.html",
     "/history/t2_chapter8.html",
     "/history/t2_chapter9.html",
-    "/rbt/t2_akuaponik.html"
+    "/rbt/t2_akuaponik.html",
+    "/rbt/t2_elektronik.html"
 ];
 
 self.addEventListener("install", event => {

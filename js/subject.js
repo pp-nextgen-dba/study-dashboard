@@ -1409,7 +1409,8 @@ export const rekaBentukData = {
             chinese:"电子设计",
             status:"Not Started",
             confidence:0,
-            last_updated:"2026-05-22"
+            last_updated:"2026-05-22",
+            resourceUrl:"../rbt/t2_elektronik.html"
         },
 
         {
