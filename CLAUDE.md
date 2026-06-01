@@ -61,7 +61,7 @@ Once the file is confirmed present:
 1. Find the matching chapter entry in `js/subject.js` and add `resourceUrl: "../<dir>/<file>.html"`
 2. Add the path to `STATIC_ASSETS` in `sw.js`
 3. Run `npm run validate` — this checks the `resourceUrl` file exists on disk
-4. Commit and push
+4. Commit
 
 ### Adding a New Subject
 
