@@ -1075,6 +1075,7 @@ export const historyData = {
             form:"T2",
             chapter:"Warisan Kerajaan Kedah, Kelantan, Negeri Sembilan dan Perlis",
             chinese:"",
+            resourceUrl:"../history/t2_chapter9.html",
             status:"Not Started",
             confidence:0,
             last_updated:"2026-05-22"

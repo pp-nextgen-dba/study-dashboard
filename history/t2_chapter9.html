@@ -1,0 +1,781 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+<title>Bab 9 — Warisan Kerajaan Kedah, Kelantan, Negeri Sembilan dan Perlis</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html{font-size:16px}
+body{font-family:'Nunito',sans-serif;background:#f0f4ff;color:#1e293b;line-height:1.5}
+
+.hero{background:linear-gradient(135deg,#1a5276,#0d3349);padding:26px 18px 40px;text-align:center;position:relative;overflow:hidden}
+.hero::after{content:'';position:absolute;bottom:-24px;left:0;right:0;height:48px;background:#f0f4ff;border-radius:50% 50% 0 0/48px 48px 0 0}
+.hero-badge{display:inline-block;background:rgba(255,255,255,.15);color:#bfdbfe;font-size:12px;letter-spacing:2px;padding:4px 14px;border-radius:20px;margin-bottom:10px}
+.hero-title{font-size:18px;font-weight:800;color:#fff;line-height:1.3;margin-bottom:4px}
+.hero-sub{font-size:13px;color:#93c5fd;margin-bottom:3px}
+.hero-zh{font-family:'Noto Sans SC',sans-serif;font-size:12px;color:#67e8f9;letter-spacing:2px;margin-bottom:30px}
+.hero-stats{display:flex;justify-content:center;gap:24px;position:relative;z-index:1}
+.stat-num{font-size:24px;font-weight:800;color:#fff;text-align:center}
+.stat-lbl{font-size:11px;color:#bfdbfe;text-align:center}
+
+.lang-legend{display:flex;justify-content:center;gap:14px;padding:10px 16px;background:#fff;border-bottom:1px solid #e5e7eb}
+.legend-dot{display:flex;align-items:center;gap:5px;font-size:12px;font-weight:700}
+.dot{width:12px;height:12px;border-radius:3px;flex-shrink:0}
+
+.lang-bar{background:#fff;padding:10px 14px;display:flex;gap:8px;align-items:center;border-bottom:2px solid #e5e7eb;position:sticky;top:0;z-index:200;box-shadow:0 2px 8px rgba(0,0,0,.08)}
+.lbtn{flex:1;padding:8px 4px;font-size:12px;font-weight:800;font-family:'Nunito',sans-serif;border:2px solid;border-radius:20px;cursor:pointer;text-align:center;opacity:.4;transition:all .15s}
+.lbtn.on{opacity:1}
+.lbtn-my{border-color:#b45309;background:#fef3c7;color:#78350f}
+.lbtn-my.on{background:#d97706;color:#fff;border-color:#d97706}
+.lbtn-en{border-color:#1d4ed8;background:#dbeafe;color:#1e3a8a}
+.lbtn-en.on{background:#2563eb;color:#fff;border-color:#2563eb}
+.lbtn-zh{border-color:#059669;background:#d1fae5;color:#064e3b}
+.lbtn-zh.on{background:#059669;color:#fff;border-color:#059669}
+
+.tabs{display:flex;overflow-x:auto;background:#1e293b;-webkit-overflow-scrolling:touch;scrollbar-width:none;position:sticky;top:53px;z-index:199}
+.tabs::-webkit-scrollbar{display:none}
+.tab{flex:0 0 auto;padding:11px 14px;font-size:12px;font-weight:800;font-family:'Nunito',sans-serif;color:#94a3b8;background:transparent;border:none;cursor:pointer;border-bottom:3px solid transparent;white-space:nowrap;transition:all .2s}
+.tab-gov.active{color:#fbbf24;border-bottom-color:#d97706}
+.tab-adat.active{color:#6ee7b7;border-bottom-color:#059669}
+.tab-law.active{color:#c4b5fd;border-bottom-color:#7c3aed}
+.tab-lit.active{color:#93c5fd;border-bottom-color:#2563eb}
+.tab-art.active{color:#fca5a5;border-bottom-color:#dc2626}
+.tab-ns.active{color:#f9a8d4;border-bottom-color:#be185d}
+.tab-mm.active{color:#fde68a;border-bottom-color:#f59e0b}
+
+.panel{display:none;padding:12px 12px 60px}
+.panel.active{display:block}
+
+/* TRI-LANGUAGE */
+.tri{border-radius:12px;overflow:hidden;margin-bottom:10px;border:2px solid #e2e8f0}
+.tri-my{background:#fffbeb;border-left:5px solid #d97706;padding:9px 12px}
+.tri-my-lbl{font-size:10px;font-weight:800;letter-spacing:2px;color:#92400e;text-transform:uppercase;margin-bottom:3px}
+.tri-my-text{font-size:14px;font-weight:700;color:#78350f;line-height:1.5}
+.tri-en{background:#eff6ff;border-left:5px solid #2563eb;padding:9px 12px}
+.tri-en-lbl{font-size:10px;font-weight:800;letter-spacing:2px;color:#1d4ed8;text-transform:uppercase;margin-bottom:3px}
+.tri-en-text{font-size:14px;font-weight:600;color:#1e3a8a;line-height:1.5;font-style:italic}
+.tri-zh{background:#ecfdf5;border-left:5px solid #059669;padding:9px 12px}
+.tri-zh-lbl{font-size:10px;font-weight:800;letter-spacing:2px;color:#047857;text-transform:uppercase;margin-bottom:3px}
+.tri-zh-text{font-family:'Noto Sans SC',sans-serif;font-size:13px;font-weight:500;color:#064e3b;line-height:1.7;letter-spacing:1px}
+
+/* SECTION CARDS */
+.sec{border-radius:16px;margin-bottom:12px;overflow:hidden;border:2px solid}
+.sec-header{display:flex;align-items:center;gap:12px;padding:14px;cursor:pointer;user-select:none;-webkit-tap-highlight-color:transparent}
+.sec-icon{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0}
+.sec-info{flex:1}
+.sec-num{font-size:10px;font-weight:800;letter-spacing:1px;margin-bottom:2px;text-transform:uppercase}
+.sec-title-my{font-size:15px;font-weight:800;line-height:1.25;color:#78350f}
+.sec-title-en{font-size:12px;font-weight:700;font-style:italic;color:#1e3a8a;margin-top:2px}
+.sec-title-zh{font-family:'Noto Sans SC',sans-serif;font-size:11px;color:#064e3b;margin-top:2px;letter-spacing:1px}
+.sec-chev{font-size:20px;color:#94a3b8;transition:transform .25s;flex-shrink:0}
+.sec-chev.open{transform:rotate(180deg)}
+.sec-body{display:none;padding:0 12px 12px}
+.sec-body.open{display:block}
+
+/* MEMORY & PILLS */
+.mem{border-radius:12px;padding:12px;background:#f1f5f9;border:2px solid #cbd5e1;margin-top:10px}
+.mem-lbl{font-size:11px;letter-spacing:2px;font-weight:800;margin-bottom:8px;color:#475569;text-transform:uppercase}
+.pills{display:flex;flex-wrap:wrap;gap:6px}
+.pill-my{padding:5px 10px;border-radius:20px;font-size:12px;font-weight:800;border:2px solid #d97706;background:#fef3c7;color:#78350f}
+.pill-en{padding:5px 10px;border-radius:20px;font-size:12px;font-weight:700;border:2px solid #2563eb;background:#dbeafe;color:#1e3a8a;font-style:italic}
+.pill-zh{padding:5px 10px;border-radius:20px;font-size:11px;font-weight:700;border:2px solid #059669;background:#d1fae5;color:#064e3b;font-family:'Noto Sans SC',sans-serif;letter-spacing:1px}
+
+/* BULLET LIST */
+.blist{list-style:none;padding:0;margin-bottom:6px}
+.blist li{font-size:13px;font-weight:600;line-height:1.5;padding:4px 0 4px 14px;position:relative;border-bottom:1px dashed rgba(0,0,0,.07)}
+.blist li:last-child{border-bottom:none}
+.blist li::before{content:'▸';position:absolute;left:0;font-size:11px}
+
+/* SUB SECTION */
+.sub-sec{border-radius:10px;padding:10px 12px;margin-bottom:8px;border:1.5px solid}
+.sub-title{font-size:11px;font-weight:800;letter-spacing:1px;text-transform:uppercase;margin-bottom:6px}
+
+/* COMPARISON TABLE */
+.comp-wrap{overflow-x:auto;margin-bottom:10px;border-radius:12px}
+.comp-table{width:100%;border-collapse:collapse;font-size:12px}
+.comp-table th{padding:8px 10px;font-size:10px;font-weight:800;letter-spacing:1px;text-transform:uppercase;text-align:center;color:#fff}
+.comp-table td{padding:8px 10px;vertical-align:top;line-height:1.4;border-bottom:1px solid rgba(0,0,0,.06)}
+.comp-table tr:last-child td{border-bottom:none}
+.th-kd{background:#d97706}.th-kl{background:#059669}.th-pl{background:#dc2626}
+.td-kd{background:#fffbeb;color:#78350f;font-weight:600}
+.td-kl{background:#ecfdf5;color:#064e3b;font-weight:600}
+.td-pl{background:#fff5f5;color:#7f1d1d;font-weight:600}
+.td-label{font-size:10px;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:#475569;background:#f8fafc;padding:6px 10px}
+
+/* PYRAMID */
+.pyramid-lvl{border-radius:10px;padding:11px 14px;margin-bottom:8px;border-left:5px solid}
+.pyr-title{font-size:13px;font-weight:800;margin-bottom:5px;text-transform:uppercase;letter-spacing:1px}
+
+/* MEMORY MAP */
+.mmap-item{border-radius:14px;overflow:hidden;margin-bottom:10px;border:2px solid #e2e8f0;box-shadow:0 2px 8px rgba(0,0,0,.06)}
+.mmap-my{background:#fef3c7;padding:9px 14px;border-bottom:1px solid #fde68a}
+.mmap-my-text{font-size:14px;font-weight:800;color:#78350f}
+.mmap-en{background:#dbeafe;padding:9px 14px;border-bottom:1px solid #bfdbfe}
+.mmap-en-text{font-size:13px;font-weight:600;color:#1e3a8a;font-style:italic}
+.mmap-zh{background:#d1fae5;padding:9px 14px}
+.mmap-zh-text{font-family:'Noto Sans SC',sans-serif;font-size:12px;font-weight:500;color:#064e3b;letter-spacing:1px}
+.mmap-header{background:#0f172a;padding:14px;text-align:center;border-radius:14px 14px 0 0}
+.mmap-h-title{font-size:15px;font-weight:800;color:#fbbf24;margin-bottom:2px}
+.mmap-h-en{font-size:12px;color:#94a3b8;font-style:italic}
+.mmap-h-zh{font-family:'Noto Sans SC',sans-serif;font-size:11px;color:#6ee7b7;letter-spacing:2px;margin-top:2px}
+
+/* EXAM BOX */
+.exam-box{border-radius:14px;overflow:hidden;border:2px solid #7c3aed;margin-top:10px}
+.exam-hdr{background:#7c3aed;padding:9px 14px}
+.exam-lbl{font-size:10px;letter-spacing:2px;font-weight:800;color:#ede9fe;text-transform:uppercase}
+.exam-my{background:#fffbeb;border-left:5px solid #d97706;padding:9px 14px}
+.exam-my-t{font-size:13px;font-weight:700;color:#78350f;line-height:1.6}
+.exam-en{background:#eff6ff;border-left:5px solid #2563eb;padding:9px 14px}
+.exam-en-t{font-size:13px;font-weight:600;color:#1e3a8a;line-height:1.6;font-style:italic}
+.exam-zh{background:#ecfdf5;border-left:5px solid #059669;padding:9px 14px}
+.exam-zh-t{font-family:'Noto Sans SC',sans-serif;font-size:12px;font-weight:500;color:#064e3b;line-height:1.8;letter-spacing:1px}
+
+/* SECTION THEMES */
+.s-gov{background:#fffbeb;border-color:#f59e0b}.s-gov .sec-header{background:#fef3c7}.s-gov .sec-icon{background:#d97706}.s-gov .sec-num{color:#92400e}.s-gov .sec-body{border-top:2px dashed #fde68a}
+.s-adat{background:#ecfdf5;border-color:#059669}.s-adat .sec-header{background:#d1fae5}.s-adat .sec-icon{background:#059669}.s-adat .sec-num{color:#047857}.s-adat .sec-body{border-top:2px dashed #6ee7b7}
+.s-law{background:#f5f3ff;border-color:#7c3aed}.s-law .sec-header{background:#ede9fe}.s-law .sec-icon{background:#7c3aed}.s-law .sec-num{color:#5b21b6}.s-law .sec-body{border-top:2px dashed #c4b5fd}
+.s-lit{background:#eff6ff;border-color:#2563eb}.s-lit .sec-header{background:#dbeafe}.s-lit .sec-icon{background:#2563eb}.s-lit .sec-num{color:#1d4ed8}.s-lit .sec-body{border-top:2px dashed #bfdbfe}
+.s-art{background:#fff5f5;border-color:#dc2626}.s-art .sec-header{background:#fee2e2}.s-art .sec-icon{background:#dc2626}.s-art .sec-num{color:#b91c1c}.s-art .sec-body{border-top:2px dashed #fca5a5}
+.s-ns{background:#fdf2f8;border-color:#be185d}.s-ns .sec-header{background:#fce7f3}.s-ns .sec-icon{background:#be185d}.s-ns .sec-num{color:#831843}.s-ns .sec-body{border-top:2px dashed #fbcfe8}
+
+/* HIDE */
+.hide-my .tri-my,.hide-my .mmap-my,.hide-my .exam-my,.hide-my .sec-title-my,.hide-my .pill-my{display:none}
+.hide-en .tri-en,.hide-en .mmap-en,.hide-en .exam-en,.hide-en .sec-title-en,.hide-en .pill-en{display:none}
+.hide-zh .tri-zh,.hide-zh .mmap-zh,.hide-zh .exam-zh,.hide-zh .sec-title-zh,.hide-zh .pill-zh{display:none}
+
+.footer{text-align:center;font-size:12px;color:#94a3b8;padding:14px;letter-spacing:1px}
+.top-nav{background:#fff;padding:10px 16px;border-bottom:2px solid #e5e7eb;position:sticky;top:0;z-index:120}
+.dashboard-link{display:inline-flex;align-items:center;gap:6px;padding:8px 12px;border-radius:8px;background:#1d4ed8;color:#fff;font-size:13px;font-weight:800;text-decoration:none}
+.dashboard-link:hover{background:#1e40af}
+</style>
+</head>
+<body id="app">
+<div class="top-nav">
+  <a class="dashboard-link" href="../index.html">&larr; Back to Dashboard</a>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-badge">Sejarah &middot; Tingkatan 3 &middot; Bab 9</div>
+  <div class="hero-title">Warisan Kerajaan Kedah, Kelantan,<br>Negeri Sembilan &amp; Perlis</div>
+  <div class="hero-sub">Heritage of Kedah, Kelantan, Negeri Sembilan &amp; Perlis</div>
+  <div class="hero-zh">吉打、吉兰丹、森美兰与玻璃市的遗产</div>
+  <div class="hero-stats">
+    <div><div class="stat-num">2</div><div class="stat-lbl">Sections</div></div>
+    <div><div class="stat-num">3</div><div class="stat-lbl">Languages</div></div>
+    <div><div class="stat-num">7</div><div class="stat-lbl">Tabs</div></div>
+  </div>
+</div>
+
+<!-- LANG LEGEND -->
+<div class="lang-legend">
+  <div class="legend-dot"><div class="dot" style="background:#d97706"></div><span style="color:#78350f">Melayu</span></div>
+  <div class="legend-dot"><div class="dot" style="background:#2563eb"></div><span style="color:#1e3a8a">English</span></div>
+  <div class="legend-dot"><div class="dot" style="background:#059669"></div><span style="color:#064e3b;font-family:'Noto Sans SC',sans-serif">中文</span></div>
+</div>
+
+<!-- LANG BAR -->
+<div class="lang-bar">
+  <button class="lbtn lbtn-my on" onclick="tgl('my',this)">&#x1F7E1; Melayu</button>
+  <button class="lbtn lbtn-en on" onclick="tgl('en',this)">&#x1F535; English</button>
+  <button class="lbtn lbtn-zh on" onclick="tgl('zh',this)">&#x1F7E2; 中文</button>
+</div>
+
+<!-- TABS -->
+<div class="tabs">
+  <button class="tab tab-gov active" onclick="showPanel('gov',this)">&#127981; Pemerintahan</button>
+  <button class="tab tab-adat" onclick="showPanel('adat',this)">&#127881; Adat</button>
+  <button class="tab tab-law" onclick="showPanel('law',this)">&#9878; Perundangan</button>
+  <button class="tab tab-lit" onclick="showPanel('lit',this)">&#128221; Persuratan</button>
+  <button class="tab tab-art" onclick="showPanel('art',this)">&#127912; Kesenian</button>
+  <button class="tab tab-ns" onclick="showPanel('ns',this)">&#127774; Adat Perpatih</button>
+  <button class="tab tab-mm" onclick="showPanel('mm',this)">&#11088; Memory Map</button>
+</div>
+
+<!-- ════════ PEMERINTAHAN ════════ -->
+<div id="panel-gov" class="panel active">
+
+  <div class="sec s-gov">
+    <div class="sec-header" onclick="exp(this)">
+      <div class="sec-icon">&#127981;</div>
+      <div class="sec-info">
+        <div class="sec-num">9.1</div>
+        <div class="sec-title-my">Sistem Pemerintahan Beraja</div>
+        <div class="sec-title-en">Royal Government System</div>
+        <div class="sec-title-zh">君主制度</div>
+      </div>
+      <span class="sec-chev open">&#8964;</span>
+    </div>
+    <div class="sec-body open">
+
+      <!-- Gelaran -->
+      <div class="comp-wrap">
+        <table class="comp-table">
+          <thead><tr><th style="background:#475569;color:#fff;text-align:left;font-size:10px;padding:7px 10px">Aspek</th><th class="th-kd">Kedah</th><th class="th-kl">Kelantan</th><th class="th-pl">Perlis</th></tr></thead>
+          <tbody>
+            <tr><td class="td-label">Gelaran Pemerintah</td><td class="td-kd">Sultan</td><td class="td-kl">Sultan</td><td class="td-pl">Raja</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Cara Pelantikan -->
+      <div class="tri">
+        <div class="tri-my"><div class="tri-my-lbl">&#x1F7E1; Cara Pelantikan Pengganti</div><div class="tri-my-text">• Pelantikan putera Sultan atau Raja sebagai pengganti.<br>• Daripada jurai keturunan pemerintah pengasas.</div></div>
+        <div class="tri-en"><div class="tri-en-lbl">&#x1F535; Succession Method</div><div class="tri-en-text">• Appointment of the Sultan's or Raja's son as successor.<br>• From the lineage of the founding ruler.</div></div>
+        <div class="tri-zh"><div class="tri-zh-lbl">&#x1F7E2; 继承方式</div><div class="tri-zh-text">• 任命苏丹或拉惹之子为继承人。<br>• 来自创国统治者的血脉后裔。</div></div>
+      </div>
+
+      <!-- Pentadbiran Wilayah -->
+      <div class="tri">
+        <div class="tri-my"><div class="tri-my-lbl">&#x1F7E1; Sultan / Raja (Negeri)</div><div class="tri-my-text">• Hierarki tertinggi dalam pemerintahan beraja.<br>• Ketua negeri dengan keistimewaan.<br>• Bertanggungjawab sebagai ketua agama Islam.<br>• Menjadi lambang perpaduan rakyat.</div></div>
+        <div class="tri-en"><div class="tri-en-lbl">&#x1F535; Sultan / Raja (State)</div><div class="tri-en-text">• Highest hierarchy in royal government.<br>• Head of state with special privileges.<br>• Responsible as head of Islam.<br>• Symbol of the unity of the people.</div></div>
+        <div class="tri-zh"><div class="tri-zh-lbl">&#x1F7E2; 苏丹/拉惹（州）</div><div class="tri-zh-text">• 君主政府中的最高级别。<br>• 拥有特权的国家元首。<br>• 负责担任伊斯兰教领袖。<br>• 人民团结的象征。</div></div>
+      </div>
+
+      <div class="tri">
+        <div class="tri-my"><div class="tri-my-lbl">&#x1F7E1; Pembesar (Jajahan/Daerah)</div><div class="tri-my-text">• Dilantik sebagai wakil pentadbir bagi pihak kerajaan.<br>• Bertanggungjawab terhadap jajahan atau daerah.<br>• Masih wujud hingga kini.</div></div>
+        <div class="tri-en"><div class="tri-en-lbl">&#x1F535; Pembesar (District)</div><div class="tri-en-text">• Appointed as administrative representative of the government.<br>• Responsible for a district or region.<br>• Still exists today.</div></div>
+        <div class="tri-zh"><div class="tri-zh-lbl">&#x1F7E2; 大臣（地区）</div><div class="tri-zh-text">• 被任命为政府行政代表。<br>• 负责管辖某一地区。<br>• 至今仍存在。</div></div>
+      </div>
+
+      <div class="tri">
+        <div class="tri-my"><div class="tri-my-lbl">&#x1F7E1; Penghulu (Mukim)</div><div class="tri-my-text">• Penguasa pada peringkat mukim.<br>• Berperanan sebagai orang perantaraan antara rakyat dengan pemerintah.<br>• Masih kekal hingga kini dengan kewujudan ketua kampung yang bertanggungjawab mentadbir unit yang lebih kecil.</div></div>
+        <div class="tri-en"><div class="tri-en-lbl">&#x1F535; Penghulu (Mukim level)</div><div class="tri-en-text">• Ruler at mukim (sub-district) level.<br>• Acts as intermediary between the people and the government.<br>• Still exists today with village chiefs administering smaller units.</div></div>
+        <div class="tri-zh"><div class="tri-zh-lbl">&#x1F7E2; 村长（乡镇级）</div><div class="tri-zh-text">• 乡镇级别的管治者。<br>• 担任人民与政府之间的中间人。<br>• 至今仍存在，由村长管理更小的行政单位。</div></div>
+      </div>
+
+      <div class="mem">
+        <div class="mem-lbl">&#129504; Memory: 3 Peringkat Pentadbiran</div>
+        <div class="pills">
+          <span class="pill-my">Sultan/Raja (Negeri)</span>
+          <span class="pill-en">Sultan/Raja (State)</span>
+          <span class="pill-zh">苏丹/拉惹（州）</span>
+          <span class="pill-my">Pembesar (Daerah)</span>
+          <span class="pill-en">Pembesar (District)</span>
+          <span class="pill-zh">大臣（地区）</span>
+          <span class="pill-my">Penghulu (Mukim)</span>
+          <span class="pill-en">Penghulu (Mukim)</span>
+          <span class="pill-zh">村长（乡镇）</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════ ADAT ISTIADAT ════════ -->
+<div id="panel-adat" class="panel">
+
+  <div class="sec s-adat">
+    <div class="sec-header" onclick="exp(this)">
+      <div class="sec-icon">&#127881;</div>
+      <div class="sec-info">
+        <div class="sec-num">9.1</div>
+        <div class="sec-title-my">Adat Istiadat</div>
+        <div class="sec-title-en">Royal Customs and Traditions</div>
+        <div class="sec-title-zh">皇家习俗与传统</div>
+      </div>
+      <span class="sec-chev open">&#8964;</span>
+    </div>
+    <div class="sec-body open">
+
+      <!-- Majlis Pemasyhuran -->
+      <div class="tri">
+        <div class="tri-my"><div class="tri-my-lbl">&#x1F7E1; Majlis Pemasyhuran</div><div class="tri-my-text">Majlis pemasyhuran pengganti Sultan atau Raja disempurnakan <strong>sebelum jenazah pemerintah dimakamkan</strong>.</div></div>
+        <div class="tri-en"><div class="tri-en-lbl">&#x1F535; Proclamation Ceremony</div><div class="tri-en-text">The proclamation of the new Sultan or Raja is completed <strong>before the ruler's body is buried</strong>.</div></div>
+        <div class="tri-zh"><div class="tri-zh-lbl">&#x1F7E2; 宣告仪式</div><div class="tri-zh-text">新苏丹或拉惹的宣告仪式在<strong>统治者遗体安葬之前</strong>完成。</div></div>
+      </div>
+
+      <!-- Istiadat Pertabalan -->
+      <div class="tri">
+        <div class="tri-my"><div class="tri-my-lbl">&#x1F7E1; Istiadat Pertabalan</div><div class="tri-my-text">• Dimulai dengan mempersembahkan <strong>naskah al-Quran</strong> dan alat kebesaran diraja.<br>• Sultan atau Raja membaca <strong>watikah pertabalan</strong> dan kemudian mengucup keris kuasa.<br>• Menteri Besar mengetuai seruan <strong>"Daulat Tuanku"</strong>.</div></div>
+        <div class="tri-en"><div class="tri-en-lbl">&#x1F535; Coronation Ceremony</div><div class="tri-en-text">• Begins with presenting the <strong>al-Quran manuscript</strong> and royal regalia.<br>• Sultan or Raja reads the <strong>coronation letter</strong> then kisses the royal kris.<br>• The Chief Minister leads the shout of <strong>"Daulat Tuanku"</strong>.</div></div>
+        <div class="tri-zh"><div class="tri-zh-lbl">&#x1F7E2; 登基仪式</div><div class="tri-zh-text">• 以呈献<strong>古兰经手稿</strong>和王室宝物开始。<br>• 苏丹或拉惹朗读<strong>登基证书</strong>，然后亲吻权力短剑。<br>• 首席部长带领呼喊<strong>"Daulat Tuanku"</strong>（万岁陛下）。</div></div>
+      </div>
+
+      <!-- Bintang Darjah -->
+      <div class="tri">
+        <div class="tri-my"><div class="tri-my-lbl">&#x1F7E1; Penganugerahan Bintang Darjah Kebesaran</div><div class="tri-my-text">• Lambang hubungan antara pemerintah dengan rakyat.<br>• Disempurnakan sempena sambutan <strong>hari keputeraan pemerintah</strong>.<br>• Dianugerahkan sebagai pengiktirafan kepada Sultan/Raja, kerabat diraja dan rakyat yang berjasa.<br>• Contoh pingat: <strong>D.K. Kelantan</strong>, <strong>D.H.M.S. Kedah</strong>, <strong>S.M.P. Perlis</strong>.</div></div>
+        <div class="tri-en"><div class="tri-en-lbl">&#x1F535; Royal Honours Award</div><div class="tri-en-text">• Symbol of relationship between the ruler and the people.<br>• Held in conjunction with the ruler's <strong>birthday celebration</strong>.<br>• Awarded as recognition to Sultan/Raja, royalty and deserving citizens.<br>• Examples: <strong>D.K. Kelantan</strong>, <strong>D.H.M.S. Kedah</strong>, <strong>S.M.P. Perlis</strong>.</div></div>
+        <div class="tri-zh"><div class="tri-zh-lbl">&#x1F7E2; 皇家荣誉授勋</div><div class="tri-zh-text">• 统治者与人民之间关系的象征。<br>• 在统治者<strong>诞辰庆典</strong>上举行。<br>• 授予苏丹/拉惹、王室成员及有功公民以示表彰。<br>• 例子：<strong>D.K.吉兰丹</strong>、<strong>D.H.M.S.吉打</strong>、<strong>S.M.P.玻璃市</strong>。</div></div>
+      </div>
+
+      <div class="mem">
+        <div class="mem-lbl">&#129504; Memory Keywords</div>
+        <div class="pills">
+          <span class="pill-my">Pemasyhuran → sebelum jenazah dimakam</span>
+          <span class="pill-en">Proclamation → before burial</span>
+          <span class="pill-zh">宣告→安葬前</span>
+          <span class="pill-my">Pertabalan: Quran + Watikah + Keris</span>
+          <span class="pill-en">Coronation: Quran + Letter + Kris</span>
+          <span class="pill-zh">登基：古兰经+证书+短剑</span>
+          <span class="pill-my">Daulat Tuanku!</span>
+          <span class="pill-en">"Daulat Tuanku!" (Long live!)</span>
+          <span class="pill-zh">万岁陛下！</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════ PERUNDANGAN ════════ -->
+<div id="panel-law" class="panel">
+
+  <div class="sec s-law">
+    <div class="sec-header" onclick="exp(this)">
+      <div class="sec-icon">&#9878;</div>
+      <div class="sec-info">
+        <div class="sec-num">9.1</div>
+        <div class="sec-title-my">Perundangan</div>
+        <div class="sec-title-en">Legal Heritage</div>
+        <div class="sec-title-zh">法律遗产</div>
+      </div>
+      <span class="sec-chev open">&#8964;</span>
+    </div>
+    <div class="sec-body open">
+
+      <!-- UU Tubuh Kerajaan -->
+      <div class="comp-wrap">
+        <table class="comp-table">
+          <thead><tr><th class="th-kd">Kedah</th><th class="th-kl">Kelantan</th><th class="th-pl">Perlis</th></tr></thead>
+          <tbody>
+            <tr>
+              <td class="td-kd">Undang-Undang Tubuh Kerajaan Kedah Darulaman</td>
+              <td class="td-kl">Undang-Undang Perlembagaan Tubuh Kerajaan Kelantan</td>
+              <td class="td-pl">Undang-Undang Tubuh Kerajaan Perlis</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Penggantian Pemerintah -->
+      <div class="tri">
+        <div class="tri-my"><div class="tri-my-lbl">&#x1F7E1; Syarat Penggantian Pemerintah</div><div class="tri-my-text">Sultan atau Raja hendaklah: Lelaki &bull; Berbangsa Melayu &bull; Berketurunan raja &bull; Beragama Islam.</div></div>
+        <div class="tri-en"><div class="tri-en-lbl">&#x1F535; Requirements for Succession</div><div class="tri-en-text">Sultan or Raja must be: Male &bull; Malay &bull; Royal lineage &bull; Muslim.</div></div>
+        <div class="tri-zh"><div class="tri-zh-lbl">&#x1F7E2; 继承条件</div><div class="tri-zh-text">苏丹或拉惹必须：男性 &bull; 马来族裔 &bull; 王室血统 &bull; 穆斯林。</div></div>
+      </div>
+
+      <!-- Peranan Sultan -->
+      <div class="tri">
+        <div class="tri-my"><div class="tri-my-lbl">&#x1F7E1; Peranan Sultan atau Raja</div><div class="tri-my-text">• Sebagai Ketua Negeri.<br>• Ketua Agama Islam.<br>• Majlis Mesyuarat Kerajaan Negeri diketuai Menteri Besar sebagai Yang Dipertua — membantu Sultan/Raja mentadbir negeri.<br>• Sultan/Raja berhak memilih Menteri Besar.<br>• Larangan menyerahkan negeri atau kuasa kepada kerajaan lain.</div></div>
+        <div class="tri-en"><div class="tri-en-lbl">&#x1F535; Role of Sultan or Raja</div><div class="tri-en-text">• Head of State.<br>• Head of Islam.<br>• State Executive Council led by Chief Minister assists the Sultan/Raja.<br>• Sultan/Raja has the right to choose the Chief Minister.<br>• Prohibition against surrendering the state or power to another government.</div></div>
+        <div class="tri-zh"><div class="tri-zh-lbl">&#x1F7E2; 苏丹/拉惹的职责</div><div class="tri-zh-text">• 国家元首。<br>• 伊斯兰教领袖。<br>• 由首席部长领导的州行政议会协助苏丹/拉惹管理国家。<br>• 苏丹/拉惹有权选择首席部长。<br>• 禁止将州或权力移交给其他政府。</div></div>
+      </div>
+
+      <!-- Hak Rakyat -->
+      <div class="tri">
+        <div class="tri-my"><div class="tri-my-lbl">&#x1F7E1; Hak Rakyat dalam Pentadbiran</div><div class="tri-my-text">Warganegara berumur <strong>21 tahun atau lebih</strong> yang tinggal dalam negeri layak menjadi <strong>Ahli Dewan Undangan Negeri</strong> mengikut Perlembagaan Persekutuan.</div></div>
+        <div class="tri-en"><div class="tri-en-lbl">&#x1F535; Citizens' Rights in Administration</div><div class="tri-en-text">Citizens aged <strong>21 years or above</strong> residing in the state are eligible to become <strong>State Legislative Assembly members</strong> under the Federal Constitution.</div></div>
+        <div class="tri-zh"><div class="tri-zh-lbl">&#x1F7E2; 公民行政权利</div><div class="tri-zh-text">年满<strong>21岁或以上</strong>的公民居住在州内，可根据联邦宪法成为<strong>州立法议会议员</strong>。</div></div>
+      </div>
+
+      <!-- Khusus Kedah & Kelantan -->
+      <div class="comp-wrap">
+        <table class="comp-table">
+          <thead><tr><th class="th-kd">Kedah — Khusus</th><th class="th-kl">Kelantan — Khusus</th></tr></thead>
+          <tbody>
+            <tr>
+              <td class="td-kd">Memperkenalkan <strong>enakmen zakat</strong> yang diuruskan menerusi penubuhan sebuah jawatankuasa pada tahun <strong>1955</strong>.</td>
+              <td class="td-kl">Memperkenalkan enakmen dan pekeliling berkaitan <strong>undang-undang jenayah Islam</strong> dan <strong>busana cara Islam</strong> dalam kehidupan rakyat. Juga: <em>Hukum Maksiat di Kelantan</em> (abad ke-19) — melarang perbuatan laga lembu dan persembahan menora.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="mem">
+        <div class="mem-lbl">&#129504; Memory Keywords</div>
+        <div class="pills">
+          <span class="pill-my">Syarat Sultan: Lelaki + Melayu + Raja + Islam</span>
+          <span class="pill-en">Sultan requirements: Male+Malay+Royal+Muslim</span>
+          <span class="pill-zh">苏丹条件：男+马来+王室+穆斯林</span>
+          <span class="pill-my">Kedah: Enakmen Zakat 1955</span>
+          <span class="pill-en">Kedah: Zakat Enactment 1955</span>
+          <span class="pill-zh">吉打：1955年天课条例</span>
+          <span class="pill-my">Kelantan: Undang-undang jenayah Islam</span>
+          <span class="pill-en">Kelantan: Islamic criminal law</span>
+          <span class="pill-zh">吉兰丹：伊斯兰刑事法</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════ PERSURATAN ════════ -->
+<div id="panel-lit" class="panel">
+
+  <div class="sec s-lit">
+    <div class="sec-header" onclick="exp(this)">
+      <div class="sec-icon">&#128221;</div>
+      <div class="sec-info">
+        <div class="sec-num">9.1</div>
+        <div class="sec-title-my">Persuratan</div>
+        <div class="sec-title-en">Literary Heritage</div>
+        <div class="sec-title-zh">文学遗产</div>
+      </div>
+      <span class="sec-chev open">&#8964;</span>
+    </div>
+    <div class="sec-body open">
+
+      <!-- KEDAH LITERARY WORKS -->
+      <div class="sub-sec" style="background:#fffbeb;border-color:#f59e0b;margin-bottom:8px">
+        <div class="sub-title" style="color:#92400e">&#9733; Kedah — Karya Persuratan / Literary Works / 文学著作</div>
+        <div class="tri">
+          <div class="tri-my"><div class="tri-my-lbl">&#x1F7E1; Al-Tarikh Salasilah Negeri Kedah</div><div class="tri-my-text">Karya Muhammad Hassan bin Dato' Kerani Muhammad Arshad pada tahun <strong>1927</strong>. Mencatatkan sejarah istana Kedah dan pentadbiran Perlis. Mengisahkan pengasasan, senarai pemerintah, pembukaan ibu kota, alat kebesaran diraja (nobat) dan pengislaman pemerintah.</div></div>
+          <div class="tri-en"><div class="tri-en-lbl">&#x1F535; Al-Tarikh Salasilah Negeri Kedah</div><div class="tri-en-text">Work by Muhammad Hassan bin Dato' Kerani Muhammad Arshad in <strong>1927</strong>. Records history of Kedah palace and Perlis administration. Covers founding, list of rulers, capital establishment, royal regalia (nobat) and conversion of rulers.</div></div>
+          <div class="tri-zh"><div class="tri-zh-lbl">&#x1F7E2; 吉打世系史</div><div class="tri-zh-text"><strong>1927年</strong>穆罕默德哈桑所著。记录吉打宫廷历史和玻璃市行政。涵盖建国、统治者名单、首都建立、王室宝物（nobat）和统治者皈依伊斯兰。</div></div>
+        </div>
+        <div class="tri">
+          <div class="tri-my"><div class="tri-my-lbl">&#x1F7E1; Hikayat Merong Mahawangsa</div><div class="tri-my-text">Dihasilkan sekitar tahun <strong>1821</strong>. Mengisahkan pengasasan kerajaan Kedah, pembukaan kota pentadbiran dan pengislaman pemerintah.</div></div>
+          <div class="tri-en"><div class="tri-en-lbl">&#x1F535; Hikayat Merong Mahawangsa</div><div class="tri-en-text">Produced around <strong>1821</strong>. Tells of Kedah's founding, establishment of administrative cities and conversion of rulers to Islam.</div></div>
+          <div class="tri-zh"><div class="tri-zh-lbl">&#x1F7E2; 默龙马哈旺沙传奇</div><div class="tri-zh-text">约<strong>1821年</strong>创作。讲述吉打建国、行政城市建立和统治者皈依伊斯兰的故事。</div></div>
+        </div>
+        <div class="tri">
+          <div class="tri-my"><div class="tri-my-lbl">&#x1F7E1; Salasilah atau Tarikh Kerajaan Kedah</div><div class="tri-my-text">Ditulis oleh <strong>Wan Yahya bin Wan Muhammad Taib</strong> pada tahun <strong>1911</strong>.</div></div>
+          <div class="tri-en"><div class="tri-en-lbl">&#x1F535; Salasilah atau Tarikh Kerajaan Kedah</div><div class="tri-en-text">Written by <strong>Wan Yahya bin Wan Muhammad Taib</strong> in <strong>1911</strong>.</div></div>
+          <div class="tri-zh"><div class="tri-zh-lbl">&#x1F7E2; 吉打王国谱系史</div><div class="tri-zh-text"><strong>1911年</strong>由万叶哈亚编写。</div></div>
+        </div>
+        <div class="tri">
+          <div class="tri-my"><div class="tri-my-lbl">&#x1F7E1; Syair Sultan Maulana</div><div class="tri-my-text">Dihasilkan zaman <strong>Sultan Ahmad Tajuddin Halim Shah II</strong> (1804–1845). Berkaitan kisah perang tentera Kedah. Dipersembahkan dalam bentuk <strong>syair</strong>.</div></div>
+          <div class="tri-en"><div class="tri-en-lbl">&#x1F535; Syair Sultan Maulana</div><div class="tri-en-text">Produced during the reign of <strong>Sultan Ahmad Tajuddin Halim Shah II</strong> (1804–1845). About Kedah's military war stories. Presented in <strong>syair</strong> (poem) form.</div></div>
+          <div class="tri-zh"><div class="tri-zh-lbl">&#x1F7E2; 苏丹毛拉纳诗歌</div><div class="tri-zh-text"><strong>苏丹艾哈迈德·塔吉丁二世</strong>（1804–1845）年代所作。关于吉打军事战争故事，以<strong>诗歌</strong>形式呈现。</div></div>
+        </div>
+      </div>
+
+      <!-- KELANTAN LITERARY WORKS -->
+      <div class="sub-sec" style="background:#ecfdf5;border-color:#059669">
+        <div class="sub-title" style="color:#047857">&#9790; Kelantan — Karya Persuratan / Literary Works / 文学著作</div>
+        <div class="tri">
+          <div class="tri-my"><div class="tri-my-lbl">&#x1F7E1; Hikayat Seri Kelantan</div><div class="tri-my-text">Dipercayai ditulis pada tahun <strong>1914</strong>. Mengisahkan pemerintahan negeri Kelantan sejak zaman <strong>Che Siti Wan Kembang, Puteri Saadon dan Raja Abdullah</strong> hingga tahun 1900.</div></div>
+          <div class="tri-en"><div class="tri-en-lbl">&#x1F535; Hikayat Seri Kelantan</div><div class="tri-en-text">Believed written in <strong>1914</strong>. Tells of Kelantan governance from the era of <strong>Che Siti Wan Kembang, Puteri Saadon and Raja Abdullah</strong> up to 1900.</div></div>
+          <div class="tri-zh"><div class="tri-zh-lbl">&#x1F7E2; 吉兰丹传奇</div><div class="tri-zh-text">据信写于<strong>1914年</strong>。讲述从<strong>Che Siti Wan Kembang、Puteri Saadon和拉惹阿都拉</strong>时代至1900年的吉兰丹治理。</div></div>
+        </div>
+        <div class="tri">
+          <div class="tri-my"><div class="tri-my-lbl">&#x1F7E1; Detik-Detik Sejarah Kelantan</div><div class="tri-my-text">Ditulis oleh <strong>Sa'ad Shukri bin Haji Muda</strong> pada tahun <strong>1971</strong>. Mencatatkan sejarah pengasasan kerajaan Kelantan dan peristiwa penting setiap pemerintah.</div></div>
+          <div class="tri-en"><div class="tri-en-lbl">&#x1F535; Detik-Detik Sejarah Kelantan</div><div class="tri-en-text">Written by <strong>Sa'ad Shukri bin Haji Muda</strong> in <strong>1971</strong>. Records history of Kelantan's founding and key events of each ruler.</div></div>
+          <div class="tri-zh"><div class="tri-zh-lbl">&#x1F7E2; 吉兰丹历史时刻</div><div class="tri-zh-text"><strong>1971年</strong>由萨阿德·舒克里所著。记录吉兰丹建国历史和每位统治者的重要事件。</div></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- ════════ KESENIAN ════════ -->
+<div id="panel-art" class="panel">
+
+  <div class="sec s-art">
+    <div class="sec-header" onclick="exp(this)">
+      <div class="sec-icon">&#127912;</div>
+      <div class="sec-info">
+        <div class="sec-num">9.1</div>
+        <div class="sec-title-my">Kesenian</div>
+        <div class="sec-title-en">Arts and Cultural Heritage</div>
+        <div class="sec-title-zh">艺术与文化遗产</div>
+      </div>
+      <span class="sec-chev open">&#8964;</span>
+    </div>
+    <div class="sec-body open">
+
+      <div class="tri">
+        <div class="tri-my"><div class="tri-my-lbl">&#x1F7E1; Seni Ukir</div><div class="tri-my-text">Banyak diwarisi di Kedah dan Kelantan. Menggunakan <strong>motif alam</strong> untuk menggantikan motif haiwan bersesuaian dengan Islam. Kekal sebagai hiasan di <strong>istana, rumah dan masjid</strong>.</div></div>
+        <div class="tri-en"><div class="tri-en-lbl">&#x1F535; Wood Carving Art</div><div class="tri-en-text">Widely inherited in Kedah and Kelantan. Uses <strong>nature motifs</strong> to replace animal motifs in accordance with Islam. Preserved as decoration in <strong>palaces, homes and mosques</strong>.</div></div>
+        <div class="tri-zh"><div class="tri-zh-lbl">&#x1F7E2; 木雕艺术</div><div class="tri-zh-text">在吉打和吉兰丹广泛传承。使用<strong>自然图案</strong>代替动物图案以符合伊斯兰。保留为<strong>宫殿、民居和清真寺</strong>的装饰。</div></div>
+      </div>
+
+      <div class="tri">
+        <div class="tri-my"><div class="tri-my-lbl">&#x1F7E1; Seni Bina</div><div class="tri-my-text">Berupa binaan istana serta hiasan ukiran kayu berkualiti. Keunikan: <strong>tebar layar berbentuk 'V' terbalik</strong> berukiran motif alam pada rumah tradisional Melayu. Tiang dibuat daripada hasil hutan tempatan — berdaya tahan dengan perubahan cuaca.</div></div>
+        <div class="tri-en"><div class="tri-en-lbl">&#x1F535; Architecture</div><div class="tri-en-text">Palace structures with quality wood carving decorations. Unique feature: <strong>inverted 'V' gable end</strong> with nature motifs on traditional Malay houses. Pillars made from local timber — weather resistant.</div></div>
+        <div class="tri-zh"><div class="tri-zh-lbl">&#x1F7E2; 建筑艺术</div><div class="tri-zh-text">宫殿建筑配以优质木雕装饰。独特之处：传统马来房屋的<strong>倒V形山墙</strong>刻有自然图案。柱子由当地木材制成，耐候性强。</div></div>
+      </div>
+
+      <div class="tri">
+        <div class="tri-my"><div class="tri-my-lbl">&#x1F7E1; Seni Pertukangan &amp; Barang Perhiasan</div><div class="tri-my-text">Berasaskan emas dan perak. Menyerlahkan kreativiti masyarakat. Pertukangan senjata tradisional seperti <strong>keris terkenal di Kelantan</strong>.</div></div>
+        <div class="tri-en"><div class="tri-en-lbl">&#x1F535; Craft &amp; Jewellery Arts</div><div class="tri-en-text">Gold and silver based. Showcases community creativity. Traditional weapon craft — <strong>kris famous in Kelantan</strong>.</div></div>
+        <div class="tri-zh"><div class="tri-zh-lbl">&#x1F7E2; 工艺与珠宝艺术</div><div class="tri-zh-text">以金银为基础，展示社区创造力。传统武器工艺——<strong>吉兰丹著名短剑</strong>。</div></div>
+      </div>
+
+      <div class="tri">
+        <div class="tri-my"><div class="tri-my-lbl">&#x1F7E1; Seni Kraf Tangan</div><div class="tri-my-text">Anyaman tikar dan bakul rotan. <strong>Wau dan batik sangat terkenal di Kelantan</strong>.</div></div>
+        <div class="tri-en"><div class="tri-en-lbl">&#x1F535; Handicraft Arts</div><div class="tri-en-text">Mat and rattan basket weaving. <strong>Kite (wau) and batik very famous in Kelantan</strong>.</div></div>
+        <div class="tri-zh"><div class="tri-zh-lbl">&#x1F7E2; 手工艺</div><div class="tri-zh-text">编织席子和藤篮。<strong>风筝（wau）和蜡染在吉兰丹非常著名</strong>。</div></div>
+      </div>
+
+      <div class="tri">
+        <div class="tri-my"><div class="tri-my-lbl">&#x1F7E1; Seni Persembahan</div><div class="tri-my-text">• <strong>Mek Mulung</strong> — teater tradisional Kedah.<br>• <strong>Wayang kulit</strong> — diangkat sebagai warisan kebangsaan.<br>• <strong>Awang Batil</strong> — penglipurlara di Perlis.</div></div>
+        <div class="tri-en"><div class="tri-en-lbl">&#x1F535; Performing Arts</div><div class="tri-en-text">• <strong>Mek Mulung</strong> — traditional Kedah theatre.<br>• <strong>Wayang kulit</strong> — elevated as national heritage.<br>• <strong>Awang Batil</strong> — storyteller in Perlis.</div></div>
+        <div class="tri-zh"><div class="tri-zh-lbl">&#x1F7E2; 表演艺术</div><div class="tri-zh-text">• <strong>Mek Mulung</strong>——吉打传统戏剧。<br>• <strong>皮影戏</strong>——被列为国家遗产。<br>• <strong>Awang Batil</strong>——玻璃市说书人。</div></div>
+      </div>
+
+      <div class="tri">
+        <div class="tri-my"><div class="tri-my-lbl">&#x1F7E1; Seni Silat</div><div class="tri-my-text">Seni atau kepandaian berjuang menggunakan ketangkasan menyerang dan mempertahankan diri. Kini menjadi persembahan istimewa dalam majlis. Menjadi acara dipertandingkan pada peringkat antarabangsa.</div></div>
+        <div class="tri-en"><div class="tri-en-lbl">&#x1F535; Silat Martial Art</div><div class="tri-en-text">Art of fighting using offensive and defensive agility. Now a special performance at events. Competed internationally.</div></div>
+        <div class="tri-zh"><div class="tri-zh-lbl">&#x1F7E2; 武术（Silat）</div><div class="tri-zh-text">使用攻防技巧的搏击艺术。现为活动中的特别表演。在国际级别竞赛。</div></div>
+      </div>
+
+      <div class="mem">
+        <div class="mem-lbl">&#129504; 5 Warisan Seni</div>
+        <div class="pills">
+          <span class="pill-my">Ukir</span><span class="pill-en">Wood Carving</span><span class="pill-zh">木雕</span>
+          <span class="pill-my">Bina</span><span class="pill-en">Architecture</span><span class="pill-zh">建筑</span>
+          <span class="pill-my">Pertukangan</span><span class="pill-en">Craft/Jewellery</span><span class="pill-zh">工艺</span>
+          <span class="pill-my">Kraf Tangan</span><span class="pill-en">Handicraft</span><span class="pill-zh">手工艺</span>
+          <span class="pill-my">Persembahan</span><span class="pill-en">Performing Arts</span><span class="pill-zh">表演艺术</span>
+          <span class="pill-my">Silat</span><span class="pill-en">Silat</span><span class="pill-zh">武术</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════ ADAT PERPATIH (N. SEMBILAN) ════════ -->
+<div id="panel-ns" class="panel">
+
+  <div class="sec s-ns">
+    <div class="sec-header" onclick="exp(this)">
+      <div class="sec-icon">&#127774;</div>
+      <div class="sec-info">
+        <div class="sec-num">9.2</div>
+        <div class="sec-title-my">Keunikan Adat Perpatih — Negeri Sembilan</div>
+        <div class="sec-title-en">Uniqueness of Adat Perpatih — N. Sembilan</div>
+        <div class="sec-title-zh">森美兰习惯法的独特性</div>
+      </div>
+      <span class="sec-chev open">&#8964;</span>
+    </div>
+    <div class="sec-body open">
+
+      <!-- Pengenalan -->
+      <div class="tri">
+        <div class="tri-my"><div class="tri-my-lbl">&#x1F7E1; Pengenalan</div><div class="tri-my-text"><strong>Adat Perpatih</strong> berasal daripada masyarakat <strong>Minangkabau</strong> yang merantau dan menetap di kawasan <strong>Rembau, Sungai Ujong, Johoi</strong> di Negeri Sembilan serta <strong>Naning</strong>. Walaupun mengalami perubahan semasa, keunikan warisannya masih kekal hingga hari ini.</div></div>
+        <div class="tri-en"><div class="tri-en-lbl">&#x1F535; Introduction</div><div class="tri-en-text"><strong>Adat Perpatih</strong> originated from the <strong>Minangkabau</strong> people who migrated and settled in <strong>Rembau, Sungai Ujong, Johoi</strong> in Negeri Sembilan and <strong>Naning</strong>. Despite changes over time, its unique heritage remains to this day.</div></div>
+        <div class="tri-zh"><div class="tri-zh-lbl">&#x1F7E2; 简介</div><div class="tri-zh-text"><strong>Adat Perpatih</strong>起源于移居并定居在森美兰<strong>林茂、双溪乌戎、Johoi</strong>及<strong>南宁</strong>的<strong>米南加保</strong>人。尽管随时代变迁，其独特遗产至今仍保留。</div></div>
+      </div>
+
+      <!-- 3 Kumpulan -->
+      <div class="tri">
+        <div class="tri-my"><div class="tri-my-lbl">&#x1F7E1; 3 Kumpulan Utama (Perut, Suku, Luak)</div><div class="tri-my-text"><strong>Perut</strong> — unit terkecil, ahlinya daripada keturunan sebelah ibu.<br><strong>Suku</strong> — unit kedua dalam sosiopolitik Adat Perpatih, dibentuk oleh beberapa Perut.<br><strong>Luak</strong> — daerah/jajahan, kumpulan ketiga terbesar dalam susunan masyarakat Minangkabau.</div></div>
+        <div class="tri-en"><div class="tri-en-lbl">&#x1F535; 3 Main Groups</div><div class="tri-en-text"><strong>Perut</strong> — smallest unit, members from mother's lineage.<br><strong>Suku</strong> — second unit in Adat Perpatih sociopolitics, formed by several Perut.<br><strong>Luak</strong> — district/territory, third largest group in Minangkabau society structure.</div></div>
+        <div class="tri-zh"><div class="tri-zh-lbl">&#x1F7E2; 三大群体</div><div class="tri-zh-text"><strong>Perut（腹族）</strong>——最小单位，成员来自母系血统。<br><strong>Suku（族）</strong>——Adat Perpatih社会政治中的第二单位，由数个Perut组成。<br><strong>Luak（地区）</strong>——地区/辖区，米南加保社会结构中第三大群体。</div></div>
+      </div>
+
+      <!-- Keunikan Adat -->
+      <div class="tri">
+        <div class="tri-my"><div class="tri-my-lbl">&#x1F7E1; Jurai Keturunan Sebelah Ibu</div><div class="tri-my-text">• Kaum perempuan dianggap <strong>Ibu Soko</strong> yang melahirkan anggota masyarakat.<br>• Anak adalah anggota suku ibunya.<br>• Anggota suku dianggap sedarah kerana berasal daripada <strong>moyang perempuan sebelah ibu</strong>.</div></div>
+        <div class="tri-en"><div class="tri-en-lbl">&#x1F535; Matrilineal Descent</div><div class="tri-en-text">• Women regarded as <strong>Ibu Soko</strong> who give birth to community members.<br>• Children belong to mother's clan.<br>• Clan members are considered blood-related as they descend from the <strong>female ancestor (mother's side)</strong>.</div></div>
+        <div class="tri-zh"><div class="tri-zh-lbl">&#x1F7E2; 母系传承</div><div class="tri-zh-text">• 女性被视为生育社区成员的<strong>Ibu Soko（宗族母）</strong>。<br>• 孩子属于母亲的氏族。<br>• 氏族成员被视为血亲，因为他们来自<strong>母系女性祖先</strong>。</div></div>
+      </div>
+
+      <div class="tri">
+        <div class="tri-my"><div class="tri-my-lbl">&#x1F7E1; Pelaksanaan Hukuman</div><div class="tri-my-text">• Bersifat <strong>pemulihan</strong>.<br>• Mengutamakan perasaan dan kepentingan pesalah.<br>• Kesalahan kecil boleh diselesaikan dengan <strong>saling bermaafan atau denda yang ringan</strong>.</div></div>
+        <div class="tri-en"><div class="tri-en-lbl">&#x1F535; Punishment Implementation</div><div class="tri-en-text">• Has a <strong>rehabilitative</strong> nature.<br>• Prioritises the feelings and interests of the offender.<br>• Minor offences can be resolved through <strong>mutual forgiveness or light fines</strong>.</div></div>
+        <div class="tri-zh"><div class="tri-zh-lbl">&#x1F7E2; 执行惩罚</div><div class="tri-zh-text">• 具有<strong>改造</strong>性质。<br>• 优先考虑违规者的感受和利益。<br>• 轻微违规可通过<strong>相互原谅或轻罚</strong>解决。</div></div>
+      </div>
+
+      <div class="tri">
+        <div class="tri-my"><div class="tri-my-lbl">&#x1F7E1; Perkahwinan</div><div class="tri-my-text">• Sesama suku <strong>tidak digalakkan</strong>; luar suku digalakkan bagi mewujudkan persaudaraan.<br>• Lelaki yang berkahwin menjadi <strong>"Orang Semenda"</strong> (orang mendatang) dalam keluarga suku isteri.<br>• Perempuan yang berkahwin sesama suku hilang hak mewarisi harta.<br>• Perlu menjalankan <strong>adat memulih pusaka</strong> jika ingin kembalikan hak.</div></div>
+        <div class="tri-en"><div class="tri-en-lbl">&#x1F535; Marriage</div><div class="tri-en-text">• Same-clan marriage <strong>discouraged</strong>; cross-clan encouraged for brotherly ties.<br>• Man who marries becomes <strong>"Orang Semenda"</strong> (newcomer) in wife's clan family.<br>• Woman who marries within clan loses right to inherit property.<br>• Must perform <strong>adat memulih pusaka</strong> to restore rights.</div></div>
+        <div class="tri-zh"><div class="tri-zh-lbl">&#x1F7E2; 婚姻</div><div class="tri-zh-text">• 同族通婚<strong>不被鼓励</strong>；跨族通婚以建立兄弟情谊。<br>• 结婚的男性成为妻子氏族家庭中的<strong>"外来者"</strong>。<br>• 同族内通婚的女性失去继承财产的权利。<br>• 需进行<strong>恢复遗产的习俗</strong>以恢复权利。</div></div>
+      </div>
+
+      <div class="tri">
+        <div class="tri-my"><div class="tri-my-lbl">&#x1F7E1; Upacara Kedim &amp; Wanita Mewarisi Pusaka</div><div class="tri-my-text"><strong>Upacara Kedim:</strong> Menerima orang dari suku lain menjadi ahli suku. Perlu bersumpah taat setia dan bersaudara. Perlu dihebahkan.<br><strong>Wanita Mewarisi Pusaka:</strong> Mewarisi harta berupa <strong>tanah dan rumah</strong>. Bertujuan agar wanita tidak terabaikan. Diwarisi turun-temurun daripada ibu kepada anak perempuan.</div></div>
+        <div class="tri-en"><div class="tri-en-lbl">&#x1F535; Kedim Ceremony &amp; Women's Inheritance</div><div class="tri-en-text"><strong>Kedim Ceremony:</strong> Accepting people from other clans as clan members. Must swear loyalty and brotherhood. Must be announced publicly.<br><strong>Women's Inheritance:</strong> Women inherit property — <strong>land and houses</strong>. To ensure women are not neglected. Passed down from mother to daughter.</div></div>
+        <div class="tri-zh"><div class="tri-zh-lbl">&#x1F7E2; Kedim仪式与女性继承遗产</div><div class="tri-zh-text"><strong>Kedim仪式：</strong>接纳其他氏族成员加入本族。须宣誓效忠和结义，须公开宣布。<br><strong>女性继承遗产：</strong>女性继承<strong>土地和房屋</strong>财产，确保女性不被忽视，由母亲传给女儿。</div></div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- PELANTIKAN PEMIMPIN -->
+  <div class="sec s-ns">
+    <div class="sec-header" onclick="exp(this)">
+      <div class="sec-icon">&#128081;</div>
+      <div class="sec-info">
+        <div class="sec-num">9.2</div>
+        <div class="sec-title-my">Hierarki Pemerintahan Adat Perpatih</div>
+        <div class="sec-title-en">Adat Perpatih Leadership Hierarchy</div>
+        <div class="sec-title-zh">习惯法领导层级</div>
+      </div>
+      <span class="sec-chev">&#8964;</span>
+    </div>
+    <div class="sec-body">
+
+      <div class="tri" style="margin-bottom:8px">
+        <div class="tri-my"><div class="tri-my-lbl">&#x1F7E1; Pelantikan Pemimpin</div><div class="tri-my-text">Pemimpin dalam Adat Perpatih ialah ketua adat seperti: <strong>Ibu Soko, Buapak, Lembaga, Undang</strong> dan <strong>Yamtuan Besar atau Yang di-Pertuan Besar</strong>. Penyandang Pesaka Adat dipilih berdasarkan <strong>muafakat</strong> — amalan demokrasi. Penghulu adalah Ketua Luak atau Daerah bagi Inas, Terachi, Jempol, Ulu Muar dan Gunung Pasir.</div></div>
+        <div class="tri-en"><div class="tri-en-lbl">&#x1F535; Leadership Appointment</div><div class="tri-en-text">Leaders in Adat Perpatih are traditional chiefs: <strong>Ibu Soko, Buapak, Lembaga, Undang</strong> and <strong>Yamtuan Besar</strong>. Adat Pesaka holders are chosen by <strong>consensus</strong> — a democratic practice. Penghulu is Head of Luak/District.</div></div>
+        <div class="tri-zh"><div class="tri-zh-lbl">&#x1F7E2; 领导任命</div><div class="tri-zh-text">习惯法中的领导者是传统首领：<strong>Ibu Soko（宗族母）、Buapak（族父）、Lembaga（氏族长）、Undang（酋长）</strong>和<strong>Yamtuan Besar（大领主）</strong>。遗产持有者通过<strong>协商</strong>选出——民主实践。</div></div>
+      </div>
+
+      <!-- PYRAMID LEVELS -->
+      <div style="margin-bottom:8px">
+        <div style="text-align:center;font-size:11px;font-weight:800;letter-spacing:2px;color:#831843;text-transform:uppercase;margin-bottom:10px">&#128081; Hierarki (Piramid Tertinggi → Terendah)</div>
+
+        <div class="pyramid-lvl" style="background:#fce7f3;border-left-color:#be185d">
+          <div class="pyr-title" style="color:#831843">1. Yamtuan Besar / Yang di-Pertuan Besar</div>
+          <div class="tri">
+            <div class="tri-my"><div class="tri-my-lbl">&#x1F7E1;</div><div class="tri-my-text">Dipilih oleh Undang Yang Empat. Berperanan sebagai Ketua Negeri. Lambang kesatuan dan persekutuan.</div></div>
+            <div class="tri-en"><div class="tri-en-lbl">&#x1F535;</div><div class="tri-en-text">Chosen by the Undang Yang Empat (Four Chiefs). Acts as Head of State. Symbol of unity and federation.</div></div>
+            <div class="tri-zh"><div class="tri-zh-lbl">&#x1F7E2;</div><div class="tri-zh-text">由四大酋长选出。担任国家元首，是团结与联邦的象征。</div></div>
+          </div>
+        </div>
+
+        <div class="pyramid-lvl" style="background:#fdf2f8;border-left-color:#ec4899">
+          <div class="pyr-title" style="color:#9d174d">2. Undang (4 Luak)</div>
+          <div class="tri">
+            <div class="tri-my"><div class="tri-my-lbl">&#x1F7E1;</div><div class="tri-my-text">Ketua Luak dilantik oleh Lembaga. Terdiri daripada: Undang Sungai Ujong, Undang Jelebu, Undang Johoi, Undang Rembau. Berkerapatan memilih seorang yang layak daripada keturunan Yamtuan Radin untuk dilantik menjadi Yamtuan Besar.</div></div>
+            <div class="tri-en"><div class="tri-en-lbl">&#x1F535;</div><div class="tri-en-text">Luak chief appointed by Lembaga. Consists of: Undang Sungai Ujong, Undang Jelebu, Undang Johoi, Undang Rembau. They collectively choose a worthy person from Yamtuan Radin's lineage to become Yamtuan Besar.</div></div>
+            <div class="tri-zh"><div class="tri-zh-lbl">&#x1F7E2;</div><div class="tri-zh-text">由Lembaga任命的地区酋长。由双溪乌戎、芦骨、Johoi、林茂四位酋长组成。共同选出Yamtuan Radin后裔中合适者为Yamtuan Besar。</div></div>
+          </div>
+        </div>
+
+        <div class="pyramid-lvl" style="background:#f5f3ff;border-left-color:#7c3aed">
+          <div class="pyr-title" style="color:#5b21b6">3. Lembaga (Ketua Suku)</div>
+          <div class="tri">
+            <div class="tri-my"><div class="tri-my-lbl">&#x1F7E1;</div><div class="tri-my-text">Ketua Suku dilantik oleh Buapak. Peranan: Memilih Undang dan Penghulu &bull; Menyelesaikan pertelingkahan antara suku &bull; Menjaga keamanan dan keselamatan &bull; Mengurus pembahagian harta pusaka.</div></div>
+            <div class="tri-en"><div class="tri-en-lbl">&#x1F535;</div><div class="tri-en-text">Clan chief appointed by Buapak. Roles: Select Undang and Penghulu &bull; Settle inter-clan disputes &bull; Maintain peace and safety &bull; Manage inheritance distribution.</div></div>
+            <div class="tri-zh"><div class="tri-zh-lbl">&#x1F7E2;</div><div class="tri-zh-text">由Buapak任命的氏族长。职责：选择Undang和Penghulu &bull; 解决跨族纠纷 &bull; 维护和平安全 &bull; 管理遗产分配。</div></div>
+          </div>
+        </div>
+
+        <div class="pyramid-lvl" style="background:#eff6ff;border-left-color:#2563eb">
+          <div class="pyr-title" style="color:#1d4ed8">4. Buapak (Ketua Perut)</div>
+          <div class="tri">
+            <div class="tri-my"><div class="tri-my-lbl">&#x1F7E1;</div><div class="tri-my-text">Dilantik oleh anak buah dalam Perut. Menjadi ketua rujukan aspek yang berkaitan dengan <strong>adat dan hukum</strong>.</div></div>
+            <div class="tri-en"><div class="tri-en-lbl">&#x1F535;</div><div class="tri-en-text">Appointed by members within the Perut group. Acts as the main reference for matters related to <strong>customs and law</strong>.</div></div>
+            <div class="tri-zh"><div class="tri-zh-lbl">&#x1F7E2;</div><div class="tri-zh-text">由Perut群体成员任命。是有关<strong>习俗和法律</strong>事务的主要参考首领。</div></div>
+          </div>
+        </div>
+
+        <div class="pyramid-lvl" style="background:#ecfdf5;border-left-color:#059669">
+          <div class="pyr-title" style="color:#047857">5. Ibu Soko (Teras Perut)</div>
+          <div class="tri">
+            <div class="tri-my"><div class="tri-my-lbl">&#x1F7E1;</div><div class="tri-my-text">Mengetahui, memahami dan menghafal adat serta asal-usul kelompok kekeluargaan. Terlibat dalam pemilihan dan pelantikan Buapak. Jika tiada Ibu Soko, <strong>semua peringkat pelantikan pemimpin tidak boleh dilaksana</strong>. Dikenali dengan pelbagai nama: Ibu Waris, Ibu Telepak, Bundo Kanduang.</div></div>
+            <div class="tri-en"><div class="tri-en-lbl">&#x1F535;</div><div class="tri-en-text">Knows, understands and memorises customs and family group origins. Involved in selection and appointment of Buapak. Without an Ibu Soko, <strong>no leadership appointment process can be carried out</strong>. Known by various names: Ibu Waris, Ibu Telepak, Bundo Kanduang.</div></div>
+            <div class="tri-zh"><div class="tri-zh-lbl">&#x1F7E2;</div><div class="tri-zh-text">了解、理解并记忆习俗及家族群体起源。参与Buapak的选拔和任命。没有Ibu Soko，<strong>所有领导任命程序无法进行</strong>。有多个称号：Ibu Waris、Ibu Telepak、Bundo Kanduang。</div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="mem">
+        <div class="mem-lbl">&#129504; Hierarki: YB → Undang → Lembaga → Buapak → Ibu Soko</div>
+        <div class="pills">
+          <span class="pill-my">Yamtuan Besar (dipilih Undang)</span>
+          <span class="pill-en">Yamtuan Besar (chosen by Undang)</span>
+          <span class="pill-zh">Yamtuan Besar（由Undang选出）</span>
+          <span class="pill-my">Undang Yang Empat</span>
+          <span class="pill-en">4 Undang Chiefs</span>
+          <span class="pill-zh">四大酋长</span>
+          <span class="pill-my">Ibu Soko = kunci semua pelantikan</span>
+          <span class="pill-en">Ibu Soko = key to all appointments</span>
+          <span class="pill-zh">Ibu Soko = 所有任命的关键</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ════════ MEMORY MAP ════════ -->
+<div id="panel-mm" class="panel">
+
+  <div style="background:#0f172a;border-radius:16px;overflow:hidden;margin-bottom:12px">
+    <div class="mmap-header">
+      <div class="mmap-h-title">&#11088; Super Compact Memory Map</div>
+      <div class="mmap-h-en">Peta Hafalan Ringkas — Bab 9</div>
+      <div class="mmap-h-zh">超简短记忆图 — 第九章</div>
+    </div>
+
+    <div style="padding:14px">
+
+      <!-- QUICK COMPARE TABLE -->
+      <div style="background:#1e293b;border-radius:12px;padding:12px;margin-bottom:12px">
+        <div style="font-size:11px;font-weight:800;letter-spacing:2px;color:#f59e0b;text-transform:uppercase;margin-bottom:10px">&#128203; 5 Aspek Warisan — Quick Compare</div>
+        <div class="comp-wrap">
+          <table class="comp-table">
+            <thead><tr><th style="background:#334155;color:#94a3b8;text-align:left;font-size:10px;padding:7px 8px">Aspek</th><th class="th-kd">Kedah</th><th class="th-kl">Kelantan</th><th class="th-pl">Perlis</th></tr></thead>
+            <tbody>
+              <tr><td class="td-label">Gelaran</td><td class="td-kd">Sultan</td><td class="td-kl">Sultan</td><td class="td-pl">Raja</td></tr>
+              <tr><td class="td-label">UU Tubuh</td><td class="td-kd">UU Kedah Darulaman</td><td class="td-kl">UU Perlembagaan Kelantan</td><td class="td-pl">UU Tubuh Perlis</td></tr>
+              <tr><td class="td-label">Perundangan Khas</td><td class="td-kd">Enakmen Zakat 1955</td><td class="td-kl">Undang jenayah Islam; Hukum Maksiat (abad ke-19)</td><td class="td-pl">—</td></tr>
+              <tr><td class="td-label">Persuratan Terkenal</td><td class="td-kd">Hikayat Merong Mahawangsa (1821); Al-Tarikh Salasilah (1927)</td><td class="td-kl">Hikayat Seri Kelantan (1914); Detik Sejarah (1971)</td><td class="td-pl">Disebut dalam Al-Tarikh Salasilah</td></tr>
+              <tr><td class="td-label">Seni Khas</td><td class="td-kd">Mek Mulung (teater)</td><td class="td-kl">Wau, Batik, Keris, Wayang Kulit</td><td class="td-pl">Awang Batil</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- MEMORY ITEMS -->
+      <div class="mmap-item">
+        <div class="mmap-my"><div class="mmap-my-text">Sistem Pemerintahan Beraja: Sultan/Raja (Negeri) → Pembesar (Daerah) → Penghulu (Mukim) — 3 peringkat, masih wujud hingga kini</div></div>
+        <div class="mmap-en"><div class="mmap-en-text">Royal Government: Sultan/Raja (State) → Pembesar (District) → Penghulu (Mukim) — 3 levels, still exist today</div></div>
+        <div class="mmap-zh"><div class="mmap-zh-text">君主制度：苏丹/拉惹（州）→ 大臣（地区）→ 村长（乡镇）— 3个级别，至今仍存在</div></div>
+      </div>
+
+      <div class="mmap-item">
+        <div class="mmap-my"><div class="mmap-my-text">Adat Istiadat: Pemasyhuran (sebelum jenazah dimakam) → Pertabalan (Quran + Watikah + Keris + "Daulat Tuanku!") → Bintang Darjah (hari keputeraan)</div></div>
+        <div class="mmap-en"><div class="mmap-en-text">Royal Customs: Proclamation (before burial) → Coronation (Quran + Letter + Kris + "Daulat Tuanku!") → Honours Award (birthday)</div></div>
+        <div class="mmap-zh"><div class="mmap-zh-text">皇家习俗：宣告（安葬前）→ 登基（古兰经+证书+短剑+"万岁！"）→ 授勋（诞辰）</div></div>
+      </div>
+
+      <div class="mmap-item">
+        <div class="mmap-my"><div class="mmap-my-text">Perundangan — Syarat Sultan: Lelaki + Melayu + Raja + Islam. Kedah: Zakat 1955. Kelantan: Jenayah Islam. Semua ada UU Tubuh Kerajaan masing-masing.</div></div>
+        <div class="mmap-en"><div class="mmap-en-text">Law — Sultan requirements: Male+Malay+Royal+Muslim. Kedah: Zakat 1955. Kelantan: Islamic criminal law. All have own State Constitution.</div></div>
+        <div class="mmap-zh"><div class="mmap-zh-text">法律——苏丹条件：男+马来+王室+穆斯林。吉打：天课1955。吉兰丹：伊斯兰刑法。各州均有自己的州宪法。</div></div>
+      </div>
+
+      <div class="mmap-item">
+        <div class="mmap-my"><div class="mmap-my-text">Persuratan Kedah: Hikayat Merong Mahawangsa (1821) + Al-Tarikh Salasilah (1927) + Syair Sultan Maulana. Kelantan: Hikayat Seri Kelantan (1914) + Detik Sejarah (1971).</div></div>
+        <div class="mmap-en"><div class="mmap-en-text">Kedah Literature: Hikayat Merong Mahawangsa (1821) + Al-Tarikh Salasilah (1927) + Syair Sultan Maulana. Kelantan: Hikayat Seri Kelantan (1914) + Detik Sejarah (1971).</div></div>
+        <div class="mmap-zh"><div class="mmap-zh-text">吉打文学：默龙马哈旺沙传奇（1821）+吉打世系史（1927）+苏丹毛拉纳诗歌。吉兰丹：吉兰丹传奇（1914）+吉兰丹历史时刻（1971）。</div></div>
+      </div>
+
+      <div class="mmap-item">
+        <div class="mmap-my"><div class="mmap-my-text">Kesenian: Ukir (motif alam) + Bina (tebar layar V terbalik) + Pertukangan (keris) + Kraf (wau, batik) + Persembahan (Mek Mulung/Kedah, Wayang Kulit, Awang Batil/Perlis) + Silat</div></div>
+        <div class="mmap-en"><div class="mmap-en-text">Arts: Carving (nature motifs) + Architecture (V-gable) + Craft (kris) + Handicraft (kite, batik) + Performing (Mek Mulung/Kedah, Shadow Puppet, Awang Batil/Perlis) + Silat</div></div>
+        <div class="mmap-zh"><div class="mmap-zh-text">艺术：木雕（自然图案）+建筑（倒V山墙）+工艺（短剑）+手工艺（风筝、蜡染）+表演艺术（Mek Mulung/吉打、皮影戏、Awang Batil/玻璃市）+武术</div></div>
+      </div>
+
+      <div class="mmap-item">
+        <div class="mmap-my"><div class="mmap-my-text">Adat Perpatih N.Sembilan: Minangkabau + Matrilineal + Perut→Suku→Luak. Hierarki: Ibu Soko→Buapak→Lembaga→Undang→Yamtuan Besar. Wanita mewarisi tanah &amp; rumah.</div></div>
+        <div class="mmap-en"><div class="mmap-en-text">Adat Perpatih N.Sembilan: Minangkabau + Matrilineal + Perut→Suku→Luak. Hierarchy: Ibu Soko→Buapak→Lembaga→Undang→Yamtuan Besar. Women inherit land &amp; houses.</div></div>
+        <div class="mmap-zh"><div class="mmap-zh-text">森美兰习惯法：米南加保+母系制+Perut→Suku→Luak。层级：Ibu Soko→Buapak→Lembaga→Undang→Yamtuan Besar。女性继承土地和房屋。</div></div>
+      </div>
+
+      <!-- EXAM BOX -->
+      <div class="exam-box">
+        <div class="exam-hdr"><div class="exam-lbl">&#9997; Exam Template / Ayat Peperiksaan / 考试句型</div></div>
+        <div class="exam-my"><div class="exam-my-t">Warisan Kerajaan [Negeri] dapat dilihat melalui sistem pemerintahan beraja, adat istiadat, perundangan, persuratan dan kesenian yang masih kekal hingga hari ini sebagai lambang kegemilangan dan identiti bangsa Melayu.</div></div>
+        <div class="exam-en"><div class="exam-en-t">The heritage of the Kingdom of [State] can be seen through the royal government system, customs, laws, literature and arts that remain to this day as a symbol of the glory and identity of the Malay people.</div></div>
+        <div class="exam-zh"><div class="exam-zh-t">【州名】王国的遗产可通过至今仍保留的君主制度、习俗、法律、文学和艺术来体现，作为马来民族辉煌和身份认同的象征。</div></div>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+<div class="footer">Bab 9 &middot; Sejarah Tingkatan 3 &middot; 第九章</div>
+
+<script>
+var hiddenLang={my:false,en:false,zh:false};
+function tgl(lang,btn){
+  hiddenLang[lang]=!hiddenLang[lang];
+  document.getElementById('app').classList.toggle('hide-'+lang,hiddenLang[lang]);
+  btn.classList.toggle('on',!hiddenLang[lang]);
+}
+function showPanel(id,btn){
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById('panel-'+id).classList.add('active');
+  btn.classList.add('active');
+  window.scrollTo(0,document.querySelector('.tabs').offsetTop-60);
+}
+function exp(hdr){
+  var b=hdr.nextElementSibling;
+  var c=hdr.querySelector('.sec-chev');
+  var o=b.classList.toggle('open');
+  c.classList.toggle('open',o);
+}
+</script>
+</body>
+</html>
