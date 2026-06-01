@@ -465,6 +465,17 @@ function mergeSeedChapters(subjectData){
 
             }
 
+            if(existingChapter.resourceUrl !== seedChapter.resourceUrl){
+
+                changed = true;
+
+                return {
+                    ...existingChapter,
+                    resourceUrl:seedChapter.resourceUrl
+                };
+
+            }
+
             return existingChapter;
 
         });
