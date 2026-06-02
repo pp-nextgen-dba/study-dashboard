@@ -1,0 +1,876 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+<title>RBT — Elektrik: Litar Elektrik & Hukum Ohm</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html{font-size:16px}
+body{font-family:'Nunito',sans-serif;background:#f0f4ff;color:#1e293b;line-height:1.5}
+
+.hero{background:linear-gradient(135deg,#7c2d12,#1e3a5f);padding:26px 18px 40px;text-align:center;position:relative;overflow:hidden}
+.hero::after{content:'';position:absolute;bottom:-24px;left:0;right:0;height:48px;background:#f0f4ff;border-radius:50% 50% 0 0/48px 48px 0 0}
+.hero-badge{display:inline-block;background:rgba(255,255,255,.15);color:#fed7aa;font-size:12px;letter-spacing:2px;padding:4px 14px;border-radius:20px;margin-bottom:10px}
+.hero-title{font-size:20px;font-weight:800;color:#fff;line-height:1.3;margin-bottom:4px}
+.hero-sub{font-size:13px;color:#93c5fd;margin-bottom:3px}
+.hero-zh{font-family:'Noto Sans SC',sans-serif;font-size:12px;color:#67e8f9;letter-spacing:2px;margin-bottom:28px}
+.hero-stats{display:flex;justify-content:center;gap:24px;position:relative;z-index:1}
+.stat-num{font-size:24px;font-weight:800;color:#fff;text-align:center}
+.stat-lbl{font-size:11px;color:#fed7aa;text-align:center}
+
+.lang-legend{display:flex;justify-content:center;gap:14px;padding:10px 16px;background:#fff;border-bottom:1px solid #e5e7eb}
+.legend-dot{display:flex;align-items:center;gap:5px;font-size:12px;font-weight:700}
+.dot{width:12px;height:12px;border-radius:3px;flex-shrink:0}
+
+.lang-bar{background:#fff;padding:10px 14px;display:flex;gap:8px;align-items:center;border-bottom:2px solid #e5e7eb;position:sticky;top:0;z-index:200;box-shadow:0 2px 8px rgba(0,0,0,.08)}
+.lbtn{flex:1;padding:8px 4px;font-size:12px;font-weight:800;font-family:'Nunito',sans-serif;border:2px solid;border-radius:20px;cursor:pointer;text-align:center;opacity:.4;transition:all .15s}
+.lbtn.on{opacity:1}
+.lbtn-my{border-color:#b45309;background:#fef3c7;color:#78350f}
+.lbtn-my.on{background:#d97706;color:#fff;border-color:#d97706}
+.lbtn-en{border-color:#1d4ed8;background:#dbeafe;color:#1e3a8a}
+.lbtn-en.on{background:#2563eb;color:#fff;border-color:#2563eb}
+.lbtn-zh{border-color:#059669;background:#d1fae5;color:#064e3b}
+.lbtn-zh.on{background:#059669;color:#fff;border-color:#059669}
+
+.tabs{display:flex;overflow-x:auto;background:#1e293b;-webkit-overflow-scrolling:touch;scrollbar-width:none;position:sticky;top:53px;z-index:199}
+.tabs::-webkit-scrollbar{display:none}
+.tab{flex:0 0 auto;padding:11px 14px;font-size:12px;font-weight:800;font-family:'Nunito',sans-serif;color:#94a3b8;background:transparent;border:none;cursor:pointer;border-bottom:3px solid transparent;white-space:nowrap;transition:all .2s}
+.tab-arus.active{color:#fde68a;border-bottom-color:#f59e0b}
+.tab-litar.active{color:#6ee7b7;border-bottom-color:#059669}
+.tab-ohm.active{color:#c4b5fd;border-bottom-color:#7c3aed}
+.tab-siri.active{color:#93c5fd;border-bottom-color:#2563eb}
+.tab-gajet.active{color:#fca5a5;border-bottom-color:#dc2626}
+.tab-bina.active{color:#f9a8d4;border-bottom-color:#be185d}
+.tab-mm.active{color:#bfdbfe;border-bottom-color:#60a5fa}
+
+.panel{display:none;padding:12px 12px 60px}
+.panel.active{display:block}
+
+/* TRI-LANGUAGE */
+.tri{border-radius:12px;overflow:hidden;margin-bottom:10px;border:2px solid #e2e8f0}
+.tri-my{background:#fffbeb;border-left:5px solid #d97706;padding:9px 12px}
+.tri-my-lbl{font-size:10px;font-weight:800;letter-spacing:2px;color:#92400e;text-transform:uppercase;margin-bottom:3px}
+.tri-my-text{font-size:14px;font-weight:700;color:#78350f;line-height:1.5}
+.tri-en{background:#eff6ff;border-left:5px solid #2563eb;padding:9px 12px}
+.tri-en-lbl{font-size:10px;font-weight:800;letter-spacing:2px;color:#1d4ed8;text-transform:uppercase;margin-bottom:3px}
+.tri-en-text{font-size:14px;font-weight:600;color:#1e3a8a;line-height:1.5;font-style:italic}
+.tri-zh{background:#ecfdf5;border-left:5px solid #059669;padding:9px 12px}
+.tri-zh-lbl{font-size:10px;font-weight:800;letter-spacing:2px;color:#047857;text-transform:uppercase;margin-bottom:3px}
+.tri-zh-text{font-family:'Noto Sans SC',sans-serif;font-size:13px;font-weight:500;color:#064e3b;line-height:1.7;letter-spacing:1px}
+
+/* SECTION CARDS */
+.sec{border-radius:16px;margin-bottom:12px;overflow:hidden;border:2px solid}
+.sec-header{display:flex;align-items:center;gap:12px;padding:14px;cursor:pointer;user-select:none;-webkit-tap-highlight-color:transparent}
+.sec-icon{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;color:#fff}
+.sec-info{flex:1}
+.sec-num{font-size:10px;font-weight:800;letter-spacing:1px;margin-bottom:2px;text-transform:uppercase}
+.sec-title-my{font-size:15px;font-weight:800;line-height:1.25;color:#78350f}
+.sec-title-en{font-size:12px;font-weight:700;font-style:italic;color:#1e3a8a;margin-top:2px}
+.sec-title-zh{font-family:'Noto Sans SC',sans-serif;font-size:11px;color:#064e3b;margin-top:2px;letter-spacing:1px}
+.sec-chev{font-size:20px;color:#94a3b8;transition:transform .25s;flex-shrink:0}
+.sec-chev.open{transform:rotate(180deg)}
+.sec-body{display:none;padding:0 12px 14px}
+.sec-body.open{display:block}
+
+/* SECTION THEMES */
+.s-am{background:#fffbeb;border-color:#f59e0b}.s-am .sec-header{background:#fef3c7}.s-am .sec-icon{background:#d97706}.s-am .sec-num{color:#92400e}.s-am .sec-body{border-top:2px dashed #fde68a}
+.s-gr{background:#f0fdf4;border-color:#059669}.s-gr .sec-header{background:#d1fae5}.s-gr .sec-icon{background:#059669}.s-gr .sec-num{color:#047857}.s-gr .sec-body{border-top:2px dashed #6ee7b7}
+.s-pu{background:#f5f3ff;border-color:#7c3aed}.s-pu .sec-header{background:#ede9fe}.s-pu .sec-icon{background:#7c3aed}.s-pu .sec-num{color:#5b21b6}.s-pu .sec-body{border-top:2px dashed #c4b5fd}
+.s-bl{background:#eff6ff;border-color:#2563eb}.s-bl .sec-header{background:#dbeafe}.s-bl .sec-icon{background:#2563eb}.s-bl .sec-num{color:#1d4ed8}.s-bl .sec-body{border-top:2px dashed #bfdbfe}
+.s-rd{background:#fff5f5;border-color:#dc2626}.s-rd .sec-header{background:#fee2e2}.s-rd .sec-icon{background:#dc2626}.s-rd .sec-num{color:#b91c1c}.s-rd .sec-body{border-top:2px dashed #fca5a5}
+.s-pk{background:#fdf2f8;border-color:#be185d}.s-pk .sec-header{background:#fce7f3}.s-pk .sec-icon{background:#be185d}.s-pk .sec-num{color:#831843}.s-pk .sec-body{border-top:2px dashed #fbcfe8}
+.s-or{background:#fff7ed;border-color:#ea580c}.s-or .sec-header{background:#ffedd5}.s-or .sec-icon{background:#ea580c}.s-or .sec-num{color:#7c2d12}.s-or .sec-body{border-top:2px dashed #fed7aa}
+
+/* FORMULA BOX */
+.formula-box{background:#1e293b;border-radius:14px;padding:14px;margin-bottom:12px}
+.formula-title{font-size:11px;font-weight:800;letter-spacing:2px;color:#f59e0b;text-transform:uppercase;margin-bottom:10px}
+.formula-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.formula-item{background:#0f172a;border-radius:10px;padding:10px 8px;text-align:center;border:1.5px solid #334155}
+.formula-eq{font-size:18px;font-weight:800;color:#fbbf24;margin-bottom:4px}
+.formula-my{font-size:11px;font-weight:700;color:#fde68a;margin-bottom:2px}
+.formula-en{font-size:11px;font-weight:600;color:#93c5fd;font-style:italic;margin-bottom:2px}
+.formula-zh{font-family:'Noto Sans SC',sans-serif;font-size:10px;font-weight:500;color:#6ee7b7;letter-spacing:1px}
+
+/* CIRCUIT TYPE CARDS */
+.circuit-card{border-radius:12px;padding:12px 14px;margin-bottom:8px;border-left:5px solid;border-top:1.5px solid;border-right:1.5px solid;border-bottom:1.5px solid}
+.circuit-num{font-size:11px;font-weight:800;letter-spacing:1px;text-transform:uppercase;margin-bottom:4px}
+
+/* WORKED EXAMPLE */
+.example-box{border-radius:12px;overflow:hidden;margin-bottom:10px;border:2px solid #7c3aed}
+.example-hdr{background:#7c3aed;padding:8px 14px}
+.example-lbl{font-size:11px;font-weight:800;color:#ede9fe;letter-spacing:1px;text-transform:uppercase}
+.example-body{padding:10px 14px;background:#f5f3ff}
+.example-q{font-size:13px;font-weight:700;color:#3b0764;margin-bottom:8px;line-height:1.5}
+.example-sol{background:#0f172a;border-radius:10px;padding:10px 12px;font-family:monospace;font-size:13px;color:#e2e8f0;line-height:1.8}
+
+/* COMPARISON TABLE */
+.comp-wrap{overflow-x:auto;margin-bottom:10px;border-radius:12px}
+.comp-table{width:100%;border-collapse:collapse;font-size:12px}
+.comp-table th{padding:8px 10px;font-size:10px;font-weight:800;letter-spacing:1px;text-transform:uppercase;text-align:left;color:#fff}
+.comp-table td{padding:8px 10px;vertical-align:top;line-height:1.4;border-bottom:1px solid rgba(0,0,0,.06)}
+.comp-table tr:last-child td{border-bottom:none}
+
+/* PILLS / MEM */
+.mem{border-radius:12px;padding:12px;background:#f1f5f9;border:2px solid #cbd5e1;margin-top:10px}
+.mem-lbl{font-size:11px;letter-spacing:2px;font-weight:800;margin-bottom:8px;color:#475569;text-transform:uppercase}
+.pills{display:flex;flex-wrap:wrap;gap:6px}
+.pill-my{padding:5px 10px;border-radius:20px;font-size:12px;font-weight:800;border:2px solid #d97706;background:#fef3c7;color:#78350f}
+.pill-en{padding:5px 10px;border-radius:20px;font-size:12px;font-weight:700;border:2px solid #2563eb;background:#dbeafe;color:#1e3a8a;font-style:italic}
+.pill-zh{padding:5px 10px;border-radius:20px;font-size:11px;font-weight:700;border:2px solid #059669;background:#d1fae5;color:#064e3b;font-family:'Noto Sans SC',sans-serif;letter-spacing:1px}
+
+/* TIP */
+.tip{background:#fef9c3;border:1.5px solid #fbbf24;border-radius:10px;padding:10px 13px;margin-bottom:8px}
+.tip-lbl{font-size:11px;font-weight:800;color:#92400e;letter-spacing:1px;text-transform:uppercase;margin-bottom:5px}
+.must{background:#ecfdf5;border:1.5px solid #059669;border-radius:10px;padding:10px 13px;margin-bottom:8px}
+.must-lbl{font-size:11px;font-weight:800;color:#047857;letter-spacing:1px;text-transform:uppercase;margin-bottom:5px}
+
+/* MEMORY MAP */
+.mmap-item{border-radius:14px;overflow:hidden;margin-bottom:10px;border:2px solid #e2e8f0;box-shadow:0 2px 6px rgba(0,0,0,.06)}
+.mmap-my{background:#fef3c7;padding:9px 14px;border-bottom:1px solid #fde68a}
+.mmap-my-text{font-size:14px;font-weight:800;color:#78350f}
+.mmap-en{background:#dbeafe;padding:9px 14px;border-bottom:1px solid #bfdbfe}
+.mmap-en-text{font-size:13px;font-weight:600;color:#1e3a8a;font-style:italic}
+.mmap-zh{background:#d1fae5;padding:9px 14px}
+.mmap-zh-text{font-family:'Noto Sans SC',sans-serif;font-size:12px;font-weight:500;color:#064e3b;letter-spacing:1px}
+.mmap-header{background:#0f172a;padding:14px;text-align:center;border-radius:14px 14px 0 0}
+.mmap-h-title{font-size:15px;font-weight:800;color:#fbbf24;margin-bottom:2px}
+.mmap-h-en{font-size:12px;color:#94a3b8;font-style:italic}
+.mmap-h-zh{font-family:'Noto Sans SC',sans-serif;font-size:11px;color:#6ee7b7;letter-spacing:2px;margin-top:2px}
+
+/* EXAM BOX */
+.exam-box{border-radius:14px;overflow:hidden;border:2px solid #7c3aed;margin-top:10px}
+.exam-hdr{background:#7c3aed;padding:9px 14px}
+.exam-lbl{font-size:10px;letter-spacing:2px;font-weight:800;color:#ede9fe;text-transform:uppercase}
+.exam-my{background:#fffbeb;border-left:5px solid #d97706;padding:9px 14px}
+.exam-my-t{font-size:13px;font-weight:700;color:#78350f;line-height:1.6}
+.exam-en{background:#eff6ff;border-left:5px solid #2563eb;padding:9px 14px}
+.exam-en-t{font-size:13px;font-weight:600;color:#1e3a8a;line-height:1.6;font-style:italic}
+.exam-zh{background:#ecfdf5;border-left:5px solid #059669;padding:9px 14px}
+.exam-zh-t{font-family:'Noto Sans SC',sans-serif;font-size:12px;font-weight:500;color:#064e3b;line-height:1.8;letter-spacing:1px}
+
+/* HIDE */
+.hide-my .tri-my,.hide-my .mmap-my,.hide-my .exam-my,.hide-my .sec-title-my,.hide-my .pill-my,.hide-my .formula-my{display:none}
+.hide-en .tri-en,.hide-en .mmap-en,.hide-en .exam-en,.hide-en .sec-title-en,.hide-en .pill-en,.hide-en .formula-en{display:none}
+.hide-zh .tri-zh,.hide-zh .mmap-zh,.hide-zh .exam-zh,.hide-zh .sec-title-zh,.hide-zh .pill-zh,.hide-zh .formula-zh{display:none}
+
+.footer{text-align:center;font-size:12px;color:#94a3b8;padding:14px;letter-spacing:1px}
+</style>
+</head>
+<body id="app">
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-badge">RBT &middot; Elektrik &middot; Litar &amp; Hukum Ohm</div>
+  <div class="hero-title">Elektrik: Litar Elektrik,<br>Hukum Ohm &amp; Projek Gajet</div>
+  <div class="hero-sub">Electricity: Electrical Circuits, Ohm's Law &amp; Gadget Project</div>
+  <div class="hero-zh">电学：电路、欧姆定律与电器小工程</div>
+  <div class="hero-stats">
+    <div><div class="stat-num">5</div><div class="stat-lbl">Jenis Litar</div></div>
+    <div><div class="stat-num">3</div><div class="stat-lbl">Bahasa</div></div>
+    <div><div class="stat-num">7</div><div class="stat-lbl">Tabs</div></div>
+  </div>
+</div>
+
+<!-- LANG LEGEND -->
+<div class="lang-legend">
+  <div class="legend-dot"><div class="dot" style="background:#d97706"></div><span style="color:#78350f">Melayu</span></div>
+  <div class="legend-dot"><div class="dot" style="background:#2563eb"></div><span style="color:#1e3a8a">English</span></div>
+  <div class="legend-dot"><div class="dot" style="background:#059669"></div><span style="color:#064e3b;font-family:'Noto Sans SC',sans-serif">中文</span></div>
+</div>
+
+<!-- LANG BAR -->
+<div class="lang-bar">
+  <button class="lbtn lbtn-my on" onclick="tgl('my',this)">&#x1F7E1; Melayu</button>
+  <button class="lbtn lbtn-en on" onclick="tgl('en',this)">&#x1F535; English</button>
+  <button class="lbtn lbtn-zh on" onclick="tgl('zh',this)">&#x1F7E2; 中文</button>
+</div>
+
+<!-- TABS -->
+<div class="tabs">
+  <button class="tab tab-arus active" onclick="showPanel('arus',this)">&#9889; Arus &amp; Voltan</button>
+  <button class="tab tab-litar" onclick="showPanel('litar',this)">&#128268; Jenis Litar</button>
+  <button class="tab tab-ohm" onclick="showPanel('ohm',this)">&#9878; Hukum Ohm</button>
+  <button class="tab tab-siri" onclick="showPanel('siri',this)">&#128200; Litar Siri/Selari</button>
+  <button class="tab tab-gajet" onclick="showPanel('gajet',this)">&#128161; Gajet Almari</button>
+  <button class="tab tab-bina" onclick="showPanel('bina',this)">&#9881; Reka Bentuk</button>
+  <button class="tab tab-mm" onclick="showPanel('mm',this)">&#11088; Memory Map</button>
+</div>
+
+<!-- ════════ ARUS & VOLTAN ════════ -->
+<div id="panel-arus" class="panel active">
+
+  <div class="sec s-am">
+    <div class="sec-header" onclick="exp(this)">
+      <div class="sec-icon">&#9889;</div>
+      <div class="sec-info">
+        <div class="sec-num">Elektrik</div>
+        <div class="sec-title-my">Jenis-jenis Arus Elektrik</div>
+        <div class="sec-title-en">Types of Electric Current</div>
+        <div class="sec-title-zh">电流类型</div>
+      </div>
+      <span class="sec-chev open">&#8964;</span>
+    </div>
+    <div class="sec-body open">
+      <div class="tri">
+        <div class="tri-my"><div class="tri-my-lbl">&#x1F7E1; Arus Ulang-alik (AU)</div><div class="tri-my-text">
+          Digunakan untuk penjanaan dan pengagihan (penghantaran) tenaga elektrik dari stesen jana kuasa untuk kegunaan di <strong>rumah dan industri</strong>.<br>
+          Voltan dikawal menggunakan <strong>transformer</strong> bagi mengurangkan kehilangan kuasa semasa pengagihan.<br>
+          Laluan: Stesen jana kuasa (25kV) → Transformer injak naik (132kV) → Grid Nasional → Transformer injak turun (33kV) → Industri berat / Rumah (240V).
+        </div></div>
+        <div class="tri-en"><div class="tri-en-lbl">&#x1F535; Alternating Current (AC)</div><div class="tri-en-text">
+          Used for generating and distributing electricity from power stations for use in <strong>homes and industries</strong>.<br>
+          Voltage controlled using <strong>transformers</strong> to reduce power loss during distribution.<br>
+          Path: Power station (25kV) → Step-up transformer (132kV) → National Grid → Step-down transformer (33kV) → Heavy industry / Home (240V).
+        </div></div>
+        <div class="tri-zh"><div class="tri-zh-lbl">&#x1F7E2; 交流电（AC）</div><div class="tri-zh-text">
+          用于从发电站发电并向<strong>家庭和工业</strong>分配电力。<br>
+          使用<strong>变压器</strong>控制电压以减少配电过程中的电力损耗。<br>
+          路径：发电站（25kV）→ 升压变压器（132kV）→ 国家电网 → 降压变压器（33kV）→ 重工业/家庭（240V）。
+        </div></div>
+      </div>
+
+      <div class="tri">
+        <div class="tri-my"><div class="tri-my-lbl">&#x1F7E1; Arus Terus (AT)</div><div class="tri-my-text">
+          Sumber: <strong>bateri, sel solar, dinamo jenis komutator</strong> dan lain-lain.<br>
+          Arus terus mengalir dalam <strong>satu arah sahaja</strong> dan mempunyai hanya <strong>1 kekutuban voltan</strong>.<br>
+          <strong>Amaran:</strong> Jauhi kawasan pencawang elektrik — bervoltan tinggi dan boleh menyebabkan renjatan.
+        </div></div>
+        <div class="tri-en"><div class="tri-en-lbl">&#x1F535; Direct Current (DC)</div><div class="tri-en-text">
+          Sources: <strong>battery, solar cell, commutator dynamo</strong> and others.<br>
+          Direct current flows in <strong>one direction only</strong> and has only <strong>1 voltage polarity</strong>.<br>
+          <strong>Warning:</strong> Stay away from electrical substations — high voltage and can cause electric shock.
+        </div></div>
+        <div class="tri-zh"><div class="tri-zh-lbl">&#x1F7E2; 直流电（DC）</div><div class="tri-zh-text">
+          来源：<strong>电池、太阳能电池、换向器发电机</strong>等。<br>
+          直流电只沿<strong>一个方向</strong>流动，只有<strong>1个电压极性</strong>。<br>
+          <strong>警告：</strong>远离变电站——高电压，可能导致触电。
+        </div></div>
+      </div>
+
+      <div class="comp-wrap">
+        <table class="comp-table">
+          <thead><tr>
+            <th style="background:#334155;color:#fff;font-size:10px">Aspek / Aspect / 方面</th>
+            <th style="background:#d97706;color:#fff;font-size:10px">Arus Ulang-alik (AU/AC)</th>
+            <th style="background:#2563eb;color:#fff;font-size:10px">Arus Terus (AT/DC)</th>
+          </tr></thead>
+          <tbody>
+            <tr><td style="font-weight:800;color:#475569;background:#f8fafc;font-size:11px">Arah / Direction / 方向</td><td style="background:#fffbeb;color:#78350f;font-weight:600">Berubah-ubah / Alternating / 交替变化</td><td style="background:#eff6ff;color:#1e3a8a;font-weight:600">Satu arah / One direction / 单向</td></tr>
+            <tr><td style="font-weight:800;color:#475569;background:#f8fafc;font-size:11px">Sumber / Source / 来源</td><td style="background:#fffbeb;color:#78350f;font-weight:600">Stesen jana kuasa / Power station / 发电站</td><td style="background:#eff6ff;color:#1e3a8a;font-weight:600">Bateri, sel solar / Battery, solar / 电池、太阳能</td></tr>
+            <tr><td style="font-weight:800;color:#475569;background:#f8fafc;font-size:11px">Kegunaan / Use / 用途</td><td style="background:#fffbeb;color:#78350f;font-weight:600">Rumah &amp; industri / Home &amp; industry / 家庭与工业</td><td style="background:#eff6ff;color:#1e3a8a;font-weight:600">Gajet kecil / Small gadgets / 小型电器</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════ JENIS LITAR ════════ -->
+<div id="panel-litar" class="panel">
+
+  <div class="sec s-gr">
+    <div class="sec-header" onclick="exp(this)">
+      <div class="sec-icon">&#128268;</div>
+      <div class="sec-info">
+        <div class="sec-num">Sambungan Litar</div>
+        <div class="sec-title-my">5 Jenis Sambungan Litar Elektrik</div>
+        <div class="sec-title-en">5 Types of Electrical Circuit Connections</div>
+        <div class="sec-title-zh">5种电路连接类型</div>
+      </div>
+      <span class="sec-chev open">&#8964;</span>
+    </div>
+    <div class="sec-body open">
+
+      <!-- 1 LITAR TERTUTUP -->
+      <div class="circuit-card" style="background:#f0fdf4;border-color:#059669">
+        <div class="circuit-num" style="color:#047857">1. Litar Tertutup / Closed Circuit / 闭合电路</div>
+        <div class="tri">
+          <div class="tri-my"><div class="tri-my-lbl">&#x1F7E1;</div><div class="tri-my-text">Litar elektrik mempunyai kitaran yang <strong>lengkap</strong> bagi pergerakan arus, voltan dan kuasa. <strong>Mentol menyala</strong> apabila suis ditutup.</div></div>
+          <div class="tri-en"><div class="tri-en-lbl">&#x1F535;</div><div class="tri-en-text">Electrical circuit has a <strong>complete</strong> loop for current, voltage and power movement. <strong>Bulb lights up</strong> when switch is closed.</div></div>
+          <div class="tri-zh"><div class="tri-zh-lbl">&#x1F7E2;</div><div class="tri-zh-text">电路有完整的电流、电压和功率流动回路。开关关闭时<strong>灯泡亮起</strong>。</div></div>
+        </div>
+      </div>
+
+      <!-- 2 LITAR BUKA -->
+      <div class="circuit-card" style="background:#fff5f5;border-color:#dc2626">
+        <div class="circuit-num" style="color:#b91c1c">2. Litar Buka / Open Circuit / 断路</div>
+        <div class="tri">
+          <div class="tri-my"><div class="tri-my-lbl">&#x1F7E1;</div><div class="tri-my-text">Litar elektrik <strong>tidak</strong> mempunyai kitaran lengkap. <strong>Mentol tidak menyala</strong> kerana suis dibuka.</div></div>
+          <div class="tri-en"><div class="tri-en-lbl">&#x1F535;</div><div class="tri-en-text">Electrical circuit does <strong>not</strong> have a complete loop. <strong>Bulb does not light</strong> because switch is open.</div></div>
+          <div class="tri-zh"><div class="tri-zh-lbl">&#x1F7E2;</div><div class="tri-zh-text">电路<strong>没有</strong>完整回路。因开关断开，<strong>灯泡不亮</strong>。</div></div>
+        </div>
+      </div>
+
+      <!-- 3 LITAR PINTAS -->
+      <div class="circuit-card" style="background:#fef9c3;border-color:#ca8a04">
+        <div class="circuit-num" style="color:#713f12">3. Litar Pintas / Short Circuit / 短路</div>
+        <div class="tri">
+          <div class="tri-my"><div class="tri-my-lbl">&#x1F7E1;</div><div class="tri-my-text">Terhasil apabila wayar positif (+) dan wayar negatif (–) yang <strong>terbuka penebatnya bersentuhan tanpa melalui beban</strong>. Sentuhan wayar menyebabkan <strong>percikan bunga api</strong> yang boleh mengakibatkan kebakaran.</div></div>
+          <div class="tri-en"><div class="tri-en-lbl">&#x1F535;</div><div class="tri-en-text">Occurs when positive (+) and negative (–) wires with <strong>damaged insulation touch without going through a load</strong>. Wire contact causes <strong>sparks</strong> that can lead to fire.</div></div>
+          <div class="tri-zh"><div class="tri-zh-lbl">&#x1F7E2;</div><div class="tri-zh-text">当正极（+）和负极（-）<strong>绝缘层破损的导线未经过负载而接触</strong>时发生。导线接触产生<strong>火花</strong>，可能引发火灾。</div></div>
+        </div>
+      </div>
+
+      <!-- 4 LITAR SALAH KEKUTUBAN -->
+      <div class="circuit-card" style="background:#fdf2f8;border-color:#be185d">
+        <div class="circuit-num" style="color:#831843">4. Litar Salah Kekutuban / Incorrect Polarity Circuit / 极性错误电路</div>
+        <div class="tri">
+          <div class="tri-my"><div class="tri-my-lbl">&#x1F7E1;</div><div class="tri-my-text">Terhasil apabila <strong>tersalah sambungan</strong> pada litar elektrik. Contoh: LED tidak menyala kerana kaki katod LED disambung pada terminal <strong>positif</strong> bateri.</div></div>
+          <div class="tri-en"><div class="tri-en-lbl">&#x1F535;</div><div class="tri-en-text">Occurs due to <strong>incorrect connections</strong> in the electrical circuit. Example: LED does not light because the cathode leg of LED is connected to the <strong>positive</strong> terminal of battery.</div></div>
+          <div class="tri-zh"><div class="tri-zh-lbl">&#x1F7E2;</div><div class="tri-zh-text">由于电路中<strong>连接错误</strong>而发生。例子：LED不亮，因为LED阴极脚连接到电池<strong>正极</strong>端。</div></div>
+        </div>
+      </div>
+
+      <!-- 5 LITAR ARUS BOCOR -->
+      <div class="circuit-card" style="background:#fff7ed;border-color:#ea580c">
+        <div class="circuit-num" style="color:#7c2d12">5. Litar Arus Bocor / Leakage Current Circuit / 漏电电路</div>
+        <div class="tri">
+          <div class="tri-my"><div class="tri-my-lbl">&#x1F7E1;</div><div class="tri-my-text">Terhasil apabila <strong>arus yang bocor pada wayar hidup melalui badan logam perkakasan elektrik</strong>. Arus bocor mengalir melalui badan logam cerek elektrik — bahaya renjatan elektrik.</div></div>
+          <div class="tri-en"><div class="tri-en-lbl">&#x1F535;</div><div class="tri-en-text">Occurs when <strong>current leaks from the live wire through the metal body of electrical equipment</strong>. Leakage current flows through the metal body of an electric kettle — danger of electric shock.</div></div>
+          <div class="tri-zh"><div class="tri-zh-lbl">&#x1F7E2;</div><div class="tri-zh-text">当<strong>漏电流通过电器金属外壳</strong>时发生。漏电流流经电水壶金属外壳——有触电危险。</div></div>
+        </div>
+      </div>
+
+      <div class="tip">
+        <div class="tip-lbl">&#128161; Tip PLUS — Litar Bypass</div>
+        <div class="tri">
+          <div class="tri-my"><div class="tri-my-text">Litar bypass terjadi akibat penyambungan wayar dibuat pada fius yang sama untuk beberapa perkakasan elektrik. Lebihan beban pada wayar akan menghasilkan haba berlebihan pada penebat wayar dan menyebabkan litar pintas.</div></div>
+          <div class="tri-en"><div class="tri-en-text">A bypass circuit occurs when wires are connected to the same fuse for several electrical appliances. Excess load on the wire produces excessive heat in the wire insulation and causes a short circuit.</div></div>
+          <div class="tri-zh"><div class="tri-zh-text">旁路电路是因为多个电器的导线连接到同一保险丝上。导线上的过载会在绝缘层上产生过多热量，导致短路。</div></div>
+        </div>
+      </div>
+
+      <div class="mem">
+        <div class="mem-lbl">&#129504; Memory: 5 Jenis Litar</div>
+        <div class="pills">
+          <span class="pill-my">1. Tertutup = lengkap ✓</span><span class="pill-en">1. Closed = complete ✓</span><span class="pill-zh">1. 闭合=完整✓</span>
+          <span class="pill-my">2. Buka = tidak lengkap ✗</span><span class="pill-en">2. Open = incomplete ✗</span><span class="pill-zh">2. 断路=不完整✗</span>
+          <span class="pill-my">3. Pintas = wayar bersentuhan → kebakaran</span><span class="pill-en">3. Short = wires touch → fire</span><span class="pill-zh">3. 短路=导线接触→火灾</span>
+          <span class="pill-my">4. Salah kekutuban = sambungan tersalah</span><span class="pill-en">4. Wrong polarity = wrong connection</span><span class="pill-zh">4. 极性错误=连接错误</span>
+          <span class="pill-my">5. Arus bocor = wayar bocor → renjatan</span><span class="pill-en">5. Leakage = leaking wire → shock</span><span class="pill-zh">5. 漏电=漏电导线→触电</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════ HUKUM OHM ════════ -->
+<div id="panel-ohm" class="panel">
+
+  <div class="sec s-pu">
+    <div class="sec-header" onclick="exp(this)">
+      <div class="sec-icon">&#9878;</div>
+      <div class="sec-info">
+        <div class="sec-num">Parameter Elektrik</div>
+        <div class="sec-title-my">Parameter Elektrik &amp; Hukum Ohm</div>
+        <div class="sec-title-en">Electrical Parameters &amp; Ohm's Law</div>
+        <div class="sec-title-zh">电气参数与欧姆定律</div>
+      </div>
+      <span class="sec-chev open">&#8964;</span>
+    </div>
+    <div class="sec-body open">
+      <div class="tri" style="margin-bottom:10px">
+        <div class="tri-my"><div class="tri-my-lbl">&#x1F7E1; Hubungan Parameter</div><div class="tri-my-text">
+          • Hubungan <strong>voltan dan arus</strong> = <strong>berkadar terus</strong>: voltan bertambah → arus bertambah.<br>
+          • Hubungan <strong>rintangan dan arus</strong> = <strong>berkadar songsang</strong>: rintangan bertambah → arus berkurang.<br>
+          • Hubungan ini disimpulkan dalam rumus: <strong>Hukum Ohm</strong>.
+        </div></div>
+        <div class="tri-en"><div class="tri-en-lbl">&#x1F535; Parameter Relationships</div><div class="tri-en-text">
+          • Relationship between <strong>voltage and current</strong> = <strong>directly proportional</strong>: voltage increases → current increases.<br>
+          • Relationship between <strong>resistance and current</strong> = <strong>inversely proportional</strong>: resistance increases → current decreases.<br>
+          • This relationship is summarised in the formula: <strong>Ohm's Law</strong>.
+        </div></div>
+        <div class="tri-zh"><div class="tri-zh-lbl">&#x1F7E2; 参数关系</div><div class="tri-zh-text">
+          • <strong>电压与电流</strong>的关系=<strong>正比</strong>：电压增加→电流增加。<br>
+          • <strong>电阻与电流</strong>的关系=<strong>反比</strong>：电阻增加→电流减少。<br>
+          • 此关系总结在公式中：<strong>欧姆定律</strong>。
+        </div></div>
+      </div>
+
+      <!-- FORMULA BOXES -->
+      <div class="formula-box">
+        <div class="formula-title">&#9878; Hukum Ohm / Ohm's Law / 欧姆定律</div>
+        <div class="formula-grid">
+          <div class="formula-item">
+            <div class="formula-eq">V = I × R</div>
+            <div class="formula-my">Voltan (volt)</div>
+            <div class="formula-en">Voltage (volt)</div>
+            <div class="formula-zh">电压（伏特）</div>
+          </div>
+          <div class="formula-item">
+            <div class="formula-eq">I = V/R</div>
+            <div class="formula-my">Arus (ampere)</div>
+            <div class="formula-en">Current (ampere)</div>
+            <div class="formula-zh">电流（安培）</div>
+          </div>
+          <div class="formula-item">
+            <div class="formula-eq">R = V/I</div>
+            <div class="formula-my">Rintangan (ohm)</div>
+            <div class="formula-en">Resistance (ohm)</div>
+            <div class="formula-zh">电阻（欧姆）</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="formula-box">
+        <div class="formula-title">&#9889; Rumus Kuasa / Power Formula / 功率公式</div>
+        <div class="formula-grid">
+          <div class="formula-item">
+            <div class="formula-eq">P = V × I</div>
+            <div class="formula-my">Kuasa (watt)</div>
+            <div class="formula-en">Power (watt)</div>
+            <div class="formula-zh">功率（瓦特）</div>
+          </div>
+          <div class="formula-item">
+            <div class="formula-eq">V = P/I</div>
+            <div class="formula-my">Voltan (volt)</div>
+            <div class="formula-en">Voltage (volt)</div>
+            <div class="formula-zh">电压（伏特）</div>
+          </div>
+          <div class="formula-item">
+            <div class="formula-eq">I = P/V</div>
+            <div class="formula-my">Arus (ampere)</div>
+            <div class="formula-en">Current (ampere)</div>
+            <div class="formula-zh">电流（安培）</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- WORKED EXAMPLES -->
+      <div class="example-box">
+        <div class="example-hdr"><div class="example-lbl">Contoh 1 — Hukum Ohm &amp; Kuasa</div></div>
+        <div class="example-body">
+          <div class="example-q">Sebuah litar mempunyai arus 0.7 A dan rintangan 2 Ω. Hitung nilai voltan dan kuasa.</div>
+          <div class="example-sol">
+            V = I × R = 0.7 A × 2 Ω = <span style="color:#fbbf24;font-weight:800">1.4 V</span><br>
+            P = V × I = 1.4 V × 0.7 A = <span style="color:#6ee7b7;font-weight:800">0.98 W</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="example-box">
+        <div class="example-hdr"><div class="example-lbl">Contoh 2 — Cari Arus</div></div>
+        <div class="example-body">
+          <div class="example-q">Sebuah litar mempunyai voltan 3 V dan rintangan 4 Ω. Kirakan nilai arus.</div>
+          <div class="example-sol">
+            I = V/R = 3 V / 4 Ω = <span style="color:#fbbf24;font-weight:800">0.75 A</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="example-box">
+        <div class="example-hdr"><div class="example-lbl">Contoh 3 — Cari Rintangan</div></div>
+        <div class="example-body">
+          <div class="example-q">Sebuah litar mempunyai voltan 3 V dan arus 0.3 A. Kirakan nilai rintangan.</div>
+          <div class="example-sol">
+            R = V/I = 3 V / 0.3 A = <span style="color:#fbbf24;font-weight:800">10 Ω</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════ LITAR SIRI & SELARI ════════ -->
+<div id="panel-siri" class="panel">
+
+  <div class="sec s-bl">
+    <div class="sec-header" onclick="exp(this)">
+      <div class="sec-icon">&#128200;</div>
+      <div class="sec-info">
+        <div class="sec-num">Litar Siri vs Selari</div>
+        <div class="sec-title-my">Ciri-ciri Litar Siri dan Litar Selari</div>
+        <div class="sec-title-en">Characteristics of Series and Parallel Circuits</div>
+        <div class="sec-title-zh">串联与并联电路的特征</div>
+      </div>
+      <span class="sec-chev open">&#8964;</span>
+    </div>
+    <div class="sec-body open">
+
+      <!-- LITAR SIRI -->
+      <div style="font-size:12px;font-weight:800;color:#1d4ed8;letter-spacing:1px;text-transform:uppercase;margin-bottom:8px">Litar Siri / Series Circuit / 串联电路</div>
+      <div class="tri" style="margin-bottom:10px">
+        <div class="tri-my"><div class="tri-my-lbl">&#x1F7E1; Rumus Siri</div><div class="tri-my-text">
+          <strong>Jumlah rintangan:</strong> R<sub>J</sub> = R<sub>1</sub> + R<sub>2</sub> + R<sub>3</sub> + ... + R<sub>n</sub><br>
+          <strong>Jumlah arus:</strong> I<sub>J</sub> = I<sub>1</sub> = I<sub>2</sub> = I<sub>3</sub> = ... = I<sub>n</sub> (sama)<br>
+          <strong>Jumlah voltan:</strong> V<sub>J</sub> = V<sub>1</sub> + V<sub>2</sub> + V<sub>3</sub> + ... + V<sub>n</sub>
+        </div></div>
+        <div class="tri-en"><div class="tri-en-lbl">&#x1F535; Series Formula</div><div class="tri-en-text">
+          <strong>Total resistance:</strong> R<sub>T</sub> = R<sub>1</sub> + R<sub>2</sub> + R<sub>3</sub> + ... + R<sub>n</sub><br>
+          <strong>Total current:</strong> I<sub>T</sub> = I<sub>1</sub> = I<sub>2</sub> = I<sub>3</sub> (same throughout)<br>
+          <strong>Total voltage:</strong> V<sub>T</sub> = V<sub>1</sub> + V<sub>2</sub> + V<sub>3</sub> + ... + V<sub>n</sub>
+        </div></div>
+        <div class="tri-zh"><div class="tri-zh-lbl">&#x1F7E2; 串联公式</div><div class="tri-zh-text">
+          <strong>总电阻：</strong>R<sub>总</sub> = R<sub>1</sub> + R<sub>2</sub> + R<sub>3</sub> + ... + R<sub>n</sub><br>
+          <strong>总电流：</strong>I<sub>总</sub> = I<sub>1</sub> = I<sub>2</sub> = I<sub>3</sub>（各处相同）<br>
+          <strong>总电压：</strong>V<sub>总</sub> = V<sub>1</sub> + V<sub>2</sub> + V<sub>3</sub> + ... + V<sub>n</sub>
+        </div></div>
+      </div>
+
+      <!-- LITAR SELARI -->
+      <div style="font-size:12px;font-weight:800;color:#1d4ed8;letter-spacing:1px;text-transform:uppercase;margin-bottom:8px">Litar Selari / Parallel Circuit / 并联电路</div>
+      <div class="tri" style="margin-bottom:10px">
+        <div class="tri-my"><div class="tri-my-lbl">&#x1F7E1; Rumus Selari</div><div class="tri-my-text">
+          <strong>Jumlah rintangan:</strong> 1/R<sub>J</sub> = 1/R<sub>1</sub> + 1/R<sub>2</sub> + 1/R<sub>3</sub> + ... + 1/R<sub>n</sub><br>
+          <strong>Jumlah arus:</strong> I<sub>J</sub> = I<sub>1</sub> + I<sub>2</sub> + I<sub>3</sub> + ... + I<sub>n</sub><br>
+          <strong>Jumlah voltan:</strong> V<sub>J</sub> = V<sub>1</sub> = V<sub>2</sub> = V<sub>3</sub> = ... = V<sub>n</sub> (sama)
+        </div></div>
+        <div class="tri-en"><div class="tri-en-lbl">&#x1F535; Parallel Formula</div><div class="tri-en-text">
+          <strong>Total resistance:</strong> 1/R<sub>T</sub> = 1/R<sub>1</sub> + 1/R<sub>2</sub> + 1/R<sub>3</sub> + ... + 1/R<sub>n</sub><br>
+          <strong>Total current:</strong> I<sub>T</sub> = I<sub>1</sub> + I<sub>2</sub> + I<sub>3</sub> + ... + I<sub>n</sub><br>
+          <strong>Total voltage:</strong> V<sub>T</sub> = V<sub>1</sub> = V<sub>2</sub> = V<sub>3</sub> (same across all)
+        </div></div>
+        <div class="tri-zh"><div class="tri-zh-lbl">&#x1F7E2; 并联公式</div><div class="tri-zh-text">
+          <strong>总电阻：</strong>1/R<sub>总</sub> = 1/R<sub>1</sub> + 1/R<sub>2</sub> + 1/R<sub>3</sub> + ... + 1/R<sub>n</sub><br>
+          <strong>总电流：</strong>I<sub>总</sub> = I<sub>1</sub> + I<sub>2</sub> + I<sub>3</sub> + ... + I<sub>n</sub><br>
+          <strong>总电压：</strong>V<sub>总</sub> = V<sub>1</sub> = V<sub>2</sub> = V<sub>3</sub>（各支路相同）
+        </div></div>
+      </div>
+
+      <!-- GABUNGAN EXAMPLE -->
+      <div class="example-box">
+        <div class="example-hdr"><div class="example-lbl">Contoh — Litar Gabungan Siri-Selari (R₁=10Ω, R₂=15Ω, R₃=10Ω)</div></div>
+        <div class="example-body">
+          <div class="example-q">Hitung dahulu R₁ dan R₂ (siri), kemudian gabungkan dengan R₃ (selari).</div>
+          <div class="example-sol">
+            <span style="color:#94a3b8">Langkah 1 (Siri):</span><br>
+            R₁₁ = R₁ + R₂ = 10Ω + 15Ω = <span style="color:#fbbf24;font-weight:800">25Ω</span><br><br>
+            <span style="color:#94a3b8">Langkah 2 (Selari):</span><br>
+            1/R<sub>J</sub> = 1/R₁₁ + 1/R₃ = 1/25 + 1/10 = 7/50 = 0.14Ω<br>
+            R<sub>J</sub> = 1/0.14 = <span style="color:#6ee7b7;font-weight:800">7.14Ω</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- SIRI VS SELARI untuk gajet -->
+      <div class="tri">
+        <div class="tri-my"><div class="tri-my-lbl">&#x1F7E1; Perbandingan Litar Gajet Lampu Almari</div><div class="tri-my-text">
+          <strong>Litar Selari:</strong> 4 mentol (M1–M4), bateri 3V, arus I=0.5A. Rintangan R = V/I = 3/0.5 = <strong>6Ω</strong>. Mentol <strong>lebih terang</strong>.<br>
+          <strong>Litar Siri:</strong> 4 mentol (M1–M4), bateri 3V, arus I=83.33mA. Rintangan R = 3/0.0833 = <strong>36Ω</strong>. Mentol <strong>lebih malap</strong>.
+        </div></div>
+        <div class="tri-en"><div class="tri-en-lbl">&#x1F535; Comparison: Wardrobe Light Circuit</div><div class="tri-en-text">
+          <strong>Parallel circuit:</strong> 4 bulbs, 3V battery, current I=0.5A. Resistance R = 3/0.5 = <strong>6Ω</strong>. Bulbs <strong>brighter</strong>.<br>
+          <strong>Series circuit:</strong> 4 bulbs, 3V battery, current I=83.33mA. Resistance R = 3/0.0833 = <strong>36Ω</strong>. Bulbs <strong>dimmer</strong>.
+        </div></div>
+        <div class="tri-zh"><div class="tri-zh-lbl">&#x1F7E2; 比较：衣柜灯电路</div><div class="tri-zh-text">
+          <strong>并联电路：</strong>4个灯泡，3V电池，电流I=0.5A。电阻R = 3/0.5 = <strong>6Ω</strong>。灯泡<strong>更亮</strong>。<br>
+          <strong>串联电路：</strong>4个灯泡，3V电池，电流I=83.33mA。电阻R = 3/0.0833 = <strong>36Ω</strong>。灯泡<strong>更暗</strong>。
+        </div></div>
+      </div>
+
+      <div class="mem">
+        <div class="mem-lbl">&#129504; Memory: Siri vs Selari</div>
+        <div class="pills">
+          <span class="pill-my">Siri: R tambah, I sama, V bahagi</span><span class="pill-en">Series: R adds up, I same, V divides</span><span class="pill-zh">串联：R相加，I相同，V分配</span>
+          <span class="pill-my">Selari: 1/R tambah, I bahagi, V sama</span><span class="pill-en">Parallel: 1/R adds, I divides, V same</span><span class="pill-zh">并联：1/R相加，I分配，V相同</span>
+          <span class="pill-my">Selari = mentol lebih terang</span><span class="pill-en">Parallel = brighter bulbs</span><span class="pill-zh">并联=灯泡更亮</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════ GAJET ALMARI ════════ -->
+<div id="panel-gajet" class="panel">
+
+  <div class="sec s-rd">
+    <div class="sec-header" onclick="exp(this)">
+      <div class="sec-icon">&#128161;</div>
+      <div class="sec-info">
+        <div class="sec-num">Gajet Lampu Almari</div>
+        <div class="sec-title-my">Suis Mikro &amp; Gajet Lampu Almari</div>
+        <div class="sec-title-en">Micro Switch &amp; Wardrobe Light Gadget</div>
+        <div class="sec-title-zh">微动开关与衣柜灯小工程</div>
+      </div>
+      <span class="sec-chev open">&#8964;</span>
+    </div>
+    <div class="sec-body open">
+
+      <!-- SUIS MIKRO -->
+      <div class="tri">
+        <div class="tri-my"><div class="tri-my-lbl">&#x1F7E1; Suis Mikro — 3 Terminal</div><div class="tri-my-text">
+          Suis mikro mempunyai 3 terminal:<br>
+          • <strong>COM</strong> (Common) — terminal bersama<br>
+          • <strong>NO</strong> (Normally Opened) — litar terbuka secara normal<br>
+          • <strong>NC</strong> (Normally Closed) — litar tertutup secara normal<br><br>
+          <strong>Suis tekan buka:</strong> Sambungkan wayar pada terminal COM dan NC.<br>
+          <strong>Suis tekan tutup:</strong> Sambungkan wayar pada terminal COM dan NO.
+        </div></div>
+        <div class="tri-en"><div class="tri-en-lbl">&#x1F535; Micro Switch — 3 Terminals</div><div class="tri-en-text">
+          Micro switch has 3 terminals:<br>
+          • <strong>COM</strong> (Common) — common terminal<br>
+          • <strong>NO</strong> (Normally Opened) — circuit open in normal state<br>
+          • <strong>NC</strong> (Normally Closed) — circuit closed in normal state<br><br>
+          <strong>Push-open switch:</strong> Connect wires to COM and NC terminals.<br>
+          <strong>Push-close switch:</strong> Connect wires to COM and NO terminals.
+        </div></div>
+        <div class="tri-zh"><div class="tri-zh-lbl">&#x1F7E2; 微动开关——3个端子</div><div class="tri-zh-text">
+          微动开关有3个端子：<br>
+          • <strong>COM</strong>（公共端）<br>
+          • <strong>NO</strong>（常开）——正常状态下电路断开<br>
+          • <strong>NC</strong>（常闭）——正常状态下电路闭合<br><br>
+          <strong>按压开启式：</strong>将导线连接到COM和NC端子。<br>
+          <strong>按压关闭式：</strong>将导线连接到COM和NO端子。
+        </div></div>
+      </div>
+
+      <!-- CARA SUIS MIKRO BERFUNGSI -->
+      <div class="tri">
+        <div class="tri-my"><div class="tri-my-lbl">&#x1F7E1; Cara Suis Mikro Berfungsi pada Gajet Lampu Almari</div><div class="tri-my-text">
+          <strong>Pintu DITUTUP:</strong> Suis mikro ditekan → Litar elektrik terbuka → Bekalan arus elektrik terputus → Mentol <strong>PADAM</strong>.<br><br>
+          <strong>Pintu DIBUKA:</strong> Suis mikro dilepaskan → Litar elektrik tertutup → Bekalan arus elektrik bersambung → Mentol <strong>MENYALA</strong>.
+        </div></div>
+        <div class="tri-en"><div class="tri-en-lbl">&#x1F535; How Micro Switch Works in Wardrobe Light</div><div class="tri-en-text">
+          <strong>Door CLOSED:</strong> Micro switch pressed → Electrical circuit opens → Electric current supply cut off → Bulb <strong>OFF</strong>.<br><br>
+          <strong>Door OPENED:</strong> Micro switch released → Electrical circuit closes → Electric current supply connected → Bulb <strong>ON</strong>.
+        </div></div>
+        <div class="tri-zh"><div class="tri-zh-lbl">&#x1F7E2; 微动开关在衣柜灯中的工作方式</div><div class="tri-zh-text">
+          <strong>门关闭时：</strong>微动开关被按压→电路断开→电流供应切断→灯泡<strong>熄灭</strong>。<br><br>
+          <strong>门打开时：</strong>微动开关被释放→电路闭合→电流供应接通→灯泡<strong>亮起</strong>。
+        </div></div>
+      </div>
+
+      <!-- PARAMETER GAJET -->
+      <div class="tri">
+        <div class="tri-my"><div class="tri-my-lbl">&#x1F7E1; Parameter Litar Gajet Lampu Almari</div><div class="tri-my-text">
+          Litar siri: 4 mentol, bateri 3V, arus = 0.0833 A.<br>
+          Jumlah rintangan: R = V/I = 3V / 0.0833A = <strong>36 Ω</strong>.<br><br>
+          Elemen sistem elektrik:<br>
+          • <strong>Sumber:</strong> 2 bateri AA = 3V<br>
+          • <strong>Beban:</strong> 4 mentol = 36Ω<br>
+          • <strong>Medium:</strong> Wayar lembar tunggal (mengikut panjang &amp; lebar ruang almari)<br>
+          • <strong>Kawalan:</strong> 1 suis mikro
+        </div></div>
+        <div class="tri-en"><div class="tri-en-lbl">&#x1F535; Wardrobe Light Gadget Circuit Parameters</div><div class="tri-en-text">
+          Series circuit: 4 bulbs, 3V battery, current = 0.0833 A.<br>
+          Total resistance: R = V/I = 3V / 0.0833A = <strong>36 Ω</strong>.<br><br>
+          Electrical system elements:<br>
+          • <strong>Source:</strong> 2 AA batteries = 3V<br>
+          • <strong>Load:</strong> 4 bulbs = 36Ω<br>
+          • <strong>Medium:</strong> Single wire (according to wardrobe interior dimensions)<br>
+          • <strong>Control:</strong> 1 micro switch
+        </div></div>
+        <div class="tri-zh"><div class="tri-zh-lbl">&#x1F7E2; 衣柜灯小工程电路参数</div><div class="tri-zh-text">
+          串联电路：4个灯泡，3V电池，电流=0.0833A。<br>
+          总电阻：R = V/I = 3V / 0.0833A = <strong>36Ω</strong>。<br><br>
+          电气系统元素：<br>
+          • <strong>电源：</strong>2节AA电池=3V<br>
+          • <strong>负载：</strong>4个灯泡=36Ω<br>
+          • <strong>介质：</strong>单芯线（根据衣柜内部尺寸）<br>
+          • <strong>控制：</strong>1个微动开关
+        </div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════ REKA BENTUK ════════ -->
+<div id="panel-bina" class="panel">
+
+  <div class="sec s-pk">
+    <div class="sec-header" onclick="exp(this)">
+      <div class="sec-icon">&#9881;</div>
+      <div class="sec-info">
+        <div class="sec-num">Reka Bentuk Litar</div>
+        <div class="sec-title-my">3 Aspek Reka Bentuk Litar Peralatan Elektrik</div>
+        <div class="sec-title-en">3 Aspects of Electrical Equipment Circuit Design</div>
+        <div class="sec-title-zh">电器电路设计的3个方面</div>
+      </div>
+      <span class="sec-chev open">&#8964;</span>
+    </div>
+    <div class="sec-body open">
+      <div class="tri">
+        <div class="tri-my"><div class="tri-my-lbl">&#x1F7E1; A — Keselamatan</div><div class="tri-my-text">Litar peralatan elektrik direka bentuk dengan ciri-ciri keselamatan yang tinggi bagi melindungi pengguna daripada <strong>litar pintas atau renjatan elektrik</strong>. Contoh: Litar periuk nasi elektrik tersembunyi di bahagian bawah, tidak boleh dicapai dengan tangan dan ditutup (tidak terdedah).</div></div>
+        <div class="tri-en"><div class="tri-en-lbl">&#x1F535; A — Safety</div><div class="tri-en-text">Electrical equipment circuits are designed with high safety features to protect users from <strong>short circuits or electric shock</strong>. Example: Rice cooker circuit hidden at the bottom, cannot be reached by hand and is covered (not exposed).</div></div>
+        <div class="tri-zh"><div class="tri-zh-lbl">&#x1F7E2; A — 安全性</div><div class="tri-zh-text">电器电路设计具有高安全特性，保护用户免受<strong>短路或触电</strong>。例子：电饭锅电路隐藏在底部，无法用手触及且已被覆盖（未暴露）。</div></div>
+      </div>
+
+      <div class="tri">
+        <div class="tri-my"><div class="tri-my-lbl">&#x1F7E1; B — Kedudukan Peranti dalam Litar</div><div class="tri-my-text">Peranti-peranti seperti <strong>sensor tekanan, sensor suhu dan elemen pemanas</strong> diletakkan bersama dengan litar elektrik. Bertujuan menjimatkan ruang, faktor keselamatan dan menghasilkan reka bentuk yang kemas serta menarik bagi tujuan komersial.</div></div>
+        <div class="tri-en"><div class="tri-en-lbl">&#x1F535; B — Device Positioning in Circuit</div><div class="tri-en-text">Devices such as <strong>pressure sensors, temperature sensors and heating elements</strong> are placed together with the electrical circuit. Aims to save space, safety factor and produce neat and attractive design for commercial purposes.</div></div>
+        <div class="tri-zh"><div class="tri-zh-lbl">&#x1F7E2; B — 电路中的装置位置</div><div class="tri-zh-text">如<strong>压力传感器、温度传感器和加热元件</strong>等装置与电路一起放置。旨在节省空间、安全因素，并为商业目的产生整洁美观的设计。</div></div>
+      </div>
+
+      <div class="tri">
+        <div class="tri-my"><div class="tri-my-lbl">&#x1F7E1; C — Sambungan Litar</div><div class="tri-my-text">Reka bentuk sambungan litar disusun mengikut <strong>fungsi yang dikehendaki</strong> bagi peralatan elektrik. Jenis sambungan litar: litar tertutup, litar buka, litar pintas, litar salah kekutuban.</div></div>
+        <div class="tri-en"><div class="tri-en-lbl">&#x1F535; C — Circuit Connection</div><div class="tri-en-text">Circuit connection design is arranged according to the <strong>required function</strong> of the electrical equipment. Types of circuit connections: closed, open, short, incorrect polarity circuits.</div></div>
+        <div class="tri-zh"><div class="tri-zh-lbl">&#x1F7E2; C — 电路连接</div><div class="tri-zh-text">电路连接设计根据电器的<strong>所需功能</strong>进行安排。电路连接类型：闭合电路、断路、短路、极性错误电路。</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sec s-pk">
+    <div class="sec-header" onclick="exp(this)">
+      <div class="sec-icon">&#128161;</div>
+      <div class="sec-info">
+        <div class="sec-num">Projek Gajet</div>
+        <div class="sec-title-my">Membina Gajet Elektrik Berfungsi</div>
+        <div class="sec-title-en">Building a Functional Electric Gadget</div>
+        <div class="sec-title-zh">建造功能性电器小工程</div>
+      </div>
+      <span class="sec-chev">&#8964;</span>
+    </div>
+    <div class="sec-body">
+      <div class="tri">
+        <div class="tri-my"><div class="tri-my-lbl">&#x1F7E1; Masalah &amp; Penyelesaian</div><div class="tri-my-text">
+          <strong>Masalah:</strong> Sukar mencari pakaian di dalam almari kerana keadaan di dalamnya gelap.<br>
+          <strong>Penyelesaian:</strong> Membina gajet lampu almari.<br>
+          <strong>Langkah:</strong> Menyediakan lakaran awal litar gajet lampu almari dan membuat pengiraan parameter.
+        </div></div>
+        <div class="tri-en"><div class="tri-en-lbl">&#x1F535; Problem &amp; Solution</div><div class="tri-en-text">
+          <strong>Problem:</strong> Difficult to find clothes in the wardrobe because the inside is dark.<br>
+          <strong>Solution:</strong> Build a wardrobe light gadget.<br>
+          <strong>Step:</strong> Prepare initial circuit drawing of wardrobe light gadget and calculate parameters.
+        </div></div>
+        <div class="tri-zh"><div class="tri-zh-lbl">&#x1F7E2; 问题与解决方案</div><div class="tri-zh-text">
+          <strong>问题：</strong>衣柜内部黑暗，难以找到衣服。<br>
+          <strong>解决方案：</strong>建造衣柜灯小工程。<br>
+          <strong>步骤：</strong>准备衣柜灯小工程的初步电路图并计算参数。
+        </div></div>
+      </div>
+
+      <div class="tri">
+        <div class="tri-my"><div class="tri-my-lbl">&#x1F7E1; 4 Langkah Membina Gajet</div><div class="tri-my-text">
+          1. Sediakan bahan-bahan dengan merujuk lakaran atau litar bergambar.<br>
+          2. Tentukan kedudukan gajet di bahagian dalam almari.<br>
+          3. Lakukan penyambungan litar gajet.<br>
+          4. Pasang litar gajet di bahagian dalam almari.
+        </div></div>
+        <div class="tri-en"><div class="tri-en-lbl">&#x1F535; 4 Steps to Build Gadget</div><div class="tri-en-text">
+          1. Prepare materials by referring to the drawing or pictorial circuit.<br>
+          2. Determine the position of the gadget inside the wardrobe.<br>
+          3. Perform gadget circuit connections.<br>
+          4. Install the gadget circuit inside the wardrobe.
+        </div></div>
+        <div class="tri-zh"><div class="tri-zh-lbl">&#x1F7E2; 4步建造小工程</div><div class="tri-zh-text">
+          1. 参照图纸或电路图准备材料。<br>
+          2. 确定小工程在衣柜内部的位置。<br>
+          3. 进行小工程电路连接。<br>
+          4. 将小工程电路安装在衣柜内部。
+        </div></div>
+      </div>
+
+      <div class="must">
+        <div class="must-lbl">&#127919; Mesti Tahu / Must Know / 必须知道</div>
+        <div class="tri">
+          <div class="tri-my"><div class="tri-my-text">Pastikan tangan kering apabila menyentuh peralatan elektrik yang sedang mengalirkan arus. Tangan yang basah boleh menyebabkan <strong>renjatan elektrik</strong>.</div></div>
+          <div class="tri-en"><div class="tri-en-text">Ensure hands are dry when touching electrical equipment carrying current. Wet hands can cause <strong>electric shock</strong>.</div></div>
+          <div class="tri-zh"><div class="tri-zh-text">接触通电的电器时，确保双手干燥。湿手可能导致<strong>触电</strong>。</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════ MEMORY MAP ════════ -->
+<div id="panel-mm" class="panel">
+  <div style="background:#0f172a;border-radius:16px;overflow:hidden;margin-bottom:12px">
+    <div class="mmap-header">
+      <div class="mmap-h-title">&#11088; Super Compact Memory Map</div>
+      <div class="mmap-h-en">RBT Elektrik — Quick Reference</div>
+      <div class="mmap-h-zh">RBT电学——快速参考</div>
+    </div>
+    <div style="padding:14px">
+
+      <!-- FORMULA TABLE -->
+      <div style="background:#1e293b;border-radius:12px;padding:12px;margin-bottom:12px">
+        <div style="font-size:11px;font-weight:800;letter-spacing:2px;color:#f59e0b;text-transform:uppercase;margin-bottom:10px">&#128203; Rumus / Formulas / 公式</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+          <div style="background:#0f172a;border-radius:10px;padding:10px;border:1.5px solid #334155;text-align:center">
+            <div style="font-size:14px;font-weight:800;color:#fbbf24;margin-bottom:4px">V = I × R</div>
+            <div style="font-size:11px;color:#fde68a;margin-bottom:2px">Voltan / Voltage</div>
+            <div style="font-family:'Noto Sans SC',sans-serif;font-size:11px;color:#6ee7b7">电压</div>
+          </div>
+          <div style="background:#0f172a;border-radius:10px;padding:10px;border:1.5px solid #334155;text-align:center">
+            <div style="font-size:14px;font-weight:800;color:#fbbf24;margin-bottom:4px">P = V × I</div>
+            <div style="font-size:11px;color:#fde68a;margin-bottom:2px">Kuasa / Power</div>
+            <div style="font-family:'Noto Sans SC',sans-serif;font-size:11px;color:#6ee7b7">功率</div>
+          </div>
+          <div style="background:#0f172a;border-radius:10px;padding:10px;border:1.5px solid #334155;text-align:center">
+            <div style="font-size:14px;font-weight:800;color:#c4b5fd;margin-bottom:4px">Siri: R = R₁+R₂</div>
+            <div style="font-size:11px;color:#e9d5ff;margin-bottom:2px">I sama, V bahagi</div>
+            <div style="font-family:'Noto Sans SC',sans-serif;font-size:11px;color:#a7f3d0">串联：I相同，V分配</div>
+          </div>
+          <div style="background:#0f172a;border-radius:10px;padding:10px;border:1.5px solid #334155;text-align:center">
+            <div style="font-size:14px;font-weight:800;color:#93c5fd;margin-bottom:4px">Selari: 1/R = 1/R₁+1/R₂</div>
+            <div style="font-size:11px;color:#bfdbfe;margin-bottom:2px">I bahagi, V sama</div>
+            <div style="font-family:'Noto Sans SC',sans-serif;font-size:11px;color:#a7f3d0">并联：I分配，V相同</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="mmap-item">
+        <div class="mmap-my"><div class="mmap-my-text">AU (Arus Ulang-alik) = Stesen jana kuasa → rumah/industri (transformer). AT (Arus Terus) = Bateri, sel solar → 1 arah</div></div>
+        <div class="mmap-en"><div class="mmap-en-text">AC (Alternating Current) = Power station → home/industry (transformers). DC (Direct Current) = Battery, solar cell → 1 direction</div></div>
+        <div class="mmap-zh"><div class="mmap-zh-text">交流电=发电站→家庭/工业（变压器）。直流电=电池、太阳能→单向</div></div>
+      </div>
+
+      <div class="mmap-item">
+        <div class="mmap-my"><div class="mmap-my-text">5 Jenis Litar: Tertutup ✓ | Buka ✗ | Pintas (kebakaran) | Salah kekutuban (sambungan tersalah) | Arus bocor (renjatan)</div></div>
+        <div class="mmap-en"><div class="mmap-en-text">5 Circuit types: Closed ✓ | Open ✗ | Short (fire) | Wrong polarity (wrong connection) | Leakage (shock)</div></div>
+        <div class="mmap-zh"><div class="mmap-zh-text">5种电路：闭合✓ | 断路✗ | 短路（火灾）| 极性错误（连接错误）| 漏电（触电）</div></div>
+      </div>
+
+      <div class="mmap-item">
+        <div class="mmap-my"><div class="mmap-my-text">Hukum Ohm: V=IR | I=V/R | R=V/I. Kuasa: P=VI | V=P/I | I=P/V</div></div>
+        <div class="mmap-en"><div class="mmap-en-text">Ohm's Law: V=IR | I=V/R | R=V/I. Power: P=VI | V=P/I | I=P/V</div></div>
+        <div class="mmap-zh"><div class="mmap-zh-text">欧姆定律：V=IR | I=V/R | R=V/I。功率：P=VI | V=P/I | I=P/V</div></div>
+      </div>
+
+      <div class="mmap-item">
+        <div class="mmap-my"><div class="mmap-my-text">Suis mikro: COM+NC = suis tekan buka | COM+NO = suis tekan tutup. Gajet almari: pintu TUTUP → mentol PADAM | pintu BUKA → mentol MENYALA</div></div>
+        <div class="mmap-en"><div class="mmap-en-text">Micro switch: COM+NC = push-open | COM+NO = push-close. Wardrobe: door CLOSED → bulb OFF | door OPENED → bulb ON</div></div>
+        <div class="mmap-zh"><div class="mmap-zh-text">微动开关：COM+NC=按压开启 | COM+NO=按压关闭。衣柜：门关→灯灭 | 门开→灯亮</div></div>
+      </div>
+
+      <div class="mmap-item">
+        <div class="mmap-my"><div class="mmap-my-text">Reka bentuk litar: A. Keselamatan (tersembunyi, tidak terdedah) | B. Kedudukan peranti (menjimat ruang, kemas) | C. Sambungan litar (mengikut fungsi)</div></div>
+        <div class="mmap-en"><div class="mmap-en-text">Circuit design: A. Safety (hidden, not exposed) | B. Device positioning (save space, neat) | C. Circuit connection (according to function)</div></div>
+        <div class="mmap-zh"><div class="mmap-zh-text">电路设计：A. 安全性（隐藏、未暴露）| B. 装置位置（节省空间、整洁）| C. 电路连接（根据功能）</div></div>
+      </div>
+
+      <div class="mmap-item">
+        <div class="mmap-my"><div class="mmap-my-text">Gajet almari: 2 bateri AA (3V) + 4 mentol (36Ω siri / 6Ω selari) + 1 suis mikro. Selari = mentol lebih terang (arus lebih besar)</div></div>
+        <div class="mmap-en"><div class="mmap-en-text">Wardrobe gadget: 2 AA batteries (3V) + 4 bulbs (36Ω series / 6Ω parallel) + 1 micro switch. Parallel = brighter bulbs (larger current)</div></div>
+        <div class="mmap-zh"><div class="mmap-zh-text">衣柜小工程：2节AA电池（3V）+ 4个灯泡（串联36Ω/并联6Ω）+ 1个微动开关。并联=灯泡更亮（电流更大）</div></div>
+      </div>
+
+      <!-- EXAM BOX -->
+      <div class="exam-box">
+        <div class="exam-hdr"><div class="exam-lbl">&#9997; Exam Template / 考试句型</div></div>
+        <div class="exam-my"><div class="exam-my-t">Hukum Ohm menyatakan bahawa voltan adalah berkadar terus dengan arus dan berkadar songsang dengan rintangan. Rumus yang digunakan ialah V = I × R, I = V/R dan R = V/I. Litar selari menghasilkan mentol yang lebih terang berbanding litar siri kerana rintangan yang lebih rendah.</div></div>
+        <div class="exam-en"><div class="exam-en-t">Ohm's Law states that voltage is directly proportional to current and inversely proportional to resistance. The formulas used are V = I × R, I = V/R and R = V/I. A parallel circuit produces brighter bulbs compared to a series circuit because of lower resistance.</div></div>
+        <div class="exam-zh"><div class="exam-zh-t">欧姆定律指出电压与电流成正比，与电阻成反比。使用的公式是V=IR，I=V/R和R=V/I。并联电路比串联电路产生更亮的灯泡，因为电阻更低。</div></div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div class="footer">RBT &middot; Elektrik &middot; Litar &amp; Hukum Ohm &middot; 电学</div>
+
+<script>
+var hiddenLang={my:false,en:false,zh:false};
+function tgl(lang,btn){
+  hiddenLang[lang]=!hiddenLang[lang];
+  document.getElementById('app').classList.toggle('hide-'+lang,hiddenLang[lang]);
+  btn.classList.toggle('on',!hiddenLang[lang]);
+}
+function showPanel(id,btn){
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById('panel-'+id).classList.add('active');
+  btn.classList.add('active');
+  window.scrollTo(0,document.querySelector('.tabs').offsetTop-60);
+}
+function exp(hdr){
+  var b=hdr.nextElementSibling;
+  var c=hdr.querySelector('.sec-chev');
+  var o=b.classList.toggle('open');
+  c.classList.toggle('open',o);
+}
+</script>
+</body>
+</html>
