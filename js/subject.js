@@ -1086,6 +1086,7 @@ export const historyData = {
             form:"T2",
             chapter:"Sarawak dan Sabah",
             chinese:"",
+            resourceUrl:"../history/t2_chapter10.html",
             status:"Not Started",
             confidence:0,
             last_updated:"2026-05-22"

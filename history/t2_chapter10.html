@@ -1,0 +1,952 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+<title>Bab 10 — Sarawak dan Sabah</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html{font-size:16px}
+body{font-family:'Nunito',sans-serif;background:#f0f4ff;color:#1e293b;line-height:1.5}
+
+.hero{background:linear-gradient(135deg,#1a5c38,#1e3a5f);padding:26px 18px 40px;text-align:center;position:relative;overflow:hidden}
+.hero::after{content:'';position:absolute;bottom:-24px;left:0;right:0;height:48px;background:#f0f4ff;border-radius:50% 50% 0 0/48px 48px 0 0}
+.hero-badge{display:inline-block;background:rgba(255,255,255,.15);color:#bbf7d0;font-size:12px;letter-spacing:2px;padding:4px 14px;border-radius:20px;margin-bottom:10px}
+.hero-title{font-size:22px;font-weight:800;color:#fff;line-height:1.3;margin-bottom:4px}
+.hero-sub{font-size:13px;color:#93c5fd;margin-bottom:3px}
+.hero-zh{font-family:'Noto Sans SC',sans-serif;font-size:12px;color:#67e8f9;letter-spacing:2px;margin-bottom:30px}
+.hero-stats{display:flex;justify-content:center;gap:24px;position:relative;z-index:1}
+.stat-num{font-size:24px;font-weight:800;color:#fff;text-align:center}
+.stat-lbl{font-size:11px;color:#bbf7d0;text-align:center}
+
+.lang-legend{display:flex;justify-content:center;gap:14px;padding:10px 16px;background:#fff;border-bottom:1px solid #e5e7eb}
+.legend-dot{display:flex;align-items:center;gap:5px;font-size:12px;font-weight:700}
+.dot{width:12px;height:12px;border-radius:3px;flex-shrink:0}
+
+.lang-bar{background:#fff;padding:10px 14px;display:flex;gap:8px;align-items:center;border-bottom:2px solid #e5e7eb;position:sticky;top:0;z-index:200;box-shadow:0 2px 8px rgba(0,0,0,.08)}
+.lbtn{flex:1;padding:8px 4px;font-size:12px;font-weight:800;font-family:'Nunito',sans-serif;border:2px solid;border-radius:20px;cursor:pointer;text-align:center;opacity:.4;transition:all .15s}
+.lbtn.on{opacity:1}
+.lbtn-my{border-color:#b45309;background:#fef3c7;color:#78350f}
+.lbtn-my.on{background:#d97706;color:#fff;border-color:#d97706}
+.lbtn-en{border-color:#1d4ed8;background:#dbeafe;color:#1e3a8a}
+.lbtn-en.on{background:#2563eb;color:#fff;border-color:#2563eb}
+.lbtn-zh{border-color:#059669;background:#d1fae5;color:#064e3b}
+.lbtn-zh.on{background:#059669;color:#fff;border-color:#059669}
+
+.tabs{display:flex;overflow-x:auto;background:#1e293b;-webkit-overflow-scrolling:touch;scrollbar-width:none;position:sticky;top:53px;z-index:199}
+.tabs::-webkit-scrollbar{display:none}
+.tab{flex:0 0 auto;padding:11px 14px;font-size:12px;font-weight:800;font-family:'Nunito',sans-serif;color:#94a3b8;background:transparent;border:none;cursor:pointer;border-bottom:3px solid transparent;white-space:nowrap;transition:all .2s}
+.tab-hub.active{color:#6ee7b7;border-bottom-color:#059669}
+.tab-gov.active{color:#fbbf24;border-bottom-color:#d97706}
+.tab-eco.active{color:#93c5fd;border-bottom-color:#2563eb}
+.tab-bumi.active{color:#c4b5fd;border-bottom-color:#7c3aed}
+.tab-seni.active{color:#fca5a5;border-bottom-color:#dc2626}
+.tab-pesta.active{color:#f9a8d4;border-bottom-color:#be185d}
+.tab-bina.active{color:#fde68a;border-bottom-color:#f59e0b}
+.tab-mm.active{color:#bfdbfe;border-bottom-color:#60a5fa}
+
+.panel{display:none;padding:12px 12px 60px}
+.panel.active{display:block}
+
+/* TRI BLOCKS */
+.tri{border-radius:12px;overflow:hidden;margin-bottom:10px;border:2px solid #e2e8f0}
+.tri-my{background:#fffbeb;border-left:5px solid #d97706;padding:9px 12px}
+.tri-my-lbl{font-size:10px;font-weight:800;letter-spacing:2px;color:#92400e;text-transform:uppercase;margin-bottom:3px}
+.tri-my-text{font-size:14px;font-weight:700;color:#78350f;line-height:1.5}
+.tri-en{background:#eff6ff;border-left:5px solid #2563eb;padding:9px 12px}
+.tri-en-lbl{font-size:10px;font-weight:800;letter-spacing:2px;color:#1d4ed8;text-transform:uppercase;margin-bottom:3px}
+.tri-en-text{font-size:14px;font-weight:600;color:#1e3a8a;line-height:1.5;font-style:italic}
+.tri-zh{background:#ecfdf5;border-left:5px solid #059669;padding:9px 12px}
+.tri-zh-lbl{font-size:10px;font-weight:800;letter-spacing:2px;color:#047857;text-transform:uppercase;margin-bottom:3px}
+.tri-zh-text{font-family:'Noto Sans SC',sans-serif;font-size:13px;font-weight:500;color:#064e3b;line-height:1.7;letter-spacing:1px}
+
+/* SECTION CARDS */
+.sec{border-radius:16px;margin-bottom:12px;overflow:hidden;border:2px solid}
+.sec-header{display:flex;align-items:center;gap:12px;padding:14px;cursor:pointer;user-select:none;-webkit-tap-highlight-color:transparent}
+.sec-icon{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;color:#fff}
+.sec-info{flex:1}
+.sec-num{font-size:10px;font-weight:800;letter-spacing:1px;margin-bottom:2px;text-transform:uppercase}
+.sec-title-my{font-size:15px;font-weight:800;line-height:1.25;color:#78350f}
+.sec-title-en{font-size:12px;font-weight:700;font-style:italic;color:#1e3a8a;margin-top:2px}
+.sec-title-zh{font-family:'Noto Sans SC',sans-serif;font-size:11px;color:#064e3b;margin-top:2px;letter-spacing:1px}
+.sec-chev{font-size:20px;color:#94a3b8;transition:transform .25s;flex-shrink:0}
+.sec-chev.open{transform:rotate(180deg)}
+.sec-body{display:none;padding:0 12px 14px}
+.sec-body.open{display:block}
+
+/* SECTION THEMES */
+.s-gr{background:#f0fdf4;border-color:#059669}.s-gr .sec-header{background:#d1fae5}.s-gr .sec-icon{background:#059669}.s-gr .sec-num{color:#047857}.s-gr .sec-body{border-top:2px dashed #6ee7b7}
+.s-am{background:#fffbeb;border-color:#f59e0b}.s-am .sec-header{background:#fef3c7}.s-am .sec-icon{background:#d97706}.s-am .sec-num{color:#92400e}.s-am .sec-body{border-top:2px dashed #fde68a}
+.s-bl{background:#eff6ff;border-color:#2563eb}.s-bl .sec-header{background:#dbeafe}.s-bl .sec-icon{background:#2563eb}.s-bl .sec-num{color:#1d4ed8}.s-bl .sec-body{border-top:2px dashed #bfdbfe}
+.s-pu{background:#f5f3ff;border-color:#7c3aed}.s-pu .sec-header{background:#ede9fe}.s-pu .sec-icon{background:#7c3aed}.s-pu .sec-num{color:#5b21b6}.s-pu .sec-body{border-top:2px dashed #c4b5fd}
+.s-rd{background:#fff5f5;border-color:#dc2626}.s-rd .sec-header{background:#fee2e2}.s-rd .sec-icon{background:#dc2626}.s-rd .sec-num{color:#b91c1c}.s-rd .sec-body{border-top:2px dashed #fca5a5}
+.s-pk{background:#fdf2f8;border-color:#be185d}.s-pk .sec-header{background:#fce7f3}.s-pk .sec-icon{background:#be185d}.s-pk .sec-num{color:#831843}.s-pk .sec-body{border-top:2px dashed #fbcfe8}
+.s-yw{background:#fefce8;border-color:#ca8a04}.s-yw .sec-header{background:#fef9c3}.s-yw .sec-icon{background:#ca8a04}.s-yw .sec-num{color:#713f12}.s-yw .sec-body{border-top:2px dashed #fde047}
+
+/* COMP TABLE */
+.comp-wrap{overflow-x:auto;margin-bottom:10px;border-radius:12px}
+.comp-table{width:100%;border-collapse:collapse;font-size:12px}
+.comp-table th{padding:8px 10px;font-size:10px;font-weight:800;letter-spacing:1px;text-transform:uppercase;text-align:left;color:#fff}
+.comp-table td{padding:8px 10px;vertical-align:top;line-height:1.4;border-bottom:1px solid rgba(0,0,0,.06)}
+.comp-table tr:last-child td{border-bottom:none}
+.th-sr{background:#059669}.th-sb{background:#2563eb}
+.td-sr{background:#f0fdf4;color:#052e16;font-weight:600}
+.td-sb{background:#eff6ff;color:#1e3a8a;font-weight:600}
+.td-lbl{font-size:10px;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:#475569;background:#f8fafc;padding:6px 10px}
+
+/* PILLS */
+.mem{border-radius:12px;padding:12px;background:#f1f5f9;border:2px solid #cbd5e1;margin-top:10px}
+.mem-lbl{font-size:11px;letter-spacing:2px;font-weight:800;margin-bottom:8px;color:#475569;text-transform:uppercase}
+.pills{display:flex;flex-wrap:wrap;gap:6px}
+.pill-my{padding:5px 10px;border-radius:20px;font-size:12px;font-weight:800;border:2px solid #d97706;background:#fef3c7;color:#78350f}
+.pill-en{padding:5px 10px;border-radius:20px;font-size:12px;font-weight:700;border:2px solid #2563eb;background:#dbeafe;color:#1e3a8a;font-style:italic}
+.pill-zh{padding:5px 10px;border-radius:20px;font-size:11px;font-weight:700;border:2px solid #059669;background:#d1fae5;color:#064e3b;font-family:'Noto Sans SC',sans-serif;letter-spacing:1px}
+
+/* BLIST */
+.blist{list-style:none;padding:0;margin-bottom:6px}
+.blist li{font-size:13px;font-weight:600;line-height:1.5;padding:4px 0 4px 14px;position:relative;border-bottom:1px dashed rgba(0,0,0,.07)}
+.blist li:last-child{border-bottom:none}
+.blist li::before{content:'▸';position:absolute;left:0;font-size:11px}
+
+/* MEMORY MAP */
+.mmap-item{border-radius:14px;overflow:hidden;margin-bottom:10px;border:2px solid #e2e8f0;box-shadow:0 2px 6px rgba(0,0,0,.06)}
+.mmap-my{background:#fef3c7;padding:9px 14px;border-bottom:1px solid #fde68a}
+.mmap-my-text{font-size:14px;font-weight:800;color:#78350f}
+.mmap-en{background:#dbeafe;padding:9px 14px;border-bottom:1px solid #bfdbfe}
+.mmap-en-text{font-size:13px;font-weight:600;color:#1e3a8a;font-style:italic}
+.mmap-zh{background:#d1fae5;padding:9px 14px}
+.mmap-zh-text{font-family:'Noto Sans SC',sans-serif;font-size:12px;font-weight:500;color:#064e3b;letter-spacing:1px}
+.mmap-header{background:#0f172a;padding:14px;text-align:center;border-radius:14px 14px 0 0}
+.mmap-h-title{font-size:15px;font-weight:800;color:#6ee7b7;margin-bottom:2px}
+.mmap-h-en{font-size:12px;color:#94a3b8;font-style:italic}
+.mmap-h-zh{font-family:'Noto Sans SC',sans-serif;font-size:11px;color:#a7f3d0;letter-spacing:2px;margin-top:2px}
+
+/* EXAM BOX */
+.exam-box{border-radius:14px;overflow:hidden;border:2px solid #7c3aed;margin-top:10px}
+.exam-hdr{background:#7c3aed;padding:9px 14px}
+.exam-lbl{font-size:10px;letter-spacing:2px;font-weight:800;color:#ede9fe;text-transform:uppercase}
+.exam-my{background:#fffbeb;border-left:5px solid #d97706;padding:9px 14px}
+.exam-my-t{font-size:13px;font-weight:700;color:#78350f;line-height:1.6}
+.exam-en{background:#eff6ff;border-left:5px solid #2563eb;padding:9px 14px}
+.exam-en-t{font-size:13px;font-weight:600;color:#1e3a8a;line-height:1.6;font-style:italic}
+.exam-zh{background:#ecfdf5;border-left:5px solid #059669;padding:9px 14px}
+.exam-zh-t{font-family:'Noto Sans SC',sans-serif;font-size:12px;font-weight:500;color:#064e3b;line-height:1.8;letter-spacing:1px}
+
+/* HIDE */
+.hide-my .tri-my,.hide-my .mmap-my,.hide-my .exam-my,.hide-my .sec-title-my,.hide-my .pill-my{display:none}
+.hide-en .tri-en,.hide-en .mmap-en,.hide-en .exam-en,.hide-en .sec-title-en,.hide-en .pill-en{display:none}
+.hide-zh .tri-zh,.hide-zh .mmap-zh,.hide-zh .exam-zh,.hide-zh .sec-title-zh,.hide-zh .pill-zh{display:none}
+
+.footer{text-align:center;font-size:12px;color:#94a3b8;padding:14px;letter-spacing:1px}
+</style>
+</head>
+<body id="app">
+
+<div class="hero">
+  <div class="hero-badge">Sejarah &middot; Tingkatan 3 &middot; Bab 10</div>
+  <div class="hero-title">Sarawak dan Sabah</div>
+  <div class="hero-sub">Sarawak and Sabah — Heritage &amp; Culture</div>
+  <div class="hero-zh">砂拉越与沙巴——遗产与文化</div>
+  <div class="hero-stats">
+    <div><div class="stat-num">4</div><div class="stat-lbl">Sections</div></div>
+    <div><div class="stat-num">3</div><div class="stat-lbl">Languages</div></div>
+    <div><div class="stat-num">8</div><div class="stat-lbl">Tabs</div></div>
+  </div>
+</div>
+
+<div class="lang-legend">
+  <div class="legend-dot"><div class="dot" style="background:#d97706"></div><span style="color:#78350f">Melayu</span></div>
+  <div class="legend-dot"><div class="dot" style="background:#2563eb"></div><span style="color:#1e3a8a">English</span></div>
+  <div class="legend-dot"><div class="dot" style="background:#059669"></div><span style="color:#064e3b;font-family:'Noto Sans SC',sans-serif">中文</span></div>
+</div>
+
+<div class="lang-bar">
+  <button class="lbtn lbtn-my on" onclick="tgl('my',this)">&#x1F7E1; Melayu</button>
+  <button class="lbtn lbtn-en on" onclick="tgl('en',this)">&#x1F535; English</button>
+  <button class="lbtn lbtn-zh on" onclick="tgl('zh',this)">&#x1F7E2; 中文</button>
+</div>
+
+<div class="tabs">
+  <button class="tab tab-hub active" onclick="showPanel('hub',this)">&#127758; Hubungan</button>
+  <button class="tab tab-gov" onclick="showPanel('gov',this)">&#127981; Pemerintahan</button>
+  <button class="tab tab-eco" onclick="showPanel('eco',this)">&#128176; Ekonomi</button>
+  <button class="tab tab-bumi" onclick="showPanel('bumi',this)">&#128101; Bumiputera</button>
+  <button class="tab tab-seni" onclick="showPanel('seni',this)">&#127912; Kesenian</button>
+  <button class="tab tab-pesta" onclick="showPanel('pesta',this)">&#127881; Perayaan &amp; Tarian</button>
+  <button class="tab tab-bina" onclick="showPanel('bina',this)">&#127968; Seni Bina</button>
+  <button class="tab tab-mm" onclick="showPanel('mm',this)">&#11088; Memory Map</button>
+</div>
+
+<!-- ════ HUBUNGAN ════ -->
+<div id="panel-hub" class="panel active">
+
+  <div class="sec s-gr">
+    <div class="sec-header" onclick="exp(this)">
+      <div class="sec-icon">&#127758;</div>
+      <div class="sec-info">
+        <div class="sec-num">10.1</div>
+        <div class="sec-title-my">Sarawak &amp; Sabah dalam Alam Melayu</div>
+        <div class="sec-title-en">Sarawak &amp; Sabah in the Malay World</div>
+        <div class="sec-title-zh">砂拉越与沙巴在马来世界的地位</div>
+      </div>
+      <span class="sec-chev open">&#8964;</span>
+    </div>
+    <div class="sec-body open">
+      <div class="tri">
+        <div class="tri-my"><div class="tri-my-lbl">&#x1F7E1; Pengenalan</div><div class="tri-my-text">
+          • Sarawak terletak di <strong>barat daya Pulau Borneo</strong>, Sabah di <strong>utara Pulau Borneo</strong>.<br>
+          • Kedua-dua kawasan terdedah kepada Alam Melayu dari aspek <strong>perdagangan</strong> dan <strong>keagamaan</strong>.
+        </div></div>
+        <div class="tri-en"><div class="tri-en-lbl">&#x1F535; Introduction</div><div class="tri-en-text">
+          • Sarawak is in <strong>south-west Borneo</strong>, Sabah in <strong>north Borneo</strong>.<br>
+          • Both areas exposed to the Malay World through <strong>trade</strong> and <strong>religion</strong>.
+        </div></div>
+        <div class="tri-zh"><div class="tri-zh-lbl">&#x1F7E2; 简介</div><div class="tri-zh-text">
+          • 砂拉越位于<strong>婆罗洲西南部</strong>，沙巴位于<strong>婆罗洲北部</strong>。<br>
+          • 两个地区通过<strong>贸易</strong>和<strong>宗教</strong>与马来世界接触。
+        </div></div>
+      </div>
+
+      <!-- PERDAGANGAN -->
+      <div class="tri">
+        <div class="tri-my"><div class="tri-my-lbl">&#x1F7E1; Kegiatan Perdagangan</div><div class="tri-my-text">
+          • Kemunculan pusat membuat <strong>tembikar</strong> di Gua Niah dan Bukit Tengkorak.<br>
+          • Muncul <strong>Chu-Po</strong> — pelabuhan di utara Sabah yang mengeksport besi ke Funan dan Champa.
+        </div></div>
+        <div class="tri-en"><div class="tri-en-lbl">&#x1F535; Trade Activities</div><div class="tri-en-text">
+          • Rise of <strong>pottery</strong> production centres at Gua Niah and Bukit Tengkorak.<br>
+          • Emergence of <strong>Chu-Po</strong> — port in north Sabah that exported iron to Funan and Champa.
+        </div></div>
+        <div class="tri-zh"><div class="tri-zh-lbl">&#x1F7E2; 贸易活动</div><div class="tri-zh-text">
+          • 尼亚洞穴和骷髅山出现<strong>陶器</strong>制造中心。<br>
+          • <strong>朱坡</strong>出现——沙巴北部港口，向扶南和占婆出口铁器。
+        </div></div>
+      </div>
+
+      <!-- PELABUHAN -->
+      <div class="tri">
+        <div class="tri-my"><div class="tri-my-lbl">&#x1F7E1; Pelabuhan Penting</div><div class="tri-my-text">
+          • <strong>Santubong</strong> — di lembah Sungai Sarawak. Terdapat barang tembikar zaman Dinasti T'ang dan Sung, industri peleburan bijih timah.<br>
+          • Pelabuhan lain: <strong>Gedong, Bukit Sadong, Kalka</strong>.<br>
+          • Menjalankan perdagangan dengan <strong>Siam dan China</strong>.
+        </div></div>
+        <div class="tri-en"><div class="tri-en-lbl">&#x1F535; Important Ports</div><div class="tri-en-text">
+          • <strong>Santubong</strong> — in Sarawak River valley. Tang and Song dynasty pottery found, tin ore smelting industry.<br>
+          • Other ports: <strong>Gedong, Bukit Sadong, Kalka</strong>.<br>
+          • Traded with <strong>Siam and China</strong>.
+        </div></div>
+        <div class="tri-zh"><div class="tri-zh-lbl">&#x1F7E2; 重要港口</div><div class="tri-zh-text">
+          • <strong>山都望</strong>——砂拉越河流域，发现唐宋陶器，有锡矿冶炼业。<br>
+          • 其他港口：<strong>格东、布吉沙东、卡尔卡</strong>。<br>
+          • 与<strong>暹罗和中国</strong>进行贸易。
+        </div></div>
+      </div>
+
+      <!-- KERAJAAN & PENGARUH -->
+      <div class="tri">
+        <div class="tri-my"><div class="tri-my-lbl">&#x1F7E1; Pengaruh Kerajaan Luar</div><div class="tri-my-text">
+          • <strong>Srivijaya</strong> meluaskan pengaruh di selatan Sarawak (mengawal perdagangan Laut China Selatan).<br>
+          • <strong>Majapahit</strong> meluaskan pengaruh di Sarawak dan utara Sabah — bukti: jumpaan gendang gangsa jenis Moko di Pulau Banggi.<br>
+          • Selepas kemerosotan Majapahit: muncul pengaruh <strong>Kesultanan Melayu Brunei</strong> dan <strong>Sulu</strong>.<br>
+          • Brunei bersahabat dengan kerajaan Sambas di Sarawak → Sambas menyerahkan wilayah kepada Brunei.<br>
+          • Sabah semakin maju di bawah <strong>Kesultanan Sulu</strong>.
+        </div></div>
+        <div class="tri-en"><div class="tri-en-lbl">&#x1F535; External Kingdom Influence</div><div class="tri-en-text">
+          • <strong>Srivijaya</strong> expanded influence to south Sarawak (controlling South China Sea trade).<br>
+          • <strong>Majapahit</strong> expanded to Sarawak and north Sabah — evidence: Moko bronze drums found at Pulau Banggi.<br>
+          • After Majapahit's decline: influence of <strong>Brunei Malay Sultanate</strong> and <strong>Sulu</strong> emerged.<br>
+          • Brunei befriended Sambas kingdom in Sarawak → Sambas ceded territory to Brunei.<br>
+          • Sabah advanced under the <strong>Sulu Sultanate</strong>.
+        </div></div>
+        <div class="tri-zh"><div class="tri-zh-lbl">&#x1F7E2; 外来王国影响</div><div class="tri-zh-text">
+          • <strong>室利佛逝</strong>将影响扩展到砂拉越南部（控制南海贸易）。<br>
+          • <strong>满者伯夷</strong>扩展到砂拉越和沙巴北部——证据：邦吉岛发现Moko铜鼓。<br>
+          • 满者伯夷衰落后：<strong>文莱马来苏丹国</strong>和<strong>苏禄</strong>影响兴起。<br>
+          • 文莱与砂拉越三发王国友好→三发将领土割让给文莱。<br>
+          • 沙巴在<strong>苏禄苏丹国</strong>下日益发展。
+        </div></div>
+      </div>
+
+      <!-- AGAMA -->
+      <div class="tri">
+        <div class="tri-my"><div class="tri-my-lbl">&#x1F7E1; Agama</div><div class="tri-my-text">
+          • Pengaruh agama <strong>Hindu, Buddha dan Islam</strong>.<br>
+          • Objek tinggalan agama Buddha di Santubong (warisan Srivijaya).<br>
+          • Penemuan <strong>patung Ganesha</strong> di Limbang (pengaruh Hindu).<br>
+          • Pengaruh Islam dibawa oleh Kesultanan <strong>Brunei dan Sulu</strong>.
+        </div></div>
+        <div class="tri-en"><div class="tri-en-lbl">&#x1F535; Religion</div><div class="tri-en-text">
+          • Influence of <strong>Hinduism, Buddhism and Islam</strong>.<br>
+          • Buddhist relics at Santubong (Srivijayan heritage).<br>
+          • Discovery of <strong>Ganesha statue</strong> in Limbang (Hindu influence).<br>
+          • Islam brought by <strong>Brunei and Sulu</strong> Sultanates.
+        </div></div>
+        <div class="tri-zh"><div class="tri-zh-lbl">&#x1F7E2; 宗教</div><div class="tri-zh-text">
+          • <strong>印度教、佛教和伊斯兰教</strong>的影响。<br>
+          • 山都望发现佛教遗物（室利佛逝遗产）。<br>
+          • 林梦发现<strong>象头神雕像</strong>（印度教影响）。<br>
+          • 伊斯兰教由<strong>文莱和苏禄</strong>苏丹国传播。
+        </div></div>
+      </div>
+
+      <div class="mem">
+        <div class="mem-lbl">&#129504; Memory Keywords</div>
+        <div class="pills">
+          <span class="pill-my">Srivijaya → selatan Sarawak</span><span class="pill-en">Srivijaya → south Sarawak</span><span class="pill-zh">室利佛逝→砂拉越南部</span>
+          <span class="pill-my">Majapahit → gendang gangsa Moko</span><span class="pill-en">Majapahit → Moko bronze drum</span><span class="pill-zh">满者伯夷→Moko铜鼓</span>
+          <span class="pill-my">Brunei &amp; Sulu → Islam</span><span class="pill-en">Brunei &amp; Sulu → Islam</span><span class="pill-zh">文莱与苏禄→伊斯兰</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ════ PEMERINTAHAN ════ -->
+<div id="panel-gov" class="panel">
+
+  <div class="sec s-am">
+    <div class="sec-header" onclick="exp(this)">
+      <div class="sec-icon">&#127981;</div>
+      <div class="sec-info">
+        <div class="sec-num">10.2</div>
+        <div class="sec-title-my">Kemunculan Pemerintahan Tempatan</div>
+        <div class="sec-title-en">Emergence of Local Government</div>
+        <div class="sec-title-zh">地方政府的兴起</div>
+      </div>
+      <span class="sec-chev open">&#8964;</span>
+    </div>
+    <div class="sec-body open">
+
+      <div class="tri" style="margin-bottom:10px">
+        <div class="tri-my"><div class="tri-my-lbl">&#x1F7E1; Bentuk Pemerintahan Tempatan</div><div class="tri-my-text">Bentuk pemerintahan wujud berdasarkan kawasan geografi: <strong>lembah sungai</strong> dan <strong>pedalaman</strong>. Terdapat 2 jenis: <strong>Kepimpinan Kesukuan</strong> dan <strong>Kepimpinan Lembah Sungai</strong>.</div></div>
+        <div class="tri-en"><div class="tri-en-lbl">&#x1F535; Forms of Local Government</div><div class="tri-en-text">Government forms based on geography: <strong>river valleys</strong> and <strong>inland</strong>. Two types: <strong>Tribal Leadership</strong> and <strong>River Valley Leadership</strong>.</div></div>
+        <div class="tri-zh"><div class="tri-zh-lbl">&#x1F7E2; 地方政府形式</div><div class="tri-zh-text">政府形式基于地理区域：<strong>河流流域</strong>和<strong>内陆</strong>。分两种：<strong>部落领导</strong>和<strong>河流流域领导</strong>。</div></div>
+      </div>
+
+      <!-- KEPIMPINAN KESUKUAN TABLE -->
+      <div style="font-size:12px;font-weight:800;color:#92400e;letter-spacing:1px;text-transform:uppercase;margin-bottom:6px">Kepimpinan Kesukuan / Tribal Leadership / 部落领导</div>
+      <div class="comp-wrap">
+        <table class="comp-table">
+          <thead><tr><th class="th-sr">Sarawak</th><th class="th-sb">Sabah</th></tr></thead>
+          <tbody>
+            <tr>
+              <td class="td-sr">Berbeza antara kawasan pedalaman dengan muara sungai. Setiap kaum mempunyai <strong>ketua bebas</strong>.<br>• Iban – Tuai Rumah<br>• Kayan – Kelunan Maren/Hipun Uma<br>• Kenyah – Peran Lepo<br>• Kelabit – Laih Rayeh</td>
+              <td class="td-sb">Sistem pentadbiran tersusun, bebas dari kawalan kuasa luar. Kepimpinan Kadazan, Murut dan Orang Sungai mempunyai bentuk kepimpinan yang sama. Mempunyai seorang ketua yang dikenali sebagai <strong>Orang Tua</strong>. Bobohizan/Babalian mengurus soal adat.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- KEPIMPINAN LEMBAH SUNGAI TABLE -->
+      <div style="font-size:12px;font-weight:800;color:#92400e;letter-spacing:1px;text-transform:uppercase;margin-bottom:6px;margin-top:10px">Kepimpinan Lembah Sungai / River Valley / 河流流域领导</div>
+      <div class="comp-wrap">
+        <table class="comp-table">
+          <thead><tr><th style="background:#334155;color:#fff;font-size:10px;width:25%">Jenis</th><th class="th-sr">Sarawak</th><th class="th-sb">Sabah</th></tr></thead>
+          <tbody>
+            <tr>
+              <td class="td-lbl">Kerajaan</td>
+              <td class="td-sr">Di lembah sungai: Sawaku, Samadong, Kalka, Saribas, Melano — wujud sejak abad ke-7. Wujud interaksi dengan kerajaan luar.</td>
+              <td class="td-sb">—</td>
+            </tr>
+            <tr>
+              <td class="td-lbl">Wakil Raja</td>
+              <td class="td-sr">Dipengaruhi Srivijaya, Brunei dan Majapahit. Kesultanan Brunei mengekalkan sistem kerajaan Melayu. Kaum Dayak diberi gelaran <strong>Orang Kaya</strong>.</td>
+              <td class="td-sb">Pengaruh dari Brunei dan Sulu. Kuasa: kehakiman, menjaga keamanan dan kebajikan penduduk, mengutip cukai. </td>
+            </tr>
+            <tr>
+              <td class="td-lbl">Ketua Bebas</td>
+              <td class="td-sr">—</td>
+              <td class="td-sb">Diketuai seorang ketua bebas. Mentadbir wilayah di muara sungai. Terdiri daripada: <strong>Syarif Osman</strong> (kawasan Marudu), <strong>Datu Kurunding</strong> (kawasan Tungku). Menegakkan kuasa dan undang-undang sendiri.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="mem">
+        <div class="mem-lbl">&#129504; Memory Keywords</div>
+        <div class="pills">
+          <span class="pill-my">Sarawak: Tuai Rumah (Iban), Orang Kaya (Dayak)</span>
+          <span class="pill-en">Sarawak: Tuai Rumah (Iban), Orang Kaya (Dayak)</span>
+          <span class="pill-zh">砂拉越：Tuai Rumah（伊班），Orang Kaya（达雅）</span>
+          <span class="pill-my">Sabah: Orang Tua, Wakil Raja, Ketua Bebas</span>
+          <span class="pill-en">Sabah: Orang Tua, Raja's Representative, Free Chief</span>
+          <span class="pill-zh">沙巴：老者、拉惹代表、自由首领</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ════ EKONOMI ════ -->
+<div id="panel-eco" class="panel">
+
+  <div class="sec s-bl">
+    <div class="sec-header" onclick="exp(this)">
+      <div class="sec-icon">&#128176;</div>
+      <div class="sec-info">
+        <div class="sec-num">10.3</div>
+        <div class="sec-title-my">Kegiatan Ekonomi Masyarakat Sarawak &amp; Sabah</div>
+        <div class="sec-title-en">Economic Activities of Sarawak &amp; Sabah Society</div>
+        <div class="sec-title-zh">砂拉越与沙巴社会的经济活动</div>
+      </div>
+      <span class="sec-chev open">&#8964;</span>
+    </div>
+    <div class="sec-body open">
+      <div class="tri" style="margin-bottom:10px">
+        <div class="tri-my"><div class="tri-my-lbl">&#x1F7E1; 3 Kawasan Bentuk Muka Bumi</div><div class="tri-my-text">Bentuk muka bumi Sarawak dan Sabah terbahagi kepada tiga kawasan: (a) <strong>Pesisir pantai</strong>, (b) <strong>Muara sungai / Lembah sungai</strong>, (c) <strong>Pedalaman</strong>.</div></div>
+        <div class="tri-en"><div class="tri-en-lbl">&#x1F535; 3 Geographic Areas</div><div class="tri-en-text">The terrain of Sarawak and Sabah is divided into three areas: (a) <strong>Coastal</strong>, (b) <strong>River mouth / River valley</strong>, (c) <strong>Interior/Inland</strong>.</div></div>
+        <div class="tri-zh"><div class="tri-zh-lbl">&#x1F7E2; 三大地形区域</div><div class="tri-zh-text">砂拉越和沙巴地形分为三个区域：(a) <strong>沿海</strong>，(b) <strong>河口/河流流域</strong>，(c) <strong>内陆</strong>。</div></div>
+      </div>
+
+      <div class="comp-wrap">
+        <table class="comp-table">
+          <thead>
+            <tr><th style="background:#334155;color:#fff;font-size:10px">Lokasi / Location / 地点</th><th class="th-sr">Sarawak</th><th class="th-sb">Sabah</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="td-lbl">Pesisir Pantai / Coast / 沿海</td>
+              <td class="td-sr"><strong>Kegiatan:</strong> Perdagangan, menangkap ikan, membuat perahu, perusahaan sagu<br><strong>Kaum:</strong> Melayu, Kedayan, Melanau</td>
+              <td class="td-sb"><strong>Kegiatan:</strong> Menangkap ikan, membuat perahu, mengutip hasil laut, perdagangan<br><strong>Kaum:</strong> Bajau/Sama, Iranun, Suluk, Melayu Brunei</td>
+            </tr>
+            <tr>
+              <td class="td-lbl">Lembah Sungai / River Valley / 河流流域</td>
+              <td class="td-sr"><strong>Kegiatan:</strong> Menanam padi, buah-buahan dan sayur-sayuran<br><strong>Kaum:</strong> Melayu, Iban, Bisaya, Melanau, Bidayuh</td>
+              <td class="td-sb"><strong>Kegiatan:</strong> Menanam padi, buah-buahan dan sayur-sayuran<br><strong>Kaum:</strong> Kadazandusun, Rungus, Orang Sungai</td>
+            </tr>
+            <tr>
+              <td class="td-lbl">Pedalaman / Interior / 内陆</td>
+              <td class="td-sr"><strong>Kegiatan:</strong> Mengutip hasil hutan, memburu haiwan liar, menanam padi<br><strong>Kaum:</strong> Kenyah, Iban, Penan, Kayan, Kelabit, Punan</td>
+              <td class="td-sb"><strong>Kegiatan:</strong> Mengutip hasil hutan, menanam padi, mengutip sarang burung<br><strong>Kaum:</strong> Murut</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ════ BUMIPUTERA ════ -->
+<div id="panel-bumi" class="panel">
+
+  <div class="sec s-pu">
+    <div class="sec-header" onclick="exp(this)">
+      <div class="sec-icon">&#128101;</div>
+      <div class="sec-info">
+        <div class="sec-num">10.4</div>
+        <div class="sec-title-my">Masyarakat Bumiputera Sarawak &amp; Sabah</div>
+        <div class="sec-title-en">Bumiputera Communities of Sarawak &amp; Sabah</div>
+        <div class="sec-title-zh">砂拉越与沙巴土著社区</div>
+      </div>
+      <span class="sec-chev open">&#8964;</span>
+    </div>
+    <div class="sec-body open">
+      <div class="comp-wrap">
+        <table class="comp-table">
+          <thead><tr><th class="th-sr">Masyarakat Bumiputera Sarawak</th><th class="th-sb">Masyarakat Bumiputera Sabah</th></tr></thead>
+          <tbody>
+            <tr>
+              <td class="td-sr"><strong>5 Kaum Utama:</strong> Iban, Melayu, Bidayuh, Melanau, Orang Ulu<br><br>Kaum lain: Bisaya, Bukitan, Dusun, Kedayan, Kajang, Kejaman, Lahanan, Lisum, Lugat, Sebop, Sekapan, Sipeng, Tagal, Tanjong dan Ukit.</td>
+              <td class="td-sb"><strong>5 Kaum Utama:</strong> Kadazandusun, Bajau/Sama, Murut, Suluk, Orang Sungai</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- KEPENTINGAN SUNGAI -->
+      <div class="tri">
+        <div class="tri-my"><div class="tri-my-lbl">&#x1F7E1; Kepentingan Sungai (6 fungsi)</div><div class="tri-my-text">
+          (a) <strong>Kegunaan harian</strong> — sumber air<br>
+          (b) <strong>Pengangkutan</strong> — laluan perjalanan<br>
+          (c) <strong>Petempatan</strong> — kawasan mendiami<br>
+          (d) <strong>Sumber rezeki</strong> — menangkap ikan, pertanian<br>
+          (e) <strong>Perdagangan</strong> — laluan dagang<br>
+          (f) <strong>Kegunaan rekreasi</strong> — aktiviti sosial
+        </div></div>
+        <div class="tri-en"><div class="tri-en-lbl">&#x1F535; Importance of Rivers (6 functions)</div><div class="tri-en-text">
+          (a) <strong>Daily use</strong> — water source<br>
+          (b) <strong>Transport</strong> — travel route<br>
+          (c) <strong>Settlement</strong> — living area<br>
+          (d) <strong>Livelihood</strong> — fishing, farming<br>
+          (e) <strong>Trade</strong> — trade route<br>
+          (f) <strong>Recreation</strong> — social activities
+        </div></div>
+        <div class="tri-zh"><div class="tri-zh-lbl">&#x1F7E2; 河流的重要性（6种功能）</div><div class="tri-zh-text">
+          (a) <strong>日常用途</strong>——水源<br>
+          (b) <strong>交通</strong>——出行路线<br>
+          (c) <strong>定居</strong>——居住区域<br>
+          (d) <strong>谋生</strong>——捕鱼、农业<br>
+          (e) <strong>贸易</strong>——贸易路线<br>
+          (f) <strong>休闲</strong>——社交活动
+        </div></div>
+      </div>
+
+      <div class="mem">
+        <div class="mem-lbl">&#129504; Memory: 6 Kepentingan Sungai</div>
+        <div class="pills">
+          <span class="pill-my">Kegunaan Harian</span><span class="pill-en">Daily Use</span><span class="pill-zh">日常用途</span>
+          <span class="pill-my">Pengangkutan</span><span class="pill-en">Transport</span><span class="pill-zh">交通</span>
+          <span class="pill-my">Petempatan</span><span class="pill-en">Settlement</span><span class="pill-zh">定居</span>
+          <span class="pill-my">Sumber Rezeki</span><span class="pill-en">Livelihood</span><span class="pill-zh">谋生</span>
+          <span class="pill-my">Perdagangan</span><span class="pill-en">Trade</span><span class="pill-zh">贸易</span>
+          <span class="pill-my">Rekreasi</span><span class="pill-en">Recreation</span><span class="pill-zh">休闲</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ════ KESENIAN ════ -->
+<div id="panel-seni" class="panel">
+
+  <div class="sec s-rd">
+    <div class="sec-header" onclick="exp(this)">
+      <div class="sec-icon">&#127912;</div>
+      <div class="sec-info">
+        <div class="sec-num">10.4</div>
+        <div class="sec-title-my">Kesenian: Tenunan Kain</div>
+        <div class="sec-title-en">Arts: Woven Cloth</div>
+        <div class="sec-title-zh">艺术：织布</div>
+      </div>
+      <span class="sec-chev open">&#8964;</span>
+    </div>
+    <div class="sec-body open">
+      <div class="comp-wrap">
+        <table class="comp-table">
+          <thead><tr><th style="background:#334155;color:#fff;font-size:10px">Hasil Kesenian</th><th class="th-sr">Sarawak</th><th class="th-sb">Sabah</th></tr></thead>
+          <tbody>
+            <tr>
+              <td class="td-lbl">Tenunan Kain</td>
+              <td class="td-sr"><strong>Pua Kumbu:</strong> Kaum Iban. Kain kapas. Digunakan di majlis kelahiran, perkahwinan dan kematian.<br><br><strong>Keringkam:</strong> Kaum Melayu. Pelbagai jenis kain (kapas, sutera). Disulam dengan benang emas, perak dan tembaga.</td>
+              <td class="td-sb"><strong>Inavol:</strong> Kaum Rungus — selendang berwarna-warni.<br><br><strong>Kain Dastar:</strong> Kaum Iranun — digunakan sebagai tanjak.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="sec s-rd">
+    <div class="sec-header" onclick="exp(this)">
+      <div class="sec-icon">&#128217;</div>
+      <div class="sec-info">
+        <div class="sec-num">10.4</div>
+        <div class="sec-title-my">Kesenian: Kraf Tangan</div>
+        <div class="sec-title-en">Arts: Handicraft</div>
+        <div class="sec-title-zh">艺术：手工艺</div>
+      </div>
+      <span class="sec-chev">&#8964;</span>
+    </div>
+    <div class="sec-body">
+      <div class="comp-wrap">
+        <table class="comp-table">
+          <thead><tr><th style="background:#334155;color:#fff;font-size:10px">Kraf Tangan</th><th class="th-sr">Sarawak</th><th class="th-sb">Sabah</th></tr></thead>
+          <tbody>
+            <tr>
+              <td class="td-lbl">Bakul / Bekas</td>
+              <td class="td-sr"><strong>Sintung Duduk (Iban):</strong> membawa benih padi.<br><strong>Lanji:</strong> membawa hasil padi.<br><strong>Basong:</strong> untuk berburu.<br><strong>Terendak (Melanau):</strong> penutup kepala — digunakan semasa Pesta Kaul.<br><strong>Bakul Pembawa Bayi (Orang Ulu):</strong> dihiasi manik dan simbol naga, manusia, burung kenyalang, harimau.</td>
+              <td class="td-sb"><strong>Bakul (Tayen, Wakid, Buan) — kawasan pedalaman:</strong><br>• Wakid — membawa barang besar<br>• Tayen — membawa hasil kebun &amp; hantaran perkahwinan<br>• Buan — tempat menyimpan barang<br><br><strong>Tikar Pandan dan Duang/Tudung Saji (Bajau/Sama):</strong> diperbuat daripada daun serdang berwarna-warni.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="sec s-rd">
+    <div class="sec-header" onclick="exp(this)">
+      <div class="sec-icon">&#128295;</div>
+      <div class="sec-info">
+        <div class="sec-num">10.4</div>
+        <div class="sec-title-my">Kesenian: Pertukangan</div>
+        <div class="sec-title-en">Arts: Craftsmanship</div>
+        <div class="sec-title-zh">艺术：工艺品</div>
+      </div>
+      <span class="sec-chev">&#8964;</span>
+    </div>
+    <div class="sec-body">
+      <div class="comp-wrap">
+        <table class="comp-table">
+          <thead><tr><th style="background:#334155;color:#fff;font-size:10px">Pertukangan</th><th class="th-sr">Sarawak</th><th class="th-sb">Sabah</th></tr></thead>
+          <tbody>
+            <tr>
+              <td class="td-lbl">Ukiran / Tiang</td>
+              <td class="td-sr"><strong>Tiang Totem (Orang Ulu):</strong> Lambang status masyarakat. Mayat golongan atasan sahaja boleh diletakkan di atas tiang.<br><br><strong>Patung Burung Kenyalang (Iban):</strong> Lambang kepahlawanan. Ukiran digunakan sebagai pemberi semangat kepada pahlawan. Penjaga rumah panjang daripada semangat jahat.</td>
+              <td class="td-sb"><strong>Guuk, Badi' dan Pida (Bajau/Sama) — diperbuat daripada besi:</strong><br>• Guuk dan Badi' — memotong rumput<br>• Pida' — upacara perkahwinan</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ════ PERAYAAN & TARIAN ════ -->
+<div id="panel-pesta" class="panel">
+
+  <div class="sec s-pk">
+    <div class="sec-header" onclick="exp(this)">
+      <div class="sec-icon">&#127881;</div>
+      <div class="sec-info">
+        <div class="sec-num">10.4</div>
+        <div class="sec-title-my">Perayaan di Sarawak</div>
+        <div class="sec-title-en">Festivals in Sarawak</div>
+        <div class="sec-title-zh">砂拉越的节日</div>
+      </div>
+      <span class="sec-chev open">&#8964;</span>
+    </div>
+    <div class="sec-body open">
+      <div class="tri">
+        <div class="tri-my"><div class="tri-my-lbl">&#x1F7E1; 1. Pesta Menuai / Gawai Dayak</div><div class="tri-my-text">Disambut oleh kaum <strong>Iban, Bidayu dan Orang Ulu</strong>. Upacara <strong>Miring</strong> diadakan semasa Gawai Dayak untuk menyatakan rasa terima kasih kepada petara atau Tuhan. Juga diadakan <strong>acara Kumang dan Keling Gawai</strong> (pemilihan ratu cantik dan jejaka tampan).</div></div>
+        <div class="tri-en"><div class="tri-en-lbl">&#x1F535; 1. Harvest Festival / Gawai Dayak</div><div class="tri-en-text">Celebrated by <strong>Iban, Bidayuh and Orang Ulu</strong>. <strong>Miring</strong> ceremony performed during Gawai to give thanks to petara or God. <strong>Kumang and Keling Gawai</strong> competition also held (beauty queen and handsome young man contest).</div></div>
+        <div class="tri-zh"><div class="tri-zh-lbl">&#x1F7E2; 1. 丰收节/Gawai Dayak</div><div class="tri-zh-text">由<strong>伊班、比达友和乌鲁人</strong>庆祝。Gawai期间举行<strong>Miring</strong>仪式以向神灵致谢。还举办<strong>Kumang和Keling Gawai</strong>比赛（选美与俊男比赛）。</div></div>
+      </div>
+      <div class="tri">
+        <div class="tri-my"><div class="tri-my-lbl">&#x1F7E1; 2. Pesta Babulang dan Makan Tahun</div><div class="tri-my-text">Disambut oleh kaum <strong>Bisaya dan Kadayan</strong>. Pesta Babulang adalah pesta menuai. <strong>Lumba kerbau</strong> merupakan acara dalam Pesta Babulang. <strong>Makan Tahun</strong> diadakan sebagai tanda kesyukuran atas hasil yang diperoleh oleh petani.</div></div>
+        <div class="tri-en"><div class="tri-en-lbl">&#x1F535; 2. Pesta Babulang &amp; Makan Tahun</div><div class="tri-en-text">Celebrated by <strong>Bisaya and Kadayan</strong>. Pesta Babulang is a harvest festival. <strong>Buffalo racing</strong> is a Pesta Babulang event. <strong>Makan Tahun</strong> held as thanksgiving for harvest.</div></div>
+        <div class="tri-zh"><div class="tri-zh-lbl">&#x1F7E2; 2. Pesta Babulang与Makan Tahun</div><div class="tri-zh-text">由<strong>比沙雅和卡达央</strong>庆祝。Pesta Babulang是丰收节。<strong>水牛赛跑</strong>是节日活动。<strong>Makan Tahun</strong>作为农民丰收的感恩节。</div></div>
+      </div>
+      <div class="tri">
+        <div class="tri-my"><div class="tri-my-lbl">&#x1F7E1; 3. Pesta Kaul</div><div class="tri-my-text">Diadakan oleh kaum <strong>Melanau</strong>. Bertujuan untuk mengelakkan malapetaka buruk oleh roh jahat yang dipanggil <strong>Ipok</strong>. Permainan <strong>Tibau</strong> diadakan.</div></div>
+        <div class="tri-en"><div class="tri-en-lbl">&#x1F535; 3. Pesta Kaul</div><div class="tri-en-text">Held by <strong>Melanau</strong> community. Aims to avoid misfortune caused by evil spirits called <strong>Ipok</strong>. <strong>Tibau</strong> game is held.</div></div>
+        <div class="tri-zh"><div class="tri-zh-lbl">&#x1F7E2; 3. Pesta Kaul</div><div class="tri-zh-text">由<strong>梅拉瑙</strong>族举行。旨在避免被称为<strong>Ipok</strong>的恶灵带来的灾难。举行<strong>Tibau</strong>游戏。</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sec s-pk">
+    <div class="sec-header" onclick="exp(this)">
+      <div class="sec-icon">&#127881;</div>
+      <div class="sec-info">
+        <div class="sec-num">10.4</div>
+        <div class="sec-title-my">Perayaan di Sabah</div>
+        <div class="sec-title-en">Festivals in Sabah</div>
+        <div class="sec-title-zh">沙巴的节日</div>
+      </div>
+      <span class="sec-chev">&#8964;</span>
+    </div>
+    <div class="sec-body">
+      <div class="tri">
+        <div class="tri-my"><div class="tri-my-lbl">&#x1F7E1; 1. Pesta Kaamatan</div><div class="tri-my-text">Diraikan oleh kaum <strong>Kadazandusun dan Murut</strong>. Simbol kesyukuran meraikan <strong>semangat padi (Bambaazon/Bambarayon)</strong>. Dijalankan oleh <strong>Babohizan/Bobolian</strong>. Berharap mendapat lebih banyak hasil. Diadakan pertandingan <strong>ratu cantik Unduk Ngadau</strong> berkaitan asal usul pengorbanan Huminodun.</div></div>
+        <div class="tri-en"><div class="tri-en-lbl">&#x1F535; 1. Pesta Kaamatan</div><div class="tri-en-text">Celebrated by <strong>Kadazandusun and Murut</strong>. Symbol of gratitude celebrating the <strong>spirit of rice (Bambaazon/Bambarayon)</strong>. Led by <strong>Babohizan/Bobolian</strong>. Hopes for more harvest. <strong>Unduk Ngadau</strong> beauty contest held — related to Huminodun's sacrifice.</div></div>
+        <div class="tri-zh"><div class="tri-zh-lbl">&#x1F7E2; 1. 卡马丹节</div><div class="tri-zh-text">由<strong>卡达山都顺和穆鲁</strong>族庆祝。感谢<strong>稻神（Bambaazon/Bambarayon）</strong>的精神象征。由<strong>Babohizan/Bobolian</strong>主持。期望获得更多收成。举办与Huminodun牺牲相关的<strong>Unduk Ngadau</strong>选美比赛。</div></div>
+      </div>
+      <div class="tri">
+        <div class="tri-my"><div class="tri-my-lbl">&#x1F7E1; 2. Pesta Regata Lepa</div><div class="tri-my-text">Disambut oleh kaum <strong>Bajau/Sama</strong>. Memperingati peranan <strong>lepa</strong> dalam kehidupan kaum Bajau. Lepa dihias cantik. <strong>Regata</strong> bermaksud perlumbaan perahu.</div></div>
+        <div class="tri-en"><div class="tri-en-lbl">&#x1F535; 2. Pesta Regata Lepa</div><div class="tri-en-text">Celebrated by <strong>Bajau/Sama</strong>. Commemorates the role of <strong>lepa</strong> (boat) in Bajau life. Lepa beautifully decorated. <strong>Regata</strong> means boat race.</div></div>
+        <div class="tri-zh"><div class="tri-zh-lbl">&#x1F7E2; 2. 利帕船赛节</div><div class="tri-zh-text">由<strong>巴瑶/萨玛</strong>族庆祝。纪念<strong>利帕船</strong>在巴瑶生活中的作用。利帕装饰华美。<strong>Regata</strong>意为赛船。</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TARIAN -->
+  <div class="sec s-pk">
+    <div class="sec-header" onclick="exp(this)">
+      <div class="sec-icon">&#128131;</div>
+      <div class="sec-info">
+        <div class="sec-num">10.4</div>
+        <div class="sec-title-my">Tarian Sarawak &amp; Sabah</div>
+        <div class="sec-title-en">Dances of Sarawak &amp; Sabah</div>
+        <div class="sec-title-zh">砂拉越与沙巴舞蹈</div>
+      </div>
+      <span class="sec-chev">&#8964;</span>
+    </div>
+    <div class="sec-body">
+      <div class="comp-wrap">
+        <table class="comp-table">
+          <thead><tr><th class="th-sr">Tarian Sarawak</th><th class="th-sb">Tarian Sabah</th></tr></thead>
+          <tbody>
+            <tr>
+              <td class="td-sr">
+                <strong>Ngajat (Iban &amp; Orang Ulu):</strong> Ngajat Indu dan Ngajat Lesung. Memberi semangat kepada pejuang yang hendak berperang.<br><br>
+                <strong>Tarian Datun Julud (Orang Ulu):</strong> Lambang kegembiraan dan terima kasih. Penari wanita memakai pakaian warna-warni dengan perhiasan kepala. Menggunakan bulu burung Kenyalang. Diiringi alat muzik <strong>Sape</strong>.<br><br>
+                <strong>Bermukun:</strong> Acara bergendang. Gendang dipalu oleh wanita, penari lelaki. Ditarikan di majlis perkahwinan. Semasa bermukun, pemukul gendang akan berbalas pantun.
+              </td>
+              <td class="td-sb">
+                <strong>Sumazau (Kadazandusun):</strong> Ditarikan semasa Pesta Kaamatan dan majlis keramaian. 'Sazau' = pergerakan tangan penari seperti helang.<br><br>
+                <strong>Magunatip (Murut):</strong> Menggunakan dua batang buluh. Ditarikan semasa majlis keramaian.<br><br>
+                <strong>Limbai (Bajau/Sama) — pantai barat Sabah:</strong> Ditarikan secara berpasangan. Pasangan wanita memakai sarimpak (hiasan kepala). Majlis perkahwinan dan keramaian.
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="mem">
+        <div class="mem-lbl">&#129504; Tarian Memory: Sarawak — Ngajat, Datun Julud, Bermukun | Sabah — Sumazau, Magunatip, Limbai</div>
+        <div class="pills">
+          <span class="pill-my">Ngajat (Iban) = semangat pejuang</span><span class="pill-en">Ngajat = warrior spirit</span><span class="pill-zh">Ngajat=战士精神</span>
+          <span class="pill-my">Datun Julud = Sape muzik</span><span class="pill-en">Datun Julud = Sape music</span><span class="pill-zh">Datun Julud=Sape乐器</span>
+          <span class="pill-my">Sumazau = pergerakan tangan helang</span><span class="pill-en">Sumazau = eagle hand movements</span><span class="pill-zh">Sumazau=鹰形手势</span>
+          <span class="pill-my">Magunatip = dua batang buluh</span><span class="pill-en">Magunatip = two bamboo poles</span><span class="pill-zh">Magunatip=两根竹竿</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ════ SENI BINA ════ -->
+<div id="panel-bina" class="panel">
+
+  <div class="sec s-yw">
+    <div class="sec-header" onclick="exp(this)">
+      <div class="sec-icon">&#127968;</div>
+      <div class="sec-info">
+        <div class="sec-num">10.4</div>
+        <div class="sec-title-my">Seni Bina Sarawak</div>
+        <div class="sec-title-en">Sarawak Architecture</div>
+        <div class="sec-title-zh">砂拉越建筑艺术</div>
+      </div>
+      <span class="sec-chev open">&#8964;</span>
+    </div>
+    <div class="sec-body open">
+      <!-- RUMAH PANJANG -->
+      <div class="tri">
+        <div class="tri-my"><div class="tri-my-lbl">&#x1F7E1; Rumah Panjang (Iban, Bidayuh, Orang Ulu)</div><div class="tri-my-text">
+          Bertujuan: keselamatan, pertahanan dan kerjasama penduduk.<br>
+          Bahagian:<br>
+          • <strong>Bilik</strong> — ruang bilik bagi setiap keluarga<br>
+          • <strong>Ruai</strong> — tempat berkumpul untuk aktiviti sosial<br>
+          • <strong>Tanju</strong> — ruang pelbagai guna<br>
+          Fungsi: tempat tinggal, berinteraksi, mengadakan acara perayaan.<br>
+          Bahan: kayu keras (kayu belian), atap daun rumbia.
+        </div></div>
+        <div class="tri-en"><div class="tri-en-lbl">&#x1F535; Longhouse (Iban, Bidayuh, Orang Ulu)</div><div class="tri-en-text">
+          Purpose: safety, defence and community cooperation.<br>
+          Sections:<br>
+          • <strong>Bilik</strong> — private family room<br>
+          • <strong>Ruai</strong> — communal social space<br>
+          • <strong>Tanju</strong> — multipurpose space<br>
+          Function: dwelling, interaction, ceremonies.<br>
+          Materials: hardwood (belian wood), sago palm leaf roof.
+        </div></div>
+        <div class="tri-zh"><div class="tri-zh-lbl">&#x1F7E2; 长屋（伊班、比达友、乌鲁人）</div><div class="tri-zh-text">
+          目的：安全、防御和社区合作。<br>
+          区域：<br>
+          • <strong>Bilik</strong>——家庭私人房间<br>
+          • <strong>Ruai</strong>——公共社交空间<br>
+          • <strong>Tanju</strong>——多用途空间<br>
+          功能：居住、互动、举办庆典。<br>
+          材料：硬木（belian木）、西米棕榈叶屋顶。
+        </div></div>
+      </div>
+
+      <!-- RUMAH TINGGI -->
+      <div class="tri">
+        <div class="tri-my"><div class="tri-my-lbl">&#x1F7E1; Rumah Tinggi (Melanau)</div><div class="tri-my-text">Dibina tinggi — <strong>10 meter dari aras tanah</strong>. Fungsi: mengelakkan serangan musuh. Bahan: kayu keras dan bulat seperti kayu belian.</div></div>
+        <div class="tri-en"><div class="tri-en-lbl">&#x1F535; Tall House (Melanau)</div><div class="tri-en-text">Built high — <strong>10 metres above ground</strong>. Function: avoid enemy attacks. Materials: hard round wood like belian.</div></div>
+        <div class="tri-zh"><div class="tri-zh-lbl">&#x1F7E2; 高脚屋（梅拉瑙）</div><div class="tri-zh-text">建造高——<strong>距地面10米</strong>。功能：避免敌人攻击。材料：坚硬圆木如belian木。</div></div>
+      </div>
+
+      <!-- RUMAH BARUK -->
+      <div class="tri">
+        <div class="tri-my"><div class="tri-my-lbl">&#x1F7E1; Rumah Baruk (Bidayuh)</div><div class="tri-my-text">Berbentuk bulat, puncaknya berbentuk kon. Dihiasi lambang burung kenyalang. Fungsi: tempat menyimpan tengkorak, majlis sosial, tempat mesyuarat, menyimpan senjata, pusat ritual. Bahan: kayu belian, dinding buluh, atap daun rumbia.</div></div>
+        <div class="tri-en"><div class="tri-en-lbl">&#x1F535; Baruk House (Bidayuh)</div><div class="tri-en-text">Round shape, cone-shaped peak. Decorated with hornbill bird symbol. Function: store skulls, social events, meeting place, weapon storage, ritual centre. Materials: belian wood, bamboo walls, sago palm leaf roof.</div></div>
+        <div class="tri-zh"><div class="tri-zh-lbl">&#x1F7E2; 圆形屋（比达友）</div><div class="tri-zh-text">圆形，顶部呈锥形。装饰犀鸟符号。功能：存放头颅、社交场所、会议场所、武器储存、仪式中心。材料：belian木、竹墙、西米棕榈叶屋顶。</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sec s-yw">
+    <div class="sec-header" onclick="exp(this)">
+      <div class="sec-icon">&#127968;</div>
+      <div class="sec-info">
+        <div class="sec-num">10.4</div>
+        <div class="sec-title-my">Seni Bina Sabah</div>
+        <div class="sec-title-en">Sabah Architecture</div>
+        <div class="sec-title-zh">沙巴建筑艺术</div>
+      </div>
+      <span class="sec-chev">&#8964;</span>
+    </div>
+    <div class="sec-body">
+      <!-- RUMAH PANJANG RUNGUS -->
+      <div class="tri">
+        <div class="tri-my"><div class="tri-my-lbl">&#x1F7E1; Rumah Panjang Rungus — dikenali sebagai Vinatang</div><div class="tri-my-text">
+          Istimewa: bilik tidur menghadap <strong>Gunung Kinabalu</strong>.<br>
+          • <strong>Ongkob</strong> — ruang bilik keluarga<br>
+          • <strong>Apad</strong> — tempat berkumpul dan tempat santai<br>
+          Fungsi: tempat kediaman, mewujudkan semangat kerjasama, kubu pertahanan, melindungi ahli-ahlinya.<br>
+          Bahan: kayu bulat, buluh, kulit kayu, daun nipah.
+        </div></div>
+        <div class="tri-en"><div class="tri-en-lbl">&#x1F535; Rungus Longhouse — known as Vinatang</div><div class="tri-en-text">
+          Special: bedrooms face <strong>Mount Kinabalu</strong>.<br>
+          • <strong>Ongkob</strong> — family bedroom space<br>
+          • <strong>Apad</strong> — gathering and relaxation space<br>
+          Function: dwelling, community spirit, defensive fort, protects members.<br>
+          Materials: round wood, bamboo, bark, nipah leaves.
+        </div></div>
+        <div class="tri-zh"><div class="tri-zh-lbl">&#x1F7E2; 龙古斯长屋——称为Vinatang</div><div class="tri-zh-text">
+          特色：卧室朝向<strong>神山（京那巴鲁山）</strong>。<br>
+          • <strong>Ongkob</strong>——家庭卧室空间<br>
+          • <strong>Apad</strong>——聚会和休息空间<br>
+          功能：居所、培养合作精神、防御堡垒、保护成员。<br>
+          材料：圆木、竹子、树皮、水椰叶。
+        </div></div>
+      </div>
+
+      <!-- RUMAH PANJANG MURUT -->
+      <div class="tri">
+        <div class="tri-my"><div class="tri-my-lbl">&#x1F7E1; Rumah Panjang Murut — dikenali sebagai Tulus dan Pahun</div><div class="tri-my-text">
+          Unik: <strong>pintu rumah dibina di tepi rumah</strong>. Terdapat ruang memanjang yang memisahkan bilik-bilik keluarga.<br>
+          • <strong>Sulap</strong> — bilik keluarga<br>
+          • <strong>Lansaran</strong> — lantai tarian<br>
+          • <strong>Tobon</strong> — pintu utama<br>
+          • <strong>Salo</strong> — ruang terbesar untuk aktiviti sosial dan agama<br>
+          Fungsi: keselamatan, pertahanan, ruang tarian, lantai lompatan.<br>
+          Bahan: kayu bulat, kulit kayu dan daun tolidus.
+        </div></div>
+        <div class="tri-en"><div class="tri-en-lbl">&#x1F535; Murut Longhouse — known as Tulus and Pahun</div><div class="tri-en-text">
+          Unique: <strong>door built at the side of the house</strong>. Has elongated space separating family rooms.<br>
+          • <strong>Sulap</strong> — family room<br>
+          • <strong>Lansaran</strong> — dance floor<br>
+          • <strong>Tobon</strong> — main door<br>
+          • <strong>Salo</strong> — largest room for social and religious activities<br>
+          Function: safety, defence, dancing space.<br>
+          Materials: round wood, bark, tolidus leaves.
+        </div></div>
+        <div class="tri-zh"><div class="tri-zh-lbl">&#x1F7E2; 穆鲁长屋——称为Tulus和Pahun</div><div class="tri-zh-text">
+          独特之处：<strong>门建在房屋侧面</strong>。有分隔家庭房间的延伸空间。<br>
+          • <strong>Sulap</strong>——家庭房间<br>
+          • <strong>Lansaran</strong>——舞蹈地板<br>
+          • <strong>Tobon</strong>——正门<br>
+          • <strong>Salo</strong>——最大的社交和宗教活动室<br>
+          功能：安全、防御、舞蹈空间。<br>
+          材料：圆木、树皮和tolidus叶。
+        </div></div>
+      </div>
+
+      <!-- LEPA -->
+      <div class="tri">
+        <div class="tri-my"><div class="tri-my-lbl">&#x1F7E1; Lepa (Bajau/Sama) — pantai timur Sabah</div><div class="tri-my-text">
+          Merupakan <strong>perahu</strong> yang dibuat oleh kaum Bajau/Sama. Pembuatan lepa perlu mengikut hari dan bulan yang ditentukan. Fungsi: mengangkut barang dan <strong>tempat kediaman</strong>. Bahan: pelbagai jenis kayu (obasuluk, seraya, mata-mata, gagir), daun nipah untuk atap.
+        </div></div>
+        <div class="tri-en"><div class="tri-en-lbl">&#x1F535; Lepa (Bajau/Sama) — east coast Sabah</div><div class="tri-en-text">
+          A <strong>boat</strong> made by the Bajau/Sama community. Construction must follow specific days and months. Function: transporting goods and <strong>place of residence</strong>. Materials: various wood types (obasuluk, seraya, mata-mata, gagir), nipah leaves for roof.
+        </div></div>
+        <div class="tri-zh"><div class="tri-zh-lbl">&#x1F7E2; 利帕船（巴瑶/萨玛）——沙巴东海岸</div><div class="tri-zh-text">
+          巴瑶/萨玛族制造的<strong>船只</strong>。制造须遵循特定的日期和月份。功能：运输货物和<strong>居所</strong>。材料：多种木材（obasuluk、seraya、mata-mata、gagir），水椰叶用于屋顶。
+        </div></div>
+      </div>
+
+      <div class="mem">
+        <div class="mem-lbl">&#129504; Seni Bina Memory</div>
+        <div class="pills">
+          <span class="pill-my">Sarawak: Rumah Panjang, Rumah Tinggi (10m), Rumah Baruk (bulat)</span>
+          <span class="pill-en">Sarawak: Longhouse, Tall House (10m), Baruk (round)</span>
+          <span class="pill-zh">砂拉越：长屋、高脚屋（10m）、圆形屋</span>
+          <span class="pill-my">Sabah: Vinatang (Rungus), Tulus/Pahun (Murut), Lepa (Bajau)</span>
+          <span class="pill-en">Sabah: Vinatang (Rungus), Tulus/Pahun (Murut), Lepa (Bajau)</span>
+          <span class="pill-zh">沙巴：Vinatang（龙古斯）、Tulus/Pahun（穆鲁）、利帕船（巴瑶）</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ════ MEMORY MAP ════ -->
+<div id="panel-mm" class="panel">
+  <div style="background:#0f172a;border-radius:16px;overflow:hidden;margin-bottom:12px">
+    <div class="mmap-header">
+      <div class="mmap-h-title">&#11088; Super Compact Memory Map</div>
+      <div class="mmap-h-en">Peta Hafalan Ringkas — Bab 10: Sarawak &amp; Sabah</div>
+      <div class="mmap-h-zh">超简短记忆图 — 第十章：砂拉越与沙巴</div>
+    </div>
+    <div style="padding:14px">
+
+      <!-- COMPARISON TABLE -->
+      <div style="background:#1e293b;border-radius:12px;padding:12px;margin-bottom:12px">
+        <div style="font-size:11px;font-weight:800;letter-spacing:2px;color:#6ee7b7;text-transform:uppercase;margin-bottom:10px">&#128203; Sarawak vs Sabah — Quick Compare</div>
+        <div class="comp-wrap">
+          <table class="comp-table">
+            <thead><tr><th style="background:#334155;color:#94a3b8;font-size:10px;text-align:left;padding:7px 8px">Aspek</th><th class="th-sr">Sarawak</th><th class="th-sb">Sabah</th></tr></thead>
+            <tbody>
+              <tr><td class="td-lbl">Lokasi</td><td class="td-sr">Barat daya Borneo / SW Borneo / 婆罗洲西南</td><td class="td-sb">Utara Borneo / N Borneo / 婆罗洲北部</td></tr>
+              <tr><td class="td-lbl">Pengaruh</td><td class="td-sr">Srivijaya, Majapahit, Brunei</td><td class="td-sb">Majapahit, Brunei, Sulu</td></tr>
+              <tr><td class="td-lbl">Kaum Utama</td><td class="td-sr">Iban, Melayu, Bidayuh, Melanau, Orang Ulu</td><td class="td-sb">Kadazandusun, Bajau/Sama, Murut, Suluk, Orang Sungai</td></tr>
+              <tr><td class="td-lbl">Perayaan</td><td class="td-sr">Gawai Dayak, Pesta Babulang, Pesta Kaul</td><td class="td-sb">Pesta Kaamatan, Pesta Regata Lepa</td></tr>
+              <tr><td class="td-lbl">Tarian</td><td class="td-sr">Ngajat, Tarian Datun Julud, Bermukun</td><td class="td-sb">Sumazau, Magunatip, Limbai</td></tr>
+              <tr><td class="td-lbl">Seni Bina</td><td class="td-sr">Rumah Panjang, Rumah Tinggi (10m), Rumah Baruk (bulat)</td><td class="td-sb">Vinatang (Rungus), Tulus/Pahun (Murut), Lepa (Bajau)</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="mmap-item">
+        <div class="mmap-my"><div class="mmap-my-text">Hubungan: Sarawak (barat daya Borneo) + Sabah (utara Borneo) → perdagangan + keagamaan → Srivijaya/Majapahit/Brunei/Sulu</div></div>
+        <div class="mmap-en"><div class="mmap-en-text">Relations: Sarawak (SW Borneo) + Sabah (N Borneo) → trade + religion → Srivijaya/Majapahit/Brunei/Sulu</div></div>
+        <div class="mmap-zh"><div class="mmap-zh-text">关系：砂拉越（婆罗洲西南）+沙巴（婆罗洲北部）→贸易+宗教→室利佛逝/满者伯夷/文莱/苏禄</div></div>
+      </div>
+
+      <div class="mmap-item">
+        <div class="mmap-my"><div class="mmap-my-text">Pemerintahan Sarawak: Tuai Rumah (Iban), Orang Kaya (Dayak Brunei). Sabah: Orang Tua (ketua suku), Wakil Raja (Brunei/Sulu), Ketua Bebas (Syarif Osman, Datu Kurunding)</div></div>
+        <div class="mmap-en"><div class="mmap-en-text">Sarawak governance: Tuai Rumah (Iban), Orang Kaya (Dayak-Brunei). Sabah: Orang Tua (tribal), Raja's Rep (Brunei/Sulu), Free Chief (Syarif Osman, Datu Kurunding)</div></div>
+        <div class="mmap-zh"><div class="mmap-zh-text">砂拉越管治：Tuai Rumah（伊班）、Orang Kaya（达雅-文莱）。沙巴：老者（部落）、拉惹代表（文莱/苏禄）、自由首领</div></div>
+      </div>
+
+      <div class="mmap-item">
+        <div class="mmap-my"><div class="mmap-my-text">Ekonomi: Pesisir (perdagangan, ikan, perahu) | Lembah sungai (padi, buah) | Pedalaman (hasil hutan, berburu)</div></div>
+        <div class="mmap-en"><div class="mmap-en-text">Economy: Coastal (trade, fishing, boats) | River valley (rice, fruits) | Interior (forest products, hunting)</div></div>
+        <div class="mmap-zh"><div class="mmap-zh-text">经济：沿海（贸易、捕鱼、船只）| 河流流域（水稻、水果）| 内陆（林产品、打猎）</div></div>
+      </div>
+
+      <div class="mmap-item">
+        <div class="mmap-my"><div class="mmap-my-text">Kepentingan Sungai: Kegunaan Harian + Pengangkutan + Petempatan + Sumber Rezeki + Perdagangan + Rekreasi</div></div>
+        <div class="mmap-en"><div class="mmap-en-text">River Importance: Daily Use + Transport + Settlement + Livelihood + Trade + Recreation</div></div>
+        <div class="mmap-zh"><div class="mmap-zh-text">河流重要性：日常用途+交通+定居+谋生+贸易+休闲</div></div>
+      </div>
+
+      <div class="mmap-item">
+        <div class="mmap-my"><div class="mmap-my-text">Tenunan Sarawak: Pua Kumbu (Iban, kain kapas), Keringkam (Melayu, benang emas). Sabah: Inavol (Rungus), Kain Dastar (Iranun)</div></div>
+        <div class="mmap-en"><div class="mmap-en-text">Sarawak weave: Pua Kumbu (Iban, cotton), Keringkam (Malay, gold thread). Sabah: Inavol (Rungus), Kain Dastar (Iranun)</div></div>
+        <div class="mmap-zh"><div class="mmap-zh-text">砂拉越织布：Pua Kumbu（伊班，棉布）、Keringkam（马来，金线）。沙巴：Inavol（龙古斯）、Kain Dastar（伊朗坤）</div></div>
+      </div>
+
+      <div class="mmap-item">
+        <div class="mmap-my"><div class="mmap-my-text">Perayaan: Gawai (Iban/Bidayuh) | Kaamatan (Kadazandusun/Murut — semangat padi Bambaazon, Unduk Ngadau) | Regata Lepa (Bajau) | Pesta Kaul (Melanau — Ipok)</div></div>
+        <div class="mmap-en"><div class="mmap-en-text">Festivals: Gawai (Iban/Bidayuh) | Kaamatan (Kadazandusun/Murut — rice spirit Bambaazon, Unduk Ngadau) | Regata Lepa (Bajau) | Pesta Kaul (Melanau — Ipok)</div></div>
+        <div class="mmap-zh"><div class="mmap-zh-text">节日：Gawai（伊班/比达友）| 卡马丹节（卡达山都顺/穆鲁——稻神Bambaazon，Unduk Ngadau）| 利帕船赛节（巴瑶）| Pesta Kaul（梅拉瑙——Ipok）</div></div>
+      </div>
+
+      <div class="mmap-item">
+        <div class="mmap-my"><div class="mmap-my-text">Seni Bina Sarawak: Rumah Panjang (Bilik+Ruai+Tanju) | Rumah Tinggi Melanau (10m) | Rumah Baruk Bidayuh (bulat+kon). Sabah: Vinatang (Rungus, Ongkob+Apad) | Tulus/Pahun (Murut, Salo+Lansaran) | Lepa (Bajau = perahu)</div></div>
+        <div class="mmap-en"><div class="mmap-en-text">Sarawak architecture: Longhouse (Bilik+Ruai+Tanju) | Tall House Melanau (10m) | Baruk Bidayuh (round+cone). Sabah: Vinatang (Rungus, Ongkob+Apad) | Tulus/Pahun (Murut, Salo+Lansaran) | Lepa (Bajau = boat home)</div></div>
+        <div class="mmap-zh"><div class="mmap-zh-text">砂拉越建筑：长屋（Bilik+Ruai+Tanju）| 梅拉瑙高脚屋（10m）| 比达友圆形屋（圆形+锥形）。沙巴：Vinatang（龙古斯，Ongkob+Apad）| Tulus/Pahun（穆鲁，Salo+Lansaran）| 利帕船（巴瑶=船屋）</div></div>
+      </div>
+
+      <!-- EXAM BOX -->
+      <div class="exam-box">
+        <div class="exam-hdr"><div class="exam-lbl">&#9997; Exam Template / 考试句型</div></div>
+        <div class="exam-my"><div class="exam-my-t">Sarawak dan Sabah merupakan sebahagian daripada Alam Melayu yang terdedah kepada pengaruh perdagangan dan keagamaan. Masyarakat bumiputera Sarawak dan Sabah mempunyai keunikan tersendiri dari aspek pemerintahan, ekonomi, kesenian, perayaan, tarian dan seni bina.</div></div>
+        <div class="exam-en"><div class="exam-en-t">Sarawak and Sabah are part of the Malay World exposed to trade and religious influences. The Bumiputera communities of Sarawak and Sabah have their own uniqueness in aspects of governance, economy, arts, festivals, dances and architecture.</div></div>
+        <div class="exam-zh"><div class="exam-zh-t">砂拉越和沙巴是马来世界的一部分，受贸易和宗教影响。砂拉越和沙巴的土著社区在政府、经济、艺术、节日、舞蹈和建筑方面各有独特之处。</div></div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div class="footer">Bab 10 &middot; Sejarah Tingkatan 3 &middot; 第十章</div>
+
+<script>
+var hiddenLang={my:false,en:false,zh:false};
+function tgl(lang,btn){
+  hiddenLang[lang]=!hiddenLang[lang];
+  document.getElementById('app').classList.toggle('hide-'+lang,hiddenLang[lang]);
+  btn.classList.toggle('on',!hiddenLang[lang]);
+}
+function showPanel(id,btn){
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById('panel-'+id).classList.add('active');
+  btn.classList.add('active');
+  window.scrollTo(0,document.querySelector('.tabs').offsetTop-60);
+}
+function exp(hdr){
+  var b=hdr.nextElementSibling;
+  var c=hdr.querySelector('.sec-chev');
+  var o=b.classList.toggle('open');
+  c.classList.toggle('open',o);
+}
+</script>
+</body>
+</html>
