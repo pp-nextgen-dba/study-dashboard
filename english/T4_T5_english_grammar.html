@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>English Grammar Mobile Learning Hub 英文语法学习</title>
+  <style>
+    :root{
+      --bg:#f5f7ff;
+      --card:#ffffff;
+      --ink:#1f2544;
+      --muted:#697089;
+      --primary:#6656e8;
+      --primary2:#8e63ff;
+      --accent:#ffb84d;
+      --green:#18a66a;
+      --line:#e2e6f7;
+      --soft:#f0edff;
+      --yellow:#fff8e8;
+      --shadow:0 16px 35px rgba(56,63,130,.15);
+      --radius:24px;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family:Arial, "Microsoft YaHei", "PingFang SC", "Noto Sans CJK SC", sans-serif;
+      background:
+        radial-gradient(circle at 0% 0%, rgba(255,184,77,.25), transparent 30%),
+        radial-gradient(circle at 100% 5%, rgba(102,86,232,.22), transparent 35%),
+        linear-gradient(180deg,#fbfcff 0%,var(--bg) 100%);
+      color:var(--ink);
+    }
+    .app-header{
+      color:white;
+      padding:28px 16px 72px;
+      background:linear-gradient(135deg,#3f2ba6,#7d61ff 58%,#a777ff);
+      position:relative;
+      overflow:hidden;
+    }
+    .app-header:before,.app-header:after{
+      content:"";
+      position:absolute;
+      border-radius:999px;
+      background:rgba(255,255,255,.12);
+    }
+    .app-header:before{width:220px;height:220px;left:-90px;top:-70px}
+    .app-header:after{width:280px;height:280px;right:-120px;bottom:-150px}
+    .hero{max-width:1100px;margin:auto;position:relative;z-index:2}
+    .badge{
+      display:inline-flex;
+      gap:8px;
+      align-items:center;
+      background:rgba(255,255,255,.16);
+      border:1px solid rgba(255,255,255,.28);
+      padding:8px 13px;
+      border-radius:999px;
+      font-weight:700;
+      font-size:.86rem;
+    }
+    h1{
+      margin:14px 0 10px;
+      font-size:clamp(2rem,6vw,4.2rem);
+      line-height:1.05;
+      letter-spacing:-1px;
+    }
+    .hero p{
+      max-width:800px;
+      margin:0;
+      line-height:1.65;
+      font-size:clamp(1rem,2.6vw,1.16rem);
+      opacity:.96;
+    }
+    main{
+      max-width:1120px;
+      margin:-50px auto 70px;
+      padding:0 14px;
+      position:relative;
+      z-index:5;
+    }
+    .panel{
+      background:rgba(255,255,255,.94);
+      border:1px solid var(--line);
+      box-shadow:var(--shadow);
+      border-radius:var(--radius);
+    }
+    .control-panel{
+      padding:16px;
+      display:grid;
+      grid-template-columns:1.4fr repeat(4,auto);
+      gap:10px;
+      align-items:center;
+      position:sticky;
+      top:8px;
+      z-index:50;
+      backdrop-filter:blur(12px);
+    }
+    .search{
+      width:100%;
+      border:1px solid var(--line);
+      background:#fbfcff;
+      border-radius:17px;
+      padding:14px 15px;
+      font-size:1rem;
+      outline:none;
+      color:var(--ink);
+    }
+    .search:focus{
+      border-color:var(--primary);
+      box-shadow:0 0 0 4px rgba(102,86,232,.13);
+    }
+    button{
+      border:0;
+      cursor:pointer;
+      font-family:inherit;
+    }
+    .filter{
+      background:#fff;
+      color:var(--primary);
+      border:1px solid var(--line);
+      border-radius:999px;
+      padding:12px 15px;
+      font-weight:900;
+      white-space:nowrap;
+      transition:.18s;
+    }
+    .filter.active,.filter:hover{
+      background:var(--primary);
+      color:white;
+      transform:translateY(-1px);
+    }
+    .lang-btn{
+      background:#211b46;
+      color:white;
+      border-radius:999px;
+      padding:12px 15px;
+      font-weight:900;
+      white-space:nowrap;
+    }
+    .dashboard{
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:12px;
+      margin:16px 0;
+    }
+    .stat{
+      padding:16px;
+      border-radius:20px;
+      background:#fff;
+      border:1px solid var(--line);
+      box-shadow:0 9px 22px rgba(56,63,130,.08);
+    }
+    .stat b{
+      display:block;
+      color:var(--primary);
+      font-size:1.65rem;
+      margin-bottom:4px;
+    }
+    .stat span{color:var(--muted);font-size:.9rem}
+    .learning-plan{
+      margin:18px 0;
+      padding:18px;
+    }
+    .learning-plan h2,.section h2{
+      margin:0 0 12px;
+      font-size:1.35rem;
+    }
+    .steps{
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:10px;
+    }
+    .step{
+      padding:14px;
+      border-radius:18px;
+      background:linear-gradient(180deg,#fff,#fbfaff);
+      border:1px solid var(--line);
+      line-height:1.45;
+    }
+    .step strong{
+      color:var(--primary);
+      display:block;
+      margin-bottom:6px;
+    }
+    .cn{
+      display:block;
+      color:#5d647c;
+      margin-top:5px;
+      line-height:1.55;
+      font-size:.95rem;
+    }
+    .section{margin-top:24px}
+    .section-head{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:10px;
+      margin:0 2px 12px;
+    }
+    .section-title{
+      display:flex;
+      align-items:center;
+      gap:10px;
+    }
+    .dot{
+      width:15px;height:15px;border-radius:5px;
+      background:var(--accent);
+      box-shadow:0 0 0 6px rgba(255,184,77,.22);
+    }
+    .unit-grid{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:14px;
+    }
+    .unit-card{
+      background:#fff;
+      border:1px solid var(--line);
+      border-radius:24px;
+      box-shadow:0 10px 22px rgba(56,63,130,.08);
+      overflow:hidden;
+      transition:.2s;
+    }
+    .unit-card:hover{transform:translateY(-3px);box-shadow:var(--shadow)}
+    .unit-strip{height:6px;background:linear-gradient(90deg,var(--primary),var(--accent))}
+    .unit-body{padding:16px}
+    .unit-top{
+      display:flex;
+      justify-content:space-between;
+      gap:8px;
+      align-items:flex-start;
+      margin-bottom:12px;
+    }
+    .unit-no{
+      background:var(--soft);
+      color:var(--primary);
+      border-radius:13px;
+      padding:8px 10px;
+      font-weight:900;
+      font-size:.86rem;
+    }
+    .page{
+      color:var(--muted);
+      font-size:.84rem;
+      padding-top:7px;
+      font-weight:700;
+    }
+    .topic{
+      font-size:1.12rem;
+      font-weight:900;
+      line-height:1.3;
+      margin-bottom:4px;
+    }
+    .topic-cn{
+      color:#5d647c;
+      font-weight:800;
+      margin-bottom:10px;
+      line-height:1.45;
+    }
+    .mini{
+      color:var(--muted);
+      line-height:1.45;
+      font-size:.92rem;
+      min-height:74px;
+    }
+    .tags{
+      display:flex;
+      flex-wrap:wrap;
+      gap:6px;
+      margin:12px 0;
+    }
+    .tag{
+      background:#f4f6ff;
+      border:1px solid #e7e9fb;
+      color:#58607d;
+      padding:5px 8px;
+      border-radius:999px;
+      font-size:.76rem;
+      font-weight:700;
+    }
+    .card-actions{
+      display:grid;
+      grid-template-columns:1fr auto;
+      gap:10px;
+      align-items:center;
+      margin-top:12px;
+    }
+    .learn-btn{
+      background:linear-gradient(135deg,var(--primary),var(--primary2));
+      color:white;
+      border-radius:15px;
+      padding:11px 12px;
+      font-weight:900;
+      text-align:center;
+      text-decoration:none;
+    }
+    .check{
+      display:flex;
+      align-items:center;
+      gap:7px;
+      color:var(--muted);
+      font-size:.88rem;
+      font-weight:700;
+    }
+    input[type=checkbox]{
+      width:19px;height:19px;
+      accent-color:var(--green);
+    }
+    .lesson{
+      margin-top:22px;
+      padding:18px;
+      scroll-margin-top:110px;
+    }
+    .lesson-head{
+      display:flex;
+      justify-content:space-between;
+      gap:12px;
+      align-items:flex-start;
+      border-bottom:1px solid var(--line);
+      padding-bottom:14px;
+      margin-bottom:14px;
+    }
+    .lesson h3{
+      margin:0;
+      font-size:1.25rem;
+      line-height:1.35;
+    }
+    .lesson .small-label{
+      color:var(--primary);
+      font-weight:900;
+      margin-bottom:5px;
+      font-size:.88rem;
+    }
+    .lesson-content{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:14px;
+    }
+    .box{
+      background:#fbfcff;
+      border:1px solid var(--line);
+      border-radius:18px;
+      padding:14px;
+      line-height:1.55;
+    }
+    .box h4{
+      margin:0 0 8px;
+      color:var(--primary);
+      font-size:1rem;
+    }
+    .formula{
+      background:#211b46;
+      color:white;
+      padding:12px;
+      border-radius:15px;
+      font-weight:900;
+      line-height:1.6;
+    }
+    .examples{
+      margin:0;
+      padding-left:18px;
+    }
+    .examples li{margin:8px 0}
+    .example-cn{
+      color:#5d647c;
+      font-size:.93rem;
+      margin-top:3px;
+    }
+    .quiz{
+      grid-column:1/-1;
+      background:var(--yellow);
+      border:1px solid #ffe0a8;
+      border-radius:18px;
+      padding:14px;
+      line-height:1.55;
+    }
+    .quiz strong{color:#9d6100}
+    .answer{
+      margin-top:8px;
+      padding:9px 11px;
+      background:white;
+      border-radius:12px;
+      border:1px dashed #e1bb74;
+      color:#705025;
+    }
+    .top-link{
+      position:fixed;
+      right:14px;
+      bottom:14px;
+      background:var(--primary);
+      color:white;
+      text-decoration:none;
+      padding:12px 14px;
+      border-radius:999px;
+      font-weight:900;
+      box-shadow:var(--shadow);
+      z-index:70;
+    }
+    .empty{
+      display:none;
+      text-align:center;
+      padding:24px;
+      margin-top:14px;
+      color:var(--muted);
+    }
+    footer{
+      text-align:center;
+      color:var(--muted);
+      padding:20px 16px 45px;
+      line-height:1.5;
+    }
+    body.cn-only .english-line{display:none}
+    body.cn-only .cn{font-size:1rem;color:var(--ink)}
+    body.cn-only .topic{display:none}
+    body.cn-only .topic-cn{font-size:1.12rem;color:var(--ink)}
+
+    @media(max-width:930px){
+      .control-panel{grid-template-columns:1fr 1fr}
+      .search{grid-column:1/-1}
+      .dashboard{grid-template-columns:repeat(2,1fr)}
+      .steps{grid-template-columns:repeat(2,1fr)}
+      .unit-grid{grid-template-columns:repeat(2,1fr)}
+      .lesson-content{grid-template-columns:1fr}
+    }
+    @media(max-width:560px){
+      .app-header{padding:24px 14px 70px}
+      main{padding:0 10px;margin-top:-48px}
+      .control-panel{grid-template-columns:1fr;position:static}
+      .dashboard,.steps,.unit-grid{grid-template-columns:1fr}
+      .stat{padding:14px}
+      .lesson{padding:15px}
+      .lesson-head{display:block}
+      .hero p{font-size:1rem}
+      .mini{min-height:auto}
+      .card-actions{grid-template-columns:1fr}
+      .top-link{right:10px;bottom:10px}
+    }
+    .top-nav{background:#fff;padding:10px 16px;border-bottom:2px solid #e5e7eb;position:sticky;top:0;z-index:120}
+    .dashboard-link{display:inline-flex;align-items:center;gap:6px;padding:8px 12px;border-radius:8px;background:#1d4ed8;color:#fff;font-size:13px;font-weight:800;text-decoration:none}
+    .dashboard-link:hover{background:#1e40af}
+  </style>
+</head>
+<body id="top">
+  <div class="top-nav"><a class="dashboard-link" href="../index.html">&larr; Back to Dashboard</a></div>
+  <header class="app-header">
+    <div class="hero">
+      <div class="badge">📱 Mobile Grammar Learning Page · 手机英文语法学习</div>
+      <h1>English Grammar Learning Hub</h1>
+      <p>
+        <span class="english-line">Form 4 and Form 5 grammar units arranged into a mobile study page. Your son can search, revise, read examples, try mini quizzes, and tick completed units anytime.</span>
+        <span class="cn">中四和中五英文语法单元整理成手机学习网页。孩子可以随时搜索、复习、阅读例句、练习小测验，并勾选已完成的单元。</span>
+      </p>
+    </div>
+  </header>
+
+  <main>
+    <section class="control-panel panel">
+      <input id="search" class="search" placeholder="Search / 搜索: passive, modals, conditionals, 被动语态..." />
+      <button class="filter active" data-filter="all">All 全部</button>
+      <button class="filter" data-filter="form4">Form 4 中四</button>
+      <button class="filter" data-filter="form5">Form 5 中五</button>
+      <button id="langBtn" class="lang-btn">中英双语</button>
+    </section>
+
+    <section class="dashboard">
+      <div class="stat"><b>31</b><span>Total grammar units<br>语法单元总数</span></div>
+      <div class="stat"><b>9</b><span>Form 4 units<br>中四单元</span></div>
+      <div class="stat"><b>22</b><span>Form 5 units<br>中五单元</span></div>
+      <div class="stat"><b id="doneCount">0</b><span>Completed units<br>已完成单元</span></div>
+    </section>
+
+    <section class="learning-plan panel">
+      <h2>How to Study Each Unit <span class="cn">如何学习每个单元</span></h2>
+      <div class="steps">
+        <div class="step"><strong>1. Understand</strong><span class="english-line">Read the meaning and sentence pattern first.</span><span class="cn">先理解意思和句型结构。</span></div>
+        <div class="step"><strong>2. Observe</strong><span class="english-line">Look carefully at the example sentences.</span><span class="cn">仔细观察例句如何使用。</span></div>
+        <div class="step"><strong>3. Practise</strong><span class="english-line">Try the mini quiz without looking at the answer.</span><span class="cn">先尝试小测验，不要马上看答案。</span></div>
+        <div class="step"><strong>4. Review</strong><span class="english-line">Tick the unit and revise difficult units again later.</span><span class="cn">完成后打勾，困难单元之后再复习。</span></div>
+      </div>
+    </section>
+
+    <section class="section" data-section="form4">
+      <div class="section-head">
+        <div class="section-title"><span class="dot"></span><h2>Form 4 Units <span class="cn">中四单元</span></h2></div>
+      </div>
+      <div class="unit-grid" id="form4Grid"></div>
+    </section>
+
+    <section class="section" data-section="form5">
+      <div class="section-head">
+        <div class="section-title"><span class="dot"></span><h2>Form 5 Units <span class="cn">中五单元</span></h2></div>
+      </div>
+      <div class="unit-grid" id="form5Grid"></div>
+    </section>
+
+    <section id="empty" class="empty panel">No unit found. 没有找到相关单元。</section>
+
+    <section class="section">
+      <div class="section-title"><span class="dot"></span><h2>Online Lessons <span class="cn">在线课程</span></h2></div>
+      <div id="lessons"></div>
+    </section>
+  </main>
+
+  <a class="top-link" href="#top">↑ Top</a>
+
+  <footer>
+    <span class="english-line">Built for mobile learning. Progress is saved in this browser using local storage.</span>
+    <span class="cn">适合手机学习。学习进度会保存在这个浏览器中。</span>
+  </footer>
+
+<script>
+const units = [
+  {f:'form4',u:1,p:1,t:'Intensifiers',tc:'加强语气词',tags:['degree','adverbs','加强语气'],meaning:'Intensifiers make adjectives or adverbs stronger or weaker.',mc:'加强语气词用来加强或减弱形容词、副词的程度。',pattern:'very / really / extremely / too / enough + adjective or adverb<br>very / really / extremely / too / enough + 形容词或副词',ex:[['The question is very easy.','这道题非常容易。'],['She speaks English really well.','她英文说得真的很好。'],['The bag is too heavy for me.','这个袋子对我来说太重了。']],quiz:'Complete: This exercise is ____ difficult for beginners.',qc:'填空：This exercise is ____ difficult for beginners.',ans:'too / very / extremely, depending on meaning. 中文：根据意思可填 too / very / extremely。'},
+  {f:'form4',u:2,p:8,t:'Used to and Would',tc:'Used to 和 Would',tags:['past habits','过去习惯'],meaning:'Used to and would describe past habits. Used to can also describe past states.',mc:'used to 和 would 用来描述过去习惯；used to 也可以描述过去状态。',pattern:'used to + base verb / would + base verb<br>used to + 原形动词 / would + 原形动词',ex:[['I used to play football every evening.','我以前每天傍晚踢足球。'],['When we were young, we would visit our grandparents.','我们小时候常常去探望祖父母。'],['She used to live in Penang.','她以前住在槟城。']],quiz:'Which is better: I would live in Penang when I was small.',qc:'哪一个更正确：I would live in Penang when I was small.',ans:'Use “I used to live in Penang” because it describes a past state. 中文：表示过去状态要用 used to。'},
+  {f:'form4',u:3,p:14,t:'Would for Imaginary Situations',tc:'Would 表示想象情况',tags:['imaginary','conditional','想象'],meaning:'Would is used to talk about imaginary or unreal situations.',mc:'would 可用来表达想象、假设或不真实的情况。',pattern:'would + base verb<br>would + 原形动词',ex:[['I would travel around the world if I had enough money.','如果我有足够的钱，我会环游世界。'],['He would help you if he were here.','如果他在这里，他会帮助你。']],quiz:'Complete: If I had more time, I ____ learn another language.',qc:'填空：If I had more time, I ____ learn another language.',ans:'would。中文：第二条件句常用 would。'},
+  {f:'form4',u:4,p:20,t:'Be Able to / Can / Manage to',tc:'能够 / 可以 / 成功做到',tags:['ability','能力'],meaning:'These words talk about ability. Manage to often means success after effort.',mc:'这些词表示能力；manage to 通常表示经过努力后成功做到。',pattern:'can + base verb / be able to + base verb / manage to + base verb<br>can / be able to / manage to + 原形动词',ex:[['I can swim.','我会游泳。'],['She is able to solve the problem.','她能够解决这个问题。'],['They managed to finish the project on time.','他们成功按时完成项目。']],quiz:'Which phrase shows effort: can, be able to, or manage to?',qc:'哪一个短语更强调“经过努力成功做到”？',ans:'manage to。中文：manage to 强调努力后的成功。'},
+  {f:'form4',u:5,p:27,t:'I Wish',tc:'I Wish 愿望句',tags:['wish','regret','愿望'],meaning:'I wish is used for hopes, regrets, or things we want to be different.',mc:'I wish 用来表达愿望、遗憾，或希望事情变得不一样。',pattern:'I wish + past simple / past perfect / would<br>I wish + 过去式 / 过去完成式 / would',ex:[['I wish I were taller.','我希望自己更高。'],['I wish I had studied earlier.','我真希望自己早点读书。'],['I wish you would listen carefully.','我希望你会认真听。']],quiz:'Complete: I wish I ____ harder for the exam yesterday.',qc:'填空：I wish I ____ harder for the exam yesterday.',ans:'had studied。中文：对过去遗憾，用 had + past participle。'},
+  {f:'form4',u:6,p:34,t:'Zero, First and Second Conditionals',tc:'零、第一和第二条件句',tags:['conditionals','条件句'],meaning:'Conditionals show a condition and a result.',mc:'条件句表示“条件”和“结果”的关系。',pattern:'If + present, present / If + present, will / If + past, would<br>if + 现在式, 现在式 / if + 现在式, will / if + 过去式, would',ex:[['If water reaches 100°C, it boils.','如果水达到100°C，它会沸腾。'],['If it rains, I will stay at home.','如果下雨，我会待在家。'],['If I had a car, I would drive to school.','如果我有车，我会开车去学校。']],quiz:'Which conditional: If I study hard, I will pass.',qc:'这是哪一种条件句：If I study hard, I will pass.',ans:'First conditional。中文：第一条件句，表示将来可能发生。'},
+  {f:'form4',u:7,p:41,t:'Either...or / Neither...nor',tc:'Either...or / Neither...nor',tags:['connectors','连接词'],meaning:'Either...or gives two choices. Neither...nor means not this and not that.',mc:'Either...or 表示二选一；Neither...nor 表示两者都不。',pattern:'either A or B / neither A nor B<br>不是 A 就是 B / A 和 B 都不',ex:[['You can choose either tea or coffee.','你可以选择茶或咖啡。'],['Neither Ali nor Ben came to school.','Ali 和 Ben 都没有来学校。']],quiz:'Complete: ____ my brother ____ my sister likes durian.',qc:'填空：____ my brother ____ my sister likes durian.',ans:'Neither ... nor。中文：两者都不，用 Neither...nor。'},
+  {f:'form4',u:8,p:48,t:'Reflexive Pronouns',tc:'反身代词',tags:['pronouns','代词'],meaning:'Reflexive pronouns refer back to the subject.',mc:'反身代词指回句子的主语，例如“我自己、他自己、他们自己”。',pattern:'myself, yourself, himself, herself, itself, ourselves, yourselves, themselves<br>我自己、你自己、他自己、她自己、它自己、我们自己、你们自己、他们自己',ex:[['I taught myself English.','我自学英文。'],['She looked at herself in the mirror.','她看着镜子里的自己。'],['They prepared the food themselves.','他们自己准备食物。']],quiz:'Complete: He fixed the bicycle by ____.',qc:'填空：He fixed the bicycle by ____.',ans:'himself。中文：主语是 He，所以用 himself。'},
+  {f:'form4',u:9,p:55,t:'Reported Speech (1)',tc:'间接引语（一）',tags:['speech','间接引语'],meaning:'Reported speech tells what someone said without using the exact words.',mc:'间接引语用来转述别人说的话，不一定使用原话。',pattern:'said that + changed tense / pronoun / time expression<br>said that + 改变时态 / 代词 / 时间表达',ex:[['Direct: “I am tired.” Reported: He said that he was tired.','直接：I am tired. 间接：他说他很累。'],['Direct: “I like English.” Reported: She said that she liked English.','直接：I like English. 间接：她说她喜欢英文。']],quiz:'Change: He said, “I am busy.”',qc:'改成间接引语：He said, “I am busy.”',ans:'He said that he was busy. 中文：am 要变成 was。'},
+
+  {f:'form5',u:10,p:62,t:'Present Simple with Stative Verbs',tc:'一般现在式与状态动词',tags:['present','stative','现在式'],meaning:'Use present simple for facts, routines, and many stative verbs.',mc:'一般现在式用于事实、习惯，以及许多状态动词。',pattern:'subject + base verb / s-form<br>主语 + 原形动词 / 第三人称单数加 s',ex:[['I know the answer.','我知道答案。'],['She likes music.','她喜欢音乐。'],['The sun rises in the east.','太阳从东方升起。']],quiz:'Correct or wrong: I am knowing the answer.',qc:'判断对错：I am knowing the answer.',ans:'Wrong. Say: I know the answer. 中文：know 是状态动词，通常不用进行式。'},
+  {f:'form5',u:11,p:69,t:'Present Continuous with Stative Verbs',tc:'现在进行式与状态动词',tags:['continuous','stative','进行式'],meaning:'Some stative verbs can be continuous when the meaning is temporary or active.',mc:'有些状态动词在特定意思下可以用进行式，表示暂时动作或主动行为。',pattern:'am / is / are + verb-ing<br>am / is / are + 动词-ing',ex:[['I am thinking about the problem.','我正在思考这个问题。'],['She is having lunch now.','她现在正在吃午餐。'],['They are seeing the doctor today.','他们今天要去看医生。']],quiz:'Correct: I am thinking you are right.',qc:'改正：I am thinking you are right.',ans:'Say: I think you are right. 中文：表示“认为”时用 think，不用进行式。'},
+  {f:'form5',u:12,p:76,t:'Relative Clauses',tc:'关系从句',tags:['clauses','从句'],meaning:'Relative clauses add information about a noun.',mc:'关系从句用来补充说明一个名词。',pattern:'who / which / that / where / whose<br>who 人 / which 物 / that 人或物 / where 地点 / whose 谁的',ex:[['The boy who won the race is my friend.','赢得比赛的男孩是我的朋友。'],['This is the book that I bought.','这是我买的书。'],['That is the school where I studied.','那是我以前读书的学校。']],quiz:'Complete: The woman ____ teaches us is kind.',qc:'填空：The woman ____ teaches us is kind.',ans:'who / that。中文：woman 是人，用 who 或 that。'},
+  {f:'form5',u:13,p:83,t:'Past Simple',tc:'一般过去式',tags:['past tense','过去式'],meaning:'Past simple describes completed actions in the past.',mc:'一般过去式表示过去已经完成的动作。',pattern:'subject + past verb<br>主语 + 过去式动词',ex:[['I watched a movie yesterday.','我昨天看了一部电影。'],['She visited her aunt last week.','她上星期探望了她的姑姑。'],['They finished the task.','他们完成了任务。']],quiz:'Complete: We ____ to the library yesterday.',qc:'填空：We ____ to the library yesterday.',ans:'went。中文：go 的过去式是 went。'},
+  {f:'form5',u:14,p:90,t:'Past Continuous',tc:'过去进行式',tags:['past tense','过去进行式'],meaning:'Past continuous describes an action in progress at a past time.',mc:'过去进行式表示过去某个时间正在进行的动作。',pattern:'was / were + verb-ing<br>was / were + 动词-ing',ex:[['I was studying at 8 p.m.','我晚上8点正在读书。'],['They were playing when it started to rain.','开始下雨时，他们正在玩。']],quiz:'Complete: She ____ sleeping when I called.',qc:'填空：She ____ sleeping when I called.',ans:'was。中文：She 搭配 was。'},
+  {f:'form5',u:15,p:97,t:'Used to / Would / Get / Get used to',tc:'过去习惯与习惯于',tags:['habit','adaptation','习惯'],meaning:'This unit compares past habits and the process of becoming familiar with something.',mc:'这个单元比较过去习惯，以及逐渐习惯某件事的表达。',pattern:'used to + verb / would + verb / get used to + noun or -ing<br>used to + 动词 / would + 动词 / get used to + 名词或动词-ing',ex:[['I used to wake up late.','我以前常常很迟起床。'],['I am getting used to waking up early.','我正在慢慢习惯早起。'],['He is used to the cold weather.','他已经习惯寒冷的天气。']],quiz:'Complete: I am getting used to ____ English every day.',qc:'填空：I am getting used to ____ English every day.',ans:'speaking。中文：get used to 后面接名词或动词-ing。'},
+  {f:'form5',u:16,p:104,t:'Present Perfect Simple and Continuous',tc:'现在完成式与现在完成进行式',tags:['perfect tense','完成式'],meaning:'Present perfect connects the past to the present. Continuous often focuses on duration.',mc:'现在完成式把过去和现在连接起来；完成进行式常强调持续时间。',pattern:'has/have + past participle / has/have been + verb-ing<br>has/have + 过去分词 / has/have been + 动词-ing',ex:[['I have finished my homework.','我已经完成作业。'],['She has been studying for two hours.','她已经读书两个小时了。']],quiz:'Complete: He ____ lived here since 2020.',qc:'填空：He ____ lived here since 2020.',ans:'has。中文：He 搭配 has。'},
+  {f:'form5',u:17,p:111,t:'Past Perfect Simple and Continuous',tc:'过去完成式与过去完成进行式',tags:['perfect tense','过去完成式'],meaning:'Past perfect shows an earlier past action before another past action.',mc:'过去完成式表示在另一个过去动作之前已经发生的动作。',pattern:'had + past participle / had been + verb-ing<br>had + 过去分词 / had been + 动词-ing',ex:[['I had eaten before he arrived.','他到达之前，我已经吃了。'],['She had been waiting for an hour.','她之前已经等了一个小时。']],quiz:'Complete: They ____ left before we reached.',qc:'填空：They ____ left before we reached.',ans:'had。中文：过去完成式用 had。'},
+  {f:'form5',u:18,p:118,t:'Future Simple and Future Continuous',tc:'一般将来式与将来进行式',tags:['future','将来式'],meaning:'Future simple talks about decisions or predictions. Future continuous talks about future actions in progress.',mc:'一般将来式表示决定或预测；将来进行式表示未来某个时间正在进行的动作。',pattern:'will + verb / will be + verb-ing<br>will + 原形动词 / will be + 动词-ing',ex:[['I will call you tomorrow.','我明天会打电话给你。'],['At 9 p.m., I will be studying.','晚上9点，我将会正在读书。']],quiz:'Complete: This time tomorrow, we ____ flying to Sabah.',qc:'填空：This time tomorrow, we ____ flying to Sabah.',ans:'will be。中文：未来某时间正在进行，用 will be + verb-ing。'},
+  {f:'form5',u:19,p:125,t:'Future Perfect Simple and Continuous',tc:'将来完成式与将来完成进行式',tags:['future','perfect','将来完成式'],meaning:'Future perfect shows completion before a future time. Future perfect continuous shows duration up to a future time.',mc:'将来完成式表示在未来某时间之前会完成；将来完成进行式强调持续到未来某时间。',pattern:'will have + past participle / will have been + verb-ing<br>will have + 过去分词 / will have been + 动词-ing',ex:[['By next week, I will have finished the book.','到下星期，我将已经读完这本书。'],['By December, she will have been working here for two years.','到十二月，她将在这里工作满两年。']],quiz:'Complete: By 10 p.m., I ____ finished my revision.',qc:'填空：By 10 p.m., I ____ finished my revision.',ans:'will have。中文：by + future time 常用 future perfect。'},
+  {f:'form5',u:20,p:132,t:'Modals (1)',tc:'情态动词（一）',tags:['modals','情态动词'],meaning:'Modals express ability, advice, permission, possibility, and obligation.',mc:'情态动词可表达能力、建议、允许、可能性和义务。',pattern:'modal + base verb<br>情态动词 + 原形动词',ex:[['You should revise daily.','你应该每天复习。'],['May I leave now?','我现在可以离开吗？'],['She can speak Chinese.','她会说中文。']],quiz:'Complete: You ____ wear a helmet for safety.',qc:'填空：You ____ wear a helmet for safety.',ans:'should / must。中文：should 表示应该，must 表示必须。'},
+  {f:'form5',u:21,p:139,t:'Modals (2)',tc:'情态动词（二）',tags:['modals','deduction','推测'],meaning:'Advanced modals can show deduction, certainty, or possibility.',mc:'进阶情态动词可以表示推测、确定性或可能性。',pattern:'must / might / could / cannot + base verb<br>must / might / could / cannot + 原形动词',ex:[['He must be tired.','他一定很累。'],['She might come later.','她可能迟一点来。'],['That cannot be true.','那不可能是真的。']],quiz:'Which modal shows strong certainty: might or must?',qc:'哪一个情态动词表示更强的确定性：might 还是 must？',ans:'must。中文：must 表示强烈推测。'},
+  {f:'form5',u:22,p:146,t:'The Passive (1)',tc:'被动语态（一）',tags:['passive','被动语态'],meaning:'The passive focuses on the action or object, not the doer.',mc:'被动语态强调动作或承受动作的对象，而不是做动作的人。',pattern:'object + be + past participle<br>宾语 + be 动词 + 过去分词',ex:[['The cake was eaten.','蛋糕被吃了。'],['English is spoken here.','这里有人说英文。'],['The letter was written by Ali.','这封信是 Ali 写的。']],quiz:'Change: Ali cleaned the room.',qc:'改成被动语态：Ali cleaned the room.',ans:'The room was cleaned by Ali. 中文：room 变成主语。'},
+  {f:'form5',u:23,p:153,t:'The Passive (2)',tc:'被动语态（二）',tags:['passive','advanced','被动语态'],meaning:'Passive structures can be used in different tenses and with modals.',mc:'被动语态可以用于不同时态，也可以和情态动词搭配。',pattern:'be / been / being + past participle<br>be / been / being + 过去分词',ex:[['The work has been completed.','工作已经被完成。'],['The road is being repaired.','道路正在维修。'],['The rules must be followed.','规则必须被遵守。']],quiz:'Change: They have completed the work.',qc:'改成被动语态：They have completed the work.',ans:'The work has been completed. 中文：现在完成式被动：has/have been + past participle。'},
+  {f:'form5',u:24,p:160,t:'Third and Mixed Conditionals',tc:'第三和混合条件句',tags:['conditionals','条件句'],meaning:'Third conditional talks about unreal past. Mixed conditional connects past condition to present result.',mc:'第三条件句谈过去不真实的情况；混合条件句把过去条件和现在结果连接起来。',pattern:'If + had + past participle, would have + past participle<br>If + had + 过去分词, would have + 过去分词',ex:[['If I had studied, I would have passed.','如果我当时有读书，我就会及格。'],['If he had slept earlier, he would not be tired now.','如果他昨晚早点睡，他现在就不会累。']],quiz:'Complete: If she had left earlier, she ____ arrived on time.',qc:'填空：If she had left earlier, she ____ arrived on time.',ans:'would have。中文：第三条件句结果用 would have。'},
+  {f:'form5',u:25,p:167,t:'Gerunds and Infinitives',tc:'动名词和不定式',tags:['gerunds','infinitives','动名词'],meaning:'Some verbs are followed by -ing, some by to + verb, and some allow both.',mc:'有些动词后接 -ing，有些接 to + 动词，有些两者都可以。',pattern:'verb + -ing / verb + to + base verb<br>动词 + -ing / 动词 + to + 原形动词',ex:[['I enjoy reading.','我喜欢阅读。'],['She wants to learn English.','她想学英文。'],['He stopped smoking.','他停止抽烟。']],quiz:'Complete: I enjoy ____ novels.',qc:'填空：I enjoy ____ novels.',ans:'reading。中文：enjoy 后面接动词-ing。'},
+  {f:'form5',u:26,p:174,t:'Comparisons of Adjectives and Adverbs',tc:'形容词和副词比较级',tags:['comparison','比较'],meaning:'Comparisons show differences between people, things, or actions.',mc:'比较结构用来比较人物、事物或动作之间的差异。',pattern:'-er than / more ... than / the most ... / as ... as<br>比较级 + than / more ... than / the most ... / as ... as',ex:[['Ali is taller than Ben.','Ali 比 Ben 高。'],['This question is more difficult than that one.','这道题比那道题更难。'],['She runs as quickly as her brother.','她跑得和哥哥一样快。']],quiz:'Complete: This book is ____ interesting than that one.',qc:'填空：This book is ____ interesting than that one.',ans:'more。中文：interesting 是较长形容词，比较级用 more interesting。'},
+  {f:'form5',u:27,p:181,t:'Reported Speech (2)',tc:'间接引语（二）',tags:['speech','advanced','间接引语'],meaning:'Advanced reported speech includes questions, commands, and requests.',mc:'进阶间接引语包括问题、命令和请求的转述。',pattern:'asked if / asked whether / told someone to / asked someone to<br>asked if / whether / told someone to / asked someone to',ex:[['He asked if I was ready.','他问我是否准备好了。'],['She told me to sit down.','她叫我坐下。'],['They asked us to wait.','他们请我们等待。']],quiz:'Change: “Please help me,” she said.',qc:'改成间接引语：“Please help me,” she said.',ans:'She asked me to help her. 中文：请求用 asked someone to。'},
+  {f:'form5',u:28,p:188,t:'Causative Forms',tc:'使役结构',tags:['causative','使役'],meaning:'Causative forms show that someone arranges for another person to do something.',mc:'使役结构表示安排别人完成某件事。',pattern:'have/get something done / get someone to do something<br>have/get something done / get someone to do something',ex:[['I had my hair cut.','我请人剪了头发。'],['She got her car repaired.','她请人修了车。'],['He got his brother to help him.','他叫哥哥帮他。']],quiz:'Complete: I had my phone ____ yesterday.',qc:'填空：I had my phone ____ yesterday.',ans:'repaired。中文：have something done 用过去分词。'},
+  {f:'form5',u:29,p:195,t:'Wishes and Preferences',tc:'愿望与偏好',tags:['wish','preference','偏好'],meaning:'This unit helps express wishes, regrets, and preferences politely.',mc:'这个单元帮助表达愿望、遗憾和偏好。',pattern:'wish / would rather / prefer / would prefer<br>wish / would rather / prefer / would prefer',ex:[['I wish I could travel.','我希望我可以旅行。'],['I would rather stay at home.','我宁愿待在家。'],['She prefers tea to coffee.','比起咖啡，她更喜欢茶。']],quiz:'Complete: I would rather ____ at home tonight.',qc:'填空：I would rather ____ at home tonight.',ans:'stay。中文：would rather 后面接原形动词。'},
+  {f:'form5',u:30,p:202,t:'Questions, Responses and Question Tags',tc:'疑问句、回答和反意疑问句',tags:['questions','疑问句'],meaning:'This unit improves question formation, short responses, and tag questions.',mc:'这个单元训练疑问句、简短回答和反意疑问句。',pattern:'auxiliary + subject + verb / positive statement + negative tag<br>助动词 + 主语 + 动词 / 肯定句 + 否定附加问句',ex:[['Do you like English?','你喜欢英文吗？'],['Yes, I do.','是的，我喜欢。'],['You are ready, aren’t you?','你准备好了，不是吗？']],quiz:'Add a tag: She is your sister, ____?',qc:'加上反意疑问句：She is your sister, ____?',ans:'isn’t she。中文：前面肯定，后面通常用否定。'},
+  {f:'form5',u:31,p:209,t:'Not only...but also / Had better / It’s about high time',tc:'Not only...but also / Had better / 是时候了',tags:['advanced structures','高级结构'],meaning:'These structures add emphasis, advice, and urgency.',mc:'这些结构用于强调、提出强烈建议和表达“是时候了”。',pattern:'not only A but also B / had better + verb / it is high time + past simple<br>not only A but also B / had better + 原形动词 / it is high time + 过去式',ex:[['She is not only smart but also hardworking.','她不但聪明，而且勤奋。'],['You had better revise now.','你最好现在复习。'],['It is high time we started.','我们是时候开始了。']],quiz:'Complete: You had better ____ early.',qc:'填空：You had better ____ early.',ans:'sleep / start / leave, depending on context. 中文：had better 后面接原形动词。'}
+];
+
+const form4Grid = document.getElementById('form4Grid');
+const form5Grid = document.getElementById('form5Grid');
+const lessons = document.getElementById('lessons');
+const search = document.getElementById('search');
+const empty = document.getElementById('empty');
+const doneCount = document.getElementById('doneCount');
+const langBtn = document.getElementById('langBtn');
+let filter = 'all';
+let cnOnly = false;
+
+function key(u){ return 'son-grammar-unit-cn-' + u; }
+
+function card(unit){
+  return `<article class="unit-card" data-form="${unit.f}" data-title="${unit.t.toLowerCase()} ${unit.tc} ${unit.tags.join(' ')}">
+    <div class="unit-strip"></div>
+    <div class="unit-body">
+      <div class="unit-top">
+        <span class="unit-no">Unit ${unit.u}</span>
+        <span class="page">Page ${unit.p}</span>
+      </div>
+      <div class="topic">${unit.t}</div>
+      <div class="topic-cn">${unit.tc}</div>
+      <div class="mini">
+        <span class="english-line">${unit.meaning}</span>
+        <span class="cn">${unit.mc}</span>
+      </div>
+      <div class="tags">${unit.tags.map(x=>`<span class="tag">${x}</span>`).join('')}</div>
+      <div class="card-actions">
+        <a class="learn-btn" href="#lesson-${unit.u}">Start Learning 开始学习</a>
+        <label class="check"><input type="checkbox" data-unit="${unit.u}" ${localStorage.getItem(key(unit.u))==='done'?'checked':''}> Done 完成</label>
+      </div>
+    </div>
+  </article>`;
+}
+
+function lesson(unit){
+  return `<article class="lesson panel" id="lesson-${unit.u}" data-form="${unit.f}" data-title="${unit.t.toLowerCase()} ${unit.tc} ${unit.tags.join(' ')}">
+    <div class="lesson-head">
+      <div>
+        <div class="small-label">Unit ${unit.u} · Page ${unit.p}</div>
+        <h3><span class="english-line">${unit.t}</span><span class="cn">${unit.tc}</span></h3>
+      </div>
+      <label class="check"><input type="checkbox" data-unit="${unit.u}" ${localStorage.getItem(key(unit.u))==='done'?'checked':''}> Mark completed 标记完成</label>
+    </div>
+    <div class="lesson-content">
+      <div class="box">
+        <h4>Meaning 意思</h4>
+        <p><span class="english-line">${unit.meaning}</span><span class="cn">${unit.mc}</span></p>
+      </div>
+      <div class="box">
+        <h4>Pattern 句型</h4>
+        <div class="formula">${unit.pattern}</div>
+      </div>
+      <div class="box">
+        <h4>Examples 例句</h4>
+        <ol class="examples">${unit.ex.map(e=>`<li><span class="english-line">${e[0]}</span><div class="example-cn cn">${e[1]}</div></li>`).join('')}</ol>
+      </div>
+      <div class="box">
+        <h4>Memory Tip 记忆方法</h4>
+        <p><span class="english-line">Read the pattern aloud, copy one example, then create one sentence about your own life.</span><span class="cn">先大声读句型，抄写一个例句，然后用自己的生活造一个句子。</span></p>
+      </div>
+      <div class="quiz">
+        <strong>Mini Quiz 小测验:</strong>
+        <div><span class="english-line">${unit.quiz}</span><span class="cn">${unit.qc}</span></div>
+        <div class="answer"><strong>Answer 答案:</strong> ${unit.ans}</div>
+      </div>
+    </div>
+  </article>`;
+}
+
+function render(){
+  form4Grid.innerHTML='';
+  form5Grid.innerHTML='';
+  lessons.innerHTML='';
+  const q = search.value.trim().toLowerCase();
+  let shown = 0;
+
+  units.forEach(u=>{
+    const text = `${u.u} ${u.t} ${u.tc} ${u.meaning} ${u.mc} ${u.pattern} ${u.tags.join(' ')}`.toLowerCase();
+    const okFilter = filter === 'all' || u.f === filter;
+    const okSearch = !q || text.includes(q);
+    if(okFilter && okSearch){
+      shown++;
+      if(u.f==='form4') form4Grid.innerHTML += card(u);
+      else form5Grid.innerHTML += card(u);
+      lessons.innerHTML += lesson(u);
+    }
+  });
+
+  document.querySelector('[data-section="form4"]').style.display = form4Grid.innerHTML ? 'block' : 'none';
+  document.querySelector('[data-section="form5"]').style.display = form5Grid.innerHTML ? 'block' : 'none';
+  empty.style.display = shown ? 'none' : 'block';
+  updateDone();
+}
+
+function updateDone(){
+  doneCount.textContent = units.filter(u=>localStorage.getItem(key(u.u))==='done').length;
+}
+
+document.querySelectorAll('.filter').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    document.querySelectorAll('.filter').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    filter = btn.dataset.filter;
+    render();
+  });
+});
+
+search.addEventListener('input',render);
+
+langBtn.addEventListener('click',()=>{
+  cnOnly = !cnOnly;
+  document.body.classList.toggle('cn-only', cnOnly);
+  langBtn.textContent = cnOnly ? '显示中英双语' : '只看中文';
+});
+
+document.addEventListener('change',e=>{
+  if(e.target.matches('input[type="checkbox"][data-unit]')){
+    const u = e.target.dataset.unit;
+    if(e.target.checked) localStorage.setItem(key(u),'done');
+    else localStorage.removeItem(key(u));
+    document.querySelectorAll(`input[data-unit="${u}"]`).forEach(cb=>cb.checked=e.target.checked);
+    updateDone();
+  }
+});
+
+render();
+</script>
+</body>
+</html>
