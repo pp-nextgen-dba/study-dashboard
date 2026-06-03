@@ -58,10 +58,24 @@ When asked to wire up a chapter notes HTML file (e.g. "add history chapter 4"):
 **Before making any changes**, confirm the HTML file exists on disk. If it is missing, stop and tell the user to upload the file first — do not create or write the HTML.
 
 Once the file is confirmed present:
-1. Find the matching chapter entry in `js/subject.js` and add `resourceUrl: "../<dir>/<file>.html"`
-2. Add the path to `STATIC_ASSETS` in `sw.js`
-3. Run `npm run validate` — this checks the `resourceUrl` file exists on disk
-4. Commit
+1. Check that the HTML file has a **Back to Dashboard** button. All chapter notes pages must include this at the top of `<body>`. The standard pattern (used in `history/t2_chapter8.html` etc.) is:
+   - Add to the CSS (before `</style>`):
+     ```css
+     .top-nav{background:#fff;padding:10px 16px;border-bottom:2px solid #e5e7eb;position:sticky;top:0;z-index:120}
+     .dashboard-link{display:inline-flex;align-items:center;gap:6px;padding:8px 12px;border-radius:8px;background:#1d4ed8;color:#fff;font-size:13px;font-weight:800;text-decoration:none}
+     .dashboard-link:hover{background:#1e40af}
+     ```
+   - Add to the HTML (first element after `<body>`):
+     ```html
+     <div class="top-nav">
+       <a class="dashboard-link" href="../index.html">&larr; Back to Dashboard</a>
+     </div>
+     ```
+   - If the file already uses a dark sticky nav (like the RBT pages), verify the button is present there instead.
+2. Find the matching chapter entry in `js/subject.js` and add `resourceUrl: "../<dir>/<file>.html"`
+3. Add the path to `STATIC_ASSETS` in `sw.js`
+4. Run `npm run validate` — this checks the `resourceUrl` file exists on disk
+5. Commit
 
 ### Adding a New Subject
 
