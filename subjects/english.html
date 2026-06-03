@@ -257,6 +257,23 @@ body{
     font-weight:bold;
 }
 
+.chapter-copy{
+    min-width:0;
+}
+
+.chapter-link{
+    display:inline-block;
+    margin-top:10px;
+    color:#1d4ed8;
+    font-size:14px;
+    font-weight:bold;
+    text-decoration:none;
+}
+
+.chapter-link:hover{
+    text-decoration:underline;
+}
+
 /* ===================================================== */
 /* MOBILE */
 /* ===================================================== */
@@ -695,6 +712,11 @@ function render(){
                     ? `<div class="chapter-cn">${chapter.chinese}</div>`
                     : "";
 
+            const chapterResource =
+                chapter.resourceUrl
+                    ? `<a class="chapter-link" href="${chapter.resourceUrl}">Open notes</a>`
+                    : "";
+
             card.innerHTML = `
 
                 <div class="chapter-top">
@@ -706,13 +728,15 @@ function render(){
                         ${icon}
                     </div>
 
-                    <div>
+                    <div class="chapter-copy">
 
                         <div class="chapter-title">
                             ${chapter.chapter}
                         </div>
 
                         ${chapterSubtitle}
+
+                        ${chapterResource}
 
                     </div>
 
@@ -737,6 +761,22 @@ function render(){
 
                 }
             );
+
+            const link =
+                card.querySelector(
+                    ".chapter-link"
+                );
+
+            if(link){
+
+                link.addEventListener(
+                    "click",
+                    event=>{
+                        event.stopPropagation();
+                    }
+                );
+
+            }
 
             grid.appendChild(card);
 
