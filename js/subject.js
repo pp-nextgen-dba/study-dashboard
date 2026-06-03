@@ -657,7 +657,8 @@ export const physicsData = {
             chinese:"力与运动 1",
             status:"Not Started",
             confidence:0,
-            last_updated:"2026-05-20"
+            last_updated:"2026-05-20",
+            resourceUrl:"../physics/t4_force_motion.html"
         },
 
         {

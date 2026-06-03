@@ -1,0 +1,1021 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=5.0"/>
+<meta name="theme-color" content="#1e3a8a"/>
+<title>Physics Chapter 2 — Force and Motion I</title>
+<style>
+:root{
+  --bg:#f0f4ff;--ink:#1e293b;--muted:#64748b;
+  --pri:#2563eb;--pri2:#6d28d9;--acc:#f59e0b;
+  --gr:#059669;--rd:#dc2626;--or:#ea580c;
+  --line:#e2e8f0;--soft:#eff6ff;
+  --shadow:0 14px 30px rgba(30,58,138,.13);--r:22px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:var(--ink);line-height:1.5}
+
+/* HEADER */
+.hdr{background:linear-gradient(135deg,#1e3a8a,#3b82f6 55%,#7c3aed);
+  padding:26px 16px 68px;position:relative;overflow:hidden;color:#fff}
+.hdr:before,.hdr:after{content:"";position:absolute;border-radius:999px;
+  background:rgba(255,255,255,.1)}
+.hdr:before{width:240px;height:240px;left:-100px;top:-80px}
+.hdr:after{width:300px;height:300px;right:-130px;bottom:-160px}
+.hero{max-width:1100px;margin:auto;position:relative;z-index:2}
+.badge{display:inline-flex;gap:7px;align-items:center;
+  background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.3);
+  padding:7px 13px;border-radius:999px;font-weight:700;font-size:.84rem;margin-bottom:10px}
+h1{font-size:clamp(1.7rem,5vw,3.6rem);line-height:1.08;letter-spacing:-1px;margin-bottom:6px}
+.hero-sub{font-size:clamp(.9rem,2vw,1.05rem);opacity:.92;max-width:700px;margin-bottom:4px}
+.lang-row{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap}
+.lbtn{border:2px solid rgba(255,255,255,.5);background:rgba(255,255,255,.15);
+  color:#fff;border-radius:999px;padding:8px 16px;font-weight:800;font-size:.84rem;
+  cursor:pointer;transition:.15s}
+.lbtn.active{background:#fff;color:var(--pri)}
+
+/* MAIN */
+main{max-width:1120px;margin:-48px auto 60px;padding:0 13px;position:relative;z-index:5}
+.panel{background:rgba(255,255,255,.94);border:1px solid var(--line);
+  box-shadow:var(--shadow);border-radius:var(--r)}
+
+/* STICKY SEARCH */
+.ctrl{padding:12px 15px;display:flex;flex-wrap:wrap;gap:9px;align-items:center;
+  position:sticky;top:7px;z-index:50;backdrop-filter:blur(12px)}
+.srch{flex:1;min-width:140px;border:1px solid var(--line);background:#fbfcff;
+  border-radius:17px;padding:11px 14px;font-size:.95rem;outline:none;color:var(--ink)}
+.srch:focus{border-color:var(--pri);box-shadow:0 0 0 3px rgba(37,99,235,.12)}
+.ftrs{display:flex;gap:7px;flex-wrap:wrap}
+.ftr{background:#fff;color:var(--pri);border:1px solid var(--line);border-radius:999px;
+  padding:9px 14px;font-weight:900;white-space:nowrap;transition:.15s;cursor:pointer}
+.ftr.active,.ftr:hover{background:var(--pri);color:#fff;transform:translateY(-1px)}
+
+/* SECTION CARDS */
+.sec{border-radius:var(--r);margin-bottom:12px;overflow:hidden;border:2px solid}
+.sec-hdr{display:flex;align-items:center;gap:12px;padding:14px;cursor:pointer;
+  user-select:none;-webkit-tap-highlight-color:transparent}
+.sec-icon{width:40px;height:40px;border-radius:10px;display:flex;
+  align-items:center;justify-content:center;font-size:20px;flex-shrink:0;color:#fff}
+.sec-info{flex:1}
+.sec-num{font-size:10px;font-weight:800;letter-spacing:1px;
+  text-transform:uppercase;margin-bottom:2px}
+.sec-t-en{font-size:15px;font-weight:900;line-height:1.25;color:#1e3a8a}
+.sec-t-zh{font-size:12px;font-weight:700;color:#047857;margin-top:2px}
+.sec-chev{font-size:20px;color:#94a3b8;transition:transform .25s;flex-shrink:0}
+.sec-chev.open{transform:rotate(180deg)}
+.sec-body{display:none;padding:0 12px 14px}
+.sec-body.open{display:block}
+
+/* TRI BLOCKS */
+.tri{border-radius:12px;overflow:hidden;margin-bottom:9px;border:2px solid var(--line)}
+.bl-en{background:#eff6ff;border-left:5px solid var(--pri);padding:9px 12px}
+.bl-en-lbl{font-size:10px;font-weight:800;letter-spacing:2px;color:#1d4ed8;
+  text-transform:uppercase;margin-bottom:3px}
+.bl-en-t{font-size:13.5px;font-weight:700;color:#1e3a8a;line-height:1.55}
+.bl-zh{background:#ecfdf5;border-left:5px solid var(--gr);padding:9px 12px}
+.bl-zh-lbl{font-size:10px;font-weight:800;letter-spacing:2px;color:#047857;
+  text-transform:uppercase;margin-bottom:3px}
+.bl-zh-t{font-size:13px;font-weight:600;color:#064e3b;line-height:1.65}
+
+/* FORMULA BOXES */
+.fbox{background:#1e293b;border-radius:14px;padding:13px;margin-bottom:9px}
+.fbox-title{font-size:11px;font-weight:800;letter-spacing:2px;color:var(--acc);
+  text-transform:uppercase;margin-bottom:9px}
+.fgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:8px}
+.fi{background:#0f172a;border-radius:10px;padding:10px 8px;text-align:center;
+  border:1.5px solid #334155}
+.fi-eq{font-size:17px;font-weight:800;color:#fbbf24;margin-bottom:4px;font-style:italic}
+.fi-en{font-size:11px;color:#bfdbfe;margin-bottom:2px;font-weight:700}
+.fi-zh{font-size:10px;color:#6ee7b7;font-weight:600}
+
+/* WORKED EXAMPLES */
+.ex-box{border-radius:13px;overflow:hidden;margin-bottom:9px;border:2px solid #c4b5fd}
+.ex-hdr{background:#7c3aed;padding:8px 13px}
+.ex-lbl{font-size:11px;font-weight:800;color:#ede9fe;letter-spacing:1px}
+.ex-body{padding:11px 13px;background:#f5f3ff}
+.ex-q{font-size:13px;font-weight:700;color:#3b0764;margin-bottom:7px;line-height:1.5}
+.ex-sol{background:#1e293b;border-radius:10px;padding:10px 12px;
+  font-family:monospace;font-size:12.5px;color:#e2e8f0;line-height:1.85;margin-top:6px}
+.ex-sol .step{color:#fbbf24;font-weight:800}
+.ex-sol .ans{color:#6ee7b7;font-weight:800}
+
+/* COMPARISON TABLE */
+.comp-wrap{overflow-x:auto;margin-bottom:9px;border-radius:12px}
+.comp-table{width:100%;border-collapse:collapse;font-size:12px}
+.comp-table th{padding:8px 10px;font-size:10px;font-weight:800;letter-spacing:1px;
+  text-transform:uppercase;text-align:left;color:#fff}
+.comp-table td{padding:8px 10px;vertical-align:top;line-height:1.45;
+  border-bottom:1px solid rgba(0,0,0,.06)}
+.comp-table tr:last-child td{border-bottom:none}
+
+/* PILLS */
+.mem{border-radius:12px;padding:11px;background:#f1f5f9;border:2px solid #cbd5e1;margin-top:8px}
+.mem-lbl{font-size:10px;letter-spacing:2px;font-weight:800;margin-bottom:7px;
+  color:#475569;text-transform:uppercase}
+.pills{display:flex;flex-wrap:wrap;gap:5px}
+.pill{padding:5px 9px;border-radius:999px;font-size:11.5px;font-weight:800;border:2px solid}
+.p-en{border-color:var(--pri);background:#dbeafe;color:#1e3a8a;font-style:italic}
+.p-zh{border-color:var(--gr);background:#d1fae5;color:#064e3b}
+
+/* TIP */
+.tip{background:#fef9c3;border:1.5px solid #fbbf24;border-radius:10px;
+  padding:9px 12px;margin-bottom:8px}
+.tip-lbl{font-size:10px;font-weight:800;color:#92400e;letter-spacing:1px;
+  text-transform:uppercase;margin-bottom:4px}
+
+/* SECTION THEMES */
+.s-bl{background:#eff6ff;border-color:#3b82f6}
+.s-bl .sec-hdr{background:#dbeafe}.s-bl .sec-icon{background:#2563eb}
+.s-bl .sec-num{color:#1d4ed8}.s-bl .sec-body{border-top:2px dashed #bfdbfe}
+
+.s-pu{background:#f5f3ff;border-color:#7c3aed}
+.s-pu .sec-hdr{background:#ede9fe}.s-pu .sec-icon{background:#6d28d9}
+.s-pu .sec-num{color:#5b21b6}.s-pu .sec-body{border-top:2px dashed #c4b5fd}
+
+.s-gr{background:#f0fdf4;border-color:#059669}
+.s-gr .sec-hdr{background:#d1fae5}.s-gr .sec-icon{background:#059669}
+.s-gr .sec-num{color:#047857}.s-gr .sec-body{border-top:2px dashed #6ee7b7}
+
+.s-am{background:#fffbeb;border-color:#f59e0b}
+.s-am .sec-hdr{background:#fef3c7}.s-am .sec-icon{background:#d97706}
+.s-am .sec-num{color:#92400e}.s-am .sec-body{border-top:2px dashed #fde68a}
+
+.s-rd{background:#fff5f5;border-color:#dc2626}
+.s-rd .sec-hdr{background:#fee2e2}.s-rd .sec-icon{background:#dc2626}
+.s-rd .sec-num{color:#b91c1c}.s-rd .sec-body{border-top:2px dashed #fca5a5}
+
+.s-or{background:#fff7ed;border-color:#ea580c}
+.s-or .sec-hdr{background:#ffedd5}.s-or .sec-icon{background:#ea580c}
+.s-or .sec-num{color:#7c2d12}.s-or .sec-body{border-top:2px dashed #fdba74}
+
+/* TABS */
+.tabs{display:flex;overflow-x:auto;background:#1e293b;scrollbar-width:none;
+  position:sticky;top:53px;z-index:49;-webkit-overflow-scrolling:touch}
+.tabs::-webkit-scrollbar{display:none}
+.tab{flex:0 0 auto;padding:11px 13px;font-size:12px;font-weight:800;
+  color:#94a3b8;background:transparent;border:none;cursor:pointer;
+  border-bottom:3px solid transparent;white-space:nowrap;transition:.2s}
+.tab.t-lin.active{color:#93c5fd;border-bottom-color:#3b82f6}
+.tab.t-gra.active{color:#6ee7b7;border-bottom-color:#059669}
+.tab.t-fre.active{color:#c4b5fd;border-bottom-color:#7c3aed}
+.tab.t-ine.active{color:#fde68a;border-bottom-color:#f59e0b}
+.tab.t-mom.active{color:#fca5a5;border-bottom-color:#dc2626}
+.tab.t-foc.active{color:#fed7aa;border-bottom-color:#ea580c}
+.tab.t-imp.active{color:#fbcfe8;border-bottom-color:#be185d}
+.tab.t-wt.active{color:#bfdbfe;border-bottom-color:#60a5fa}
+.tab.t-mm.active{color:#fbbf24;border-bottom-color:#f59e0b}
+
+.panel-section{display:none;padding:12px 12px 60px}
+.panel-section.active{display:block}
+
+/* MEMORY MAP */
+.mmap-item{border-radius:13px;overflow:hidden;margin-bottom:9px;
+  border:2px solid var(--line);box-shadow:0 2px 6px rgba(0,0,0,.06)}
+.mm-en{background:#dbeafe;padding:9px 13px;border-bottom:1px solid #bfdbfe}
+.mm-en-t{font-size:13.5px;font-weight:800;color:#1e3a8a}
+.mm-zh{background:#d1fae5;padding:9px 13px}
+.mm-zh-t{font-size:12.5px;font-weight:600;color:#064e3b}
+.mmap-hdr{background:#0f172a;padding:14px;text-align:center;border-radius:13px 13px 0 0}
+.mmap-h1{font-size:15px;font-weight:800;color:#fbbf24;margin-bottom:2px}
+.mmap-h2{font-size:12px;color:#94a3b8;font-style:italic}
+.mmap-h3{font-size:11px;color:#6ee7b7;margin-top:2px}
+
+/* EXAM */
+.exam-box{border-radius:13px;overflow:hidden;border:2px solid #7c3aed;margin-top:9px}
+.exam-hdr{background:#7c3aed;padding:9px 13px}
+.exam-lbl{font-size:10px;letter-spacing:2px;font-weight:800;color:#ede9fe;text-transform:uppercase}
+.exam-en{background:#eff6ff;border-left:5px solid var(--pri);padding:9px 13px}
+.exam-en-t{font-size:13px;font-weight:700;color:#1e3a8a;line-height:1.6}
+.exam-zh{background:#ecfdf5;border-left:5px solid var(--gr);padding:9px 13px}
+.exam-zh-t{font-size:12px;font-weight:600;color:#064e3b;line-height:1.7}
+
+.empty-msg{display:none;text-align:center;padding:22px;color:var(--muted)}
+
+/* HIDE LOGIC */
+body.lang-en .zh-only{display:none}
+body.lang-zh .en-only{display:none}
+
+/* TOP LINK */
+.top-link{position:fixed;right:13px;bottom:13px;background:var(--pri);
+  color:#fff;text-decoration:none;padding:11px 13px;border-radius:999px;
+  font-weight:900;box-shadow:var(--shadow);z-index:70;font-size:.88rem}
+
+footer{text-align:center;color:var(--muted);padding:18px 14px 50px;font-size:.84rem;line-height:1.6}
+
+/* RESPONSIVE */
+@media(max-width:900px){
+  .srch{flex-basis:100%}
+}
+@media(max-width:560px){
+  main{padding:0 10px;margin-top:-44px}
+  .hdr{padding:22px 13px 66px}
+  .sec-body{padding:0 10px 12px}
+  .top-link{right:10px;bottom:10px}
+}
+</style>
+</head>
+<body id="top" class="lang-both">
+
+<!-- HEADER -->
+<header class="hdr">
+  <div class="hero">
+    <div class="badge">📐 Physics · Chapter 2 · Newtonian Mechanics</div>
+    <h1>Force and Motion I</h1>
+    <p class="hero-sub en-only">Linear Motion, Graphs, Inertia, Momentum, Force, Impulse and Weight — with worked examples.</p>
+    <p class="hero-sub zh-only" style="margin-top:5px">线性运动、图表、惯性、动量、力、冲量与重力——含解题示例。</p>
+    <div class="lang-row">
+      <button class="lbtn active" data-lang="both" onclick="setLang(this)">EN + 中文</button>
+      <button class="lbtn" data-lang="en" onclick="setLang(this)">English Only</button>
+      <button class="lbtn" data-lang="zh" onclick="setLang(this)">仅中文</button>
+    </div>
+  </div>
+</header>
+
+<main>
+  <!-- STICKY SEARCH -->
+  <section class="ctrl panel">
+    <input id="srch" class="srch" placeholder="Search: momentum, velocity, inertia, impulse…"/>
+    <div class="ftrs">
+      <button class="ftr active" data-f="all">All</button>
+      <button class="ftr" data-f="2.1">2.1</button>
+      <button class="ftr" data-f="2.2">2.2</button>
+      <button class="ftr" data-f="2.3">2.3</button>
+      <button class="ftr" data-f="2.4">2.4</button>
+      <button class="ftr" data-f="2.5">2.5</button>
+      <button class="ftr" data-f="2.6">2.6</button>
+      <button class="ftr" data-f="2.7">2.7</button>
+      <button class="ftr" data-f="2.8">2.8</button>
+    </div>
+  </section>
+
+  <!-- TABS -->
+  <div class="tabs">
+    <button class="tab t-lin active" onclick="showTab('lin',this)">2.1 Linear Motion</button>
+    <button class="tab t-gra" onclick="showTab('gra',this)">2.2 Graphs</button>
+    <button class="tab t-fre" onclick="showTab('fre',this)">2.3 Free Fall</button>
+    <button class="tab t-ine" onclick="showTab('ine',this)">2.4 Inertia</button>
+    <button class="tab t-mom" onclick="showTab('mom',this)">2.5 Momentum</button>
+    <button class="tab t-foc" onclick="showTab('foc',this)">2.6 Force</button>
+    <button class="tab t-imp" onclick="showTab('imp',this)">2.7 Impulse</button>
+    <button class="tab t-wt" onclick="showTab('wt',this)">2.8 Weight</button>
+    <button class="tab t-mm" onclick="showTab('mm',this)">⭐ Memory Map</button>
+  </div>
+
+<!-- ══════════ 2.1 LINEAR MOTION ══════════ -->
+<div id="tab-lin" class="panel-section active" data-sec="2.1">
+
+  <div class="sec s-bl">
+    <div class="sec-hdr" onclick="exp(this)">
+      <div class="sec-icon">📏</div>
+      <div class="sec-info">
+        <div class="sec-num">2.1</div>
+        <div class="sec-t-en">Distance, Displacement, Speed &amp; Velocity</div>
+        <div class="sec-t-zh">距离、位移、速率与速度</div>
+      </div>
+      <span class="sec-chev open">⌄</span>
+    </div>
+    <div class="sec-body open">
+      <div class="tri">
+        <div class="bl-en"><div class="bl-en-lbl">🔵 English</div><div class="bl-en-t">
+          <b>Distance</b> = length of path travelled by an object.<br>
+          <b>Displacement</b> = distance between initial and final position in a specified direction (straight line joining start and end).<br>
+          <b>Speed</b> = distance travelled ÷ time taken (rate of change of distance).<br>
+          <b>Velocity</b> = displacement ÷ time taken (rate of change of displacement).<br>
+          Speed and distance are <b>scalar</b>. Velocity and displacement are <b>vector</b>.
+        </div></div>
+        <div class="bl-zh"><div class="bl-zh-lbl">🟢 中文</div><div class="bl-zh-t">
+          <b>距离</b> = 物体行走路径的长度。<br>
+          <b>位移</b> = 初位置到末位置的直线距离（有方向）。<br>
+          <b>速率</b> = 距离 ÷ 时间（距离的变化率）。<br>
+          <b>速度</b> = 位移 ÷ 时间（位移的变化率）。<br>
+          速率与距离是<b>标量</b>；速度与位移是<b>矢量</b>。
+        </div></div>
+      </div>
+      <div class="fbox">
+        <div class="fbox-title">Key Formulas / 关键公式</div>
+        <div class="fgrid">
+          <div class="fi"><div class="fi-eq">Speed = d/t</div><div class="fi-en">Distance / Time</div><div class="fi-zh">距离 / 时间</div></div>
+          <div class="fi"><div class="fi-eq">v = s/t</div><div class="fi-en">Displacement / Time</div><div class="fi-zh">位移 / 时间</div></div>
+        </div>
+      </div>
+
+      <!-- Example 1 -->
+      <div class="ex-box">
+        <div class="ex-hdr"><div class="ex-lbl">Example 1 — Ahmad runs P→Q→R, total time = 50 s</div></div>
+        <div class="ex-body">
+          <div class="ex-q en-only">P to Q = 60 m, then Q to R = 100 m (back toward P). Find: (a) distance, (b) speed, (c) displacement, (d) velocity.</div>
+          <div class="ex-q zh-only">P到Q = 60 m，Q到R = 100 m（折回P方向）。求：(a)距离 (b)速率 (c)位移 (d)速度</div>
+          <div class="ex-sol">
+<span class="step">(a) Distance</span> = 60 + 100 = <span class="ans">160 m</span>
+<span class="step">(b) Speed</span> = 160 ÷ 50 = <span class="ans">3.2 m s⁻¹</span>
+<span class="step">(c) Displacement</span> = straight line RP = <span class="ans">–40 m</span>  (toward P)
+<span class="step">(d) Velocity</span> = –40 ÷ 50 = <span class="ans">–0.8 m s⁻¹</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Example 2 -->
+      <div class="ex-box">
+        <div class="ex-hdr"><div class="ex-lbl">Example 2 — Cycling A→B→C→D, time = 20 s (path: 30+30+40+30 m)</div></div>
+        <div class="ex-body">
+          <div class="ex-q en-only">Find: (a) distance, (b) average speed, (c) displacement, (d) average velocity.</div>
+          <div class="ex-q zh-only">求：(a)距离 (b)平均速率 (c)位移 (d)平均速度</div>
+          <div class="ex-sol">
+<span class="step">(a)</span> 30+30+40+30 = <span class="ans">130 m</span>
+<span class="step">(b)</span> 130÷20 = <span class="ans">6.5 m s⁻¹</span>
+<span class="step">(c)</span> Displacement AD = √(30²+40²) = <span class="ans">50 m</span>
+<span class="step">(d)</span> 50÷20 = <span class="ans">2.5 m s⁻¹</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sec s-bl">
+    <div class="sec-hdr" onclick="exp(this)">
+      <div class="sec-icon">⚡</div>
+      <div class="sec-info">
+        <div class="sec-num">2.1</div>
+        <div class="sec-t-en">Uniform Velocity, Acceleration &amp; Equations of Motion</div>
+        <div class="sec-t-zh">匀速、加速度与线性运动方程</div>
+      </div>
+      <span class="sec-chev">⌄</span>
+    </div>
+    <div class="sec-body">
+      <div class="tri">
+        <div class="bl-en"><div class="bl-en-lbl">🔵 English</div><div class="bl-en-t">
+          <b>Uniform velocity</b>: same velocity in equal time intervals.<br>
+          <b>Acceleration</b> = rate of change of velocity. If velocity increases → positive acceleration. If decreases → negative acceleration (deceleration).
+        </div></div>
+        <div class="bl-zh"><div class="bl-zh-lbl">🟢 中文</div><div class="bl-zh-t">
+          <b>匀速</b>：在相同时间间隔内速度相同。<br>
+          <b>加速度</b> = 速度的变化率。速度增加→正加速度；速度减小→负加速度（减速）。
+        </div></div>
+      </div>
+      <div class="fbox">
+        <div class="fbox-title">5 Equations of Linear Motion / 线性运动方程</div>
+        <div class="fgrid">
+          <div class="fi"><div class="fi-eq">a = (v−u)/t</div><div class="fi-en">Acceleration</div><div class="fi-zh">加速度</div></div>
+          <div class="fi"><div class="fi-eq">v = u + at</div><div class="fi-en">Final velocity</div><div class="fi-zh">末速度</div></div>
+          <div class="fi"><div class="fi-eq">s = ½(u+v)t</div><div class="fi-en">Displacement</div><div class="fi-zh">位移</div></div>
+          <div class="fi"><div class="fi-eq">s = ut + ½at²</div><div class="fi-en">Displacement</div><div class="fi-zh">位移</div></div>
+          <div class="fi"><div class="fi-eq">v² = u² + 2as</div><div class="fi-en">Without time</div><div class="fi-zh">不含时间</div></div>
+        </div>
+        <div style="font-size:.8rem;color:#94a3b8;margin-top:8px;padding-left:2px">
+          u = initial velocity 初速度 | v = final velocity 末速度 | a = acceleration 加速度 | s = displacement 位移 | t = time 时间
+        </div>
+      </div>
+
+      <div class="ex-box">
+        <div class="ex-hdr"><div class="ex-lbl">Example 3 — Car from rest, v = 15 m s⁻¹ after 3 s</div></div>
+        <div class="ex-body">
+          <div class="ex-q en-only">Find (a) acceleration, (b) displacement.</div>
+          <div class="ex-q zh-only">求：(a)加速度 (b)位移</div>
+          <div class="ex-sol">
+u=0, v=15, t=3
+<span class="step">(a)</span> a = (15−0)/3 = <span class="ans">5 m s⁻²</span>
+<span class="step">(b)</span> s = ½(0+15)×3 = <span class="ans">22.5 m</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="ex-box">
+        <div class="ex-hdr"><div class="ex-lbl">Example 4 — Van: u = 8 m s⁻¹, a = 4 m s⁻², t = 5 s</div></div>
+        <div class="ex-body">
+          <div class="ex-q en-only">Find (a) final velocity, (b) displacement in 5 s.</div>
+          <div class="ex-q zh-only">求：(a)末速度 (b)5秒内位移</div>
+          <div class="ex-sol">
+<span class="step">(a)</span> v = 8+(4)(5) = <span class="ans">28 m s⁻¹</span>
+<span class="step">(b)</span> s = (8)(5)+½(4)(5²) = 40+50 = <span class="ans">90 m</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="ex-box">
+        <div class="ex-hdr"><div class="ex-lbl">Example 5 — Ticker Timer (50 dots/s). First gap 0.5 cm, last gap 1.5 cm</div></div>
+        <div class="ex-body">
+          <div class="ex-q en-only">Find the acceleration of the trolley (dots 1 to 6).</div>
+          <div class="ex-q zh-only">求小车加速度（第1至第6点）</div>
+          <div class="ex-sol">
+<span class="step">u</span> = 0.5÷0.02 = 25 cm s⁻¹
+<span class="step">v</span> = 1.5÷0.02 = 75 cm s⁻¹
+<span class="step">t</span> = (6−1)×0.02 = 0.1 s
+<span class="step">a</span> = (75−25)÷0.1 = <span class="ans">500 cm s⁻²</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ 2.2 GRAPHS ══════════ -->
+<div id="tab-gra" class="panel-section" data-sec="2.2">
+  <div class="sec s-gr">
+    <div class="sec-hdr" onclick="exp(this)">
+      <div class="sec-icon">📈</div>
+      <div class="sec-info">
+        <div class="sec-num">2.2</div>
+        <div class="sec-t-en">Linear Motion Graphs (s-t and v-t)</div>
+        <div class="sec-t-zh">线性运动图表（位移-时间图 和 速度-时间图）</div>
+      </div>
+      <span class="sec-chev open">⌄</span>
+    </div>
+    <div class="sec-body open">
+      <div class="tri">
+        <div class="bl-en"><div class="bl-en-lbl">🔵 Displacement-Time Graph (s-t)</div><div class="bl-en-t">
+          • Gradient = velocity.<br>
+          • Horizontal line (zero gradient) → stationary (v = 0).<br>
+          • Positive gradient → uniform positive velocity.<br>
+          • Negative gradient → uniform negative velocity (returning).
+        </div></div>
+        <div class="bl-zh"><div class="bl-zh-lbl">🟢 位移-时间图（s-t）</div><div class="bl-zh-t">
+          • 斜率 = 速度。<br>
+          • 水平线（零斜率）→ 静止（v = 0）。<br>
+          • 正斜率 → 匀速正方向运动。<br>
+          • 负斜率 → 匀速负方向运动（返回）。
+        </div></div>
+      </div>
+      <div class="tri">
+        <div class="bl-en"><div class="bl-en-lbl">🔵 Velocity-Time Graph (v-t)</div><div class="bl-en-t">
+          • Gradient = acceleration.<br>
+          • Area under graph = displacement.<br>
+          • Horizontal line → uniform velocity (a = 0).<br>
+          • Positive slope → uniform acceleration.<br>
+          • Negative slope → deceleration.
+        </div></div>
+        <div class="bl-zh"><div class="bl-zh-lbl">🟢 速度-时间图（v-t）</div><div class="bl-zh-t">
+          • 斜率 = 加速度。<br>
+          • 图下面积 = 位移。<br>
+          • 水平线 → 匀速（a = 0）。<br>
+          • 正斜率 → 匀加速。<br>
+          • 负斜率 → 减速。
+        </div></div>
+      </div>
+      <div class="ex-box">
+        <div class="ex-hdr"><div class="ex-lbl">Example 6 — s-t graph: AB (0–20 s), BC (20–50 s), CD (50–100 s)</div></div>
+        <div class="ex-body">
+          <div class="ex-q en-only">AB: 0→100 m in 20 s. BC: stationary at 100 m. CD: 100→200 m in 50 s. Find velocities of each segment.</div>
+          <div class="ex-q zh-only">AB：0→100m用20s。BC：静止在100m。CD：100→200m用50s。求各段速度。</div>
+          <div class="ex-sol">
+<span class="step">AB</span>: v = 100÷20 = <span class="ans">5 m s⁻¹</span>  (uniform velocity)
+<span class="step">BC</span>: v = <span class="ans">0 m s⁻¹</span>  (at rest)
+<span class="step">CD</span>: v = 100÷50 = <span class="ans">2 m s⁻¹</span>  (uniform velocity)
+          </div>
+        </div>
+      </div>
+      <div class="ex-box">
+        <div class="ex-hdr"><div class="ex-lbl">Example 7 — s-t graph: OA (0–2 s, +10 m), AB (2–6 s), BC (6–10 s, −10 m)</div></div>
+        <div class="ex-body">
+          <div class="ex-q en-only">Find velocities of OA, AB, BC and (b) average speed and velocity for whole journey.</div>
+          <div class="ex-q zh-only">求OA、AB、BC各段速度，以及全程平均速率和速度。</div>
+          <div class="ex-sol">
+<span class="step">OA</span>: v = 10÷2 = <span class="ans">5 m s⁻¹</span>
+<span class="step">AB</span>: v = <span class="ans">0 m s⁻¹</span>  (horizontal)
+<span class="step">BC</span>: v = −10÷4 = <span class="ans">−2.5 m s⁻¹</span>
+<span class="step">Avg speed</span>: 20÷10 = <span class="ans">2 m s⁻¹</span>
+<span class="step">Avg velocity</span>: 0÷10 = <span class="ans">0 m s⁻¹</span>  (returned to start)
+          </div>
+        </div>
+      </div>
+
+      <div class="mem">
+        <div class="mem-lbl">📝 Memory — Graphs</div>
+        <div class="pills">
+          <span class="pill p-en">s-t gradient = velocity</span>
+          <span class="pill p-zh">s-t斜率=速度</span>
+          <span class="pill p-en">v-t gradient = acceleration</span>
+          <span class="pill p-zh">v-t斜率=加速度</span>
+          <span class="pill p-en">v-t area = displacement</span>
+          <span class="pill p-zh">v-t面积=位移</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ 2.3 FREE FALL ══════════ -->
+<div id="tab-fre" class="panel-section" data-sec="2.3">
+  <div class="sec s-pu">
+    <div class="sec-hdr" onclick="exp(this)">
+      <div class="sec-icon">🌍</div>
+      <div class="sec-info">
+        <div class="sec-num">2.3</div>
+        <div class="sec-t-en">Free Fall Motion</div>
+        <div class="sec-t-zh">自由落体运动</div>
+      </div>
+      <span class="sec-chev open">⌄</span>
+    </div>
+    <div class="sec-body open">
+      <div class="tri">
+        <div class="bl-en"><div class="bl-en-lbl">🔵 English</div><div class="bl-en-t">
+          • Gravitational acceleration, <b>g = 9.81 m s⁻²</b>.<br>
+          • Free fall: motion influenced <b>only by gravitational force</b>. No air resistance.<br>
+          • Falling down: acceleration = 9.81 m s⁻².<br>
+          • Thrown upward: deceleration = 9.81 m s⁻² (gravitational force slows it down).
+        </div></div>
+        <div class="bl-zh"><div class="bl-zh-lbl">🟢 中文</div><div class="bl-zh-t">
+          • 重力加速度 <b>g = 9.81 m s⁻²</b>。<br>
+          • 自由落体：运动<b>只受重力影响</b>，无空气阻力。<br>
+          • 向下落：加速度 = 9.81 m s⁻²。<br>
+          • 向上抛：减速度 = 9.81 m s⁻²（重力使其减速）。
+        </div></div>
+      </div>
+      <div class="ex-box">
+        <div class="ex-hdr"><div class="ex-lbl">Example 8 — Ball released from building, reaches floor in 4 s</div></div>
+        <div class="ex-body">
+          <div class="ex-q en-only">Find (a) height of building, (b) velocity at floor. [g = 9.81 m s⁻², u = 0]</div>
+          <div class="ex-q zh-only">求：(a)建筑物高度 (b)落地速度。[g = 9.81 m s⁻², u = 0]</div>
+          <div class="ex-sol">
+<span class="step">(a)</span> s = ut + ½gt² = 0+(½)(9.81)(4²) = <span class="ans">78.48 m</span>
+<span class="step">(b)</span> v = u + gt = 0+9.81×4 = <span class="ans">39.24 m s⁻¹</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ 2.4 INERTIA ══════════ -->
+<div id="tab-ine" class="panel-section" data-sec="2.4">
+  <div class="sec s-am">
+    <div class="sec-hdr" onclick="exp(this)">
+      <div class="sec-icon">🚌</div>
+      <div class="sec-info">
+        <div class="sec-num">2.4</div>
+        <div class="sec-t-en">Inertia (Newton's First Law)</div>
+        <div class="sec-t-zh">惯性（牛顿第一定律）</div>
+      </div>
+      <span class="sec-chev open">⌄</span>
+    </div>
+    <div class="sec-body open">
+      <div class="tri">
+        <div class="bl-en"><div class="bl-en-lbl">🔵 English</div><div class="bl-en-t">
+          <b>Newton's First Law:</b> An object will remain at rest or move at uniform velocity if no external force acts on it.<br>
+          <b>Inertia</b> = tendency of an object to remain at rest or continue its uniform motion in a straight line.<br>
+          Inertia depends on <b>mass</b>. Greater mass → greater inertia.
+        </div></div>
+        <div class="bl-zh"><div class="bl-zh-lbl">🟢 中文</div><div class="bl-zh-t">
+          <b>牛顿第一定律：</b>如果没有外力作用，物体将保持静止或匀速直线运动。<br>
+          <b>惯性</b> = 物体保持静止或匀速直线运动的趋势。<br>
+          惯性取决于<b>质量</b>。质量越大，惯性越大。
+        </div></div>
+      </div>
+      <div class="tri">
+        <div class="bl-en"><div class="bl-en-lbl">🔵 Negative Effects &amp; Reduction</div><div class="bl-en-t">
+          <b>Front collision:</b> Passengers thrown forward (high speed stop). → Safety belt + Airbag.<br>
+          <b>Rear collision:</b> Head moves backward. → Headrest at car seats.
+        </div></div>
+        <div class="bl-zh"><div class="bl-zh-lbl">🟢 惯性的负面影响与解决方法</div><div class="bl-zh-t">
+          <b>前方碰撞：</b>乘客向前冲（急停时）。→ 安全带 + 气囊。<br>
+          <b>追尾碰撞：</b>头部向后甩。→ 座椅头枕。
+        </div></div>
+      </div>
+      <div class="mem">
+        <div class="mem-lbl">📝 Examples of Inertia / 惯性例子</div>
+        <div class="pills">
+          <span class="pill p-en">Bus stops → passengers thrown forward</span>
+          <span class="pill p-zh">公车急停→乘客向前冲</span>
+          <span class="pill p-en">Card pulled → coin falls into glass</span>
+          <span class="pill p-zh">拉纸板→硬币掉入杯中</span>
+          <span class="pill p-en">Lorry harder to stop than motorcycle</span>
+          <span class="pill p-zh">卡车比摩托车更难停下</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ 2.5 MOMENTUM ══════════ -->
+<div id="tab-mom" class="panel-section" data-sec="2.5">
+  <div class="sec s-rd">
+    <div class="sec-hdr" onclick="exp(this)">
+      <div class="sec-icon">🎯</div>
+      <div class="sec-info">
+        <div class="sec-num">2.5</div>
+        <div class="sec-t-en">Momentum &amp; Conservation of Momentum</div>
+        <div class="sec-t-zh">动量与动量守恒</div>
+      </div>
+      <span class="sec-chev open">⌄</span>
+    </div>
+    <div class="sec-body open">
+      <div class="tri">
+        <div class="bl-en"><div class="bl-en-lbl">🔵 English</div><div class="bl-en-t">
+          <b>Momentum, p = mv</b>. Unit: kg m s⁻¹. Vector quantity.<br>
+          <b>Principle of Conservation of Momentum:</b> Total momentum before collision = Total momentum after collision (no external force).<br>
+          m₁u₁ + m₂u₂ = m₁v₁ + m₂v₂
+        </div></div>
+        <div class="bl-zh"><div class="bl-zh-lbl">🟢 中文</div><div class="bl-zh-t">
+          <b>动量 p = mv</b>。单位：kg m s⁻¹。矢量。<br>
+          <b>动量守恒定律：</b>无外力作用时，碰撞前总动量 = 碰撞后总动量。<br>
+          m₁u₁ + m₂u₂ = m₁v₁ + m₂v₂
+        </div></div>
+      </div>
+      <div class="ex-box">
+        <div class="ex-hdr"><div class="ex-lbl">Example 9 — Bullet (20 g, 100 m s⁻¹) hits block (2.48 kg, at rest)</div></div>
+        <div class="ex-body">
+          <div class="ex-q en-only">Bullet embeds in block. Find common velocity.</div>
+          <div class="ex-q zh-only">子弹嵌入木块，求共同速度。</div>
+          <div class="ex-sol">
+Before: p = 0.02×100 + 0 = <span class="ans">2 kg m s⁻¹</span>
+After:  p = (0.02+2.48)v = 2.5v
+<span class="step">2 = 2.5v</span>  →  v = <span class="ans">0.8 m s⁻¹</span>
+          </div>
+        </div>
+      </div>
+      <div class="ex-box">
+        <div class="ex-hdr"><div class="ex-lbl">Example 10 — Pistol (2.0 kg) fires bullet (40 g, 200 m s⁻¹)</div></div>
+        <div class="ex-body">
+          <div class="ex-q en-only">(a) Why does pistol recoil? (b) Find recoil velocity.</div>
+          <div class="ex-q zh-only">(a) 为什么手枪会后坐？(b) 求后坐速度。</div>
+          <div class="ex-sol">
+Before: total p = 0
+After:  0 = (2.0×v) + (0.04×200)
+         0 = 2v + 8
+         v = <span class="ans">−4 m s⁻¹</span>  (opposite direction = recoil)
+<span class="step">Recoil velocity = 4 m s⁻¹</span>
+          </div>
+        </div>
+      </div>
+      <div class="tri">
+        <div class="bl-en"><div class="bl-en-lbl">🔵 Application — Rocket Launch</div><div class="bl-en-t">
+          Before launch: total momentum = 0.<br>
+          Hot gases expelled downward → rocket moves upward (equal but opposite momentum).<br>
+          0 = momentum of hot gas (down) + momentum of rocket (up)
+        </div></div>
+        <div class="bl-zh"><div class="bl-zh-lbl">🟢 应用——火箭发射</div><div class="bl-zh-t">
+          发射前：总动量 = 0。<br>
+          高温气体向下喷出 → 火箭向上运动（大小相同，方向相反的动量）。<br>
+          0 = 气体动量（向下）+ 火箭动量（向上）
+        </div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ 2.6 FORCE ══════════ -->
+<div id="tab-foc" class="panel-section" data-sec="2.6">
+  <div class="sec s-or">
+    <div class="sec-hdr" onclick="exp(this)">
+      <div class="sec-icon">💪</div>
+      <div class="sec-info">
+        <div class="sec-num">2.6</div>
+        <div class="sec-t-en">Force (Newton's Second Law)</div>
+        <div class="sec-t-zh">力（牛顿第二定律）</div>
+      </div>
+      <span class="sec-chev open">⌄</span>
+    </div>
+    <div class="sec-body open">
+      <div class="tri">
+        <div class="bl-en"><div class="bl-en-lbl">🔵 English</div><div class="bl-en-t">
+          <b>Newton's Second Law:</b> Rate of change of momentum is directly proportional to the force.<br>
+          <b>F = ma</b>. F in N, m in kg, a in m s⁻².<br>
+          a ∝ F (directly proportional to force).<br>
+          a ∝ 1/m (inversely proportional to mass).
+        </div></div>
+        <div class="bl-zh"><div class="bl-zh-lbl">🟢 中文</div><div class="bl-zh-t">
+          <b>牛顿第二定律：</b>动量变化率与所受的力成正比。<br>
+          <b>F = ma</b>。F单位N，m单位kg，a单位m s⁻²。<br>
+          a ∝ F（加速度与力成正比）。<br>
+          a ∝ 1/m（加速度与质量成反比）。
+        </div></div>
+      </div>
+      <div class="fbox">
+        <div class="fbox-title">Formula / 公式</div>
+        <div class="fgrid">
+          <div class="fi"><div class="fi-eq">F = ma</div><div class="fi-en">Force = mass × acceleration</div><div class="fi-zh">力 = 质量 × 加速度</div></div>
+          <div class="fi"><div class="fi-eq">a = F/m</div><div class="fi-en">Acceleration</div><div class="fi-zh">加速度</div></div>
+        </div>
+      </div>
+      <div class="ex-box">
+        <div class="ex-hdr"><div class="ex-lbl">Example 11 — Mass 400 g, Force 5 N → find acceleration</div></div>
+        <div class="ex-body">
+          <div class="ex-sol">a = F/m = 5÷0.4 = <span class="ans">12.5 m s⁻²</span></div>
+        </div>
+      </div>
+      <div class="ex-box">
+        <div class="ex-hdr"><div class="ex-lbl">Example 12 — Mass 1.2 kg, a = 25 m s⁻² → find force</div></div>
+        <div class="ex-body">
+          <div class="ex-sol">F = ma = 1.2×25 = <span class="ans">30 N</span></div>
+        </div>
+      </div>
+      <div class="ex-box">
+        <div class="ex-hdr"><div class="ex-lbl">Example 13 — Bus 2 400 kg, u = 30 m s⁻¹, stops in 10 s</div></div>
+        <div class="ex-body">
+          <div class="ex-q en-only">Find (a) deceleration, (b) braking force.</div>
+          <div class="ex-q zh-only">求：(a)减速度 (b)制动力</div>
+          <div class="ex-sol">
+<span class="step">(a)</span> a = (0−30)÷10 = <span class="ans">−3 m s⁻²</span>  (deceleration 3 m s⁻²)
+<span class="step">(b)</span> F = 2400×(−3) = <span class="ans">−7 200 N</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ 2.7 IMPULSE ══════════ -->
+<div id="tab-imp" class="panel-section" data-sec="2.7">
+  <div class="sec s-pu">
+    <div class="sec-hdr" onclick="exp(this)">
+      <div class="sec-icon">💥</div>
+      <div class="sec-info">
+        <div class="sec-num">2.7</div>
+        <div class="sec-t-en">Impulse and Impulsive Force</div>
+        <div class="sec-t-zh">冲量与冲击力</div>
+      </div>
+      <span class="sec-chev open">⌄</span>
+    </div>
+    <div class="sec-body open">
+      <div class="tri">
+        <div class="bl-en"><div class="bl-en-lbl">🔵 English</div><div class="bl-en-t">
+          <b>Impulse</b> = change of momentum = Ft = mv − mu. Unit: N s or kg m s⁻¹.<br>
+          <b>Impulsive force, F = (mv−mu)/t</b>. Force acting on an object in a very short time.<br>
+          <b>Newton's Third Law:</b> For every action there is an equal and opposite reaction.
+        </div></div>
+        <div class="bl-zh"><div class="bl-zh-lbl">🟢 中文</div><div class="bl-zh-t">
+          <b>冲量</b> = 动量变化量 = Ft = mv − mu。单位：N·s 或 kg m s⁻¹。<br>
+          <b>冲击力 F = (mv−mu)/t</b>。在极短时间内作用于物体的力。<br>
+          <b>牛顿第三定律：</b>每个作用力都有一个大小相等、方向相反的反作用力。
+        </div></div>
+      </div>
+      <div class="fbox">
+        <div class="fbox-title">Impulse Formulas / 冲量公式</div>
+        <div class="fgrid">
+          <div class="fi"><div class="fi-eq">J = Ft</div><div class="fi-en">Impulse = Force × time</div><div class="fi-zh">冲量 = 力 × 时间</div></div>
+          <div class="fi"><div class="fi-eq">J = mv−mu</div><div class="fi-en">Change in momentum</div><div class="fi-zh">动量变化量</div></div>
+          <div class="fi"><div class="fi-eq">F = (mv−mu)/t</div><div class="fi-en">Impulsive force</div><div class="fi-zh">冲击力</div></div>
+        </div>
+      </div>
+      <div class="ex-box">
+        <div class="ex-hdr"><div class="ex-lbl">Example 14 — Car 1 200 kg, u = 5 m s⁻¹ hits tree, stops in 0.08 s</div></div>
+        <div class="ex-body">
+          <div class="ex-q en-only">Find (a) impulse, (b) impulsive force.</div>
+          <div class="ex-q zh-only">求：(a)冲量 (b)冲击力</div>
+          <div class="ex-sol">
+<span class="step">(a)</span> J = m(v−u) = 1200×(0−5) = <span class="ans">−6 000 kg m s⁻¹</span>
+<span class="step">(b)</span> a = (0−5)÷0.08 = −62.5 m s⁻²
+         F = 1200×(−62.5) = <span class="ans">−75 000 N</span>
+          </div>
+        </div>
+      </div>
+      <div class="ex-box">
+        <div class="ex-hdr"><div class="ex-lbl">Example 15 — Ball 500 g, u = 0, v = 40 m s⁻¹ in 0.2 s</div></div>
+        <div class="ex-body">
+          <div class="ex-q en-only">Find (a) impulsive force, (b) impulse.</div>
+          <div class="ex-q zh-only">求：(a)冲击力 (b)冲量</div>
+          <div class="ex-sol">
+<span class="step">(a)</span> a = (40−0)÷0.2 = 200 m s⁻²
+         F = 0.5×200 = <span class="ans">100 N</span>
+<span class="step">(b)</span> J = Ft = 100×0.2 = <span class="ans">20 N s</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ 2.8 WEIGHT ══════════ -->
+<div id="tab-wt" class="panel-section" data-sec="2.8">
+  <div class="sec s-gr">
+    <div class="sec-hdr" onclick="exp(this)">
+      <div class="sec-icon">⚖️</div>
+      <div class="sec-info">
+        <div class="sec-num">2.8</div>
+        <div class="sec-t-en">Weight — Mass vs Weight</div>
+        <div class="sec-t-zh">重力——质量与重力的区别</div>
+      </div>
+      <span class="sec-chev open">⌄</span>
+    </div>
+    <div class="sec-body open">
+      <div class="comp-wrap">
+        <table class="comp-table">
+          <thead><tr>
+            <th style="background:#334155">Aspect / 方面</th>
+            <th style="background:#059669">Mass / 质量</th>
+            <th style="background:#dc2626">Weight / 重力</th>
+          </tr></thead>
+          <tbody>
+            <tr>
+              <td style="font-weight:800;background:#f8fafc;color:#475569;font-size:11px">Definition / 定义</td>
+              <td style="background:#f0fdf4;color:#064e3b;font-weight:700">Amount of matter / 物体中物质的量</td>
+              <td style="background:#fff5f5;color:#7f1d1d;font-weight:700">Gravitational force acting on it / 作用在物体上的重力</td>
+            </tr>
+            <tr>
+              <td style="font-weight:800;background:#f8fafc;color:#475569;font-size:11px">Unit / 单位</td>
+              <td style="background:#f0fdf4;color:#064e3b;font-weight:700">kg</td>
+              <td style="background:#fff5f5;color:#7f1d1d;font-weight:700">N (Newton / 牛顿)</td>
+            </tr>
+            <tr>
+              <td style="font-weight:800;background:#f8fafc;color:#475569;font-size:11px">Type / 类型</td>
+              <td style="background:#f0fdf4;color:#064e3b;font-weight:700">Scalar / 标量</td>
+              <td style="background:#fff5f5;color:#7f1d1d;font-weight:700">Vector / 矢量</td>
+            </tr>
+            <tr>
+              <td style="font-weight:800;background:#f8fafc;color:#475569;font-size:11px">Changes? / 会变化？</td>
+              <td style="background:#f0fdf4;color:#064e3b;font-weight:700">Constant everywhere / 处处不变</td>
+              <td style="background:#fff5f5;color:#7f1d1d;font-weight:700">Changes with g / 随g值变化</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="fbox">
+        <div class="fbox-title">Formula / 公式 &nbsp;·&nbsp; g on Earth = 9.81 N kg⁻¹</div>
+        <div class="fgrid">
+          <div class="fi"><div class="fi-eq">W = mg</div><div class="fi-en">Weight = mass × g</div><div class="fi-zh">重力 = 质量 × g</div></div>
+        </div>
+      </div>
+      <div class="ex-box">
+        <div class="ex-hdr"><div class="ex-lbl">Example 16 — Find weight (g = 9.81 N kg⁻¹)</div></div>
+        <div class="ex-body">
+          <div class="ex-q en-only">(a) Stone: 300 g &nbsp; (b) Car: 1 500 kg</div>
+          <div class="ex-q zh-only">(a) 石头：300 g &nbsp; (b) 汽车：1 500 kg</div>
+          <div class="ex-sol">
+<span class="step">(a)</span> W = 0.3×9.81 = <span class="ans">2.943 N</span>
+<span class="step">(b)</span> W = 1500×9.81 = <span class="ans">14 715 N</span>
+          </div>
+        </div>
+      </div>
+      <div class="ex-box">
+        <div class="ex-hdr"><div class="ex-lbl">Example 17 — Stone 2.5 kg: weight on Earth vs Moon (g_moon = 1.62 N kg⁻¹)</div></div>
+        <div class="ex-body">
+          <div class="ex-sol">
+<span class="step">Earth</span>:  W = 2.5×9.81 = <span class="ans">24.525 N</span>
+<span class="step">Moon</span>:   W = 2.5×1.62 = <span class="ans">4.05 N</span>
+<span class="step">Mass</span>:   Same = <span class="ans">2.5 kg</span>  everywhere
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ MEMORY MAP ══════════ -->
+<div id="tab-mm" class="panel-section" data-sec="mm">
+  <div style="background:#0f172a;border-radius:var(--r);overflow:hidden;margin-bottom:12px">
+    <div class="mmap-hdr">
+      <div class="mmap-h1">⭐ Super Compact Memory Map</div>
+      <div class="mmap-h2">Chapter 2 — Force and Motion I · Quick Reference</div>
+      <div class="mmap-h3">第二章 — 力与运动I · 速查参考</div>
+    </div>
+    <div style="padding:14px">
+
+      <!-- Formula summary table -->
+      <div style="background:#1e293b;border-radius:12px;padding:12px;margin-bottom:12px">
+        <div style="font-size:11px;font-weight:800;letter-spacing:2px;color:#f59e0b;text-transform:uppercase;margin-bottom:9px">📐 All Key Formulas / 所有关键公式</div>
+        <div class="fgrid">
+          <div class="fi"><div class="fi-eq">v = u + at</div><div class="fi-en">Linear motion</div><div class="fi-zh">线性运动</div></div>
+          <div class="fi"><div class="fi-eq">s = ½(u+v)t</div><div class="fi-en">Displacement</div><div class="fi-zh">位移</div></div>
+          <div class="fi"><div class="fi-eq">v² = u²+2as</div><div class="fi-en">Without t</div><div class="fi-zh">无时间</div></div>
+          <div class="fi"><div class="fi-eq">a = (v−u)/t</div><div class="fi-en">Acceleration</div><div class="fi-zh">加速度</div></div>
+          <div class="fi"><div class="fi-eq">p = mv</div><div class="fi-en">Momentum</div><div class="fi-zh">动量</div></div>
+          <div class="fi"><div class="fi-eq">F = ma</div><div class="fi-en">Newton's 2nd</div><div class="fi-zh">牛顿第二定律</div></div>
+          <div class="fi"><div class="fi-eq">J = Ft = mv−mu</div><div class="fi-en">Impulse</div><div class="fi-zh">冲量</div></div>
+          <div class="fi"><div class="fi-eq">W = mg</div><div class="fi-en">Weight</div><div class="fi-zh">重力</div></div>
+        </div>
+      </div>
+
+      <div class="mmap-item">
+        <div class="mm-en"><div class="mm-en-t">2.1 Distance = path length (scalar). Displacement = straight line start→end (vector). Speed = d/t. Velocity = s/t.</div></div>
+        <div class="mm-zh"><div class="mm-zh-t">2.1 距离=路径长度（标量）。位移=起点到终点直线距离（矢量）。速率=d/t。速度=s/t。</div></div>
+      </div>
+
+      <div class="mmap-item">
+        <div class="mm-en"><div class="mm-en-t">2.1 Equations of Motion: v=u+at | s=½(u+v)t | s=ut+½at² | v²=u²+2as | a=(v−u)/t</div></div>
+        <div class="mm-zh"><div class="mm-zh-t">2.1 运动方程：v=u+at | s=½(u+v)t | s=ut+½at² | v²=u²+2as | a=(v−u)/t</div></div>
+      </div>
+
+      <div class="mmap-item">
+        <div class="mm-en"><div class="mm-en-t">2.2 s-t graph: gradient = velocity. v-t graph: gradient = acceleration, area = displacement.</div></div>
+        <div class="mm-zh"><div class="mm-zh-t">2.2 s-t图：斜率=速度；v-t图：斜率=加速度，面积=位移。</div></div>
+      </div>
+
+      <div class="mmap-item">
+        <div class="mm-en"><div class="mm-en-t">2.3 Free fall: g = 9.81 m s⁻². Falling down: a = +9.81. Thrown up: deceleration = 9.81 m s⁻².</div></div>
+        <div class="mm-zh"><div class="mm-zh-t">2.3 自由落体：g = 9.81 m s⁻²。向下落：a = +9.81。向上抛：减速度 = 9.81 m s⁻²。</div></div>
+      </div>
+
+      <div class="mmap-item">
+        <div class="mm-en"><div class="mm-en-t">2.4 Inertia (Newton's 1st Law): object stays at rest or uniform velocity unless a force acts. Inertia ∝ mass. Safety belt/airbag/headrest reduce inertia effects.</div></div>
+        <div class="mm-zh"><div class="mm-zh-t">2.4 惯性（牛顿第一定律）：无外力作用时，物体保持静止或匀速。惯性∝质量。安全带/气囊/头枕减轻惯性影响。</div></div>
+      </div>
+
+      <div class="mmap-item">
+        <div class="mm-en"><div class="mm-en-t">2.5 Momentum p = mv (kg m s⁻¹). Conservation: total p before = total p after (no external force). Rocket: gas goes down → rocket goes up.</div></div>
+        <div class="mm-zh"><div class="mm-zh-t">2.5 动量 p = mv（kg m s⁻¹）。守恒：无外力时，碰撞前总动量=碰撞后总动量。火箭：气体向下→火箭向上。</div></div>
+      </div>
+
+      <div class="mmap-item">
+        <div class="mm-en"><div class="mm-en-t">2.6 Newton's 2nd Law: F = ma. a ∝ F (directly). a ∝ 1/m (inversely). F in N, m in kg, a in m s⁻².</div></div>
+        <div class="mm-zh"><div class="mm-zh-t">2.6 牛顿第二定律：F = ma。a∝F（正比）；a∝1/m（反比）。F单位N，m单位kg，a单位m s⁻²。</div></div>
+      </div>
+
+      <div class="mmap-item">
+        <div class="mm-en"><div class="mm-en-t">2.7 Impulse J = Ft = mv−mu (N s). Impulsive force F = (mv−mu)/t. Newton's 3rd: action = equal &amp; opposite reaction.</div></div>
+        <div class="mm-zh"><div class="mm-zh-t">2.7 冲量 J = Ft = mv−mu（N·s）。冲击力 F = (mv−mu)/t。牛顿第三定律：作用力=大小相等方向相反的反作用力。</div></div>
+      </div>
+
+      <div class="mmap-item">
+        <div class="mm-en"><div class="mm-en-t">2.8 W = mg. g on Earth = 9.81 N kg⁻¹. Mass = constant (scalar, kg). Weight = varies with g (vector, N).</div></div>
+        <div class="mm-zh"><div class="mm-zh-t">2.8 W = mg。地球g = 9.81 N kg⁻¹。质量=不变（标量，kg）。重力=随g变化（矢量，N）。</div></div>
+      </div>
+
+      <!-- EXAM TEMPLATES -->
+      <div class="exam-box">
+        <div class="exam-hdr"><div class="exam-lbl">✏️ Exam Templates / 考试句型</div></div>
+        <div class="exam-en">
+          <div class="exam-en-t">
+            <b>Momentum conservation:</b> "The total momentum before collision equals the total momentum after collision because no external force acts on the system."<br><br>
+            <b>Inertia:</b> "The passenger is thrown forward because of inertia — their body tends to continue moving at the original velocity when the vehicle stops suddenly."<br><br>
+            <b>Impulse:</b> "Impulse = change in momentum = mv − mu = Ft."
+          </div>
+        </div>
+        <div class="exam-zh">
+          <div class="exam-zh-t">
+            <b>动量守恒：</b>"由于系统不受外力作用，碰撞前的总动量等于碰撞后的总动量。"<br><br>
+            <b>惯性：</b>"乘客向前冲是因为惯性——当车辆突然停止时，身体倾向于继续以原来的速度运动。"<br><br>
+            <b>冲量：</b>"冲量 = 动量变化量 = mv − mu = Ft。"
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+</main>
+
+<a class="top-link" href="#top">↑ Top</a>
+<footer>
+  <span class="en-only">Physics Chapter 2 — Force and Motion I · 17 worked examples · All formulas included</span>
+  <span class="zh-only">物理第二章 — 力与运动I · 17道解题示例 · 包含所有公式</span>
+</footer>
+
+<script>
+/* LANG */
+function setLang(btn){
+  document.querySelectorAll('.lbtn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  const l=btn.dataset.lang;
+  document.body.className='lang-'+l;
+  localStorage.setItem('fm-lang',l);
+}
+(function(){
+  const s=localStorage.getItem('fm-lang')||'both';
+  const b=document.querySelector(`.lbtn[data-lang="${s}"]`);
+  if(b)setLang(b);
+})();
+
+/* TABS */
+function showTab(id,btn){
+  document.querySelectorAll('.panel-section').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById('tab-'+id).classList.add('active');
+  btn.classList.add('active');
+  window.scrollTo(0,document.querySelector('.tabs').offsetTop-60);
+}
+
+/* ACCORDION */
+function exp(hdr){
+  const b=hdr.nextElementSibling;
+  const c=hdr.querySelector('.sec-chev');
+  const o=b.classList.toggle('open');
+  c.classList.toggle('open',o);
+}
+
+/* SEARCH */
+const srch=document.getElementById('srch');
+let curFilter='all';
+srch.addEventListener('input',applyFilter);
+document.querySelectorAll('.ftr').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    document.querySelectorAll('.ftr').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    curFilter=btn.dataset.f;
+    applyFilter();
+  });
+});
+function applyFilter(){
+  const q=srch.value.trim().toLowerCase();
+  document.querySelectorAll('.panel-section').forEach(sec=>{
+    const secId=sec.dataset.sec||'';
+    const okF=curFilter==='all'||secId===curFilter;
+    const text=(sec.textContent||'').toLowerCase();
+    const okQ=!q||text.includes(q);
+    sec.style.display=(okF&&okQ)?'':'none';
+    if(okF&&okQ) sec.classList.add('active');
+  });
+  // if filter selects a section, auto-switch tab
+  if(curFilter!=='all'){
+    const maps={'2.1':'lin','2.2':'gra','2.3':'fre','2.4':'ine','2.5':'mom','2.6':'foc','2.7':'imp','2.8':'wt'};
+    const t=maps[curFilter];
+    if(t){
+      const btn=document.querySelector(`.tab.t-${t}`);
+      if(btn) showTab(t,btn);
+    }
+  }
+}
+</script>
+</body>
+</html>
