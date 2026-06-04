@@ -60,16 +60,40 @@ No `archive/` subdirectories — all files sit directly in `<subject>/`.
 
 When triggered, the workflow:
 1. Pulls latest from GitHub (`git pull`)
-2. Scans all root-level subject folders: `chemistry/`, `english/`, `history/`, `physics/`, `rbt/`, etc. (no subdirectories)
+2. Scans all root-level subject folders: `chemistry/`, `english/`, `history/`, `physics/`, `rbt/`, etc. (**no subdirectories, no archive/**)
 3. For each HTML file matching `t<form(s)>_chapter<num>.html`:
    - Checks if `resourceUrl` is already set in `js/subject.js`
-   - If missing: adds Back to Dashboard button (if absent), adds `resourceUrl`, updates `sw.js`
-4. Runs `npm run validate`, commits and pushes if changes were made
-5. Appends result to `FILES/auto_integration_log.txt` (GMT+8 timestamps)
+   - If missing:
+     a. Add Back to Dashboard button to the HTML file (if absent)
+     b. Add `resourceUrl` to matching chapter in `js/subject.js`
+        - Match by: form + chapterNum (direct). If no direct match, match by form + position (nth chapter of that form)
+     c. Add path to `STATIC_ASSETS` in `sw.js`
+4. For each subject whose chapter now has a `resourceUrl`, check `subjects/<subject>.html` for all four required components — add any that are missing:
+   - **`.chapter-link` CSS** in `<style>`:
+     ```css
+     .chapter-link{display:inline-block;margin-top:10px;color:#1d4ed8;font-size:14px;text-decoration:none}
+     .chapter-link:hover{text-decoration:underline}
+     ```
+   - **`chapterResource` variable** before `card.innerHTML`:
+     ```js
+     const chapterResource = chapter.resourceUrl
+         ? `<a class="chapter-link" href="${chapter.resourceUrl}">Open notes</a>`
+         : "";
+     ```
+   - **`${chapterResource}`** included inside `card.innerHTML`
+   - **Click guard** in the card click handler:
+     ```js
+     if(e.target.closest(".chapter-link")){ return; }
+     ```
+   - **`addMissingChineseLabels()`** function that syncs `resourceUrl` (and `chinese`) from seed data into Firestore on load — called inside `loadData()` when `snap.exists()`
+5. Runs `npm run validate`, commits and pushes if changes were made
+6. Appends result to `FILES/auto_integration_log.txt` (GMT+8 timestamps)
 
 **Paths used:**
 - `resourceUrl`: `"../chemistry/t4_chapter1.html"` (relative from `subjects/`)
 - `STATIC_ASSETS`: `'/chemistry/t4_chapter1.html'` (leading slash, from root)
+
+**Why `addMissingChineseLabels` is needed:** Subject pages load from Firestore. If the Firestore doc was saved before `resourceUrl` was added to `subject.js`, it won't have the field. This function syncs missing fields from seed data into Firestore on page load.
 
 ## Adding a New Subject
 
