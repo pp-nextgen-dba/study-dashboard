@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=5.0"/>
+<meta name="theme-color" content="#5b21b6"/>
+<title>Chemistry Form 4 Chapter 1 — Introduction to Chemistry</title>
+<style>
+:root{
+  --bg:#f5f3ff;--ink:#1e1b4b;--muted:#6b7280;
+  --pri:#7c3aed;--pri2:#a855f7;--acc:#f59e0b;
+  --gr:#059669;--rd:#dc2626;--bl:#2563eb;
+  --line:#e2e8f0;--soft:#ede9fe;
+  --shadow:0 14px 30px rgba(109,40,217,.13);--r:22px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:var(--ink)}
+
+/* HEADER */
+.hdr{background:linear-gradient(135deg,#4c1d95,#7c3aed 55%,#a855f7);
+  padding:26px 16px 68px;position:relative;overflow:hidden;color:#fff}
+.hdr:before,.hdr:after{content:"";position:absolute;border-radius:999px;
+  background:rgba(255,255,255,.1)}
+.hdr:before{width:230px;height:230px;left:-95px;top:-75px}
+.hdr:after{width:290px;height:290px;right:-125px;bottom:-155px}
+.hero{max-width:1100px;margin:auto;position:relative;z-index:2}
+.badge{display:inline-flex;gap:7px;align-items:center;
+  background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.3);
+  padding:7px 13px;border-radius:999px;font-weight:700;font-size:.83rem;margin-bottom:10px}
+h1{font-size:clamp(1.7rem,5vw,3.5rem);line-height:1.08;letter-spacing:-1px;margin-bottom:6px}
+.hero-sub{font-size:clamp(.9rem,2vw,1.05rem);opacity:.93;max-width:680px;margin-bottom:4px}
+.lang-row{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap}
+.lbtn{border:2px solid rgba(255,255,255,.5);background:rgba(255,255,255,.15);
+  color:#fff;border-radius:999px;padding:8px 16px;font-weight:800;font-size:.83rem;cursor:pointer;transition:.15s}
+.lbtn.active{background:#fff;color:var(--pri)}
+
+/* MAIN */
+main{max-width:1120px;margin:-48px auto 60px;padding:0 13px;position:relative;z-index:5}
+.panel{background:rgba(255,255,255,.94);border:1px solid var(--line);
+  box-shadow:var(--shadow);border-radius:var(--r)}
+
+/* STICKY BAR */
+.ctrl{padding:12px 15px;display:flex;flex-wrap:wrap;gap:9px;align-items:center;
+  position:sticky;top:7px;z-index:50;backdrop-filter:blur(12px)}
+.srch{flex:1;min-width:140px;border:1px solid var(--line);background:#fbfcff;
+  border-radius:17px;padding:11px 14px;font-size:.95rem;outline:none;color:var(--ink)}
+.srch:focus{border-color:var(--pri);box-shadow:0 0 0 3px rgba(124,58,237,.12)}
+
+/* TABS */
+.tabs{display:flex;overflow-x:auto;background:#1e1b4b;scrollbar-width:none;
+  position:sticky;top:53px;z-index:49;-webkit-overflow-scrolling:touch}
+.tabs::-webkit-scrollbar{display:none}
+.tab{flex:0 0 auto;padding:11px 14px;font-size:12px;font-weight:800;
+  color:#94a3b8;background:transparent;border:none;cursor:pointer;
+  border-bottom:3px solid transparent;white-space:nowrap;transition:.2s}
+.tab.t1.active{color:#c4b5fd;border-bottom-color:#a855f7}
+.tab.t2.active{color:#6ee7b7;border-bottom-color:#059669}
+.tab.t3.active{color:#fde68a;border-bottom-color:#f59e0b}
+.tab.tmm.active{color:#fbbf24;border-bottom-color:#f59e0b}
+
+.psec{display:none;padding:12px 12px 60px}
+.psec.active{display:block}
+
+/* SECTION CARDS */
+.sec{border-radius:var(--r);margin-bottom:12px;overflow:hidden;border:2px solid}
+.sec-hdr{display:flex;align-items:center;gap:12px;padding:14px;cursor:pointer;
+  user-select:none;-webkit-tap-highlight-color:transparent}
+.sec-icon{width:40px;height:40px;border-radius:10px;display:flex;
+  align-items:center;justify-content:center;font-size:20px;flex-shrink:0;color:#fff}
+.sec-info{flex:1}
+.sec-num{font-size:10px;font-weight:800;letter-spacing:1px;text-transform:uppercase;margin-bottom:2px}
+.sec-t-en{font-size:15px;font-weight:900;line-height:1.25;color:#3b0764}
+.sec-t-zh{font-size:12px;font-weight:700;color:#047857;margin-top:2px}
+.sec-chev{font-size:20px;color:#94a3b8;transition:transform .25s;flex-shrink:0}
+.sec-chev.open{transform:rotate(180deg)}
+.sec-body{display:none;padding:0 12px 14px}
+.sec-body.open{display:block}
+
+/* TRI BLOCKS */
+.tri{border-radius:12px;overflow:hidden;margin-bottom:9px;border:2px solid var(--line)}
+.bl-en{background:#f5f3ff;border-left:5px solid var(--pri);padding:9px 12px}
+.bl-en-lbl{font-size:10px;font-weight:800;letter-spacing:2px;color:#5b21b6;text-transform:uppercase;margin-bottom:3px}
+.bl-en-t{font-size:13.5px;font-weight:700;color:#3b0764;line-height:1.55}
+.bl-zh{background:#ecfdf5;border-left:5px solid var(--gr);padding:9px 12px}
+.bl-zh-lbl{font-size:10px;font-weight:800;letter-spacing:2px;color:#047857;text-transform:uppercase;margin-bottom:3px}
+.bl-zh-t{font-size:13px;font-weight:600;color:#064e3b;line-height:1.65}
+
+/* TABLE */
+.tbl-wrap{overflow-x:auto;margin-bottom:10px;border-radius:13px}
+.tbl{width:100%;border-collapse:collapse;font-size:12.5px}
+.tbl th{padding:9px 11px;font-size:10px;font-weight:800;letter-spacing:1px;
+  text-transform:uppercase;text-align:left;color:#fff}
+.tbl td{padding:9px 11px;vertical-align:top;line-height:1.45;
+  border-bottom:1px solid rgba(0,0,0,.06)}
+.tbl tr:last-child td{border-bottom:none}
+.th-pu{background:#7c3aed}
+.th-gr{background:#059669}
+.th-rd{background:#dc2626}
+.td-pu{background:#f5f3ff;color:#3b0764;font-weight:700}
+.td-gr{background:#f0fdf4;color:#064e3b;font-weight:600}
+.td-rd{background:#fff5f5;color:#7f1d1d;font-weight:600}
+.td-label{font-size:10px;font-weight:800;letter-spacing:1px;text-transform:uppercase;
+  color:#475569;background:#f8fafc;padding:7px 11px}
+
+/* FLOW STEPS */
+.flow{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:10px;padding:12px;
+  background:#f5f3ff;border-radius:13px;border:1.5px solid #ddd6fe}
+.fstep{background:var(--pri);color:#fff;border-radius:11px;padding:9px 12px;
+  font-size:12px;font-weight:800;text-align:center;min-width:90px;line-height:1.35}
+.fstep-zh{background:#059669}
+.farrow{font-size:20px;color:#a78bfa;flex-shrink:0}
+.flow-label{font-size:10px;font-weight:800;letter-spacing:2px;color:#5b21b6;
+  text-transform:uppercase;margin-bottom:7px;display:block}
+
+/* CAREER PILLS */
+.career-grid{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:9px}
+.cpill{padding:9px 14px;border-radius:13px;font-size:12.5px;font-weight:800;
+  border:2px solid;text-align:center}
+.cp-en{border-color:var(--pri);background:#ede9fe;color:#4c1d95}
+.cp-zh{border-color:var(--gr);background:#d1fae5;color:#064e3b}
+
+/* PILLS */
+.mem{border-radius:12px;padding:11px;background:#f1f5f9;border:2px solid #cbd5e1;margin-top:8px}
+.mem-lbl{font-size:10px;letter-spacing:2px;font-weight:800;margin-bottom:7px;
+  color:#475569;text-transform:uppercase}
+.pills{display:flex;flex-wrap:wrap;gap:5px}
+.pill{padding:5px 9px;border-radius:999px;font-size:11.5px;font-weight:800;border:2px solid}
+.p-en{border-color:var(--pri);background:#ede9fe;color:#4c1d95}
+.p-zh{border-color:var(--gr);background:#d1fae5;color:#064e3b}
+
+/* SECTION THEMES */
+.s-pu{background:#f5f3ff;border-color:#a855f7}
+.s-pu .sec-hdr{background:#ede9fe}.s-pu .sec-icon{background:#7c3aed}
+.s-pu .sec-num{color:#5b21b6}.s-pu .sec-body{border-top:2px dashed #c4b5fd}
+
+.s-gr{background:#f0fdf4;border-color:#059669}
+.s-gr .sec-hdr{background:#d1fae5}.s-gr .sec-icon{background:#059669}
+.s-gr .sec-num{color:#047857}.s-gr .sec-body{border-top:2px dashed #6ee7b7}
+
+.s-am{background:#fffbeb;border-color:#f59e0b}
+.s-am .sec-hdr{background:#fef3c7}.s-am .sec-icon{background:#d97706}
+.s-am .sec-num{color:#92400e}.s-am .sec-body{border-top:2px dashed #fde68a}
+
+.s-rd{background:#fff5f5;border-color:#dc2626}
+.s-rd .sec-hdr{background:#fee2e2}.s-rd .sec-icon{background:#dc2626}
+.s-rd .sec-num{color:#b91c1c}.s-rd .sec-body{border-top:2px dashed #fca5a5}
+
+/* MEMORY MAP */
+.mmap-item{border-radius:13px;overflow:hidden;margin-bottom:9px;
+  border:2px solid var(--line);box-shadow:0 2px 6px rgba(0,0,0,.06)}
+.mm-en{background:#ede9fe;padding:9px 13px;border-bottom:1px solid #ddd6fe}
+.mm-en-t{font-size:13.5px;font-weight:800;color:#3b0764}
+.mm-zh{background:#d1fae5;padding:9px 13px}
+.mm-zh-t{font-size:12.5px;font-weight:600;color:#064e3b}
+.mmap-hdr{background:#1e1b4b;padding:14px;text-align:center;border-radius:13px 13px 0 0}
+.mmap-h1{font-size:15px;font-weight:800;color:#fbbf24;margin-bottom:2px}
+.mmap-h2{font-size:12px;color:#94a3b8;font-style:italic}
+.mmap-h3{font-size:11px;color:#6ee7b7;margin-top:2px}
+
+/* EXAM */
+.exam-box{border-radius:13px;overflow:hidden;border:2px solid var(--pri);margin-top:9px}
+.exam-hdr{background:var(--pri);padding:9px 13px}
+.exam-lbl{font-size:10px;letter-spacing:2px;font-weight:800;color:#ede9fe;text-transform:uppercase}
+.exam-en{background:#f5f3ff;border-left:5px solid var(--pri);padding:9px 13px}
+.exam-en-t{font-size:13px;font-weight:700;color:#3b0764;line-height:1.6}
+.exam-zh{background:#ecfdf5;border-left:5px solid var(--gr);padding:9px 13px}
+.exam-zh-t{font-size:12px;font-weight:600;color:#064e3b;line-height:1.7}
+
+/* HIDE */
+body.lang-en .zh-only{display:none}
+body.lang-zh .en-only{display:none}
+
+.top-link{position:fixed;right:13px;bottom:13px;background:var(--pri);
+  color:#fff;text-decoration:none;padding:11px 13px;border-radius:999px;
+  font-weight:900;box-shadow:var(--shadow);z-index:70;font-size:.88rem}
+footer{text-align:center;color:var(--muted);padding:18px 14px 50px;font-size:.83rem;line-height:1.6}
+
+@media(max-width:560px){
+  main{padding:0 10px;margin-top:-44px}
+  .hdr{padding:22px 13px 66px}
+  .flow{flex-direction:column;align-items:flex-start}
+  .farrow{transform:rotate(90deg)}
+}
+</style>
+</head>
+<body id="top" class="lang-both">
+
+<header class="hdr">
+  <div class="hero">
+    <div class="badge">🧪 Chemistry · Form 4 · Chapter 1</div>
+    <h1>Introduction to Chemistry</h1>
+    <p class="hero-sub en-only">Chemistry in daily life, scientific investigation, lab apparatus usage, safety equipment, chemical storage and disposal.</p>
+    <p class="hero-sub zh-only" style="margin-top:5px">化学在日常生活中的应用、科学探究、实验室仪器使用、安全设备、化学品储存与处置。</p>
+    <div class="lang-row">
+      <button class="lbtn active" data-lang="both" onclick="setLang(this)">EN + 中文</button>
+      <button class="lbtn" data-lang="en" onclick="setLang(this)">English Only</button>
+      <button class="lbtn" data-lang="zh" onclick="setLang(this)">仅中文</button>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section class="ctrl panel">
+    <input id="srch" class="srch" placeholder="Search: safety, chemical, careers, hypothesis…"/>
+  </section>
+
+  <div class="tabs">
+    <button class="tab t1 active" onclick="showTab('t1',this)">1.1 Chemistry Field</button>
+    <button class="tab t2" onclick="showTab('t2',this)">1.2 Scientific Method</button>
+    <button class="tab t3" onclick="showTab('t3',this)">1.3 Lab Safety</button>
+    <button class="tab tmm" onclick="showTab('tmm',this)">⭐ Memory Map</button>
+  </div>
+
+<!-- ══════════ 1.1 CHEMISTRY FIELD ══════════ -->
+<div id="tab-t1" class="psec active">
+
+  <div class="sec s-pu">
+    <div class="sec-hdr" onclick="exp(this)">
+      <div class="sec-icon">⚗️</div>
+      <div class="sec-info">
+        <div class="sec-num">1.1</div>
+        <div class="sec-t-en">Development in Chemistry Field &amp; Its Importance</div>
+        <div class="sec-t-zh">化学领域的发展及其重要性</div>
+      </div>
+      <span class="sec-chev open">⌄</span>
+    </div>
+    <div class="sec-body open">
+      <div class="tri">
+        <div class="bl-en"><div class="bl-en-lbl">🔵 English</div><div class="bl-en-t">
+          <b>Chemistry</b> is a field of science that studies the <b>structures, properties, compositions and interactions between matter</b>.
+        </div></div>
+        <div class="bl-zh"><div class="bl-zh-lbl">🟢 中文</div><div class="bl-zh-t">
+          <b>化学</b>是研究<b>物质的结构、性质、组成和相互作用</b>的科学领域。
+        </div></div>
+      </div>
+
+      <!-- CHEMICALS IN DAILY LIFE TABLE -->
+      <div class="tbl-wrap">
+        <table class="tbl">
+          <thead>
+            <tr>
+              <th class="th-pu" style="width:18%">Field<br><span style="font-size:9px;opacity:.85">领域</span></th>
+              <th class="th-pu" style="width:28%">Chemical<br><span style="font-size:9px;opacity:.85">化学品</span></th>
+              <th class="th-pu">Use / 用途</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="td-label" rowspan="2">Food<br>食品</td>
+              <td class="td-pu">Flavouring / 调味剂</td>
+              <td class="td-gr">Enhance the taste of food. / 增强食物味道。</td>
+            </tr>
+            <tr>
+              <td class="td-pu">Sweetener / 甜味剂</td>
+              <td class="td-gr">To make food and drink sweeter. / 使食物和饮料更甜。</td>
+            </tr>
+            <tr>
+              <td class="td-label">Food (cont.)<br>食品（续）</td>
+              <td class="td-pu">Preservative / 防腐剂</td>
+              <td class="td-gr">To slow down or prevent the growth of microorganisms. / 减缓或防止微生物生长。</td>
+            </tr>
+            <tr>
+              <td class="td-label" rowspan="2">Medicine<br>医药</td>
+              <td class="td-pu">Analgesics / 镇痛药</td>
+              <td class="td-gr">Applied to the surface of skin or wound to prevent infection. / 涂于皮肤或伤口表面以防感染。</td>
+            </tr>
+            <tr>
+              <td class="td-pu">Antimicrobials / 抗菌剂</td>
+              <td class="td-gr">Used to kill or retard the growth of microorganisms. / 用于杀死或抑制微生物生长。</td>
+            </tr>
+            <tr>
+              <td class="td-label" rowspan="2">Agriculture<br>农业</td>
+              <td class="td-pu">Fertiliser / 肥料</td>
+              <td class="td-gr">To enhance plant growth. / 促进植物生长。</td>
+            </tr>
+            <tr>
+              <td class="td-pu">Pesticide / 农药</td>
+              <td class="td-gr">Poison to kill pests such as insects, rodents, etc. / 毒杀害虫，如昆虫、鼠类等。</td>
+            </tr>
+            <tr>
+              <td class="td-label" rowspan="2">Industry<br>工业</td>
+              <td class="td-pu">Paint / 油漆</td>
+              <td class="td-gr">To protect the exterior of a building. / 保护建筑物外表面。</td>
+            </tr>
+            <tr>
+              <td class="td-pu">Glass / 玻璃</td>
+              <td class="td-gr">Making laboratory apparatus and tableware. / 制造实验室仪器和餐具。</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="sec s-pu">
+    <div class="sec-hdr" onclick="exp(this)">
+      <div class="sec-icon">💼</div>
+      <div class="sec-info">
+        <div class="sec-num">1.1</div>
+        <div class="sec-t-en">Careers Related to Chemistry</div>
+        <div class="sec-t-zh">与化学相关的职业</div>
+      </div>
+      <span class="sec-chev">⌄</span>
+    </div>
+    <div class="sec-body">
+      <div class="tri">
+        <div class="bl-en"><div class="bl-en-lbl">🔵 English — 5 career fields</div><div class="bl-en-t">
+          Pharmaceutical · Cosmetic · Nanotechnology · Green technology · Biotechnology
+        </div></div>
+        <div class="bl-zh"><div class="bl-zh-lbl">🟢 中文——5个职业领域</div><div class="bl-zh-t">
+          制药 · 化妆品 · 纳米技术 · 绿色技术 · 生物技术
+        </div></div>
+      </div>
+      <div class="career-grid">
+        <div class="cpill cp-en">💊 Pharmaceutical<br><span class="zh-only" style="font-weight:600;color:#059669">制药</span></div>
+        <div class="cpill cp-en">💄 Cosmetic<br><span class="zh-only" style="font-weight:600;color:#059669">化妆品</span></div>
+        <div class="cpill cp-en">🔬 Nanotechnology<br><span class="zh-only" style="font-weight:600;color:#059669">纳米技术</span></div>
+        <div class="cpill cp-en">🌿 Green Technology<br><span class="zh-only" style="font-weight:600;color:#059669">绿色技术</span></div>
+        <div class="cpill cp-en">🧬 Biotechnology<br><span class="zh-only" style="font-weight:600;color:#059669">生物技术</span></div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ══════════ 1.2 SCIENTIFIC METHOD ══════════ -->
+<div id="tab-t2" class="psec">
+
+  <div class="sec s-gr">
+    <div class="sec-hdr" onclick="exp(this)">
+      <div class="sec-icon">🔬</div>
+      <div class="sec-info">
+        <div class="sec-num">1.2</div>
+        <div class="sec-t-en">Scientific Investigation — Steps of Scientific Method</div>
+        <div class="sec-t-zh">科学探究——科学方法的步骤</div>
+      </div>
+      <span class="sec-chev open">⌄</span>
+    </div>
+    <div class="sec-body open">
+      <div class="tri">
+        <div class="bl-en"><div class="bl-en-lbl">🔵 English — 10 steps in order</div><div class="bl-en-t">
+          Follow the steps systematically to conduct a valid scientific investigation.
+        </div></div>
+        <div class="bl-zh"><div class="bl-zh-lbl">🟢 中文——按顺序的10个步骤</div><div class="bl-zh-t">
+          系统地遵循步骤，以进行有效的科学探究。
+        </div></div>
+      </div>
+
+      <!-- FLOW EN -->
+      <div class="flow">
+        <span class="flow-label en-only">Scientific Method Steps / 科学方法步骤</span>
+        <div class="fstep">1. Making observations<br><span class="zh-only" style="font-size:10px;opacity:.9">进行观察</span></div>
+        <div class="farrow">→</div>
+        <div class="fstep">2. Making an inference<br><span class="zh-only" style="font-size:10px;opacity:.9">作出推断</span></div>
+        <div class="farrow">→</div>
+        <div class="fstep">3. Identifying the problem<br><span class="zh-only" style="font-size:10px;opacity:.9">确认问题</span></div>
+        <div class="farrow">→</div>
+        <div class="fstep">4. Making a hypothesis<br><span class="zh-only" style="font-size:10px;opacity:.9">作出假设</span></div>
+        <div class="farrow">→</div>
+        <div class="fstep">5. Identifying the variables<br><span class="zh-only" style="font-size:10px;opacity:.9">确认变量</span></div>
+        <div class="farrow">→</div>
+        <div class="fstep">6. Controlling the variables<br><span class="zh-only" style="font-size:10px;opacity:.9">控制变量</span></div>
+        <div class="farrow">→</div>
+        <div class="fstep">7. Planning an experiment<br><span class="zh-only" style="font-size:10px;opacity:.9">规划实验</span></div>
+        <div class="farrow">→</div>
+        <div class="fstep">8. Collecting data<br><span class="zh-only" style="font-size:10px;opacity:.9">收集数据</span></div>
+        <div class="farrow">→</div>
+        <div class="fstep">9. Interpreting data<br><span class="zh-only" style="font-size:10px;opacity:.9">解读数据</span></div>
+        <div class="farrow">→</div>
+        <div class="fstep">10. Making a conclusion<br><span class="zh-only" style="font-size:10px;opacity:.9">作出结论</span></div>
+        <div class="farrow">→</div>
+        <div class="fstep">11. Preparing a report<br><span class="zh-only" style="font-size:10px;opacity:.9">撰写报告</span></div>
+      </div>
+
+      <div class="mem">
+        <div class="mem-lbl">📝 Memory Shortcut / 记忆口诀</div>
+        <div class="pills">
+          <span class="pill p-en">Obs → Infer → Problem → Hypothesis → Variables → Plan → Collect → Interpret → Conclude → Report</span>
+          <span class="pill p-zh">观察→推断→问题→假设→变量→计划→收集→解读→结论→报告</span>
+        </div>
+      </div>
+
+      <!-- VARIABLES TABLE -->
+      <div style="margin-top:10px">
+        <div class="tbl-wrap">
+          <table class="tbl">
+            <thead><tr>
+              <th class="th-gr">Variable Type / 变量类型</th>
+              <th class="th-gr">Definition / 定义</th>
+            </tr></thead>
+            <tbody>
+              <tr>
+                <td class="td-label">Manipulated variable<br>操纵变量</td>
+                <td style="background:#f0fdf4;color:#064e3b;font-weight:600">
+                  <span class="en-only">The variable that is deliberately changed / controlled by the experimenter.</span>
+                  <span class="zh-only">由实验者刻意改变/控制的变量。</span>
+                </td>
+              </tr>
+              <tr>
+                <td class="td-label">Responding variable<br>回应变量</td>
+                <td style="background:#f0fdf4;color:#064e3b;font-weight:600">
+                  <span class="en-only">The variable that changes as a result of the manipulated variable.</span>
+                  <span class="zh-only">因操纵变量改变而发生变化的变量。</span>
+                </td>
+              </tr>
+              <tr>
+                <td class="td-label">Fixed variable<br>固定变量</td>
+                <td style="background:#f0fdf4;color:#064e3b;font-weight:600">
+                  <span class="en-only">The variable that is kept constant throughout the experiment.</span>
+                  <span class="zh-only">在整个实验中保持不变的变量。</span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ══════════ 1.3 LAB SAFETY ══════════ -->
+<div id="tab-t3" class="psec">
+
+  <!-- PERSONAL PROTECTIVE EQUIPMENT -->
+  <div class="sec s-am">
+    <div class="sec-hdr" onclick="exp(this)">
+      <div class="sec-icon">🦺</div>
+      <div class="sec-info">
+        <div class="sec-num">1.3</div>
+        <div class="sec-t-en">Personal Protective &amp; Safety Equipment</div>
+        <div class="sec-t-zh">个人防护与安全设备</div>
+      </div>
+      <span class="sec-chev open">⌄</span>
+    </div>
+    <div class="sec-body open">
+      <div class="tbl-wrap">
+        <table class="tbl">
+          <thead><tr>
+            <th class="th-pu">Personal Protective Equipment<br><span style="opacity:.85;font-size:9px">个人防护设备</span></th>
+            <th class="th-gr">Safety Equipment in Laboratory<br><span style="opacity:.85;font-size:9px">实验室安全设备</span></th>
+          </tr></thead>
+          <tbody>
+            <tr>
+              <td class="td-pu">Safety goggles / 护目镜</td>
+              <td class="td-gr">Fume chamber / 通风橱</td>
+            </tr>
+            <tr>
+              <td class="td-pu">Face mask / 口罩</td>
+              <td class="td-gr">Fire extinguisher / 灭火器</td>
+            </tr>
+            <tr>
+              <td class="td-pu">Gloves / 手套</td>
+              <td class="td-gr">Safety shower / 安全淋浴</td>
+            </tr>
+            <tr>
+              <td class="td-pu">Laboratory coat / 实验室外套</td>
+              <td class="td-gr">Eyewash / 洗眼器</td>
+            </tr>
+            <tr>
+              <td class="td-pu">Laboratory shoes / 实验室鞋</td>
+              <td class="td-gr">Hand wash / 洗手台</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- CHEMICAL SPILL STEPS -->
+  <div class="sec s-rd">
+    <div class="sec-hdr" onclick="exp(this)">
+      <div class="sec-icon">⚠️</div>
+      <div class="sec-info">
+        <div class="sec-num">1.3</div>
+        <div class="sec-t-en">Steps to Manage Chemical Spills</div>
+        <div class="sec-t-zh">处理化学品泄漏的步骤</div>
+      </div>
+      <span class="sec-chev">⌄</span>
+    </div>
+    <div class="sec-body">
+      <div class="flow">
+        <div class="fstep" style="background:#dc2626">1. Inform teacher immediately<br><span class="zh-only" style="font-size:10px;opacity:.9">立即通知老师</span></div>
+        <div class="farrow">→</div>
+        <div class="fstep" style="background:#dc2626">2. Make accident site a prohibited area<br><span class="zh-only" style="font-size:10px;opacity:.9">将事故现场设为禁区</span></div>
+        <div class="farrow">→</div>
+        <div class="fstep" style="background:#dc2626">3. Border spill with sand (prevent spreading)<br><span class="zh-only" style="font-size:10px;opacity:.9">用沙围住溢出物（防止扩散）</span></div>
+        <div class="farrow">→</div>
+        <div class="fstep" style="background:#dc2626">4. Clean the chemical spill<br><span class="zh-only" style="font-size:10px;opacity:.9">清理化学品溢出物</span></div>
+        <div class="farrow">→</div>
+        <div class="fstep" style="background:#dc2626">5. Dispose according to correct procedures<br><span class="zh-only" style="font-size:10px;opacity:.9">按正确程序处置</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- STORAGE -->
+  <div class="sec s-am">
+    <div class="sec-hdr" onclick="exp(this)">
+      <div class="sec-icon">🗄️</div>
+      <div class="sec-info">
+        <div class="sec-num">1.3</div>
+        <div class="sec-t-en">Storage of Chemicals</div>
+        <div class="sec-t-zh">化学品储存方法</div>
+      </div>
+      <span class="sec-chev">⌄</span>
+    </div>
+    <div class="sec-body">
+      <div class="tbl-wrap">
+        <table class="tbl">
+          <thead><tr>
+            <th class="th-pu">Chemical / 化学品</th>
+            <th class="th-gr">Storage Method / 储存方法</th>
+          </tr></thead>
+          <tbody>
+            <tr>
+              <td class="td-pu">Reactive metals<br>活泼金属</td>
+              <td class="td-gr">
+                <span class="en-only">In paraffin oil.</span>
+                <span class="zh-only">储存于石蜡油中。</span>
+              </td>
+            </tr>
+            <tr>
+              <td class="td-pu">Volatile and inflammable liquids<br>挥发性和易燃液体</td>
+              <td class="td-gr">
+                <span class="en-only">In a shady area far from sunlight and heat source.</span>
+                <span class="zh-only">储存于远离阳光和热源的阴凉处。</span>
+              </td>
+            </tr>
+            <tr>
+              <td class="td-pu">Substances easily decomposed by light<br>易感光分解的物质</td>
+              <td class="td-gr">
+                <span class="en-only">In dark bottles.</span>
+                <span class="zh-only">储存于深色瓶中。</span>
+              </td>
+            </tr>
+            <tr>
+              <td class="td-pu">Corrosive chemicals<br>腐蚀性化学品</td>
+              <td class="td-gr">
+                <span class="en-only">In a cabinet which is kept locked.</span>
+                <span class="zh-only">储存于上锁的橱柜中。</span>
+              </td>
+            </tr>
+            <tr>
+              <td class="td-pu">Heavy metals and toxic substances<br>重金属和有毒物质</td>
+              <td class="td-gr">
+                <span class="en-only">In a special labelled container in a locked room free from heat.</span>
+                <span class="zh-only">储存于标有标签的特殊容器中，置于远离热源的上锁房间。</span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- DISPOSAL -->
+  <div class="sec s-gr">
+    <div class="sec-hdr" onclick="exp(this)">
+      <div class="sec-icon">🗑️</div>
+      <div class="sec-info">
+        <div class="sec-num">1.3</div>
+        <div class="sec-t-en">Disposal of Chemicals</div>
+        <div class="sec-t-zh">化学品处置方法</div>
+      </div>
+      <span class="sec-chev">⌄</span>
+    </div>
+    <div class="sec-body">
+      <div class="tbl-wrap">
+        <table class="tbl">
+          <thead><tr>
+            <th class="th-gr">Chemical / 化学品</th>
+            <th class="th-gr">Disposal Method / 处置方法</th>
+          </tr></thead>
+          <tbody>
+            <tr>
+              <td class="td-label">H₂O₂ low concentration<br>低浓度双氧水</td>
+              <td class="td-gr">
+                <span class="en-only">Poured directly into the sink.</span>
+                <span class="zh-only">直接倒入水槽。</span>
+              </td>
+            </tr>
+            <tr>
+              <td class="td-label">H₂O₂ high concentration<br>高浓度双氧水</td>
+              <td class="td-gr">
+                <span class="en-only">Dilute with water and add sodium sulphite before pouring into the sink.</span>
+                <span class="zh-only">用水稀释并加入亚硫酸钠后再倒入水槽。</span>
+              </td>
+            </tr>
+            <tr>
+              <td class="td-label">Solid, organic &amp; hydrocarbon waste<br>固体、有机物及烃类废物</td>
+              <td class="td-gr">
+                <span class="en-only">Kept in special containers.</span>
+                <span class="zh-only">存放于特殊容器中。</span>
+              </td>
+            </tr>
+            <tr>
+              <td class="td-label">Strong acid &amp; alkali waste<br>强酸强碱废物</td>
+              <td class="td-gr">
+                <span class="en-only">Kept in closed labelled containers.</span>
+                <span class="zh-only">存放于有标签的密封容器中。</span>
+              </td>
+            </tr>
+            <tr>
+              <td class="td-label">Solutions with heavy metals &amp; toxic substances<br>含重金属及有毒物质的溶液</td>
+              <td class="td-gr">
+                <span class="en-only">Kept in plastic bags and evaporated in fume chamber. Heavy metals disposed according to standard procedures.</span>
+                <span class="zh-only">装入塑料袋并在通风橱中蒸发。重金属按标准程序处置。</span>
+              </td>
+            </tr>
+            <tr>
+              <td class="td-label">Volatile substance waste<br>挥发性物质废物</td>
+              <td class="td-gr">
+                <span class="en-only">Kept in a closed container away from sunlight and heat.</span>
+                <span class="zh-only">存放于远离阳光和热源的密封容器中。</span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ══════════ MEMORY MAP ══════════ -->
+<div id="tab-tmm" class="psec">
+  <div style="background:#1e1b4b;border-radius:var(--r);overflow:hidden;margin-bottom:12px">
+    <div class="mmap-hdr">
+      <div class="mmap-h1">⭐ Super Compact Memory Map</div>
+      <div class="mmap-h2">Chemistry Form 4 Chapter 1 — Introduction to Chemistry</div>
+      <div class="mmap-h3">化学中四第一章 — 化学简介</div>
+    </div>
+    <div style="padding:14px">
+
+      <div class="mmap-item">
+        <div class="mm-en"><div class="mm-en-t">1.1 Chemistry = study of structures, properties, compositions and interactions between matter.</div></div>
+        <div class="mm-zh"><div class="mm-zh-t">1.1 化学 = 研究物质的结构、性质、组成和相互作用。</div></div>
+      </div>
+
+      <div class="mmap-item">
+        <div class="mm-en"><div class="mm-en-t">1.1 Chemicals in daily life: Food (flavouring, sweetener, preservative) · Medicine (analgesics, antimicrobials) · Agriculture (fertiliser, pesticide) · Industry (paint, glass)</div></div>
+        <div class="mm-zh"><div class="mm-zh-t">1.1 日常生活中的化学品：食品（调味剂、甜味剂、防腐剂）· 医药（镇痛药、抗菌剂）· 农业（肥料、农药）· 工业（油漆、玻璃）</div></div>
+      </div>
+
+      <div class="mmap-item">
+        <div class="mm-en"><div class="mm-en-t">1.1 Careers in Chemistry: Pharmaceutical · Cosmetic · Nanotechnology · Green Technology · Biotechnology</div></div>
+        <div class="mm-zh"><div class="mm-zh-t">1.1 化学相关职业：制药 · 化妆品 · 纳米技术 · 绿色技术 · 生物技术</div></div>
+      </div>
+
+      <div class="mmap-item">
+        <div class="mm-en"><div class="mm-en-t">1.2 Scientific Method (10 steps): Observe → Infer → Identify Problem → Hypothesis → Identify Variables → Control Variables → Plan Experiment → Collect Data → Interpret Data → Conclude → Report</div></div>
+        <div class="mm-zh"><div class="mm-zh-t">1.2 科学方法（10步）：观察→推断→确认问题→假设→确认变量→控制变量→规划实验→收集数据→解读数据→结论→报告</div></div>
+      </div>
+
+      <div class="mmap-item">
+        <div class="mm-en"><div class="mm-en-t">1.2 Variables: Manipulated (changed by experimenter) · Responding (changes due to manipulation) · Fixed (kept constant)</div></div>
+        <div class="mm-zh"><div class="mm-zh-t">1.2 变量：操纵变量（由实验者改变）· 回应变量（因操纵而改变）· 固定变量（保持不变）</div></div>
+      </div>
+
+      <div class="mmap-item">
+        <div class="mm-en"><div class="mm-en-t">1.3 Personal protective: Safety goggles, Face mask, Gloves, Lab coat, Lab shoes. Safety equipment: Fume chamber, Fire extinguisher, Safety shower, Eyewash, Hand wash.</div></div>
+        <div class="mm-zh"><div class="mm-zh-t">1.3 个人防护：护目镜、口罩、手套、实验室外套、实验室鞋。安全设备：通风橱、灭火器、安全淋浴、洗眼器、洗手台。</div></div>
+      </div>
+
+      <div class="mmap-item">
+        <div class="mm-en"><div class="mm-en-t">1.3 Chemical spill steps: Inform teacher → Prohibit area → Border with sand → Clean spill → Dispose correctly.</div></div>
+        <div class="mm-zh"><div class="mm-zh-t">1.3 化学品泄漏步骤：通知老师→设禁区→用沙围住→清理溢出物→按规程处置。</div></div>
+      </div>
+
+      <div class="mmap-item">
+        <div class="mm-en"><div class="mm-en-t">1.3 Storage: Reactive metals → paraffin oil · Inflammable liquids → shady &amp; cool · Light-sensitive → dark bottles · Corrosive → locked cabinet · Heavy metals/toxic → locked room, labelled container.</div></div>
+        <div class="mm-zh"><div class="mm-zh-t">1.3 储存：活泼金属→石蜡油 · 易燃液体→阴凉远热 · 感光物质→深色瓶 · 腐蚀性→上锁橱柜 · 重金属/有毒→标签容器，上锁房间。</div></div>
+      </div>
+
+      <div class="mmap-item">
+        <div class="mm-en"><div class="mm-en-t">1.3 Disposal: H₂O₂ low → sink direct · H₂O₂ high → dilute + sodium sulphite then sink · Solid/organic/hydrocarbon → special containers · Strong acid/alkali → closed labelled container · Heavy metal solutions → plastic bag + fume chamber · Volatile → closed container, away from heat.</div></div>
+        <div class="mm-zh"><div class="mm-zh-t">1.3 处置：低浓度H₂O₂→直接倒入水槽 · 高浓度H₂O₂→稀释+亚硫酸钠再倒入 · 固体/有机/烃类→特殊容器 · 强酸强碱→密封标签容器 · 重金属溶液→塑料袋+通风橱 · 挥发性→密封容器，远离热源。</div></div>
+      </div>
+
+      <div class="exam-box">
+        <div class="exam-hdr"><div class="exam-lbl">✏️ Exam Templates / 考试句型</div></div>
+        <div class="exam-en"><div class="exam-en-t">
+          <b>Definition:</b> "Chemistry is a field of science that studies the structures, properties, compositions and interactions between matter."<br><br>
+          <b>Hypothesis format:</b> "If [manipulated variable] increases, then [responding variable] will [increase/decrease]."<br><br>
+          <b>Chemical spill:</b> "Inform the teacher immediately, then make the accident site a prohibited area and border the spill with sand to prevent it from spreading."
+        </div></div>
+        <div class="exam-zh"><div class="exam-zh-t">
+          <b>定义：</b>"化学是研究物质的结构、性质、组成和相互作用的科学领域。"<br><br>
+          <b>假设格式：</b>"如果[操纵变量]增加，则[回应变量]将[增加/减少]。"<br><br>
+          <b>化学品泄漏：</b>"立即通知老师，然后将事故现场设为禁区，并用沙子围住溢出物以防扩散。"
+        </div></div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+</main>
+
+<a class="top-link" href="#top">↑ Top</a>
+<footer>
+  <span class="en-only">Chemistry Form 4 Chapter 1 · Introduction to Chemistry · Single HTML file · No internet required</span>
+  <span class="zh-only">化学中四第一章 · 化学简介 · 单一HTML文件 · 无需网络</span>
+</footer>
+
+<script>
+function setLang(btn){
+  document.querySelectorAll('.lbtn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  document.body.className='lang-'+btn.dataset.lang;
+  localStorage.setItem('chem1-lang',btn.dataset.lang);
+}
+(function(){
+  const s=localStorage.getItem('chem1-lang')||'both';
+  const b=document.querySelector(`.lbtn[data-lang="${s}"]`);
+  if(b)setLang(b);
+})();
+
+function showTab(id,btn){
+  document.querySelectorAll('.psec').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById('tab-'+id).classList.add('active');
+  btn.classList.add('active');
+  window.scrollTo(0,document.querySelector('.tabs').offsetTop-60);
+}
+
+function exp(hdr){
+  const b=hdr.nextElementSibling;
+  const c=hdr.querySelector('.sec-chev');
+  const o=b.classList.toggle('open');
+  c.classList.toggle('open',o);
+}
+
+document.getElementById('srch').addEventListener('input',function(){
+  const q=this.value.trim().toLowerCase();
+  document.querySelectorAll('.sec').forEach(s=>{
+    s.style.display=!q||s.textContent.toLowerCase().includes(q)?'':'none';
+  });
+});
+</script>
+</body>
+</html>
