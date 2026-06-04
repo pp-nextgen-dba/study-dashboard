@@ -569,7 +569,8 @@ export const chemistryData = {
             chinese:"化学导论",
             status:"Not Started",
             confidence:0,
-            last_updated:"2026-05-20"
+            last_updated:"2026-05-20",
+            resourceUrl:"../chemistry/t4_chapter1.html"
         },
 
         {
