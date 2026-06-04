@@ -313,24 +313,31 @@ if(addMissingChineseLabels(data)){
 
         <!-- SUBJECTS -->
         <div class="section">
-            <h2>Supported Subjects &amp; Folders</h2>
+            <h2>Supported Subjects &amp; Upload Folders</h2>
+            <p style="margin-bottom:14px;">
+                Upload chapter HTML files into the <strong>root-level folder</strong> shown below.
+                These folders are separate from <code>subjects/</code> (which holds subject overview pages — do not upload chapter files there).
+            </p>
             <table>
-                <tr><th>Subject</th><th>Root folder</th><th>Subject page</th><th>Forms</th></tr>
-                <tr><td>Maths</td><td><code>maths/</code></td><td><code>subjects/maths.html</code></td><td>T2, T3, T4, T5</td></tr>
-                <tr><td>Add Maths</td><td><code>addmaths/</code></td><td><code>subjects/addmaths.html</code></td><td>T4, T5</td></tr>
-                <tr><td>Science</td><td><code>science/</code></td><td><code>subjects/science.html</code></td><td>T2, T3</td></tr>
-                <tr><td>Physics</td><td><code>physics/</code></td><td><code>subjects/physics.html</code></td><td>T4, T5</td></tr>
-                <tr><td>Chemistry</td><td><code>chemistry/</code></td><td><code>subjects/chemistry.html</code></td><td>T4, T5</td></tr>
-                <tr><td>Biology</td><td><code>biology/</code></td><td><code>subjects/biology.html</code></td><td>T4, T5</td></tr>
-                <tr><td>English</td><td><code>english/</code></td><td><code>subjects/english.html</code></td><td>T4/T5 combined</td></tr>
-                <tr><td>Chinese</td><td><code>chinese/</code></td><td><code>subjects/chinese.html</code></td><td>T2–T5</td></tr>
-                <tr><td>Malay</td><td><code>malay/</code></td><td><code>subjects/malay.html</code></td><td>T2–T5</td></tr>
-                <tr><td>Moral</td><td><code>moral/</code></td><td><code>subjects/moral.html</code></td><td>T2–T5</td></tr>
-                <tr><td>History</td><td><code>history/</code></td><td><code>subjects/history.html</code></td><td>T2, T3</td></tr>
-                <tr><td>Geografi</td><td><code>geografi/</code></td><td><code>subjects/geografi.html</code></td><td>T2, T3</td></tr>
-                <tr><td>Reka Bentuk (RBT)</td><td><code>rbt/</code></td><td><code>subjects/rekabentuk.html</code></td><td>T2, T3</td></tr>
-                <tr><td>Seni</td><td><code>seni/</code></td><td><code>subjects/seni.html</code></td><td>T2, T3</td></tr>
+                <tr><th>Subject</th><th>Upload chapter files here</th><th>Filename example</th><th>Forms in use</th></tr>
+                <tr><td>Maths</td><td><code>maths/</code></td><td><code>t2_chapter1.html</code></td><td>T2</td></tr>
+                <tr><td>Add Maths</td><td><code>addmaths/</code></td><td><code>t4_chapter1.html</code></td><td>T4, T5</td></tr>
+                <tr><td>Science</td><td><code>science/</code></td><td><code>t2_chapter1.html</code></td><td>T2, T3</td></tr>
+                <tr><td>Physics</td><td><code>physics/</code></td><td><code>t4_chapter1.html</code></td><td>T4, T5</td></tr>
+                <tr><td>Chemistry</td><td><code>chemistry/</code></td><td><code>t4_chapter1.html</code></td><td>T4, T5</td></tr>
+                <tr><td>Biology</td><td><code>biology/</code></td><td><code>t4_chapter1.html</code></td><td>T4, T5</td></tr>
+                <tr><td>English</td><td><code>english/</code></td><td><code>t4_t5_chapter1.html</code></td><td>T4/T5 combined</td></tr>
+                <tr><td>Chinese</td><td><code>chinese/</code></td><td><code>t2_chapter1.html</code></td><td>T2, T3, T4, T5</td></tr>
+                <tr><td>Malay</td><td><code>malay/</code></td><td><code>t2_chapter1.html</code></td><td>T2, T3, T4, T5</td></tr>
+                <tr><td>Moral</td><td><code>moral/</code></td><td><code>t2_chapter1.html</code></td><td>T2, T3, T4, T5</td></tr>
+                <tr><td>History</td><td><code>history/</code></td><td><code>t2_chapter4.html</code></td><td>T2, T3, T4, T5</td></tr>
+                <tr><td>Geografi</td><td><code>geografi/</code></td><td><code>t2_chapter1.html</code></td><td>T2, T3</td></tr>
+                <tr><td>Reka Bentuk (RBT)</td><td><code>rbt/</code></td><td><code>t2_chapter1.html</code></td><td>T2, T3</td></tr>
+                <tr><td>Seni</td><td><code>seni/</code></td><td><code>t2_chapter1.html</code></td><td>T2, T3</td></tr>
             </table>
+            <p style="margin-top:12px; font-size:0.9em; color:#64748b;">
+                Folders that don't exist yet (<code>maths/</code>, <code>addmaths/</code>, etc.) will be created automatically when you upload the first file into them via GitHub.
+            </p>
         </div>
 
         <!-- LOG -->
