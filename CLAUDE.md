@@ -23,6 +23,20 @@ npx serve .             # run locally
 
 **Subjects (14):** Maths, Add Maths, Science, Physics, Chemistry, Biology, English, Chinese, Malay, Moral, History, Geografi, Reka Bentuk, Seni (T2–T3).
 
+## Chapter HTML File Locations
+
+Chapter notes pages live in **root-level subject folders**, not inside `subjects/`:
+
+```
+chemistry/     t4_chapter1.html
+english/       T4_T5_english_grammar.html
+history/       t2_chapter4.html, t2_chapter8.html ...
+physics/       t4_force_motion.html
+rbt/           t2_akuaponik.html, t2_elektrik.html ...
+```
+
+No `archive/` subdirectories — all files sit directly in `<subject>/`.
+
 ## Adding a Chapter Notes Page
 
 **First:** confirm the HTML file exists on disk — do not create it.
@@ -37,10 +51,25 @@ npx serve .             # run locally
    <div class="top-nav"><a class="dashboard-link" href="../index.html">&larr; Back to Dashboard</a></div>
    ```
    *(RBT pages use a dark sticky nav — verify the button is there instead.)*
-2. Add `resourceUrl: "../<dir>/<file>.html"` to the matching chapter in `js/subject.js`
-3. Add path to `STATIC_ASSETS` in `sw.js`
+2. Add `resourceUrl: "../<subject>/<file>.html"` to the matching chapter in `js/subject.js`
+3. Add `'/<subject>/<file>.html'` to `STATIC_ASSETS` in `sw.js`
 4. Run `npm run validate`
 5. Commit
+
+## Auto-Integration Workflow
+
+When triggered, the workflow:
+1. Pulls latest from GitHub (`git pull`)
+2. Scans all root-level subject folders: `chemistry/`, `english/`, `history/`, `physics/`, `rbt/`, etc. (no subdirectories)
+3. For each HTML file matching `t<form(s)>_chapter<num>.html`:
+   - Checks if `resourceUrl` is already set in `js/subject.js`
+   - If missing: adds Back to Dashboard button (if absent), adds `resourceUrl`, updates `sw.js`
+4. Runs `npm run validate`, commits and pushes if changes were made
+5. Appends result to `FILES/auto_integration_log.txt` (GMT+8 timestamps)
+
+**Paths used:**
+- `resourceUrl`: `"../chemistry/t4_chapter1.html"` (relative from `subjects/`)
+- `STATIC_ASSETS`: `'/chemistry/t4_chapter1.html'` (leading slash, from root)
 
 ## Adding a New Subject
 
