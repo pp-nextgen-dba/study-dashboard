@@ -458,13 +458,20 @@ function mergeSeedChapters(subjectData){
 
             }
 
-            if(existingChapter.chinese !== seedChapter.chinese){
+            if(
+                existingChapter.chinese !== seedChapter.chinese ||
+                existingChapter.chapterCode !== seedChapter.chapterCode ||
+                (!existingChapter.resourceUrl && seedChapter.resourceUrl)
+            ){
 
                 changed = true;
 
                 return {
                     ...existingChapter,
-                    chinese:seedChapter.chinese
+                    chinese:seedChapter.chinese,
+                    chapterCode:seedChapter.chapterCode,
+                    ...(seedChapter.resourceUrl && !existingChapter.resourceUrl
+                        ? {resourceUrl:seedChapter.resourceUrl} : {})
                 };
 
             }
@@ -731,7 +738,7 @@ function render(){
                     <div class="chapter-copy">
 
                         <div class="chapter-title">
-                            ${chapter.chapter}
+                            ${chapter.chapter}${chapter.chapterCode ? ' (' + chapter.chapterCode.split('_')[1] + ')' : ''}
                         </div>
 
                         ${chapterSubtitle}
