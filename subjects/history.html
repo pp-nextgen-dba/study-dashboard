@@ -744,7 +744,9 @@ function render(){
 
             card.addEventListener(
                 "click",
-                async ()=>{
+                async (e)=>{
+
+                    if(e.target.closest(".chapter-link")){ return; }
 
                     chapter.status =
                         nextStatus(
