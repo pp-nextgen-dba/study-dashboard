@@ -3,25 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Study-Dashboard: Chapter HTML Automation Workflow</title>
+    <title>Study-Dashboard: Chapter Auto-Integration Workflow</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             line-height: 1.6;
             color: #333;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #1d4ed8 0%, #1e40af 100%);
             padding: 20px;
             min-height: 100vh;
         }
 
         .container {
-            max-width: 1200px;
+            max-width: 1000px;
             margin: 0 auto;
             background: white;
             border-radius: 12px;
@@ -30,823 +26,378 @@
         }
 
         header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #1d4ed8 0%, #1e40af 100%);
             color: white;
-            padding: 40px 20px;
-            text-align: center;
+            padding: 40px 30px;
         }
 
-        header h1 {
-            font-size: 2.5em;
-            margin-bottom: 10px;
-        }
+        header h1 { font-size: 2em; margin-bottom: 8px; }
+        header p { font-size: 1em; opacity: 0.85; }
 
-        header p {
-            font-size: 1.1em;
-            opacity: 0.9;
-        }
+        .content { padding: 40px 40px 20px; }
 
-        .content {
-            padding: 40px;
-        }
-
-        .section {
-            margin-bottom: 50px;
-        }
+        .section { margin-bottom: 50px; }
 
         .section h2 {
-            color: #667eea;
-            font-size: 2em;
-            margin-bottom: 20px;
-            padding-bottom: 10px;
-            border-bottom: 3px solid #667eea;
+            color: #1d4ed8;
+            font-size: 1.4em;
+            margin-bottom: 18px;
+            padding-bottom: 8px;
+            border-bottom: 3px solid #1d4ed8;
         }
 
-        .phase {
-            background: #f8f9fa;
-            border-left: 4px solid #667eea;
-            padding: 20px;
-            margin-bottom: 20px;
+        .block {
+            background: #f8f9ff;
+            border-left: 4px solid #1d4ed8;
+            padding: 18px 20px;
+            margin-bottom: 18px;
             border-radius: 8px;
         }
 
-        .phase h3 {
-            color: #667eea;
-            margin-bottom: 15px;
-            font-size: 1.5em;
-        }
+        .block h3 { color: #1d4ed8; margin-bottom: 12px; font-size: 1.05em; }
 
-        .phase ol, .phase ul {
-            margin-left: 20px;
-            margin-bottom: 15px;
-        }
+        .block ol, .block ul { margin-left: 22px; }
+        .block li { margin-bottom: 8px; line-height: 1.8; }
 
-        .phase li {
-            margin-bottom: 10px;
-            line-height: 1.8;
+        code, .mono {
+            background: #e8eeff;
+            padding: 2px 7px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+            color: #1d4ed8;
         }
 
         .code-block {
-            background: #2d2d2d;
-            color: #f8f8f2;
-            padding: 15px;
+            background: #1e293b;
+            color: #e2e8f0;
+            padding: 16px;
             border-radius: 8px;
             overflow-x: auto;
-            margin: 15px 0;
+            margin: 12px 0;
             font-family: 'Courier New', monospace;
-            font-size: 0.9em;
-            line-height: 1.4;
+            font-size: 0.88em;
+            line-height: 1.6;
         }
 
-        .example-box {
-            background: #e8f5e9;
-            border-left: 4px solid #4caf50;
-            padding: 15px;
-            margin: 15px 0;
-            border-radius: 8px;
-        }
+        .green { background: #ecfdf5; border-left-color: #22c55e; }
+        .green h3 { color: #15803d; }
 
-        .example-box strong {
-            color: #2e7d32;
-        }
+        .orange { background: #fff7ed; border-left-color: #f97316; }
+        .orange h3 { color: #c2410c; }
 
-        .warning-box {
-            background: #fff3e0;
-            border-left: 4px solid #ff9800;
-            padding: 15px;
-            margin: 15px 0;
-            border-radius: 8px;
-        }
-
-        .workflow-diagram {
-            background: #f5f5f5;
-            padding: 30px;
-            border-radius: 8px;
-            margin: 20px 0;
-            text-align: center;
-            border: 2px solid #e0e0e0;
-        }
-
-        .workflow-step {
-            background: white;
-            border: 2px solid #667eea;
-            border-radius: 8px;
-            padding: 20px;
-            margin: 15px 0;
-            color: #333;
-        }
-
-        .workflow-arrow {
-            text-align: center;
-            font-size: 2em;
-            color: #667eea;
-            margin: 10px 0;
-        }
-
-        .checklist {
-            background: #f0f7ff;
-            border-left: 4px solid #2196F3;
-            padding: 20px;
-            border-radius: 8px;
-            margin: 15px 0;
-        }
-
-        .checklist ul {
-            list-style: none;
-            margin-left: 0;
-        }
-
-        .checklist li {
-            padding: 8px 0;
-        }
-
-        .checklist li:before {
-            content: "✓ ";
-            color: #4caf50;
+        .badge {
+            display: inline-block;
+            padding: 3px 10px;
+            border-radius: 12px;
+            font-size: 0.8em;
             font-weight: bold;
-            margin-right: 10px;
+            margin-left: 8px;
         }
-
-        .filename {
-            background: #e3f2fd;
-            padding: 2px 6px;
-            border-radius: 4px;
-            font-family: monospace;
-            color: #1565c0;
-        }
+        .badge-green { background: #dcfce7; color: #166534; }
+        .badge-blue  { background: #dbeafe; color: #1e40af; }
 
         table {
             width: 100%;
             border-collapse: collapse;
-            margin: 15px 0;
+            margin: 12px 0;
+            font-size: 0.95em;
+        }
+        table th { background: #1d4ed8; color: white; padding: 10px 12px; text-align: left; }
+        table td { padding: 10px 12px; border-bottom: 1px solid #e2e8f0; }
+        table tr:hover { background: #f0f4ff; }
+
+        .flow {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            margin: 16px 0;
+        }
+        .flow-step {
             background: white;
+            border: 2px solid #1d4ed8;
+            border-radius: 8px;
+            padding: 14px 18px;
         }
-
-        table th {
-            background: #667eea;
-            color: white;
-            padding: 12px;
-            text-align: left;
-        }
-
-        table td {
-            padding: 12px;
-            border-bottom: 1px solid #e0e0e0;
-        }
-
-        table tr:hover {
-            background: #f5f5f5;
-        }
-
-        .button {
-            display: inline-block;
-            background: #667eea;
-            color: white;
-            padding: 10px 20px;
-            border-radius: 6px;
-            text-decoration: none;
-            margin: 10px 10px 10px 0;
-            font-weight: bold;
-        }
-
-        .button:hover {
-            background: #764ba2;
-        }
+        .flow-step strong { color: #1d4ed8; }
+        .flow-arrow { text-align: center; color: #1d4ed8; font-size: 1.4em; line-height: 1; }
 
         footer {
             background: #f8f9fa;
             padding: 20px;
             text-align: center;
-            color: #666;
-            border-top: 1px solid #e0e0e0;
-        }
-
-        .status {
-            display: inline-block;
-            background: #4caf50;
-            color: white;
-            padding: 4px 8px;
-            border-radius: 4px;
+            color: #64748b;
+            border-top: 1px solid #e2e8f0;
             font-size: 0.9em;
-            font-weight: bold;
-        }
-
-        .icon {
-            font-size: 1.2em;
-            margin-right: 5px;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1>📚 Study-Dashboard Chapter HTML Automation</h1>
-            <p>Complete Workflow Documentation</p>
-        </header>
+<div class="container">
 
-        <div class="content">
-            <!-- OVERVIEW -->
-            <div class="section">
-                <h2>📋 Overview</h2>
-                <p style="font-size: 1.1em; line-height: 1.8;">
-                    This system automates the integration of new chapter HTML files into the study-dashboard.
-                    When you upload a chapter file to a subject directory, the system automatically:
-                </p>
-                <ul style="margin-left: 40px; margin-top: 15px; font-size: 1.05em;">
-                    <li>Adds the "Back to Dashboard" button (if missing)</li>
-                    <li>Updates the subject data with the chapter link</li>
-                    <li>Registers the file in the service worker cache</li>
-                    <li>Validates the entire project</li>
-                    <li>Commits and pushes changes to GitHub</li>
-                    <li>Logs all execution details with timestamps</li>
-                </ul>
+    <header>
+        <h1>Study-Dashboard — Chapter Auto-Integration</h1>
+        <p>How to upload chapter notes and let the workflow wire everything up automatically</p>
+    </header>
+
+    <div class="content">
+
+        <!-- OVERVIEW -->
+        <div class="section">
+            <h2>Overview</h2>
+            <p style="font-size:1.05em; line-height:1.9;">
+                When you push a new chapter HTML file to GitHub, this workflow automatically:
+            </p>
+            <ul style="margin: 14px 0 0 28px; font-size:1.0em; line-height:2;">
+                <li>Adds the <strong>Back to Dashboard</strong> button to the chapter page (if missing)</li>
+                <li>Adds <code>resourceUrl</code> to the matching chapter in <code>js/subject.js</code></li>
+                <li>Adds the file to <code>STATIC_ASSETS</code> in <code>sw.js</code> (service worker cache)</li>
+                <li>Ensures the subject page has the <strong>Open notes</strong> link and Firestore sync logic</li>
+                <li>Validates, commits and pushes all changes to GitHub</li>
+                <li>Appends a timestamped entry to <code>FILES/auto_integration_log.txt</code></li>
+            </ul>
+        </div>
+
+        <!-- STEP 1: UPLOAD -->
+        <div class="section">
+            <h2>Step 1 — Upload Your HTML File to GitHub</h2>
+
+            <div class="block">
+                <h3>Where to put the file</h3>
+                <p>Drop it directly into the <strong>root-level subject folder</strong> — not inside <code>subjects/</code>:</p>
+                <div class="code-block">
+chemistry/t4_chapter2.html
+physics/t4_chapter1.html
+history/t2_chapter5.html
+rbt/t2_chapter3.html
+english/t4_t5_chapter2.html</div>
+                <p style="margin-top:10px;">No subfolders. No <code>archive/</code>. Flat files only.</p>
             </div>
 
-            <!-- STATUS -->
-            <div class="section">
-                <h2>✅ Implementation Status</h2>
-                <div class="checklist">
-                    <ul>
-                        <li>Data structure updated: 246 chapters with chapterNum</li>
-                        <li>Scheduled agent created and enabled</li>
-                        <li>Button auto-insertion enabled</li>
-                        <li>Logging system enabled</li>
-                        <li>GitHub integration ready</li>
-                    </ul>
-                </div>
-            </div>
-
-            <!-- PHASE 1 -->
-            <div class="section">
-                <h2><span class="icon">⚙️</span>Phase 1: Data Structure Setup</h2>
-                <p style="margin-bottom: 15px;"><strong>Status: <span class="status">COMPLETE</span></strong></p>
-
-                <div class="phase">
-                    <h3>Added to all 246 chapters in js/subject.js</h3>
-                    <p style="margin-bottom: 15px;">Each chapter now includes a sequential <code>chapterNum</code> field within its form:</p>
-
-                    <div class="code-block">
-{
-    form: "T2",
-    chapterNum: 1,  // ← NEW: sequential number within form
-    chapter: "Biodiversity",
-    status: "Not Started",
-    confidence: 0,
-    last_updated: "2026-05-20"
-}
-                    </div>
-
-                    <p style="margin-top: 15px;"><strong>Chapter numbering by form:</strong></p>
-                    <ul style="margin-left: 20px;">
-                        <li>T2: 76 chapters numbered 1-76</li>
-                        <li>T3: 53 chapters numbered 1-53</li>
-                        <li>T4: 61 chapters numbered 1-61</li>
-                        <li>T5: 54 chapters numbered 1-54</li>
-                        <li>T4/T5 (Combined): 2 chapters numbered 1-2</li>
-                    </ul>
-                </div>
-
-                <div class="phase">
-                    <h3>Support for Combined Forms (English, etc.)</h3>
-                    <div class="code-block">
-{
-    form: "T4/T5",  // ← NEW: combined form support
-    chapterNum: 1,
-    chapter: "Grammar",
-    status: "Not Started",
-    ...
-}
-                    </div>
-                </div>
-            </div>
-
-            <!-- PHASE 2 -->
-            <div class="section">
-                <h2><span class="icon">📤</span>Phase 2: Upload HTML File</h2>
-                <p style="margin-bottom: 15px;"><strong>Status: <span class="status">USER ACTION</span></strong></p>
-
-                <div class="phase">
-                    <h3>File Location & Naming Convention</h3>
-
-                    <p style="margin-bottom: 15px;"><strong>Upload directory:</strong></p>
-                    <div class="code-block">
-C:\development\paul\study-dashboard\subjects\&lt;subject&gt;/
-                    </div>
-
-                    <p style="margin-top: 20px; margin-bottom: 15px;"><strong>Filename pattern:</strong></p>
-                    <div class="code-block">
-t&lt;form&gt;_chapter&lt;num&gt;.html
-                    </div>
-
-                    <p style="margin-top: 20px; margin-bottom: 15px;"><strong>Examples:</strong></p>
-                    <table>
-                        <tr>
-                            <th>Subject</th>
-                            <th>Form</th>
-                            <th>Chapter</th>
-                            <th>Filename</th>
-                            <th>Full Path</th>
-                        </tr>
-                        <tr>
-                            <td>Physics</td>
-                            <td>T4</td>
-                            <td>1</td>
-                            <td><span class="filename">t4_chapter1.html</span></td>
-                            <td><span class="filename">subjects/physics/t4_chapter1.html</span></td>
-                        </tr>
-                        <tr>
-                            <td>English</td>
-                            <td>T4/T5</td>
-                            <td>1</td>
-                            <td><span class="filename">t4_t5_chapter1.html</span></td>
-                            <td><span class="filename">subjects/english/t4_t5_chapter1.html</span></td>
-                        </tr>
-                        <tr>
-                            <td>History</td>
-                            <td>T2</td>
-                            <td>10</td>
-                            <td><span class="filename">t2_chapter10.html</span></td>
-                            <td><span class="filename">subjects/history/t2_chapter10.html</span></td>
-                        </tr>
-                        <tr>
-                            <td>Maths</td>
-                            <td>T3</td>
-                            <td>5</td>
-                            <td><span class="filename">t3_chapter5.html</span></td>
-                            <td><span class="filename">subjects/maths/t3_chapter5.html</span></td>
-                        </tr>
-                    </table>
-                </div>
-
-                <div class="phase">
-                    <h3>HTML File Requirements</h3>
-                    <p style="margin-bottom: 15px;">Your HTML file can be:</p>
-                    <ul style="margin-left: 20px; margin-bottom: 15px;">
-                        <li>✓ WITH "Back to Dashboard" button included</li>
-                        <li>✓ WITHOUT "Back to Dashboard" button (system will add it)</li>
-                    </ul>
-
-                    <div class="example-box">
-                        <strong>📌 TIP:</strong> The system automatically adds the navigation button if it's missing,
-                        so you can focus on the content. Just upload your HTML file and the automation handles the rest.
-                    </div>
-                </div>
-            </div>
-
-            <!-- PHASE 3 -->
-            <div class="section">
-                <h2><span class="icon">🤖</span>Phase 3: Agent Processing (Every 4 Hours)</h2>
-                <p style="margin-bottom: 15px;"><strong>Status: <span class="status">AUTOMATED</span></strong></p>
-
-                <div class="phase">
-                    <h3>Execution Schedule</h3>
-                    <p><strong>Cron Expression:</strong> <span class="filename">0 */4 * * *</span></p>
-
-                    <p style="margin-top: 15px;"><strong>UTC Times (24-hour format):</strong></p>
-                    <div style="background: #f5f5f5; padding: 15px; border-radius: 8px; margin-top: 10px;">
-                        00:00 | 04:00 | 08:00 | 12:00 | 16:00 | 20:00
-                    </div>
-
-                    <p style="margin-top: 15px;"><strong>Asia/Kuala_Lumpur Times (Local):</strong></p>
-                    <div style="background: #f5f5f5; padding: 15px; border-radius: 8px; margin-top: 10px;">
-                        8:00 AM | 12:00 PM | 4:00 PM | 8:00 PM | 12:00 AM | 4:00 AM
-                    </div>
-                </div>
-
-                <div class="phase">
-                    <h3>Agent Processing Steps</h3>
-                    <p style="margin-bottom: 15px;">For each uploaded HTML file matching the pattern, the agent:</p>
-
-                    <ol style="margin-left: 20px;">
-                        <li style="margin-bottom: 15px;">
-                            <strong>Check for "Back to Dashboard" button</strong>
-                            <ul style="margin-top: 5px;">
-                                <li>Searches for existing button (class: <span class="filename">dashboard-link</span>)</li>
-                                <li>If missing, inserts HTML button after &lt;body&gt; tag</li>
-                                <li>If missing, adds CSS styling to &lt;head&gt; section</li>
-                                <li>Avoids duplicates if button already exists</li>
-                            </ul>
-                        </li>
-
-                        <li style="margin-bottom: 15px;">
-                            <strong>Parse filename</strong>
-                            <ul style="margin-top: 5px;">
-                                <li>Extract form: <span class="filename">t4</span> → <span class="filename">T4</span>, <span class="filename">t4_t5</span> → <span class="filename">T4/T5</span></li>
-                                <li>Extract chapter number: <span class="filename">chapter1</span> → <span class="filename">1</span></li>
-                            </ul>
-                        </li>
-
-                        <li style="margin-bottom: 15px;">
-                            <strong>Update js/subject.js</strong>
-                            <ul style="margin-top: 5px;">
-                                <li>Find matching chapter by form + chapterNum</li>
-                                <li>Add resourceUrl property</li>
-                                <li>Example: <span class="filename">resourceUrl: "../subjects/physics/t4_chapter1.html"</span></li>
-                            </ul>
-                        </li>
-
-                        <li style="margin-bottom: 15px;">
-                            <strong>Update sw.js (Service Worker)</strong>
-                            <ul style="margin-top: 5px;">
-                                <li>Add file path to STATIC_ASSETS array</li>
-                                <li>Format: <span class="filename">'subjects/physics/t4_chapter1.html'</span></li>
-                                <li>Prevents duplicate entries</li>
-                            </ul>
-                        </li>
-
-                        <li style="margin-bottom: 15px;">
-                            <strong>Validate project</strong>
-                            <ul style="margin-top: 5px;">
-                                <li>Run: <span class="filename">npm run validate</span></li>
-                                <li>Ensures no errors introduced</li>
-                            </ul>
-                        </li>
-
-                        <li>
-                            <strong>Commit & Push to GitHub</strong>
-                            <ul style="margin-top: 5px;">
-                                <li>Stages modified files</li>
-                                <li>Creates commit with message: <span class="filename">Auto-add chapter notes: t4_chapter1.html</span></li>
-                                <li>Pushes to main branch</li>
-                                <li>Only if validation passes</li>
-                            </ul>
-                        </li>
-                    </ol>
-                </div>
-
-                <div class="warning-box">
-                    <strong>⚠️ VALIDATION FAILURE:</strong> If npm validate fails, the agent will NOT commit.
-                    You'll see the error in the log file. Fix the issue and reupload the file.
-                </div>
-            </div>
-
-            <!-- PHASE 4 -->
-            <div class="section">
-                <h2><span class="icon">📝</span>Phase 4: Execution Logging</h2>
-                <p style="margin-bottom: 15px;"><strong>Status: <span class="status">AUTOMATED</span></strong></p>
-
-                <div class="phase">
-                    <h3>Log File Location</h3>
-                    <div class="code-block">
-FILES/auto_integration_log.txt
-                    </div>
-                    <p style="margin-top: 10px; font-size: 0.95em;"><em>Appended mode: keeps complete execution history</em></p>
-                </div>
-
-                <div class="phase">
-                    <h3>Log Entry Format</h3>
-                    <p style="margin-bottom: 15px;">Every execution is logged with:</p>
-
-                    <div class="code-block">
-===== EXECUTION =====
-Timestamp: 2026-06-04T12:04:32Z
-Status: [Files updated | No files detected]
-
-MATCHED FILES (processed):
-- subjects/physics/t4_chapter1.html → Physics T4 Chapter 1 [Button added]
-- subjects/english/t4_t5_chapter1.html → English T4/T5 Chapter 1 [Button added]
-
-UNMATCHED FILES (suggestions):
-- force_motion.html → SUGGESTED: t4_chapter1.html
-  (Inferred: Physics, Form T4, Chapter 1)
-
-GIT RESULT: [Committed and pushed | No changes | Validation failed]
-=====================
-                    </div>
-                </div>
-
-                <div class="example-box">
-                    <strong>Example: No Files Detected</strong>
-                    <div class="code-block" style="margin-top: 10px;">
-===== EXECUTION =====
-Timestamp: 2026-06-04T16:04:32Z
-Status: No files detected
-
-MATCHED FILES (processed):
-(none)
-
-UNMATCHED FILES (suggestions):
-(none)
-
-GIT RESULT: No changes
-=====================
-                    </div>
-                </div>
-            </div>
-
-            <!-- PHASE 5 -->
-            <div class="section">
-                <h2><span class="icon">✔️</span>Phase 5: Verification & Results</h2>
-                <p style="margin-bottom: 15px;"><strong>Status: <span class="status">USER VERIFICATION</span></strong></p>
-
-                <div class="phase">
-                    <h3>How to Verify Integration</h3>
-                    <ol style="margin-left: 20px;">
-                        <li style="margin-bottom: 15px;">
-                            <strong>Check GitHub commits</strong>
-                            <ul style="margin-top: 5px;">
-                                <li>Repository: <a href="https://github.com/pp-nextgen-dba/study-dashboard" target="_blank">pp-nextgen-dba/study-dashboard</a></li>
-                                <li>Look for commits titled: "Auto-add chapter notes: ..."</li>
-                            </ul>
-                        </li>
-
-                        <li style="margin-bottom: 15px;">
-                            <strong>Test in web UI</strong>
-                            <ul style="margin-top: 5px;">
-                                <li>Open the dashboard (live or local)</li>
-                                <li>Navigate to the subject</li>
-                                <li>Verify new chapter appears with "Open Notes" link</li>
-                                <li>Click the link to view the chapter</li>
-                                <li>Verify "Back to Dashboard" button appears</li>
-                            </ul>
-                        </li>
-
-                        <li style="margin-bottom: 15px;">
-                            <strong>Review execution log</strong>
-                            <ul style="margin-top: 5px;">
-                                <li>File: <span class="filename">FILES/auto_integration_log.txt</span></li>
-                                <li>Check timestamps, status, and any issues</li>
-                                <li>Identify unmatched files that need renaming</li>
-                            </ul>
-                        </li>
-
-                        <li>
-                            <strong>Check browser cache (if needed)</strong>
-                            <ul style="margin-top: 5px;">
-                                <li>Service worker may cache old version</li>
-                                <li>Hard refresh: Ctrl+Shift+R or Cmd+Shift+R</li>
-                                <li>Or clear service worker cache in DevTools</li>
-                            </ul>
-                        </li>
-                    </ol>
-                </div>
-            </div>
-
-            <!-- COMPLETE WORKFLOW DIAGRAM -->
-            <div class="section">
-                <h2><span class="icon">🔄</span>Complete Workflow Diagram</h2>
-
-                <div class="workflow-diagram">
-                    <div class="workflow-step">
-                        <strong>Step 1: You Upload HTML</strong>
-                        <p style="margin-top: 10px; font-size: 0.95em;">
-                            File: <span class="filename">subjects/physics/t4_chapter1.html</span>
-                        </p>
-                    </div>
-
-                    <div class="workflow-arrow">⬇️</div>
-
-                    <div class="workflow-step">
-                        <strong>Step 2: Agent Detects (Every 4 Hours)</strong>
-                        <p style="margin-top: 10px; font-size: 0.95em;">
-                            Scans untracked files via git status
-                        </p>
-                    </div>
-
-                    <div class="workflow-arrow">⬇️</div>
-
-                    <div class="workflow-step">
-                        <strong>Step 3: Agent Processes</strong>
-                        <p style="margin-top: 10px; font-size: 0.95em;">
-                            • Adds button (if needed)<br>
-                            • Updates subject.js<br>
-                            • Updates sw.js<br>
-                            • Validates project
-                        </p>
-                    </div>
-
-                    <div class="workflow-arrow">⬇️</div>
-
-                    <div class="workflow-step">
-                        <strong>Step 4: Agent Commits & Pushes</strong>
-                        <p style="margin-top: 10px; font-size: 0.95em;">
-                            Commits to GitHub main branch
-                        </p>
-                    </div>
-
-                    <div class="workflow-arrow">⬇️</div>
-
-                    <div class="workflow-step">
-                        <strong>Step 5: Agent Logs Execution</strong>
-                        <p style="margin-top: 10px; font-size: 0.95em;">
-                            Timestamp + Status → FILES/auto_integration_log.txt
-                        </p>
-                    </div>
-
-                    <div class="workflow-arrow">⬇️</div>
-
-                    <div class="workflow-step" style="background: #e8f5e9;">
-                        <strong style="color: #2e7d32;">✓ Chapter Live in Dashboard</strong>
-                        <p style="margin-top: 10px; font-size: 0.95em;">
-                            Users can view the new chapter notes
-                        </p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- SUBJECTS REFERENCE -->
-            <div class="section">
-                <h2><span class="icon">📚</span>Supported Subjects</h2>
-
+            <div class="block">
+                <h3>Filename pattern</h3>
                 <table>
-                    <tr>
-                        <th>Subject</th>
-                        <th>Folder</th>
-                        <th>Forms</th>
-                        <th>Chapters</th>
-                        <th>Example Filename</th>
-                    </tr>
-                    <tr>
-                        <td>Maths</td>
-                        <td><span class="filename">maths</span></td>
-                        <td>T2, T3, T4, T5</td>
-                        <td>Varied</td>
-                        <td><span class="filename">t4_chapter1.html</span></td>
-                    </tr>
-                    <tr>
-                        <td>Additional Maths</td>
-                        <td><span class="filename">addmaths</span></td>
-                        <td>T4, T5</td>
-                        <td>Varied</td>
-                        <td><span class="filename">t4_chapter1.html</span></td>
-                    </tr>
-                    <tr>
-                        <td>Science</td>
-                        <td><span class="filename">science</span></td>
-                        <td>T2, T3</td>
-                        <td>Varied</td>
-                        <td><span class="filename">t2_chapter1.html</span></td>
-                    </tr>
-                    <tr>
-                        <td>Physics</td>
-                        <td><span class="filename">physics</span></td>
-                        <td>T4, T5</td>
-                        <td>Varied</td>
-                        <td><span class="filename">t4_chapter1.html</span></td>
-                    </tr>
-                    <tr>
-                        <td>Chemistry</td>
-                        <td><span class="filename">chemistry</span></td>
-                        <td>T4, T5</td>
-                        <td>Varied</td>
-                        <td><span class="filename">t4_chapter1.html</span></td>
-                    </tr>
-                    <tr>
-                        <td>Biology</td>
-                        <td><span class="filename">biology</span></td>
-                        <td>T4, T5</td>
-                        <td>Varied</td>
-                        <td><span class="filename">t4_chapter1.html</span></td>
-                    </tr>
-                    <tr>
-                        <td>English</td>
-                        <td><span class="filename">english</span></td>
-                        <td><strong>T4/T5</strong> (Combined)</td>
-                        <td>Varied</td>
-                        <td><span class="filename">t4_t5_chapter1.html</span></td>
-                    </tr>
-                    <tr>
-                        <td>Chinese</td>
-                        <td><span class="filename">chinese</span></td>
-                        <td>T4, T5</td>
-                        <td>Varied</td>
-                        <td><span class="filename">t4_chapter1.html</span></td>
-                    </tr>
-                    <tr>
-                        <td>Malay</td>
-                        <td><span class="filename">malay</span></td>
-                        <td>T4, T5</td>
-                        <td>Varied</td>
-                        <td><span class="filename">t4_chapter1.html</span></td>
-                    </tr>
-                    <tr>
-                        <td>Moral</td>
-                        <td><span class="filename">moral</span></td>
-                        <td>T4, T5</td>
-                        <td>Varied</td>
-                        <td><span class="filename">t4_chapter1.html</span></td>
-                    </tr>
-                    <tr>
-                        <td>History</td>
-                        <td><span class="filename">history</span></td>
-                        <td>T2, T3</td>
-                        <td>Varied</td>
-                        <td><span class="filename">t2_chapter1.html</span></td>
-                    </tr>
-                    <tr>
-                        <td>Geografi</td>
-                        <td><span class="filename">geografi</span></td>
-                        <td>T2, T3</td>
-                        <td>Varied</td>
-                        <td><span class="filename">t2_chapter1.html</span></td>
-                    </tr>
-                    <tr>
-                        <td>Reka Bentuk (RBT)</td>
-                        <td><span class="filename">rekabentuk</span></td>
-                        <td>T2, T3</td>
-                        <td>Varied</td>
-                        <td><span class="filename">t2_chapter1.html</span></td>
-                    </tr>
-                    <tr>
-                        <td>Seni</td>
-                        <td><span class="filename">seni</span></td>
-                        <td>T4, T5</td>
-                        <td>Varied</td>
-                        <td><span class="filename">t4_chapter1.html</span></td>
-                    </tr>
+                    <tr><th>Pattern</th><th>Example</th><th>Means</th></tr>
+                    <tr><td><code>t&lt;form&gt;_chapter&lt;num&gt;.html</code></td><td><code>t4_chapter2.html</code></td><td>Form 4, Chapter 2</td></tr>
+                    <tr><td><code>t&lt;form&gt;_t&lt;form&gt;_chapter&lt;num&gt;.html</code></td><td><code>t4_t5_chapter1.html</code></td><td>Form 4/5 combined, Chapter 1</td></tr>
                 </table>
+                <p style="margin-top:10px;">The chapter number in the filename is the <strong>position within that form</strong> (1st T4 chapter = 1, 2nd = 2, etc.).</p>
             </div>
 
-            <!-- TROUBLESHOOTING -->
-            <div class="section">
-                <h2><span class="icon">🔧</span>Troubleshooting</h2>
-
-                <div class="phase">
-                    <h3>File Not Detected</h3>
-                    <p><strong>Check:</strong></p>
-                    <ul style="margin-left: 20px;">
-                        <li>Filename matches pattern: <span class="filename">t<form>_chapter<num>.html</span></li>
-                        <li>File is in correct directory: <span class="filename">subjects/<subject>/</span></li>
-                        <li>File is untracked (git not aware yet)</li>
-                        <li>Wait until next 4-hour execution cycle</li>
-                    </ul>
-                </div>
-
-                <div class="phase">
-                    <h3>Validation Error</h3>
-                    <p><strong>Solution:</strong></p>
-                    <ul style="margin-left: 20px;">
-                        <li>Check log file for error details</li>
-                        <li>File won't be committed until error is fixed</li>
-                        <li>Fix the issue and reupload the file</li>
-                    </ul>
-                </div>
-
-                <div class="phase">
-                    <h3>Chapter Not Showing in Dashboard</h3>
-                    <p><strong>Check:</strong></p>
-                    <ul style="margin-left: 20px;">
-                        <li>Verify commit was pushed to GitHub</li>
-                        <li>Hard refresh browser (Ctrl+Shift+R)</li>
-                        <li>Clear service worker cache if needed</li>
-                        <li>Check browser console for errors</li>
-                    </ul>
-                </div>
-
-                <div class="phase">
-                    <h3>Filename Suggestion Not Matching</h3>
-                    <p><strong>What to do:</strong></p>
-                    <ul style="margin-left: 20px;">
-                        <li>Review the suggestion in the log file</li>
-                        <li>Check your HTML file content for clues</li>
-                        <li>Rename and reupload with suggested name</li>
-                    </ul>
-                </div>
+            <div class="block green">
+                <h3>How to upload — two options</h3>
+                <p><strong>Option A — GitHub web UI (easiest):</strong></p>
+                <ol style="margin: 8px 0 0 22px;">
+                    <li>Go to your repo on GitHub</li>
+                    <li>Navigate to the subject folder (e.g. <code>chemistry/</code>)</li>
+                    <li>Click <strong>Add file → Upload files</strong></li>
+                    <li>Drop the HTML file in → commit directly to <code>main</code></li>
+                </ol>
+                <p style="margin-top:14px;"><strong>Option B — Push from local machine:</strong></p>
+                <div class="code-block">
+git add chemistry/t4_chapter2.html
+git commit -m "Add chemistry T4 chapter 2 notes"
+git push origin main</div>
             </div>
 
-            <!-- KEY INFORMATION -->
-            <div class="section">
-                <h2><span class="icon">📌</span>Key Information</h2>
-
-                <div class="checklist">
-                    <strong>Repository:</strong>
-                    <p><a href="https://github.com/pp-nextgen-dba/study-dashboard" target="_blank">https://github.com/pp-nextgen-dba/study-dashboard</a></p>
-
-                    <strong style="display: block; margin-top: 15px;">Manage Automation Routine:</strong>
-                    <p><a href="https://claude.ai/code/routines/trig_01PsmEWmsEo7VtySp2A2rG3t" target="_blank">https://claude.ai/code/routines/trig_01PsmEWmsEo7VtySp2A2rG3t</a></p>
-
-                    <strong style="display: block; margin-top: 15px;">Execution Frequency:</strong>
-                    <p>Every 4 hours (UTC: 00:00, 04:00, 08:00, 12:00, 16:00, 20:00)</p>
-
-                    <strong style="display: block; margin-top: 15px;">Log Location:</strong>
-                    <p><span class="filename">FILES/auto_integration_log.txt</span></p>
-                </div>
-            </div>
-
-            <!-- DEPLOYMENT CHECKLIST -->
-            <div class="section">
-                <h2><span class="icon">🚀</span>Ready to Deploy?</h2>
-                <div class="checklist">
-                    <ul>
-                        <li>Data structure updated (chapterNum added)</li>
-                        <li>Scheduled agent created and enabled</li>
-                        <li>Button auto-insertion enabled</li>
-                        <li>Logging system enabled</li>
-                        <li>GitHub integration ready</li>
-                        <li>All subjects supported</li>
-                        <li>Validation and error handling in place</li>
-                    </ul>
-                </div>
-                <p style="text-align: center; font-size: 1.2em; margin-top: 30px;">
-                    <strong>✅ SYSTEM READY FOR PRODUCTION</strong>
-                </p>
+            <div class="block orange">
+                <h3>Note on this Claude Code environment</h3>
+                <p>This workflow runs in a <strong>remote container</strong> that clones from GitHub. Files only on your local machine are invisible here. Always push to GitHub first — the workflow fetches from there.</p>
             </div>
         </div>
 
-        <footer>
-            <p>Study-Dashboard Chapter HTML Automation System</p>
-            <p>Generated: June 4, 2026 | Status: Production Ready</p>
-        </footer>
-    </div>
+        <!-- STEP 2: TRIGGER -->
+        <div class="section">
+            <h2>Step 2 — Trigger the Workflow</h2>
+
+            <div class="block">
+                <h3>How to run</h3>
+                <p>Open this Claude Code session and say:</p>
+                <div class="code-block">run workflow once now</div>
+                <p style="margin-top:10px;">That's it. The workflow runs immediately and reports what it did.</p>
+            </div>
+
+            <div class="block">
+                <h3>What happens when triggered</h3>
+                <div class="flow">
+                    <div class="flow-step"><strong>1. Pull</strong> — fetches latest from GitHub (<code>git pull origin main</code>)</div>
+                    <div class="flow-arrow">↓</div>
+                    <div class="flow-step"><strong>2. Scan</strong> — finds all HTML files in root-level subject folders (<code>chemistry/</code>, <code>physics/</code>, <code>history/</code>, <code>rbt/</code>, <code>english/</code>, etc.)</div>
+                    <div class="flow-arrow">↓</div>
+                    <div class="flow-step"><strong>3. Detect</strong> — cross-checks each file against <code>js/subject.js</code>; any chapter missing <code>resourceUrl</code> gets processed</div>
+                    <div class="flow-arrow">↓</div>
+                    <div class="flow-step"><strong>4. Process</strong> — for each new file: adds Back to Dashboard button, adds <code>resourceUrl</code> to subject.js, adds path to sw.js STATIC_ASSETS</div>
+                    <div class="flow-arrow">↓</div>
+                    <div class="flow-step"><strong>5. Subject page check</strong> — verifies the subject's <code>subjects/&lt;name&gt;.html</code> has all four required components for "Open notes" to work (see below)</div>
+                    <div class="flow-arrow">↓</div>
+                    <div class="flow-step"><strong>6. Validate</strong> — runs <code>npm run validate</code>; aborts commit if errors found</div>
+                    <div class="flow-arrow">↓</div>
+                    <div class="flow-step"><strong>7. Commit &amp; push</strong> — commits all changes to GitHub, appends run result to log</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SUBJECT PAGE CHECKS -->
+        <div class="section">
+            <h2>What the Workflow Checks on Subject Pages</h2>
+            <p style="margin-bottom:16px;">For every subject that gets a new <code>resourceUrl</code>, the workflow verifies <code>subjects/&lt;name&gt;.html</code> has all four of these. Missing ones are added automatically.</p>
+
+            <div class="block">
+                <h3>1 — <code>.chapter-link</code> CSS</h3>
+                <p>Styles the "Open notes" anchor link in chapter cards.</p>
+                <div class="code-block">
+.chapter-link{display:inline-block;margin-top:10px;color:#1d4ed8;font-size:14px;text-decoration:none}
+.chapter-link:hover{text-decoration:underline}</div>
+            </div>
+
+            <div class="block">
+                <h3>2 — <code>chapterResource</code> variable in card render</h3>
+                <p>Generates the "Open notes" link HTML before it's inserted into the card.</p>
+                <div class="code-block">
+const chapterResource = chapter.resourceUrl
+    ? `&lt;a class="chapter-link" href="${chapter.resourceUrl}"&gt;Open notes&lt;/a&gt;`
+    : "";
+// then inside card.innerHTML:
+${chapterResource}</div>
+            </div>
+
+            <div class="block">
+                <h3>3 — Click guard in card click handler</h3>
+                <p>Prevents clicking "Open notes" from also toggling the chapter's status.</p>
+                <div class="code-block">
+card.addEventListener("click", async (e) =&gt; {
+    if(e.target.closest(".chapter-link")){ return; }
+    // ... rest of status toggle
+});</div>
+            </div>
+
+            <div class="block">
+                <h3>4 — <code>addMissingChineseLabels()</code> Firestore sync</h3>
+                <p>
+                    Subject pages read chapter data from <strong>Firestore</strong>, not directly from <code>subject.js</code>.
+                    If the Firestore document was saved before <code>resourceUrl</code> was added, it won't have the field —
+                    meaning the "Open notes" link won't appear even though the code is correct.
+                </p>
+                <p style="margin-top:10px;">This function runs on page load and syncs any missing <code>resourceUrl</code> (and <code>chinese</code>) fields from the seed data back into Firestore automatically.</p>
+                <div class="code-block">
+// Called inside loadData() when snap.exists():
+if(addMissingChineseLabels(data)){
+    data.last_saved = new Date().toISOString();
+    await setDoc(docRef, data);
+}</div>
+            </div>
+        </div>
+
+        <!-- PATHS REFERENCE -->
+        <div class="section">
+            <h2>Path Reference</h2>
+            <table>
+                <tr><th>Where</th><th>Format</th><th>Example</th></tr>
+                <tr>
+                    <td><code>js/subject.js</code> — resourceUrl</td>
+                    <td><code>"../&lt;subject&gt;/&lt;file&gt;.html"</code></td>
+                    <td><code>"../chemistry/t4_chapter2.html"</code></td>
+                </tr>
+                <tr>
+                    <td><code>sw.js</code> — STATIC_ASSETS</td>
+                    <td><code>'/&lt;subject&gt;/&lt;file&gt;.html'</code></td>
+                    <td><code>'/chemistry/t4_chapter2.html'</code></td>
+                </tr>
+                <tr>
+                    <td>Chapter HTML — button href</td>
+                    <td><code>"../index.html"</code></td>
+                    <td><code>href="../index.html"</code></td>
+                </tr>
+            </table>
+        </div>
+
+        <!-- SUBJECTS -->
+        <div class="section">
+            <h2>Supported Subjects &amp; Folders</h2>
+            <table>
+                <tr><th>Subject</th><th>Root folder</th><th>Subject page</th><th>Forms</th></tr>
+                <tr><td>Maths</td><td><code>maths/</code></td><td><code>subjects/maths.html</code></td><td>T2, T3, T4, T5</td></tr>
+                <tr><td>Add Maths</td><td><code>addmaths/</code></td><td><code>subjects/addmaths.html</code></td><td>T4, T5</td></tr>
+                <tr><td>Science</td><td><code>science/</code></td><td><code>subjects/science.html</code></td><td>T2, T3</td></tr>
+                <tr><td>Physics</td><td><code>physics/</code></td><td><code>subjects/physics.html</code></td><td>T4, T5</td></tr>
+                <tr><td>Chemistry</td><td><code>chemistry/</code></td><td><code>subjects/chemistry.html</code></td><td>T4, T5</td></tr>
+                <tr><td>Biology</td><td><code>biology/</code></td><td><code>subjects/biology.html</code></td><td>T4, T5</td></tr>
+                <tr><td>English</td><td><code>english/</code></td><td><code>subjects/english.html</code></td><td>T4/T5 combined</td></tr>
+                <tr><td>Chinese</td><td><code>chinese/</code></td><td><code>subjects/chinese.html</code></td><td>T2–T5</td></tr>
+                <tr><td>Malay</td><td><code>malay/</code></td><td><code>subjects/malay.html</code></td><td>T2–T5</td></tr>
+                <tr><td>Moral</td><td><code>moral/</code></td><td><code>subjects/moral.html</code></td><td>T2–T5</td></tr>
+                <tr><td>History</td><td><code>history/</code></td><td><code>subjects/history.html</code></td><td>T2, T3</td></tr>
+                <tr><td>Geografi</td><td><code>geografi/</code></td><td><code>subjects/geografi.html</code></td><td>T2, T3</td></tr>
+                <tr><td>Reka Bentuk (RBT)</td><td><code>rbt/</code></td><td><code>subjects/rekabentuk.html</code></td><td>T2, T3</td></tr>
+                <tr><td>Seni</td><td><code>seni/</code></td><td><code>subjects/seni.html</code></td><td>T2, T3</td></tr>
+            </table>
+        </div>
+
+        <!-- LOG -->
+        <div class="section">
+            <h2>Execution Log</h2>
+            <div class="block">
+                <h3>Location</h3>
+                <p><code>FILES/auto_integration_log.txt</code> — append-only, all runs kept in history.</p>
+            </div>
+            <div class="block">
+                <h3>Log format</h3>
+                <div class="code-block">
+===== EXECUTION =====
+Timestamp: 2026-06-04T22:01:04+08:00
+Status: Files updated
+
+MATCHED FILES (processed):
+- chemistry/t4_chapter1.html → Chemistry T4 Chapter 16 (Intro to Chemistry) [Button added]
+
+UNMATCHED FILES (suggestions):
+(none)
+
+GIT RESULT: Committed and pushed
+=====================</div>
+                <p style="margin-top:10px;">Timestamps are in <strong>GMT+8</strong> (Malaysia time).</p>
+            </div>
+        </div>
+
+        <!-- TROUBLESHOOTING -->
+        <div class="section">
+            <h2>Troubleshooting</h2>
+
+            <div class="block orange">
+                <h3>"Open notes" link not visible after workflow ran</h3>
+                <ul style="margin-left:22px;">
+                    <li>Hard-refresh the subject page: <code>Ctrl+Shift+R</code> (clears service worker cache)</li>
+                    <li>If still missing: the subject page may be missing the <code>addMissingChineseLabels</code> function — tell Claude to check and fix it</li>
+                    <li>Root cause: Firestore had a stale document saved before <code>resourceUrl</code> was added</li>
+                </ul>
+            </div>
+
+            <div class="block orange">
+                <h3>File not detected by workflow</h3>
+                <ul style="margin-left:22px;">
+                    <li>Confirm file is pushed to GitHub (not just saved locally)</li>
+                    <li>Confirm filename matches <code>t&lt;form&gt;_chapter&lt;num&gt;.html</code></li>
+                    <li>Confirm file is in the <strong>root-level subject folder</strong> (e.g. <code>chemistry/</code>), not inside <code>subjects/</code> or a subfolder</li>
+                    <li>Check that <code>resourceUrl</code> is not already set in <code>js/subject.js</code> for that chapter (workflow skips already-integrated files)</li>
+                </ul>
+            </div>
+
+            <div class="block orange">
+                <h3>Validation error — workflow did not commit</h3>
+                <ul style="margin-left:22px;">
+                    <li>Check the output reported in chat for the specific error</li>
+                    <li>Fix the issue (usually a mismatch in subject.js), then re-run the workflow</li>
+                </ul>
+            </div>
+        </div>
+
+    </div><!-- /content -->
+
+    <footer>
+        <p>Study-Dashboard Auto-Integration Workflow</p>
+        <p style="margin-top:4px;">Last updated: 2026-06-04 &nbsp;|&nbsp; Timezone: GMT+8</p>
+    </footer>
+
+</div>
 </body>
 </html>
