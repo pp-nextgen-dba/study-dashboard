@@ -1,0 +1,733 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Automation Scanning Process - Where & How</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        header p {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+
+        .content {
+            padding: 40px;
+        }
+
+        .section {
+            margin-bottom: 50px;
+        }
+
+        .section h2 {
+            color: #667eea;
+            font-size: 2em;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #667eea;
+        }
+
+        .section h3 {
+            color: #764ba2;
+            font-size: 1.4em;
+            margin: 25px 0 15px 0;
+        }
+
+        .code-block {
+            background: #2d2d2d;
+            color: #f8f8f2;
+            padding: 20px;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 15px 0;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+            line-height: 1.5;
+        }
+
+        .directory-tree {
+            background: #f5f5f5;
+            border-left: 4px solid #667eea;
+            padding: 20px;
+            margin: 15px 0;
+            border-radius: 8px;
+            font-family: monospace;
+            font-size: 0.95em;
+            line-height: 1.8;
+        }
+
+        .highlight {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 8px;
+        }
+
+        .info-box {
+            background: #e3f2fd;
+            border-left: 4px solid #2196F3;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 8px;
+        }
+
+        .success-box {
+            background: #e8f5e9;
+            border-left: 4px solid #4caf50;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 8px;
+            color: #2e7d32;
+        }
+
+        .step {
+            background: #f8f9fa;
+            border-left: 4px solid #667eea;
+            padding: 20px;
+            margin: 15px 0;
+            border-radius: 8px;
+        }
+
+        .step-number {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .filename {
+            background: #e8eaf6;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: monospace;
+            color: #3f51b5;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+            background: white;
+        }
+
+        table th {
+            background: #667eea;
+            color: white;
+            padding: 12px;
+            text-align: left;
+        }
+
+        table td {
+            padding: 12px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        table tr:hover {
+            background: #f5f5f5;
+        }
+
+        .flow-diagram {
+            background: #f5f5f5;
+            padding: 30px;
+            border-radius: 8px;
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .flow-box {
+            background: white;
+            border: 2px solid #667eea;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 10px;
+            display: inline-block;
+            min-width: 250px;
+        }
+
+        .arrow {
+            font-size: 2em;
+            color: #667eea;
+            margin: 0 10px;
+        }
+
+        .command {
+            background: #263238;
+            color: #aed581;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+            font-family: 'Courier New', monospace;
+            font-size: 0.95em;
+        }
+
+        .file-path {
+            background: #eceff1;
+            border: 1px solid #90caf9;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+            font-family: monospace;
+            color: #0d47a1;
+        }
+
+        .button {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 6px;
+            text-decoration: none;
+            margin: 10px 10px 10px 0;
+            font-weight: bold;
+        }
+
+        .button:hover {
+            background: #764ba2;
+        }
+
+        footer {
+            background: #f8f9fa;
+            padding: 20px;
+            text-align: center;
+            color: #666;
+            border-top: 1px solid #e0e0e0;
+        }
+
+        .routine-link {
+            font-size: 1.1em;
+            margin: 20px 0;
+            padding: 15px;
+            background: #f3e5f5;
+            border: 2px solid #9c27b0;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .routine-link a {
+            color: #6a1b9a;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .routine-link a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🔍 Where Automation Scans for New HTML Files</h1>
+            <p>Complete breakdown of the scanning process</p>
+        </header>
+
+        <div class="content">
+            <!-- QUICK ANSWER -->
+            <div class="section">
+                <h2>Quick Answer</h2>
+
+                <div class="info-box">
+                    <strong>Where:</strong> Remote cloud agent (Claude AI Code)<br>
+                    <strong>What it scans:</strong> All 14 subject directories: physics/, english/, rbt/, maths/, history/, chemistry/, biology/, science/, addmaths/, malay/, chinese/, moral/, geografi/, seni/<br>
+                    <strong>How:</strong> Using <span class="filename">git status</span> command to find untracked files<br>
+                    <strong>Pattern:</strong> Looks for <span class="filename">t&lt;form&gt;_chapter&lt;num&gt;.html</span> files<br>
+                    <strong>When:</strong> Every 4 hours (UTC: 00:00, 04:00, 08:00, 12:00, 16:00, 20:00)
+                </div>
+            </div>
+
+            <!-- LOCATION: WHERE IT RUNS -->
+            <div class="section">
+                <h2>📍 Location: Where It Runs</h2>
+
+                <h3>Not on Your Computer</h3>
+                <p style="margin-bottom: 15px;">
+                    The scanning process does <strong>NOT</strong> run locally on your machine.
+                </p>
+
+                <h3>Remote Cloud Agent</h3>
+                <div class="highlight">
+                    <strong>Platform:</strong> Claude AI Code (Anthropic Cloud)<br>
+                    <strong>Type:</strong> Scheduled Remote Agent (CCR - Cloud Code Runner)<br>
+                    <strong>Routine ID:</strong> <span class="filename">trig_01PsmEWmsEo7VtySp2A2rG3t</span><br>
+                    <strong>Repository Access:</strong> GitHub (pp-nextgen-dba/study-dashboard)
+                </div>
+
+                <h3>Access the Agent Control Panel</h3>
+                <div class="routine-link">
+                    <a href="https://claude.ai/code/routines/trig_01PsmEWmsEo7VtySp2A2rG3t" target="_blank">
+                        🔗 Open Automation Routine Manager
+                    </a>
+                </div>
+
+                <p style="margin-top: 20px; font-size: 0.95em; color: #666;">
+                    This is the control panel where you can:
+                    • See if automation is enabled
+                    • Check next run time
+                    • Manually trigger "Run Now"
+                    • View execution history
+                </p>
+            </div>
+
+            <!-- WHAT IT SCANS -->
+            <div class="section">
+                <h2>📂 What It Scans: Directory Structure</h2>
+
+                <h3>Scanned Directories</h3>
+                <p style="margin-bottom: 15px;">The agent scans all subject directories in this structure:</p>
+
+                <div class="directory-tree">
+                    study-dashboard/<br>
+                    ├── subjects/<br>
+                    │   ├── physics/          ← Scans here<br>
+                    │   ├── chemistry/        ← Scans here<br>
+                    │   ├── biology/          ← Scans here<br>
+                    │   ├── english/          ← Scans here<br>
+                    │   ├── maths/            ← Scans here<br>
+                    │   ├── history/          ← Scans here<br>
+                    │   ├── rbt/              ← Scans here<br>
+                    │   ├── malay/            ← Scans here<br>
+                    │   ├── chinese/          ← Scans here<br>
+                    │   ├── moral/            ← Scans here<br>
+                    │   ├── geografi/         ← Scans here<br>
+                    │   ├── seni/             ← Scans here<br>
+                    │   ├── addmaths/         ← Scans here<br>
+                    │   └── science/          ← Scans here<br>
+                    │<br>
+                    ├── js/<br>
+                    │   ├── subject.js        ← Updates with resourceUrl<br>
+                    │   └── ...<br>
+                    ├── sw.js                 ← Updates STATIC_ASSETS<br>
+                    ├── FILES/<br>
+                    │   └── auto_integration_log.txt ← Writes logs here<br>
+                    └── ...
+                </div>
+
+                <h3>All 14 Supported Subjects</h3>
+                <table>
+                    <tr>
+                        <th>Subject</th>
+                        <th>Folder Name</th>
+                        <th>Forms</th>
+                        <th>Example File</th>
+                    </tr>
+                    <tr>
+                        <td>Physics</td>
+                        <td><span class="filename">physics</span></td>
+                        <td>T4, T5</td>
+                        <td><span class="filename">t4_chapter1.html</span></td>
+                    </tr>
+                    <tr>
+                        <td>Chemistry</td>
+                        <td><span class="filename">chemistry</span></td>
+                        <td>T4, T5</td>
+                        <td><span class="filename">t4_chapter1.html</span></td>
+                    </tr>
+                    <tr>
+                        <td>Biology</td>
+                        <td><span class="filename">biology</span></td>
+                        <td>T4, T5</td>
+                        <td><span class="filename">t4_chapter1.html</span></td>
+                    </tr>
+                    <tr>
+                        <td>English</td>
+                        <td><span class="filename">english</span></td>
+                        <td><strong>T4/T5</strong></td>
+                        <td><span class="filename">t4_t5_chapter1.html</span></td>
+                    </tr>
+                    <tr>
+                        <td>Maths</td>
+                        <td><span class="filename">maths</span></td>
+                        <td>T2, T3, T4, T5</td>
+                        <td><span class="filename">t4_chapter1.html</span></td>
+                    </tr>
+                    <tr>
+                        <td>History</td>
+                        <td><span class="filename">history</span></td>
+                        <td>T2, T3</td>
+                        <td><span class="filename">t2_chapter1.html</span></td>
+                    </tr>
+                    <tr>
+                        <td>RBT (Reka Bentuk)</td>
+                        <td><span class="filename">rekabentuk</span></td>
+                        <td>T2, T3</td>
+                        <td><span class="filename">t2_chapter1.html</span></td>
+                    </tr>
+                    <tr>
+                        <td>Malay</td>
+                        <td><span class="filename">malay</span></td>
+                        <td>T4, T5</td>
+                        <td><span class="filename">t4_chapter1.html</span></td>
+                    </tr>
+                    <tr>
+                        <td>Chinese</td>
+                        <td><span class="filename">chinese</span></td>
+                        <td>T4, T5</td>
+                        <td><span class="filename">t4_chapter1.html</span></td>
+                    </tr>
+                    <tr>
+                        <td>Moral</td>
+                        <td><span class="filename">moral</span></td>
+                        <td>T4, T5</td>
+                        <td><span class="filename">t4_chapter1.html</span></td>
+                    </tr>
+                    <tr>
+                        <td>Geografi</td>
+                        <td><span class="filename">geografi</span></td>
+                        <td>T2, T3</td>
+                        <td><span class="filename">t2_chapter1.html</span></td>
+                    </tr>
+                    <tr>
+                        <td>Seni</td>
+                        <td><span class="filename">seni</span></td>
+                        <td>T4, T5</td>
+                        <td><span class="filename">t4_chapter1.html</span></td>
+                    </tr>
+                    <tr>
+                        <td>Additional Maths</td>
+                        <td><span class="filename">addmaths</span></td>
+                        <td>T4, T5</td>
+                        <td><span class="filename">t4_chapter1.html</span></td>
+                    </tr>
+                    <tr>
+                        <td>Science</td>
+                        <td><span class="filename">science</span></td>
+                        <td>T2, T3</td>
+                        <td><span class="filename">t2_chapter1.html</span></td>
+                    </tr>
+                </table>
+            </div>
+
+            <!-- HOW IT SCANS -->
+            <div class="section">
+                <h2>🔎 How It Scans: The Technical Process</h2>
+
+                <h3>Scanning Method: Git Status Command</h3>
+                <div class="info-box">
+                    The agent uses the <span class="filename">git status</span> command to find untracked files.
+                    These are HTML files you uploaded but haven't been committed yet.
+                </div>
+
+                <h3>Exact Git Command Used</h3>
+                <div class="code-block">
+git status
+                </div>
+
+                <p style="margin-top: 15px; margin-bottom: 15px;">This command shows output like:</p>
+                <div class="code-block">
+On branch main
+Untracked files:
+  (use "git add <file>..." to include what will be committed)
+    subjects/physics/t4_chapter1.html
+    subjects/english/t4_t5_chapter1.html
+    subjects/history/t2_chapter10.html
+
+nothing added to commit but untracked files present
+                </div>
+
+                <h3>Pattern Matching</h3>
+                <p style="margin-bottom: 15px;">The agent looks for files matching this regex pattern:</p>
+
+                <div class="code-block">
+t[0-9](_[0-9])?_chapter[0-9]+\.html
+                </div>
+
+                <p style="margin-top: 15px; margin-bottom: 15px;"><strong>Matches:</strong></p>
+                <ul style="margin-left: 20px; margin-bottom: 15px;">
+                    <li>✓ <span class="filename">t2_chapter1.html</span> (form T2, chapter 1)</li>
+                    <li>✓ <span class="filename">t4_chapter10.html</span> (form T4, chapter 10)</li>
+                    <li>✓ <span class="filename">t4_t5_chapter1.html</span> (combined form T4/T5, chapter 1)</li>
+                </ul>
+
+                <p style="margin-bottom: 15px;"><strong>Does NOT match:</strong></p>
+                <ul style="margin-left: 20px;">
+                    <li>✗ <span class="filename">force_motion.html</span> (no form/chapter pattern)</li>
+                    <li>✗ <span class="filename">chapter10.html</span> (missing form prefix)</li>
+                    <li>✗ <span class="filename">t2_notes.html</span> (missing chapter pattern)</li>
+                </ul>
+            </div>
+
+            <!-- SCANNING FLOW -->
+            <div class="section">
+                <h2>⚙️ Scanning Flow: Step-by-Step</h2>
+
+                <div class="step">
+                    <span class="step-number">1</span>
+                    <h4>Check-in to Repository</h4>
+                    <p>Remote agent clones fresh copy of study-dashboard repo from GitHub</p>
+                </div>
+
+                <div class="step">
+                    <span class="step-number">2</span>
+                    <h4>Run Git Status</h4>
+                    <p>Executes <span class="filename">git status</span> to find untracked files</p>
+                    <div class="command">
+$ git status
+                    </div>
+                </div>
+
+                <div class="step">
+                    <span class="step-number">3</span>
+                    <h4>Filter by Pattern</h4>
+                    <p>Separates files into:</p>
+                    <ul style="margin-left: 20px;">
+                        <li><strong>MATCHED:</strong> Files following <span class="filename">t&lt;form&gt;_chapter&lt;num&gt;.html</span></li>
+                        <li><strong>UNMATCHED:</strong> Files not following pattern</li>
+                    </ul>
+                </div>
+
+                <div class="step">
+                    <span class="step-number">4</span>
+                    <h4>Process Matched Files</h4>
+                    <p>For each matched file:</p>
+                    <ul style="margin-left: 20px;">
+                        <li>Parse filename → extract form and chapter number</li>
+                        <li>Find matching chapter in <span class="filename">js/subject.js</span></li>
+                        <li>Add <span class="filename">resourceUrl</span> property</li>
+                        <li>Update <span class="filename">sw.js</span> STATIC_ASSETS</li>
+                    </ul>
+                </div>
+
+                <div class="step">
+                    <span class="step-number">5</span>
+                    <h4>Validate & Commit</h4>
+                    <p>Run <span class="filename">npm run validate</span> then git commit & push</p>
+                </div>
+
+                <div class="step">
+                    <span class="step-number">6</span>
+                    <h4>Log Execution</h4>
+                    <p>Write results to <span class="filename">FILES/auto_integration_log.txt</span> with timestamp</p>
+                </div>
+
+                <div class="step">
+                    <span class="step-number">7</span>
+                    <h4>Commit Log to GitHub</h4>
+                    <p>Push log entry so you can verify what happened</p>
+                </div>
+            </div>
+
+            <!-- AGENT PROMPT -->
+            <div class="section">
+                <h2>📋 Agent Instructions: The Scanning Rules</h2>
+
+                <p style="margin-bottom: 15px;">
+                    The exact scanning logic is defined in the agent's instructions. This is what tells the agent what to scan for:
+                </p>
+
+                <h3>Key Instructions (Simplified)</h3>
+
+                <div class="info-box">
+                    <strong>1. Find untracked HTML files in subjects/* directories</strong><br>
+                    Command: <span class="filename">git status</span><br>
+                    Look for: Files listed as <span class="filename">??</span> (untracked)<br><br>
+
+                    <strong>2. Separate into MATCHED and UNMATCHED</strong><br>
+                    Pattern: <span class="filename">t&lt;form(s)&gt;_chapter&lt;num&gt;.html</span><br>
+                    Example: <span class="filename">t4_chapter1.html</span> or <span class="filename">t4_t5_chapter1.html</span><br><br>
+
+                    <strong>3. Process only MATCHED files</strong><br>
+                    Extract: form (T2, T3, T4, T5, or T4/T5)<br>
+                    Extract: chapter number (1, 2, 3, ... up to 76)<br><br>
+
+                    <strong>4. Log UNMATCHED files with suggestions</strong><br>
+                    Analyze HTML content<br>
+                    Suggest correct filename<br>
+                </div>
+
+                <h3>View Full Agent Instructions</h3>
+                <p style="margin-bottom: 15px;">
+                    To see the complete scanning logic:
+                </p>
+
+                <a href="https://claude.ai/code/routines/trig_01PsmEWmsEo7VtySp2A2rG3t" target="_blank" class="button">
+                    Open Routine Manager → View Instructions
+                </a>
+            </div>
+
+            <!-- SCAN EXAMPLES -->
+            <div class="section">
+                <h2>📊 Scan Examples: What Happens</h2>
+
+                <h3>Example 1: File Detected and Processed</h3>
+                <div class="success-box">
+                    <strong>Scenario:</strong> You upload <span class="filename">t4_chapter1.html</span> to <span class="filename">subjects/physics/</span><br><br>
+
+                    <strong>Scanning:</strong><br>
+                    1. Agent runs <span class="filename">git status</span><br>
+                    2. Sees: <span class="filename">subjects/physics/t4_chapter1.html</span> (untracked)<br>
+                    3. Pattern check: ✓ Matches <span class="filename">t&lt;form&gt;_chapter&lt;num&gt;</span><br>
+                    4. MATCHED group: ✓ Processed<br><br>
+
+                    <strong>Result:</strong><br>
+                    ✓ File integrated<br>
+                    ✓ Committed to GitHub<br>
+                    ✓ Log shows "Files updated"<br>
+                </div>
+
+                <h3>Example 2: Unmatched File Logged</h3>
+                <div class="highlight">
+                    <strong>Scenario:</strong> You upload <span class="filename">force_motion.html</span> to <span class="filename">subjects/physics/</span><br><br>
+
+                    <strong>Scanning:</strong><br>
+                    1. Agent runs <span class="filename">git status</span><br>
+                    2. Sees: <span class="filename">subjects/physics/force_motion.html</span> (untracked)<br>
+                    3. Pattern check: ✗ Does NOT match pattern<br>
+                    4. UNMATCHED group: ⚠️ Logged with suggestion<br><br>
+
+                    <strong>Log Entry:</strong><br>
+                    UNMATCHED FILE: force_motion.html<br>
+                    Subject: physics, Form: T4, Chapter: 1<br>
+                    SUGGESTED RENAME: t4_chapter1.html<br>
+                </div>
+
+                <h3>Example 3: No New Files</h3>
+                <div class="info-box">
+                    <strong>Scenario:</strong> No new HTML files uploaded<br><br>
+
+                    <strong>Scanning:</strong><br>
+                    1. Agent runs <span class="filename">git status</span><br>
+                    2. No untracked files in subjects/*<br>
+                    3. Nothing to process<br><br>
+
+                    <strong>Log Entry:</strong><br>
+                    Status: No files detected<br>
+                    MATCHED FILES: (none)<br>
+                    GIT RESULT: No changes<br>
+                </div>
+            </div>
+
+            <!-- WHERE TO VIEW SCANNING PROCESS -->
+            <div class="section">
+                <h2>👁️ Where to View the Scanning Process Happen</h2>
+
+                <h3>Option 1: Routine Manager (Live Control)</h3>
+                <div class="routine-link">
+                    <a href="https://claude.ai/code/routines/trig_01PsmEWmsEo7VtySp2A2rG3t" target="_blank">
+                        🔗 https://claude.ai/code/routines/trig_01PsmEWmsEo7VtySp2A2rG3t
+                    </a>
+                </div>
+                <p style="margin-top: 10px;">
+                    Shows: Next run time, execution history, enable/disable toggle
+                </p>
+
+                <h3>Option 2: Execution Log File (After Scanning)</h3>
+                <div class="file-path">
+                    C:\development\paul\study-dashboard\FILES\auto_integration_log.txt
+                </div>
+                <p style="margin-top: 10px;">
+                    Shows: What was scanned, what was found, what was processed, any errors
+                </p>
+
+                <h3>Option 3: GitHub Commits (Final Result)</h3>
+                <div style="background: #e3f2fd; border: 1px solid #2196F3; padding: 15px; border-radius: 8px; margin: 15px 0;">
+                    <a href="https://github.com/pp-nextgen-dba/study-dashboard" target="_blank" style="color: #1565c0; text-decoration: none; font-weight: bold;">
+                        🔗 https://github.com/pp-nextgen-dba/study-dashboard
+                    </a>
+                </div>
+                <p style="margin-top: 10px;">
+                    Shows: Commits like "Auto-add chapter notes: t4_chapter1.html"
+                </p>
+
+                <h3>Option 4: Manual Test (Immediate)</h3>
+                <p style="margin-bottom: 15px;">
+                    To test the scanning right now:
+                </p>
+                <ol style="margin-left: 20px; line-height: 1.8;">
+                    <li>Upload test file: <span class="filename">subjects/physics/t4_chapter1.html</span></li>
+                    <li>Go to routine manager (link above)</li>
+                    <li>Click "Run Now"</li>
+                    <li>Check log file 30 seconds later</li>
+                    <li>Should show file was scanned and processed</li>
+                </ol>
+            </div>
+
+            <!-- SUMMARY -->
+            <div style="background: linear-gradient(135deg, #667eea15 0%, #764ba215 100%); border: 2px solid #667eea; padding: 30px; border-radius: 8px; margin: 30px 0;">
+                <h2 style="color: #667eea; margin-bottom: 20px;">📍 Summary: Scanning Process Location</h2>
+
+                <table style="margin: 0;">
+                    <tr>
+                        <th>What</th>
+                        <th>Where</th>
+                        <th>How Often</th>
+                    </tr>
+                    <tr>
+                        <td><strong>Agent runs</strong></td>
+                        <td>Claude AI Cloud (Remote)</td>
+                        <td>Every 4 hours</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Scans directories</strong></td>
+                        <td><span class="filename">subjects/*/</span> (all 14 subjects)</td>
+                        <td>Every scan cycle</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Detects files</strong></td>
+                        <td>Using <span class="filename">git status</span> for untracked files</td>
+                        <td>Every scan cycle</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Pattern matches</strong></td>
+                        <td><span class="filename">t&lt;form&gt;_chapter&lt;num&gt;.html</span></td>
+                        <td>Every scan cycle</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Logs results</strong></td>
+                        <td><span class="filename">FILES/auto_integration_log.txt</span></td>
+                        <td>After every cycle</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Pushes changes</strong></td>
+                        <td>GitHub (pp-nextgen-dba/study-dashboard)</td>
+                        <td>If files processed</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <footer>
+            <p>Study-Dashboard Automation: Scanning Process Documentation</p>
+            <p>Generated: June 4, 2026</p>
+        </footer>
+    </div>
+</body>
+</html>
