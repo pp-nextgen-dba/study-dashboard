@@ -274,19 +274,59 @@ card.addEventListener("click", async (e) =&gt; {
             </div>
 
             <div class="block">
-                <h3>4 — <code>addMissingChineseLabels()</code> Firestore sync</h3>
+                <h3>4 — Firestore sync function</h3>
                 <p>
                     Subject pages read chapter data from <strong>Firestore</strong>, not directly from <code>subject.js</code>.
-                    If the Firestore document was saved before <code>resourceUrl</code> was added, it won't have the field —
-                    meaning the "Open notes" link won't appear even though the code is correct.
+                    If the Firestore document was saved before a field was added, it won't have it —
+                    meaning the "Open notes" link or chapter code won't appear even though the code is correct.
                 </p>
-                <p style="margin-top:10px;">This function runs on page load and syncs any missing <code>resourceUrl</code> (and <code>chinese</code>) fields from the seed data back into Firestore automatically.</p>
+                <p style="margin-top:10px;">This function runs on page load and syncs any missing fields from seed data back into Firestore automatically. Fields synced: <code>chinese</code>, <code>chapterCode</code>, <code>resourceUrl</code>.</p>
                 <div class="code-block">
 // Called inside loadData() when snap.exists():
 if(addMissingChineseLabels(data)){
     data.last_saved = new Date().toISOString();
     await setDoc(docRef, data);
 }</div>
+                <p style="margin-top:10px;"><strong>English &amp; Malay</strong> use <code>mergeSeedChapters()</code> (same purpose, different name). <strong>Chinese</strong> uses <code>addMissingChineseLabels()</code>.</p>
+            </div>
+        </div>
+
+        <!-- CHAPTER CODE DISPLAY -->
+        <div class="section">
+            <h2>Chapter Code Display (English, Malay, Chinese)</h2>
+            <p style="margin-bottom:16px;">
+                English, Malay, and Chinese chapters use <strong>3-digit codes</strong> instead of form/chapter numbers,
+                because their topics are skill-based rather than form-numbered.
+                The code is shown in the chapter card title on the subject page.
+            </p>
+
+            <div class="block">
+                <h3>How it looks in the UI</h3>
+                <table>
+                    <tr><th>Subject</th><th>Card title shown</th><th>Code field in subject.js</th></tr>
+                    <tr><td>English</td><td>Present Simple (001)</td><td><code>chapterCode:"en_001"</code></td></tr>
+                    <tr><td>Malay</td><td>Mendengar untuk Maklumat (001)</td><td><code>chapterCode:"my_001"</code></td></tr>
+                    <tr><td>Chinese</td><td>现代文阅读理解 (001)</td><td><code>chapterCode:"zh_001"</code></td></tr>
+                </table>
+            </div>
+
+            <div class="block">
+                <h3>Code ranges</h3>
+                <table>
+                    <tr><th>Subject</th><th>Prefix</th><th>Range</th><th>Total chapters</th></tr>
+                    <tr><td>English</td><td><code>en_</code></td><td>en_001 – en_057</td><td>57</td></tr>
+                    <tr><td>Malay</td><td><code>my_</code></td><td>my_001 – my_055</td><td>55</td></tr>
+                    <tr><td>Chinese</td><td><code>zh_</code></td><td>zh_001 – zh_029</td><td>29</td></tr>
+                </table>
+            </div>
+
+            <div class="block">
+                <h3>How the code is rendered in the card</h3>
+                <div class="code-block">
+&lt;div class="chapter-title"&gt;
+    ${chapter.chapter}${chapter.chapterCode ? ' (' + chapter.chapterCode.split('_')[1] + ')' : ''}
+&lt;/div&gt;</div>
+                <p style="margin-top:10px;">The numeric part is extracted from <code>chapterCode</code> (e.g. <code>en_001</code> → <code>001</code>) so the prefix is never shown in the UI.</p>
             </div>
         </div>
 
