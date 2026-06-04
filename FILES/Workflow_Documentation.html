@@ -1,0 +1,852 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Study-Dashboard: Chapter HTML Automation Workflow</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        header p {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+
+        .content {
+            padding: 40px;
+        }
+
+        .section {
+            margin-bottom: 50px;
+        }
+
+        .section h2 {
+            color: #667eea;
+            font-size: 2em;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #667eea;
+        }
+
+        .phase {
+            background: #f8f9fa;
+            border-left: 4px solid #667eea;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+        }
+
+        .phase h3 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 1.5em;
+        }
+
+        .phase ol, .phase ul {
+            margin-left: 20px;
+            margin-bottom: 15px;
+        }
+
+        .phase li {
+            margin-bottom: 10px;
+            line-height: 1.8;
+        }
+
+        .code-block {
+            background: #2d2d2d;
+            color: #f8f8f2;
+            padding: 15px;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 15px 0;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+            line-height: 1.4;
+        }
+
+        .example-box {
+            background: #e8f5e9;
+            border-left: 4px solid #4caf50;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 8px;
+        }
+
+        .example-box strong {
+            color: #2e7d32;
+        }
+
+        .warning-box {
+            background: #fff3e0;
+            border-left: 4px solid #ff9800;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 8px;
+        }
+
+        .workflow-diagram {
+            background: #f5f5f5;
+            padding: 30px;
+            border-radius: 8px;
+            margin: 20px 0;
+            text-align: center;
+            border: 2px solid #e0e0e0;
+        }
+
+        .workflow-step {
+            background: white;
+            border: 2px solid #667eea;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 15px 0;
+            color: #333;
+        }
+
+        .workflow-arrow {
+            text-align: center;
+            font-size: 2em;
+            color: #667eea;
+            margin: 10px 0;
+        }
+
+        .checklist {
+            background: #f0f7ff;
+            border-left: 4px solid #2196F3;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 15px 0;
+        }
+
+        .checklist ul {
+            list-style: none;
+            margin-left: 0;
+        }
+
+        .checklist li {
+            padding: 8px 0;
+        }
+
+        .checklist li:before {
+            content: "✓ ";
+            color: #4caf50;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        .filename {
+            background: #e3f2fd;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: monospace;
+            color: #1565c0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+            background: white;
+        }
+
+        table th {
+            background: #667eea;
+            color: white;
+            padding: 12px;
+            text-align: left;
+        }
+
+        table td {
+            padding: 12px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        table tr:hover {
+            background: #f5f5f5;
+        }
+
+        .button {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 6px;
+            text-decoration: none;
+            margin: 10px 10px 10px 0;
+            font-weight: bold;
+        }
+
+        .button:hover {
+            background: #764ba2;
+        }
+
+        footer {
+            background: #f8f9fa;
+            padding: 20px;
+            text-align: center;
+            color: #666;
+            border-top: 1px solid #e0e0e0;
+        }
+
+        .status {
+            display: inline-block;
+            background: #4caf50;
+            color: white;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.9em;
+            font-weight: bold;
+        }
+
+        .icon {
+            font-size: 1.2em;
+            margin-right: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📚 Study-Dashboard Chapter HTML Automation</h1>
+            <p>Complete Workflow Documentation</p>
+        </header>
+
+        <div class="content">
+            <!-- OVERVIEW -->
+            <div class="section">
+                <h2>📋 Overview</h2>
+                <p style="font-size: 1.1em; line-height: 1.8;">
+                    This system automates the integration of new chapter HTML files into the study-dashboard.
+                    When you upload a chapter file to a subject directory, the system automatically:
+                </p>
+                <ul style="margin-left: 40px; margin-top: 15px; font-size: 1.05em;">
+                    <li>Adds the "Back to Dashboard" button (if missing)</li>
+                    <li>Updates the subject data with the chapter link</li>
+                    <li>Registers the file in the service worker cache</li>
+                    <li>Validates the entire project</li>
+                    <li>Commits and pushes changes to GitHub</li>
+                    <li>Logs all execution details with timestamps</li>
+                </ul>
+            </div>
+
+            <!-- STATUS -->
+            <div class="section">
+                <h2>✅ Implementation Status</h2>
+                <div class="checklist">
+                    <ul>
+                        <li>Data structure updated: 246 chapters with chapterNum</li>
+                        <li>Scheduled agent created and enabled</li>
+                        <li>Button auto-insertion enabled</li>
+                        <li>Logging system enabled</li>
+                        <li>GitHub integration ready</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- PHASE 1 -->
+            <div class="section">
+                <h2><span class="icon">⚙️</span>Phase 1: Data Structure Setup</h2>
+                <p style="margin-bottom: 15px;"><strong>Status: <span class="status">COMPLETE</span></strong></p>
+
+                <div class="phase">
+                    <h3>Added to all 246 chapters in js/subject.js</h3>
+                    <p style="margin-bottom: 15px;">Each chapter now includes a sequential <code>chapterNum</code> field within its form:</p>
+
+                    <div class="code-block">
+{
+    form: "T2",
+    chapterNum: 1,  // ← NEW: sequential number within form
+    chapter: "Biodiversity",
+    status: "Not Started",
+    confidence: 0,
+    last_updated: "2026-05-20"
+}
+                    </div>
+
+                    <p style="margin-top: 15px;"><strong>Chapter numbering by form:</strong></p>
+                    <ul style="margin-left: 20px;">
+                        <li>T2: 76 chapters numbered 1-76</li>
+                        <li>T3: 53 chapters numbered 1-53</li>
+                        <li>T4: 61 chapters numbered 1-61</li>
+                        <li>T5: 54 chapters numbered 1-54</li>
+                        <li>T4/T5 (Combined): 2 chapters numbered 1-2</li>
+                    </ul>
+                </div>
+
+                <div class="phase">
+                    <h3>Support for Combined Forms (English, etc.)</h3>
+                    <div class="code-block">
+{
+    form: "T4/T5",  // ← NEW: combined form support
+    chapterNum: 1,
+    chapter: "Grammar",
+    status: "Not Started",
+    ...
+}
+                    </div>
+                </div>
+            </div>
+
+            <!-- PHASE 2 -->
+            <div class="section">
+                <h2><span class="icon">📤</span>Phase 2: Upload HTML File</h2>
+                <p style="margin-bottom: 15px;"><strong>Status: <span class="status">USER ACTION</span></strong></p>
+
+                <div class="phase">
+                    <h3>File Location & Naming Convention</h3>
+
+                    <p style="margin-bottom: 15px;"><strong>Upload directory:</strong></p>
+                    <div class="code-block">
+C:\development\paul\study-dashboard\subjects\&lt;subject&gt;/
+                    </div>
+
+                    <p style="margin-top: 20px; margin-bottom: 15px;"><strong>Filename pattern:</strong></p>
+                    <div class="code-block">
+t&lt;form&gt;_chapter&lt;num&gt;.html
+                    </div>
+
+                    <p style="margin-top: 20px; margin-bottom: 15px;"><strong>Examples:</strong></p>
+                    <table>
+                        <tr>
+                            <th>Subject</th>
+                            <th>Form</th>
+                            <th>Chapter</th>
+                            <th>Filename</th>
+                            <th>Full Path</th>
+                        </tr>
+                        <tr>
+                            <td>Physics</td>
+                            <td>T4</td>
+                            <td>1</td>
+                            <td><span class="filename">t4_chapter1.html</span></td>
+                            <td><span class="filename">subjects/physics/t4_chapter1.html</span></td>
+                        </tr>
+                        <tr>
+                            <td>English</td>
+                            <td>T4/T5</td>
+                            <td>1</td>
+                            <td><span class="filename">t4_t5_chapter1.html</span></td>
+                            <td><span class="filename">subjects/english/t4_t5_chapter1.html</span></td>
+                        </tr>
+                        <tr>
+                            <td>History</td>
+                            <td>T2</td>
+                            <td>10</td>
+                            <td><span class="filename">t2_chapter10.html</span></td>
+                            <td><span class="filename">subjects/history/t2_chapter10.html</span></td>
+                        </tr>
+                        <tr>
+                            <td>Maths</td>
+                            <td>T3</td>
+                            <td>5</td>
+                            <td><span class="filename">t3_chapter5.html</span></td>
+                            <td><span class="filename">subjects/maths/t3_chapter5.html</span></td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div class="phase">
+                    <h3>HTML File Requirements</h3>
+                    <p style="margin-bottom: 15px;">Your HTML file can be:</p>
+                    <ul style="margin-left: 20px; margin-bottom: 15px;">
+                        <li>✓ WITH "Back to Dashboard" button included</li>
+                        <li>✓ WITHOUT "Back to Dashboard" button (system will add it)</li>
+                    </ul>
+
+                    <div class="example-box">
+                        <strong>📌 TIP:</strong> The system automatically adds the navigation button if it's missing,
+                        so you can focus on the content. Just upload your HTML file and the automation handles the rest.
+                    </div>
+                </div>
+            </div>
+
+            <!-- PHASE 3 -->
+            <div class="section">
+                <h2><span class="icon">🤖</span>Phase 3: Agent Processing (Every 4 Hours)</h2>
+                <p style="margin-bottom: 15px;"><strong>Status: <span class="status">AUTOMATED</span></strong></p>
+
+                <div class="phase">
+                    <h3>Execution Schedule</h3>
+                    <p><strong>Cron Expression:</strong> <span class="filename">0 */4 * * *</span></p>
+
+                    <p style="margin-top: 15px;"><strong>UTC Times (24-hour format):</strong></p>
+                    <div style="background: #f5f5f5; padding: 15px; border-radius: 8px; margin-top: 10px;">
+                        00:00 | 04:00 | 08:00 | 12:00 | 16:00 | 20:00
+                    </div>
+
+                    <p style="margin-top: 15px;"><strong>Asia/Kuala_Lumpur Times (Local):</strong></p>
+                    <div style="background: #f5f5f5; padding: 15px; border-radius: 8px; margin-top: 10px;">
+                        8:00 AM | 12:00 PM | 4:00 PM | 8:00 PM | 12:00 AM | 4:00 AM
+                    </div>
+                </div>
+
+                <div class="phase">
+                    <h3>Agent Processing Steps</h3>
+                    <p style="margin-bottom: 15px;">For each uploaded HTML file matching the pattern, the agent:</p>
+
+                    <ol style="margin-left: 20px;">
+                        <li style="margin-bottom: 15px;">
+                            <strong>Check for "Back to Dashboard" button</strong>
+                            <ul style="margin-top: 5px;">
+                                <li>Searches for existing button (class: <span class="filename">dashboard-link</span>)</li>
+                                <li>If missing, inserts HTML button after &lt;body&gt; tag</li>
+                                <li>If missing, adds CSS styling to &lt;head&gt; section</li>
+                                <li>Avoids duplicates if button already exists</li>
+                            </ul>
+                        </li>
+
+                        <li style="margin-bottom: 15px;">
+                            <strong>Parse filename</strong>
+                            <ul style="margin-top: 5px;">
+                                <li>Extract form: <span class="filename">t4</span> → <span class="filename">T4</span>, <span class="filename">t4_t5</span> → <span class="filename">T4/T5</span></li>
+                                <li>Extract chapter number: <span class="filename">chapter1</span> → <span class="filename">1</span></li>
+                            </ul>
+                        </li>
+
+                        <li style="margin-bottom: 15px;">
+                            <strong>Update js/subject.js</strong>
+                            <ul style="margin-top: 5px;">
+                                <li>Find matching chapter by form + chapterNum</li>
+                                <li>Add resourceUrl property</li>
+                                <li>Example: <span class="filename">resourceUrl: "../subjects/physics/t4_chapter1.html"</span></li>
+                            </ul>
+                        </li>
+
+                        <li style="margin-bottom: 15px;">
+                            <strong>Update sw.js (Service Worker)</strong>
+                            <ul style="margin-top: 5px;">
+                                <li>Add file path to STATIC_ASSETS array</li>
+                                <li>Format: <span class="filename">'subjects/physics/t4_chapter1.html'</span></li>
+                                <li>Prevents duplicate entries</li>
+                            </ul>
+                        </li>
+
+                        <li style="margin-bottom: 15px;">
+                            <strong>Validate project</strong>
+                            <ul style="margin-top: 5px;">
+                                <li>Run: <span class="filename">npm run validate</span></li>
+                                <li>Ensures no errors introduced</li>
+                            </ul>
+                        </li>
+
+                        <li>
+                            <strong>Commit & Push to GitHub</strong>
+                            <ul style="margin-top: 5px;">
+                                <li>Stages modified files</li>
+                                <li>Creates commit with message: <span class="filename">Auto-add chapter notes: t4_chapter1.html</span></li>
+                                <li>Pushes to main branch</li>
+                                <li>Only if validation passes</li>
+                            </ul>
+                        </li>
+                    </ol>
+                </div>
+
+                <div class="warning-box">
+                    <strong>⚠️ VALIDATION FAILURE:</strong> If npm validate fails, the agent will NOT commit.
+                    You'll see the error in the log file. Fix the issue and reupload the file.
+                </div>
+            </div>
+
+            <!-- PHASE 4 -->
+            <div class="section">
+                <h2><span class="icon">📝</span>Phase 4: Execution Logging</h2>
+                <p style="margin-bottom: 15px;"><strong>Status: <span class="status">AUTOMATED</span></strong></p>
+
+                <div class="phase">
+                    <h3>Log File Location</h3>
+                    <div class="code-block">
+FILES/auto_integration_log.txt
+                    </div>
+                    <p style="margin-top: 10px; font-size: 0.95em;"><em>Appended mode: keeps complete execution history</em></p>
+                </div>
+
+                <div class="phase">
+                    <h3>Log Entry Format</h3>
+                    <p style="margin-bottom: 15px;">Every execution is logged with:</p>
+
+                    <div class="code-block">
+===== EXECUTION =====
+Timestamp: 2026-06-04T12:04:32Z
+Status: [Files updated | No files detected]
+
+MATCHED FILES (processed):
+- subjects/physics/t4_chapter1.html → Physics T4 Chapter 1 [Button added]
+- subjects/english/t4_t5_chapter1.html → English T4/T5 Chapter 1 [Button added]
+
+UNMATCHED FILES (suggestions):
+- force_motion.html → SUGGESTED: t4_chapter1.html
+  (Inferred: Physics, Form T4, Chapter 1)
+
+GIT RESULT: [Committed and pushed | No changes | Validation failed]
+=====================
+                    </div>
+                </div>
+
+                <div class="example-box">
+                    <strong>Example: No Files Detected</strong>
+                    <div class="code-block" style="margin-top: 10px;">
+===== EXECUTION =====
+Timestamp: 2026-06-04T16:04:32Z
+Status: No files detected
+
+MATCHED FILES (processed):
+(none)
+
+UNMATCHED FILES (suggestions):
+(none)
+
+GIT RESULT: No changes
+=====================
+                    </div>
+                </div>
+            </div>
+
+            <!-- PHASE 5 -->
+            <div class="section">
+                <h2><span class="icon">✔️</span>Phase 5: Verification & Results</h2>
+                <p style="margin-bottom: 15px;"><strong>Status: <span class="status">USER VERIFICATION</span></strong></p>
+
+                <div class="phase">
+                    <h3>How to Verify Integration</h3>
+                    <ol style="margin-left: 20px;">
+                        <li style="margin-bottom: 15px;">
+                            <strong>Check GitHub commits</strong>
+                            <ul style="margin-top: 5px;">
+                                <li>Repository: <a href="https://github.com/pp-nextgen-dba/study-dashboard" target="_blank">pp-nextgen-dba/study-dashboard</a></li>
+                                <li>Look for commits titled: "Auto-add chapter notes: ..."</li>
+                            </ul>
+                        </li>
+
+                        <li style="margin-bottom: 15px;">
+                            <strong>Test in web UI</strong>
+                            <ul style="margin-top: 5px;">
+                                <li>Open the dashboard (live or local)</li>
+                                <li>Navigate to the subject</li>
+                                <li>Verify new chapter appears with "Open Notes" link</li>
+                                <li>Click the link to view the chapter</li>
+                                <li>Verify "Back to Dashboard" button appears</li>
+                            </ul>
+                        </li>
+
+                        <li style="margin-bottom: 15px;">
+                            <strong>Review execution log</strong>
+                            <ul style="margin-top: 5px;">
+                                <li>File: <span class="filename">FILES/auto_integration_log.txt</span></li>
+                                <li>Check timestamps, status, and any issues</li>
+                                <li>Identify unmatched files that need renaming</li>
+                            </ul>
+                        </li>
+
+                        <li>
+                            <strong>Check browser cache (if needed)</strong>
+                            <ul style="margin-top: 5px;">
+                                <li>Service worker may cache old version</li>
+                                <li>Hard refresh: Ctrl+Shift+R or Cmd+Shift+R</li>
+                                <li>Or clear service worker cache in DevTools</li>
+                            </ul>
+                        </li>
+                    </ol>
+                </div>
+            </div>
+
+            <!-- COMPLETE WORKFLOW DIAGRAM -->
+            <div class="section">
+                <h2><span class="icon">🔄</span>Complete Workflow Diagram</h2>
+
+                <div class="workflow-diagram">
+                    <div class="workflow-step">
+                        <strong>Step 1: You Upload HTML</strong>
+                        <p style="margin-top: 10px; font-size: 0.95em;">
+                            File: <span class="filename">subjects/physics/t4_chapter1.html</span>
+                        </p>
+                    </div>
+
+                    <div class="workflow-arrow">⬇️</div>
+
+                    <div class="workflow-step">
+                        <strong>Step 2: Agent Detects (Every 4 Hours)</strong>
+                        <p style="margin-top: 10px; font-size: 0.95em;">
+                            Scans untracked files via git status
+                        </p>
+                    </div>
+
+                    <div class="workflow-arrow">⬇️</div>
+
+                    <div class="workflow-step">
+                        <strong>Step 3: Agent Processes</strong>
+                        <p style="margin-top: 10px; font-size: 0.95em;">
+                            • Adds button (if needed)<br>
+                            • Updates subject.js<br>
+                            • Updates sw.js<br>
+                            • Validates project
+                        </p>
+                    </div>
+
+                    <div class="workflow-arrow">⬇️</div>
+
+                    <div class="workflow-step">
+                        <strong>Step 4: Agent Commits & Pushes</strong>
+                        <p style="margin-top: 10px; font-size: 0.95em;">
+                            Commits to GitHub main branch
+                        </p>
+                    </div>
+
+                    <div class="workflow-arrow">⬇️</div>
+
+                    <div class="workflow-step">
+                        <strong>Step 5: Agent Logs Execution</strong>
+                        <p style="margin-top: 10px; font-size: 0.95em;">
+                            Timestamp + Status → FILES/auto_integration_log.txt
+                        </p>
+                    </div>
+
+                    <div class="workflow-arrow">⬇️</div>
+
+                    <div class="workflow-step" style="background: #e8f5e9;">
+                        <strong style="color: #2e7d32;">✓ Chapter Live in Dashboard</strong>
+                        <p style="margin-top: 10px; font-size: 0.95em;">
+                            Users can view the new chapter notes
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SUBJECTS REFERENCE -->
+            <div class="section">
+                <h2><span class="icon">📚</span>Supported Subjects</h2>
+
+                <table>
+                    <tr>
+                        <th>Subject</th>
+                        <th>Folder</th>
+                        <th>Forms</th>
+                        <th>Chapters</th>
+                        <th>Example Filename</th>
+                    </tr>
+                    <tr>
+                        <td>Maths</td>
+                        <td><span class="filename">maths</span></td>
+                        <td>T2, T3, T4, T5</td>
+                        <td>Varied</td>
+                        <td><span class="filename">t4_chapter1.html</span></td>
+                    </tr>
+                    <tr>
+                        <td>Additional Maths</td>
+                        <td><span class="filename">addmaths</span></td>
+                        <td>T4, T5</td>
+                        <td>Varied</td>
+                        <td><span class="filename">t4_chapter1.html</span></td>
+                    </tr>
+                    <tr>
+                        <td>Science</td>
+                        <td><span class="filename">science</span></td>
+                        <td>T2, T3</td>
+                        <td>Varied</td>
+                        <td><span class="filename">t2_chapter1.html</span></td>
+                    </tr>
+                    <tr>
+                        <td>Physics</td>
+                        <td><span class="filename">physics</span></td>
+                        <td>T4, T5</td>
+                        <td>Varied</td>
+                        <td><span class="filename">t4_chapter1.html</span></td>
+                    </tr>
+                    <tr>
+                        <td>Chemistry</td>
+                        <td><span class="filename">chemistry</span></td>
+                        <td>T4, T5</td>
+                        <td>Varied</td>
+                        <td><span class="filename">t4_chapter1.html</span></td>
+                    </tr>
+                    <tr>
+                        <td>Biology</td>
+                        <td><span class="filename">biology</span></td>
+                        <td>T4, T5</td>
+                        <td>Varied</td>
+                        <td><span class="filename">t4_chapter1.html</span></td>
+                    </tr>
+                    <tr>
+                        <td>English</td>
+                        <td><span class="filename">english</span></td>
+                        <td><strong>T4/T5</strong> (Combined)</td>
+                        <td>Varied</td>
+                        <td><span class="filename">t4_t5_chapter1.html</span></td>
+                    </tr>
+                    <tr>
+                        <td>Chinese</td>
+                        <td><span class="filename">chinese</span></td>
+                        <td>T4, T5</td>
+                        <td>Varied</td>
+                        <td><span class="filename">t4_chapter1.html</span></td>
+                    </tr>
+                    <tr>
+                        <td>Malay</td>
+                        <td><span class="filename">malay</span></td>
+                        <td>T4, T5</td>
+                        <td>Varied</td>
+                        <td><span class="filename">t4_chapter1.html</span></td>
+                    </tr>
+                    <tr>
+                        <td>Moral</td>
+                        <td><span class="filename">moral</span></td>
+                        <td>T4, T5</td>
+                        <td>Varied</td>
+                        <td><span class="filename">t4_chapter1.html</span></td>
+                    </tr>
+                    <tr>
+                        <td>History</td>
+                        <td><span class="filename">history</span></td>
+                        <td>T2, T3</td>
+                        <td>Varied</td>
+                        <td><span class="filename">t2_chapter1.html</span></td>
+                    </tr>
+                    <tr>
+                        <td>Geografi</td>
+                        <td><span class="filename">geografi</span></td>
+                        <td>T2, T3</td>
+                        <td>Varied</td>
+                        <td><span class="filename">t2_chapter1.html</span></td>
+                    </tr>
+                    <tr>
+                        <td>Reka Bentuk (RBT)</td>
+                        <td><span class="filename">rekabentuk</span></td>
+                        <td>T2, T3</td>
+                        <td>Varied</td>
+                        <td><span class="filename">t2_chapter1.html</span></td>
+                    </tr>
+                    <tr>
+                        <td>Seni</td>
+                        <td><span class="filename">seni</span></td>
+                        <td>T4, T5</td>
+                        <td>Varied</td>
+                        <td><span class="filename">t4_chapter1.html</span></td>
+                    </tr>
+                </table>
+            </div>
+
+            <!-- TROUBLESHOOTING -->
+            <div class="section">
+                <h2><span class="icon">🔧</span>Troubleshooting</h2>
+
+                <div class="phase">
+                    <h3>File Not Detected</h3>
+                    <p><strong>Check:</strong></p>
+                    <ul style="margin-left: 20px;">
+                        <li>Filename matches pattern: <span class="filename">t<form>_chapter<num>.html</span></li>
+                        <li>File is in correct directory: <span class="filename">subjects/<subject>/</span></li>
+                        <li>File is untracked (git not aware yet)</li>
+                        <li>Wait until next 4-hour execution cycle</li>
+                    </ul>
+                </div>
+
+                <div class="phase">
+                    <h3>Validation Error</h3>
+                    <p><strong>Solution:</strong></p>
+                    <ul style="margin-left: 20px;">
+                        <li>Check log file for error details</li>
+                        <li>File won't be committed until error is fixed</li>
+                        <li>Fix the issue and reupload the file</li>
+                    </ul>
+                </div>
+
+                <div class="phase">
+                    <h3>Chapter Not Showing in Dashboard</h3>
+                    <p><strong>Check:</strong></p>
+                    <ul style="margin-left: 20px;">
+                        <li>Verify commit was pushed to GitHub</li>
+                        <li>Hard refresh browser (Ctrl+Shift+R)</li>
+                        <li>Clear service worker cache if needed</li>
+                        <li>Check browser console for errors</li>
+                    </ul>
+                </div>
+
+                <div class="phase">
+                    <h3>Filename Suggestion Not Matching</h3>
+                    <p><strong>What to do:</strong></p>
+                    <ul style="margin-left: 20px;">
+                        <li>Review the suggestion in the log file</li>
+                        <li>Check your HTML file content for clues</li>
+                        <li>Rename and reupload with suggested name</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- KEY INFORMATION -->
+            <div class="section">
+                <h2><span class="icon">📌</span>Key Information</h2>
+
+                <div class="checklist">
+                    <strong>Repository:</strong>
+                    <p><a href="https://github.com/pp-nextgen-dba/study-dashboard" target="_blank">https://github.com/pp-nextgen-dba/study-dashboard</a></p>
+
+                    <strong style="display: block; margin-top: 15px;">Manage Automation Routine:</strong>
+                    <p><a href="https://claude.ai/code/routines/trig_01PsmEWmsEo7VtySp2A2rG3t" target="_blank">https://claude.ai/code/routines/trig_01PsmEWmsEo7VtySp2A2rG3t</a></p>
+
+                    <strong style="display: block; margin-top: 15px;">Execution Frequency:</strong>
+                    <p>Every 4 hours (UTC: 00:00, 04:00, 08:00, 12:00, 16:00, 20:00)</p>
+
+                    <strong style="display: block; margin-top: 15px;">Log Location:</strong>
+                    <p><span class="filename">FILES/auto_integration_log.txt</span></p>
+                </div>
+            </div>
+
+            <!-- DEPLOYMENT CHECKLIST -->
+            <div class="section">
+                <h2><span class="icon">🚀</span>Ready to Deploy?</h2>
+                <div class="checklist">
+                    <ul>
+                        <li>Data structure updated (chapterNum added)</li>
+                        <li>Scheduled agent created and enabled</li>
+                        <li>Button auto-insertion enabled</li>
+                        <li>Logging system enabled</li>
+                        <li>GitHub integration ready</li>
+                        <li>All subjects supported</li>
+                        <li>Validation and error handling in place</li>
+                    </ul>
+                </div>
+                <p style="text-align: center; font-size: 1.2em; margin-top: 30px;">
+                    <strong>✅ SYSTEM READY FOR PRODUCTION</strong>
+                </p>
+            </div>
+        </div>
+
+        <footer>
+            <p>Study-Dashboard Chapter HTML Automation System</p>
+            <p>Generated: June 4, 2026 | Status: Production Ready</p>
+        </footer>
+    </div>
+</body>
+</html>

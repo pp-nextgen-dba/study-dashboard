@@ -1,0 +1,806 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Check Automation Status - Study Dashboard</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            padding: 20px;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+
+        header {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        header p {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+
+        .content {
+            padding: 40px;
+        }
+
+        .method {
+            background: #f8f9fa;
+            border-left: 5px solid #2a5298;
+            padding: 30px;
+            margin-bottom: 30px;
+            border-radius: 8px;
+            position: relative;
+        }
+
+        .method.active {
+            border-left-color: #4caf50;
+            background: #f1f8f6;
+        }
+
+        .method h2 {
+            color: #1e3c72;
+            font-size: 1.8em;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+
+        .method-number {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            background: #2a5298;
+            color: white;
+            border-radius: 50%;
+            font-size: 1.5em;
+            font-weight: bold;
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+
+        .method.active .method-number {
+            background: #4caf50;
+        }
+
+        .checklist {
+            list-style: none;
+            margin: 20px 0;
+        }
+
+        .checklist li {
+            padding: 12px 0;
+            padding-left: 35px;
+            position: relative;
+            font-size: 1.05em;
+            line-height: 1.6;
+        }
+
+        .checklist li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #4caf50;
+            font-weight: bold;
+            font-size: 1.3em;
+        }
+
+        .code-box {
+            background: #2d2d2d;
+            color: #f8f8f2;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+            font-family: 'Courier New', monospace;
+            font-size: 0.95em;
+            overflow-x: auto;
+            line-height: 1.5;
+        }
+
+        .link-box {
+            background: #e3f2fd;
+            border: 2px solid #2196F3;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+        }
+
+        .link-box a {
+            color: #1565c0;
+            text-decoration: none;
+            font-weight: bold;
+            word-break: break-all;
+        }
+
+        .link-box a:hover {
+            text-decoration: underline;
+        }
+
+        .instruction {
+            background: #fff3e0;
+            border-left: 4px solid #ff9800;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 8px;
+        }
+
+        .success {
+            background: #e8f5e9;
+            border-left: 4px solid #4caf50;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 8px;
+            color: #2e7d32;
+        }
+
+        .warning {
+            background: #fff3e0;
+            border-left: 4px solid #ff9800;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 8px;
+            color: #e65100;
+        }
+
+        .info {
+            background: #f3e5f5;
+            border-left: 4px solid #9c27b0;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 8px;
+            color: #6a1b9a;
+        }
+
+        .button {
+            display: inline-block;
+            background: #2a5298;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 6px;
+            text-decoration: none;
+            margin: 10px 10px 10px 0;
+            font-weight: bold;
+            transition: background 0.3s;
+        }
+
+        .button:hover {
+            background: #1e3c72;
+        }
+
+        .button.primary {
+            background: #4caf50;
+        }
+
+        .button.primary:hover {
+            background: #388e3c;
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 0.95em;
+            margin: 5px 0;
+        }
+
+        .status-active {
+            background: #c8e6c9;
+            color: #2e7d32;
+        }
+
+        .status-inactive {
+            background: #ffcdd2;
+            color: #c62828;
+        }
+
+        .timeline {
+            position: relative;
+            padding: 20px 0;
+        }
+
+        .timeline-item {
+            padding-left: 40px;
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .timeline-item:before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 5px;
+            width: 15px;
+            height: 15px;
+            background: #2a5298;
+            border-radius: 50%;
+            border: 3px solid white;
+            box-shadow: 0 0 0 2px #2a5298;
+        }
+
+        .timeline-item:after {
+            content: "";
+            position: absolute;
+            left: 6px;
+            top: 20px;
+            width: 3px;
+            height: calc(100% + 10px);
+            background: #ddd;
+        }
+
+        .timeline-item:last-child:after {
+            display: none;
+        }
+
+        .screenshot-note {
+            background: #eceff1;
+            border: 2px dashed #90caf9;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 15px 0;
+            text-align: center;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+            background: white;
+        }
+
+        table th {
+            background: #2a5298;
+            color: white;
+            padding: 12px;
+            text-align: left;
+            font-weight: bold;
+        }
+
+        table td {
+            padding: 12px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        table tr:hover {
+            background: #f5f5f5;
+        }
+
+        .filename {
+            background: #e8eaf6;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: monospace;
+            color: #3f51b5;
+        }
+
+        .step-counter {
+            background: #2a5298;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-weight: bold;
+            margin-right: 10px;
+            display: inline-block;
+        }
+
+        footer {
+            background: #f8f9fa;
+            padding: 20px;
+            text-align: center;
+            color: #666;
+            border-top: 1px solid #e0e0e0;
+            margin-top: 40px;
+        }
+
+        .divider {
+            height: 2px;
+            background: linear-gradient(to right, transparent, #ddd, transparent);
+            margin: 30px 0;
+        }
+
+        .quick-check {
+            background: linear-gradient(135deg, #e8f5e9 0%, #f1f8f6 100%);
+            border: 2px solid #4caf50;
+            padding: 25px;
+            border-radius: 8px;
+            margin: 30px 0;
+        }
+
+        .quick-check h3 {
+            color: #2e7d32;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+        }
+
+        .emoji {
+            font-size: 1.2em;
+            margin-right: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🔍 Check Automation Status</h1>
+            <p>Verify that your automation system is running</p>
+        </header>
+
+        <div class="content">
+            <!-- QUICK CHECK -->
+            <div class="quick-check">
+                <h3><span class="emoji">⚡</span>Quick 30-Second Check</h3>
+                <p style="margin-bottom: 15px;">Want to know right now if automation is running?</p>
+                <ol style="margin-left: 20px; line-height: 1.8;">
+                    <li>Open: <a href="https://claude.ai/code/routines/trig_01PsmEWmsEo7VtySp2A2rG3t" target="_blank" style="color: #1565c0; font-weight: bold;">Automation Routine Page</a></li>
+                    <li>Look for: <span class="status-badge status-active">Enabled</span></li>
+                    <li>Check: "Next run at" shows a future time</li>
+                    <li>Done! ✓ Automation is active</li>
+                </ol>
+            </div>
+
+            <div class="divider"></div>
+
+            <!-- METHOD 1: ROUTINE STATUS -->
+            <div class="method">
+                <h2>
+                    <span class="method-number">1</span>
+                    Check Routine Status (Easiest)
+                </h2>
+
+                <p style="margin-bottom: 15px; font-size: 1.05em;">
+                    Go to the Claude Code routine management page to see if automation is enabled.
+                </p>
+
+                <div class="link-box">
+                    <strong>🔗 Routine URL:</strong><br>
+                    <a href="https://claude.ai/code/routines/trig_01PsmEWmsEo7VtySp2A2rG3t" target="_blank">
+                        https://claude.ai/code/routines/trig_01PsmEWmsEo7VtySp2A2rG3t
+                    </a>
+                </div>
+
+                <h3 style="color: #1e3c72; margin-top: 25px; margin-bottom: 15px;">What to Look For:</h3>
+
+                <table>
+                    <tr>
+                        <th>Field</th>
+                        <th>What to See</th>
+                        <th>Meaning</th>
+                    </tr>
+                    <tr>
+                        <td><strong>Status</strong></td>
+                        <td><span class="status-badge status-active">Enabled</span></td>
+                        <td>Automation is active and will run</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Next Run At</strong></td>
+                        <td>Future date/time (e.g., 2026-06-04 12:04:32Z)</td>
+                        <td>When automation will execute next</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Cron Expression</strong></td>
+                        <td><span class="filename">0 */4 * * *</span></td>
+                        <td>Runs every 4 hours</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Last Run</strong></td>
+                        <td>Recent timestamp</td>
+                        <td>Proves automation has executed before</td>
+                    </tr>
+                </table>
+
+                <div class="success">
+                    <strong>✓ What "Enabled" Means:</strong> Your automation is active and will process new HTML files automatically every 4 hours.
+                </div>
+            </div>
+
+            <!-- METHOD 2: EXECUTION LOG -->
+            <div class="method">
+                <h2>
+                    <span class="method-number">2</span>
+                    Check Execution Log (Most Detailed)
+                </h2>
+
+                <p style="margin-bottom: 15px; font-size: 1.05em;">
+                    Open the log file to see what automation has actually done.
+                </p>
+
+                <h3 style="color: #1e3c72; margin: 20px 0 15px 0;">File Location:</h3>
+                <div class="code-box">
+C:\development\paul\study-dashboard\FILES\auto_integration_log.txt
+                </div>
+
+                <h3 style="color: #1e3c72; margin: 20px 0 15px 0;">How to View:</h3>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <strong>Open File Explorer</strong>
+                        <p style="margin-top: 5px; color: #666;">Navigate to <span class="filename">C:\development\paul\study-dashboard\FILES\</span></p>
+                    </div>
+
+                    <div class="timeline-item">
+                        <strong>Find auto_integration_log.txt</strong>
+                        <p style="margin-top: 5px; color: #666;">Right-click → Open with → Notepad (or your text editor)</p>
+                    </div>
+
+                    <div class="timeline-item">
+                        <strong>Scroll to Bottom</strong>
+                        <p style="margin-top: 5px; color: #666;">Most recent execution is at the end (Press Ctrl+End)</p>
+                    </div>
+
+                    <div class="timeline-item">
+                        <strong>Read the Entry</strong>
+                        <p style="margin-top: 5px; color: #666;">See timestamp, status, and what was processed</p>
+                    </div>
+                </div>
+
+                <h3 style="color: #1e3c72; margin: 20px 0 15px 0;">What to See in Log:</h3>
+
+                <div class="instruction" style="background: #f3e5f5; border-left-color: #9c27b0;">
+                    <strong>Log Entry Example (Files Updated):</strong>
+                    <div class="code-box" style="margin-top: 10px;">
+===== EXECUTION =====
+Timestamp: 2026-06-04T12:04:32Z
+Status: Files updated
+
+MATCHED FILES (processed):
+- subjects/physics/t4_chapter1.html → Physics T4 Chapter 1 [Button added]
+
+UNMATCHED FILES (suggestions):
+(none)
+
+GIT RESULT: Committed and pushed
+=====================
+                    </div>
+                </div>
+
+                <div class="instruction" style="background: #f3e5f5; border-left-color: #9c27b0;">
+                    <strong>Log Entry Example (No Files):</strong>
+                    <div class="code-box" style="margin-top: 10px;">
+===== EXECUTION =====
+Timestamp: 2026-06-04T16:04:32Z
+Status: No files detected
+
+MATCHED FILES (processed):
+(none)
+
+UNMATCHED FILES (suggestions):
+(none)
+
+GIT RESULT: No changes
+=====================
+                    </div>
+                </div>
+
+                <div class="success">
+                    <strong>✓ What This Proves:</strong> A log entry means automation ran at that timestamp. "Files updated" means it found and processed files. "No files detected" means no new files (but automation still ran — it's working!).
+                </div>
+            </div>
+
+            <!-- METHOD 3: GITHUB COMMITS -->
+            <div class="method">
+                <h2>
+                    <span class="method-number">3</span>
+                    Check GitHub Commits (Proof of Work)
+                </h2>
+
+                <p style="margin-bottom: 15px; font-size: 1.05em;">
+                    See if automation has actually committed files to GitHub.
+                </p>
+
+                <div class="link-box">
+                    <strong>🔗 Repository URL:</strong><br>
+                    <a href="https://github.com/pp-nextgen-dba/study-dashboard" target="_blank">
+                        https://github.com/pp-nextgen-dba/study-dashboard
+                    </a>
+                </div>
+
+                <h3 style="color: #1e3c72; margin: 20px 0 15px 0;">Steps to Check:</h3>
+
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <strong>Open Repository</strong>
+                        <p style="margin-top: 5px; color: #666;">Go to GitHub and open the study-dashboard repo</p>
+                    </div>
+
+                    <div class="timeline-item">
+                        <strong>Click on "Commits"</strong>
+                        <p style="margin-top: 5px; color: #666;">Usually near the top, shows recent commit history</p>
+                    </div>
+
+                    <div class="timeline-item">
+                        <strong>Look for Auto-Commits</strong>
+                        <p style="margin-top: 5px; color: #666;">Search for commits with message: <span class="filename">Auto-add chapter notes:</span></p>
+                    </div>
+
+                    <div class="timeline-item">
+                        <strong>Check Timestamps</strong>
+                        <p style="margin-top: 5px; color: #666;">Should match automation execution times (every 4 hours)</p>
+                    </div>
+                </div>
+
+                <h3 style="color: #1e3c72; margin: 20px 0 15px 0;">What to Look For:</h3>
+
+                <div class="success">
+                    <strong>✓ Good Sign - You'll See Commits Like:</strong>
+                    <ul style="margin-left: 20px; margin-top: 10px;">
+                        <li><code>"Auto-add chapter notes: t4_chapter1.html"</code></li>
+                        <li><code>"Auto-add chapter notes: t4_t5_chapter1.html, t2_chapter10.html"</code></li>
+                    </ul>
+                </div>
+
+                <div class="warning">
+                    <strong>⚠️ No Commits Yet?</strong>
+                    <p style="margin-top: 10px;">That's OK! It means either:</p>
+                    <ul style="margin-left: 20px; margin-top: 10px;">
+                        <li>No HTML files have been uploaded yet</li>
+                        <li>Automation is waiting for the next 4-hour cycle</li>
+                        <li>Upload a test file and check again in 4 hours (or run manually)</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- METHOD 4: MANUAL TEST -->
+            <div class="method active">
+                <h2>
+                    <span class="method-number">4</span>
+                    Test Manually (Fastest Way to Verify)
+                </h2>
+
+                <p style="margin-bottom: 15px; font-size: 1.05em;">
+                    Don't want to wait 4 hours? Test automation right now.
+                </p>
+
+                <h3 style="color: #2e7d32; margin: 20px 0 15px 0;">Step 1: Create a Test HTML File</h3>
+
+                <p style="margin-bottom: 10px;">Create a simple HTML file with basic content:</p>
+
+                <div class="code-box">
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;title&gt;Test Chapter&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;Test Chapter Content&lt;/h1&gt;
+    &lt;p&gt;This is a test chapter.&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+                </div>
+
+                <h3 style="color: #2e7d32; margin: 20px 0 15px 0;">Step 2: Upload to Subject Directory</h3>
+
+                <p style="margin-bottom: 10px;">Save to:</p>
+                <div class="code-box">
+C:\development\paul\study-dashboard\subjects\physics\t4_chapter1.html
+                </div>
+
+                <div class="instruction">
+                    <strong>📝 Note:</strong> Use an existing subject directory (physics, english, etc.)
+                    and correct filename format: <span class="filename">t&lt;form&gt;_chapter&lt;num&gt;.html</span>
+                </div>
+
+                <h3 style="color: #2e7d32; margin: 20px 0 15px 0;">Step 3: Run Automation Now</h3>
+
+                <p style="margin-bottom: 10px;">Go to the routine page and manually trigger it:</p>
+
+                <a href="https://claude.ai/code/routines/trig_01PsmEWmsEo7VtySp2A2rG3t" target="_blank" class="button primary">
+                    Open Routine Page
+                </a>
+
+                <div class="instruction" style="margin-top: 20px;">
+                    <strong>Look for "Run Now" button and click it</strong><br>
+                    The automation will execute immediately instead of waiting 4 hours.
+                </div>
+
+                <h3 style="color: #2e7d32; margin: 20px 0 15px 0;">Step 4: Check Results (30 seconds later)</h3>
+
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <strong>Open Log File</strong>
+                        <p style="margin-top: 5px; color: #666;"><span class="filename">FILES/auto_integration_log.txt</span></p>
+                    </div>
+
+                    <div class="timeline-item">
+                        <strong>Scroll to Bottom</strong>
+                        <p style="margin-top: 5px; color: #666;">Look for your recent test timestamp</p>
+                    </div>
+
+                    <div class="timeline-item">
+                        <strong>Check Status</strong>
+                        <p style="margin-top: 5px; color: #666;">Should show "Files updated" with your test file listed</p>
+                    </div>
+                </div>
+
+                <div class="success" style="margin-top: 20px;">
+                    <strong>✓ Test Successful!</strong>
+                    <p style="margin-top: 10px;">If log shows your file was processed, automation is working perfectly.</p>
+                </div>
+            </div>
+
+            <!-- METHOD 5: WATCH LOG FILE -->
+            <div class="method">
+                <h2>
+                    <span class="method-number">5</span>
+                    Watch Log File Live (Monitor Continuously)
+                </h2>
+
+                <p style="margin-bottom: 15px; font-size: 1.05em;">
+                    Keep log file open and watch it update every 4 hours.
+                </p>
+
+                <h3 style="color: #1e3c72; margin: 20px 0 15px 0;">Best Tools to Watch Log:</h3>
+
+                <table>
+                    <tr>
+                        <th>Tool</th>
+                        <th>How to Use</th>
+                        <th>Auto-Refresh</th>
+                    </tr>
+                    <tr>
+                        <td><strong>Notepad++</strong></td>
+                        <td>Open file, will show "file changed" message</td>
+                        <td>Yes ✓</td>
+                    </tr>
+                    <tr>
+                        <td><strong>VS Code</strong></td>
+                        <td>Open file, auto-detects changes</td>
+                        <td>Yes ✓</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Windows Notepad</strong></td>
+                        <td>Open file, manually refresh (Ctrl+Z or reopen)</td>
+                        <td>No ✗</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Tail Command</strong></td>
+                        <td>PowerShell: <span class="filename">Get-Content file -Tail 20 -Wait</span></td>
+                        <td>Yes ✓</td>
+                    </tr>
+                </table>
+
+                <h3 style="color: #1e3c72; margin: 20px 0 15px 0;">Recommended: PowerShell Watch Command</h3>
+
+                <div class="code-box">
+cd C:\development\paul\study-dashboard\FILES
+Get-Content auto_integration_log.txt -Tail 30 -Wait
+                </div>
+
+                <div class="instruction">
+                    <strong>What This Does:</strong> Shows last 30 lines of log and automatically updates
+                    as new entries appear. Keep this open to watch automation in real-time.
+                </div>
+
+                <div class="success" style="margin-top: 20px;">
+                    <strong>✓ Expected Behavior:</strong> Every 4 hours, a new "===== EXECUTION ====="
+                    block will appear at the bottom, showing what automation did.
+                </div>
+            </div>
+
+            <div class="divider"></div>
+
+            <!-- SUMMARY TABLE -->
+            <div style="background: #f5f5f5; padding: 30px; border-radius: 8px; margin: 30px 0;">
+                <h2 style="color: #1e3c72; margin-bottom: 20px;">Quick Reference: Where to Check</h2>
+
+                <table>
+                    <tr>
+                        <th>What to Check</th>
+                        <th>Where to Look</th>
+                        <th>Frequency</th>
+                        <th>Best For</th>
+                    </tr>
+                    <tr>
+                        <td><strong>Is it enabled?</strong></td>
+                        <td><a href="https://claude.ai/code/routines/trig_01PsmEWmsEo7VtySp2A2rG3t" target="_blank">Routine Page</a></td>
+                        <td>Once (setup)</td>
+                        <td>Initial verification</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Did it run?</strong></td>
+                        <td><span class="filename">FILES/auto_integration_log.txt</span></td>
+                        <td>Every 4 hours</td>
+                        <td>Daily monitoring</td>
+                    </tr>
+                    <tr>
+                        <td><strong>What happened?</strong></td>
+                        <td><span class="filename">FILES/auto_integration_log.txt</span></td>
+                        <td>Every 4 hours</td>
+                        <td>Troubleshooting</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Was file processed?</strong></td>
+                        <td><a href="https://github.com/pp-nextgen-dba/study-dashboard" target="_blank">GitHub Commits</a></td>
+                        <td>Every 4 hours</td>
+                        <td>Proof automation worked</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Test right now</strong></td>
+                        <td><a href="https://claude.ai/code/routines/trig_01PsmEWmsEo7VtySp2A2rG3t" target="_blank">Run Now Button</a></td>
+                        <td>On demand</td>
+                        <td>Immediate verification</td>
+                    </tr>
+                </table>
+            </div>
+
+            <!-- TROUBLESHOOTING -->
+            <div class="method">
+                <h2>❓ Troubleshooting: What If...?</h2>
+
+                <h3 style="color: #1e3c72; margin: 20px 0 15px 0;">Routine shows "Disabled"?</h3>
+                <div class="warning">
+                    <p><strong>Problem:</strong> Automation is turned off</p>
+                    <p style="margin-top: 10px;"><strong>Solution:</strong> Go to routine page and click Enable button</p>
+                </div>
+
+                <h3 style="color: #1e3c72; margin: 20px 0 15px 0;">Log file is empty?</h3>
+                <div class="warning">
+                    <p><strong>Problem:</strong> Automation hasn't run yet, or no files detected</p>
+                    <p style="margin-top: 10px;"><strong>Solution:</strong> Upload a test HTML file and trigger manual run</p>
+                </div>
+
+                <h3 style="color: #1e3c72; margin: 20px 0 15px 0;">Log shows validation error?</h3>
+                <div class="warning">
+                    <p><strong>Problem:</strong> Something is wrong with the project</p>
+                    <p style="margin-top: 10px;"><strong>Solution:</strong> Check error message in log, fix issue, reupload</p>
+                </div>
+
+                <h3 style="color: #1e3c72; margin: 20px 0 15px 0;">GitHub shows no auto-commits?</h3>
+                <div class="warning">
+                    <p><strong>Problem:</strong> Files haven't been uploaded yet</p>
+                    <p style="margin-top: 10px;"><strong>Solution:</strong> Upload test file and wait for next cycle (or run manually)</p>
+                </div>
+            </div>
+
+            <!-- SUMMARY -->
+            <div style="background: linear-gradient(135deg, #e8f5e9 0%, #f1f8f6 100%); border: 2px solid #4caf50; padding: 30px; border-radius: 8px; margin: 30px 0;">
+                <h2 style="color: #2e7d32; margin-bottom: 20px;">✅ Summary: Is Your Automation Working?</h2>
+
+                <p style="font-size: 1.1em; margin-bottom: 20px;">Check in this order:</p>
+
+                <ol style="font-size: 1.05em; margin-left: 20px; line-height: 1.8;">
+                    <li><strong>Routine page shows "Enabled"?</strong> → Automation is active ✓</li>
+                    <li><strong>Log file has recent timestamp?</strong> → Automation ran ✓</li>
+                    <li><strong>GitHub has auto-commits?</strong> → Files were processed ✓</li>
+                    <li><strong>Upload test file, run manually?</strong> → Everything works ✓</li>
+                </ol>
+
+                <p style="font-size: 1.05em; margin-top: 25px; color: #2e7d32;">
+                    <strong>If all 4 check out → Your automation is working perfectly!</strong>
+                </p>
+            </div>
+        </div>
+
+        <footer>
+            <p>Study-Dashboard Automation Status Checker</p>
+            <p>Generated: June 4, 2026 | For Verification Purposes</p>
+        </footer>
+    </div>
+</body>
+</html>
