@@ -431,31 +431,37 @@ function addMissingChineseLabels(subjectData){
         new Map(
             physicsData.chapters.map(chapter => [
                 `${chapter.form}|${chapter.chapter}`,
-                chapter.chinese
+                {chinese: chapter.chinese, resourceUrl: chapter.resourceUrl}
             ])
         );
 
     subjectData.chapters =
         subjectData.chapters.map(chapter => {
 
-            if(chapter.chinese){
-                return chapter;
-            }
-
-            const chinese =
+            const fallback =
                 fallbackByChapter.get(
                     `${chapter.form}|${chapter.chapter}`
                 );
 
-            if(!chinese){
+            let update = {};
+
+            if(!chapter.chinese && fallback?.chinese){
+                update.chinese = fallback.chinese;
+                changed = true;
+            }
+
+            if(!chapter.resourceUrl && fallback?.resourceUrl){
+                update.resourceUrl = fallback.resourceUrl;
+                changed = true;
+            }
+
+            if(Object.keys(update).length === 0){
                 return chapter;
             }
 
-            changed = true;
-
             return {
                 ...chapter,
-                chinese
+                ...update
             };
 
         });
