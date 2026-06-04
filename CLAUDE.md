@@ -61,12 +61,15 @@ No `archive/` subdirectories — all files sit directly in `<subject>/`.
 When triggered, the workflow:
 1. Pulls latest from GitHub (`git pull`)
 2. Scans all root-level subject folders: `chemistry/`, `english/`, `history/`, `physics/`, `rbt/`, etc. (**no subdirectories, no archive/**)
-3. For each HTML file matching `t<form(s)>_chapter<num>.html`:
+3. For each HTML file, two filename patterns are supported:
+   - **Standard:** `t<form(s)>_chapter<num>.html` — for Maths, Science, Physics, Chemistry, Biology, History, Geografi, RBT, Seni, Add Maths, Moral
+   - **3-digit code:** `en_<NNN>.html`, `my_<NNN>.html`, `zh_<NNN>.html` — for English, Malay, Chinese (matched via `chapterCode` field in subject.js)
    - Checks if `resourceUrl` is already set in `js/subject.js`
    - If missing:
      a. Add Back to Dashboard button to the HTML file (if absent)
      b. Add `resourceUrl` to matching chapter in `js/subject.js`
-        - Match by: form + chapterNum (direct). If no direct match, match by form + position (nth chapter of that form)
+        - Standard: match by form + chapterNum (direct), or form + position (nth chapter of that form)
+        - 3-digit code: match by `chapterCode` field (e.g. `en_001` matches chapter with `chapterCode:"en_001"`)
      c. Add path to `STATIC_ASSETS` in `sw.js`
 4. For each subject whose chapter now has a `resourceUrl`, check `subjects/<subject>.html` for all four required components — add any that are missing:
    - **`.chapter-link` CSS** in `<style>`:
