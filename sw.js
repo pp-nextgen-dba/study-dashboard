@@ -25,6 +25,8 @@ const STATIC_ASSETS = [
     "/subjects/seni.html",
     "/daily-progress.html",
     "/js/daily-progress.js",
+    "/history/melaka_chapter5.html",
+    "/history/chapter7.html",
     "/history/t2_chapter4.html",
     "/history/t2_chapter8.html",
     "/history/t2_chapter9.html",
