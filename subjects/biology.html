@@ -388,7 +388,7 @@ import {
     biologyData
 }
 from
-"../js/subject.js?v=14";
+"../js/subject.js?v=15";
 
 import { requireAuth } from "../js/auth.js";
 await requireAuth("../index.html");
@@ -418,6 +418,11 @@ function addMissingBiologyLabels(subjectData){
 
         return true;
 
+    }
+
+    // Guard: if Firestore returned an empty chapters array, don't clobber — treat as no changes needed
+    if(subjectData.chapters.length === 0){
+        return false;
     }
 
     let changed = false;
@@ -482,7 +487,11 @@ async function loadData(){
         if(addMissingBiologyLabels(data)){
 
             data.last_saved = new Date().toISOString();
-            await setDoc(docRef,data);
+            try{
+                await setDoc(docRef,data);
+            }catch(e){
+                console.warn("Failed to sync missing fields to Firestore:",e);
+            }
 
         }
 
