@@ -257,6 +257,18 @@ body{
     font-weight:bold;
 }
 
+.chapter-link{
+    display:inline-block;
+    margin-top:10px;
+    color:#1d4ed8;
+    font-size:14px;
+    text-decoration:none;
+}
+
+.chapter-link:hover{
+    text-decoration:underline;
+}
+
 /* ===================================================== */
 /* MOBILE */
 /* ===================================================== */
@@ -402,6 +414,63 @@ let data =
     structuredClone(biologyData);
 
 
+function addMissingChineseLabels(subjectData){
+
+    if(!Array.isArray(subjectData.chapters)){
+
+        subjectData.chapters =
+            structuredClone(biologyData.chapters);
+
+        return true;
+
+    }
+
+    let changed = false;
+
+    const fallbackByChapter =
+        new Map(
+            biologyData.chapters.map(chapter => [
+                `${chapter.form}|${chapter.chapter}`,
+                {chinese: chapter.chinese, resourceUrl: chapter.resourceUrl}
+            ])
+        );
+
+    subjectData.chapters =
+        subjectData.chapters.map(chapter => {
+
+            const fallback =
+                fallbackByChapter.get(
+                    `${chapter.form}|${chapter.chapter}`
+                );
+
+            let update = {};
+
+            if(!chapter.chinese && fallback?.chinese){
+                update.chinese = fallback.chinese;
+                changed = true;
+            }
+
+            if(!chapter.resourceUrl && fallback?.resourceUrl){
+                update.resourceUrl = fallback.resourceUrl;
+                changed = true;
+            }
+
+            if(Object.keys(update).length === 0){
+                return chapter;
+            }
+
+            return {
+                ...chapter,
+                ...update
+            };
+
+        });
+
+    return changed;
+
+}
+
+
 // =========================================================
 // LOAD
 // =========================================================
@@ -414,6 +483,13 @@ async function loadData(){
     if(snap.exists()){
 
         data = snap.data();
+
+        if(addMissingChineseLabels(data)){
+
+            data.last_saved = new Date().toISOString();
+            await setDoc(docRef,data);
+
+        }
 
     }else{
 
@@ -618,6 +694,11 @@ function render(){
             card.className =
                 `chapter-card ${cardClass}`;
 
+            const chapterResource =
+                chapter.resourceUrl
+                    ? `<a class="chapter-link" href="${chapter.resourceUrl}">Open notes</a>`
+                    : "";
+
             card.innerHTML = `
 
                 <div class="chapter-top">
@@ -643,13 +724,19 @@ function render(){
 
                 </div>
 
+                ${chapterResource}
+
                 </div>
 
             `;
 
             card.addEventListener(
                 "click",
-                async ()=>{
+                async (e)=>{
+
+                    if(e.target.closest(".chapter-link")){
+                        return;
+                    }
 
                     chapter.status =
                         nextStatus(
