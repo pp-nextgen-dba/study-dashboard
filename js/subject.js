@@ -322,6 +322,7 @@ export const biologyData = {
             chapterNum: 6,
             chapter:"Cell Division",
             chinese:"细胞分裂",
+            resourceUrl:"../biology/t4_chapter6.html",
             status:"Not Started",
             confidence:0,
             last_updated:"2026-05-20"
