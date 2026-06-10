@@ -324,7 +324,8 @@ export const biologyData = {
             chinese:"细胞分裂",
             status:"Not Started",
             confidence:0,
-            last_updated:"2026-05-20"
+            last_updated:"2026-05-20",
+            resourceUrl:"../biology/t4_chapter6.html"
         },
 
         {
