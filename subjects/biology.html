@@ -285,6 +285,9 @@ body{
 
 }
 
+.chapter-link{display:inline-block;margin-top:10px;color:#1d4ed8;font-size:14px;text-decoration:none}
+.chapter-link:hover{text-decoration:underline}
+
 </style>
 
 </head>
@@ -406,6 +409,22 @@ let data =
 // LOAD
 // =========================================================
 
+function addMissingChineseLabels(firestoreData){
+    const seed = biologyData.chapters;
+    let changed = false;
+    firestoreData.chapters.forEach((ch, i) => {
+        if(!ch.resourceUrl && seed[i] && seed[i].resourceUrl){
+            ch.resourceUrl = seed[i].resourceUrl;
+            changed = true;
+        }
+        if(!ch.chinese && seed[i] && seed[i].chinese){
+            ch.chinese = seed[i].chinese;
+            changed = true;
+        }
+    });
+    return changed;
+}
+
 async function loadData(){
 
     const snap =
@@ -414,6 +433,9 @@ async function loadData(){
     if(snap.exists()){
 
         data = snap.data();
+        if(addMissingChineseLabels(data)){
+            await setDoc(docRef, data);
+        }
 
     }else{
 
@@ -612,6 +634,10 @@ function render(){
 
             }
 
+            const chapterResource = chapter.resourceUrl
+                ? `<a class="chapter-link" href="${chapter.resourceUrl}">Open notes</a>`
+                : "";
+
             const card =
                 document.createElement("div");
 
@@ -643,13 +669,17 @@ function render(){
 
                 </div>
 
+                ${chapterResource}
+
                 </div>
 
             `;
 
             card.addEventListener(
                 "click",
-                async ()=>{
+                async (e)=>{
+
+                    if(e.target.closest(".chapter-link")){ return; }
 
                     chapter.status =
                         nextStatus(
