@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=5.0"/>
+<meta name="theme-color" content="#0891b2"/>
+<title>Biology Form 4 Chapter 8 — Respiratory Systems in Humans and Animals</title>
+<style>
+:root{
+  --bg:#f0f9ff;--ink:#0c4a6e;--muted:#6b7280;
+  --pri:#0891b2;--gr:#16a34a;--rd:#dc2626;
+  --am:#d97706;--pu:#7c3aed;--or:#ea580c;
+  --line:#bae6fd;--soft:#e0f2fe;
+  --shadow:0 14px 30px rgba(8,145,178,.13);--r:22px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:var(--ink)}
+
+.hdr{background:linear-gradient(135deg,#0c4a6e,#0891b2 55%,#22d3ee);
+  padding:26px 16px 68px;position:relative;overflow:hidden;color:#fff}
+.hdr:before,.hdr:after{content:"";position:absolute;border-radius:999px;background:rgba(255,255,255,.1)}
+.hdr:before{width:230px;height:230px;left:-95px;top:-75px}
+.hdr:after{width:290px;height:290px;right:-125px;bottom:-155px}
+.hero{max-width:1100px;margin:auto;position:relative;z-index:2}
+.badge{display:inline-flex;gap:7px;align-items:center;
+  background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.3);
+  padding:7px 13px;border-radius:999px;font-weight:700;font-size:.83rem;margin-bottom:10px}
+h1{font-size:clamp(1.6rem,5vw,3.2rem);line-height:1.08;letter-spacing:-1px;margin-bottom:6px}
+.hero-sub{font-size:clamp(.9rem,2vw,1.05rem);opacity:.93;max-width:680px;margin-bottom:4px}
+.lang-row{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap}
+.lbtn{border:2px solid rgba(255,255,255,.5);background:rgba(255,255,255,.15);
+  color:#fff;border-radius:999px;padding:8px 16px;font-weight:800;font-size:.83rem;cursor:pointer;transition:.15s}
+.lbtn.active{background:#fff;color:var(--pri)}
+
+main{max-width:1120px;margin:-48px auto 60px;padding:0 13px;position:relative;z-index:5}
+.panel{background:rgba(255,255,255,.94);border:1px solid var(--line);box-shadow:var(--shadow);border-radius:var(--r)}
+
+.ctrl{padding:12px 15px;display:flex;flex-wrap:wrap;gap:9px;align-items:center;
+  position:sticky;top:7px;z-index:50;backdrop-filter:blur(12px)}
+.srch{flex:1;min-width:140px;border:1px solid var(--line);background:#fbfcff;
+  border-radius:17px;padding:11px 14px;font-size:.95rem;outline:none;color:var(--ink)}
+.srch:focus{border-color:var(--pri);box-shadow:0 0 0 3px rgba(8,145,178,.12)}
+
+.tabs{display:flex;overflow-x:auto;background:#0c4a6e;scrollbar-width:none;
+  position:sticky;top:53px;z-index:49;-webkit-overflow-scrolling:touch}
+.tabs::-webkit-scrollbar{display:none}
+.tab{flex:0 0 auto;padding:11px 14px;font-size:12px;font-weight:800;
+  color:#94a3b8;background:transparent;border:none;cursor:pointer;
+  border-bottom:3px solid transparent;white-space:nowrap;transition:.2s}
+.tab.t1.active{color:#7dd3fc;border-bottom-color:#0891b2}
+.tab.t2.active{color:#6ee7b7;border-bottom-color:#16a34a}
+.tab.t3.active{color:#fde68a;border-bottom-color:#d97706}
+.tab.t4.active{color:#fca5a5;border-bottom-color:#dc2626}
+.tab.tmm.active{color:#fbbf24;border-bottom-color:#f59e0b}
+
+.psec{display:none;padding:12px 12px 60px}
+.psec.active{display:block}
+
+/* SECTION CARDS */
+.sec{border-radius:var(--r);margin-bottom:12px;overflow:hidden;border:2px solid}
+.sec-hdr{display:flex;align-items:center;gap:12px;padding:14px;cursor:pointer;user-select:none;-webkit-tap-highlight-color:transparent}
+.sec-icon{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;color:#fff}
+.sec-info{flex:1}
+.sec-num{font-size:10px;font-weight:800;letter-spacing:1px;text-transform:uppercase;margin-bottom:2px}
+.sec-t-en{font-size:15px;font-weight:900;line-height:1.25;color:#0c4a6e}
+.sec-t-zh{font-size:12px;font-weight:700;color:#047857;margin-top:2px}
+.sec-chev{font-size:20px;color:#94a3b8;transition:transform .25s;flex-shrink:0}
+.sec-chev.open{transform:rotate(180deg)}
+.sec-body{display:none;padding:0 12px 14px}
+.sec-body.open{display:block}
+
+/* TRI */
+.tri{border-radius:12px;overflow:hidden;margin-bottom:9px;border:2px solid var(--line)}
+.bl-en{background:#e0f2fe;border-left:5px solid var(--pri);padding:9px 12px}
+.bl-en-lbl{font-size:10px;font-weight:800;letter-spacing:2px;color:#0369a1;text-transform:uppercase;margin-bottom:3px}
+.bl-en-t{font-size:13.5px;font-weight:700;color:#0c4a6e;line-height:1.55}
+.bl-zh{background:#ecfdf5;border-left:5px solid var(--gr);padding:9px 12px}
+.bl-zh-lbl{font-size:10px;font-weight:800;letter-spacing:2px;color:#047857;text-transform:uppercase;margin-bottom:3px}
+.bl-zh-t{font-size:13px;font-weight:600;color:#064e3b;line-height:1.65}
+
+/* TABLE */
+.tbl-wrap{overflow-x:auto;margin-bottom:10px;border-radius:13px}
+.tbl{width:100%;border-collapse:collapse;font-size:12px}
+.tbl th{padding:9px 10px;font-size:10px;font-weight:800;letter-spacing:1px;text-transform:uppercase;text-align:left;color:#fff}
+.tbl td{padding:9px 10px;vertical-align:top;line-height:1.45;border-bottom:1px solid rgba(0,0,0,.06)}
+.tbl tr:last-child td{border-bottom:none}
+.th-cy{background:#0891b2}
+.th-gr{background:#16a34a}
+.th-am{background:#d97706}
+.th-rd{background:#dc2626}
+.th-pu{background:#7c3aed}
+
+/* ORGANISM CARDS */
+.org-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:10px}
+.org-card{border-radius:14px;overflow:hidden;border:2px solid}
+.org-head{padding:9px 12px;font-size:13px;font-weight:900;color:#fff;text-align:center}
+.org-body{padding:11px 12px;font-size:12px;font-weight:700;line-height:1.5}
+.org-zh{padding:9px 12px;font-size:11.5px;font-weight:600;color:#064e3b;background:#ecfdf5;border-top:1px dashed #a7f3d0;line-height:1.5}
+
+/* FLOW STEPS */
+.flow-wrap{background:#0c4a6e;border-radius:14px;padding:14px;margin-bottom:10px}
+.flow-lbl{font-size:10px;font-weight:800;letter-spacing:2px;color:#7dd3fc;text-transform:uppercase;margin-bottom:9px}
+.fstep-wrap{margin-bottom:16px}
+.fstep-wrap:last-child{margin-bottom:0}
+.fstep{background:rgba(255,255,255,.13);border-radius:10px;padding:10px 13px;font-size:13px;font-weight:800;color:#fff;line-height:1.35;position:relative}
+.fstep:after{content:"↓";position:absolute;left:50%;transform:translateX(-50%);bottom:-16px;color:#67e8f9;font-size:16px;font-weight:900}
+.fstep-wrap:last-child .fstep:after{display:none}
+.fstep-zh{font-size:11.5px;color:#a7f3d0;font-weight:600;margin-top:3px}
+.fstep-num{font-size:18px;font-weight:900;color:#fbbf24;margin-right:6px}
+
+/* PILLS */
+.mem{border-radius:12px;padding:11px;background:#f1f5f9;border:2px solid #cbd5e1;margin-top:8px}
+.mem-lbl{font-size:10px;letter-spacing:2px;font-weight:800;margin-bottom:7px;color:#475569;text-transform:uppercase}
+.pills{display:flex;flex-wrap:wrap;gap:5px}
+.pill{padding:5px 9px;border-radius:999px;font-size:11.5px;font-weight:800;border:2px solid}
+.p-cy{border-color:var(--pri);background:#e0f2fe;color:#0c4a6e}
+.p-gr{border-color:var(--gr);background:#d1fae5;color:#052e16}
+.p-rd{border-color:var(--rd);background:#fee2e2;color:#7f1d1d}
+.p-am{border-color:var(--am);background:#fef3c7;color:#78350f}
+.p-pu{border-color:var(--pu);background:#ede9fe;color:#3b0764}
+
+/* SECTION THEMES */
+.s-cy{background:#e0f2fe;border-color:#0891b2}
+.s-cy .sec-hdr{background:#bae6fd}.s-cy .sec-icon{background:#0891b2}
+.s-cy .sec-num{color:#0369a1}.s-cy .sec-body{border-top:2px dashed #7dd3fc}
+
+.s-gr{background:#f0fdf4;border-color:#16a34a}
+.s-gr .sec-hdr{background:#d1fae5}.s-gr .sec-icon{background:#16a34a}
+.s-gr .sec-num{color:#15803d}.s-gr .sec-body{border-top:2px dashed #6ee7b7}
+
+.s-am{background:#fffbeb;border-color:#f59e0b}
+.s-am .sec-hdr{background:#fef3c7}.s-am .sec-icon{background:#d97706}
+.s-am .sec-num{color:#92400e}.s-am .sec-body{border-top:2px dashed #fde68a}
+
+.s-rd{background:#fff5f5;border-color:#dc2626}
+.s-rd .sec-hdr{background:#fee2e2}.s-rd .sec-icon{background:#dc2626}
+.s-rd .sec-num{color:#b91c1c}.s-rd .sec-body{border-top:2px dashed #fca5a5}
+
+/* MEMORY MAP */
+.mmap-item{border-radius:13px;overflow:hidden;margin-bottom:9px;border:2px solid var(--line);box-shadow:0 2px 6px rgba(0,0,0,.06)}
+.mm-en{background:#bae6fd;padding:9px 13px;border-bottom:1px solid #7dd3fc}
+.mm-en-t{font-size:13.5px;font-weight:800;color:#0c4a6e}
+.mm-zh{background:#d1fae5;padding:9px 13px}
+.mm-zh-t{font-size:12.5px;font-weight:600;color:#064e3b}
+.mmap-hdr{background:#0c4a6e;padding:14px;text-align:center;border-radius:13px 13px 0 0}
+.mmap-h1{font-size:15px;font-weight:800;color:#fbbf24;margin-bottom:2px}
+.mmap-h2{font-size:12px;color:#94a3b8;font-style:italic}
+.mmap-h3{font-size:11px;color:#6ee7b7;margin-top:2px}
+
+.exam-box{border-radius:13px;overflow:hidden;border:2px solid var(--pri);margin-top:9px}
+.exam-hdr{background:var(--pri);padding:9px 13px}
+.exam-lbl{font-size:10px;letter-spacing:2px;font-weight:800;color:#e0f2fe;text-transform:uppercase}
+.exam-en{background:#e0f2fe;border-left:5px solid var(--pri);padding:9px 13px}
+.exam-en-t{font-size:13px;font-weight:700;color:#0c4a6e;line-height:1.6}
+.exam-zh{background:#ecfdf5;border-left:5px solid var(--gr);padding:9px 13px}
+.exam-zh-t{font-size:12px;font-weight:600;color:#064e3b;line-height:1.7}
+
+body.lang-en .zh-only{display:none}
+body.lang-zh .en-only{display:none}
+
+.top-link{position:fixed;right:13px;bottom:13px;background:var(--pri);
+  color:#fff;text-decoration:none;padding:11px 13px;border-radius:999px;
+  font-weight:900;box-shadow:var(--shadow);z-index:70;font-size:.88rem}
+footer{text-align:center;color:var(--muted);padding:18px 14px 50px;font-size:.83rem;line-height:1.6}
+
+@media(max-width:900px){.org-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:560px){main{padding:0 10px;margin-top:-44px}.hdr{padding:22px 13px 66px}.org-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body id="top" class="lang-both">
+
+<header class="hdr">
+  <div class="hero">
+    <div class="badge">🫁 Biology · Form 4 · Chapter 8</div>
+    <h1>Respiratory Systems in<br>Humans and Animals</h1>
+    <p class="hero-sub en-only">Types of respiratory systems, mechanisms of breathing, gaseous exchange in humans, and respiratory health issues.</p>
+    <p class="hero-sub zh-only" style="margin-top:5px">呼吸系统类型、呼吸机制、人体气体交换及呼吸健康问题。</p>
+    <div class="lang-row">
+      <button class="lbtn active" data-lang="both" onclick="setLang(this)">EN + 中文</button>
+      <button class="lbtn" data-lang="en" onclick="setLang(this)">English Only</button>
+      <button class="lbtn" data-lang="zh" onclick="setLang(this)">仅中文</button>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section class="ctrl panel">
+    <input id="srch" class="srch" placeholder="Search: alveolus, trachea, gill, emphysema, diffusion…"/>
+  </section>
+
+  <div class="tabs">
+    <button class="tab t1 active" onclick="showTab('t1',this)">8.1 Respiratory Types</button>
+    <button class="tab t2" onclick="showTab('t2',this)">8.2 Breathing Mechanisms</button>
+    <button class="tab t3" onclick="showTab('t3',this)">8.3 Gaseous Exchange</button>
+    <button class="tab t4" onclick="showTab('t4',this)">8.4 Health Issues</button>
+    <button class="tab tmm" onclick="showTab('tmm',this)">⭐ Memory Map</button>
+  </div>
+
+<!-- ══════ 8.1 TYPES ══════ -->
+<div id="tab-t1" class="psec active">
+
+  <div class="sec s-cy">
+    <div class="sec-hdr" onclick="exp(this)">
+      <div class="sec-icon">🫁</div>
+      <div class="sec-info">
+        <div class="sec-num">8.1</div>
+        <div class="sec-t-en">Types of Respiratory System — 4 Organisms</div>
+        <div class="sec-t-zh">呼吸系统类型——4种生物</div>
+      </div>
+      <span class="sec-chev open">⌄</span>
+    </div>
+    <div class="sec-body open">
+      <div class="tbl-wrap">
+        <table class="tbl">
+          <thead>
+            <tr>
+              <th class="th-cy">Features / 特征</th>
+              <th style="background:#f59e0b;color:#fff">Insects / 昆虫</th>
+              <th style="background:#2563eb;color:#fff">Fish / 鱼</th>
+              <th style="background:#16a34a;color:#fff">Amphibians / 两栖类</th>
+              <th style="background:#dc2626;color:#fff">Humans / 人类</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td style="background:#e0f2fe;font-weight:800;color:#0369a1;font-size:11px">Respiratory organ<br>呼吸器官</td>
+              <td style="background:#fffbeb;font-weight:700;color:#78350f">Trachea 气管</td>
+              <td style="background:#eff6ff;font-weight:700;color:#1e3a8a">Gills 鳃</td>
+              <td style="background:#f0fdf4;font-weight:700;color:#052e16">Skin and lungs<br>皮肤和肺</td>
+              <td style="background:#fff5f5;font-weight:700;color:#7f1d1d">Lungs 肺</td>
+            </tr>
+            <tr>
+              <td style="background:#e0f2fe;font-weight:800;color:#0369a1;font-size:11px">Respiratory structure (gas exchange parts)<br>呼吸结构（气体交换部位）</td>
+              <td style="background:#fffbeb;font-weight:700;color:#78350f">Tracheole 气管小支</td>
+              <td style="background:#eff6ff;font-weight:700;color:#1e3a8a">Filament and lamella<br>鳃丝和鳃瓣</td>
+              <td style="background:#f0fdf4;font-weight:700;color:#052e16">Skin and alveolus<br>皮肤和肺泡</td>
+              <td style="background:#fff5f5;font-weight:700;color:#7f1d1d">Alveolus 肺泡</td>
+            </tr>
+            <tr>
+              <td style="background:#e0f2fe;font-weight:800;color:#0369a1;font-size:11px">Adaptation of respiratory structure<br>呼吸结构的适应性</td>
+              <td style="background:#fffbeb;font-weight:700;color:#78350f">Large number of tracheoles<br>大量气管小支</td>
+              <td style="background:#eff6ff;font-weight:700;color:#1e3a8a">Large number of filaments and lamellae<br>大量鳃丝和鳃瓣</td>
+              <td style="background:#f0fdf4;font-weight:700;color:#052e16">Lung walls are folded and alveoli exposed to atmosphere<br>肺壁折叠，肺泡暴露于大气</td>
+              <td style="background:#fff5f5;font-weight:700;color:#7f1d1d">Millions of alveoli that are very small<br>数百万极小的肺泡</td>
+            </tr>
+            <tr>
+              <td style="background:#e0f2fe;font-weight:800;color:#0369a1;font-size:11px">Source of oxygen<br>氧气来源</td>
+              <td style="background:#fffbeb;font-weight:700;color:#78350f">Atmosphere 大气</td>
+              <td style="background:#eff6ff;font-weight:700;color:#1e3a8a">Water 水</td>
+              <td style="background:#f0fdf4;font-weight:700;color:#052e16">Atmosphere and water<br>大气和水</td>
+              <td style="background:#fff5f5;font-weight:700;color:#7f1d1d">Atmosphere 大气</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- ADAPTATIONS -->
+  <div class="sec s-cy">
+    <div class="sec-hdr" onclick="exp(this)">
+      <div class="sec-icon">⚙️</div>
+      <div class="sec-info">
+        <div class="sec-num">8.1</div>
+        <div class="sec-t-en">Adaptations for Gaseous Exchange (4 Key Features)</div>
+        <div class="sec-t-zh">气体交换的适应特征（4个关键特征）</div>
+      </div>
+      <span class="sec-chev">⌄</span>
+    </div>
+    <div class="sec-body">
+      <div class="tri">
+        <div class="bl-en"><div class="bl-en-lbl">🔵 4 Adaptations</div><div class="bl-en-t">
+          1. The <b>thin surface layer</b> of the respiratory structure is just as thick as a single cell.<br>
+          2. Surrounded by a large network of <b>blood capillaries</b>.<br>
+          3. The large <b>ratio of total surface area</b> of respiratory structure per volume (TSAV).<br>
+          4. <b>Moist respiratory structure</b>.
+        </div></div>
+        <div class="bl-zh"><div class="bl-zh-lbl">🟢 4种适应特征</div><div class="bl-zh-t">
+          1. 呼吸结构的表面层<b>薄如单细胞</b>厚度。<br>
+          2. 被大量<b>毛细血管网</b>包围。<br>
+          3. 呼吸结构单位体积的<b>总表面积比率（TSAV）大</b>。<br>
+          4. <b>呼吸结构湿润</b>。
+        </div></div>
+      </div>
+      <div class="mem">
+        <div class="mem-lbl">📝 Memory — TBMT</div>
+        <div class="pills">
+          <span class="pill p-cy">Thin surface 薄表面层</span>
+          <span class="pill p-cy">Blood capillaries 毛细血管</span>
+          <span class="pill p-cy">TSAV large 大表面积比</span>
+          <span class="pill p-cy">Moist 湿润</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════ 8.2 BREATHING MECHANISMS ══════ -->
+<div id="tab-t2" class="psec">
+
+  <div class="sec s-gr">
+    <div class="sec-hdr" onclick="exp(this)">
+      <div class="sec-icon">💨</div>
+      <div class="sec-info">
+        <div class="sec-num">8.2</div>
+        <div class="sec-t-en">Mechanisms of Breathing — 4 Organisms</div>
+        <div class="sec-t-zh">呼吸机制——4种生物</div>
+      </div>
+      <span class="sec-chev open">⌄</span>
+    </div>
+    <div class="sec-body open">
+      <div class="org-grid">
+
+        <!-- INSECTS -->
+        <div class="org-card" style="border-color:#f59e0b">
+          <div class="org-head" style="background:#d97706">🦗 Insects / 昆虫</div>
+          <div class="org-body en-only" style="background:#fffbeb;color:#78350f">
+            • Tracheal system strengthened with chitin.<br>
+            • Air flows: spiracle → trachea → tracheole → body cells.<br>
+            • Some insects have <b>air sacs</b> to increase rate of diffusion of gases.
+          </div>
+          <div class="org-zh">气管系统由甲壳素加固。气流路径：气门→气管→气管小支→体细胞。部分昆虫有<b>气囊</b>以增加气体扩散速率。</div>
+        </div>
+
+        <!-- FISH -->
+        <div class="org-card" style="border-color:#2563eb">
+          <div class="org-head" style="background:#2563eb">🐟 Fish / 鱼</div>
+          <div class="org-body en-only" style="background:#eff6ff;color:#1e3a8a">
+            • Gills consist of smooth filaments with thin projections called <b>lamellae</b>.<br>
+            • <b>Countercurrent exchange mechanism</b>: water flows opposite to bloodstream → increases diffusion rate.
+          </div>
+          <div class="org-zh">鳃由平滑鳃丝组成，具有称为<b>鳃瓣</b>的薄突起。<b>对流交换机制</b>：水流方向与血流相反→提高扩散速率。</div>
+        </div>
+
+        <!-- AMPHIBIANS -->
+        <div class="org-card" style="border-color:#16a34a">
+          <div class="org-head" style="background:#16a34a">🐸 Amphibians / 两栖类</div>
+          <div class="org-body en-only" style="background:#f0fdf4;color:#052e16">
+            • Use <b>lungs and skin</b> (live on land and water).<br>
+            • Lungs = pair of sacs connected to back of mouth; controlled by the <b>glottis</b>.<br>
+            • <b>Thin and moist skin surface</b> increases diffusion rate.
+          </div>
+          <div class="org-zh">使用<b>肺和皮肤</b>（生活于陆地和水中）。肺=一对连接口腔后部的气囊，由<b>声门</b>控制。<b>薄而湿润的皮肤表面</b>提高扩散速率。</div>
+        </div>
+
+        <!-- HUMANS -->
+        <div class="org-card" style="border-color:#dc2626">
+          <div class="org-head" style="background:#dc2626">🧍 Humans / 人类</div>
+          <div class="org-body en-only" style="background:#fff5f5;color:#7f1d1d">
+            • Use <b>lungs</b>. Air enters via trachea (supported by C-shaped cartilage rings).<br>
+            • Lungs: bronchus → bronchiole → alveolus.<br>
+            • <b>Millions of alveoli</b> increase surface area for gaseous exchange.
+          </div>
+          <div class="org-zh">使用<b>肺</b>。空气经由气管（C形软骨环支撑）进入。肺：支气管→细支气管→肺泡。<b>数百万肺泡</b>增大气体交换表面积。</div>
+        </div>
+      </div>
+
+      <div class="mem">
+        <div class="mem-lbl">📝 Key Terms / 关键术语</div>
+        <div class="pills">
+          <span class="pill p-am">Spiracle → Trachea → Tracheole (insects)</span>
+          <span class="pill p-am">气门→气管→气管小支（昆虫）</span>
+          <span class="pill" style="border-color:#2563eb;background:#dbeafe;color:#1e3a8a">Countercurrent exchange (fish) 对流交换（鱼）</span>
+          <span class="pill p-gr">Glottis controls lungs (amphibians) 声门控制（两栖）</span>
+          <span class="pill p-rd">Bronchus→Bronchiole→Alveolus (humans) 支气管→细支气管→肺泡（人类）</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════ 8.3 GASEOUS EXCHANGE ══════ -->
+<div id="tab-t3" class="psec">
+
+  <div class="sec s-am">
+    <div class="sec-hdr" onclick="exp(this)">
+      <div class="sec-icon">🔄</div>
+      <div class="sec-info">
+        <div class="sec-num">8.3</div>
+        <div class="sec-t-en">Gaseous Exchange in Humans — 4-Step Process</div>
+        <div class="sec-t-zh">人体气体交换——4步过程</div>
+      </div>
+      <span class="sec-chev open">⌄</span>
+    </div>
+    <div class="sec-body open">
+      <div class="tri">
+        <div class="bl-en"><div class="bl-en-lbl">🔵 Overview</div><div class="bl-en-t">
+          Gaseous exchange occurs via <b>diffusion</b> driven by differences in partial pressure of O₂ (PO₂) and CO₂ (PCO₂) between alveolus, blood capillary and body cells.
+        </div></div>
+        <div class="bl-zh"><div class="bl-zh-lbl">🟢 概述</div><div class="bl-zh-t">
+          气体交换通过<b>扩散</b>进行，由肺泡、毛细血管和体细胞之间O₂分压（PO₂）和CO₂分压（PCO₂）的差异驱动。
+        </div></div>
+      </div>
+
+      <div class="flow-wrap">
+        <div class="flow-lbl">4 Steps / 4个步骤</div>
+        <div class="fstep-wrap">
+          <div class="fstep">
+            <span class="fstep-num">①</span><b>Alveolus → Blood Capillary (O₂)</b>
+            <div class="fstep-zh">In the alveolus, PO₂ is higher → O₂ diffuses into blood capillary.</div>
+            <div class="fstep-zh zh-only">在肺泡中，PO₂较高→O₂扩散进入毛细血管。</div>
+          </div>
+        </div>
+        <div class="fstep-wrap">
+          <div class="fstep">
+            <span class="fstep-num">②</span><b>Blood Capillary → Alveolus (CO₂)</b>
+            <div class="fstep-zh">In blood capillary, PCO₂ is higher → CO₂ diffuses into alveolus.</div>
+            <div class="fstep-zh zh-only">在毛细血管中，PCO₂较高→CO₂扩散进入肺泡。</div>
+          </div>
+        </div>
+        <div class="fstep-wrap">
+          <div class="fstep">
+            <span class="fstep-num">③</span><b>O₂ transported in blood</b>
+            <div class="fstep-zh">Oxygen joins haemoglobin → forms oxyhaemoglobin → transported to body cells.</div>
+            <div class="fstep-zh zh-only">氧气与血红蛋白结合→形成氧合血红蛋白→输送到体细胞。在毛细血管中，PO₂较高→O₂分解并扩散进入体细胞。</div>
+          </div>
+        </div>
+        <div class="fstep-wrap">
+          <div class="fstep">
+            <span class="fstep-num">④</span><b>Body Cells → Red Blood Cells → Alveolus (CO₂ removal)</b>
+            <div class="fstep-zh">PCO₂ is higher in body cells → CO₂ diffuses into red blood cells → then into alveolus to be removed.</div>
+            <div class="fstep-zh zh-only">体细胞中PCO₂较高→CO₂扩散进入红细胞→再进入肺泡被排出。</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tri">
+        <div class="bl-en"><div class="bl-en-lbl">🔵 Key Principle</div><div class="bl-en-t">
+          • High PO₂ → O₂ diffuses out (alveolus to blood, blood to body cells).<br>
+          • High PCO₂ → CO₂ diffuses out (blood to alveolus, body cells to blood).<br>
+          • O₂ transport: O₂ + haemoglobin → <b>oxyhaemoglobin</b>
+        </div></div>
+        <div class="bl-zh"><div class="bl-zh-lbl">🟢 关键原理</div><div class="bl-zh-t">
+          • PO₂高→O₂向外扩散（肺泡→血液，血液→体细胞）。<br>
+          • PCO₂高→CO₂向外扩散（血液→肺泡，体细胞→血液）。<br>
+          • O₂运输：O₂ + 血红蛋白→<b>氧合血红蛋白</b>
+        </div></div>
+      </div>
+
+      <div class="mem">
+        <div class="mem-lbl">📝 Diffusion Rules / 扩散规则</div>
+        <div class="pills">
+          <span class="pill p-cy">High PO₂ in alveolus → O₂ in 肺泡PO₂高→O₂进入血液</span>
+          <span class="pill p-cy">High PCO₂ in blood → CO₂ out 血液PCO₂高→CO₂进入肺泡</span>
+          <span class="pill p-am">O₂ + Hb → Oxyhaemoglobin 氧合血红蛋白</span>
+          <span class="pill p-rd">High PCO₂ in body cells → CO₂ → RBC → alveolus 体细胞→红细胞→肺泡</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════ 8.4 HEALTH ISSUES ══════ -->
+<div id="tab-t4" class="psec">
+
+  <div class="sec s-rd">
+    <div class="sec-hdr" onclick="exp(this)">
+      <div class="sec-icon">⚕️</div>
+      <div class="sec-info">
+        <div class="sec-num">8.4</div>
+        <div class="sec-t-en">Health Issues — COPD &amp; Respiratory Diseases</div>
+        <div class="sec-t-zh">健康问题——慢性阻塞性肺病与呼吸疾病</div>
+      </div>
+      <span class="sec-chev open">⌄</span>
+    </div>
+    <div class="sec-body open">
+      <div class="tri">
+        <div class="bl-en"><div class="bl-en-lbl">🔵 COPD Definition</div><div class="bl-en-t">
+          <b>Chronic Obstructive Pulmonary Disease (COPD)</b> is a type of disease that affects the human respiratory system by <b>disturbing the airflow</b>.
+        </div></div>
+        <div class="bl-zh"><div class="bl-zh-lbl">🟢 慢性阻塞性肺病定义</div><div class="bl-zh-t">
+          <b>慢性阻塞性肺病（COPD）</b>是一种通过<b>干扰气流</b>影响人体呼吸系统的疾病。
+        </div></div>
+      </div>
+
+      <!-- 3 DISEASE CARDS -->
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:10px">
+
+        <div style="border-radius:14px;overflow:hidden;border:2px solid #ea580c">
+          <div style="background:#ea580c;padding:10px 12px;font-size:13px;font-weight:900;color:#fff">🫁 Emphysema / 肺气肿</div>
+          <div class="en-only" style="padding:11px 12px;background:#fff7ed;font-size:12.5px;font-weight:700;color:#7c2d12;line-height:1.5">
+            Alveolus <b>fails to shrink during exhalation</b>. Air is trapped and causes gaseous exchange to become less efficient.
+          </div>
+          <div class="zh-only" style="padding:11px 12px;background:#ecfdf5;font-size:12px;font-weight:600;color:#064e3b;line-height:1.5">
+            肺泡在<b>呼气时无法收缩</b>。空气被困住，导致气体交换效率降低。
+          </div>
+        </div>
+
+        <div style="border-radius:14px;overflow:hidden;border:2px solid #2563eb">
+          <div style="background:#2563eb;padding:10px 12px;font-size:13px;font-weight:900;color:#fff">🔬 Chronic Bronchitis / 慢性支气管炎</div>
+          <div class="en-only" style="padding:11px 12px;background:#eff6ff;font-size:12.5px;font-weight:700;color:#1e3a8a;line-height:1.5">
+            <b>Inflammation</b> of the bronchial tube results in the destruction of cilia and disturbs the filtering process. A large amount of mucus is produced and bronchial tube space becomes narrow.
+          </div>
+          <div class="zh-only" style="padding:11px 12px;background:#ecfdf5;font-size:12px;font-weight:600;color:#064e3b;line-height:1.5">
+            支气管<b>发炎</b>导致纤毛被破坏，干扰过滤功能。产生大量黏液，支气管空间变窄。
+          </div>
+        </div>
+
+        <div style="border-radius:14px;overflow:hidden;border:2px solid #16a34a">
+          <div style="background:#16a34a;padding:10px 12px;font-size:13px;font-weight:900;color:#fff">💨 Asthma / 哮喘</div>
+          <div class="en-only" style="padding:11px 12px;background:#f0fdf4;font-size:12.5px;font-weight:700;color:#052e16;line-height:1.5">
+            The bronchiole walls become <b>swollen and thick</b>. Air passage becomes narrow, which affects the airflow.
+          </div>
+          <div class="zh-only" style="padding:11px 12px;background:#ecfdf5;font-size:12px;font-weight:600;color:#064e3b;line-height:1.5">
+            细支气管壁变得<b>肿胀和增厚</b>。气道变窄，影响气流。
+          </div>
+        </div>
+      </div>
+
+      <!-- COMPARISON TABLE -->
+      <div class="tbl-wrap">
+        <table class="tbl">
+          <thead><tr>
+            <th class="th-cy">Disease / 疾病</th>
+            <th class="th-cy">Part affected / 受影响部位</th>
+            <th class="th-cy">Main problem / 主要问题</th>
+            <th class="th-cy">Effect / 影响</th>
+          </tr></thead>
+          <tbody>
+            <tr>
+              <td style="background:#fff7ed;font-weight:800;color:#9a3412">Emphysema 肺气肿</td>
+              <td style="background:#fff7ed;font-weight:700;color:#7c2d12">Alveolus 肺泡</td>
+              <td style="background:#fff7ed;font-weight:700;color:#7c2d12">
+                <span class="en-only">Cannot shrink during exhalation</span>
+                <span class="zh-only">呼气时无法收缩</span>
+              </td>
+              <td style="background:#fff7ed;font-weight:700;color:#7c2d12">
+                <span class="en-only">Air trapped → less efficient gaseous exchange</span>
+                <span class="zh-only">空气被困→气体交换效率降低</span>
+              </td>
+            </tr>
+            <tr>
+              <td style="background:#eff6ff;font-weight:800;color:#1e3a8a">Chronic Bronchitis 慢性支气管炎</td>
+              <td style="background:#eff6ff;font-weight:700;color:#1e3a8a">Bronchial tube 支气管</td>
+              <td style="background:#eff6ff;font-weight:700;color:#1e3a8a">
+                <span class="en-only">Inflammation → cilia destroyed, excess mucus</span>
+                <span class="zh-only">发炎→纤毛被破坏，过多黏液</span>
+              </td>
+              <td style="background:#eff6ff;font-weight:700;color:#1e3a8a">
+                <span class="en-only">Narrow airway → obstructed airflow</span>
+                <span class="zh-only">气道变窄→气流受阻</span>
+              </td>
+            </tr>
+            <tr>
+              <td style="background:#f0fdf4;font-weight:800;color:#052e16">Asthma 哮喘</td>
+              <td style="background:#f0fdf4;font-weight:700;color:#052e16">Bronchiole 细支气管</td>
+              <td style="background:#f0fdf4;font-weight:700;color:#052e16">
+                <span class="en-only">Walls swollen and thick</span>
+                <span class="zh-only">管壁肿胀增厚</span>
+              </td>
+              <td style="background:#f0fdf4;font-weight:700;color:#052e16">
+                <span class="en-only">Narrow air passage → affects airflow</span>
+                <span class="zh-only">气道变窄→影响气流</span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="mem">
+        <div class="mem-lbl">📝 Memory — 3 Diseases / 3种疾病</div>
+        <div class="pills">
+          <span class="pill p-am">Emphysema: alveolus fails to shrink 肺气肿：肺泡无法收缩</span>
+          <span class="pill" style="border-color:#2563eb;background:#dbeafe;color:#1e3a8a">Chronic Bronchitis: inflammation + excess mucus 慢性支气管炎：发炎+过多黏液</span>
+          <span class="pill p-gr">Asthma: bronchiole walls thick 哮喘：细支气管壁增厚</span>
+          <span class="pill p-cy">All = COPD (airflow disturbed) 全部属于COPD（气流受阻）</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════ MEMORY MAP ══════ -->
+<div id="tab-tmm" class="psec">
+  <div style="background:#0c4a6e;border-radius:var(--r);overflow:hidden;margin-bottom:12px">
+    <div class="mmap-hdr">
+      <div class="mmap-h1">⭐ Super Compact Memory Map</div>
+      <div class="mmap-h2">Biology Form 4 Chapter 8 — Respiratory Systems in Humans and Animals</div>
+      <div class="mmap-h3">生物学中四第八章 — 人类与动物的呼吸系统</div>
+    </div>
+    <div style="padding:14px">
+
+      <div class="mmap-item">
+        <div class="mm-en"><div class="mm-en-t">8.1 Respiratory organs: Insects=Trachea · Fish=Gills · Amphibians=Skin+Lungs · Humans=Lungs. Gas exchange structures: Insects=Tracheole · Fish=Filament+Lamella · Amphibians=Skin+Alveolus · Humans=Alveolus.</div></div>
+        <div class="mm-zh"><div class="mm-zh-t">8.1 呼吸器官：昆虫=气管·鱼=鳃·两栖=皮肤+肺·人类=肺。气体交换结构：昆虫=气管小支·鱼=鳃丝+鳃瓣·两栖=皮肤+肺泡·人类=肺泡。</div></div>
+      </div>
+
+      <div class="mmap-item">
+        <div class="mm-en"><div class="mm-en-t">8.1 4 Adaptations for gaseous exchange: (1) Thin surface layer (single cell thick) (2) Surrounded by blood capillaries (3) Large TSAV ratio (4) Moist respiratory surface.</div></div>
+        <div class="mm-zh"><div class="mm-zh-t">8.1 气体交换的4种适应特征：①薄表面层（单细胞厚）②毛细血管包围③大TSAV比④呼吸表面湿润。</div></div>
+      </div>
+
+      <div class="mmap-item">
+        <div class="mm-en"><div class="mm-en-t">8.2 Insects: Spiracle→Trachea→Tracheole→Body cells. Air sacs increase diffusion. Fish: Countercurrent exchange mechanism (water opposite to blood). Amphibians: Glottis controls lungs; thin moist skin. Humans: C-shaped cartilage rings; Bronchus→Bronchiole→Alveolus.</div></div>
+        <div class="mm-zh"><div class="mm-zh-t">8.2 昆虫：气门→气管→气管小支→体细胞。气囊增加扩散。鱼：对流交换机制（水流与血流相反）。两栖：声门控制肺；薄湿皮肤。人类：C形软骨环；支气管→细支气管→肺泡。</div></div>
+      </div>
+
+      <div class="mmap-item">
+        <div class="mm-en"><div class="mm-en-t">8.3 Gaseous exchange (4 steps): ① Alveolus: high PO₂ → O₂ diffuses into blood capillary. ② Blood: high PCO₂ → CO₂ diffuses into alveolus. ③ O₂ + Hb → oxyhaemoglobin → transported to body cells. ④ Body cells: high PCO₂ → CO₂ → RBC → alveolus (removed).</div></div>
+        <div class="mm-zh"><div class="mm-zh-t">8.3 气体交换（4步）：①肺泡：PO₂高→O₂扩散进血液。②血液：PCO₂高→CO₂扩散进肺泡。③O₂+血红蛋白→氧合血红蛋白→输送到体细胞。④体细胞：PCO₂高→CO₂→红细胞→肺泡（排出）。</div></div>
+      </div>
+
+      <div class="mmap-item">
+        <div class="mm-en"><div class="mm-en-t">8.4 COPD = disturbs airflow. 3 diseases: Emphysema (alveolus fails to shrink → air trapped) · Chronic Bronchitis (bronchial inflammation → excess mucus, cilia destroyed) · Asthma (bronchiole walls swollen and thick → narrow air passage).</div></div>
+        <div class="mm-zh"><div class="mm-zh-t">8.4 COPD=气流受阻。3种疾病：肺气肿（肺泡无法收缩→空气被困）·慢性支气管炎（支气管发炎→过多黏液，纤毛被破坏）·哮喘（细支气管壁肿胀增厚→气道变窄）。</div></div>
+      </div>
+
+      <div class="exam-box">
+        <div class="exam-hdr"><div class="exam-lbl">✏️ Exam Templates / 考试句型</div></div>
+        <div class="exam-en"><div class="exam-en-t">
+          <b>Gaseous exchange principle:</b> "Gaseous exchange occurs by diffusion. Oxygen diffuses from an area of high partial pressure to an area of low partial pressure."<br><br>
+          <b>Countercurrent mechanism:</b> "The countercurrent exchange mechanism in fish refers to the flow of water through the gills going against the bloodstream, which increases the rate of diffusion of gases."<br><br>
+          <b>Emphysema:</b> "In emphysema, the alveolus fails to shrink during exhalation, causing air to become trapped and gaseous exchange to become less efficient."
+        </div></div>
+        <div class="exam-zh"><div class="exam-zh-t">
+          <b>气体交换原理：</b>"气体交换通过扩散发生。氧气从分压高的区域扩散到分压低的区域。"<br><br>
+          <b>对流交换机制：</b>"鱼类的对流交换机制是指水流经鳃的方向与血流方向相反，从而提高气体扩散速率。"<br><br>
+          <b>肺气肿：</b>"肺气肿中，肺泡在呼气时无法收缩，导致空气被困，气体交换效率降低。"
+        </div></div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+</main>
+
+<a class="top-link" href="#top">↑ Top</a>
+<footer>
+  <span class="en-only">Biology Form 4 Chapter 8 · Respiratory Systems · Single HTML · No internet required</span>
+  <span class="zh-only">生物学中四第八章 · 呼吸系统 · 单一HTML · 无需网络</span>
+</footer>
+
+<script>
+function setLang(btn){
+  document.querySelectorAll('.lbtn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  document.body.className='lang-'+btn.dataset.lang;
+  localStorage.setItem('bio8-lang',btn.dataset.lang);
+}
+(function(){
+  const s=localStorage.getItem('bio8-lang')||'both';
+  const b=document.querySelector(`.lbtn[data-lang="${s}"]`);
+  if(b)setLang(b);
+})();
+function showTab(id,btn){
+  document.querySelectorAll('.psec').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById('tab-'+id).classList.add('active');
+  btn.classList.add('active');
+  window.scrollTo(0,document.querySelector('.tabs').offsetTop-60);
+}
+function exp(hdr){
+  const b=hdr.nextElementSibling;
+  const c=hdr.querySelector('.sec-chev');
+  const o=b.classList.toggle('open');
+  c.classList.toggle('open',o);
+}
+document.getElementById('srch').addEventListener('input',function(){
+  const q=this.value.trim().toLowerCase();
+  document.querySelectorAll('.sec').forEach(s=>{
+    s.style.display=!q||s.textContent.toLowerCase().includes(q)?'':'none';
+  });
+});
+</script>
+</body>
+</html>

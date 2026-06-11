@@ -365,6 +365,7 @@ export const biologyData = {
             chapterNum: 8,
             chapter:"Respiratory Systems in Humans and Animals",
             chinese:"人类与动物的呼吸系统",
+            resourceUrl:"../biology/biology_chapter8.html",
             status:"Not Started",
             confidence:0,
             last_updated:"2026-05-20"
