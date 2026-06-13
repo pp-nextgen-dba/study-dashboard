@@ -611,6 +611,194 @@ import { biologyData } from "../js/subject.js?v=17";  &lt;!-- increment --&gt;</
                 </div>
             </div>
 
+            <!-- Adding a New Subject -->
+            <div class="section">
+                <h2>➕ Adding a New Subject</h2>
+
+                <div class="subsection">
+                    <h3>Complete steps to add a brand new subject:</h3>
+                    <ol style="color: #2d3748; padding-left: 20px; line-height: 2;">
+                        <li>Add chapter data export to <code>js/subject.js</code>
+                            <div class="code-example" style="margin-top: 8px;">export const newSubjectData = {
+    subject: "Subject Name",
+    chapters: [{
+        form: "T2",
+        globalNum: 1,
+        chapterNum: 1,
+        chapter: "Chapter Name",
+        chinese: "中文名称",
+        status: "Not Started",
+        confidence: 0,
+        last_updated: "2026-06-14"
+    }]
+};</div>
+                        </li>
+                        <li>Add entry to <code>js/subject-registry.js</code> (set <code>loadSeed: true</code> to auto-seed Firestore)
+                            <div class="code-example" style="margin-top: 8px;">newsubject: {
+    displayName: "Subject Name",
+    firestoreKey: "newsubject",
+    progressBarIds: ["newsubject-progress"],
+    href: "subjects/newsubject.html",
+    loadSeed: true
+}</div>
+                        </li>
+                        <li>Create <code>subjects/newsubject.html</code> following existing subject page pattern (include Back to Dashboard button)</li>
+                        <li>Add subject card to <code>index.html</code> with matching progress bar IDs</li>
+                        <li>Add page path to <code>STATIC_ASSETS</code> in <code>sw.js</code>
+                            <div class="code-example" style="margin-top: 8px;">"/subjects/newsubject.html"</div>
+                        </li>
+                        <li>Run <code>npm run validate</code></li>
+                        <li>Commit & push</li>
+                    </ol>
+                </div>
+            </div>
+
+            <!-- Auto-Integration Workflow -->
+            <div class="section">
+                <h2>🔄 Auto-Integration Workflow</h2>
+
+                <div class="subsection">
+                    <h3>For language chapters (en_/my_/zh_), check available codes first:</h3>
+                    <div class="command">npm run check-codes</div>
+                </div>
+
+                <div class="subsection">
+                    <h3>The workflow scans for unregistered HTML files and wires them automatically:</h3>
+                    <ol style="color: #2d3748; padding-left: 20px; line-height: 1.8;">
+                        <li>Pulls latest from GitHub</li>
+                        <li>Scans root-level subject folders (<code>chemistry/</code>, <code>english/</code>, <code>rbt/</code>, etc.)</li>
+                        <li>Checks for HTML files matching:
+                            <ul style="margin-top: 8px; margin-left: 20px;">
+                                <li><strong>Standard:</strong> <code>t&lt;form(s)&gt;_chapter&lt;num&gt;.html</code></li>
+                                <li><strong>Language codes:</strong> <code>en_&lt;NNN&gt;.html</code>, <code>my_&lt;NNN&gt;.html</code>, <code>zh_&lt;NNN&gt;.html</code></li>
+                            </ul>
+                        </li>
+                        <li>If <code>resourceUrl</code> is missing: adds it to subject.js, updates sw.js, and adds Back button to HTML</li>
+                        <li>Checks subject pages for required components (CSS, variables, sync function) and adds any missing</li>
+                        <li>Runs validation, commits and pushes if changes were made</li>
+                    </ol>
+                </div>
+
+                <div class="note">
+                    <strong>ℹ️ Workflow schedule:</strong> Runs every 4 hours (GMT+8). Tracks 246+ chapters across all subjects.
+                </div>
+            </div>
+
+            <!-- Changing the PIN -->
+            <div class="section">
+                <h2>🔐 Changing the PIN</h2>
+
+                <div class="subsection">
+                    <h3>To change the dashboard PIN code:</h3>
+                    <ol style="color: #2d3748; padding-left: 20px; line-height: 2;">
+                        <li>Open browser <strong>DevTools</strong> (F12) on the dashboard</li>
+                        <li>Go to <strong>Console</strong> tab and run:
+                            <div class="code-example" style="margin-top: 8px;">await crypto.subtle.digest("SHA-256", new TextEncoder().encode("NEWPIN"))</div>
+                        </li>
+                        <li>Convert the result to hex (browsers usually show it)</li>
+                        <li>Update <code>CORRECT_PIN_HASH</code> in <code>js/auth.js</code></li>
+                        <li>Commit & push</li>
+                    </ol>
+                </div>
+
+                <div class="warning">
+                    <strong>⚠️ Security:</strong> The PIN hash is SHA-256 without salt. Keep it secure.
+                </div>
+            </div>
+
+            <!-- Commands Reference -->
+            <div class="section">
+                <h2>📟 Commands Reference</h2>
+
+                <div class="subsection">
+                    <table>
+                        <tr>
+                            <th>Command</th>
+                            <th>Purpose</th>
+                        </tr>
+                        <tr>
+                            <td><code>npm run validate</code></td>
+                            <td>Cross-check subject.js, subject-registry.js, index.html, and subject pages for consistency</td>
+                        </tr>
+                        <tr>
+                            <td><code>npm run check-codes</code></td>
+                            <td>Show next available 3-digit codes for en_/my_/zh_ chapters</td>
+                        </tr>
+                        <tr>
+                            <td><code>npx serve .</code></td>
+                            <td>Run dashboard locally on http://localhost:3000</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Key Files Reference -->
+            <div class="section">
+                <h2>📁 Key Files Reference</h2>
+
+                <div class="subsection">
+                    <table>
+                        <tr>
+                            <th>File</th>
+                            <th>Purpose</th>
+                        </tr>
+                        <tr>
+                            <td><code>js/subject.js</code></td>
+                            <td>Master data (14 subjects, chapters with form/status/confidence/last_updated)</td>
+                        </tr>
+                        <tr>
+                            <td><code>js/subject-registry.js</code></td>
+                            <td>Maps subjects → Firestore key, progress bar IDs, href, loadSeed flag</td>
+                        </tr>
+                        <tr>
+                            <td><code>js/dashboard.js</code></td>
+                            <td>onSnapshot listeners, Firestore auto-seed, Export Progress button</td>
+                        </tr>
+                        <tr>
+                            <td><code>js/firebase.js</code></td>
+                            <td>Firebase init, exports <code>db</code>, calls <code>signInAnonymously()</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>js/auth.js</code></td>
+                            <td>PIN auth (SHA-256 hash). Exports <code>requireAuth()</code>, <code>isAuthenticated()</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>sw.js</code></td>
+                            <td>Service worker — caches STATIC_ASSETS; Firestore bypasses cache</td>
+                        </tr>
+                        <tr>
+                            <td><code>tools/validate-project.mjs</code></td>
+                            <td>Cross-checks subject.js, subject-registry.js, index.html, subject pages</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Chapter HTML File Locations -->
+            <div class="section">
+                <h2>📍 Chapter HTML File Locations</h2>
+
+                <div class="subsection">
+                    <h3>Chapter notes pages live in root-level subject folders:</h3>
+                    <div class="code-example">chemistry/     t4_chapter1.html
+english/       T4_T5_english_grammar.html
+history/       t2_chapter4.html, t2_chapter8.html ...
+physics/       t4_force_motion.html
+rbt/           t2_akuaponik.html, t2_elektrik.html, t4_chapter_mekanikal.html ...</div>
+                </div>
+
+                <div class="note">
+                    <strong>ℹ️ Structure:</strong> No <code>archive/</code> subdirectories — all files sit directly in <code>&lt;subject&gt;/</code>
+                </div>
+
+                <div class="subsection">
+                    <h3>Subjects (14 total):</h3>
+                    <div style="color: #2d3748; padding: 16px; background: #f7fafc; border-radius: 8px;">
+                        Maths, Add Maths, Science, Physics, Chemistry, Biology, English, Chinese, Malay, Moral, History, Geografi, Reka Bentuk, Seni (T2–T3)
+                    </div>
+                </div>
+            </div>
+
             <!-- Key Concept -->
             <div class="section">
                 <h2>💡 Key Concept: Firestore Sync</h2>
@@ -626,7 +814,7 @@ import { biologyData } from "../js/subject.js?v=17";  &lt;!-- increment --&gt;</
         <footer>
             <p>📖 Study Dashboard Workflow Guide</p>
             <p style="margin-top: 10px; font-size: 12px;">
-                Version: v1.0 | Date: 2026-06-13 | Last Updated: 2026-06-13
+                Version: v1.1 | Date: 2026-06-13 | Last Updated: 2026-06-14
             </p>
             <p style="margin-top: 5px; font-size: 12px;">
                 Location: html-guide/workflow-guide-v1.0-2026-06-13.html
