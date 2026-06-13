@@ -53,8 +53,10 @@ No `archive/` subdirectories — all files sit directly in `<subject>/`.
    *(RBT pages use a dark sticky nav — verify the button is there instead.)*
 2. Add `resourceUrl: "../<subject>/<file>.html"` to the matching chapter in `js/subject.js`
 3. Add `'/<subject>/<file>.html'` to `STATIC_ASSETS` in `sw.js`
-4. Run `npm run validate`
-5. Commit
+4. **Update subject page** — if the subject page doesn't have the `.chapter-link` CSS, `chapterResource` variable, and `addMissingChineseLabels()` sync function, add them (see Auto-Integration Workflow step 4 for templates)
+5. **Bump cache versions** — increment `?v=N` on the subject page's CSS and module imports
+6. Run `npm run validate`
+7. Commit
 
 ## Auto-Integration Workflow
 
@@ -88,7 +90,22 @@ When triggered, the workflow:
      ```js
      if(e.target.closest(".chapter-link")){ return; }
      ```
-   - **`addMissingChineseLabels()`** function that syncs `resourceUrl` (and `chinese`) from seed data into Firestore on load — called inside `loadData()` when `snap.exists()`
+   - **`addMissingChineseLabels()`** function that syncs `resourceUrl` (and `chinese`) from seed data into Firestore on load — called inside `loadData()` when `snap.exists()`:
+     ```js
+     async function addMissingChineseLabels(){
+         data.chapters.forEach((ch, idx)=>{
+             const seed = biologyData.chapters[idx];
+             if(seed.resourceUrl && !ch.resourceUrl){
+                 ch.resourceUrl = seed.resourceUrl;
+             }
+             if(seed.chinese && !ch.chinese){
+                 ch.chinese = seed.chinese;
+             }
+         });
+     }
+     // Then call it in loadData(): if(snap.exists()){ data = snap.data(); await addMissingChineseLabels(); }
+     ```
+   - **Cache versions bumped** — increment `?v=N` on CSS and module imports to force fresh load
 5. Runs `npm run validate`, commits and pushes if changes were made
 6. Appends result to `FILES/auto_integration_log.txt` (GMT+8 timestamps)
 
