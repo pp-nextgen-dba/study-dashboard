@@ -15,7 +15,7 @@ content="width=device-width, initial-scale=1.0">
 <title>Biology Dashboard</title>
 
 <link rel="stylesheet"
-href="../css/style.css?v=31">
+href="../css/style.css?v=32">
 
 <style>
 
@@ -397,7 +397,7 @@ import {
     biologyData
 }
 from
-"../js/subject.js?v=16";
+"../js/subject.js?v=17";
 
 import { requireAuth } from "../js/auth.js";
 await requireAuth("../index.html");
@@ -418,6 +418,18 @@ let data =
 // LOAD
 // =========================================================
 
+async function addMissingChineseLabels(){
+    data.chapters.forEach((ch, idx)=>{
+        const seed = biologyData.chapters[idx];
+        if(seed.resourceUrl && !ch.resourceUrl){
+            ch.resourceUrl = seed.resourceUrl;
+        }
+        if(seed.chinese && !ch.chinese){
+            ch.chinese = seed.chinese;
+        }
+    });
+}
+
 async function loadData(){
 
     const snap =
@@ -426,6 +438,7 @@ async function loadData(){
     if(snap.exists()){
 
         data = snap.data();
+        await addMissingChineseLabels();
 
     }else{
 
