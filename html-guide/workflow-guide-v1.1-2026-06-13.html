@@ -252,6 +252,50 @@
         </header>
 
         <div class="content">
+            <!-- User Input Section -->
+            <div class="section">
+                <h2>💬 How to Request Adding a Chapter</h2>
+
+                <div class="subsection">
+                    <h3>Command Format:</h3>
+                    <p style="color: #2d3748; margin-bottom: 12px;">Simply ask Claude Code to add a chapter by specifying the subject and chapter name:</p>
+                    <div class="command">add [subject] chapter [chapter name]</div>
+                </div>
+
+                <div class="subsection">
+                    <h3>Examples:</h3>
+                    <ul style="color: #2d3748; padding-left: 20px; line-height: 1.8;">
+                        <li><code>add Chemistry chapter T4 Chapter 1</code></li>
+                        <li><code>add Physics chapter Force and Motion</code></li>
+                        <li><code>add English chapter en_058</code></li>
+                        <li><code>add Reka Bentuk chapter Mekanikal</code></li>
+                        <li><code>add History chapter T2 Chapter 4</code></li>
+                    </ul>
+                </div>
+
+                <div class="note">
+                    <strong>ℹ️ Requirements:</strong>
+                    <ul style="padding-left: 20px; margin-top: 8px;">
+                        <li>HTML file must already exist on disk in the subject folder</li>
+                        <li>Subject name must match an existing subject (Maths, Physics, Chemistry, Biology, English, etc.)</li>
+                        <li>Chapter name should match the chapter entry in <code>js/subject.js</code></li>
+                    </ul>
+                </div>
+
+                <div class="success">
+                    <strong>✓ What Claude will do automatically:</strong>
+                    <ul style="padding-left: 20px; margin-top: 8px;">
+                        <li>Verify HTML file exists</li>
+                        <li>Add <code>resourceUrl</code> to <code>js/subject.js</code></li>
+                        <li>Update <code>sw.js</code> STATIC_ASSETS</li>
+                        <li>Check/add Firestore sync function to subject page</li>
+                        <li>Bump cache versions</li>
+                        <li>Run validation</li>
+                        <li>Commit & push to GitHub</li>
+                    </ul>
+                </div>
+            </div>
+
             <!-- Step 1 -->
             <div class="section">
                 <h2><span class="step-number">1</span> Check Available Codes (for Language Chapters)</h2>
