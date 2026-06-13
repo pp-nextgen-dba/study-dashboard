@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Study Dashboard - Chapter Integration Workflow Guide</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+
+        header p {
+            font-size: 16px;
+            opacity: 0.9;
+        }
+
+        .content {
+            padding: 40px;
+        }
+
+        .section {
+            margin-bottom: 50px;
+        }
+
+        .section h2 {
+            font-size: 24px;
+            color: #2d3748;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .step-number {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: #667eea;
+            color: white;
+            border-radius: 50%;
+            font-weight: bold;
+            font-size: 20px;
+        }
+
+        .subsection {
+            margin-bottom: 30px;
+            padding: 20px;
+            background: #f7fafc;
+            border-left: 4px solid #667eea;
+            border-radius: 8px;
+        }
+
+        .subsection h3 {
+            color: #2d3748;
+            margin-bottom: 12px;
+            font-size: 16px;
+        }
+
+        .code-block {
+            background: #2d3748;
+            color: #e2e8f0;
+            padding: 16px;
+            border-radius: 8px;
+            overflow-x: auto;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            margin: 12px 0;
+            line-height: 1.6;
+        }
+
+        .command {
+            background: #edf2f7;
+            border: 1px solid #cbd5e0;
+            padding: 12px 16px;
+            border-radius: 6px;
+            font-family: monospace;
+            color: #2d3748;
+            margin: 12px 0;
+        }
+
+        .note {
+            background: #fef5e7;
+            border-left: 4px solid #f39c12;
+            padding: 16px;
+            border-radius: 6px;
+            margin: 16px 0;
+        }
+
+        .note strong {
+            color: #d68910;
+        }
+
+        .warning {
+            background: #fadbd8;
+            border-left: 4px solid #e74c3c;
+            padding: 16px;
+            border-radius: 6px;
+            margin: 16px 0;
+        }
+
+        .warning strong {
+            color: #c0392b;
+        }
+
+        .success {
+            background: #d5f4e6;
+            border-left: 4px solid #27ae60;
+            padding: 16px;
+            border-radius: 6px;
+            margin: 16px 0;
+        }
+
+        .success strong {
+            color: #1e8449;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 16px 0;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        th {
+            background: #edf2f7;
+            font-weight: 600;
+            color: #2d3748;
+        }
+
+        tr:hover {
+            background: #f7fafc;
+        }
+
+        .checklist {
+            list-style: none;
+        }
+
+        .checklist li {
+            padding: 10px 0;
+            padding-left: 30px;
+            position: relative;
+            color: #2d3748;
+        }
+
+        .checklist li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #27ae60;
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        .quick-ref {
+            background: #edf2f7;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+
+        .quick-ref h4 {
+            color: #667eea;
+            margin-bottom: 12px;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .code-example {
+            background: #2d3748;
+            color: #e2e8f0;
+            padding: 16px;
+            border-radius: 6px;
+            margin: 12px 0;
+            font-family: monospace;
+            font-size: 13px;
+            line-height: 1.6;
+            overflow-x: auto;
+        }
+
+        footer {
+            background: #f7fafc;
+            padding: 30px 40px;
+            text-align: center;
+            color: #718096;
+            border-top: 1px solid #e2e8f0;
+        }
+
+        .flow-diagram {
+            background: #f7fafc;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .flow-diagram p {
+            color: #2d3748;
+            margin: 8px 0;
+            font-size: 14px;
+        }
+
+        .arrow {
+            color: #667eea;
+            font-size: 20px;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📚 Study Dashboard Workflow Guide</h1>
+            <p>Complete guide to adding chapters with resourceUrl, Firestore sync, and cache management</p>
+        </header>
+
+        <div class="content">
+            <!-- Step 1 -->
+            <div class="section">
+                <h2><span class="step-number">1</span> Check Available Codes (for Language Chapters)</h2>
+
+                <div class="subsection">
+                    <h3>For English, Malay, or Chinese chapters:</h3>
+                    <p>Run this command to see what 3-digit code to use:</p>
+                    <div class="command">npm run check-codes</div>
+                    <p>Output shows:</p>
+                    <div class="code-block">📊 Chapter Code Status
+
+Language | Highest Code | Next Code
+---------|--------------|----------
+en     | en_057    | en_058
+my     | my_055    | my_056
+zh     | zh_029    | zh_030</div>
+                </div>
+
+                <div class="note">
+                    <strong>ℹ️ Note:</strong> Standard chapters (t2_chapter1.html, t4_force_motion.html) don't need this — use form + chapter number instead.
+                </div>
+            </div>
+
+            <!-- Step 2 -->
+            <div class="section">
+                <h2><span class="step-number">2</span> Prepare HTML File</h2>
+
+                <div class="subsection">
+                    <h3>Upload or locate your chapter HTML file:</h3>
+                    <ul class="checklist">
+                        <li>Place in root-level subject folder: <code>chemistry/</code>, <code>english/</code>, etc.</li>
+                        <li>Name follows pattern: <code>t4_chapter1.html</code> or <code>en_058.html</code></li>
+                        <li>Ensure it exists on disk before wiring it up</li>
+                    </ul>
+                </div>
+
+                <div class="subsection">
+                    <h3>Add Back to Dashboard button (if not present):</h3>
+                    <p><strong>Standard pages:</strong></p>
+                    <div class="code-example">&lt;div class="top-nav" style="background:#fff;padding:10px 16px;border-bottom:2px solid #e5e7eb;position:sticky;top:0;z-index:120"&gt;
+  &lt;a class="dashboard-link" href="../index.html" style="display:inline-flex;align-items:center;gap:6px;padding:8px 12px;border-radius:8px;background:#1d4ed8;color:#fff;font-size:13px;font-weight:800;text-decoration:none"&gt;
+    &larr; Back to Dashboard
+  &lt;/a&gt;
+&lt;/div&gt;</div>
+                    <p style="margin-top: 16px;"><strong>RBT pages (dark header with custom styling):</strong> Position absolutely inside &lt;header&gt; to avoid being hidden:</p>
+                    <div class="code-example">&lt;header class="hdr"&gt;
+  &lt;div style="position:absolute;top:10px;left:16px"&gt;
+    &lt;a href="../index.html" style="display:inline-flex;align-items:center;gap:6px;padding:8px 12px;border-radius:8px;background:rgba(255,255,255,0.2);color:#fff;font-size:13px;font-weight:800;text-decoration:none;border:1px solid rgba(255,255,255,0.3)"&gt;
+      &larr; Dashboard
+    &lt;/a&gt;
+  &lt;/div&gt;
+  &lt;!-- header content --&gt;
+&lt;/header&gt;</div>
+                </div>
+            </div>
+
+            <!-- Step 3 -->
+            <div class="section">
+                <h2><span class="step-number">3</span> Update subject.js</h2>
+
+                <div class="subsection">
+                    <h3>Add resourceUrl to the matching chapter:</h3>
+                    <div class="code-example">{
+    form:"T4",
+    globalNum: 8,
+    chapterNum: 8,
+    chapter:"Respiratory Systems in Humans and Animals",
+    chinese:"人类与动物的呼吸系统",
+    resourceUrl:"../biology/biology_chapter8.html",  // ← ADD THIS
+    status:"Not Started",
+    confidence:0,
+    last_updated:"2026-05-20"
+}</div>
+                    <p><strong>For language chapters (en_/my_/zh_):</strong> Also add chapterCode field:</p>
+                    <div class="code-example">chapterCode:"en_058"</div>
+                </div>
+            </div>
+
+            <!-- Step 4 -->
+            <div class="section">
+                <h2><span class="step-number">4</span> Update Service Worker Cache</h2>
+
+                <div class="subsection">
+                    <h3>Add to STATIC_ASSETS in sw.js:</h3>
+                    <div class="code-example">const STATIC_ASSETS = [
+    '/',
+    '/index.html',
+    '/css/style.css',
+    '/js/subject.js',
+    '/js/firebase.js',
+    '/subjects/biology.html',
+    '/biology/biology_chapter8.html',  // ← ADD THIS
+    // ... other assets
+];</div>
+                    <p><strong>Important:</strong> Use leading slash, path is from root</p>
+                </div>
+            </div>
+
+            <!-- Step 5 -->
+            <div class="section">
+                <h2><span class="step-number">5</span> Update Subject Page (subjects/*.html)</h2>
+
+                <div class="subsection">
+                    <h3>Add CSS styling for chapter links:</h3>
+                    <div class="code-example">.chapter-link{
+    display:inline-block;
+    margin-top:10px;
+    color:#1d4ed8;
+    font-size:14px;
+    text-decoration:none;
+}
+
+.chapter-link:hover{
+    text-decoration:underline;
+}</div>
+                </div>
+
+                <div class="subsection">
+                    <h3>Add chapterResource variable in render function:</h3>
+                    <div class="code-example">const chapterResource = chapter.resourceUrl
+    ? `&lt;a class="chapter-link" href="${chapter.resourceUrl}"&gt;Open notes&lt;/a&gt;`
+    : "";</div>
+                </div>
+
+                <div class="subsection">
+                    <h3>Include in card.innerHTML:</h3>
+                    <div class="code-example">card.innerHTML = `
+    &lt;div class="chapter-top"&gt;
+        &lt;div class="status-icon ${iconClass}"&gt;${icon}&lt;/div&gt;
+        &lt;div&gt;
+            &lt;div class="chapter-title"&gt;
+                Chapter ${chapter.globalNum}: ${chapter.chapter}
+            &lt;/div&gt;
+            &lt;div class="chapter-cn"&gt;${chapter.chinese}&lt;/div&gt;
+            ${chapterResource}  &lt;!-- ADD THIS --&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+`;</div>
+                </div>
+
+                <div class="subsection">
+                    <h3>Add click guard in event listener:</h3>
+                    <div class="code-example">card.addEventListener("click", async (e)=>{
+    if(e.target.closest(".chapter-link")){ return; }  // ← ADD THIS
+
+    chapter.status = nextStatus(chapter.status);
+    await saveData();
+    render();
+});</div>
+                </div>
+
+                <div class="subsection">
+                    <h3>Add Firestore sync function:</h3>
+                    <div class="code-example">async function addMissingChineseLabels(){
+    data.chapters.forEach((ch, idx)=>{
+        const seed = biologyData.chapters[idx];
+        if(seed.resourceUrl && !ch.resourceUrl){
+            ch.resourceUrl = seed.resourceUrl;
+        }
+        if(seed.chinese && !ch.chinese){
+            ch.chinese = seed.chinese;
+        }
+    });
+}
+
+// Then in loadData():
+if(snap.exists()){
+    data = snap.data();
+    await addMissingChineseLabels();  // ← ADD THIS
+}</div>
+                </div>
+
+                <div class="warning">
+                    <strong>⚠️ Critical:</strong> Without the Firestore sync function, the link won't appear if the document was saved before resourceUrl was added!
+                </div>
+            </div>
+
+            <!-- Step 6 -->
+            <div class="section">
+                <h2><span class="step-number">6</span> Bump Cache Versions</h2>
+
+                <div class="subsection">
+                    <h3>Update version numbers in subject page imports:</h3>
+                    <div class="code-example">&lt;link rel="stylesheet" href="../css/style.css?v=32"&gt;  &lt;!-- increment --&gt;
+
+import { biologyData } from "../js/subject.js?v=17";  &lt;!-- increment --&gt;</div>
+                    <p>This forces browsers to fetch fresh copies instead of using cached versions.</p>
+                </div>
+
+                <div class="note">
+                    <strong>ℹ️ Tip:</strong> Increment both CSS and module import versions each time you make changes.
+                </div>
+            </div>
+
+            <!-- Step 7 -->
+            <div class="section">
+                <h2><span class="step-number">7</span> Validate Project</h2>
+
+                <div class="subsection">
+                    <h3>Run validation to catch issues:</h3>
+                    <div class="command">npm run validate</div>
+                    <p>This checks:</p>
+                    <ul class="checklist">
+                        <li>subject.js, subject-registry.js, index.html consistency</li>
+                        <li>All chapter pages exist and are properly linked</li>
+                        <li>resourceUrl paths are correct</li>
+                    </ul>
+                </div>
+
+                <div class="success">
+                    <strong>✓ Success:</strong> Validation should output "Validated 14 dashboard subjects."
+                </div>
+            </div>
+
+            <!-- Step 8 -->
+            <div class="section">
+                <h2><span class="step-number">8</span> Commit & Push</h2>
+
+                <div class="subsection">
+                    <h3>Stage and commit your changes:</h3>
+                    <div class="command">git add js/subject.js sw.js subjects/biology.html</div>
+                    <div class="command">git commit -m "feat: add biology chapter 8 with Open notes link"</div>
+                    <div class="command">git push origin main</div>
+                </div>
+
+                <div class="note">
+                    <strong>ℹ️ Commit message format:</strong> Describe what you added, not internal details.
+                </div>
+            </div>
+
+            <!-- Step 9 -->
+            <div class="section">
+                <h2><span class="step-number">9</span> Browser Cache Clearing (For Users)</h2>
+
+                <div class="subsection">
+                    <h3>After changes are pushed, users must clear Firestore cache to see the new "Open notes" link:</h3>
+                    <ol style="color: #2d3748; padding-left: 20px; line-height: 2;">
+                        <li>Open the subject page (e.g., <code>subjects/biology.html</code>)</li>
+                        <li>Press <strong>F12</strong> to open DevTools</li>
+                        <li>Go to <strong>Application</strong> tab</li>
+                        <li>Click <strong>Storage</strong> → <strong>Clear site data</strong></li>
+                        <li><strong>Refresh</strong> the page</li>
+                    </ol>
+                </div>
+
+                <div class="warning">
+                    <strong>⚠️ Why needed:</strong> Firestore caches the document locally. Without clearing, the page loads stale data without the new <code>resourceUrl</code> field. The <code>addMissingChineseLabels()</code> function syncs it from seed data on reload, but the cache must be cleared first.
+                </div>
+            </div>
+
+            <!-- Quick Reference -->
+            <div class="section">
+                <h2>📋 Quick Reference Checklist</h2>
+
+                <div class="quick-ref">
+                    <h4>Before Adding a Chapter</h4>
+                    <ul class="checklist">
+                        <li>Run <code>npm run check-codes</code> (for language chapters)</li>
+                        <li>Confirm HTML file exists on disk</li>
+                        <li>Add Back to Dashboard button if missing</li>
+                    </ul>
+
+                    <h4>Code Updates Required</h4>
+                    <ul class="checklist">
+                        <li>Add resourceUrl to chapter in js/subject.js</li>
+                        <li>Add path to STATIC_ASSETS in sw.js</li>
+                        <li>Add .chapter-link CSS to subjects/subject.html</li>
+                        <li>Add chapterResource variable</li>
+                        <li>Add click guard in card event listener</li>
+                        <li>Add addMissingChineseLabels() function</li>
+                        <li>Call sync function in loadData() when snap.exists()</li>
+                        <li>Bump cache versions (?v=N)</li>
+                    </ul>
+
+                    <h4>Final Steps</h4>
+                    <ul class="checklist">
+                        <li>Run <code>npm run validate</code></li>
+                        <li>Commit changes with descriptive message</li>
+                        <li>Push to GitHub</li>
+                        <li>Wait 1-2 minutes for GitHub Pages to rebuild</li>
+                        <li>Hard refresh browser (Ctrl+Shift+R)</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Troubleshooting -->
+            <div class="section">
+                <h2>🔧 Troubleshooting</h2>
+
+                <div class="subsection">
+                    <h3>Link doesn't appear on GitHub Pages</h3>
+                    <ul class="checklist">
+                        <li>Verify addMissingChineseLabels() function is present</li>
+                        <li>Check that it's called in loadData() when snap.exists()</li>
+                        <li>Hard refresh browser (Ctrl+Shift+R) to clear cache</li>
+                        <li>Wait 2-3 minutes for GitHub Pages to rebuild</li>
+                    </ul>
+                </div>
+
+                <div class="subsection">
+                    <h3>Link appears but clicking doesn't navigate</h3>
+                    <ul class="checklist">
+                        <li>Verify resourceUrl path is correct (relative from subjects/)</li>
+                        <li>Check that HTML file exists in correct location</li>
+                        <li>Ensure path is in STATIC_ASSETS in sw.js</li>
+                    </ul>
+                </div>
+
+                <div class="subsection">
+                    <h3>Validation fails</h3>
+                    <div class="command">npm run validate</div>
+                    <p>Read error messages carefully — they indicate which files are inconsistent or missing.</p>
+                </div>
+            </div>
+
+            <!-- Key Concept -->
+            <div class="section">
+                <h2>💡 Key Concept: Firestore Sync</h2>
+
+                <div class="note">
+                    <p><strong>Why is addMissingChineseLabels() needed?</strong></p>
+                    <p>Subject pages load from Firestore. If a Firestore document was created and saved BEFORE you added the resourceUrl to subject.js, the Firestore doc won't have that field.</p>
+                    <p>The sync function updates Firestore with missing fields from the seed data (subject.js) every time the page loads, ensuring the "Open notes" link always displays.</p>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <p>📖 Study Dashboard Workflow Guide</p>
+            <p style="margin-top: 10px; font-size: 12px;">
+                Version: v1.0 | Date: 2026-06-13 | Last Updated: 2026-06-13
+            </p>
+            <p style="margin-top: 5px; font-size: 12px;">
+                Location: html-guide/workflow-guide-v1.0-2026-06-13.html
+            </p>
+        </footer>
+    </div>
+</body>
+</html>
