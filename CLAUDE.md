@@ -42,22 +42,27 @@ No `archive/` subdirectories — all files sit directly in `<subject>/`.
 
 **First:** confirm the HTML file exists on disk — do not create it.
 
-1. Check/add **Back to Dashboard** button (first element after `<body>`):
-   ```css
-   .top-nav{background:#fff;padding:10px 16px;border-bottom:2px solid #e5e7eb;position:sticky;top:0;z-index:120}
-   .dashboard-link{display:inline-flex;align-items:center;gap:6px;padding:8px 12px;border-radius:8px;background:#1d4ed8;color:#fff;font-size:13px;font-weight:800;text-decoration:none}
-   .dashboard-link:hover{background:#1e40af}
-   ```
-   ```html
-   <div class="top-nav"><a class="dashboard-link" href="../index.html">&larr; Back to Dashboard</a></div>
-   ```
-   *(RBT pages use a dark sticky nav — verify the button is there instead.)*
+1. Check/add **Back to Dashboard** button:
+   - **Standard pages:** Add as first element after `<body>`:
+     ```html
+     <div class="top-nav" style="background:#fff;padding:10px 16px;border-bottom:2px solid #e5e7eb;position:sticky;top:0;z-index:120">
+       <a class="dashboard-link" href="../index.html" style="display:inline-flex;align-items:center;gap:6px;padding:8px 12px;border-radius:8px;background:#1d4ed8;color:#fff;font-size:13px;font-weight:800;text-decoration:none">&larr; Back to Dashboard</a>
+     </div>
+     ```
+   - **RBT pages** (dark header with custom styling): Position absolutely inside `<header>` to avoid being hidden:
+     ```html
+     <header class="hdr">
+       <div style="position:absolute;top:10px;left:16px"><a href="../index.html" style="display:inline-flex;align-items:center;gap:6px;padding:8px 12px;border-radius:8px;background:rgba(255,255,255,0.2);color:#fff;font-size:13px;font-weight:800;text-decoration:none;border:1px solid rgba(255,255,255,0.3)">&larr; Dashboard</a></div>
+       <!-- header content -->
+     </header>
+     ```
 2. Add `resourceUrl: "../<subject>/<file>.html"` to the matching chapter in `js/subject.js`
 3. Add `'/<subject>/<file>.html'` to `STATIC_ASSETS` in `sw.js`
 4. **Update subject page** — if the subject page doesn't have the `.chapter-link` CSS, `chapterResource` variable, and `addMissingChineseLabels()` sync function, add them (see Auto-Integration Workflow step 4 for templates)
 5. **Bump cache versions** — increment `?v=N` on the subject page's CSS and module imports
 6. Run `npm run validate`
-7. Commit
+7. Commit & push
+8. **Browser cache clearing:** After pushing, users should clear site data (DevTools → Application → Storage → Clear site data) to load the updated Firestore document with the new `resourceUrl`
 
 ## Auto-Integration Workflow
 
