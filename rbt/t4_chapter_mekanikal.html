@@ -1,0 +1,989 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=5.0"/>
+<meta name="theme-color" content="#0891b2"/>
+<title>RBT — Reka Bentuk Mekanikal (2.2)</title>
+<style>
+:root{
+  --bg:#f0f9ff;--ink:#0c4a6e;--muted:#6b7280;
+  --pri:#0891b2;--gr:#16a34a;--rd:#dc2626;
+  --am:#d97706;--pu:#7c3aed;--or:#ea580c;
+  --pk:#be185d;--tl:#0d9488;
+  --line:#bae6fd;--soft:#e0f2fe;
+  --shadow:0 14px 30px rgba(8,145,178,.13);--r:22px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:var(--ink)}
+
+.hdr{background:linear-gradient(135deg,#0c4a6e,#0891b2 55%,#06b6d4);
+  padding:26px 16px 68px;position:relative;overflow:hidden;color:#fff}
+.hdr:before,.hdr:after{content:"";position:absolute;border-radius:999px;background:rgba(255,255,255,.1)}
+.hdr:before{width:230px;height:230px;left:-95px;top:-75px}
+.hdr:after{width:290px;height:290px;right:-125px;bottom:-155px}
+.hero{max-width:1100px;margin:auto;position:relative;z-index:2}
+.badge{display:inline-flex;gap:7px;align-items:center;
+  background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.3);
+  padding:7px 13px;border-radius:999px;font-weight:700;font-size:.83rem;margin-bottom:10px}
+h1{font-size:clamp(1.6rem,5vw,3.2rem);line-height:1.08;letter-spacing:-1px;margin-bottom:6px}
+.hero-sub{font-size:clamp(.88rem,2vw,1rem);opacity:.93;max-width:680px;margin-bottom:4px}
+.lang-row{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap}
+.lbtn{border:2px solid rgba(255,255,255,.5);background:rgba(255,255,255,.15);
+  color:#fff;border-radius:999px;padding:8px 16px;font-weight:800;font-size:.83rem;cursor:pointer;transition:.15s}
+.lbtn.active{background:#fff;color:var(--pri)}
+
+main{max-width:1120px;margin:-48px auto 60px;padding:0 13px;position:relative;z-index:5}
+.panel{background:rgba(255,255,255,.94);border:1px solid var(--line);box-shadow:var(--shadow);border-radius:var(--r)}
+
+.ctrl{padding:12px 15px;display:flex;flex-wrap:wrap;gap:9px;align-items:center;
+  position:sticky;top:7px;z-index:50;backdrop-filter:blur(12px)}
+.srch{flex:1;min-width:140px;border:1px solid var(--line);background:#fbfcff;
+  border-radius:17px;padding:11px 14px;font-size:.95rem;outline:none;color:var(--ink)}
+.srch:focus{border-color:var(--pri);box-shadow:0 0 0 3px rgba(8,145,178,.12)}
+
+.tabs{display:flex;overflow-x:auto;background:#0c4a6e;scrollbar-width:none;
+  position:sticky;top:53px;z-index:49;-webkit-overflow-scrolling:touch}
+.tabs::-webkit-scrollbar{display:none}
+.tab{flex:0 0 auto;padding:11px 14px;font-size:12px;font-weight:800;
+  color:#94a3b8;background:transparent;border:none;cursor:pointer;
+  border-bottom:3px solid transparent;white-space:nowrap;transition:.2s}
+.tab.t1.active{color:#7dd3fc;border-bottom-color:#0891b2}
+.tab.t2.active{color:#c4b5fd;border-bottom-color:#7c3aed}
+.tab.t3.active{color:#fde68a;border-bottom-color:#d97706}
+.tab.t4.active{color:#6ee7b7;border-bottom-color:#16a34a}
+.tab.t5.active{color:#fca5a5;border-bottom-color:#dc2626}
+.tab.tmm.active{color:#fbbf24;border-bottom-color:#f59e0b}
+
+.psec{display:none;padding:12px 12px 60px}
+.psec.active{display:block}
+
+.sec{border-radius:var(--r);margin-bottom:12px;overflow:hidden;border:2px solid}
+.sec-hdr{display:flex;align-items:center;gap:12px;padding:14px;cursor:pointer;user-select:none;-webkit-tap-highlight-color:transparent}
+.sec-icon{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;color:#fff}
+.sec-info{flex:1}
+.sec-num{font-size:10px;font-weight:800;letter-spacing:1px;text-transform:uppercase;margin-bottom:2px}
+.sec-t-my{font-size:15px;font-weight:900;line-height:1.25;color:#0c4a6e}
+.sec-t-en{font-size:12px;font-weight:700;color:#1d4ed8;font-style:italic;margin-top:2px}
+.sec-t-zh{font-size:12px;font-weight:700;color:#047857;margin-top:1px}
+.sec-chev{font-size:20px;color:#94a3b8;transition:transform .25s;flex-shrink:0}
+.sec-chev.open{transform:rotate(180deg)}
+.sec-body{display:none;padding:0 12px 14px}
+.sec-body.open{display:block}
+
+/* TRI-LANGUAGE BLOCKS */
+.tri{border-radius:12px;overflow:hidden;margin-bottom:9px;border:2px solid var(--line)}
+.bl-my{background:#fef3c7;border-left:5px solid var(--am);padding:9px 12px}
+.bl-my-lbl{font-size:10px;font-weight:800;letter-spacing:2px;color:#92400e;text-transform:uppercase;margin-bottom:3px}
+.bl-my-t{font-size:13.5px;font-weight:700;color:#78350f;line-height:1.55}
+.bl-en{background:#e0f2fe;border-left:5px solid var(--pri);padding:9px 12px}
+.bl-en-lbl{font-size:10px;font-weight:800;letter-spacing:2px;color:#0369a1;text-transform:uppercase;margin-bottom:3px}
+.bl-en-t{font-size:13px;font-weight:600;color:#0c4a6e;line-height:1.55;font-style:italic}
+.bl-zh{background:#ecfdf5;border-left:5px solid var(--gr);padding:9px 12px}
+.bl-zh-lbl{font-size:10px;font-weight:800;letter-spacing:2px;color:#047857;text-transform:uppercase;margin-bottom:3px}
+.bl-zh-t{font-size:13px;font-weight:600;color:#064e3b;line-height:1.65}
+
+/* COMPONENT CARDS */
+.comp-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px;margin-bottom:10px}
+.comp-card{border-radius:14px;overflow:hidden;border:2px solid;text-align:center;padding:14px 10px}
+.comp-icon{font-size:28px;margin-bottom:6px}
+.comp-my{font-size:13px;font-weight:900;margin-bottom:3px;color:#0c4a6e}
+.comp-en{font-size:11px;font-weight:700;font-style:italic;color:#1d4ed8;margin-bottom:3px}
+.comp-zh{font-size:11px;font-weight:600;color:#047857}
+.comp-desc-my{font-size:11.5px;font-weight:700;color:#374151;line-height:1.4;margin-top:6px;border-top:1px dashed rgba(0,0,0,.1);padding-top:6px}
+.comp-desc-en{font-size:10.5px;font-style:italic;color:#1d4ed8;line-height:1.4;margin-top:3px}
+.comp-desc-zh{font-size:10.5px;color:#047857;line-height:1.4;margin-top:3px}
+
+/* GEAR TYPES */
+.gear-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:9px;margin-bottom:10px}
+.gear-card{border-radius:13px;padding:11px;border:2px solid #bae6fd;background:#e0f2fe;text-align:center}
+.gear-my{font-size:12.5px;font-weight:900;color:#0c4a6e;margin-bottom:3px}
+.gear-en{font-size:11px;font-weight:700;font-style:italic;color:#1d4ed8;margin-bottom:3px}
+.gear-zh{font-size:10.5px;font-weight:600;color:#047857}
+
+/* LEVER CLASSES */
+.lever-grid{display:grid;gap:10px;margin-bottom:10px}
+.lever-card{border-radius:14px;overflow:hidden;border:2px solid}
+.lever-head{padding:10px 14px;font-size:14px;font-weight:900;color:#fff}
+.lever-body{padding:11px 14px;font-size:12.5px;font-weight:700;line-height:1.5}
+.lever-zh{padding:9px 14px;font-size:12px;font-weight:600;color:#064e3b;background:#ecfdf5;border-top:1px dashed #a7f3d0;line-height:1.5}
+
+/* TABLE */
+.tbl-wrap{overflow-x:auto;margin-bottom:10px;border-radius:13px}
+.tbl{width:100%;border-collapse:collapse;font-size:12px}
+.tbl th{padding:9px 10px;font-size:10px;font-weight:800;letter-spacing:1px;text-transform:uppercase;text-align:left;color:#fff}
+.tbl td{padding:9px 10px;vertical-align:top;line-height:1.45;border-bottom:1px solid rgba(0,0,0,.06)}
+.tbl tr:last-child td{border-bottom:none}
+
+/* FLOW */
+.flow-wrap{background:#0c4a6e;border-radius:14px;padding:14px;margin-bottom:10px}
+.flow-lbl{font-size:10px;font-weight:800;letter-spacing:2px;color:#7dd3fc;text-transform:uppercase;margin-bottom:9px}
+.fstep-wrap{margin-bottom:16px}
+.fstep-wrap:last-child{margin-bottom:0}
+.fstep{background:rgba(255,255,255,.13);border-radius:10px;padding:10px 13px;font-size:13px;font-weight:800;color:#fff;line-height:1.35;position:relative}
+.fstep:after{content:"↓";position:absolute;left:50%;transform:translateX(-50%);bottom:-16px;color:#67e8f9;font-size:16px;font-weight:900}
+.fstep-wrap:last-child .fstep:after{display:none}
+.fstep-sub{font-size:11.5px;color:#a7f3d0;font-weight:600;margin-top:3px}
+.fdiamond{background:#fbbf24;border-radius:10px;padding:9px 13px;font-size:13px;font-weight:900;color:#0c4a6e;text-align:center;position:relative}
+.fdiamond:after{content:"↓";position:absolute;left:50%;transform:translateX(-50%);bottom:-16px;color:#fbbf24;font-size:16px;font-weight:900}
+
+/* PILLS */
+.mem{border-radius:12px;padding:11px;background:#f1f5f9;border:2px solid #cbd5e1;margin-top:8px}
+.mem-lbl{font-size:10px;letter-spacing:2px;font-weight:800;margin-bottom:7px;color:#475569;text-transform:uppercase}
+.pills{display:flex;flex-wrap:wrap;gap:5px}
+.pill{padding:5px 9px;border-radius:999px;font-size:11.5px;font-weight:800;border:2px solid}
+.p-my{border-color:var(--am);background:#fef3c7;color:#78350f}
+.p-en{border-color:var(--pri);background:#e0f2fe;color:#0c4a6e;font-style:italic}
+.p-zh{border-color:var(--gr);background:#d1fae5;color:#052e16}
+
+/* SECTION THEMES */
+.s-cy{background:#e0f2fe;border-color:#0891b2}
+.s-cy .sec-hdr{background:#bae6fd}.s-cy .sec-icon{background:#0891b2}
+.s-cy .sec-num{color:#0369a1}.s-cy .sec-body{border-top:2px dashed #7dd3fc}
+
+.s-pu{background:#f5f3ff;border-color:#7c3aed}
+.s-pu .sec-hdr{background:#ede9fe}.s-pu .sec-icon{background:#7c3aed}
+.s-pu .sec-num{color:#5b21b6}.s-pu .sec-body{border-top:2px dashed #c4b5fd}
+
+.s-am{background:#fffbeb;border-color:#f59e0b}
+.s-am .sec-hdr{background:#fef3c7}.s-am .sec-icon{background:#d97706}
+.s-am .sec-num{color:#92400e}.s-am .sec-body{border-top:2px dashed #fde68a}
+
+.s-gr{background:#f0fdf4;border-color:#16a34a}
+.s-gr .sec-hdr{background:#d1fae5}.s-gr .sec-icon{background:#16a34a}
+.s-gr .sec-num{color:#15803d}.s-gr .sec-body{border-top:2px dashed #6ee7b7}
+
+.s-rd{background:#fff5f5;border-color:#dc2626}
+.s-rd .sec-hdr{background:#fee2e2}.s-rd .sec-icon{background:#dc2626}
+.s-rd .sec-num{color:#b91c1c}.s-rd .sec-body{border-top:2px dashed #fca5a5}
+
+.s-or{background:#fff7ed;border-color:#ea580c}
+.s-or .sec-hdr{background:#ffedd5}.s-or .sec-icon{background:#ea580c}
+.s-or .sec-num{color:#7c2d12}.s-or .sec-body{border-top:2px dashed #fdba74}
+
+/* MEMORY MAP */
+.mmap-item{border-radius:13px;overflow:hidden;margin-bottom:9px;border:2px solid var(--line);box-shadow:0 2px 6px rgba(0,0,0,.06)}
+.mm-my{background:#fef3c7;padding:9px 13px;border-bottom:1px solid #fde68a}
+.mm-my-t{font-size:13.5px;font-weight:800;color:#78350f}
+.mm-en{background:#bae6fd;padding:9px 13px;border-bottom:1px solid #7dd3fc}
+.mm-en-t{font-size:12.5px;font-weight:700;color:#0c4a6e;font-style:italic}
+.mm-zh{background:#d1fae5;padding:9px 13px}
+.mm-zh-t{font-size:12.5px;font-weight:600;color:#064e3b}
+.mmap-hdr{background:#0c4a6e;padding:14px;text-align:center;border-radius:13px 13px 0 0}
+.mmap-h1{font-size:15px;font-weight:800;color:#fbbf24;margin-bottom:2px}
+.mmap-h2{font-size:12px;color:#94a3b8;font-style:italic}
+.mmap-h3{font-size:11px;color:#6ee7b7;margin-top:2px}
+
+.exam-box{border-radius:13px;overflow:hidden;border:2px solid var(--pri);margin-top:9px}
+.exam-hdr{background:var(--pri);padding:9px 13px}
+.exam-lbl{font-size:10px;letter-spacing:2px;font-weight:800;color:#e0f2fe;text-transform:uppercase}
+.exam-my{background:#fef3c7;border-left:5px solid var(--am);padding:9px 13px}
+.exam-my-t{font-size:13px;font-weight:700;color:#78350f;line-height:1.6}
+.exam-en{background:#e0f2fe;border-left:5px solid var(--pri);padding:9px 13px}
+.exam-en-t{font-size:13px;font-weight:700;color:#0c4a6e;line-height:1.6;font-style:italic}
+.exam-zh{background:#ecfdf5;border-left:5px solid var(--gr);padding:9px 13px}
+.exam-zh-t{font-size:12px;font-weight:600;color:#064e3b;line-height:1.7}
+
+/* HIDE */
+body.lang-my .en-only,.body.lang-my .zh-only{display:none}
+body.lang-en .my-only,.body.lang-en .zh-only{display:none}
+body.lang-zh .my-only,.body.lang-zh .en-only{display:none}
+body.lang-my-en .zh-only{display:none}
+body.lang-my-zh .en-only{display:none}
+body.lang-en-zh .my-only{display:none}
+
+.top-link{position:fixed;right:13px;bottom:13px;background:var(--pri);
+  color:#fff;text-decoration:none;padding:11px 13px;border-radius:999px;
+  font-weight:900;box-shadow:var(--shadow);z-index:70;font-size:.88rem}
+footer{text-align:center;color:var(--muted);padding:18px 14px 50px;font-size:.83rem;line-height:1.6}
+
+@media(max-width:900px){.comp-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:560px){
+  main{padding:0 10px;margin-top:-44px}
+  .hdr{padding:22px 13px 66px}
+  .comp-grid,.gear-grid{grid-template-columns:repeat(2,1fr)}
+}
+</style>
+</head>
+<body id="top" class="lang-all">
+
+<header class="hdr">
+  <div class="hero">
+    <div class="badge">⚙️ RBT · Topik 2.2</div>
+    <h1>Reka Bentuk Mekanikal</h1>
+    <p class="hero-sub">Sistem mekanikal, komponen (Gear, Pautan, Tuas, Takal, Tali sawat, Aci sesondol, Aci engkol, Gelongsor, Galas bebola, Bindu, Rantai), reka bentuk gajet basikal dan cadangan penambahbaikan.</p>
+    <p class="hero-sub" style="margin-top:4px;font-style:italic;color:#bae6fd">Mechanical Design System · 机械设计系统</p>
+    <div class="lang-row">
+      <button class="lbtn active" data-lang="lang-all" onclick="setLang(this)">MY+EN+中文</button>
+      <button class="lbtn" data-lang="lang-my-en" onclick="setLang(this)">MY+EN</button>
+      <button class="lbtn" data-lang="lang-en-zh" onclick="setLang(this)">EN+中文</button>
+      <button class="lbtn" data-lang="lang-my" onclick="setLang(this)">Melayu</button>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section class="ctrl panel">
+    <input id="srch" class="srch" placeholder="Cari: gear, tuas, takal, rantai, pautan…"/>
+  </section>
+
+  <div class="tabs">
+    <button class="tab t1 active" onclick="showTab('t1',this)">2.2 Sistem Mekanikal</button>
+    <button class="tab t2" onclick="showTab('t2',this)">Gear &amp; Pautan</button>
+    <button class="tab t3" onclick="showTab('t3',this)">Tuas, Takal &amp; Tali sawat</button>
+    <button class="tab t4" onclick="showTab('t4',this)">Aci, Gelongsor &amp; Lain-lain</button>
+    <button class="tab t5" onclick="showTab('t5',this)">Reka Bentuk Gajet</button>
+    <button class="tab tmm" onclick="showTab('tmm',this)">⭐ Memory Map</button>
+  </div>
+
+<!-- ══════ 2.2 SISTEM MEKANIKAL ══════ -->
+<div id="tab-t1" class="psec active">
+
+  <div class="sec s-cy">
+    <div class="sec-hdr" onclick="exp(this)">
+      <div class="sec-icon">⚙️</div>
+      <div class="sec-info">
+        <div class="sec-num">2.2</div>
+        <div class="sec-t-my">Sistem Mekanikal — Definisi</div>
+        <div class="sec-t-en">Mechanical System — Definition</div>
+        <div class="sec-t-zh">机械系统——定义</div>
+      </div>
+      <span class="sec-chev open">⌄</span>
+    </div>
+    <div class="sec-body open">
+      <div class="tri">
+        <div class="bl-my"><div class="bl-my-lbl">🟡 Melayu</div><div class="bl-my-t">
+          <b>Sistem mekanikal</b> terdiri daripada gabungan beberapa komponen mekanikal yang berfungsi sebagai penghantar bagi menyelesaikan sesuatu tugasan yang dikehendaki (ditetapkan).<br><br>
+          Gabungan komponen mekanikal membolehkan suatu produk <b>berfungsi, bergerak atau berputar</b>.
+        </div></div>
+        <div class="bl-en"><div class="bl-en-lbl">🔵 English</div><div class="bl-en-t">
+          A <b>mechanical system</b> consists of a combination of mechanical components that act as transmitters to complete a required task. The combination of mechanical components allows a product to <b>function, move or rotate</b>.
+        </div></div>
+        <div class="bl-zh"><div class="bl-zh-lbl">🟢 中文</div><div class="bl-zh-t">
+          <b>机械系统</b>由多种机械部件的组合构成，作为传递器以完成所要求的任务。机械部件的组合使产品能够<b>运作、移动或旋转</b>。
+        </div></div>
+      </div>
+
+      <div class="tri">
+        <div class="bl-my"><div class="bl-my-lbl">🟡 Tip PLUS</div><div class="bl-my-t">
+          • Sistem mekanikal dapat <b>mengurangkan penggunaan tenaga manusia</b>.<br>
+          • Gabungan komponen membolehkan produk berfungsi, bergerak dan berputar.<br>
+          • Menggunakan komponen sama ada secara <b>berasingan atau bergabung</b>.<br>
+          • Pergerakan mekanikal bertujuan <b>memindahkan sumber gerakan</b> kepada gerakan yang lain.<br>
+          • Sistem mekanikal paling ringkas menggunakan <b>sekurang-kurangnya 2 jenis</b> komponen mekanikal.
+        </div></div>
+        <div class="bl-en"><div class="bl-en-lbl">🔵 Key Points</div><div class="bl-en-t">
+          • Reduces human effort. Uses components separately or combined. Mechanical movement transfers one source of motion to another. Simplest mechanical system uses at least 2 types of components.
+        </div></div>
+        <div class="bl-zh"><div class="bl-zh-lbl">🟢 关键点</div><div class="bl-zh-t">
+          • 减少人力使用。单独或组合使用部件。机械运动将一种运动源转移到另一种运动。最简单的机械系统至少使用2种机械部件。
+        </div></div>
+      </div>
+
+      <!-- 11 COMPONENTS OVERVIEW -->
+      <div style="font-size:11px;font-weight:800;letter-spacing:2px;color:#0369a1;text-transform:uppercase;margin-bottom:9px">11 Komponen Mekanikal / Mechanical Components / 11种机械部件</div>
+      <div class="comp-grid">
+        <div class="comp-card" style="background:#e0f2fe;border-color:#0891b2">
+          <div class="comp-icon">⚙️</div>
+          <div class="comp-my">A. Gear</div>
+          <div class="comp-en">Gear</div>
+          <div class="comp-zh">齿轮</div>
+          <div class="comp-desc-my">Menukar kelajuan pergerakan</div>
+          <div class="comp-desc-en">Changes speed of movement</div>
+          <div class="comp-desc-zh">改变运动速度</div>
+        </div>
+        <div class="comp-card" style="background:#f5f3ff;border-color:#7c3aed">
+          <div class="comp-icon">🔗</div>
+          <div class="comp-my">B. Pautan</div>
+          <div class="comp-en">Linkage</div>
+          <div class="comp-zh">连杆</div>
+          <div class="comp-desc-my">Penghubung komponen dalam sistem</div>
+          <div class="comp-desc-en">Connects components in system</div>
+          <div class="comp-desc-zh">连接系统中的部件</div>
+        </div>
+        <div class="comp-card" style="background:#fff7ed;border-color:#ea580c">
+          <div class="comp-icon">🔧</div>
+          <div class="comp-my">C. Tuil/Tuas</div>
+          <div class="comp-en">Lever</div>
+          <div class="comp-zh">杠杆</div>
+          <div class="comp-desc-my">Sistem daya, beban &amp; fulkrum</div>
+          <div class="comp-desc-en">Force, load &amp; fulcrum system</div>
+          <div class="comp-desc-zh">力、负载与支点系统</div>
+        </div>
+        <div class="comp-card" style="background:#fef9c3;border-color:#ca8a04">
+          <div class="comp-icon">🛞</div>
+          <div class="comp-my">D. Takal</div>
+          <div class="comp-en">Pulley</div>
+          <div class="comp-zh">滑轮</div>
+          <div class="comp-desc-my">Kurangkan berat beban</div>
+          <div class="comp-desc-en">Reduces load weight</div>
+          <div class="comp-desc-zh">减少负载重量</div>
+        </div>
+        <div class="comp-card" style="background:#f0fdf4;border-color:#16a34a">
+          <div class="comp-icon">📎</div>
+          <div class="comp-my">E. Tali sawat</div>
+          <div class="comp-en">Belting</div>
+          <div class="comp-zh">传动带</div>
+          <div class="comp-desc-my">Hubungkan takal pemacu dan dipacu</div>
+          <div class="comp-desc-en">Links drive and driven pulleys</div>
+          <div class="comp-desc-zh">连接主动轮和从动轮</div>
+        </div>
+        <div class="comp-card" style="background:#fff5f5;border-color:#dc2626">
+          <div class="comp-icon">🔩</div>
+          <div class="comp-my">F. Aci sesondol</div>
+          <div class="comp-en">Camshaft</div>
+          <div class="comp-zh">凸轮轴</div>
+          <div class="comp-desc-my">Buka/tutup injap enjin</div>
+          <div class="comp-desc-en">Opens/closes engine valves</div>
+          <div class="comp-desc-zh">开/关发动机气门</div>
+        </div>
+        <div class="comp-card" style="background:#fdf2f8;border-color:#be185d">
+          <div class="comp-icon">🔄</div>
+          <div class="comp-my">G. Aci engkol</div>
+          <div class="comp-en">Crankshaft</div>
+          <div class="comp-zh">曲轴</div>
+          <div class="comp-desc-my">Tukar gerakan linear ke berputar</div>
+          <div class="comp-desc-en">Converts linear to rotary motion</div>
+          <div class="comp-desc-zh">将线性运动转为旋转运动</div>
+        </div>
+        <div class="comp-card" style="background:#e0f2fe;border-color:#0891b2">
+          <div class="comp-icon">↔️</div>
+          <div class="comp-my">H. Gelongsor</div>
+          <div class="comp-en">Slider</div>
+          <div class="comp-zh">滑块</div>
+          <div class="comp-desc-my">Kurangkan geseran gerakan mendatar</div>
+          <div class="comp-desc-en">Reduces friction in horizontal movement</div>
+          <div class="comp-desc-zh">减少水平运动中的摩擦</div>
+        </div>
+        <div class="comp-card" style="background:#fffbeb;border-color:#f59e0b">
+          <div class="comp-icon">⭕</div>
+          <div class="comp-my">I. Galas bebola</div>
+          <div class="comp-en">Ball bearing</div>
+          <div class="comp-zh">滚珠轴承</div>
+          <div class="comp-desc-my">Pengantara objek berputar</div>
+          <div class="comp-desc-en">Intermediary for rotating objects</div>
+          <div class="comp-desc-zh">旋转物体的中间体</div>
+        </div>
+        <div class="comp-card" style="background:#f5f3ff;border-color:#7c3aed">
+          <div class="comp-icon">🔧</div>
+          <div class="comp-my">J. Bindu</div>
+          <div class="comp-en">Chuck</div>
+          <div class="comp-zh">卡盘</div>
+          <div class="comp-desc-my">Pemegang mata gerudi</div>
+          <div class="comp-desc-en">Drill bit holder/clamp</div>
+          <div class="comp-desc-zh">钻头夹持器</div>
+        </div>
+        <div class="comp-card" style="background:#f0fdf4;border-color:#16a34a">
+          <div class="comp-icon">⛓️</div>
+          <div class="comp-my">K. Rantai</div>
+          <div class="comp-en">Chain</div>
+          <div class="comp-zh">链条</div>
+          <div class="comp-desc-my">Pengantara kuasa antara dua gear</div>
+          <div class="comp-desc-en">Power transmitter between two gears</div>
+          <div class="comp-desc-zh">两齿轮间的动力传递器</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════ GEAR & PAUTAN ══════ -->
+<div id="tab-t2" class="psec">
+
+  <div class="sec s-cy">
+    <div class="sec-hdr" onclick="exp(this)">
+      <div class="sec-icon">⚙️</div>
+      <div class="sec-info">
+        <div class="sec-num">A</div>
+        <div class="sec-t-my">Gear — Jenis-jenis</div>
+        <div class="sec-t-en">Gear — Types</div>
+        <div class="sec-t-zh">齿轮——类型</div>
+      </div>
+      <span class="sec-chev open">⌄</span>
+    </div>
+    <div class="sec-body open">
+      <div class="tri">
+        <div class="bl-my"><div class="bl-my-lbl">🟡 Definisi</div><div class="bl-my-t">
+          <b>Gear</b> digunakan untuk <b>menukar kelajuan</b> peralatan mekanikal yang bergerak, contohnya mesin gerudi tangan. <b>Gigi</b> pada badan gear berfungsi untuk menyalurkan kuasa daripada sumber kepada penerima.
+        </div></div>
+        <div class="bl-en"><div class="bl-en-lbl">🔵 Definition</div><div class="bl-en-t">
+          Gear is used to <b>change the speed</b> of moving mechanical equipment. Teeth on the gear body transmit power from the source to the receiver.
+        </div></div>
+        <div class="bl-zh"><div class="bl-zh-lbl">🟢 定义</div><div class="bl-zh-t">
+          齿轮用于<b>改变运动机械设备的速度</b>。齿轮体上的齿将动力从来源传递给接收器。
+        </div></div>
+      </div>
+
+      <div class="gear-grid">
+        <div class="gear-card"><div class="gear-my">Gear skru</div><div class="gear-en">Screw gear</div><div class="gear-zh">螺旋齿轮</div></div>
+        <div class="gear-card"><div class="gear-my">Gear serong</div><div class="gear-en">Bevel gear</div><div class="gear-zh">锥齿轮</div></div>
+        <div class="gear-card"><div class="gear-my">Gear miter</div><div class="gear-en">Miter gear</div><div class="gear-zh">直角锥齿轮</div></div>
+        <div class="gear-card"><div class="gear-my">Gear dalam</div><div class="gear-en">Internal gear</div><div class="gear-zh">内齿轮</div></div>
+        <div class="gear-card"><div class="gear-my">Gear tulang hering</div><div class="gear-en">Herringbone gear</div><div class="gear-zh">人字齿轮</div></div>
+        <div class="gear-card"><div class="gear-my">Gear belitan</div><div class="gear-en">Worm gear</div><div class="gear-zh">蜗轮</div></div>
+        <div class="gear-card"><div class="gear-my">Gear taji</div><div class="gear-en">Spur gear</div><div class="gear-zh">正齿轮</div></div>
+        <div class="gear-card"><div class="gear-my">Gear rak dan pinan</div><div class="gear-en">Rack and pinion</div><div class="gear-zh">齿条和小齿轮</div></div>
+        <div class="gear-card"><div class="gear-my">Gear serong pilin</div><div class="gear-en">Spiral bevel gear</div><div class="gear-zh">螺旋锥齿轮</div></div>
+        <div class="gear-card"><div class="gear-my">Gear heliks</div><div class="gear-en">Helical gear</div><div class="gear-zh">斜齿轮</div></div>
+      </div>
+
+      <div class="mem">
+        <div class="mem-lbl">📝 10 Jenis Gear / 10 Gear Types / 10种齿轮</div>
+        <div class="pills">
+          <span class="pill p-my">Skru</span><span class="pill p-en">Screw</span><span class="pill p-zh">螺旋</span>
+          <span class="pill p-my">Serong</span><span class="pill p-en">Bevel</span><span class="pill p-zh">锥形</span>
+          <span class="pill p-my">Miter</span><span class="pill p-en">Miter</span><span class="pill p-zh">直角锥</span>
+          <span class="pill p-my">Dalam</span><span class="pill p-en">Internal</span><span class="pill p-zh">内齿</span>
+          <span class="pill p-my">Tulang hering</span><span class="pill p-en">Herringbone</span><span class="pill p-zh">人字</span>
+          <span class="pill p-my">Belitan</span><span class="pill p-en">Worm</span><span class="pill p-zh">蜗轮</span>
+          <span class="pill p-my">Taji</span><span class="pill p-en">Spur</span><span class="pill p-zh">正齿</span>
+          <span class="pill p-my">Rak &amp; pinan</span><span class="pill p-en">Rack &amp; pinion</span><span class="pill p-zh">齿条小齿轮</span>
+          <span class="pill p-my">Serong pilin</span><span class="pill p-en">Spiral bevel</span><span class="pill p-zh">螺旋锥</span>
+          <span class="pill p-my">Heliks</span><span class="pill p-en">Helical</span><span class="pill p-zh">斜齿</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sec s-pu">
+    <div class="sec-hdr" onclick="exp(this)">
+      <div class="sec-icon">🔗</div>
+      <div class="sec-info">
+        <div class="sec-num">B</div>
+        <div class="sec-t-my">Pautan (Linkage)</div>
+        <div class="sec-t-en">Linkage</div>
+        <div class="sec-t-zh">连杆</div>
+      </div>
+      <span class="sec-chev">⌄</span>
+    </div>
+    <div class="sec-body">
+      <div class="tri">
+        <div class="bl-my"><div class="bl-my-lbl">🟡 Melayu</div><div class="bl-my-t">
+          <b>Pautan</b> berfungsi sebagai <b>penghubung</b> suatu komponen atau bahan bagi melengkapkan suatu sistem mekanikal. Contoh: penggunaan pautan pada pintu (door closer).
+        </div></div>
+        <div class="bl-en"><div class="bl-en-lbl">🔵 English</div><div class="bl-en-t">
+          Linkage functions as a <b>connector</b> of a component or material to complete a mechanical system. Example: door closer mechanism.
+        </div></div>
+        <div class="bl-zh"><div class="bl-zh-lbl">🟢 中文</div><div class="bl-zh-t">
+          连杆作为<b>连接器</b>连接部件或材料以完成机械系统。例子：门控器（关门器）。
+        </div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════ TUAS, TAKAL & TALI SAWAT ══════ -->
+<div id="tab-t3" class="psec">
+
+  <div class="sec s-or">
+    <div class="sec-hdr" onclick="exp(this)">
+      <div class="sec-icon">🔧</div>
+      <div class="sec-info">
+        <div class="sec-num">C</div>
+        <div class="sec-t-my">Tuil atau Tuas (Lever) — 3 Kelas</div>
+        <div class="sec-t-en">Lever — 3 Classes</div>
+        <div class="sec-t-zh">杠杆——3种类别</div>
+      </div>
+      <span class="sec-chev open">⌄</span>
+    </div>
+    <div class="sec-body open">
+      <div class="tri">
+        <div class="bl-my"><div class="bl-my-lbl">🟡 Definisi</div><div class="bl-my-t">
+          Tuil atau tuas ialah sistem yang berkaitan dengan <b>daya (force), beban (load) dan fulkrum (pivot/fulcrum)</b>.
+        </div></div>
+        <div class="bl-en"><div class="bl-en-lbl">🔵 Definition</div><div class="bl-en-t">
+          A lever is a system related to <b>force (Daya), load (Beban) and fulcrum (Fulkrum)</b>.
+        </div></div>
+        <div class="bl-zh"><div class="bl-zh-lbl">🟢 定义</div><div class="bl-zh-t">
+          杠杆是与<b>力（Daya）、负载（Beban）和支点（Fulkrum）</b>相关的系统。
+        </div></div>
+      </div>
+
+      <div class="lever-grid">
+        <div class="lever-card" style="border-color:#dc2626">
+          <div class="lever-head" style="background:#dc2626">Kelas 1 / Class 1 / 第一类</div>
+          <div class="lever-body en-only" style="background:#fff5f5;color:#7f1d1d">
+            Arrangement: Daya — Fulkrum — Beban (Force — Fulcrum — Load)<br>
+            Fulcrum is <b>between</b> force and load.<br>
+            Example: Pliers (playar), scissors (gunting), seesaw.
+          </div>
+          <div class="lever-zh" style="color:#064e3b">
+            排列：力——支点——负载。支点在<b>力和负载之间</b>。例子：钳子、剪刀、跷跷板。
+          </div>
+          <div class="lever-body my-only" style="background:#fff5f5;color:#7f1d1d">
+            Susun atur: Daya — Fulkrum — Beban. Fulkrum berada di <b>antara</b> daya dan beban. Contoh: Playar, gunting, jongkang-jongket.
+          </div>
+        </div>
+
+        <div class="lever-card" style="border-color:#16a34a">
+          <div class="lever-head" style="background:#16a34a">Kelas 2 / Class 2 / 第二类</div>
+          <div class="lever-body en-only" style="background:#f0fdf4;color:#052e16">
+            Arrangement: Daya — Beban — Fulkrum (Force — Load — Fulcrum)<br>
+            Load is <b>between</b> force and fulcrum.<br>
+            Example: Wheelbarrow (kereta sorong), bottle opener.
+          </div>
+          <div class="lever-zh">
+            排列：力——负载——支点。负载在<b>力和支点之间</b>。例子：手推车、开瓶器。
+          </div>
+          <div class="lever-body my-only" style="background:#f0fdf4;color:#052e16">
+            Susun atur: Daya — Beban — Fulkrum. Beban berada di <b>antara</b> daya dan fulkrum. Contoh: Kereta sorong, pembuka botol.
+          </div>
+        </div>
+
+        <div class="lever-card" style="border-color:#2563eb">
+          <div class="lever-head" style="background:#2563eb">Kelas 3 / Class 3 / 第三类</div>
+          <div class="lever-body en-only" style="background:#eff6ff;color:#1e3a8a">
+            Arrangement: Fulkrum — Daya — Beban (Fulcrum — Force — Load)<br>
+            Force is <b>between</b> fulcrum and load.<br>
+            Example: Stapler, tweezers, fishing rod.
+          </div>
+          <div class="lever-zh">
+            排列：支点——力——负载。力在<b>支点和负载之间</b>。例子：订书机、镊子、鱼竿。
+          </div>
+          <div class="lever-body my-only" style="background:#eff6ff;color:#1e3a8a">
+            Susun atur: Fulkrum — Daya — Beban. Daya berada di <b>antara</b> fulkrum dan beban. Contoh: Pemahat, pencengkam, joran.
+          </div>
+        </div>
+      </div>
+
+      <div class="mem">
+        <div class="mem-lbl">📝 Memory — 3 Kelas Tuas</div>
+        <div class="pills">
+          <span class="pill p-rd" style="border-color:#dc2626;background:#fee2e2;color:#7f1d1d">Kelas 1: D-F-B (playar) Force-Fulcrum-Load</span>
+          <span class="pill p-gr">Kelas 2: D-B-F (kereta sorong) Force-Load-Fulcrum</span>
+          <span class="pill" style="border-color:#2563eb;background:#dbeafe;color:#1e3a8a">Kelas 3: F-D-B (pemahat) Fulcrum-Force-Load</span>
+          <span class="pill p-zh">第一类：力-支点-负载</span>
+          <span class="pill p-zh">第二类：力-负载-支点</span>
+          <span class="pill p-zh">第三类：支点-力-负载</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sec s-am">
+    <div class="sec-hdr" onclick="exp(this)">
+      <div class="sec-icon">🛞</div>
+      <div class="sec-info">
+        <div class="sec-num">D</div>
+        <div class="sec-t-my">Takal (Pulley) &amp; Tali sawat (Belting)</div>
+        <div class="sec-t-en">Pulley &amp; Belting</div>
+        <div class="sec-t-zh">滑轮与传动带</div>
+      </div>
+      <span class="sec-chev">⌄</span>
+    </div>
+    <div class="sec-body">
+      <div class="tri">
+        <div class="bl-my"><div class="bl-my-lbl">🟡 Takal / Pulley / 滑轮</div><div class="bl-my-t">
+          Takal ialah <b>mesin ringkas</b> yang terdiri daripada satu roda yang berputar pada gandar. Digunakan untuk <b>mengurangkan berat</b> supaya beban mudah diangkat.
+        </div></div>
+        <div class="bl-en"><div class="bl-en-lbl">🔵 Pulley</div><div class="bl-en-t">
+          A pulley is a <b>simple machine</b> consisting of a wheel rotating on an axle. Used to <b>reduce load weight</b> so that loads can be lifted more easily.
+        </div></div>
+        <div class="bl-zh"><div class="bl-zh-lbl">🟢 滑轮</div><div class="bl-zh-t">
+          滑轮是由在轴上旋转的轮子组成的<b>简单机器</b>。用于<b>减少负载重量</b>，使重物更容易被提起。
+        </div></div>
+      </div>
+
+      <div class="tri">
+        <div class="bl-my"><div class="bl-my-lbl">🟡 Tali sawat / Belting / 传动带</div><div class="bl-my-t">
+          Tali sawat berfungsi <b>menghubungkan takal pemacu dengan takal dipacu</b>. Banyak digunakan dalam industri seperti pemesinan, conveyor dan enjin motosikal berkuasa tinggi. Juga digunakan untuk <b>mengubah kelajuan pergerakan</b> daripada tinggi kepada rendah.
+        </div></div>
+        <div class="bl-en"><div class="bl-en-lbl">🔵 Belting</div><div class="bl-en-t">
+          Belting connects the <b>drive pulley to the driven pulley</b>. Used in machinery, conveyors and high-powered motorcycles. Also used to <b>change movement speed</b> from high to low.
+        </div></div>
+        <div class="bl-zh"><div class="bl-zh-lbl">🟢 传动带</div><div class="bl-zh-t">
+          传动带<b>连接主动轮和从动轮</b>。用于机械、传送带和大功率摩托车。也用于将运动速度从<b>高速变为低速</b>。
+        </div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════ ACI, GELONGSOR & LAIN-LAIN ══════ -->
+<div id="tab-t4" class="psec">
+
+  <div class="sec s-rd">
+    <div class="sec-hdr" onclick="exp(this)">
+      <div class="sec-icon">🔩</div>
+      <div class="sec-info">
+        <div class="sec-num">F-K</div>
+        <div class="sec-t-my">Aci sesondol, Aci engkol, Gelongsor, Galas bebola, Bindu, Rantai</div>
+        <div class="sec-t-en">Camshaft, Crankshaft, Slider, Ball Bearing, Chuck, Chain</div>
+        <div class="sec-t-zh">凸轮轴、曲轴、滑块、滚珠轴承、卡盘、链条</div>
+      </div>
+      <span class="sec-chev open">⌄</span>
+    </div>
+    <div class="sec-body open">
+      <div class="tbl-wrap">
+        <table class="tbl">
+          <thead><tr>
+            <th style="background:#0891b2">Komponen / Component / 部件</th>
+            <th style="background:#0891b2">Fungsi / Function / 功能</th>
+            <th style="background:#0891b2">Contoh / Example / 例子</th>
+          </tr></thead>
+          <tbody>
+            <tr>
+              <td style="background:#e0f2fe;font-weight:800;color:#0c4a6e">F. Aci sesondol<br><span style="font-style:italic;font-size:11px;color:#1d4ed8">Camshaft · 凸轮轴</span></td>
+              <td style="font-weight:700;color:#0c4a6e;background:#f0f9ff">
+                <span class="my-only">Membuka dan menutup injap (valve) pada enjin kenderaan bermotor.</span>
+                <span class="en-only">Opens and closes valves in motor vehicle engines.</span>
+                <span class="zh-only">开/关机动车辆发动机中的气门。</span>
+              </td>
+              <td style="font-weight:600;color:#374151;background:#f0f9ff">
+                <span class="my-only">Enjin kereta / Injap enjin</span>
+                <span class="en-only">Car engine / Engine valve</span>
+                <span class="zh-only">汽车发动机/气门</span>
+              </td>
+            </tr>
+            <tr>
+              <td style="background:#fdf2f8;font-weight:800;color:#be185d">G. Aci engkol<br><span style="font-style:italic;font-size:11px;color:#1d4ed8">Crankshaft · 曲轴</span></td>
+              <td style="font-weight:700;color:#0c4a6e;background:#fdf2f8">
+                <span class="my-only">Menukarkan gerakan linear kepada gerakan berputar. Juga penghantar kuasa ke kotak gear.</span>
+                <span class="en-only">Converts linear motion to rotary motion. Also transmits power to gearbox.</span>
+                <span class="zh-only">将线性运动转换为旋转运动，并将动力传输到变速箱。</span>
+              </td>
+              <td style="font-weight:600;color:#374151;background:#fdf2f8">
+                <span class="my-only">Enjin kenderaan</span>
+                <span class="en-only">Vehicle engine</span>
+                <span class="zh-only">车辆发动机</span>
+              </td>
+            </tr>
+            <tr>
+              <td style="background:#e0f2fe;font-weight:800;color:#0c4a6e">H. Gelongsor<br><span style="font-style:italic;font-size:11px;color:#1d4ed8">Slider · 滑块</span></td>
+              <td style="font-weight:700;color:#0c4a6e;background:#f0f9ff">
+                <span class="my-only">Mengurangkan geseran ketika komponen bergerak secara mendatar. Digunakan untuk memindahkan beban yang berat.</span>
+                <span class="en-only">Reduces friction when components move horizontally. Used to transfer heavy loads.</span>
+                <span class="zh-only">减少部件水平移动时的摩擦，用于转移重型负载。</span>
+              </td>
+              <td style="font-weight:600;color:#374151;background:#f0f9ff">
+                <span class="my-only">Pintu gelongsor / Industri berat</span>
+                <span class="en-only">Sliding door / Heavy industry</span>
+                <span class="zh-only">滑动门/重工业</span>
+              </td>
+            </tr>
+            <tr>
+              <td style="background:#fffbeb;font-weight:800;color:#d97706">I. Galas bebola<br><span style="font-style:italic;font-size:11px;color:#1d4ed8">Ball bearing · 滚珠轴承</span></td>
+              <td style="font-weight:700;color:#0c4a6e;background:#fffbeb">
+                <span class="my-only">Bertindak sebagai pengantara objek yang berputar. Mengurangkan geseran dan melancarkan pergerakan.</span>
+                <span class="en-only">Acts as an intermediary for rotating objects. Reduces friction and smoothens movement.</span>
+                <span class="zh-only">充当旋转物体的中间体，减少摩擦并使运动顺畅。</span>
+              </td>
+              <td style="font-weight:600;color:#374151;background:#fffbeb">
+                <span class="my-only">Roda kenderaan / Basikal</span>
+                <span class="en-only">Vehicle wheel / Bicycle</span>
+                <span class="zh-only">车轮/自行车</span>
+              </td>
+            </tr>
+            <tr>
+              <td style="background:#f5f3ff;font-weight:800;color:#7c3aed">J. Bindu<br><span style="font-style:italic;font-size:11px;color:#1d4ed8">Chuck · 卡盘</span></td>
+              <td style="font-weight:700;color:#0c4a6e;background:#f5f3ff">
+                <span class="my-only">Pemegang dan pencengkam mata mesin gerudi. Kunci bindu mengetatkan cengkaman pada mata gerudi.</span>
+                <span class="en-only">Holds and clamps drill bits. Chuck key tightens the clamp on the drill bit.</span>
+                <span class="zh-only">夹持和固定钻头。卡盘扳手拧紧钻头上的夹具。</span>
+              </td>
+              <td style="font-weight:600;color:#374151;background:#f5f3ff">
+                <span class="my-only">Mesin gerudi / Gerudi mudah alih</span>
+                <span class="en-only">Drill machine / Cordless drill</span>
+                <span class="zh-only">钻孔机/无线钻机</span>
+              </td>
+            </tr>
+            <tr>
+              <td style="background:#f0fdf4;font-weight:800;color:#15803d">K. Rantai<br><span style="font-style:italic;font-size:11px;color:#1d4ed8">Chain · 链条</span></td>
+              <td style="font-weight:700;color:#0c4a6e;background:#f0fdf4">
+                <span class="my-only">Pengantara bagi penghantaran kuasa antara dua gear.</span>
+                <span class="en-only">Power transmitter between two gears.</span>
+                <span class="zh-only">两个齿轮之间的动力传递器。</span>
+              </td>
+              <td style="font-weight:600;color:#374151;background:#f0fdf4">
+                <span class="my-only">Basikal / Motosikal</span>
+                <span class="en-only">Bicycle / Motorcycle</span>
+                <span class="zh-only">自行车/摩托车</span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════ REKA BENTUK GAJET ══════ -->
+<div id="tab-t5" class="psec">
+
+  <div class="sec s-gr">
+    <div class="sec-hdr" onclick="exp(this)">
+      <div class="sec-icon">🚲</div>
+      <div class="sec-info">
+        <div class="sec-num">Gajet</div>
+        <div class="sec-t-my">Sistem Mekanikal pada Basikal</div>
+        <div class="sec-t-en">Mechanical System on Bicycle</div>
+        <div class="sec-t-zh">自行车上的机械系统</div>
+      </div>
+      <span class="sec-chev open">⌄</span>
+    </div>
+    <div class="sec-body open">
+      <div class="tbl-wrap">
+        <table class="tbl">
+          <thead><tr>
+            <th style="background:#16a34a">Bahagian / Part / 部件</th>
+            <th style="background:#16a34a">Komponen Mekanikal / Component / 机械部件</th>
+            <th style="background:#16a34a">Fungsi / Function / 功能</th>
+          </tr></thead>
+          <tbody>
+            <tr>
+              <td style="background:#f0fdf4;font-weight:800;color:#15803d">Hendal / Handlebar / 车把</td>
+              <td style="background:#f0fdf4;font-weight:700;color:#052e16">Galas bebola / Ball bearing / 滚珠轴承</td>
+              <td style="font-weight:700;color:#052e16;background:#f0fdf4">
+                <span class="my-only">Membolehkan hendal digerakkan dengan bebas untuk mengawal haluan basikal.</span>
+                <span class="en-only">Allows handlebar to move freely to control bicycle direction.</span>
+                <span class="zh-only">使车把能自由移动以控制自行车方向。</span>
+              </td>
+            </tr>
+            <tr>
+              <td style="background:#f0fdf4;font-weight:800;color:#15803d">Brek / Brake / 刹车</td>
+              <td style="background:#f0fdf4;font-weight:700;color:#052e16">Tuas / Lever / 杠杆</td>
+              <td style="font-weight:700;color:#052e16;background:#f0fdf4">
+                <span class="my-only">Digunakan pada pemegang pencengkam brek untuk memperlahankan atau menghentikan basikal.</span>
+                <span class="en-only">Used on brake clamp handle to slow down or stop the bicycle.</span>
+                <span class="zh-only">用于刹车夹手柄，使自行车减速或停止。</span>
+              </td>
+            </tr>
+            <tr>
+              <td style="background:#f0fdf4;font-weight:800;color:#15803d">Pedal / Pedal / 脚踏板</td>
+              <td style="background:#f0fdf4;font-weight:700;color:#052e16">Rantai dan Gear / Chain &amp; Gear / 链条和齿轮</td>
+              <td style="font-weight:700;color:#052e16;background:#f0fdf4">
+                <span class="my-only">Pedal berpusing → menghasilkan tenaga → Rantai dan Gear menghantar kuasa untuk menggerakkan basikal.</span>
+                <span class="en-only">Pedal rotates → generates power → Chain &amp; Gear transmit power to move the bicycle.</span>
+                <span class="zh-only">脚踏板旋转→产生动力→链条和齿轮传递动力以驱动自行车。</span>
+              </td>
+            </tr>
+            <tr>
+              <td style="background:#f0fdf4;font-weight:800;color:#15803d">Roda / Wheel / 车轮</td>
+              <td style="background:#f0fdf4;font-weight:700;color:#052e16">Galas bebola / Ball bearing / 滚珠轴承</td>
+              <td style="font-weight:700;color:#052e16;background:#f0fdf4">
+                <span class="my-only">Membolehkan roda basikal berputar dengan mudah.</span>
+                <span class="en-only">Allows bicycle wheel to rotate easily.</span>
+                <span class="zh-only">使自行车轮子能轻松旋转。</span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="sec s-gr">
+    <div class="sec-hdr" onclick="exp(this)">
+      <div class="sec-icon">💡</div>
+      <div class="sec-info">
+        <div class="sec-num">Gajet</div>
+        <div class="sec-t-my">Gajet Lampu Basikal — Proses Pembinaan</div>
+        <div class="sec-t-en">Bicycle Light Gadget — Build Process</div>
+        <div class="sec-t-zh">自行车灯小工程——建造过程</div>
+      </div>
+      <span class="sec-chev">⌄</span>
+    </div>
+    <div class="sec-body">
+      <!-- ANALYSIS TABLE -->
+      <div class="tbl-wrap">
+        <table class="tbl">
+          <thead><tr>
+            <th style="background:#7c3aed">Komponen / Part / 部件</th>
+            <th style="background:#7c3aed">Sistem Mekanikal / Mechanical System / 机械系统</th>
+            <th style="background:#16a34a">Kekuatan / Strength / 优点</th>
+            <th style="background:#dc2626">Kelemahan / Weakness / 缺点</th>
+          </tr></thead>
+          <tbody>
+            <tr>
+              <td style="background:#f5f3ff;font-weight:800;color:#5b21b6">Pemegang lampu<br><span style="font-size:11px;font-weight:600;color:#1d4ed8">Light holder</span><br><span style="font-size:11px;color:#047857">灯架</span></td>
+              <td style="background:#f5f3ff;font-weight:700;color:#3b0764">Pautan (Linkage) 连杆</td>
+              <td style="background:#f0fdf4;font-weight:700;color:#052e16">
+                <span class="my-only">Mempunyai cengkaman yang kuat pada hendal basikal.</span>
+                <span class="en-only">Has strong grip on bicycle handlebar.</span>
+                <span class="zh-only">对车把有强力夹持力。</span>
+              </td>
+              <td style="background:#fff5f5;font-weight:700;color:#7f1d1d">
+                <span class="my-only">Sukar menguatkan cengkaman kerana diameter hendal berbeza-beza.</span>
+                <span class="en-only">Difficult to tighten grip due to varying handlebar diameters.</span>
+                <span class="zh-only">因车把直径不同而难以紧固夹持力。</span>
+              </td>
+            </tr>
+            <tr>
+              <td style="background:#fef3c7;font-weight:800;color:#92400e">Pengunci pemegang lampu<br><span style="font-size:11px;font-weight:600;color:#1d4ed8">Light holder lock</span><br><span style="font-size:11px;color:#047857">灯架锁</span></td>
+              <td style="background:#fef3c7;font-weight:700;color:#78350f">Tuas (Lever) 杠杆</td>
+              <td style="background:#f0fdf4;font-weight:700;color:#052e16">
+                <span class="my-only">Mengambil masa yang singkat untuk dipasang dan ditanggalkan.</span>
+                <span class="en-only">Takes short time to install and remove.</span>
+                <span class="zh-only">安装和拆卸所需时间短。</span>
+              </td>
+              <td style="background:#fff5f5;font-weight:700;color:#7f1d1d">
+                <span class="my-only">Mudah terbuka jika tidak dipasang dengan kemas.</span>
+                <span class="en-only">Easily opens if not installed securely.</span>
+                <span class="zh-only">如未安装牢固则容易松开。</span>
+              </td>
+            </tr>
+            <tr>
+              <td style="background:#e0f2fe;font-weight:800;color:#0c4a6e">Badan lampu<br><span style="font-size:11px;font-weight:600;color:#1d4ed8">Light body</span><br><span style="font-size:11px;color:#047857">灯体</span></td>
+              <td style="background:#e0f2fe;font-weight:700;color:#0c4a6e">Gelongsor (Slider) 滑块</td>
+              <td style="background:#f0fdf4;font-weight:700;color:#052e16">
+                <span class="my-only">Badan lampu boleh ditanggalkan dan dipasang dengan mudah.</span>
+                <span class="en-only">Light body can be easily detached and attached.</span>
+                <span class="zh-only">灯体可以轻松拆卸和安装。</span>
+              </td>
+              <td style="background:#fff5f5;font-weight:700;color:#7f1d1d">
+                <span class="my-only">Gelongsor mudah longgar jika terdapat gegaran yang kuat.</span>
+                <span class="en-only">Slider easily loosens under strong vibration.</span>
+                <span class="zh-only">在强烈振动下滑块容易松动。</span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- BUILD FLOW -->
+      <div class="flow-wrap">
+        <div class="flow-lbl">Proses Pembinaan Gajet / Build Process / 建造过程</div>
+        <div class="fstep-wrap"><div class="fstep">Mula — Projek Gajet Lampu Basikal<div class="fstep-sub">Start — Bicycle Light Gadget Project · 开始——自行车灯小工程</div></div></div>
+        <div class="fstep-wrap"><div class="fstep">Sesi brief bersama pelanggan<div class="fstep-sub">Customer briefing session · 客户简报会议</div></div></div>
+        <div class="fstep-wrap"><div class="fstep">Kaji selidik<div class="fstep-sub">Research · 调研</div></div></div>
+        <div class="fstep-wrap"><div class="fstep">Lakaran awal → Lakaran idea<div class="fstep-sub">Initial sketch → Idea sketches · 初步草图→创意草图</div></div></div>
+        <div class="fstep-wrap"><div class="fdiamond">Sesi kritik — Ya / Tidak?<div style="font-size:11px;font-weight:700">Critique session — Yes/No? · 批评会议——通过/未通过？</div></div></div>
+        <div class="fstep-wrap"><div class="fstep">Lakaran akhir → Lukisan kerja<div class="fstep-sub">Final drawing → Working drawing · 最终图纸→工作图纸</div></div></div>
+        <div class="fstep-wrap"><div class="fstep">Penyelidikan komponen → Proses penghasilan komponen<div class="fstep-sub">Component research → Component production · 部件调研→部件生产</div></div></div>
+        <div class="fstep-wrap"><div class="fstep">Pemasangan komponen<div class="fstep-sub">Component assembly · 部件装配</div></div></div>
+        <div class="fstep-wrap"><div class="fdiamond">Pengujian — Ya / Tidak?<div style="font-size:11px;font-weight:700">Testing — Pass/Fail? · 测试——通过/未通过？</div></div></div>
+        <div class="fstep-wrap"><div class="fstep">Kemasan akhir<div class="fstep-sub">Final packaging · 最终包装</div></div></div>
+        <div class="fstep-wrap"><div class="fstep" style="background:#16a34a;border-radius:999px;text-align:center">✅ Selesai — Gajet Lampu Basikal Disiapkan<div class="fstep-sub">Completed! · 完成！</div></div></div>
+      </div>
+
+      <!-- IMPROVEMENT -->
+      <div class="tri">
+        <div class="bl-my"><div class="bl-my-lbl">🟡 Cadangan Penambahbaikan</div><div class="bl-my-t">
+          4 aspek yang boleh ditambahbaik pada gajet: <b>Rupa bentuk · Bahan binaan · Fungsi · Kemasan</b>.<br>
+          Penambahbaikan dilakukan sekiranya sistem pada gajet gagal berfungsi atau terdapat kecacatan reka bentuk.
+        </div></div>
+        <div class="bl-en"><div class="bl-en-lbl">🔵 Improvement Suggestions</div><div class="bl-en-t">
+          4 aspects that can be improved on the gadget: <b>Appearance · Build material · Function · Packaging</b>. Improvements are made if the gadget system fails or design flaws are found.
+        </div></div>
+        <div class="bl-zh"><div class="bl-zh-lbl">🟢 改进建议</div><div class="bl-zh-t">
+          可改进小工程的4个方面：<b>外形·建造材料·功能·包装</b>。当小工程系统失效或存在设计缺陷时进行改进。
+        </div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════ MEMORY MAP ══════ -->
+<div id="tab-tmm" class="psec">
+  <div style="background:#0c4a6e;border-radius:var(--r);overflow:hidden;margin-bottom:12px">
+    <div class="mmap-hdr">
+      <div class="mmap-h1">⭐ Super Compact Memory Map</div>
+      <div class="mmap-h2">RBT Topik 2.2 — Reka Bentuk Mekanikal · Mechanical Design</div>
+      <div class="mmap-h3">机械设计 · Mechanical Design System</div>
+    </div>
+    <div style="padding:14px">
+
+      <div class="mmap-item">
+        <div class="mm-my"><div class="mm-my-t">Sistem mekanikal = gabungan komponen mekanikal yang berfungsi sebagai penghantar untuk menyelesaikan tugasan. Minimum 2 jenis komponen. Mengurangkan tenaga manusia.</div></div>
+        <div class="mm-en"><div class="mm-en-t">Mechanical system = combination of components acting as transmitters to complete tasks. Minimum 2 types of components. Reduces human effort.</div></div>
+        <div class="mm-zh"><div class="mm-zh-t">机械系统=作为传递器完成任务的部件组合。最少2种部件。减少人力。</div></div>
+      </div>
+
+      <div class="mmap-item">
+        <div class="mm-my"><div class="mm-my-t">11 Komponen: A.Gear (kelajuan) · B.Pautan/Linkage (penghubung) · C.Tuas/Lever (daya-beban-fulkrum) · D.Takal/Pulley (angkat beban) · E.Tali sawat/Belting (hubung takal) · F.Aci sesondol/Camshaft (injap enjin) · G.Aci engkol/Crankshaft (linear→putar) · H.Gelongsor/Slider (kurang geseran mendatar) · I.Galas bebola/Ball bearing (objek putar) · J.Bindu/Chuck (pemegang mata gerudi) · K.Rantai/Chain (hantar kuasa antara 2 gear)</div></div>
+        <div class="mm-en"><div class="mm-en-t">11 Components: A.Gear (speed) · B.Linkage (connector) · C.Lever (force-load-fulcrum) · D.Pulley (lift load) · E.Belting (link pulleys) · F.Camshaft (engine valve) · G.Crankshaft (linear→rotary) · H.Slider (reduce horizontal friction) · I.Ball bearing (rotating objects) · J.Chuck (drill bit holder) · K.Chain (power between 2 gears)</div></div>
+        <div class="mm-zh"><div class="mm-zh-t">11种部件：A.齿轮(速度)·B.连杆(连接器)·C.杠杆(力-负载-支点)·D.滑轮(提升负载)·E.传动带(连接滑轮)·F.凸轮轴(发动机气门)·G.曲轴(线性→旋转)·H.滑块(减少水平摩擦)·I.滚珠轴承(旋转物体)·J.卡盘(钻头夹持器)·K.链条(两齿轮间传力)</div></div>
+      </div>
+
+      <div class="mmap-item">
+        <div class="mm-my"><div class="mm-my-t">10 Jenis Gear: Skru · Serong (Bevel) · Miter · Dalam (Internal) · Tulang hering (Herringbone) · Belitan (Worm) · Taji (Spur) · Rak &amp; pinan (Rack &amp; pinion) · Serong pilin (Spiral bevel) · Heliks (Helical)</div></div>
+        <div class="mm-en"><div class="mm-en-t">10 Gear types: Screw · Bevel · Miter · Internal · Herringbone · Worm · Spur · Rack &amp; pinion · Spiral bevel · Helical</div></div>
+        <div class="mm-zh"><div class="mm-zh-t">10种齿轮：螺旋·锥形·直角锥·内齿·人字·蜗轮·正齿·齿条小齿轮·螺旋锥·斜齿</div></div>
+      </div>
+
+      <div class="mmap-item">
+        <div class="mm-my"><div class="mm-my-t">3 Kelas Tuas: Kelas 1 = D-F-B (playar, gunting) · Kelas 2 = D-B-F (kereta sorong) · Kelas 3 = F-D-B (pemahat, stapler)</div></div>
+        <div class="mm-en"><div class="mm-en-t">3 Lever classes: Class 1 = F-Fu-L (pliers, scissors) · Class 2 = F-L-Fu (wheelbarrow) · Class 3 = Fu-F-L (stapler, tweezers)</div></div>
+        <div class="mm-zh"><div class="mm-zh-t">3类杠杆：第一类=力-支点-负载（钳子）·第二类=力-负载-支点（手推车）·第三类=支点-力-负载（订书机）</div></div>
+      </div>
+
+      <div class="mmap-item">
+        <div class="mm-my"><div class="mm-my-t">Basikal: Hendal=Galas bebola · Brek=Tuas · Pedal=Rantai+Gear · Roda=Galas bebola. Gajet Lampu Basikal: Pemegang=Pautan · Pengunci=Tuas · Badan lampu=Gelongsor.</div></div>
+        <div class="mm-en"><div class="mm-en-t">Bicycle: Handlebar=Ball bearing · Brake=Lever · Pedal=Chain+Gear · Wheel=Ball bearing. Bicycle Light: Holder=Linkage · Lock=Lever · Light body=Slider.</div></div>
+        <div class="mm-zh"><div class="mm-zh-t">自行车：车把=滚珠轴承·刹车=杠杆·脚踏板=链条+齿轮·车轮=滚珠轴承。自行车灯：灯架=连杆·灯锁=杠杆·灯体=滑块。</div></div>
+      </div>
+
+      <div class="mmap-item">
+        <div class="mm-my"><div class="mm-my-t">Proses pembinaan gajet: Brief → Kaji selidik → Lakaran awal → Lakaran idea → Sesi kritik → Lakaran akhir → Lukisan kerja → Penyelidikan komponen → Penghasilan → Pemasangan → Pengujian → Kemasan akhir → Selesai.</div></div>
+        <div class="mm-en"><div class="mm-en-t">Gadget build process: Brief → Research → Initial sketch → Idea sketches → Critique → Final drawing → Working drawing → Component research → Production → Assembly → Testing → Final packaging → Complete.</div></div>
+        <div class="mm-zh"><div class="mm-zh-t">小工程建造流程：简报→调研→初步草图→创意草图→批评→最终图纸→工作图纸→部件调研→生产→装配→测试→最终包装→完成。</div></div>
+      </div>
+
+      <div class="mmap-item">
+        <div class="mm-my"><div class="mm-my-t">Cadangan penambahbaikan — 4 aspek: Rupa bentuk · Bahan binaan · Fungsi · Kemasan. Analisis kesesuaian komponen: Reka bentuk komponen · Jenis bahan · Kedudukan pemasangan · Kemasan.</div></div>
+        <div class="mm-en"><div class="mm-en-t">Improvement suggestions — 4 aspects: Appearance · Build material · Function · Packaging. Component suitability analysis: Component design · Material type · Installation position · Packaging.</div></div>
+        <div class="mm-zh"><div class="mm-zh-t">改进建议——4个方面：外形·建造材料·功能·包装。部件适用性分析：部件设计·材料类型·安装位置·包装。</div></div>
+      </div>
+
+      <div class="exam-box">
+        <div class="exam-hdr"><div class="exam-lbl">✏️ Soalan Peperiksaan / Exam Templates / 考试句型</div></div>
+        <div class="exam-my"><div class="exam-my-t">
+          <b>Definisi sistem mekanikal:</b> "Sistem mekanikal terdiri daripada gabungan beberapa komponen mekanikal yang berfungsi sebagai penghantar bagi menyelesaikan sesuatu tugasan yang dikehendaki."<br><br>
+          <b>Fungsi gear:</b> "Gear digunakan untuk menukar kelajuan peralatan mekanikal yang bergerak. Gigi yang terdapat pada badan gear berfungsi untuk menyalurkan kuasa daripada sumber kepada penerima."
+        </div></div>
+        <div class="exam-en"><div class="exam-en-t">
+          <b>Mechanical system definition:</b> "A mechanical system consists of a combination of mechanical components that act as transmitters to complete a required task."<br><br>
+          <b>Gear function:</b> "Gear is used to change the speed of moving mechanical equipment. The teeth on the gear body transmit power from the source to the receiver."
+        </div></div>
+        <div class="exam-zh"><div class="exam-zh-t">
+          <b>机械系统定义：</b>"机械系统由多种机械部件的组合构成，作为传递器以完成所要求的任务。"<br><br>
+          <b>齿轮功能：</b>"齿轮用于改变运动机械设备的速度。齿轮体上的齿将动力从来源传递给接收器。"
+        </div></div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+</main>
+
+<a class="top-link" href="#top">↑ Atas</a>
+<footer>
+  RBT · Reka Bentuk Mekanikal (2.2) · Mechanical Design · 机械设计 · Single HTML · Tiada Internet diperlukan
+</footer>
+
+<script>
+function setLang(btn){
+  document.querySelectorAll('.lbtn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  document.body.className=btn.dataset.lang;
+  localStorage.setItem('rbm-lang',btn.dataset.lang);
+}
+(function(){
+  const s=localStorage.getItem('rbm-lang')||'lang-all';
+  const b=document.querySelector(`.lbtn[data-lang="${s}"]`);
+  if(b)setLang(b);
+})();
+function showTab(id,btn){
+  document.querySelectorAll('.psec').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById('tab-'+id).classList.add('active');
+  btn.classList.add('active');
+  window.scrollTo(0,document.querySelector('.tabs').offsetTop-60);
+}
+function exp(hdr){
+  const b=hdr.nextElementSibling;
+  const c=hdr.querySelector('.sec-chev');
+  const o=b.classList.toggle('open');
+  c.classList.toggle('open',o);
+}
+document.getElementById('srch').addEventListener('input',function(){
+  const q=this.value.trim().toLowerCase();
+  document.querySelectorAll('.sec').forEach(s=>{
+    s.style.display=!q||s.textContent.toLowerCase().includes(q)?'':'none';
+  });
+});
+</script>
+</body>
+</html>

@@ -1659,6 +1659,7 @@ export const rekaBentukData = {
             chapterNum: 38,
             chapter:"Reka Bentuk Mekanikal",
             chinese:"机械设计",
+            resourceUrl:"../rbt/t4_chapter_mekanikal.html",
             status:"Not Started",
             confidence:0,
             last_updated:"2026-05-22"
