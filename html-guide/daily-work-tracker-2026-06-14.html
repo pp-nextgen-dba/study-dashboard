@@ -363,6 +363,50 @@
     <script>
         const STORAGE_KEY = 'study-dashboard-work-log';
 
+        // Pre-populate with today's work entries (2026-06-14)
+        const DEFAULT_ENTRIES = [
+            {
+                id: 1718342400000,
+                date: "2026-06-14",
+                status: "completed",
+                description: "Add Reka Bentuk Mekanikal Chapter Notes\n\n✓ Verified HTML file exists: rbt/t4_chapter_mekanikal.html\n✓ Added resourceUrl to subject.js (T2, globalNum 4, chapterNum 38)\n✓ Updated sw.js STATIC_ASSETS with chapter path\n✓ Added Firestore sync function to rekabentuk.html\n✓ Added \"Back to Dashboard\" button (absolute positioning in RBT header)\n✓ Bumped cache version v=30 → v=31\n✓ Validated & committed with git tracking\n✓ Pushed to GitHub\n\nCommits: 4d1e75c, a4d4dc3, 8e4271e, d92d18d",
+                createdAt: new Date().toISOString()
+            },
+            {
+                id: 1718342401000,
+                date: "2026-06-14",
+                status: "completed",
+                description: "Update CLAUDE.md with Back Button & Cache Clearing\n\n✓ Split back button guidance into two sections:\n  - Standard pages (sticky nav div after body)\n  - RBT pages (absolute positioning inside header)\n✓ Added Step 8: Browser cache clearing instructions\n✓ Explained why cache clearing needed (Firestore local caching)\n✓ Documented addMissingChineseLabels() function requirements\n\nCommit: a4dc8fe",
+                createdAt: new Date().toISOString()
+            },
+            {
+                id: 1718342402000,
+                date: "2026-06-14",
+                status: "completed",
+                description: "Expand HTML Workflow Guide v1.1\n\n✓ Added User Input section (command format & examples)\n✓ Added RBT back button positioning guide\n✓ Added Step 9: Browser cache clearing for users\n✓ Added 6 new major sections from CLAUDE.md:\n  - Adding a New Subject (6-step process)\n  - Auto-Integration Workflow (4-hourly routine)\n  - Changing the PIN (SHA-256 hash generation)\n  - Commands Reference (3 commands with descriptions)\n  - Key Files Reference (7 key files with purposes)\n  - Chapter HTML File Locations (14 subjects, structure)\n✓ All sections with code examples & tables\n\nCommits: 89ab33a, 2fc7f38, 26e8978",
+                createdAt: new Date().toISOString()
+            },
+            {
+                id: 1718342403000,
+                date: "2026-06-14",
+                status: "completed",
+                description: "Create Interactive Daily Work Tracker\n\n✓ Built HTML tracker with features:\n  - Date picker (defaults to today)\n  - Status selector (Completed/In Progress)\n  - Work description textarea\n  - Real-time stats display (total, completed, in-progress)\n  - Persistent localStorage (survives page refresh)\n  - Delete individual entries\n  - Responsive mobile-friendly design\n✓ Validated & pushed to GitHub\n\nCommit: 9c1ab21",
+                createdAt: new Date().toISOString()
+            },
+            {
+                id: 1718342404000,
+                date: "2026-06-14",
+                status: "completed",
+                description: "Save Session Memory Files\n\n✓ Created workflow-chapter-addition-v1.md\n  - Complete automated workflow process\n  - Back button positioning guide\n  - Firestore sync details\n  - Documentation status\n\n✓ Created session-2026-06-13-14-chapter-workflow.md\n  - Session summary\n  - Work completed\n  - RBT back button solution\n  - Ready status for next session\n\n✓ Updated MEMORY.md index with new references",
+                createdAt: new Date().toISOString()
+            }
+        ];
+
+        // Initialize with default entries if storage is empty
+        if (!localStorage.getItem(STORAGE_KEY)) {
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(DEFAULT_ENTRIES));
+        }
+
         // Set today's date as default
         document.getElementById('workDate').valueAsDate = new Date();
 
