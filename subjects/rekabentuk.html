@@ -15,7 +15,7 @@ content="width=device-width, initial-scale=1.0">
 <title>Reka Bentuk Dashboard</title>
 
 <link rel="stylesheet"
-href="../css/style.css?v=30">
+href="../css/style.css?v=31">
 
 <style>
 
@@ -498,6 +498,23 @@ function mergeSeedChapters(subjectData){
 
 
 // =========================================================
+// FIRESTORE SYNC
+// =========================================================
+
+async function addMissingChineseLabels(){
+    data.chapters.forEach((ch, idx)=>{
+        const seed = rekaBentukData.chapters[idx];
+        if(seed.resourceUrl && !ch.resourceUrl){
+            ch.resourceUrl = seed.resourceUrl;
+        }
+        if(seed.chinese && !ch.chinese){
+            ch.chinese = seed.chinese;
+        }
+    });
+}
+
+
+// =========================================================
 // LOAD
 // =========================================================
 
@@ -509,6 +526,7 @@ async function loadData(){
     if(snap.exists()){
 
         data = snap.data();
+        await addMissingChineseLabels();
 
         if(mergeSeedChapters(data)){
 
