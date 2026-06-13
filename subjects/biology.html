@@ -15,7 +15,7 @@ content="width=device-width, initial-scale=1.0">
 <title>Biology Dashboard</title>
 
 <link rel="stylesheet"
-href="../css/style.css?v=30">
+href="../css/style.css?v=31">
 
 <style>
 
@@ -257,6 +257,18 @@ body{
     font-weight:bold;
 }
 
+.chapter-link{
+    display:inline-block;
+    margin-top:10px;
+    color:#1d4ed8;
+    font-size:14px;
+    text-decoration:none;
+}
+
+.chapter-link:hover{
+    text-decoration:underline;
+}
+
 /* ===================================================== */
 /* MOBILE */
 /* ===================================================== */
@@ -385,7 +397,7 @@ import {
     biologyData
 }
 from
-"../js/subject.js?v=15";
+"../js/subject.js?v=16";
 
 import { requireAuth } from "../js/auth.js";
 await requireAuth("../index.html");
@@ -612,6 +624,10 @@ function render(){
 
             }
 
+            const chapterResource = chapter.resourceUrl
+                ? `<a class="chapter-link" href="${chapter.resourceUrl}">Open notes</a>`
+                : "";
+
             const card =
                 document.createElement("div");
 
@@ -639,6 +655,8 @@ function render(){
                             ${chapter.chinese}
                         </div>
 
+                        ${chapterResource}
+
                     </div>
 
                 </div>
@@ -649,7 +667,9 @@ function render(){
 
             card.addEventListener(
                 "click",
-                async ()=>{
+                async (e)=>{
+
+                    if(e.target.closest(".chapter-link")){ return; }
 
                     chapter.status =
                         nextStatus(
