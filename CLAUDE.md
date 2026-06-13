@@ -6,6 +6,7 @@ Static PWA — Malaysian school study progress tracker. No build step. Firebase 
 
 ```bash
 npm run validate        # after editing subject.js, subject-registry.js, or index.html
+npm run check-codes     # show next available 3-digit codes for en_/my_/zh_ chapters
 npx serve .             # run locally
 ```
 
@@ -59,6 +60,8 @@ No `archive/` subdirectories — all files sit directly in `<subject>/`.
 7. Commit
 
 ## Auto-Integration Workflow
+
+**Before adding a chapter with 3-digit code**, run `npm run check-codes` to see the next available code for that language.
 
 When triggered, the workflow:
 1. Pulls latest from GitHub (`git pull`)
