@@ -10,6 +10,23 @@ npm run check-codes     # show next available 3-digit codes for en_/my_/zh_ chap
 npx serve .             # run locally
 ```
 
+## Firestore Rules (Important)
+
+Default Firebase security rules expire after 30 days. **Check expiration date before it passes:**
+
+**Current rules:** Valid until **June 30, 2026**
+
+When rules expire, all Firestore reads/writes fail with `Missing or insufficient permissions` error. To extend:
+
+1. Firebase Console → Your project → Firestore Database → Rules
+2. Find the line: `allow read, write: if request.time < timestamp.date(YYYY, M, D);`
+3. Update the date to a future date (e.g., `2026, 7, 30`)
+4. Click **Publish**
+
+Reload the app — it should work again.
+
+**Note:** Rules are set to expire intentionally (security best practice). For permanent access, use `allow read, write: if true;` instead.
+
 ## Key Files
 
 | File | Purpose |
