@@ -8,7 +8,7 @@ export const subjectRegistry = [
         progressBarId:"scienceProgressBar",
         progressTextId:"scienceProgressText",
         seedExport:"scienceData",
-        loadSeed:false
+        loadSeed:true
     },
 
     {
@@ -19,7 +19,7 @@ export const subjectRegistry = [
         progressBarId:"mathsProgressBar",
         progressTextId:"mathsProgressText",
         seedExport:"mathsData",
-        loadSeed:false
+        loadSeed:true
     },
 
     {
@@ -30,7 +30,7 @@ export const subjectRegistry = [
         progressBarId:"addMathsProgressBar",
         progressTextId:"addMathsProgressText",
         seedExport:"addMathsData",
-        loadSeed:false
+        loadSeed:true
     },
 
     {
@@ -118,7 +118,7 @@ export const subjectRegistry = [
         progressBarId:"physicsProgressBar",
         progressTextId:"physicsProgressText",
         seedExport:"physicsData",
-        loadSeed:false
+        loadSeed:true
     },
 
     {
@@ -129,7 +129,7 @@ export const subjectRegistry = [
         progressBarId:"chemistryProgressBar",
         progressTextId:"chemistryProgressText",
         seedExport:"chemistryData",
-        loadSeed:false
+        loadSeed:true
     },
 
     {
@@ -140,7 +140,7 @@ export const subjectRegistry = [
         progressBarId:"biologyProgressBar",
         progressTextId:"biologyProgressText",
         seedExport:"biologyData",
-        loadSeed:false
+        loadSeed:true
     },
 
     {
