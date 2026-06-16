@@ -245,6 +245,12 @@ function watchSubjectProgress(
                         seedData
                     );
 
+                    updateSubjectProgress(
+                        seedData,
+                        progressBarId,
+                        progressTextId
+                    );
+
                 }catch(error){
 
                     console.error(
@@ -253,15 +259,23 @@ function watchSubjectProgress(
                         error
                     );
 
+                    updateSubjectProgress(
+                        null,
+                        progressBarId,
+                        progressTextId
+                    );
+
                 }
 
-            }
+            }else{
 
-            updateSubjectProgress(
-                null,
-                progressBarId,
-                progressTextId
-            );
+                updateSubjectProgress(
+                    null,
+                    progressBarId,
+                    progressTextId
+                );
+
+            }
 
         },
         error => {
