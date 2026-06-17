@@ -47,6 +47,7 @@ Chapter notes pages live in **root-level subject folders**, not inside `subjects
 
 ```
 chemistry/     t4_chapter1.html
+chinese/       zh_030.html
 english/       T4_T5_english_grammar.html
 history/       t2_chapter4.html, t2_chapter8.html ...
 physics/       t4_force_motion.html
@@ -54,6 +55,9 @@ rbt/           t2_akuaponik.html, t2_elektrik.html ...
 ```
 
 No `archive/` subdirectories — all files sit directly in `<subject>/`.
+
+**Chinese chapters (3-digit code):**
+- `zh_030` — 独中中文 (T3) — Independent Chinese curriculum & reading comprehension
 
 ## Adding a Chapter Notes Page
 
@@ -138,7 +142,11 @@ When triggered, the workflow:
 - `resourceUrl`: `"../chemistry/t4_chapter1.html"` (relative from `subjects/`)
 - `STATIC_ASSETS`: `'/chemistry/t4_chapter1.html'` (leading slash, from root)
 
-**Why `addMissingChineseLabels` is needed:** Subject pages load from Firestore. If the Firestore doc was saved before `resourceUrl` was added to `subject.js`, it won't have the field. This function syncs missing fields from seed data into Firestore on page load.
+**Why `addMissingChineseLabels` is needed:** Subject pages load from Firestore. The function:
+   - Syncs missing fields (`resourceUrl`, `chinese`, `chapterCode`) from seed data into Firestore
+   - Adds completely new chapters from `subject.js` that don't exist in Firestore yet
+   - Called on page load, automatically saves changes back to Firestore
+   - Allows new chapters to appear immediately without manual Firestore updates
 
 ## Adding a New Subject
 
