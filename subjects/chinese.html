@@ -471,6 +471,18 @@ function addMissingChineseLabels(subjectData){
 
         });
 
+    const existingChapterKeys = new Set(
+        subjectData.chapters.map(ch => `${ch.form}|${ch.chapter}`)
+    );
+
+    chineseData.chapters.forEach(seedChapter => {
+        const key = `${seedChapter.form}|${seedChapter.chapter}`;
+        if(!existingChapterKeys.has(key)){
+            subjectData.chapters.push(structuredClone(seedChapter));
+            changed = true;
+        }
+    });
+
     return changed;
 
 }
