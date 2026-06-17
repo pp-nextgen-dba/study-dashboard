@@ -2604,8 +2604,21 @@ export const chineseData = {
         },
 
         {
-            form:"T4",
+            form:"T3",
             globalNum: 17,
+            chapterCode:"zh_030",
+            chapterNum: 42,
+            chapter:"独中中文",
+            chinese:"独立中学华文课程与阅读理解",
+            resourceUrl:"../chinese/zh_030.html",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-06-17"
+        },
+
+        {
+            form:"T4",
+            globalNum: 18,
             chapterCode:"zh_017",
             chapterNum: 40,
             chapter:"SPM 现代文阅读",
@@ -2617,7 +2630,7 @@ export const chineseData = {
 
         {
             form:"T4",
-            globalNum: 18,
+            globalNum: 19,
             chapterCode:"zh_018",
             chapterNum: 41,
             chapter:"SPM 文言文阅读",
@@ -2629,7 +2642,7 @@ export const chineseData = {
 
         {
             form:"T4",
-            globalNum: 19,
+            globalNum: 20,
             chapterCode:"zh_019",
             chapterNum: 42,
             chapter:"名句精华与文化知识",
@@ -2641,7 +2654,7 @@ export const chineseData = {
 
         {
             form:"T4",
-            globalNum: 20,
+            globalNum: 21,
             chapterCode:"zh_020",
             chapterNum: 43,
             chapter:"议论文写作",
@@ -2653,7 +2666,7 @@ export const chineseData = {
 
         {
             form:"T4",
-            globalNum: 21,
+            globalNum: 22,
             chapterCode:"zh_021",
             chapterNum: 44,
             chapter:"说明文与评论文",
@@ -2665,7 +2678,7 @@ export const chineseData = {
 
         {
             form:"T4",
-            globalNum: 22,
+            globalNum: 23,
             chapterCode:"zh_022",
             chapterNum: 45,
             chapter:"应用文训练",
@@ -2677,7 +2690,7 @@ export const chineseData = {
 
         {
             form:"T4",
-            globalNum: 23,
+            globalNum: 24,
             chapterCode:"zh_023",
             chapterNum: 46,
             chapter:"口试与听力训练",
@@ -2689,7 +2702,7 @@ export const chineseData = {
 
         {
             form:"T5",
-            globalNum: 24,
+            globalNum: 25,
             chapterCode:"zh_024",
             chapterNum: 36,
             chapter:"SPM 阅读理解强化",

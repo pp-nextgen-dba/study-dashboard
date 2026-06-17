@@ -38,7 +38,8 @@ const STATIC_ASSETS = [
     "/english/T4_T5_english_grammar.html",
     "/physics/t4_force_motion.html",
     "/chemistry/t4_chapter1.html",
-    "/biology/biology_chapter8.html"
+    "/biology/biology_chapter8.html",
+    "/chinese/zh_030.html"
 ];
 
 self.addEventListener("install", event => {
