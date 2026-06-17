@@ -39,6 +39,9 @@ const monthGrid =
 const subjectMonthList =
     document.getElementById("subjectMonthList");
 
+const subjectYearlyList =
+    document.getElementById("subjectYearlyList");
+
 let progressData = {
     days:{}
 };
@@ -324,6 +327,7 @@ function renderMonthProgress(){
         bestDayCount;
 
     renderSubjectMonthlyList(monthDates);
+    renderSubjectYearlyStats();
 
 }
 
@@ -365,6 +369,66 @@ function renderSubjectMonthlyList(monthDates){
         `;
 
         subjectMonthList.appendChild(row);
+
+    });
+
+}
+
+function renderSubjectYearlyStats(){
+
+    subjectYearlyList.innerHTML = "";
+
+    const yearlyStats = [];
+
+    subjectRegistry.forEach(subject => {
+
+        const daysCount = Object.keys(
+            progressData.days
+        ).filter(dateKey =>
+            getDaySubjects(dateKey).includes(subject.id)
+        ).length;
+
+        yearlyStats.push({
+            id:subject.id,
+            title:subject.title,
+            icon:subject.icon,
+            daysCount:daysCount
+        });
+
+    });
+
+    yearlyStats.sort(
+        (a,b) => b.daysCount - a.daysCount
+    );
+
+    yearlyStats.forEach(stat => {
+
+        const percent =
+            Math.round(
+                stat.daysCount / 365 * 100
+            );
+
+        const row =
+            document.createElement("div");
+
+        row.className =
+            "subject-yearly-row";
+
+        row.innerHTML = `
+            <div class="subject-yearly-title">
+                <span>${stat.icon} ${stat.title}</span>
+                <strong>${stat.daysCount}</strong>
+            </div>
+            <div class="progress-bar compact">
+                <div
+                    class="progress-fill"
+                    style="width:${percent}%"
+                ></div>
+            </div>
+            <span class="subject-yearly-percent">${percent}%</span>
+        `;
+
+        subjectYearlyList.appendChild(row);
 
     });
 

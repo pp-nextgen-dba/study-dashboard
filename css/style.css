@@ -493,6 +493,64 @@ h2{
 
 }
 
+.subject-yearly-panel{
+
+    margin-top:14px;
+
+}
+
+.subject-yearly-list{
+
+    display:grid;
+
+    gap:10px;
+
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+
+}
+
+.subject-yearly-row{
+
+    border:1px solid #e5e7eb;
+
+    border-radius:8px;
+
+    padding:10px;
+
+}
+
+.subject-yearly-title{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    gap:10px;
+
+    font-size:12px;
+
+    margin-bottom:8px;
+
+}
+
+.subject-yearly-title strong{
+
+    color:#1d4ed8;
+
+    white-space:nowrap;
+
+}
+
+.subject-yearly-percent{
+
+    font-size:11px;
+
+    color:#666;
+
+    margin-top:4px;
+
+}
+
 .month-summary div{
 
     background:#f8fafc;
