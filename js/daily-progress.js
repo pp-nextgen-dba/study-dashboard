@@ -379,7 +379,8 @@ function renderSubjectYearlyStats(){
     subjectYearlyList.innerHTML = "";
 
     const dateKeys = Object.keys(progressData.days);
-    let dateRangeHtml = "";
+    const yearlyDateRangeEl =
+        document.getElementById("yearlyDateRange");
 
     if(dateKeys.length > 0){
         const sortedDates = dateKeys.sort();
@@ -389,10 +390,10 @@ function renderSubjectYearlyStats(){
         const oldestStr = oldestDate.toLocaleDateString("en-US",{month:"short",day:"numeric",year:"numeric"});
         const latestStr = latestDate.toLocaleDateString("en-US",{month:"short",day:"numeric",year:"numeric"});
 
-        dateRangeHtml = `<p style="color:#666;font-size:13px;margin-bottom:16px;">Tracked from ${oldestStr} to ${latestStr}</p>`;
+        yearlyDateRangeEl.innerText = `[Tracked from ${oldestStr} to ${latestStr}]`;
+    } else {
+        yearlyDateRangeEl.innerText = "";
     }
-
-    subjectYearlyList.innerHTML = dateRangeHtml;
 
     const yearlyStats = [];
 
