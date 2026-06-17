@@ -378,6 +378,22 @@ function renderSubjectYearlyStats(){
 
     subjectYearlyList.innerHTML = "";
 
+    const dateKeys = Object.keys(progressData.days);
+    let dateRangeHtml = "";
+
+    if(dateKeys.length > 0){
+        const sortedDates = dateKeys.sort();
+        const oldestDate = new Date(sortedDates[0]);
+        const latestDate = new Date(sortedDates[sortedDates.length - 1]);
+
+        const oldestStr = oldestDate.toLocaleDateString("en-US",{month:"short",day:"numeric",year:"numeric"});
+        const latestStr = latestDate.toLocaleDateString("en-US",{month:"short",day:"numeric",year:"numeric"});
+
+        dateRangeHtml = `<p style="color:#666;font-size:13px;margin-bottom:16px;">Tracked from ${oldestStr} to ${latestStr}</p>`;
+    }
+
+    subjectYearlyList.innerHTML = dateRangeHtml;
+
     const yearlyStats = [];
 
     subjectRegistry.forEach(subject => {
