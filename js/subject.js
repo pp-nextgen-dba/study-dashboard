@@ -3407,61 +3407,156 @@ export const moralData = {
             form:"T2",
             globalNum: 1,
             chapterNum: 52,
-            chapter:"Moral Values and Self Identity",
-            chinese:"道德价值与自我身份",
+            chapter:"Unit 1: Sumber Moral Asas Pembentukan Akhlak Mulia",
             status:"Not Started",
             confidence:0,
-            last_updated:"2026-05-22",
-            resourceUrl:"../moral/t2_moral_unit14.html"
+            last_updated:"2026-06-21"
         },
 
         {
             form:"T2",
             globalNum: 2,
             chapterNum: 53,
-            chapter:"Responsibility to Family",
-            chinese:"对家庭的责任",
+            chapter:"Unit 2: Agama atau Kepercayaan Membentuk Keperibadian Mulia",
             status:"Not Started",
             confidence:0,
-            last_updated:"2026-05-22"
+            last_updated:"2026-06-21"
         },
 
         {
             form:"T2",
             globalNum: 3,
             chapterNum: 54,
-            chapter:"Respect and Good Manners",
-            chinese:"尊重与礼貌",
+            chapter:"Unit 3: Tanggungjawab Diri Terlaksana hidup makin bahagia",
             status:"Not Started",
             confidence:0,
-            last_updated:"2026-05-22"
+            last_updated:"2026-06-21"
         },
 
         {
             form:"T2",
             globalNum: 4,
             chapterNum: 55,
-            chapter:"Friendship and Cooperation",
-            chinese:"友谊与合作",
+            chapter:"Unit 4: Tanggungjawab Diri Membentuk Keluarga Bahagia",
             status:"Not Started",
             confidence:0,
-            last_updated:"2026-05-22"
+            last_updated:"2026-06-21"
         },
 
         {
             form:"T2",
             globalNum: 5,
             chapterNum: 56,
-            chapter:"Community Harmony",
-            chinese:"社区和谐",
+            chapter:"Unit 5: adab dijaga persahabatan terbela",
             status:"Not Started",
             confidence:0,
-            last_updated:"2026-05-22"
+            last_updated:"2026-06-21"
+        },
+
+        {
+            form:"T2",
+            globalNum: 6,
+            chapterNum: 57,
+            chapter:"Unit 6: Jiran Sepakat Membawa Berkat",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-06-21"
+        },
+
+        {
+            form:"T2",
+            globalNum: 7,
+            chapterNum: 58,
+            chapter:"Unit 7: Masyarakat Penyayang Tonggak aspirasi Negara",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-06-21"
+        },
+
+        {
+            form:"T2",
+            globalNum: 8,
+            chapterNum: 59,
+            chapter:"Unit 8: Perkhidmatan Awam Pemangkin Pembangunan Negara",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-06-21"
+        },
+
+        {
+            form:"T2",
+            globalNum: 9,
+            chapterNum: 60,
+            chapter:"Unit 9: Hargai Alam Warisan Kita",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-06-21"
+        },
+
+        {
+            form:"T2",
+            globalNum: 10,
+            chapterNum: 61,
+            chapter:"Unit 10: Gaya Hidup Sihat dan Selamat Menjamin Keharmonian Bersama",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-06-21"
+        },
+
+        {
+            form:"T2",
+            globalNum: 11,
+            chapterNum: 62,
+            chapter:"Unit 11: adab di tempat awam dijaga, nikmat hidup dirasai bersama",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-06-21"
+        },
+
+        {
+            form:"T2",
+            globalNum: 12,
+            chapterNum: 63,
+            chapter:"Unit 12: etika dan undang-undang siber membantu pembentukan jati diri",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-06-21"
+        },
+
+        {
+            form:"T2",
+            globalNum: 13,
+            chapterNum: 64,
+            chapter:"Unit 13: keselamatan di jalan raya tanggungjawab bersama",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-06-21"
+        },
+
+        {
+            form:"T2",
+            globalNum: 14,
+            chapterNum: 65,
+            chapter:"Unit 14: menangani konflik identity diri asas pembentukan personaliti",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-06-21",
+            resourceUrl:"../moral/t2_moral_unit14.html"
+        },
+
+        {
+            form:"T2",
+            globalNum: 15,
+            chapterNum: 66,
+            chapter:"Unit 15: Hak Asasi Manusia Dilindungi Bersama",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-06-21"
         },
 
         {
             form:"T3",
-            globalNum: 6,
+            globalNum: 16,
             chapterNum: 42,
             chapter:"Integrity in Daily Life",
             chinese:"日常生活中的诚信",
@@ -3472,7 +3567,7 @@ export const moralData = {
 
         {
             form:"T3",
-            globalNum: 7,
+            globalNum: 17,
             chapterNum: 43,
             chapter:"Justice and Fairness",
             chinese:"正义与公平",
@@ -3483,7 +3578,7 @@ export const moralData = {
 
         {
             form:"T3",
-            globalNum: 8,
+            globalNum: 18,
             chapterNum: 44,
             chapter:"Tolerance in a Diverse Society",
             chinese:"多元社会中的宽容",
@@ -3494,7 +3589,7 @@ export const moralData = {
 
         {
             form:"T3",
-            globalNum: 9,
+            globalNum: 19,
             chapterNum: 45,
             chapter:"Environmental Responsibility",
             chinese:"环境责任",
@@ -3505,7 +3600,7 @@ export const moralData = {
 
         {
             form:"T3",
-            globalNum: 10,
+            globalNum: 20,
             chapterNum: 46,
             chapter:"Patriotism and Citizenship",
             chinese:"爱国精神与公民责任",
@@ -3516,7 +3611,7 @@ export const moralData = {
 
         {
             form:"T4",
-            globalNum: 11,
+            globalNum: 21,
             chapterNum: 47,
             chapter:"Moral Principles and Decision Making",
             chinese:"道德原则与决策",
@@ -3527,7 +3622,7 @@ export const moralData = {
 
         {
             form:"T4",
-            globalNum: 12,
+            globalNum: 22,
             chapterNum: 48,
             chapter:"Human Rights and Responsibility",
             chinese:"人权与责任",
@@ -3538,7 +3633,7 @@ export const moralData = {
 
         {
             form:"T4",
-            globalNum: 13,
+            globalNum: 23,
             chapterNum: 49,
             chapter:"Conflict Resolution",
             chinese:"冲突解决",
@@ -3549,7 +3644,7 @@ export const moralData = {
 
         {
             form:"T4",
-            globalNum: 14,
+            globalNum: 24,
             chapterNum: 50,
             chapter:"Ethics in Technology",
             chinese:"科技伦理",
@@ -3560,7 +3655,7 @@ export const moralData = {
 
         {
             form:"T5",
-            globalNum: 15,
+            globalNum: 25,
             chapterNum: 42,
             chapter:"Moral Leadership",
             chinese:"道德领导",
@@ -3571,7 +3666,7 @@ export const moralData = {
 
         {
             form:"T5",
-            globalNum: 16,
+            globalNum: 26,
             chapterNum: 43,
             chapter:"Global Citizenship",
             chinese:"全球公民意识",
@@ -3582,7 +3677,7 @@ export const moralData = {
 
         {
             form:"T5",
-            globalNum: 17,
+            globalNum: 27,
             chapterNum: 44,
             chapter:"Social Justice and Welfare",
             chinese:"社会正义与福利",
@@ -3593,7 +3688,7 @@ export const moralData = {
 
         {
             form:"T5",
-            globalNum: 18,
+            globalNum: 28,
             chapterNum: 45,
             chapter:"National Unity and Peace",
             chinese:"国家团结与和平",
