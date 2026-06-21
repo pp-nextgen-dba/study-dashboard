@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Unit 11 Pendidikan Moral Tingkatan 2 | Adab di Tempat Awam</title>
+  <style>
+    :root{
+      --bg:#f8fafc; --card:#ffffff; --text:#172033; --muted:#64748b;
+      --blue:#2563eb; --green:#16a34a; --teal:#0f766e; --orange:#ea580c;
+      --purple:#7c3aed; --red:#dc2626; --yellow:#ca8a04; --dark:#0f172a;
+      --shadow:0 14px 34px rgba(15,23,42,.12); --radius:22px;
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{
+      font-family:"Segoe UI","Noto Sans","Microsoft YaHei",Arial,sans-serif;
+      background:
+        radial-gradient(circle at top left,rgba(37,99,235,.14),transparent 30%),
+        radial-gradient(circle at top right,rgba(234,88,12,.13),transparent 28%),
+        linear-gradient(135deg,#f8fbff,#f5f3ff 50%,#fff7ed);
+      color:var(--text); line-height:1.65; padding:20px;
+    }
+    .container{max-width:1260px;margin:0 auto}
+    .hero{
+      background:linear-gradient(135deg,#0f172a,#7c3aed 48%,#ea580c);
+      color:#fff;border-radius:32px;padding:38px 30px;margin-bottom:24px;
+      box-shadow:var(--shadow);position:relative;overflow:hidden;
+    }
+    .hero:after{content:"";position:absolute;right:-80px;top:-80px;width:300px;height:300px;border-radius:50%;background:rgba(255,255,255,.15)}
+    h1{font-size:clamp(1.8rem,4vw,3.45rem);line-height:1.08;letter-spacing:-.04em;margin-bottom:12px;position:relative;z-index:2}
+    .hero p{font-size:1.05rem;max-width:980px;color:rgba(255,255,255,.92);position:relative;z-index:2}
+    .pills{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px;position:relative;z-index:2}
+    .pill{padding:8px 14px;border-radius:999px;background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.25);font-weight:800}
+    .section{background:rgba(255,255,255,.84);border:1px solid rgba(255,255,255,.92);border-radius:var(--radius);padding:24px;margin-bottom:22px;box-shadow:0 10px 24px rgba(15,23,42,.08)}
+    h2{font-size:1.55rem;margin-bottom:12px;color:#0f172a}
+    h3{font-size:1.12rem;margin:8px 0;color:#111827}
+    .grid{display:grid;grid-template-columns:repeat(12,1fr);gap:16px}
+    .card{background:var(--card);border:1px solid #e8eef7;border-radius:20px;padding:18px;box-shadow:0 8px 18px rgba(15,23,42,.07)}
+    .wide{grid-column:span 12}.half{grid-column:span 6}.third{grid-column:span 4}.quarter{grid-column:span 3}
+    .badge{display:inline-block;color:white;font-weight:900;padding:6px 12px;border-radius:999px;margin-bottom:10px}
+    .blue{background:var(--blue)}.green{background:var(--green)}.teal{background:var(--teal)}.orange{background:var(--orange)}.purple{background:var(--purple)}.red{background:var(--red)}.yellow{background:var(--yellow)}
+    .tri{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:10px}
+    .tri div{background:#f8fafc;border-left:4px solid var(--purple);padding:12px;border-radius:14px}
+    .tri strong{display:block;color:#6d28d9;margin-bottom:3px}
+    ul,ol{padding-left:20px}.muted{color:var(--muted)}
+    .map-center{
+      max-width:560px;margin:0 auto 22px;text-align:center;color:white;
+      background:linear-gradient(135deg,#7c3aed,#2563eb,#ea580c);border-radius:24px;padding:18px;font-weight:900;box-shadow:var(--shadow)
+    }
+    .branches{display:grid;grid-template-columns:repeat(5,1fr);gap:13px}
+    .branch{background:white;border-radius:18px;padding:14px;border-top:7px solid var(--purple);box-shadow:0 8px 18px rgba(15,23,42,.07)}
+    .branch:nth-child(2){border-color:var(--green)}.branch:nth-child(3){border-color:var(--orange)}.branch:nth-child(4){border-color:var(--blue)}.branch:nth-child(5){border-color:var(--red)}
+    .value{display:inline-block;background:#f3e8ff;color:#6b21a8;border:1px solid #e9d5ff;border-radius:999px;padding:5px 10px;font-weight:800;margin:4px 4px 0 0;font-size:.92rem}
+    .formula{background:linear-gradient(135deg,#fff7ed,#fffbeb);border:2px dashed #fb923c;border-radius:18px;padding:16px;margin-top:12px}
+    code{font-family:inherit;font-weight:850;color:#9a3412;display:block;white-space:normal;margin-top:6px}
+    .table-wrap{overflow-x:auto;border-radius:18px;border:1px solid #e5e7eb;background:white}
+    table{width:100%;border-collapse:collapse;min-width:820px}
+    th{background:#0f172a;color:#fff;text-align:left;padding:12px;font-size:.92rem}
+    td{padding:12px;border-bottom:1px solid #e5e7eb;vertical-align:top}
+    tr:nth-child(even) td{background:#f8fafc}
+    .answer{background:#f0fdf4;border-left:5px solid var(--green);padding:11px;border-radius:12px;margin-top:8px}
+    .warning{background:#fff1f2;border-left:5px solid var(--red);padding:11px;border-radius:12px;margin-top:8px}
+    .tip{background:#eff6ff;border-left:5px solid var(--blue);padding:11px;border-radius:12px;margin-top:8px}
+    .footer{text-align:center;color:var(--muted);padding:16px}
+    @media(max-width:980px){.half,.third,.quarter{grid-column:span 12}.tri{grid-template-columns:1fr}.branches{grid-template-columns:1fr 1fr}}
+    @media(max-width:640px){body{padding:12px}.hero{padding:26px 18px;border-radius:24px}.section{padding:16px}.branches{grid-template-columns:1fr}}
+    @media print{body{background:#fff;padding:0}.hero,.section,.card,.branch{box-shadow:none}.section{break-inside:avoid}}
+  </style>
+</head>
+<body>
+<main class="container">
+
+  <section class="hero">
+    <h1>Unit 11: Adab di Tempat Awam Dijaga, Nikmat Hidup Dirasai Bersama</h1>
+    <p>
+      Tingkatan 2 Pendidikan Moral exam notes with tri-language explanation, memory map,
+      public places, good and bad manners, importance, moral values, KBAT answer templates and practice answer key.
+      <br/>中二道德第11课：维护公共场所礼仪，共享美好生活——公共场所、礼貌行为、不良行为、重要性与考试答题模板。
+    </p>
+    <div class="pills">
+      <span class="pill">BM + English + 中文</span>
+      <span class="pill">Peta Minda / Memory Map</span>
+      <span class="pill">Tempat Awam</span>
+      <span class="pill">Adab & Tidak Beradab</span>
+      <span class="pill">KBAT Answers</span>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>1. Memory Map / Peta Minda / 记忆导图</h2>
+    <div class="map-center">
+      Good Manners in Public Places Maintain Harmony<br/>
+      Adab di Tempat Awam Mengekalkan Keharmonian<br/>
+      公共场所有礼貌，社会更和谐
+    </div>
+    <div class="branches">
+      <div class="branch">
+        <h3>Konsep</h3>
+        <ul>
+          <li>Public place = where many people gather</li>
+          <li>Tempat orang ramai menjalankan urusan/aktiviti</li>
+          <li>公共场所：大众活动与办事地点</li>
+        </ul>
+      </div>
+      <div class="branch">
+        <h3>Tempat Awam</h3>
+        <ul>
+          <li>Hospital, library, airport</li>
+          <li>Market, railway station, bus stop</li>
+          <li>医院、图书馆、机场、市场、车站</li>
+        </ul>
+      </div>
+      <div class="branch">
+        <h3>Adab Baik</h3>
+        <ul>
+          <li>Dress properly, speak politely, use facilities well</li>
+          <li>穿着得体、有礼貌、爱护设施</li>
+        </ul>
+      </div>
+      <div class="branch">
+        <h3>Tidak Beradab</h3>
+        <ul>
+          <li>Vandalism, littering, blocking others</li>
+          <li>破坏公物、乱丢垃圾、阻碍他人</li>
+        </ul>
+      </div>
+      <div class="branch">
+        <h3>Kepentingan</h3>
+        <ul>
+          <li>Safe, comfortable, disciplined society</li>
+          <li>安全舒适、节省维修费、提升国家形象</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>2. Learning Objectives and Core Concept / Objektif & Konsep / 学习重点</h2>
+    <div class="grid">
+      <div class="card half">
+        <span class="badge purple">Objektif Pembelajaran</span>
+        <ul>
+          <li>Mengetahui tempat-tempat awam.</li>
+          <li>Mengetahui cara beradab di tempat awam.</li>
+          <li>Menjelaskan kepentingan beradab di tempat awam.</li>
+          <li>Membezakan amalan beradab dan tidak beradab di tempat awam.</li>
+          <li>Menghubung kait amalan beradab dengan keharmonian masyarakat.</li>
+          <li>Mengekspresikan perasaan apabila melaksanakan tanggungjawab di tempat awam.</li>
+        </ul>
+      </div>
+      <div class="card half">
+        <span class="badge blue">Konsep Penting</span>
+        <div class="tri">
+          <div><strong>BM</strong>Tempat awam ialah tempat orang ramai berkumpul untuk menjalankan sesuatu urusan atau aktiviti.</div>
+          <div><strong>English</strong>A public place is a place where many people gather to carry out matters or activities.</div>
+          <div><strong>中文</strong>公共场所是许多人聚集办理事务或进行活动的地方。</div>
+        </div>
+        <div class="tip">
+          Semua pihak perlu menjaga adab ketika berada di tempat awam untuk mengekalkan keharmonian bersama.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>3. Nilai Murni / Moral Values / 道德价值</h2>
+    <div class="grid">
+      <div class="card third"><span class="value">Hemah tinggi</span><p>Berkelakuan sopan dan menggunakan bahasa yang baik. Be courteous. 举止有礼。</p></div>
+      <div class="card third"><span class="value">Kesederhanaan</span><p>Tidak berlebihan dalam pakaian, percakapan dan tingkah laku. Avoid excessive behaviour. 行为适中。</p></div>
+      <div class="card third"><span class="value">Harga diri</span><p>Menjaga maruah diri dengan beradab. Maintain self-dignity. 维护自尊。</p></div>
+      <div class="card third"><span class="value">Rasional</span><p>Berfikir sebelum bertindak supaya tidak menyusahkan orang lain. Think before acting. 行动前三思。</p></div>
+      <div class="card third"><span class="value">Kebebasan</span><p>Menggunakan kebebasan tanpa mengganggu hak orang lain. Freedom with limits. 自由但不侵犯他人。</p></div>
+      <div class="card third"><span class="value">Bertanggungjawab</span><p>Menjaga kemudahan awam dan kebersihan. Protect public facilities. 负责任维护公共设施。</p></div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>4. Contoh Tempat Awam / Public Places / 公共场所例子</h2>
+    <div class="grid">
+      <div class="card quarter"><span class="badge blue">Hospital</span><p>Keep quiet, respect patients, follow rules.</p></div>
+      <div class="card quarter"><span class="badge green">Stesen Kereta Api</span><p>Queue properly and do not block others.</p></div>
+      <div class="card quarter"><span class="badge purple">Perpustakaan</span><p>Speak softly and keep books properly.</p></div>
+      <div class="card quarter"><span class="badge orange">Tempat Menunggu Bas</span><p>Queue and give priority to elderly/disabled people.</p></div>
+      <div class="card quarter"><span class="badge teal">Lapangan Terbang</span><p>Follow instructions and keep facilities clean.</p></div>
+      <div class="card quarter"><span class="badge yellow">Pasar Awam</span><p>Do not litter and respect other shoppers.</p></div>
+      <div class="card quarter"><span class="badge green">Kawasan Rekreasi</span><p>Keep the area clean and safe.</p></div>
+      <div class="card quarter"><span class="badge blue">RTC</span><p>Use services and facilities responsibly.</p></div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>5. Cara Beradab di Tempat Awam / Good Manners / 公共场所礼貌行为</h2>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Amalan Beradab</th><th>Explanation / Huraian</th><th>中文理解</th></tr></thead>
+        <tbody>
+          <tr><td>Memakai pakaian sopan dan sesuai.</td><td>Menjaga imej diri dan menghormati suasana tempat awam.</td><td>穿着端庄合适，尊重场合。</td></tr>
+          <tr><td>Berkelakuan sopan di tempat awam.</td><td>Tidak membuat bising, tidak bergaduh dan menjaga tutur kata.</td><td>举止有礼，不吵闹、不争吵。</td></tr>
+          <tr><td>Membuang sampah ke dalam tong sampah.</td><td>Menjaga kebersihan dan keselesaan orang ramai.</td><td>把垃圾丢进垃圾桶，保持清洁。</td></tr>
+          <tr><td>Menggunakan kemudahan awam dengan baik.</td><td>Tidak merosakkan harta benda awam dan menggunakan kemudahan mengikut keperluan.</td><td>正确使用公共设施，不破坏公物。</td></tr>
+          <tr><td>Memberikan laluan kepada orang ramai.</td><td>Tidak menghalang laluan dan memberi ruang kepada orang lain.</td><td>不阻碍通道，给别人空间。</td></tr>
+          <tr><td>Menggunakan air di tandas mengikut keperluan.</td><td>Mengelakkan pembaziran dan menjaga kebersihan tandas awam.</td><td>节约用水，保持厕所清洁。</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>6. Kepentingan Beradab di Tempat Awam / Importance / 重要性</h2>
+    <div class="grid">
+      <div class="card third"><span class="badge green">Kos Penyelenggaraan</span><p>Menjimatkan perbelanjaan penyelenggaraan kerana kemudahan tidak mudah rosak.</p></div>
+      <div class="card third"><span class="badge blue">Jangka Masa Lama</span><p>Kemudahan awam boleh digunakan dalam jangka masa yang lama.</p></div>
+      <div class="card third"><span class="badge teal">Selesa dan Selamat</span><p>Kemudahan menjadi selesa dan selamat digunakan oleh semua orang.</p></div>
+      <div class="card third"><span class="badge orange">Imej Negara</span><p>Meningkatkan imej negara, terutama kepada pelawat dan pelancong.</p></div>
+      <div class="card third"><span class="badge purple">Disiplin</span><p>Melatih diri berdisiplin dan mematuhi peraturan.</p></div>
+      <div class="card third"><span class="badge red">Harmoni</span><p>Mengelakkan perselisihan dan mengekalkan keharmonian masyarakat.</p></div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>7. Amalan Beradab vs Tidak Beradab / Comparison / 好行为与坏行为比较</h2>
+    <div class="grid">
+      <div class="card half">
+        <span class="badge green">Amalan Beradab</span>
+        <ul>
+          <li>Menggunakan harta benda awam dengan baik.</li>
+          <li>Menggunakan tong sampah yang disediakan.</li>
+          <li>Menjaga adab dan kelakuan di tempat awam.</li>
+          <li>Menggunakan air di tandas mengikut keperluan.</li>
+          <li>Memberikan laluan kepada orang ramai.</li>
+          <li>Beratur dan mematuhi peraturan.</li>
+        </ul>
+      </div>
+      <div class="card half">
+        <span class="badge red">Amalan Tidak Beradab</span>
+        <ul>
+          <li>Merosakkan harta benda awam atau vandalisme.</li>
+          <li>Membuang sampah di merata-rata tempat.</li>
+          <li>Pergaulan bebas antara lelaki dan perempuan tanpa batasan.</li>
+          <li>Membiarkan pili air tidak ditutup selepas digunakan.</li>
+          <li>Menghalang laluan orang ramai.</li>
+          <li>Membuat bising di hospital, perpustakaan atau tempat menunggu.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>8. Exam Formula / Formula Jawapan / 答题公式</h2>
+    <div class="formula">
+      <strong>Basic formula:</strong>
+      <code>Saya mengamalkan nilai [nilai moral] kerana [amalan beradab di tempat awam]. Kesannya, [kesan positif].</code>
+      <strong>Example:</strong>
+      <code>Saya mengamalkan nilai bertanggungjawab kerana saya membuang sampah ke dalam tong sampah di kawasan rekreasi. Kesannya, tempat awam menjadi bersih, selesa dan selamat digunakan.</code>
+    </div>
+    <div class="formula">
+      <strong>KBAT formula:</strong>
+      <code>Pada pendapat saya, [tindakan] perlu dilakukan kerana [sebab]. Hal ini dapat [kesan positif kepada masyarakat/negara].</code>
+      <strong>Example:</strong>
+      <code>Pada pendapat saya, masyarakat perlu menggunakan kemudahan awam dengan baik kerana kemudahan tersebut dikongsi oleh semua orang. Hal ini dapat menjimatkan kos penyelenggaraan dan mengekalkan keharmonian masyarakat.</code>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>9. Common Exam Questions and Sample Answers / Soalan Lazim / 常见题目</h2>
+    <div class="grid">
+      <div class="card half">
+        <h3>Q: Nyatakan tempat-tempat awam.</h3>
+        <div class="answer">
+          Hospital, perpustakaan, lapangan terbang, pasar awam, stesen kereta api, tempat menunggu bas, kawasan rekreasi dan Pusat Transformasi Luar Bandar.
+        </div>
+      </div>
+      <div class="card half">
+        <h3>Q: Terangkan cara beradab di tempat awam.</h3>
+        <div class="answer">
+          Memakai pakaian sopan dan sesuai, membuang sampah ke dalam tong sampah, menggunakan kemudahan awam dengan baik, berkelakuan sopan dan memberikan laluan kepada orang ramai.
+        </div>
+      </div>
+      <div class="card half">
+        <h3>Q: Senaraikan kepentingan beradab di tempat awam.</h3>
+        <div class="answer">
+          Menjimatkan kos penyelenggaraan, kemudahan awam tahan lama, kemudahan selesa dan selamat digunakan, meningkatkan imej negara serta melatih diri berdisiplin dan mematuhi peraturan.
+        </div>
+      </div>
+      <div class="card half">
+        <h3>Q: Hubung kait amalan beradab dan tidak beradab dengan keharmonian masyarakat.</h3>
+        <div class="answer">
+          Amalan beradab seperti menjaga kebersihan dan tidak merosakkan kemudahan awam dapat mewujudkan suasana yang selesa serta harmoni. Sebaliknya, amalan tidak beradab seperti vandalisme dan membuang sampah merata-rata boleh menimbulkan rasa tidak puas hati dan mengganggu keselesaan orang ramai.
+        </div>
+      </div>
+      <div class="card half">
+        <h3>Q: Apakah perasaan anda apabila melaksanakan tanggungjawab membersihkan tempat awam? Mengapa?</h3>
+        <div class="answer">
+          Saya berasa gembira dan bangga kerana dapat membantu menjaga kebersihan tempat awam. Hal ini menjadikan kawasan tersebut lebih selesa, selamat dan dapat digunakan oleh orang ramai.
+        </div>
+      </div>
+      <div class="card half">
+        <h3>Q: Kesan apabila seseorang membuang sampah di tempat awam.</h3>
+        <div class="answer">
+          Tempat awam menjadi kotor, berbau busuk dan tidak selesa. Perbuatan itu juga boleh menyebabkan penyakit, mencemarkan imej negara dan meningkatkan kos pembersihan.
+        </div>
+      </div>
+      <div class="card wide">
+        <h3>Q: Huraikan langkah untuk mengurangkan pencemaran di tempat awam.</h3>
+        <div class="answer">
+          Masyarakat perlu membuang sampah ke dalam tong sampah, mengadakan gotong-royong, memasang papan tanda larangan membuang sampah, menyediakan tong sampah yang mencukupi, mendidik orang ramai tentang kebersihan dan melaporkan perbuatan vandalisme atau pencemaran kepada pihak berkuasa.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>10. Practice Answer Key / Skema Ringkas / 练习答案</h2>
+    <div class="grid">
+      <div class="card half">
+        <h3>Praktis DSKP Q1: Padankan Tempat Awam</h3>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Item</th><th>Answer</th></tr></thead>
+            <tbody>
+              <tr><td>(a) Gambar bangunan pasar / kawasan awam</td><td>Pasar awam</td></tr>
+              <tr><td>(b) Gambar bangunan hospital</td><td>Hospital</td></tr>
+              <tr><td>(c) Gambar kapal terbang / terminal</td><td>Lapangan terbang</td></tr>
+              <tr><td>(d) Gambar ruang membaca / rak buku</td><td>Perpustakaan</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="warning">Note: Item (a) depends on the picture clarity; it appears to be a public market/building area.</div>
+      </div>
+      <div class="card half">
+        <h3>Praktis DSKP Q2: Cara Beradab</h3>
+        <div class="answer">
+          (a) Memakai pakaian <strong>sopan dan sesuai</strong>.<br/>
+          (b) Membuang sampah ke dalam <strong>tong sampah</strong>.<br/>
+          (c) Menggunakan kemudahan awam dengan <strong>baik</strong>.
+        </div>
+      </div>
+      <div class="card half">
+        <h3>Praktis DSKP Q3: Kepentingan Beradab</h3>
+        <div class="answer">
+          Pilih mana-mana tiga: menjimatkan kos penyelenggaraan; kemudahan awam boleh digunakan lama; kemudahan selesa dan selamat digunakan; meningkatkan imej negara; melatih diri berdisiplin dan mematuhi peraturan.
+        </div>
+      </div>
+      <div class="card half">
+        <h3>Praktis DSKP Q4: Hasil Perbincangan</h3>
+        <div class="answer">
+          Amalan beradab seperti menggunakan tong sampah, menjaga kemudahan awam dan memberi laluan kepada orang ramai dapat mengekalkan keharmonian masyarakat. Amalan tidak beradab seperti vandalisme, membuang sampah merata-rata dan menghalang laluan orang ramai akan menimbulkan ketidakselesaan, pergaduhan dan imej buruk kepada masyarakat.
+        </div>
+      </div>
+      <div class="card wide">
+        <h3>Praktis DSKP Q5: Berdasarkan Gambar Gotong-royong</h3>
+        <div class="answer">
+          <strong>(a)</strong> Saya berasa gembira dan bangga kerana dapat melaksanakan tanggungjawab menjaga kebersihan tempat awam.<br/>
+          <strong>(b)</strong> Kesan membuang sampah di tempat awam: kawasan menjadi kotor, berbau busuk, mengundang penyakit, menyusahkan orang ramai dan mencemarkan imej masyarakat.<br/>
+          <strong>(c)</strong> Langkah mengurangkan pencemaran: buang sampah ke dalam tong sampah, mengadakan gotong-royong, menyediakan tong sampah mencukupi, memasang papan tanda, memberi pendidikan kebersihan dan melaporkan pencemaran kepada pihak berkuasa.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>11. Quick Revision Checklist / Senarai Semak / 快速复习清单</h2>
+    <div class="grid">
+      <div class="card quarter"><span class="badge purple">1</span><p>Memorise definition: public place = place where many people gather for activities.</p></div>
+      <div class="card quarter"><span class="badge blue">2</span><p>Know public places: hospital, library, airport, market, station, bus stop, recreation area.</p></div>
+      <div class="card quarter"><span class="badge green">3</span><p>Good manners: dress properly, throw rubbish into bin, use facilities well.</p></div>
+      <div class="card quarter"><span class="badge red">4</span><p>Bad manners: vandalism, littering, wasting water, blocking others.</p></div>
+      <div class="card quarter"><span class="badge orange">5</span><p>Importance: save maintenance cost, facilities last longer, safe, comfortable, good image.</p></div>
+      <div class="card quarter"><span class="badge teal">6</span><p>Values: hemah tinggi, kesederhanaan, harga diri, rasional, kebebasan.</p></div>
+      <div class="card quarter"><span class="badge purple">7</span><p>Feelings question: gembira, bangga, puas hati + reason.</p></div>
+      <div class="card quarter"><span class="badge blue">8</span><p>For KBAT: action + reason + positive effect.</p></div>
+    </div>
+  </section>
+
+  <p class="footer">
+    Unit 11 exam preparation page · Pendidikan Moral Tingkatan 2 · BM + English + 中文
+  </p>
+
+</main>
+</body>
+</html>
