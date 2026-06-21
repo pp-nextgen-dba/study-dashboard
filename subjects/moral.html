@@ -15,7 +15,7 @@ content="width=device-width, initial-scale=1.0">
 <title>Pendidikan Moral Dashboard</title>
 
 <link rel="stylesheet"
-href="../css/style.css?v=31">
+href="../css/style.css?v=32">
 
 <style>
 
@@ -430,7 +430,7 @@ function mergeSeedChapters(subjectData){
     const existingByChapter =
         new Map(
             subjectData.chapters.map(chapter => [
-                `${chapter.form}|${chapter.chapter}`,
+                `${chapter.form}|${chapter.globalNum}`,
                 chapter
             ])
         );
@@ -440,7 +440,7 @@ function mergeSeedChapters(subjectData){
 
             const existingChapter =
                 existingByChapter.get(
-                    `${seedChapter.form}|${seedChapter.chapter}`
+                    `${seedChapter.form}|${seedChapter.globalNum}`
                 );
 
             if(!existingChapter){
@@ -454,6 +454,17 @@ function mergeSeedChapters(subjectData){
             }
 
             let updatedChapter = existingChapter;
+
+            if(existingChapter.chapter !== seedChapter.chapter){
+
+                changed = true;
+
+                updatedChapter = {
+                    ...updatedChapter,
+                    chapter:seedChapter.chapter
+                };
+
+            }
 
             if(!existingChapter.chinese && seedChapter.chinese){
 
@@ -484,14 +495,14 @@ function mergeSeedChapters(subjectData){
     const seedKeys =
         new Set(
             moralData.chapters.map(seedChapter =>
-                `${seedChapter.form}|${seedChapter.chapter}`
+                `${seedChapter.form}|${seedChapter.globalNum}`
             )
         );
 
     const extraExistingChapters =
         subjectData.chapters.filter(chapter =>
             !seedKeys.has(
-                `${chapter.form}|${chapter.chapter}`
+                `${chapter.form}|${chapter.globalNum}`
             )
         );
 
