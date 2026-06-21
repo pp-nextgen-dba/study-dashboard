@@ -413,6 +413,13 @@
                 status: "completed",
                 description: "Add Moral T2 Unit 13 Chapter\n\n✓ Chapter HTML Verified\n  - File: moral/t2_moral_unit13.html\n  - Content: Road safety & shared responsibility guide\n\n✓ Subject Data Integration\n  - Added resourceUrl to Unit 13 (chapterNum 64, globalNum 13)\n  - resourceUrl: \"../moral/t2_moral_unit13.html\"\n\n✓ Service Worker & Offline Caching\n  - Added \"/moral/t2_moral_unit13.html\" to STATIC_ASSETS in sw.js\n  - Enables offline access to chapter notes\n\n✓ Firestore Sync\n  - mergeSeedChapters() already configured to sync resourceUrl\n  - Unit 13 will display \"Open notes\" link on Moral subject page\n\n✓ Validation & Version Control\n  - npm run validate: passed (14 subjects) ✓\n  - Commit: 879c839 — feat: add Moral T2 Unit 13 chapter with resourceUrl and offline caching\n  - Pushed to GitHub ✓",
                 createdAt: new Date().toISOString()
+            },
+            {
+                id: 1719043200003,
+                date: "2026-06-21",
+                status: "completed",
+                description: "Reorganize Moral Subject to 15 Chapters Only\n\n✓ Curriculum Simplification\n  - Removed T3, T4, T5 Moral chapters\n  - Kept only 15 T2 Moral chapters (globalNum 1-15)\n  - Total: 28 → 15 chapters for Moral subject\n\n✓ Label Restructuring\n  - Changed all chapter labels: \"Unit N:\" → \"Chapter N:\"\n  - All 15 chapters now use consistent \"Chapter\" numbering\n  - Titles remain in Malay with moral education focus\n\n✓ Content Preserved\n  - Maintained resourceUrl for Chapters 13 & 14\n    - Chapter 13: ../moral/t2_moral_unit13.html\n    - Chapter 14: ../moral/t2_moral_unit14.html\n  - All other chapter content unchanged\n\n✓ Validation & Version Control\n  - npm run validate: passed (14 subjects) ✓\n  - Commit: 8c9a2f7 — refactor: reorganize Moral subject to 15 chapters, change Unit labels to Chapter\n  - Pushed to GitHub ✓\n\n✓ Result\n  - Simpler, cleaner curriculum structure\n  - Moral subject now displays 15 chapters consistently\n  - Easier for students to navigate and track progress",
+                createdAt: new Date().toISOString()
             }
         ];
 
