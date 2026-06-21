@@ -427,7 +427,7 @@ function mergeSeedChapters(subjectData){
 
     }
 
-    const existingByChapter =
+    const existingByKey =
         new Map(
             subjectData.chapters.map(chapter => [
                 `${chapter.form}|${chapter.globalNum}`,
@@ -435,11 +435,19 @@ function mergeSeedChapters(subjectData){
             ])
         );
 
+    const seedByKey =
+        new Map(
+            moralData.chapters.map(ch => [
+                `${ch.form}|${ch.globalNum}`,
+                ch
+            ])
+        );
+
     const seededChapters =
         moralData.chapters.map(seedChapter => {
 
             const existingChapter =
-                existingByChapter.get(
+                existingByKey.get(
                     `${seedChapter.form}|${seedChapter.globalNum}`
                 );
 
@@ -492,23 +500,26 @@ function mergeSeedChapters(subjectData){
 
         });
 
-    const seedKeys =
+    const existingKeys =
         new Set(
-            moralData.chapters.map(seedChapter =>
-                `${seedChapter.form}|${seedChapter.globalNum}`
+            subjectData.chapters.map(ch =>
+                `${ch.form}|${ch.globalNum}`
             )
         );
 
-    const extraExistingChapters =
-        subjectData.chapters.filter(chapter =>
-            !seedKeys.has(
-                `${chapter.form}|${chapter.globalNum}`
-            )
-        );
+    const extraSeedChapters =
+        [];
+
+    for(let [key, ch] of seedByKey){
+        if(!existingKeys.has(key)){
+            changed = true;
+            extraSeedChapters.push(ch);
+        }
+    }
 
     subjectData.chapters = [
         ...seededChapters,
-        ...extraExistingChapters
+        ...extraSeedChapters
     ];
 
     return changed;
@@ -529,10 +540,16 @@ async function loadData(){
 
         data = snap.data();
 
-        if(mergeSeedChapters(data)){
+        if(!Array.isArray(data.chapters) || data.chapters.length !== moralData.chapters.length){
+
+            data.chapters = structuredClone(moralData.chapters);
+            data.last_saved = new Date().toISOString();
+            await setDoc(docRef, data);
+
+        }else if(mergeSeedChapters(data)){
 
             data.last_saved = new Date().toISOString();
-    await setDoc(docRef,data);
+            await setDoc(docRef,data);
 
         }
 
