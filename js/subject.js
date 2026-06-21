@@ -3510,7 +3510,8 @@ export const moralData = {
             chapter:"Chapter 11: adab di tempat awam dijaga, nikmat hidup dirasai bersama",
             status:"Not Started",
             confidence:0,
-            last_updated:"2026-06-21"
+            last_updated:"2026-06-21",
+            resourceUrl:"../moral/t2_moral_unit11.html"
         },
 
         {
