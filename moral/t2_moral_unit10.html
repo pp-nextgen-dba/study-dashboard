@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Unit 10 Pendidikan Moral Tingkatan 2 | Gaya Hidup Sihat dan Selamat</title>
+  <style>
+    :root{
+      --bg:#f7fbff; --card:#ffffff; --text:#172033; --muted:#64748b;
+      --blue:#2563eb; --green:#16a34a; --teal:#0f766e; --orange:#ea580c;
+      --purple:#7c3aed; --red:#dc2626; --yellow:#ca8a04; --dark:#0f172a;
+      --shadow:0 14px 34px rgba(15,23,42,.12); --radius:22px;
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{
+      font-family:"Segoe UI","Noto Sans","Microsoft YaHei",Arial,sans-serif;
+      background:
+        radial-gradient(circle at top left,rgba(37,99,235,.15),transparent 30%),
+        radial-gradient(circle at top right,rgba(22,163,74,.16),transparent 28%),
+        linear-gradient(135deg,#f8fbff,#f0fdf4 50%,#fff7ed);
+      color:var(--text); line-height:1.65; padding:20px;
+    }
+    .container{max-width:1260px;margin:0 auto}
+    .hero{
+      background:linear-gradient(135deg,#0f172a,#2563eb 45%,#16a34a);
+      color:#fff;border-radius:32px;padding:38px 30px;margin-bottom:24px;
+      box-shadow:var(--shadow);position:relative;overflow:hidden;
+    }
+    .hero:after{content:"";position:absolute;right:-80px;top:-80px;width:300px;height:300px;border-radius:50%;background:rgba(255,255,255,.15)}
+    h1{font-size:clamp(1.8rem,4vw,3.45rem);line-height:1.08;letter-spacing:-.04em;margin-bottom:12px;position:relative;z-index:2}
+    .hero p{font-size:1.05rem;max-width:980px;color:rgba(255,255,255,.92);position:relative;z-index:2}
+    .pills{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px;position:relative;z-index:2}
+    .pill{padding:8px 14px;border-radius:999px;background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.25);font-weight:800}
+    .section{background:rgba(255,255,255,.84);border:1px solid rgba(255,255,255,.92);border-radius:var(--radius);padding:24px;margin-bottom:22px;box-shadow:0 10px 24px rgba(15,23,42,.08)}
+    h2{font-size:1.55rem;margin-bottom:12px;color:#0f172a}
+    h3{font-size:1.12rem;margin:8px 0;color:#111827}
+    .grid{display:grid;grid-template-columns:repeat(12,1fr);gap:16px}
+    .card{background:var(--card);border:1px solid #e8eef7;border-radius:20px;padding:18px;box-shadow:0 8px 18px rgba(15,23,42,.07)}
+    .wide{grid-column:span 12}.half{grid-column:span 6}.third{grid-column:span 4}.quarter{grid-column:span 3}
+    .badge{display:inline-block;color:white;font-weight:900;padding:6px 12px;border-radius:999px;margin-bottom:10px}
+    .blue{background:var(--blue)}.green{background:var(--green)}.teal{background:var(--teal)}.orange{background:var(--orange)}.purple{background:var(--purple)}.red{background:var(--red)}.yellow{background:var(--yellow)}
+    .tri{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:10px}
+    .tri div{background:#f8fafc;border-left:4px solid var(--blue);padding:12px;border-radius:14px}
+    .tri strong{display:block;color:#1d4ed8;margin-bottom:3px}
+    ul,ol{padding-left:20px}.muted{color:var(--muted)}
+    .map-center{
+      max-width:540px;margin:0 auto 22px;text-align:center;color:white;
+      background:linear-gradient(135deg,#2563eb,#16a34a);border-radius:24px;padding:18px;font-weight:900;box-shadow:var(--shadow)
+    }
+    .branches{display:grid;grid-template-columns:repeat(5,1fr);gap:13px}
+    .branch{background:white;border-radius:18px;padding:14px;border-top:7px solid var(--blue);box-shadow:0 8px 18px rgba(15,23,42,.07)}
+    .branch:nth-child(2){border-color:var(--green)}.branch:nth-child(3){border-color:var(--orange)}.branch:nth-child(4){border-color:var(--purple)}.branch:nth-child(5){border-color:var(--red)}
+    .value{display:inline-block;background:#eff6ff;color:#1d4ed8;border:1px solid #bfdbfe;border-radius:999px;padding:5px 10px;font-weight:800;margin:4px 4px 0 0;font-size:.92rem}
+    .formula{background:linear-gradient(135deg,#fff7ed,#fffbeb);border:2px dashed #fb923c;border-radius:18px;padding:16px;margin-top:12px}
+    code{font-family:inherit;font-weight:850;color:#9a3412;display:block;white-space:normal;margin-top:6px}
+    .table-wrap{overflow-x:auto;border-radius:18px;border:1px solid #e5e7eb;background:white}
+    table{width:100%;border-collapse:collapse;min-width:820px}
+    th{background:#0f172a;color:#fff;text-align:left;padding:12px;font-size:.92rem}
+    td{padding:12px;border-bottom:1px solid #e5e7eb;vertical-align:top}
+    tr:nth-child(even) td{background:#f8fafc}
+    .answer{background:#f0fdf4;border-left:5px solid var(--green);padding:11px;border-radius:12px;margin-top:8px}
+    .warning{background:#fff1f2;border-left:5px solid var(--red);padding:11px;border-radius:12px;margin-top:8px}
+    .tip{background:#eff6ff;border-left:5px solid var(--blue);padding:11px;border-radius:12px;margin-top:8px}
+    .footer{text-align:center;color:var(--muted);padding:16px}
+    @media(max-width:980px){.half,.third,.quarter{grid-column:span 12}.tri{grid-template-columns:1fr}.branches{grid-template-columns:1fr 1fr}}
+    @media(max-width:640px){body{padding:12px}.hero{padding:26px 18px;border-radius:24px}.section{padding:16px}.branches{grid-template-columns:1fr}}
+    @media print{body{background:#fff;padding:0}.hero,.section,.card,.branch{box-shadow:none}.section{break-inside:avoid}}
+  </style>
+</head>
+<body>
+<main class="container">
+
+  <section class="hero">
+    <h1>Unit 10: Gaya Hidup Sihat dan Selamat</h1>
+    <p>
+      Tingkatan 2 Pendidikan Moral exam notes with tri-language explanation, memory map,
+      healthy lifestyle activities, effects on self and society, moral values, KBAT answer templates and practice answer key.
+      <br/>中二道德第10课：健康与安全生活方式——健康活动、对个人与社会的影响、考试重点与答题模板。
+    </p>
+    <div class="pills">
+      <span class="pill">BM + English + 中文</span>
+      <span class="pill">Peta Minda / Memory Map</span>
+      <span class="pill">Aktiviti Sihat</span>
+      <span class="pill">Nilai Murni</span>
+      <span class="pill">KBAT Answers</span>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>1. Memory Map / Peta Minda / 记忆导图</h2>
+    <div class="map-center">
+      Healthy and Safe Lifestyle Builds Personal and Social Harmony<br/>
+      Gaya Hidup Sihat dan Selamat Menjamin Keharmonian Bersama<br/>
+      健康与安全生活方式促进共同和谐
+    </div>
+    <div class="branches">
+      <div class="branch">
+        <h3>Konsep</h3>
+        <ul>
+          <li>Prioritise body health and disease prevention</li>
+          <li>Utamakan kesihatan badan dan pencegahan penyakit</li>
+          <li>注重身体健康与预防疾病</li>
+        </ul>
+      </div>
+      <div class="branch">
+        <h3>Aktiviti Sihat</h3>
+        <ul>
+          <li>Exercise, balanced diet, enough rest</li>
+          <li>Senaman, makanan seimbang, rehat cukup</li>
+          <li>运动、均衡饮食、足够休息</li>
+        </ul>
+      </div>
+      <div class="branch">
+        <h3>Keselamatan</h3>
+        <ul>
+          <li>Clean environment and avoid prohibited substances</li>
+          <li>Persekitaran bersih dan bebas bahan terlarang</li>
+          <li>环境清洁，远离违禁物质</li>
+        </ul>
+      </div>
+      <div class="branch">
+        <h3>Kesan kepada Diri</h3>
+        <ul>
+          <li>Healthy body, smart mind, less stress</li>
+          <li>Tubuh sihat, minda cerdas, kurang stres</li>
+          <li>身体健康、头脑清晰、减轻压力</li>
+        </ul>
+      </div>
+      <div class="branch">
+        <h3>Kesan kepada Masyarakat</h3>
+        <ul>
+          <li>Productive, united and safe society</li>
+          <li>Masyarakat produktif, bersatu dan selamat</li>
+          <li>社会更有生产力、团结、安全</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>2. Learning Objectives and Core Concept / Objektif & Konsep / 学习重点</h2>
+    <div class="grid">
+      <div class="card half">
+        <span class="badge blue">Objektif Pembelajaran</span>
+        <ul>
+          <li>Memahami gaya hidup sihat dan selamat.</li>
+          <li>Mengenal pasti aktiviti gaya hidup sihat dan selamat.</li>
+          <li>Menilai kesan amalan gaya hidup sihat dan selamat.</li>
+          <li>Mengaitkan amalan gaya hidup sihat dengan kesejahteraan hidup.</li>
+          <li>Mengekspresikan perasaan apabila mengamalkan gaya hidup sihat dan selamat.</li>
+          <li>Mengamalkan gaya hidup sihat dan selamat dalam kehidupan seharian.</li>
+        </ul>
+      </div>
+      <div class="card half">
+        <span class="badge green">Konsep Penting</span>
+        <div class="tri">
+          <div><strong>BM</strong>Gaya hidup sihat ialah amalan masyarakat yang mengutamakan penjagaan kesihatan badan serta pencegahan penyakit.</div>
+          <div><strong>English</strong>A healthy lifestyle is a community practice that prioritises body health care and disease prevention.</div>
+          <div><strong>中文</strong>健康生活方式是重视身体健康护理和预防疾病的社会实践。</div>
+        </div>
+        <div class="tip">
+          Exam focus: connect healthy lifestyle to <strong>self-discipline, safety, family wellbeing, social harmony and disease prevention</strong>.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>3. Nilai Murni / Moral Values / 道德价值</h2>
+    <div class="grid">
+      <div class="card third"><span class="value">Harga diri</span><p>Menjaga kesihatan dan maruah diri. Respect self by taking care of health. 爱惜自己、维护自尊。</p></div>
+      <div class="card third"><span class="value">Kerajinan</span><p>Rajin bersenam dan menjaga kebersihan. Diligent in exercise and hygiene. 勤劳运动和保持卫生。</p></div>
+      <div class="card third"><span class="value">Bertanggungjawab</span><p>Bertanggungjawab menjaga kesihatan dan keselamatan. Responsible for health and safety. 对健康与安全负责。</p></div>
+      <div class="card third"><span class="value">Berdikari</span><p>Mampu mengurus diri dan jadual harian dengan baik. Manage oneself independently. 能自律管理生活。</p></div>
+      <div class="card third"><span class="value">Kesederhanaan</span><p>Tidak berlebihan dalam makan, hiburan atau penggunaan gajet. Avoid excess in food, entertainment and gadgets. 饮食、娱乐和电子产品不过量。</p></div>
+      <div class="card third"><span class="value">Rasional</span><p>Berfikir sebelum memilih makanan, aktiviti dan pergaulan. Make wise health choices. 理性选择饮食、活动和朋友。</p></div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>4. Aktiviti dan Amalan Gaya Hidup Sihat dan Selamat / Healthy Practices / 健康安全生活习惯</h2>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Amalan / Practice</th><th>Explanation / Huraian</th><th>中文理解</th></tr></thead>
+        <tbody>
+          <tr><td>Membuat pemeriksaan kesihatan</td><td>Mengesan penyakit lebih awal dan mendapatkan rawatan segera.</td><td>定期体检，及早发现疾病。</td></tr>
+          <tr><td>Makan makanan seimbang</td><td>Membekalkan nutrien yang cukup dan mengelakkan obesiti.</td><td>均衡饮食，获得足够营养，避免肥胖。</td></tr>
+          <tr><td>Menjaga kebersihan diri</td><td>Mengelakkan penyakit berjangkit dan bau badan.</td><td>保持个人卫生，预防传染病。</td></tr>
+          <tr><td>Menjaga kebersihan persekitaran</td><td>Mewujudkan kawasan yang bersih, selamat dan selesa.</td><td>保持环境清洁、安全与舒适。</td></tr>
+          <tr><td>Bebas daripada penggunaan bahan terlarang</td><td>Mengelakkan ketagihan, masalah sosial dan kerosakan kesihatan.</td><td>远离违禁物质，避免成瘾和社会问题。</td></tr>
+          <tr><td>Amalan ibadat dan meditasi</td><td>Menjadikan jiwa lebih tenang dan mengurangkan tekanan.</td><td>宗教实践或冥想使内心平静、减压。</td></tr>
+          <tr><td>Sentiasa berfikiran positif</td><td>Membina emosi yang stabil dan hubungan baik dengan orang lain.</td><td>保持积极思维，情绪更稳定。</td></tr>
+          <tr><td>Mendapatkan rehat yang cukup</td><td>Membantu badan pulih dan minda lebih fokus.</td><td>足够休息，身体恢复，学习更专注。</td></tr>
+          <tr><td>Melakukan aktiviti senaman</td><td>Menguatkan badan, meningkatkan stamina dan mengurangkan stres.</td><td>运动强身、增强体力、减轻压力。</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>5. Effects on Self / Kesan kepada Diri / 对个人的影响</h2>
+    <div class="grid">
+      <div class="card quarter"><span class="badge green">Minda Cerdas</span><p>Mempunyai minda yang cerdas dan lebih fokus ketika belajar.</p></div>
+      <div class="card quarter"><span class="badge blue">Tubuh Sihat</span><p>Memiliki tubuh badan yang sihat dan bertenaga.</p></div>
+      <div class="card quarter"><span class="badge orange">Kurang Stres</span><p>Mengurangkan tekanan melalui rehat, senaman dan pemikiran positif.</p></div>
+      <div class="card quarter"><span class="badge purple">Bebas Masalah Sosial</span><p>Menjauhi bahan terlarang, pergaulan negatif dan tabiat buruk.</p></div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>6. Effects on Society / Kesan kepada Masyarakat / 对社会的影响</h2>
+    <div class="grid">
+      <div class="card third"><span class="badge green">Masyarakat Produktif</span><p>Melahirkan anggota masyarakat yang lebih produktif dan aktif.</p></div>
+      <div class="card third"><span class="badge blue">Bersatu Padu</span><p>Melahirkan masyarakat yang bersatu padu dan bekerjasama.</p></div>
+      <div class="card third"><span class="badge teal">Persekitaran Bersih</span><p>Mewujudkan persekitaran yang bersih dan selamat.</p></div>
+      <div class="card third"><span class="badge orange">Kurang Masalah Sosial</span><p>Mengurangkan masalah sosial seperti penyalahgunaan dadah dan gejala negatif.</p></div>
+      <div class="card third"><span class="badge purple">Masyarakat Sihat</span><p>Melahirkan anggota masyarakat yang sihat.</p></div>
+      <div class="card third"><span class="badge red">Keharmonian</span><p>Hubungan keluarga dan masyarakat menjadi lebih harmoni.</p></div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>7. Exam Formula / Formula Jawapan / 答题公式</h2>
+    <div class="formula">
+      <strong>Basic formula:</strong>
+      <code>Saya mengamalkan nilai [nilai moral] kerana [amalan gaya hidup sihat]. Kesannya, [kesan positif].</code>
+      <strong>Example:</strong>
+      <code>Saya mengamalkan nilai bertanggungjawab kerana saya makan makanan seimbang dan melakukan senaman secara berkala. Kesannya, tubuh badan saya menjadi sihat dan minda saya lebih cerdas.</code>
+    </div>
+    <div class="formula">
+      <strong>KBAT formula:</strong>
+      <code>Pada pendapat saya, [amalan] perlu dilakukan kerana [sebab]. Hal ini dapat [kesan positif kepada diri/keluarga/masyarakat].</code>
+      <strong>Example:</strong>
+      <code>Pada pendapat saya, remaja perlu menjauhi bahan terlarang kerana bahan tersebut boleh merosakkan kesihatan dan masa depan. Hal ini dapat mengelakkan masalah sosial dan menjamin kesejahteraan hidup.</code>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>8. Common Exam Questions and Sample Answers / Soalan Lazim / 常见题目</h2>
+    <div class="grid">
+      <div class="card half">
+        <h3>Q: Padankan definisi gaya hidup sihat.</h3>
+        <div class="answer">
+          Gaya hidup sihat ialah amalan masyarakat yang mengutamakan penjagaan kesihatan badan serta pencegahan penyakit.
+        </div>
+      </div>
+      <div class="card half">
+        <h3>Q: Terangkan empat aktiviti gaya hidup sihat dan selamat.</h3>
+        <div class="answer">
+          Makan makanan seimbang untuk mendapatkan nutrien yang cukup. Melakukan senaman untuk menguatkan badan. Mendapatkan rehat yang cukup supaya minda lebih fokus. Menjaga kebersihan diri dan persekitaran untuk mengelakkan penyakit.
+        </div>
+      </div>
+      <div class="card half">
+        <h3>Q: Nyatakan kesan amalan gaya hidup sihat kepada masyarakat.</h3>
+        <div class="answer">
+          Melahirkan masyarakat yang sihat, produktif, bersatu padu dan bekerjasama. Selain itu, amalan ini dapat mengurangkan masalah sosial serta mewujudkan persekitaran yang bersih dan selamat.
+        </div>
+      </div>
+      <div class="card half">
+        <h3>Q: Hubung kait amalan gaya hidup sihat dengan kesejahteraan hidup.</h3>
+        <div class="answer">
+          Amalan seperti makan makanan seimbang, bersenam dan mendapat rehat yang cukup menjadikan badan sihat dan minda cerdas. Apabila diri sihat, seseorang dapat belajar atau bekerja dengan baik serta hidup lebih sejahtera bersama keluarga dan masyarakat.
+        </div>
+      </div>
+      <div class="card half">
+        <h3>Q: Apakah perasaan anda apabila mengamalkan gaya hidup sihat dan selamat?</h3>
+        <div class="answer">
+          Saya berasa gembira dan bangga kerana dapat menjaga kesihatan diri. Saya juga berasa lebih yakin kerana tubuh badan saya sihat, minda lebih cerdas dan saya dapat mengelakkan masalah sosial.
+        </div>
+      </div>
+      <div class="card half">
+        <h3>Q: Nyatakan amalan untuk bebas daripada masalah sosial.</h3>
+        <div class="answer">
+          Menjauhi penggunaan bahan terlarang, memilih rakan yang baik, mengisi masa lapang dengan aktiviti berfaedah, berfikiran positif dan mengamalkan ibadat atau meditasi.
+        </div>
+      </div>
+      <div class="card wide">
+        <h3>Q: Bina jadual aktiviti gaya hidup sihat dan selamat.</h3>
+        <div class="answer">
+          Contoh: 6.30 pagi bangun dan membersihkan diri; 7.00 pagi sarapan seimbang; 8.00 pagi belajar; 5.00 petang bersenam; 7.00 malam makan malam seimbang; 8.00 malam ulang kaji; 9.30 malam meditasi/ibadat dan persediaan tidur; 10.00 malam tidur secukupnya.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>9. Practice Answer Key / Skema Ringkas / 练习答案</h2>
+    <div class="grid">
+      <div class="card half">
+        <h3>Praktis DSKP Q1: Definisi Gaya Hidup Sihat</h3>
+        <div class="answer">
+          Padankan dengan: <strong>Amalan masyarakat yang mengutamakan penjagaan kesihatan badan serta pencegahan penyakit.</strong>
+        </div>
+      </div>
+      <div class="card half">
+        <h3>Praktis DSKP Q2: Aktiviti Gaya Hidup Sihat dan Selamat</h3>
+        <div class="answer">
+          Mana-mana empat jawapan sesuai: membuat pemeriksaan kesihatan, makan makanan seimbang, menjaga kebersihan diri, menjaga kebersihan persekitaran, bebas daripada penggunaan bahan terlarang, amalan ibadat dan meditasi, sentiasa berfikiran positif, mendapat rehat yang cukup, melakukan aktiviti senaman.
+        </div>
+      </div>
+      <div class="card half">
+        <h3>Praktis DSKP Q3: Kesan kepada Masyarakat</h3>
+        <div class="answer">
+          Melahirkan anggota masyarakat yang lebih produktif; melahirkan masyarakat yang bersatu padu dan bekerjasama; mewujudkan persekitaran yang bersih dan selamat; mengurangkan masalah sosial; melahirkan anggota masyarakat yang sihat.
+        </div>
+      </div>
+      <div class="card half">
+        <h3>Praktis DSKP Q4: Hasil Perbincangan</h3>
+        <div class="answer">
+          Amalan gaya hidup sihat seperti bersenam, makan makanan seimbang, menjaga kebersihan dan mendapat rehat yang cukup dapat meningkatkan kesihatan diri. Apabila masyarakat sihat, mereka lebih produktif, kurang mengalami stres dan dapat hidup dalam suasana bersih, selamat serta harmoni.
+        </div>
+      </div>
+      <div class="card wide">
+        <h3>Praktis DSKP Q5: Contoh Jadual Aktiviti Harian</h3>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Masa</th><th>Aktiviti</th><th>Tujuan</th></tr></thead>
+            <tbody>
+              <tr><td>6.30 pagi</td><td>Bangun tidur dan membersihkan diri</td><td>Menjaga kebersihan diri</td></tr>
+              <tr><td>7.00 pagi</td><td>Sarapan makanan seimbang</td><td>Membekalkan tenaga</td></tr>
+              <tr><td>8.00 pagi – 1.00 petang</td><td>Belajar di sekolah</td><td>Meningkatkan ilmu</td></tr>
+              <tr><td>1.30 petang</td><td>Makan tengah hari seimbang</td><td>Menjaga kesihatan badan</td></tr>
+              <tr><td>3.00 petang</td><td>Rehat secukupnya</td><td>Mengurangkan keletihan</td></tr>
+              <tr><td>5.00 petang</td><td>Bersenam / beriadah</td><td>Menguatkan badan dan mengurangkan stres</td></tr>
+              <tr><td>7.00 malam</td><td>Makan malam bersama keluarga</td><td>Mengeratkan hubungan keluarga</td></tr>
+              <tr><td>8.00 malam</td><td>Ulang kaji pelajaran</td><td>Mempunyai minda yang cerdas</td></tr>
+              <tr><td>9.30 malam</td><td>Ibadat / meditasi / persediaan tidur</td><td>Menenangkan fikiran</td></tr>
+              <tr><td>10.00 malam</td><td>Tidur</td><td>Mendapat rehat yang cukup</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>10. Quick Revision Checklist / Senarai Semak / 快速复习清单</h2>
+    <div class="grid">
+      <div class="card quarter"><span class="badge blue">1</span><p>Memorise definition: health care + disease prevention.</p></div>
+      <div class="card quarter"><span class="badge green">2</span><p>Know values: harga diri, kerajinan, bertanggungjawab, berdikari, kesederhanaan.</p></div>
+      <div class="card quarter"><span class="badge orange">3</span><p>Activities: health check, exercise, balanced diet, hygiene, enough rest.</p></div>
+      <div class="card quarter"><span class="badge purple">4</span><p>Avoid: prohibited substances, excessive gadget use, negative friends.</p></div>
+      <div class="card quarter"><span class="badge teal">5</span><p>Effects on self: smart mind, healthy body, less stress, free from social problems.</p></div>
+      <div class="card quarter"><span class="badge red">6</span><p>Effects on society: productive, united, clean and safe, fewer social problems.</p></div>
+      <div class="card quarter"><span class="badge green">7</span><p>Feelings question: gembira, bangga, yakin + reason.</p></div>
+      <div class="card quarter"><span class="badge blue">8</span><p>For KBAT: practice + reason + positive effect.</p></div>
+    </div>
+  </section>
+
+  <p class="footer">
+    Unit 10 exam preparation page · Pendidikan Moral Tingkatan 2 · BM + English + 中文
+  </p>
+
+</main>
+</body>
+</html>
