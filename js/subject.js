@@ -3530,7 +3530,8 @@ export const moralData = {
             chapter:"Unit 13: keselamatan di jalan raya tanggungjawab bersama",
             status:"Not Started",
             confidence:0,
-            last_updated:"2026-06-21"
+            last_updated:"2026-06-21",
+            resourceUrl:"../moral/t2_moral_unit13.html"
         },
 
         {
