@@ -3555,7 +3555,8 @@ export const moralData = {
             chapter:"Chapter 15: Hak Asasi Manusia Dilindungi Bersama",
             status:"Not Started",
             confidence:0,
-            last_updated:"2026-06-21"
+            last_updated:"2026-06-21",
+            resourceUrl:"../moral/t2_moral_unit15.html"
         },
 
         {
