@@ -777,9 +777,7 @@ function render(){
                             ${chapter.chapter}
                         </div>
 
-                        <div class="chapter-cn">
-                            ${chapter.chinese}
-                        </div>
+                        ${chapter.chinese ? `<div class="chapter-cn">${chapter.chinese}</div>` : ''}
 
                         ${chapterResource}
 
