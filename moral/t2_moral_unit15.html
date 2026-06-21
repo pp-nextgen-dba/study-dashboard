@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Unit 15 Pendidikan Moral Tingkatan 2 | Hak Asasi Manusia Dilindungi Bersama</title>
+  <style>
+    :root{
+      --bg:#f6f8fc; --card:#fff; --text:#172033; --muted:#64748b;
+      --blue:#2563eb; --green:#16a34a; --orange:#ea580c; --purple:#7c3aed;
+      --red:#dc2626; --teal:#0f766e; --dark:#0f172a; --pink:#db2777;
+      --shadow:0 14px 34px rgba(15,23,42,.12); --radius:22px;
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{
+      font-family:"Segoe UI","Noto Sans","Microsoft YaHei",Arial,sans-serif;
+      background:
+        radial-gradient(circle at top left,rgba(37,99,235,.16),transparent 30%),
+        radial-gradient(circle at top right,rgba(219,39,119,.12),transparent 28%),
+        linear-gradient(135deg,#f8fbff,#fff7ed 50%,#f0fdf4);
+      color:var(--text); line-height:1.65; padding:20px;
+    }
+    .container{max-width:1260px;margin:0 auto}
+    .hero{
+      background:linear-gradient(135deg,#0f172a,#7c3aed 48%,#16a34a);
+      color:white;border-radius:32px;padding:38px 30px;margin-bottom:24px;
+      box-shadow:var(--shadow);position:relative;overflow:hidden;
+    }
+    .hero:after{content:"";position:absolute;right:-80px;top:-80px;width:300px;height:300px;border-radius:50%;background:rgba(255,255,255,.15)}
+    h1{font-size:clamp(1.8rem,4vw,3.45rem);line-height:1.08;letter-spacing:-.04em;margin-bottom:12px;position:relative;z-index:2}
+    .hero p{font-size:1.05rem;max-width:980px;color:rgba(255,255,255,.92);position:relative;z-index:2}
+    .pills{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px;position:relative;z-index:2}
+    .pill{padding:8px 14px;border-radius:999px;background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.25);font-weight:800}
+    .section{background:rgba(255,255,255,.84);border:1px solid rgba(255,255,255,.92);border-radius:var(--radius);padding:24px;margin-bottom:22px;box-shadow:0 10px 24px rgba(15,23,42,.08)}
+    h2{font-size:1.55rem;margin-bottom:12px;color:#0f172a}
+    h3{font-size:1.12rem;margin:8px 0;color:#111827}
+    .grid{display:grid;grid-template-columns:repeat(12,1fr);gap:16px}
+    .card{background:var(--card);border:1px solid #e8eef7;border-radius:20px;padding:18px;box-shadow:0 8px 18px rgba(15,23,42,.07)}
+    .wide{grid-column:span 12}.half{grid-column:span 6}.third{grid-column:span 4}.quarter{grid-column:span 3}
+    .badge{display:inline-block;color:white;font-weight:900;padding:6px 12px;border-radius:999px;margin-bottom:10px}
+    .blue{background:var(--blue)}.green{background:var(--green)}.orange{background:var(--orange)}.purple{background:var(--purple)}.red{background:var(--red)}.teal{background:var(--teal)}.pink{background:var(--pink)}
+    .tri{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:10px}
+    .tri div{background:#f8fafc;border-left:4px solid var(--purple);padding:12px;border-radius:14px}
+    .tri strong{display:block;color:#6d28d9;margin-bottom:3px}
+    ul,ol{padding-left:20px}.muted{color:var(--muted)}
+    .map-center{
+      max-width:500px;margin:0 auto 22px;text-align:center;color:white;
+      background:linear-gradient(135deg,#7c3aed,#16a34a);border-radius:24px;padding:18px;font-weight:900;box-shadow:var(--shadow)
+    }
+    .branches{display:grid;grid-template-columns:repeat(4,1fr);gap:13px}
+    .branch{background:white;border-radius:18px;padding:14px;border-top:7px solid var(--purple);box-shadow:0 8px 18px rgba(15,23,42,.07)}
+    .branch:nth-child(2){border-color:var(--green)}.branch:nth-child(3){border-color:var(--orange)}.branch:nth-child(4){border-color:var(--blue)}
+    .value{display:inline-block;background:#f3e8ff;color:#6b21a8;border:1px solid #e9d5ff;border-radius:999px;padding:5px 10px;font-weight:800;margin:4px 4px 0 0;font-size:.92rem}
+    .formula{background:linear-gradient(135deg,#fff7ed,#fffbeb);border:2px dashed #fb923c;border-radius:18px;padding:16px;margin-top:12px}
+    code{font-family:inherit;font-weight:850;color:#9a3412;display:block;white-space:normal;margin-top:6px}
+    .table-wrap{overflow-x:auto;border-radius:18px;border:1px solid #e5e7eb;background:white}
+    table{width:100%;border-collapse:collapse;min-width:820px}
+    th{background:#0f172a;color:#fff;text-align:left;padding:12px;font-size:.92rem}
+    td{padding:12px;border-bottom:1px solid #e5e7eb;vertical-align:top}
+    tr:nth-child(even) td{background:#f8fafc}
+    .answer{background:#f0fdf4;border-left:5px solid var(--green);padding:11px;border-radius:12px;margin-top:8px}
+    .warning{background:#fff1f2;border-left:5px solid var(--red);padding:11px;border-radius:12px;margin-top:8px}
+    .tip{background:#eff6ff;border-left:5px solid var(--blue);padding:11px;border-radius:12px;margin-top:8px}
+    .footer{text-align:center;color:var(--muted);padding:16px}
+    @media(max-width:980px){.half,.third,.quarter{grid-column:span 12}.tri{grid-template-columns:1fr}.branches{grid-template-columns:1fr 1fr}}
+    @media(max-width:640px){body{padding:12px}.hero{padding:26px 18px;border-radius:24px}.section{padding:16px}.branches{grid-template-columns:1fr}}
+    @media print{body{background:#fff;padding:0}.hero,.section,.card,.branch{box-shadow:none}.section{break-inside:avoid}}
+  </style>
+</head>
+<body>
+<main class="container">
+
+  <section class="hero">
+    <h1>Unit 15: Hak Asasi Manusia Dilindungi Bersama</h1>
+    <p>
+      Tingkatan 2 Pendidikan Moral exam notes with tri-language explanation, memory map,
+      human-rights categories, relevant acts, moral values, KBAT answer templates and practice answer key.
+      <br/>中二道德第15课：共同维护人权——妇女、工人、OKU 与消费者权益考试重点。
+    </p>
+    <div class="pills">
+      <span class="pill">BM + English + 中文</span>
+      <span class="pill">Peta Minda / Memory Map</span>
+      <span class="pill">Hak Wanita / Pekerja / OKU / Pengguna</span>
+      <span class="pill">Nilai Moral</span>
+      <span class="pill">KBAT Answers</span>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>1. Memory Map / Peta Minda / 记忆导图</h2>
+    <div class="map-center">
+      Human Rights Must Be Protected Together<br/>
+      Hak Asasi Manusia Dilindungi Bersama<br/>
+      人权需要大家共同维护
+    </div>
+    <div class="branches">
+      <div class="branch">
+        <h3>Hak Wanita</h3>
+        <ul>
+          <li>Education, work, protection</li>
+          <li>Rights of women and girls</li>
+          <li>妇女权利：教育、就业、保护</li>
+        </ul>
+      </div>
+      <div class="branch">
+        <h3>Hak Pekerja</h3>
+        <ul>
+          <li>Sick leave, fair working hours, KWSP</li>
+          <li>Safe and fair workplace</li>
+          <li>工人权利：病假、工时保障、公积金</li>
+        </ul>
+      </div>
+      <div class="branch">
+        <h3>Hak OKU</h3>
+        <ul>
+          <li>Education, family life, safe life, accessibility</li>
+          <li>Not excluded from society</li>
+          <li>残障人士权利：教育、安全、无障碍设施</li>
+        </ul>
+      </div>
+      <div class="branch">
+        <h3>Hak Pengguna</h3>
+        <ul>
+          <li>Quality goods, accurate information, compensation</li>
+          <li>Protection from dishonest traders</li>
+          <li>消费者权利：品质、资讯、赔偿</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>2. Core Concept / Konsep Utama / 核心概念</h2>
+    <div class="tri">
+      <div><strong>BM</strong>Golongan wanita, pengguna, Orang Kurang Upaya (OKU) dan pekerja mempunyai hak untuk dilindungi dan dipatuhi.</div>
+      <div><strong>English</strong>Women, consumers, persons with disabilities and workers have rights that must be protected and respected.</div>
+      <div><strong>中文</strong>妇女、消费者、残障人士和工人都拥有应被保护与尊重的权利。</div>
+    </div>
+    <div class="tip">
+      Main exam idea: When answering Unit 15, always connect the situation to <strong>fair treatment, protection, respect, welfare, dignity and responsibility</strong>.
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>3. Human Rights Categories / Kategori Hak / 权利类别</h2>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Group</th>
+            <th>Rights / Hak</th>
+            <th>Acts / Akta</th>
+            <th>Importance / Kepentingan</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Hak Wanita</strong><br/>Women’s rights<br/>妇女权利</td>
+            <td>
+              <ul>
+                <li>Mendapat pendidikan.</li>
+                <li>Mendapat pekerjaan.</li>
+                <li>Mendapat perlindungan.</li>
+                <li>Dilayan secara bermaruah dan adil.</li>
+              </ul>
+            </td>
+            <td>Akta Perlindungan Wanita dan Gadis 1973</td>
+            <td>
+              <ul>
+                <li>Dapat memberi sumbangan kepada keluarga dan masyarakat.</li>
+                <li>Mendapat perlindungan daripada penindasan.</li>
+                <li>Memelihara maruah dan keselamatan wanita.</li>
+              </ul>
+            </td>
+          </tr>
+          <tr>
+            <td><strong>Hak Pekerja</strong><br/>Workers’ rights<br/>工人权利</td>
+            <td>
+              <ul>
+                <li>Mendapat cuti sakit.</li>
+                <li>Mendapat gaji untuk jumlah jam bekerja.</li>
+                <li>Mendapat perlindungan KWSP.</li>
+                <li>Mendapat layanan sama rata dari segi gaji dan kenaikan pangkat.</li>
+              </ul>
+            </td>
+            <td>
+              <ul>
+                <li>Akta Pekerjaan 1995</li>
+                <li>Akta Agensi Pekerjaan Swasta 1981</li>
+              </ul>
+            </td>
+            <td>
+              <ul>
+                <li>Pekerja lebih bersemangat dan produktif.</li>
+                <li>Pekerja rasa dihargai oleh majikan.</li>
+                <li>Hubungan majikan dan pekerja lebih harmoni.</li>
+              </ul>
+            </td>
+          </tr>
+          <tr>
+            <td><strong>Hak OKU</strong><br/>Rights of persons with disabilities<br/>残障人士权利</td>
+            <td>
+              <ul>
+                <li>Hak tinggal bersama keluarga.</li>
+                <li>Hak mendapat pendidikan.</li>
+                <li>Hak menjalani kehidupan secara aman.</li>
+                <li>Hak mendapat kemudahan awam yang sesuai.</li>
+                <li>Hak mendapat peluang pekerjaan yang sama.</li>
+              </ul>
+            </td>
+            <td>Akta Orang Kurang Upaya 2008</td>
+            <td>
+              <ul>
+                <li>Membolehkan mereka hidup berdikari.</li>
+                <li>Meneruskan kehidupan seperti orang lain.</li>
+                <li>Mengelakkan mereka dipinggirkan oleh masyarakat.</li>
+              </ul>
+            </td>
+          </tr>
+          <tr>
+            <td><strong>Hak Pengguna</strong><br/>Consumer rights<br/>消费者权利</td>
+            <td>
+              <ul>
+                <li>Mendapat barangan dan perkhidmatan berkualiti.</li>
+                <li>Mendapat pampasan dan ganti rugi.</li>
+                <li>Mendapat maklumat yang tepat.</li>
+                <li>Mendapat perlindungan daripada penipuan peniaga.</li>
+              </ul>
+            </td>
+            <td>Akta Kawalan Harga 1946, Pindaan 1973</td>
+            <td>
+              <ul>
+                <li>Supaya pengguna tidak ditindas oleh peniaga.</li>
+                <li>Supaya nasib pengguna dibela.</li>
+                <li>Pengguna dapat membuat pilihan yang bijak.</li>
+              </ul>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>4. Government and Agencies / Peranan Kerajaan dan Badan / 政府与机构角色</h2>
+    <div class="grid">
+      <div class="card half">
+        <span class="badge blue">Sumbangan Badan Kerajaan</span>
+        <ol>
+          <li>Menggubal akta berkaitan hak wanita, hak pengguna, hak OKU dan hak pekerja.</li>
+          <li>Mewujudkan kementerian dan jabatan untuk melindungi kumpulan tersebut.</li>
+          <li>Menyediakan kemudahan, bantuan, perlindungan dan saluran aduan.</li>
+        </ol>
+      </div>
+      <div class="card half">
+        <span class="badge green">Examples of Agencies</span>
+        <ul>
+          <li>Jabatan Hal Ehwal Wanita</li>
+          <li>Majlis Pertubuhan Wanita</li>
+          <li>Kementerian / Jabatan berkaitan pekerjaan dan sumber manusia</li>
+          <li>Pertubuhan Keselamatan Sosial, PERKESO</li>
+          <li>Persatuan Orang Buta Malaysia</li>
+          <li>FOMCA</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>5. Moral Values to Apply / Nilai Moral / 应用价值观</h2>
+    <div class="grid">
+      <div class="card third"><span class="value">Keadilan</span><p>Melayan semua pihak secara sama rata. Treat everyone fairly. 公平对待所有人。</p></div>
+      <div class="card third"><span class="value">Hormat</span><p>Menghormati hak, maruah dan keperluan orang lain. Respect rights and dignity. 尊重权利与尊严。</p></div>
+      <div class="card third"><span class="value">Bertanggungjawab</span><p>Menjalankan tugas untuk melindungi hak orang lain. Carry out duties responsibly. 负责任地维护他人权利。</p></div>
+      <div class="card third"><span class="value">Kasih sayang</span><p>Prihatin terhadap golongan yang memerlukan. Care for vulnerable groups. 关心有需要者。</p></div>
+      <div class="card third"><span class="value">Baik hati</span><p>Membantu OKU, pekerja, pengguna dan wanita yang memerlukan. Help sincerely. 真诚帮助。</p></div>
+      <div class="card third"><span class="value">Rasional</span><p>Membuat keputusan berdasarkan hak, undang-undang dan bukti. Think based on law and evidence. 依法理性判断。</p></div>
+      <div class="card third"><span class="value">Keberanian</span><p>Berani melaporkan penindasan atau penipuan. Report wrongdoing bravely. 勇于举报不公。</p></div>
+      <div class="card third"><span class="value">Kesederhanaan</span><p>Berbelanja secara berhemah dan membuat pilihan bijak. Spend wisely. 理性消费。</p></div>
+      <div class="card third"><span class="value">Patriotisme</span><p>Menyokong usaha negara melindungi hak rakyat. Support national welfare. 支持国家维护人民权益。</p></div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>6. Exam Answer Formula / Formula Jawapan / 答题公式</h2>
+    <div class="formula">
+      <strong>Basic moral answer:</strong>
+      <code>Saya mengamalkan nilai [nilai moral] kerana [tindakan baik]. Kesannya, [kesan positif].</code>
+      <strong>Example:</strong>
+      <code>Saya mengamalkan nilai hormat kerana saya menghormati hak Orang Kurang Upaya dengan membantu mereka menggunakan kemudahan awam. Kesannya, mereka tidak berasa tersisih daripada masyarakat.</code>
+    </div>
+    <div class="formula">
+      <strong>KBAT answer:</strong>
+      <code>Pada pendapat saya, [tindakan] perlu dilakukan kerana [sebab]. Hal ini dapat [kesan positif kepada individu/masyarakat/negara].</code>
+      <strong>Example:</strong>
+      <code>Pada pendapat saya, hak pengguna perlu dilindungi kerana pengguna berhak mendapat barangan yang berkualiti dan maklumat yang tepat. Hal ini dapat mengelakkan pengguna daripada ditipu oleh peniaga.</code>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>7. Common Exam Questions and Sample Answers / Soalan Lazim / 常见题目</h2>
+    <div class="grid">
+      <div class="card half">
+        <h3>Q: Senaraikan kemudahan yang harus disediakan kepada golongan OKU.</h3>
+        <div class="answer">
+          Laluan khas atau ramp, tandas OKU, tempat letak kereta khas, lif mesra OKU, kaunter khas, kemudahan bersukan dan kemudahan pendidikan yang sesuai.
+        </div>
+      </div>
+      <div class="card half">
+        <h3>Q: Tiga sebab kepentingan OKU perlu dilindungi.</h3>
+        <div class="answer">
+          Supaya mereka boleh hidup berdikari, tidak dipinggirkan oleh masyarakat, dan dapat meneruskan kehidupan seperti orang lain dengan selamat serta bermaruah.
+        </div>
+      </div>
+      <div class="card half">
+        <h3>Q: Rakan OKU sukar memasuki perpustakaan awam. Nyatakan tiga cara membantu.</h3>
+        <div class="answer">
+          Saya boleh membantu menolak kerusi roda, meminta bantuan pegawai perpustakaan, dan mencadangkan kepada pihak perpustakaan supaya menyediakan laluan khas atau ramp untuk OKU.
+        </div>
+      </div>
+      <div class="card half">
+        <h3>Q: Senaraikan tiga hak pekerja yang patut dilaksanakan oleh majikan.</h3>
+        <div class="answer">
+          Hak mendapat gaji yang adil, hak mendapat cuti sakit, hak mendapat jumlah jam bekerja yang munasabah, hak mendapat perlindungan KWSP/PERKESO dan hak mendapat tempat kerja yang selamat.
+        </div>
+      </div>
+      <div class="card half">
+        <h3>Q: Tiga kesan jika kemudahan pekerja tidak disediakan oleh majikan.</h3>
+        <div class="answer">
+          Pekerja kurang bersemangat, produktiviti menurun, hubungan pekerja dan majikan menjadi renggang, pekerja berasa tidak dihargai, dan kesihatan pekerja boleh terjejas.
+        </div>
+      </div>
+      <div class="card half">
+        <h3>Q: Dua kepentingan menghormati hak pekerja.</h3>
+        <div class="answer">
+          Dapat meningkatkan semangat kerja dan produktiviti organisasi. Selain itu, hubungan antara pekerja dengan majikan menjadi lebih harmoni.
+        </div>
+      </div>
+      <div class="card half">
+        <h3>Q: Tiga bentuk penipuan yang biasa dialami pengguna.</h3>
+        <div class="answer">
+          Harga tidak jelas atau tiada tanda harga, barangan rosak atau tidak berkualiti, iklan palsu, sukatan/timbangan tidak tepat, dan barangan tamat tempoh.
+        </div>
+      </div>
+      <div class="card half">
+        <h3>Q: Dua kepentingan mengetahui hak sebagai pengguna.</h3>
+        <div class="answer">
+          Pengguna dapat mengelakkan diri daripada ditipu. Pengguna juga boleh menuntut pampasan atau membuat aduan jika menerima barangan/perkhidmatan yang tidak berkualiti.
+        </div>
+      </div>
+      <div class="card half">
+        <h3>Q: Apakah tindakan apabila ditipu atau dihalang mendapat barangan terbaik?</h3>
+        <div class="answer">
+          Simpan resit dan bukti pembelian, buat aduan kepada peniaga, laporkan kepada persatuan pengguna atau pihak berkuasa seperti FOMCA/KPDN, dan menuntut pampasan jika perlu.
+        </div>
+      </div>
+      <div class="card half">
+        <h3>Q: Dua kesan jika peniaga tidak memelihara hak pengguna.</h3>
+        <div class="answer">
+          Pengguna akan kehilangan kepercayaan terhadap peniaga dan reputasi perniagaan akan terjejas. Peniaga juga boleh dikenakan tindakan undang-undang.
+        </div>
+      </div>
+      <div class="card half">
+        <h3>Q: Dua hak yang diterima oleh pengguna.</h3>
+        <div class="answer">
+          Hak mendapat barangan dan perkhidmatan berkualiti serta hak mendapat maklumat yang tepat. Pengguna juga berhak mendapat pampasan atau ganti rugi.
+        </div>
+      </div>
+      <div class="card half">
+        <h3>Q: Dua kepentingan pendidikan kepenggunaan kepada pengguna.</h3>
+        <div class="answer">
+          Pengguna dapat membuat pilihan pembelian yang bijak dan tidak mudah ditipu. Pengguna juga tahu saluran aduan jika hak mereka dinafikan.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>8. Practice Answer Key / Skema Ringkas / 练习答案</h2>
+    <div class="grid">
+      <div class="card half">
+        <h3>Bahagian A: Multiple Choice</h3>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Question</th><th>Answer</th><th>Reason</th></tr></thead>
+            <tbody>
+              <tr><td>1</td><td>D</td><td>Guru, belia, wanita and OKU are not all specifically “supaya mereka tidak ditindas”; the question asks the protected groups in context, likely III and IV based on listed rights.</td></tr>
+              <tr><td>2</td><td>A</td><td>FOMCA is the consumer body.</td></tr>
+              <tr><td>3</td><td>D</td><td>Hak wanita includes protection by law.</td></tr>
+              <tr><td>4</td><td>C</td><td>Celebrating Hari Wanita is not mainly to encourage women to work hard for national progress.</td></tr>
+              <tr><td>5</td><td>D</td><td>Knowledge of consumer rights can increase national income through responsible consumerism and fair trade.</td></tr>
+              <tr><td>6</td><td>D</td><td>OKU should receive special treatment/support and equal job opportunities; false information and get-rich schemes are wrong.</td></tr>
+              <tr><td>7</td><td>D</td><td>Not mocking their disabilities shows respect.</td></tr>
+              <tr><td>8</td><td>C</td><td>All workers should be treated equally in working hours.</td></tr>
+              <tr><td>9</td><td>B</td><td>Giving too much allowance for shopping during rest time is not a direct career-improvement method.</td></tr>
+              <tr><td>10</td><td>B</td><td>Women need protection of dignity and health during pregnancy.</td></tr>
+              <tr><td>11</td><td>D</td><td>Giving annual salary increments to all workers shows respect for workers’ contribution.</td></tr>
+              <tr><td>12</td><td>A</td><td>Reporting sellers who do not display prices shows responsibility.</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="warning">
+          Please double-check Question 1 with the teacher’s marking scheme because the photo is slightly rotated/blurred and the wording may affect the exact option.
+        </div>
+      </div>
+
+      <div class="card half">
+        <h3>Bahagian B1: Isi Tempat Kosong</h3>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Blank</th><th>Answer</th></tr></thead>
+            <tbody>
+              <tr><td>(a)</td><td>hubungan</td></tr>
+              <tr><td>(b)</td><td>bersemangat</td></tr>
+              <tr><td>(c)</td><td>menghormati</td></tr>
+              <tr><td>(d)</td><td>menyediakan</td></tr>
+              <tr><td>(e)</td><td>tersisih</td></tr>
+              <tr><td>(f)</td><td>perbelanjaan</td></tr>
+              <tr><td>(g)</td><td>memeriksa</td></tr>
+              <tr><td>(h)</td><td>barangan</td></tr>
+              <tr><td>(i)</td><td>dilindungi</td></tr>
+              <tr><td>(j)</td><td>kenaikan</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="card half">
+        <h3>Bahagian B2: Rajah Hak Wanita</h3>
+        <div class="answer">
+          <strong>Keperluan asas:</strong> makanan, pakaian, tempat tinggal, keselamatan, kesihatan.<br/>
+          <strong>Pekerjaan:</strong> peluang pekerjaan, gaji yang adil, kenaikan pangkat, cuti bersalin.<br/>
+          <strong>Perlindungan:</strong> perlindungan daripada keganasan, gangguan, penindasan dan eksploitasi.
+        </div>
+      </div>
+
+      <div class="card half">
+        <h3>Important Note for Matching Values</h3>
+        <div class="tip">
+          In Pendidikan Moral, one situation can sometimes match more than one value. Choose the value most directly shown by the action:
+          <br/><strong>Report wrongdoing</strong> = bertanggungjawab / keberanian.
+          <br/><strong>Fair treatment</strong> = keadilan / hormat.
+          <br/><strong>Help vulnerable group</strong> = baik hati / kasih sayang.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>9. Quick Revision Checklist / Senarai Semak / 快速复习清单</h2>
+    <div class="grid">
+      <div class="card quarter"><span class="badge purple">1</span><p>Memorise 4 groups: Wanita, Pekerja, OKU, Pengguna.</p></div>
+      <div class="card quarter"><span class="badge green">2</span><p>Know 2–3 rights for each group.</p></div>
+      <div class="card quarter"><span class="badge orange">3</span><p>Know related acts: Women and Girls Protection, Employment, OKU, Price Control.</p></div>
+      <div class="card quarter"><span class="badge blue">4</span><p>Use values: Keadilan, Hormat, Bertanggungjawab, Kasih sayang, Baik hati.</p></div>
+      <div class="card quarter"><span class="badge red">5</span><p>For OKU questions: accessibility, equality, dignity, not excluded.</p></div>
+      <div class="card quarter"><span class="badge teal">6</span><p>For worker questions: salary, leave, working hours, facilities, safety.</p></div>
+      <div class="card quarter"><span class="badge pink">7</span><p>For consumer questions: quality goods, information, compensation, complaint channel.</p></div>
+      <div class="card quarter"><span class="badge green">8</span><p>For KBAT, answer with action + reason + positive effect.</p></div>
+    </div>
+  </section>
+
+  <p class="footer">
+    Unit 15 exam preparation page · Pendidikan Moral Tingkatan 2 · BM + English + 中文
+  </p>
+
+</main>
+</body>
+</html>
