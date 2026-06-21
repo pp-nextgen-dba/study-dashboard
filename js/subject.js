@@ -3523,7 +3523,8 @@ export const moralData = {
             chapter:"Chapter 12: etika dan undang-undang siber membantu pembentukan jati diri",
             status:"Not Started",
             confidence:0,
-            last_updated:"2026-06-21"
+            last_updated:"2026-06-21",
+            resourceUrl:"../moral/t2_moral_unit12.html"
         },
 
         {

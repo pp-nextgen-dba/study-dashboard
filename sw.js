@@ -45,7 +45,8 @@ const STATIC_ASSETS = [
     "/moral/t2_moral_unit11.html",
     "/moral/t2_moral_unit10.html",
     "/moral/t2_moral_unit9.html",
-    "/moral/t2_moral_unit15.html"
+    "/moral/t2_moral_unit15.html",
+    "/moral/t2_moral_unit12.html"
 ];
 
 self.addEventListener("install", event => {
