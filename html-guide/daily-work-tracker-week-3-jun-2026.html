@@ -420,6 +420,13 @@
                 status: "completed",
                 description: "Fix T2 Moral Curriculum - Unit to Chapter Labels\n\n✓ Label Conversion\n  - Changed all T2 Moral chapter labels: \"Unit N:\" → \"Chapter N:\"\n  - All 15 T2 chapters now use consistent \"Chapter\" naming\n  - Chapter 1 through Chapter 15\n\n✓ Curriculum Structure Verified\n  - T2: 15 chapters only (chapterNum 52-66, globalNum 1-15)\n  - T3: 5 chapters intact (globalNum 16-20)\n  - T4: 4 chapters intact (globalNum 21-24)\n  - T5: 4 chapters intact (globalNum 25-28)\n  - Total: 28 Moral chapters (by form, not mixed)\n\n✓ Data Integrity\n  - Maintained resourceUrl for Chapters 13 & 14\n    - Chapter 13: ../moral/t2_moral_unit13.html\n    - Chapter 14: ../moral/t2_moral_unit14.html\n  - All other fields unchanged\n\n✓ Quality Assurance\n  - npm run validate: passed (14 subjects) ✓\n  - File structure verified: T2→T3→T4→T5 sequence correct\n  - No mixing of forms within T2\n\n✓ Version Control\n  - 499d2ef — feat: update T2 Moral chapters - Unit labels to Chapter, keep T3/T4/T5\n  - Pushed to GitHub ✓",
                 createdAt: new Date().toISOString()
+            },
+            {
+                id: 1719043200005,
+                date: "2026-06-21",
+                status: "completed",
+                description: "Add Moral T2 Chapter 11 Notes and Links\n\n✓ Chapter 11 Setup\n  - File: moral/t2_moral_unit11.html\n  - Content: Public etiquette & shared livelihood guide\n  - Chapter: \"adab di tempat awam dijaga, nikmat hidup dirasai bersama\"\n\n✓ Subject Data Integration\n  - Added resourceUrl to Chapter 11 (chapterNum 62, globalNum 11)\n  - resourceUrl: \"../moral/t2_moral_unit11.html\"\n  - Firestore sync configured to add link\n\n✓ Service Worker & Offline Caching\n  - Added \"/moral/t2_moral_unit11.html\" to STATIC_ASSETS in sw.js\n  - Enables offline access to chapter notes\n\n✓ File Management\n  - HTML file uploaded and committed to GitHub\n  - Commit: 9118f9f — add: moral chapter 11 notes HTML file\n\n✓ Validation & Version Control\n  - npm run validate: passed (14 subjects) ✓\n  - Commit: d8f0520 — feat: add Moral T2 Chapter 11 resourceUrl and offline caching\n  - All changes pushed to GitHub ✓",
+                createdAt: new Date().toISOString()
             }
         ];
 
