@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Unit 14 Pendidikan Moral Tingkatan 2 | Menangani Konflik Identiti Diri</title>
+  <style>
+    :root{
+      --bg:#f8fafc; --card:#ffffff; --text:#172033; --muted:#64748b;
+      --blue:#2563eb; --green:#16a34a; --teal:#0f766e; --orange:#ea580c;
+      --purple:#7c3aed; --red:#dc2626; --pink:#db2777; --dark:#0f172a;
+      --shadow:0 14px 34px rgba(15,23,42,.12); --radius:22px;
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{
+      font-family:"Segoe UI","Noto Sans","Microsoft YaHei",Arial,sans-serif;
+      background:
+        radial-gradient(circle at top left,rgba(124,58,237,.14),transparent 30%),
+        radial-gradient(circle at top right,rgba(219,39,119,.12),transparent 28%),
+        linear-gradient(135deg,#f8fbff,#f5f3ff 50%,#fff7ed);
+      color:var(--text); line-height:1.65; padding:20px;
+    }
+    .container{max-width:1260px;margin:0 auto}
+    .hero{
+      background:linear-gradient(135deg,#0f172a,#7c3aed 48%,#db2777);
+      color:#fff;border-radius:32px;padding:38px 30px;margin-bottom:24px;
+      box-shadow:var(--shadow);position:relative;overflow:hidden;
+    }
+    .hero:after{content:"";position:absolute;right:-80px;top:-80px;width:300px;height:300px;border-radius:50%;background:rgba(255,255,255,.15)}
+    h1{font-size:clamp(1.8rem,4vw,3.45rem);line-height:1.08;letter-spacing:-.04em;margin-bottom:12px;position:relative;z-index:2}
+    .hero p{font-size:1.05rem;max-width:980px;color:rgba(255,255,255,.92);position:relative;z-index:2}
+    .pills{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px;position:relative;z-index:2}
+    .pill{padding:8px 14px;border-radius:999px;background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.25);font-weight:800}
+    .section{background:rgba(255,255,255,.84);border:1px solid rgba(255,255,255,.92);border-radius:var(--radius);padding:24px;margin-bottom:22px;box-shadow:0 10px 24px rgba(15,23,42,.08)}
+    h2{font-size:1.55rem;margin-bottom:12px;color:#0f172a}
+    h3{font-size:1.12rem;margin:8px 0;color:#111827}
+    .grid{display:grid;grid-template-columns:repeat(12,1fr);gap:16px}
+    .card{background:var(--card);border:1px solid #e8eef7;border-radius:20px;padding:18px;box-shadow:0 8px 18px rgba(15,23,42,.07)}
+    .wide{grid-column:span 12}.half{grid-column:span 6}.third{grid-column:span 4}.quarter{grid-column:span 3}
+    .badge{display:inline-block;color:white;font-weight:900;padding:6px 12px;border-radius:999px;margin-bottom:10px}
+    .blue{background:var(--blue)}.green{background:var(--green)}.teal{background:var(--teal)}.orange{background:var(--orange)}.purple{background:var(--purple)}.red{background:var(--red)}.pink{background:var(--pink)}
+    .tri{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:10px}
+    .tri div{background:#f8fafc;border-left:4px solid var(--purple);padding:12px;border-radius:14px}
+    .tri strong{display:block;color:#6d28d9;margin-bottom:3px}
+    ul,ol{padding-left:20px}.muted{color:var(--muted)}
+    .map-center{
+      max-width:580px;margin:0 auto 22px;text-align:center;color:white;
+      background:linear-gradient(135deg,#7c3aed,#db2777,#2563eb);border-radius:24px;padding:18px;font-weight:900;box-shadow:var(--shadow)
+    }
+    .branches{display:grid;grid-template-columns:repeat(5,1fr);gap:13px}
+    .branch{background:white;border-radius:18px;padding:14px;border-top:7px solid var(--purple);box-shadow:0 8px 18px rgba(15,23,42,.07)}
+    .branch:nth-child(2){border-color:var(--pink)}.branch:nth-child(3){border-color:var(--orange)}.branch:nth-child(4){border-color:var(--green)}.branch:nth-child(5){border-color:var(--blue)}
+    .value{display:inline-block;background:#f3e8ff;color:#6b21a8;border:1px solid #e9d5ff;border-radius:999px;padding:5px 10px;font-weight:800;margin:4px 4px 0 0;font-size:.92rem}
+    .formula{background:linear-gradient(135deg,#fff7ed,#fffbeb);border:2px dashed #fb923c;border-radius:18px;padding:16px;margin-top:12px}
+    code{font-family:inherit;font-weight:850;color:#9a3412;display:block;white-space:normal;margin-top:6px}
+    .table-wrap{overflow-x:auto;border-radius:18px;border:1px solid #e5e7eb;background:white}
+    table{width:100%;border-collapse:collapse;min-width:820px}
+    th{background:#0f172a;color:#fff;text-align:left;padding:12px;font-size:.92rem}
+    td{padding:12px;border-bottom:1px solid #e5e7eb;vertical-align:top}
+    tr:nth-child(even) td{background:#f8fafc}
+    .answer{background:#f0fdf4;border-left:5px solid var(--green);padding:11px;border-radius:12px;margin-top:8px}
+    .warning{background:#fff1f2;border-left:5px solid var(--red);padding:11px;border-radius:12px;margin-top:8px}
+    .tip{background:#eff6ff;border-left:5px solid var(--blue);padding:11px;border-radius:12px;margin-top:8px}
+    .footer{text-align:center;color:var(--muted);padding:16px}
+    @media(max-width:980px){.half,.third,.quarter{grid-column:span 12}.tri{grid-template-columns:1fr}.branches{grid-template-columns:1fr 1fr}}
+    @media(max-width:640px){body{padding:12px}.hero{padding:26px 18px;border-radius:24px}.section{padding:16px}.branches{grid-template-columns:1fr}}
+    @media print{body{background:#fff;padding:0}.hero,.section,.card,.branch{box-shadow:none}.section{break-inside:avoid}}
+  </style>
+</head>
+<body>
+<main class="container">
+
+  <section class="hero">
+    <h1>Unit 14: Menangani Konflik Identiti Diri Asas Pembentukan Personaliti</h1>
+    <p>
+      Tingkatan 2 Pendidikan Moral exam notes with tri-language explanation, memory map,
+      definition, factors, ways to overcome identity conflict, importance, moral values, KBAT answer templates and practice answer key.
+      <br/>中二道德第14课：处理自我认同冲突，塑造人格——定义、影响因素、解决方法、重要性与考试答题模板。
+    </p>
+    <div class="pills">
+      <span class="pill">BM + English + 中文</span>
+      <span class="pill">Peta Minda / Memory Map</span>
+      <span class="pill">Konflik Identiti Diri</span>
+      <span class="pill">Nilai Murni</span>
+      <span class="pill">KBAT Answers</span>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>1. Memory Map / Peta Minda / 记忆导图</h2>
+    <div class="map-center">
+      Manage Identity Conflict to Build Strong Personality<br/>
+      Menangani Konflik Identiti Diri Membentuk Personaliti<br/>
+      处理自我认同冲突，建立良好人格
+    </div>
+    <div class="branches">
+      <div class="branch">
+        <h3>Definisi</h3>
+        <ul>
+          <li>Inner disagreement or conflict</li>
+          <li>Perselisihan / pertentangan dalaman individu</li>
+          <li>个人内心的矛盾与冲突</li>
+        </ul>
+      </div>
+      <div class="branch">
+        <h3>Faktor</h3>
+        <ul>
+          <li>Peer influence, media, pressure</li>
+          <li>Pengaruh rakan sebaya, media, tekanan</li>
+          <li>同伴影响、媒体影响、压力</li>
+        </ul>
+      </div>
+      <div class="branch">
+        <h3>Cara Mengatasi</h3>
+        <ul>
+          <li>Positive lifestyle, good friends, family support</li>
+          <li>Gaya hidup positif, kawan baik, keluarga</li>
+          <li>积极生活、良友、家庭支持</li>
+        </ul>
+      </div>
+      <div class="branch">
+        <h3>Kepentingan</h3>
+        <ul>
+          <li>Protect dignity, avoid negative acts</li>
+          <li>Memelihara maruah, mengelak perkara negatif</li>
+          <li>维护尊严，避免负面行为</li>
+        </ul>
+      </div>
+      <div class="branch">
+        <h3>Nilai</h3>
+        <ul>
+          <li>Rasional, harga diri, keberanian</li>
+          <li>Berdikari, kejujuran</li>
+          <li>理性、自尊、勇敢、独立、诚实</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>2. Learning Objectives and Core Concept / Objektif & Konsep / 学习重点</h2>
+    <div class="grid">
+      <div class="card half">
+        <span class="badge purple">Objektif Pembelajaran</span>
+        <ul>
+          <li>Mengetahui definisi konflik identiti diri sebagai remaja.</li>
+          <li>Mengetahui faktor yang mempengaruhi konflik identiti diri sebagai remaja.</li>
+          <li>Mengetahui cara mengatasi konflik identiti diri yang dihadapi oleh golongan remaja.</li>
+          <li>Menjelaskan kepentingan menangani konflik identiti diri.</li>
+          <li>Mengekspresikan perasaan apabila berjaya menangani konflik identiti diri.</li>
+          <li>Mengamalkan penyelesaian konflik identiti diri mengikut cara yang betul.</li>
+        </ul>
+      </div>
+      <div class="card half">
+        <span class="badge pink">Konsep Penting</span>
+        <div class="tri">
+          <div><strong>BM</strong>Konflik identiti diri bermaksud perselisihan atau pertentangan dalaman individu.</div>
+          <div><strong>English</strong>Identity conflict means inner disagreement or internal conflict within an individual.</div>
+          <div><strong>中文</strong>自我认同冲突指个人内心出现矛盾或冲突。</div>
+        </div>
+        <div class="tip">
+          Konflik juga boleh berlaku antara individu dengan individu lain dari segi idea, kepentingan, matlamat, kehendak, personaliti, keperibadian dan perwatakan.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>3. Nilai Murni / Moral Values / 道德价值</h2>
+    <div class="grid">
+      <div class="card third"><span class="value">Rasional</span><p>Berfikir dengan matang sebelum membuat keputusan. Think wisely before deciding. 做决定前理性思考。</p></div>
+      <div class="card third"><span class="value">Harga diri</span><p>Yakin dengan kelebihan diri dan menjaga maruah. Respect and value oneself. 自尊自爱。</p></div>
+      <div class="card third"><span class="value">Keberanian</span><p>Berani mendapatkan nasihat dan menolak pengaruh negatif. Be brave to seek help and reject negativity. 勇敢求助和拒绝负面影响。</p></div>
+      <div class="card third"><span class="value">Berdikari</span><p>Mampu membuat pilihan yang baik tanpa terlalu bergantung kepada orang lain. Be independent. 独立作出正确选择。</p></div>
+      <div class="card third"><span class="value">Kejujuran</span><p>Jujur terhadap diri sendiri dan berani mengakui kesilapan. Be honest with oneself. 对自己诚实，承认错误。</p></div>
+      <div class="card third"><span class="value">Kesederhanaan</span><p>Tidak berlebihan mengikut trend, emosi atau kehendak diri. Avoid extremes. 不盲目跟风，不过度情绪化。</p></div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>4. Faktor yang Mempengaruhi Konflik Identiti Diri / Factors / 影响因素</h2>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Faktor</th><th>Explanation / Huraian</th><th>中文理解</th></tr></thead>
+        <tbody>
+          <tr><td>Kurang penghayatan agama dan nilai-nilai murni</td><td>Remaja mudah keliru dan sukar membezakan baik buruk.</td><td>缺乏宗教与道德价值，容易迷失方向。</td></tr>
+          <tr><td>Tidak mempunyai jati diri yang kuat</td><td>Mudah terikut-ikut dengan trend atau kehendak orang lain.</td><td>自我认同不强，容易盲从。</td></tr>
+          <tr><td>Perasaan ingin mencuba dan ingin tahu yang tinggi</td><td>Remaja mungkin mencuba perkara negatif tanpa memikirkan kesan.</td><td>好奇心强，可能尝试负面行为。</td></tr>
+          <tr><td>Selalu berasa tertekan</td><td>Tekanan boleh menyebabkan emosi tidak stabil dan keputusan kurang rasional.</td><td>压力大导致情绪不稳和判断错误。</td></tr>
+          <tr><td>Pengaruh rakan sebaya</td><td>Rakan negatif boleh mendorong remaja melakukan perkara tidak baik.</td><td>坏朋友可能影响青少年做错事。</td></tr>
+          <tr><td>Pengaruh media massa</td><td>Kandungan media yang tidak sesuai boleh mempengaruhi sikap dan identiti remaja.</td><td>不良媒体内容会影响态度与价值观。</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>5. Cara Mengatasi Konflik Identiti Diri / Ways to Overcome / 解决方法</h2>
+    <div class="grid">
+      <div class="card third"><span class="badge green">Hubungan Keluarga</span><p>Mengeratkan hubungan kekeluargaan dan berkongsi masalah dengan ibu bapa atau ahli keluarga.</p></div>
+      <div class="card third"><span class="badge blue">Gaya Hidup Positif</span><p>Mengamalkan gaya hidup sihat dan positif seperti bersenam, belajar dan mengisi masa dengan aktiviti berfaedah.</p></div>
+      <div class="card third"><span class="badge purple">Rakan Positif</span><p>Berkawan dengan individu yang positif dan menjauhi rakan yang memberi pengaruh buruk.</p></div>
+      <div class="card third"><span class="badge orange">Ajaran Agama</span><p>Selalu mengamalkan dan menghayati ajaran agama serta nilai-nilai murni.</p></div>
+      <div class="card third"><span class="badge pink">Fikiran Positif</span><p>Berfikiran positif dalam menghadapi sebarang masalah dan tidak mudah putus asa.</p></div>
+      <div class="card third"><span class="badge red">Hormati Adat</span><p>Tidak melakukan perkara yang bertentangan dengan adat dan budaya masyarakat.</p></div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>6. Kepentingan Menangani Konflik Identiti Diri / Importance / 重要性</h2>
+    <div class="grid">
+      <div class="card quarter"><span class="badge green">Hubungan Baik</span><p>Mengeratkan hubungan dengan orang lain.</p></div>
+      <div class="card quarter"><span class="badge purple">Elak Negatif</span><p>Mengelakkan diri daripada melakukan perkara-perkara negatif.</p></div>
+      <div class="card quarter"><span class="badge pink">Hidup Bahagia</span><p>Menikmati hidup yang lebih bahagia dan tenang.</p></div>
+      <div class="card quarter"><span class="badge blue">Maruah Diri</span><p>Memelihara imej dan maruah diri.</p></div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>7. Exam Formula / Formula Jawapan / 答题公式</h2>
+    <div class="formula">
+      <strong>Basic formula:</strong>
+      <code>Saya mengamalkan nilai [nilai moral] kerana [tindakan menangani konflik identiti diri]. Kesannya, [kesan positif].</code>
+      <strong>Example:</strong>
+      <code>Saya mengamalkan nilai rasional kerana saya berfikir secara matang sebelum mengikut ajakan rakan. Kesannya, saya dapat mengelakkan diri daripada melakukan perkara negatif.</code>
+    </div>
+    <div class="formula">
+      <strong>KBAT formula:</strong>
+      <code>Pada pendapat saya, remaja perlu [tindakan] kerana [sebab]. Hal ini dapat [kesan positif kepada diri/keluarga/masyarakat].</code>
+      <strong>Example:</strong>
+      <code>Pada pendapat saya, remaja perlu berkawan dengan individu yang positif kerana rakan yang baik dapat membimbing kita membuat keputusan yang betul. Hal ini dapat memelihara imej dan maruah diri.</code>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>8. Common Exam Questions and Sample Answers / Soalan Lazim / 常见题目</h2>
+    <div class="grid">
+      <div class="card half">
+        <h3>Q: Apakah maksud konflik identiti diri sebagai remaja?</h3>
+        <div class="answer">
+          Konflik identiti diri bermaksud perselisihan atau pertentangan dalaman individu, termasuk kekeliruan dalam mengenali personaliti, keperibadian dan perwatakan diri.
+        </div>
+      </div>
+      <div class="card half">
+        <h3>Q: Terangkan faktor yang mempengaruhi konflik identiti diri sebagai remaja.</h3>
+        <div class="answer">
+          Antara faktornya ialah tidak mempunyai jati diri yang kuat, perasaan ingin mencuba yang tinggi, selalu berasa tertekan, pengaruh rakan sebaya, pengaruh media massa serta kurang penghayatan agama dan nilai murni.
+        </div>
+      </div>
+      <div class="card half">
+        <h3>Q: Terangkan cara mengatasi konflik identiti diri.</h3>
+        <div class="answer">
+          Remaja boleh mengeratkan hubungan kekeluargaan, berkawan dengan individu positif, mengamalkan gaya hidup sihat, berfikiran positif, menghayati ajaran agama dan tidak melakukan perkara yang bertentangan dengan adat serta budaya masyarakat.
+        </div>
+      </div>
+      <div class="card half">
+        <h3>Q: Nyatakan kepentingan menangani konflik identiti diri.</h3>
+        <div class="answer">
+          Menangani konflik identiti diri penting untuk memelihara imej dan maruah diri, mengeratkan hubungan dengan orang lain, mengelakkan perkara negatif serta menikmati hidup yang lebih bahagia dan tenang.
+        </div>
+      </div>
+      <div class="card half">
+        <h3>Q: Apakah perasaan apabila berjaya menangani konflik identiti diri?</h3>
+        <div class="answer">
+          Saya berasa gembira, lega dan bangga kerana berjaya membuat keputusan yang betul. Saya juga lebih yakin untuk menjadi remaja yang berpersonaliti baik dan dihormati orang lain.
+        </div>
+      </div>
+      <div class="card half">
+        <h3>Q: Bagaimana jika rakan mengajak anda melakukan perkara negatif?</h3>
+        <div class="answer">
+          Saya akan menolak ajakan tersebut dengan tegas dan sopan, memberi nasihat kepada rakan, menjauhi pengaruh negatif dan mendapatkan nasihat daripada ibu bapa atau guru.
+        </div>
+      </div>
+      <div class="card wide">
+        <h3>Q: Catatkan maklumat tentang cara menangani konflik identiti diri dan kepentingannya.</h3>
+        <div class="answer">
+          Cara menangani konflik identiti diri termasuklah mengamalkan ajaran agama, berfikiran positif, berkawan dengan individu positif, mengeratkan hubungan kekeluargaan dan mengamalkan gaya hidup sihat. Kepentingannya ialah remaja dapat mengelakkan perkara negatif, menjaga maruah diri, mengeratkan hubungan dengan orang lain dan hidup lebih tenang.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>9. Practice Answer Key / Skema Ringkas / 练习答案</h2>
+    <div class="grid">
+      <div class="card half">
+        <h3>Praktis DSKP Q1: Maksud Konflik Identiti Diri</h3>
+        <div class="answer">
+          Jawapan: <strong>C — Perselisihan atau pertentangan dalaman individu.</strong>
+        </div>
+      </div>
+      <div class="card half">
+        <h3>Praktis DSKP Q2: Faktor yang Mempengaruhi</h3>
+        <div class="answer">
+          (a) Tidak mempunyai <strong>jati diri</strong> yang kuat.<br/>
+          (b) Perasaan <strong>ingin mencuba dan ingin tahu</strong> yang tinggi dalam diri.<br/>
+          (c) Selalu berasa <strong>tertekan</strong>.
+        </div>
+      </div>
+      <div class="card half">
+        <h3>Praktis DSKP Q3: Cara Mengatasi</h3>
+        <div class="answer">
+          Pilih mana-mana empat: mengeratkan hubungan kekeluargaan; mengamalkan gaya hidup sihat dan positif; berkawan dengan individu positif; selalu mengamalkan dan menghayati ajaran agama; berfikiran positif ketika menghadapi masalah; tidak melakukan perkara yang bertentangan dengan adat dan budaya masyarakat.
+        </div>
+      </div>
+      <div class="card half">
+        <h3>Praktis DSKP Q4: Maklumat Internet</h3>
+        <div class="answer">
+          Isi sesuai: remaja perlu mengenal pasti punca konflik, berkongsi masalah dengan orang dipercayai, mendapatkan nasihat guru/kaunselor/ibu bapa, menguatkan jati diri, memilih rakan positif dan mengelakkan kandungan media yang negatif. Kepentingannya: menjaga maruah, mengurangkan tekanan, membuat keputusan baik dan mengelakkan salah laku.
+        </div>
+      </div>
+      <div class="card half">
+        <h3>Praktis DSKP Q5: Wawancara Bertema</h3>
+        <div class="answer">
+          Contoh soalan wawancara: Apakah maksud konflik identiti diri? Apakah faktor utama remaja mengalami konflik identiti? Bagaimanakah keluarga boleh membantu? Mengapakah rakan positif penting? Apakah nilai moral yang perlu diamalkan? Kesimpulan: remaja perlu berani mendapatkan nasihat dan membuat keputusan secara rasional.
+        </div>
+      </div>
+      <div class="card half">
+        <h3>Praktis DSKP Q6: Aktiviti Jelajah Ilmu</h3>
+        <div class="answer">
+          Aktiviti boleh merangkumi ceramah kaunseling, perbincangan kumpulan, poster nilai murni, simulasi menolak ajakan negatif, dan pembentangan tentang cara membina jati diri. Nilai yang ditekankan ialah rasional, harga diri, keberanian, berdikari dan kejujuran.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>10. Quick Revision Checklist / Senarai Semak / 快速复习清单</h2>
+    <div class="grid">
+      <div class="card quarter"><span class="badge purple">1</span><p>Definition: conflict = internal disagreement or inner conflict.</p></div>
+      <div class="card quarter"><span class="badge pink">2</span><p>Factors: weak identity, curiosity, pressure, peers, media, weak moral values.</p></div>
+      <div class="card quarter"><span class="badge green">3</span><p>Ways: family bond, positive lifestyle, positive friends, religion, positive thinking.</p></div>
+      <div class="card quarter"><span class="badge orange">4</span><p>Importance: protect dignity, avoid negative acts, happy life, good relationships.</p></div>
+      <div class="card quarter"><span class="badge blue">5</span><p>Values: rasional, harga diri, keberanian, berdikari, kejujuran.</p></div>
+      <div class="card quarter"><span class="badge red">6</span><p>For peer pressure: reject politely, seek help, choose positive friends.</p></div>
+      <div class="card quarter"><span class="badge purple">7</span><p>Feeling question: gembira, lega, bangga, yakin + reason.</p></div>
+      <div class="card quarter"><span class="badge blue">8</span><p>For KBAT: action + reason + positive effect.</p></div>
+    </div>
+  </section>
+
+  <p class="footer">
+    Unit 14 exam preparation page · Pendidikan Moral Tingkatan 2 · BM + English + 中文
+  </p>
+
+</main>
+</body>
+</html>

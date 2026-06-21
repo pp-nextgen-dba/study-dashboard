@@ -3411,7 +3411,8 @@ export const moralData = {
             chinese:"道德价值与自我身份",
             status:"Not Started",
             confidence:0,
-            last_updated:"2026-05-22"
+            last_updated:"2026-05-22",
+            resourceUrl:"../moral/t2_moral_unit14.html"
         },
 
         {
