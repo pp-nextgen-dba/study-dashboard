@@ -152,6 +152,17 @@ export const subjectRegistry = [
         progressTextId:"seniProgressText",
         seedExport:"seniData",
         loadSeed:true
+    },
+
+    {
+        id:"storybooks",
+        title:"Story Books",
+        icon:"📖",
+        href:"subjects/storybooks.html",
+        progressBarId:"storybooksProgressBar",
+        progressTextId:"storybooksProgressText",
+        seedExport:"storybooksData",
+        loadSeed:true
     }
 
 ];

@@ -4201,3 +4201,24 @@ export const seniData = {
     ]
 
 };
+
+
+// =========================================================
+// STORY BOOKS
+// =========================================================
+
+export const storybooksData = {
+
+    subject:"Story Books",
+
+    chapters:[{
+            form:"Story",
+            globalNum: 1,
+            chapterNum: 1,
+            chapter:"Story 1",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-06-21"
+        }]
+
+};
