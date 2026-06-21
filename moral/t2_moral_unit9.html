@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Unit 9 Pendidikan Moral Tingkatan 2 | Hargai Alam Warisan Kita</title>
+  <style>
+    :root{
+      --bg:#f6fbf6; --card:#ffffff; --text:#172033; --muted:#64748b;
+      --green:#16a34a; --emerald:#047857; --blue:#2563eb; --cyan:#0891b2;
+      --orange:#ea580c; --yellow:#ca8a04; --red:#dc2626; --dark:#0f172a;
+      --shadow:0 14px 34px rgba(15,23,42,.12); --radius:22px;
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{
+      font-family:"Segoe UI","Noto Sans","Microsoft YaHei",Arial,sans-serif;
+      background:
+        radial-gradient(circle at top left,rgba(22,163,74,.18),transparent 30%),
+        radial-gradient(circle at top right,rgba(37,99,235,.13),transparent 28%),
+        linear-gradient(135deg,#f0fdf4,#f8fbff 50%,#fff7ed);
+      color:var(--text); line-height:1.65; padding:20px;
+    }
+    .container{max-width:1260px;margin:0 auto}
+    .hero{
+      background:linear-gradient(135deg,#064e3b,#16a34a 48%,#2563eb);
+      color:#fff;border-radius:32px;padding:38px 30px;margin-bottom:24px;
+      box-shadow:var(--shadow);position:relative;overflow:hidden;
+    }
+    .hero:after{content:"";position:absolute;right:-80px;top:-80px;width:300px;height:300px;border-radius:50%;background:rgba(255,255,255,.15)}
+    h1{font-size:clamp(1.8rem,4vw,3.45rem);line-height:1.08;letter-spacing:-.04em;margin-bottom:12px;position:relative;z-index:2}
+    .hero p{font-size:1.05rem;max-width:980px;color:rgba(255,255,255,.92);position:relative;z-index:2}
+    .pills{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px;position:relative;z-index:2}
+    .pill{padding:8px 14px;border-radius:999px;background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.25);font-weight:800}
+    .section{background:rgba(255,255,255,.84);border:1px solid rgba(255,255,255,.92);border-radius:var(--radius);padding:24px;margin-bottom:22px;box-shadow:0 10px 24px rgba(15,23,42,.08)}
+    h2{font-size:1.55rem;margin-bottom:12px;color:#0f172a}
+    h3{font-size:1.12rem;margin:8px 0;color:#111827}
+    .grid{display:grid;grid-template-columns:repeat(12,1fr);gap:16px}
+    .card{background:var(--card);border:1px solid #e8eef7;border-radius:20px;padding:18px;box-shadow:0 8px 18px rgba(15,23,42,.07)}
+    .wide{grid-column:span 12}.half{grid-column:span 6}.third{grid-column:span 4}.quarter{grid-column:span 3}
+    .badge{display:inline-block;color:white;font-weight:900;padding:6px 12px;border-radius:999px;margin-bottom:10px}
+    .green{background:var(--green)}.emerald{background:var(--emerald)}.blue{background:var(--blue)}.cyan{background:var(--cyan)}.orange{background:var(--orange)}.yellow{background:var(--yellow)}.red{background:var(--red)}
+    .tri{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:10px}
+    .tri div{background:#f8fafc;border-left:4px solid var(--green);padding:12px;border-radius:14px}
+    .tri strong{display:block;color:#047857;margin-bottom:3px}
+    ul,ol{padding-left:20px}.muted{color:var(--muted)}
+    .map-center{
+      max-width:520px;margin:0 auto 22px;text-align:center;color:white;
+      background:linear-gradient(135deg,#047857,#16a34a,#2563eb);border-radius:24px;padding:18px;font-weight:900;box-shadow:var(--shadow)
+    }
+    .branches{display:grid;grid-template-columns:repeat(5,1fr);gap:13px}
+    .branch{background:white;border-radius:18px;padding:14px;border-top:7px solid var(--green);box-shadow:0 8px 18px rgba(15,23,42,.07)}
+    .branch:nth-child(2){border-color:var(--blue)}.branch:nth-child(3){border-color:var(--orange)}.branch:nth-child(4){border-color:var(--cyan)}.branch:nth-child(5){border-color:var(--red)}
+    .value{display:inline-block;background:#ecfdf5;color:#065f46;border:1px solid #bbf7d0;border-radius:999px;padding:5px 10px;font-weight:800;margin:4px 4px 0 0;font-size:.92rem}
+    .formula{background:linear-gradient(135deg,#fff7ed,#fffbeb);border:2px dashed #fb923c;border-radius:18px;padding:16px;margin-top:12px}
+    code{font-family:inherit;font-weight:850;color:#9a3412;display:block;white-space:normal;margin-top:6px}
+    .table-wrap{overflow-x:auto;border-radius:18px;border:1px solid #e5e7eb;background:white}
+    table{width:100%;border-collapse:collapse;min-width:820px}
+    th{background:#0f172a;color:#fff;text-align:left;padding:12px;font-size:.92rem}
+    td{padding:12px;border-bottom:1px solid #e5e7eb;vertical-align:top}
+    tr:nth-child(even) td{background:#f8fafc}
+    .answer{background:#f0fdf4;border-left:5px solid var(--green);padding:11px;border-radius:12px;margin-top:8px}
+    .warning{background:#fff1f2;border-left:5px solid var(--red);padding:11px;border-radius:12px;margin-top:8px}
+    .tip{background:#eff6ff;border-left:5px solid var(--blue);padding:11px;border-radius:12px;margin-top:8px}
+    .footer{text-align:center;color:var(--muted);padding:16px}
+    @media(max-width:980px){.half,.third,.quarter{grid-column:span 12}.tri{grid-template-columns:1fr}.branches{grid-template-columns:1fr 1fr}}
+    @media(max-width:640px){body{padding:12px}.hero{padding:26px 18px;border-radius:24px}.section{padding:16px}.branches{grid-template-columns:1fr}}
+    @media print{body{background:#fff;padding:0}.hero,.section,.card,.branch{box-shadow:none}.section{break-inside:avoid}}
+  </style>
+</head>
+<body>
+<main class="container">
+
+  <section class="hero">
+    <h1>Unit 9: Hargai Alam Warisan Kita</h1>
+    <p>
+      Tingkatan 2 Pendidikan Moral exam notes with tri-language explanation, memory map,
+      environmental roles, government and NGO actions, effects of human activities, KBAT answers and practice key.
+      <br/>中二道德第9课：珍惜大自然遗产——环保责任、政府与 NGO 角色、破坏环境的后果与考试答题模板。
+    </p>
+    <div class="pills">
+      <span class="pill">BM + English + 中文</span>
+      <span class="pill">Peta Minda / Memory Map</span>
+      <span class="pill">5R</span>
+      <span class="pill">Nilai Murni</span>
+      <span class="pill">KBAT Answers</span>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>1. Memory Map / Peta Minda / 记忆导图</h2>
+    <div class="map-center">
+      Protecting the Environment Is Everyone’s Responsibility<br/>
+      Melindungi Alam Sekitar Tanggungjawab Bersama<br/>
+      保护环境，人人有责
+    </div>
+    <div class="branches">
+      <div class="branch">
+        <h3>Konsep</h3>
+        <ul>
+          <li>Alam sekitar penting dalam kehidupan harian</li>
+          <li>Balance of nature supports life</li>
+          <li>自然平衡维持生命</li>
+        </ul>
+      </div>
+      <div class="branch">
+        <h3>Peranan Masyarakat</h3>
+        <ul>
+          <li>5R, gotong-royong, planting trees</li>
+          <li>Do not litter or open burn</li>
+          <li>实践 5R、不乱丢垃圾、不露天焚烧</li>
+        </ul>
+      </div>
+      <div class="branch">
+        <h3>Badan Kerajaan</h3>
+        <ul>
+          <li>PERHILITAN, JAS, JPSM</li>
+          <li>Protect wildlife, control pollution, conserve forests</li>
+          <li>政府保护野生动物、控制污染、保育森林</li>
+        </ul>
+      </div>
+      <div class="branch">
+        <h3>NGO</h3>
+        <ul>
+          <li>Persatuan Pencinta Alam Malaysia</li>
+          <li>Sahabat Alam Malaysia</li>
+          <li>WWF</li>
+        </ul>
+      </div>
+      <div class="branch">
+        <h3>Kesan Buruk</h3>
+        <ul>
+          <li>Habitat destroyed, species reduced</li>
+          <li>Less oxygen, more CO₂, soil erosion</li>
+          <li>栖息地被破坏、物种减少、氧气减少、土壤侵蚀</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>2. Learning Objectives and Core Concept / Objektif & Konsep / 学习重点</h2>
+    <div class="grid">
+      <div class="card half">
+        <span class="badge green">Objektif Pembelajaran</span>
+        <ul>
+          <li>Mengetahui peranan masyarakat dalam melindungi alam sekitar.</li>
+          <li>Mengetahui langkah badan kerajaan dalam melindungi alam sekitar.</li>
+          <li>Mengetahui sumbangan badan bukan kerajaan untuk melindungi alam sekitar.</li>
+          <li>Menjelaskan kesan aktiviti manusia terhadap keseimbangan alam sekitar.</li>
+          <li>Mengekspresikan perasaan apabila terlibat dalam aktiviti melindungi alam sekitar.</li>
+        </ul>
+      </div>
+      <div class="card half">
+        <span class="badge emerald">Konsep Penting</span>
+        <div class="tri">
+          <div><strong>BM</strong>Alam sekitar memainkan peranan penting dalam kehidupan harian kita. Semua pihak perlu bertanggungjawab menjaga dan melindunginya.</div>
+          <div><strong>English</strong>The environment is important in daily life. Everyone must be responsible for protecting it.</div>
+          <div><strong>中文</strong>环境对日常生活非常重要。所有人都有责任保护环境。</div>
+        </div>
+        <div class="warning">
+          Jika keseimbangan alam terjejas, semua benda hidup akan menerima kesan buruk dan tidak dapat meneruskan kehidupan dengan baik.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>3. Nilai Murni / Moral Values / 道德价值</h2>
+    <div class="grid">
+      <div class="card third"><span class="value">Kasih sayang</span><p>Menyayangi alam sekitar dan semua hidupan. Love nature and living things. 爱护自然与生命。</p></div>
+      <div class="card third"><span class="value">Bertanggungjawab</span><p>Menjalankan tugas menjaga alam sekitar. Take responsibility for environmental protection. 负责任保护环境。</p></div>
+      <div class="card third"><span class="value">Rasional</span><p>Berfikir kesan sebelum melakukan sesuatu. Think about consequences before acting. 行动前思考后果。</p></div>
+      <div class="card third"><span class="value">Kerjasama</span><p>Bergotong-royong menjaga kebersihan. Work together to clean and protect the environment. 合作保护环境。</p></div>
+      <div class="card third"><span class="value">Kerajinan</span><p>Rajin menyertai aktiviti pemuliharaan alam. Diligent in conservation activities. 勤劳参与环保活动。</p></div>
+      <div class="card third"><span class="value">Kesederhanaan</span><p>Mengurangkan pembaziran sumber. Reduce wastage. 减少浪费。</p></div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>4. Peranan Anda dan Masyarakat / Role of Society / 个人与社会责任</h2>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Action / Tindakan</th><th>Why it matters / Sebab</th><th>中文理解</th></tr></thead>
+        <tbody>
+          <tr><td>Tidak membuang sampah ke dalam sungai atau longkang.</td><td>Mengelakkan pencemaran air dan banjir kilat.</td><td>不把垃圾丢进河流或沟渠，避免水污染和闪电水灾。</td></tr>
+          <tr><td>Tidak melakukan pembakaran terbuka.</td><td>Mengurangkan pencemaran udara dan jerebu.</td><td>不露天焚烧，减少空气污染和烟霾。</td></tr>
+          <tr><td>Mengamalkan 5R: rethink, repair, reuse, reduce, recycle.</td><td>Mengurangkan pembaziran dan jumlah sisa pepejal.</td><td>实践 5R，减少浪费和垃圾。</td></tr>
+          <tr><td>Penanaman pokok.</td><td>Menambahkan oksigen, menyerap karbon dioksida dan mencantikkan kawasan.</td><td>种树增加氧气、吸收二氧化碳、美化环境。</td></tr>
+          <tr><td>Bergotong-royong membersihkan alam sekitar.</td><td>Mewujudkan kawasan yang bersih, sihat dan harmoni.</td><td>一起清理环境，让社区更干净健康。</td></tr>
+          <tr><td>Melaporkan kegiatan yang menjejaskan alam sekitar.</td><td>Membolehkan pihak berkuasa mengambil tindakan segera.</td><td>举报破坏环境行为，让当局及时处理。</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>5. Government Bodies / Badan Kerajaan / 政府机构</h2>
+    <div class="grid">
+      <div class="card third">
+        <span class="badge blue">PERHILITAN</span>
+        <h3>Jabatan Perlindungan Hidupan Liar dan Taman Negara</h3>
+        <p>Melindungi hidupan liar dan habitatnya termasuk Taman Negara.</p>
+        <p class="muted">Protects wildlife and their habitats. 保护野生动物和栖息地。</p>
+      </div>
+      <div class="card third">
+        <span class="badge green">JAS</span>
+        <h3>Jabatan Alam Sekitar</h3>
+        <p>Mencegah dan mengawal pencemaran alam sekeliling.</p>
+        <p class="muted">Prevents and controls environmental pollution. 预防和控制环境污染。</p>
+      </div>
+      <div class="card third">
+        <span class="badge orange">JPSM</span>
+        <h3>Jabatan Perhutanan Semenanjung Malaysia</h3>
+        <p>Pemeliharaan dan pemuliharaan sumber hutan.</p>
+        <p class="muted">Conserves and restores forest resources. 保护与复育森林资源。</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>6. NGOs / Badan Bukan Kerajaan / 非政府组织</h2>
+    <div class="grid">
+      <div class="card third">
+        <span class="badge emerald">Persatuan Pencinta Alam Malaysia</span>
+        <p>Mengetahui dan mengetengahkan isu berkaitan alam sekitar di Malaysia, termasuk konservasi habitat dan pendidikan alam sekitar.</p>
+      </div>
+      <div class="card third">
+        <span class="badge cyan">Sahabat Alam Malaysia</span>
+        <p>Meningkatkan usaha memelihara dan memulihara hutan serta sumber asli dengan penglibatan komuniti.</p>
+      </div>
+      <div class="card third">
+        <span class="badge blue">WWF</span>
+        <p>Menyedarkan orang ramai tentang kepentingan penjagaan alam sekitar.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>7. Kesan Buruk Aktiviti Manusia / Negative Effects / 人类活动的坏影响</h2>
+    <div class="grid">
+      <div class="card third"><span class="badge red">Habitat Musnah</span><p>Habitat tumbuhan dan hidupan liar akan musnah. Plants and wildlife lose their homes. 动植物栖息地被破坏。</p></div>
+      <div class="card third"><span class="badge red">Spesies Berkurang</span><p>Spesies tumbuhan dan hidupan liar berkurang. Species decline. 物种减少。</p></div>
+      <div class="card third"><span class="badge red">Oksigen Berkurang</span><p>Jumlah oksigen berkurang apabila pokok ditebang. Less oxygen when trees are cut down. 砍树导致氧气减少。</p></div>
+      <div class="card third"><span class="badge red">CO₂ Bertambah</span><p>Jumlah karbon dioksida bertambah dan meningkatkan pemanasan global. More carbon dioxide and global warming. 二氧化碳增加，全球变暖。</p></div>
+      <div class="card third"><span class="badge red">Hakisan Tanah</span><p>Tanah mudah terhakis apabila hutan ditebang. Soil erosion happens when forests are cleared. 砍伐森林造成土壤侵蚀。</p></div>
+      <div class="card third"><span class="badge red">Kesihatan Terjejas</span><p>Pencemaran air dan udara boleh menyebabkan penyakit. Pollution affects health. 水和空气污染影响健康。</p></div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>8. Exam Formula / Formula Jawapan / 答题公式</h2>
+    <div class="formula">
+      <strong>Basic formula:</strong>
+      <code>Saya mengamalkan nilai [nilai moral] kerana [tindakan menjaga alam sekitar]. Kesannya, [kesan positif].</code>
+      <strong>Example:</strong>
+      <code>Saya mengamalkan nilai bertanggungjawab kerana saya tidak membuang sampah ke dalam sungai. Kesannya, sungai menjadi bersih dan hidupan akuatik dapat dilindungi.</code>
+    </div>
+    <div class="formula">
+      <strong>KBAT formula:</strong>
+      <code>Pada pendapat saya, [tindakan] perlu dilakukan kerana [sebab]. Hal ini dapat [kesan positif kepada alam/masyarakat].</code>
+      <strong>Example:</strong>
+      <code>Pada pendapat saya, masyarakat perlu melaporkan kegiatan pencemaran kerana pihak berkuasa boleh mengambil tindakan segera. Hal ini dapat mengelakkan kerosakan alam sekitar menjadi lebih serius.</code>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>9. Common Exam Questions and Sample Answers / Soalan Lazim / 常见题目</h2>
+    <div class="grid">
+      <div class="card half">
+        <h3>Q: Tandakan peranan masyarakat dalam melindungi alam sekitar.</h3>
+        <div class="answer">
+          Betul: mengamalkan 5R, bergotong-royong membersihkan alam sekitar, melaporkan kegiatan yang menjejaskan alam sekitar.
+          <br/>Salah: membuang sampah ke sungai/longkang, pembakaran terbuka sesuka hati, menggunakan beg plastik secara berlebihan.
+        </div>
+      </div>
+      <div class="card half">
+        <h3>Q: Padankan badan kerajaan dengan peranan.</h3>
+        <div class="answer">
+          JAS: mencegah dan mengawal pencemaran alam sekeliling.<br/>
+          PERHILITAN: melindungi hidupan liar dan habitatnya termasuk Taman Negara.<br/>
+          JPSM: pemeliharaan dan pemuliharaan sumber hutan.
+        </div>
+      </div>
+      <div class="card half">
+        <h3>Q: Nyatakan sumbangan NGO untuk melindungi alam sekitar.</h3>
+        <div class="answer">
+          Persatuan Pencinta Alam Malaysia mengetengahkan isu alam sekitar dan pendidikan alam sekitar. Sahabat Alam Malaysia memelihara hutan dan sumber asli bersama komuniti. WWF menyedarkan orang ramai tentang kepentingan penjagaan alam sekitar.
+        </div>
+      </div>
+      <div class="card half">
+        <h3>Q: Hubung kait aktiviti manusia dengan keseimbangan alam sekitar.</h3>
+        <div class="answer">
+          Aktiviti seperti pembalakan haram, pencemaran sungai dan pembakaran terbuka boleh memusnahkan habitat, mengurangkan spesies hidupan liar, mengurangkan oksigen, menambahkan karbon dioksida dan menyebabkan hakisan tanah.
+        </div>
+      </div>
+      <div class="card half">
+        <h3>Q: Apakah perasaan anda apabila terlibat dalam gotong-royong membersihkan sungai? Mengapa?</h3>
+        <div class="answer">
+          Saya berasa gembira dan bangga kerana dapat membantu membersihkan sungai serta menjaga alam sekitar. Aktiviti ini juga dapat memupuk nilai kerjasama dan bertanggungjawab dalam masyarakat.
+        </div>
+      </div>
+      <div class="card half">
+        <h3>Q: Jika anda ternampak pihak mencemarkan sungai, apakah tindakan anda?</h3>
+        <div class="answer">
+          Saya akan menegur secara berhemah jika keadaan selamat, mengambil gambar sebagai bukti, dan melaporkan perkara tersebut kepada pihak berkuasa seperti Jabatan Alam Sekitar atau pihak berkenaan.
+        </div>
+      </div>
+      <div class="card wide">
+        <h3>Q: Sekiranya sungai di tempat anda tercemar, nyatakan tindakan untuk memulihkan sungai tersebut.</h3>
+        <div class="answer">
+          Saya akan menyertai gotong-royong membersihkan sungai, mengasingkan dan membuang sampah di tempat yang betul, mengajak masyarakat mengamalkan 5R, meletakkan papan tanda larangan membuang sampah, dan melaporkan punca pencemaran kepada pihak berkuasa.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>10. Practice Answer Key / Skema Ringkas / 练习答案</h2>
+    <div class="grid">
+      <div class="card half">
+        <h3>Praktis DSKP Q1: Tandakan Peranan Masyarakat</h3>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Item</th><th>Answer</th><th>Reason</th></tr></thead>
+            <tbody>
+              <tr><td>(a) Membuang sampah ke sungai atau longkang</td><td>X</td><td>Mencemarkan air dan menyumbat longkang.</td></tr>
+              <tr><td>(b) Mengamalkan 5R</td><td>✓</td><td>Mengurangkan pembaziran dan sisa.</td></tr>
+              <tr><td>(c) Bergotong-royong membersihkan alam sekitar</td><td>✓</td><td>Menjaga kebersihan bersama.</td></tr>
+              <tr><td>(d) Melakukan pembakaran terbuka sesuka hati</td><td>X</td><td>Menyebabkan pencemaran udara.</td></tr>
+              <tr><td>(e) Melaporkan kegiatan yang menjejaskan alam sekitar</td><td>✓</td><td>Membantu pihak berkuasa bertindak.</td></tr>
+              <tr><td>(f) Penggunaan beg plastik semasa membeli-belah</td><td>X</td><td>Menambahkan sisa plastik jika digunakan berlebihan.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="card half">
+        <h3>Praktis DSKP Q2: Padanan Badan Kerajaan</h3>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Logo / Badan</th><th>Peranan</th></tr></thead>
+            <tbody>
+              <tr><td>Jabatan Alam Sekitar, JAS</td><td>Mencegah dan mengawal pencemaran alam sekeliling.</td></tr>
+              <tr><td>PERHILITAN</td><td>Melindungi hidupan liar dan habitatnya termasuk Taman Negara.</td></tr>
+              <tr><td>Jabatan Perhutanan Semenanjung Malaysia, JPSM</td><td>Pemeliharaan dan pemuliharaan sumber hutan.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="card half">
+        <h3>Praktis DSKP Q3: Sumbangan NGO</h3>
+        <div class="answer">
+          <strong>(a) Persatuan Pencinta Alam Malaysia:</strong> Mengetengahkan isu alam sekitar, konservasi habitat dan pendidikan alam sekitar.<br/>
+          <strong>(b) Sahabat Alam Malaysia:</strong> Meningkatkan usaha memelihara dan memulihara hutan serta sumber asli dengan penglibatan komuniti.<br/>
+          <strong>(c) WWF:</strong> Menyedarkan orang ramai tentang kepentingan penjagaan alam sekitar.
+        </div>
+      </div>
+      <div class="card half">
+        <h3>Praktis DSKP Q4: Hasil Perbincangan Kesan Aktiviti Manusia</h3>
+        <div class="answer">
+          Pembalakan haram menyebabkan habitat musnah, spesies hidupan liar berkurang dan hakisan tanah. Pembakaran terbuka menyebabkan pencemaran udara dan jumlah karbon dioksida bertambah. Pembuangan sampah ke sungai menyebabkan pencemaran air dan mengancam hidupan akuatik.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>11. Quick Revision Checklist / Senarai Semak / 快速复习清单</h2>
+    <div class="grid">
+      <div class="card quarter"><span class="badge green">1</span><p>Memorise nilai: kasih sayang, bertanggungjawab, rasional, kerjasama, kerajinan.</p></div>
+      <div class="card quarter"><span class="badge blue">2</span><p>Know society’s roles: 5R, gotong-royong, planting trees, report pollution.</p></div>
+      <div class="card quarter"><span class="badge orange">3</span><p>Know government bodies: JAS, PERHILITAN, JPSM.</p></div>
+      <div class="card quarter"><span class="badge cyan">4</span><p>Know NGOs: Persatuan Pencinta Alam Malaysia, Sahabat Alam Malaysia, WWF.</p></div>
+      <div class="card quarter"><span class="badge red">5</span><p>Negative effects: habitat destroyed, species reduced, oxygen reduced, CO₂ increased, soil erosion.</p></div>
+      <div class="card quarter"><span class="badge emerald">6</span><p>For river pollution: clean up, 5R, report source, educate community.</p></div>
+      <div class="card quarter"><span class="badge green">7</span><p>For feelings question: gembira, bangga, puas hati + reason.</p></div>
+      <div class="card quarter"><span class="badge blue">8</span><p>For KBAT: action + reason + positive effect.</p></div>
+    </div>
+  </section>
+
+  <p class="footer">
+    Unit 9 exam preparation page · Pendidikan Moral Tingkatan 2 · BM + English + 中文
+  </p>
+
+</main>
+</body>
+</html>
