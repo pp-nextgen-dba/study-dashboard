@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Unit 13 Pendidikan Moral Tingkatan 2 | Keselamatan Jalan Raya</title>
+  <style>
+    :root{
+      --bg:#f8fafc; --card:#ffffff; --text:#172033; --muted:#64748b;
+      --blue:#2563eb; --green:#16a34a; --teal:#0f766e; --orange:#ea580c;
+      --purple:#7c3aed; --red:#dc2626; --yellow:#ca8a04; --dark:#0f172a;
+      --shadow:0 14px 34px rgba(15,23,42,.12); --radius:22px;
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{
+      font-family:"Segoe UI","Noto Sans","Microsoft YaHei",Arial,sans-serif;
+      background:
+        radial-gradient(circle at top left,rgba(220,38,38,.12),transparent 30%),
+        radial-gradient(circle at top right,rgba(37,99,235,.14),transparent 28%),
+        linear-gradient(135deg,#f8fbff,#fff7ed 50%,#f0fdf4);
+      color:var(--text); line-height:1.65; padding:20px;
+    }
+    .container{max-width:1260px;margin:0 auto}
+    .hero{
+      background:linear-gradient(135deg,#0f172a,#dc2626 48%,#2563eb);
+      color:#fff;border-radius:32px;padding:38px 30px;margin-bottom:24px;
+      box-shadow:var(--shadow);position:relative;overflow:hidden;
+    }
+    .hero:after{content:"";position:absolute;right:-80px;top:-80px;width:300px;height:300px;border-radius:50%;background:rgba(255,255,255,.15)}
+    h1{font-size:clamp(1.8rem,4vw,3.45rem);line-height:1.08;letter-spacing:-.04em;margin-bottom:12px;position:relative;z-index:2}
+    .hero p{font-size:1.05rem;max-width:980px;color:rgba(255,255,255,.92);position:relative;z-index:2}
+    .pills{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px;position:relative;z-index:2}
+    .pill{padding:8px 14px;border-radius:999px;background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.25);font-weight:800}
+    .section{background:rgba(255,255,255,.84);border:1px solid rgba(255,255,255,.92);border-radius:var(--radius);padding:24px;margin-bottom:22px;box-shadow:0 10px 24px rgba(15,23,42,.08)}
+    h2{font-size:1.55rem;margin-bottom:12px;color:#0f172a}
+    h3{font-size:1.12rem;margin:8px 0;color:#111827}
+    .grid{display:grid;grid-template-columns:repeat(12,1fr);gap:16px}
+    .card{background:var(--card);border:1px solid #e8eef7;border-radius:20px;padding:18px;box-shadow:0 8px 18px rgba(15,23,42,.07)}
+    .wide{grid-column:span 12}.half{grid-column:span 6}.third{grid-column:span 4}.quarter{grid-column:span 3}
+    .badge{display:inline-block;color:white;font-weight:900;padding:6px 12px;border-radius:999px;margin-bottom:10px}
+    .blue{background:var(--blue)}.green{background:var(--green)}.teal{background:var(--teal)}.orange{background:var(--orange)}.purple{background:var(--purple)}.red{background:var(--red)}.yellow{background:var(--yellow)}
+    .tri{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:10px}
+    .tri div{background:#f8fafc;border-left:4px solid var(--red);padding:12px;border-radius:14px}
+    .tri strong{display:block;color:#b91c1c;margin-bottom:3px}
+    ul,ol{padding-left:20px}.muted{color:var(--muted)}
+    .map-center{
+      max-width:560px;margin:0 auto 22px;text-align:center;color:white;
+      background:linear-gradient(135deg,#dc2626,#ea580c,#2563eb);border-radius:24px;padding:18px;font-weight:900;box-shadow:var(--shadow)
+    }
+    .branches{display:grid;grid-template-columns:repeat(5,1fr);gap:13px}
+    .branch{background:white;border-radius:18px;padding:14px;border-top:7px solid var(--red);box-shadow:0 8px 18px rgba(15,23,42,.07)}
+    .branch:nth-child(2){border-color:var(--blue)}.branch:nth-child(3){border-color:var(--orange)}.branch:nth-child(4){border-color:var(--green)}.branch:nth-child(5){border-color:var(--purple)}
+    .value{display:inline-block;background:#fff1f2;color:#b91c1c;border:1px solid #fecdd3;border-radius:999px;padding:5px 10px;font-weight:800;margin:4px 4px 0 0;font-size:.92rem}
+    .formula{background:linear-gradient(135deg,#fff7ed,#fffbeb);border:2px dashed #fb923c;border-radius:18px;padding:16px;margin-top:12px}
+    code{font-family:inherit;font-weight:850;color:#9a3412;display:block;white-space:normal;margin-top:6px}
+    .table-wrap{overflow-x:auto;border-radius:18px;border:1px solid #e5e7eb;background:white}
+    table{width:100%;border-collapse:collapse;min-width:820px}
+    th{background:#0f172a;color:#fff;text-align:left;padding:12px;font-size:.92rem}
+    td{padding:12px;border-bottom:1px solid #e5e7eb;vertical-align:top}
+    tr:nth-child(even) td{background:#f8fafc}
+    .answer{background:#f0fdf4;border-left:5px solid var(--green);padding:11px;border-radius:12px;margin-top:8px}
+    .warning{background:#fff1f2;border-left:5px solid var(--red);padding:11px;border-radius:12px;margin-top:8px}
+    .tip{background:#eff6ff;border-left:5px solid var(--blue);padding:11px;border-radius:12px;margin-top:8px}
+    .footer{text-align:center;color:var(--muted);padding:16px}
+    @media(max-width:980px){.half,.third,.quarter{grid-column:span 12}.tri{grid-template-columns:1fr}.branches{grid-template-columns:1fr 1fr}}
+    @media(max-width:640px){body{padding:12px}.hero{padding:26px 18px;border-radius:24px}.section{padding:16px}.branches{grid-template-columns:1fr}}
+    @media print{body{background:#fff;padding:0}.hero,.section,.card,.branch{box-shadow:none}.section{break-inside:avoid}}
+  </style>
+</head>
+<body>
+<main class="container">
+
+  <section class="hero">
+    <h1>Unit 13: Keselamatan di Jalan Raya Tanggungjawab Bersama</h1>
+    <p>
+      Tingkatan 2 Pendidikan Moral exam notes with tri-language explanation, memory map,
+      road rules, road laws, responsible parties, importance, moral values, KBAT answer templates and practice answer key.
+      <br/>中二道德第13课：道路安全，人人有责——交通规则、交通法律、相关责任方、重要性与考试答题模板。
+    </p>
+    <div class="pills">
+      <span class="pill">BM + English + 中文</span>
+      <span class="pill">Peta Minda / Memory Map</span>
+      <span class="pill">Peraturan vs Undang-undang</span>
+      <span class="pill">Keselamatan Jalan Raya</span>
+      <span class="pill">KBAT Answers</span>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>1. Memory Map / Peta Minda / 记忆导图</h2>
+    <div class="map-center">
+      Road Safety Is a Shared Responsibility<br/>
+      Keselamatan Jalan Raya Tanggungjawab Bersama<br/>
+      道路安全，人人有责
+    </div>
+    <div class="branches">
+      <div class="branch">
+        <h3>Konsep</h3>
+        <ul>
+          <li>Rules and laws exist to protect road users</li>
+          <li>Peraturan dan undang-undang menjaga keselamatan</li>
+          <li>规则与法律保障道路使用者安全</li>
+        </ul>
+      </div>
+      <div class="branch">
+        <h3>Peraturan Jalan Raya</h3>
+        <ul>
+          <li>Do not cycle side by side</li>
+          <li>Wear bright clothes at night</li>
+          <li>Avoid weaving between vehicles</li>
+        </ul>
+      </div>
+      <div class="branch">
+        <h3>Undang-undang Jalan Raya</h3>
+        <ul>
+          <li>Have driving licence</li>
+          <li>Follow speed limit</li>
+          <li>Do not use phone while driving</li>
+        </ul>
+      </div>
+      <div class="branch">
+        <h3>Kepentingan</h3>
+        <ul>
+          <li>Reduce congestion and accidents</li>
+          <li>Save lives and property</li>
+          <li>减少堵车和意外，保护生命财产</li>
+        </ul>
+      </div>
+      <div class="branch">
+        <h3>Pihak Berperanan</h3>
+        <ul>
+          <li>Murid, ibu bapa, sekolah, JPJ, polis trafik</li>
+          <li>Students, parents, school, authorities</li>
+          <li>学生、父母、学校、陆交局、交警</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>2. Learning Objectives and Core Concept / Objektif & Konsep / 学习重点</h2>
+    <div class="grid">
+      <div class="card half">
+        <span class="badge red">Objektif Pembelajaran</span>
+        <ul>
+          <li>Mengetahui peraturan jalan raya dan undang-undang jalan raya.</li>
+          <li>Menjelaskan perbezaan antara peraturan jalan raya dan undang-undang jalan raya.</li>
+          <li>Menilai kepentingan mematuhi peraturan dan undang-undang jalan raya.</li>
+          <li>Menghubung kait kesedaran mematuhi peraturan dan undang-undang dengan keselamatan jalan raya.</li>
+          <li>Mengekspresikan perasaan apabila mematuhi peraturan dan undang-undang jalan raya.</li>
+          <li>Mengamalkan sikap mengutamakan keselamatan jalan raya.</li>
+        </ul>
+      </div>
+      <div class="card half">
+        <span class="badge blue">Konsep Penting</span>
+        <div class="tri">
+          <div><strong>BM</strong>Peraturan dan undang-undang jalan raya diwujudkan bagi menjamin kepentingan semua pengguna jalan raya.</div>
+          <div><strong>English</strong>Road rules and road laws are created to protect the interests and safety of all road users.</div>
+          <div><strong>中文</strong>交通规则与交通法律是为了保障所有道路使用者的利益与安全。</div>
+        </div>
+        <div class="tip">
+          Main exam idea: semua pengguna jalan raya mesti mematuhi peraturan, berdisiplin dan bertanggungjawab supaya kemalangan dapat dielakkan.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>3. Nilai Murni / Moral Values / 道德价值</h2>
+    <div class="grid">
+      <div class="card third"><span class="value">Hormat</span><p>Menghormati peraturan jalan raya dan hak pengguna lain. Respect road rules and others. 尊重交通规则与他人。</p></div>
+      <div class="card third"><span class="value">Bertanggungjawab</span><p>Menjaga keselamatan diri dan orang lain. Be responsible for safety. 对自己和他人的安全负责。</p></div>
+      <div class="card third"><span class="value">Toleransi</span><p>Bertolak ansur dan memberi laluan kepada pengguna lain. Give way and be considerate. 礼让与包容。</p></div>
+      <div class="card third"><span class="value">Kasih sayang</span><p>Menyayangi nyawa sendiri, keluarga dan pengguna jalan raya. Value human life. 珍惜生命。</p></div>
+      <div class="card third"><span class="value">Rasional</span><p>Berfikir sebelum bertindak di jalan raya. Think before acting. 行动前三思。</p></div>
+      <div class="card third"><span class="value">Disiplin</span><p>Mematuhi undang-undang walaupun tiada pengawasan. Obey rules consistently. 自律守法。</p></div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>4. Peraturan Jalan Raya vs Undang-undang Jalan Raya</h2>
+    <div class="grid">
+      <div class="card half">
+        <span class="badge green">Peraturan Jalan Raya</span>
+        <p class="muted">Amalan keselamatan yang boleh meningkatkan kesedaran keselamatan pengguna ketika berada di jalan raya.</p>
+        <ul>
+          <li>Tidak menunggang basikal secara beriringan.</li>
+          <li>Memakai pakaian cerah dan bersinar pada waktu malam.</li>
+          <li>Mengelakkan mencelah di antara kenderaan.</li>
+          <li>Melihat kiri, kanan dan kiri sebelum melintas jalan.</li>
+          <li>Menggunakan jejantas apabila melintas jalan raya.</li>
+          <li>Mematuhi lampu isyarat.</li>
+        </ul>
+      </div>
+      <div class="card half">
+        <span class="badge red">Undang-undang Jalan Raya</span>
+        <p class="muted">Akta yang mewajibkan suatu perlakuan kepada pengguna jalan raya. Pengguna yang tidak mematuhi undang-undang boleh dikenakan hukuman.</p>
+        <ul>
+          <li>Mempunyai lesen memandu.</li>
+          <li>Mematuhi had laju kenderaan yang ditetapkan.</li>
+          <li>Tidak menggunakan telefon bimbit semasa memandu.</li>
+          <li>Mematuhi peraturan yang dikuatkuasakan oleh pihak berkuasa.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>5. Kepentingan Mematuhi Peraturan dan Undang-undang Jalan Raya / Importance / 重要性</h2>
+    <div class="grid">
+      <div class="card third"><span class="badge blue">Kurang Kesesakan</span><p>Mengurangkan kesesakan jalan raya kerana pengguna lebih berdisiplin.</p></div>
+      <div class="card third"><span class="badge green">Imej Negara</span><p>Imej negara meningkat apabila pengguna jalan raya beradab dan mematuhi undang-undang.</p></div>
+      <div class="card third"><span class="badge orange">Kurang Beban Kerajaan</span><p>Mengurangkan beban kerajaan membaiki kerosakan akibat kemalangan jalan raya.</p></div>
+      <div class="card third"><span class="badge teal">Jalan Selamat</span><p>Menjadikan jalan raya selamat untuk digunakan oleh semua pengguna.</p></div>
+      <div class="card third"><span class="badge red">Elak Kehilangan Nyawa</span><p>Mengelakkan kehilangan nyawa dan harta benda.</p></div>
+      <div class="card third"><span class="badge purple">Elak Kemalangan</span><p>Mengelakkan kemalangan dan kecederaan serius.</p></div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>6. Pihak yang Berperanan / Responsible Parties / 相关责任方</h2>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Pihak</th><th>Langkah-langkah yang Diambil</th><th>中文理解</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><strong>Murid</strong></td>
+            <td>Melihat kiri, kanan dan kiri sebelum melintas jalan raya. Menggunakan jejantas apabila melintas jalan raya.</td>
+            <td>学生过马路前看左、右、左；使用行人天桥。</td>
+          </tr>
+          <tr>
+            <td><strong>Ibu Bapa</strong></td>
+            <td>Menjadi contoh pemandu yang baik. Mendidik anak-anak tentang peraturan dan undang-undang jalan raya.</td>
+            <td>父母以身作则，并教育孩子交通规则。</td>
+          </tr>
+          <tr>
+            <td><strong>Pihak Sekolah</strong></td>
+            <td>Mengadakan ceramah keselamatan jalan raya. Menubuhkan Kelab Keselamatan Jalan Raya.</td>
+            <td>学校举办交通安全讲座，成立交通安全学会。</td>
+          </tr>
+          <tr>
+            <td><strong>JPJ</strong></td>
+            <td>Menguatkuasakan dan mentadbir undang-undang jalan raya. Mengadakan kempen kesedaran di seluruh negara.</td>
+            <td>陆路交通局执法与推行全国安全意识活动。</td>
+          </tr>
+          <tr>
+            <td><strong>Polis Trafik</strong></td>
+            <td>Meningkatkan rondaan di semua jalan raya. Mengawal lalu lintas.</td>
+            <td>交警加强巡逻并指挥交通。</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>7. Exam Formula / Formula Jawapan / 答题公式</h2>
+    <div class="formula">
+      <strong>Basic formula:</strong>
+      <code>Saya mengamalkan nilai [nilai moral] kerana [tindakan mematuhi peraturan/undang-undang jalan raya]. Kesannya, [kesan positif].</code>
+      <strong>Example:</strong>
+      <code>Saya mengamalkan nilai bertanggungjawab kerana saya menggunakan jejantas semasa melintas jalan raya. Kesannya, keselamatan diri saya terjamin dan kemalangan dapat dielakkan.</code>
+    </div>
+    <div class="formula">
+      <strong>KBAT formula:</strong>
+      <code>Pada pendapat saya, [pihak] perlu [tindakan] kerana [sebab]. Hal ini dapat [kesan positif kepada pengguna jalan raya/masyarakat/negara].</code>
+      <strong>Example:</strong>
+      <code>Pada pendapat saya, pihak sekolah perlu mengadakan ceramah keselamatan jalan raya kerana murid dapat memahami cara menggunakan jalan raya dengan selamat. Hal ini dapat mengurangkan risiko kemalangan.</code>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>8. Common Exam Questions and Sample Answers / Soalan Lazim / 常见题目</h2>
+    <div class="grid">
+      <div class="card half">
+        <h3>Q: Bezakan peraturan jalan raya dan undang-undang jalan raya.</h3>
+        <div class="answer">
+          Peraturan jalan raya ialah amalan keselamatan untuk meningkatkan kesedaran pengguna jalan raya, seperti melihat kiri dan kanan sebelum melintas. Undang-undang jalan raya pula ialah akta yang wajib dipatuhi dan pengguna yang melanggarnya boleh dikenakan hukuman, seperti memandu tanpa lesen atau menggunakan telefon bimbit semasa memandu.
+        </div>
+      </div>
+      <div class="card half">
+        <h3>Q: Nyatakan contoh peraturan jalan raya.</h3>
+        <div class="answer">
+          Tidak menunggang basikal secara beriringan, memakai pakaian cerah pada waktu malam, tidak mencelah di antara kenderaan, mematuhi lampu isyarat dan menggunakan jejantas.
+        </div>
+      </div>
+      <div class="card half">
+        <h3>Q: Nyatakan contoh undang-undang jalan raya.</h3>
+        <div class="answer">
+          Mempunyai lesen memandu, mematuhi had laju yang ditetapkan dan tidak menggunakan telefon bimbit semasa memandu.
+        </div>
+      </div>
+      <div class="card half">
+        <h3>Q: Nyatakan kepentingan mematuhi peraturan dan undang-undang jalan raya.</h3>
+        <div class="answer">
+          Dapat mengurangkan kesesakan jalan raya, mengelakkan kemalangan, menjadikan jalan raya selamat, mengelakkan kehilangan nyawa dan harta benda serta meningkatkan imej negara.
+        </div>
+      </div>
+      <div class="card half">
+        <h3>Q: Apakah langkah murid untuk menjaga keselamatan jalan raya?</h3>
+        <div class="answer">
+          Murid perlu melihat kiri, kanan dan kiri sebelum melintas jalan, menggunakan jejantas, mematuhi lampu isyarat, tidak bermain di jalan raya dan berjalan di laluan pejalan kaki.
+        </div>
+      </div>
+      <div class="card half">
+        <h3>Q: Apakah peranan ibu bapa dalam meningkatkan keselamatan jalan raya?</h3>
+        <div class="answer">
+          Ibu bapa perlu menjadi contoh pemandu yang baik, mematuhi had laju, tidak menggunakan telefon semasa memandu dan mendidik anak-anak tentang peraturan serta undang-undang jalan raya.
+        </div>
+      </div>
+      <div class="card wide">
+        <h3>Q: Tulis laporan ringkas lawatan ke akademi memandu.</h3>
+        <div class="answer">
+          Pada hari Sabtu, saya dan rakan-rakan menyertai lawatan ke akademi memandu. Kami diberi penerangan tentang peraturan dan undang-undang jalan raya seperti memiliki lesen memandu, mematuhi had laju dan tidak menggunakan telefon bimbit semasa memandu. Kami juga belajar cara melintas jalan dengan selamat dan kepentingan memakai tali pinggang keselamatan. Saya berasa gembira kerana lawatan ini meningkatkan kesedaran saya tentang keselamatan jalan raya. Saya berazam untuk menjadi pengguna jalan raya yang berdisiplin dan bertanggungjawab.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>9. Practice Answer Key / Skema Ringkas / 练习答案</h2>
+    <div class="grid">
+      <div class="card half">
+        <h3>Praktis DSKP Q1: “P” untuk Peraturan, “U” untuk Undang-undang</h3>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Item</th><th>Answer</th><th>Reason</th></tr></thead>
+            <tbody>
+              <tr><td>(a) Mempunyai lesen memandu</td><td>U</td><td>Wajib dari segi undang-undang.</td></tr>
+              <tr><td>(b) Patuhi lampu isyarat</td><td>P</td><td>Amalan keselamatan jalan raya.</td></tr>
+              <tr><td>(c) Elakkan mencelah di antara kenderaan</td><td>P</td><td>Amalan selamat pengguna jalan raya.</td></tr>
+              <tr><td>(d) Tidak menunggang basikal secara beriringan</td><td>P</td><td>Peraturan keselamatan penunggang basikal.</td></tr>
+              <tr><td>(e) Patuhi had laju kenderaan yang ditetapkan</td><td>U</td><td>Melanggar had laju boleh dikenakan tindakan.</td></tr>
+              <tr><td>(f) Pakai pakaian cerah dan bersinar pada waktu malam</td><td>P</td><td>Amalan keselamatan supaya mudah dilihat.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="card half">
+        <h3>Praktis DSKP Q2: Padankan Maksud</h3>
+        <div class="answer">
+          <strong>Peraturan jalan raya:</strong> Amalan keselamatan yang boleh meningkatkan kesedaran keselamatan pengguna ketika berada di jalan raya.<br/>
+          <strong>Undang-undang jalan raya:</strong> Akta yang mewajibkan suatu perlakuan kepada pengguna semasa berada di jalan raya. Pengguna yang tidak mematuhi undang-undang boleh dikenakan hukuman.
+        </div>
+      </div>
+
+      <div class="card half">
+        <h3>Praktis DSKP Q3: Kepentingan</h3>
+        <div class="answer">
+          (a) Mengurangkan <strong>kesesakan</strong> jalan raya.<br/>
+          (b) Mengelakkan <strong>kemalangan</strong>.<br/>
+          (c) Menjadikan jalan raya <strong>selamat</strong> untuk digunakan.
+        </div>
+      </div>
+
+      <div class="card half">
+        <h3>Praktis DSKP Q4: Video / Iklan Kemalangan Jalan Raya</h3>
+        <div class="answer">
+          Isi perbincangan: punca kemalangan seperti memandu laju, menggunakan telefon bimbit, tidak mematuhi lampu isyarat dan cuai ketika melintas. Mesej iklan: patuhi peraturan, sayangi nyawa, guna jejantas, jangan guna telefon semasa memandu dan hormati pengguna jalan raya lain.
+        </div>
+      </div>
+
+      <div class="card half">
+        <h3>Praktis DSKP Q5: Brosur Kesedaran Pengguna Jalan Raya</h3>
+        <div class="answer">
+          Tajuk brosur: “Utamakan Keselamatan Jalan Raya”. Isi penting: patuhi had laju, jangan guna telefon semasa memandu, gunakan jejantas, pakai tali pinggang keselamatan/topi keledar, berhati-hati pada waktu malam dan hormati pengguna jalan raya lain.
+        </div>
+      </div>
+
+      <div class="card half">
+        <h3>Praktis DSKP Q6: Laporan Lawatan Akademi Memandu</h3>
+        <div class="answer">
+          Gunakan struktur: tajuk laporan, tarikh, tempat, tujuan lawatan, aktiviti yang dijalankan, ilmu yang diperoleh, perasaan dan kesimpulan. Tekankan nilai bertanggungjawab, rasional dan hormat kepada undang-undang jalan raya.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>10. Quick Revision Checklist / Senarai Semak / 快速复习清单</h2>
+    <div class="grid">
+      <div class="card quarter"><span class="badge red">1</span><p>Memorise difference: peraturan = safety practice; undang-undang = compulsory law with punishment.</p></div>
+      <div class="card quarter"><span class="badge blue">2</span><p>Examples of rules: bright clothes, no cycling side by side, no weaving between vehicles.</p></div>
+      <div class="card quarter"><span class="badge green">3</span><p>Examples of laws: driving licence, speed limit, no phone while driving.</p></div>
+      <div class="card quarter"><span class="badge orange">4</span><p>Importance: reduce congestion, accidents, loss of life and government burden.</p></div>
+      <div class="card quarter"><span class="badge purple">5</span><p>Responsible parties: pupils, parents, school, JPJ, traffic police.</p></div>
+      <div class="card quarter"><span class="badge teal">6</span><p>Values: hormat, bertanggungjawab, toleransi, kasih sayang, rasional.</p></div>
+      <div class="card quarter"><span class="badge red">7</span><p>Feelings question: gembira, bangga, selamat + reason.</p></div>
+      <div class="card quarter"><span class="badge blue">8</span><p>For KBAT: action + reason + safety effect.</p></div>
+    </div>
+  </section>
+
+  <p class="footer">
+    Unit 13 exam preparation page · Pendidikan Moral Tingkatan 2 · BM + English + 中文
+  </p>
+
+</main>
+</body>
+</html>
