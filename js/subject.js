@@ -3407,7 +3407,7 @@ export const moralData = {
             form:"T2",
             globalNum: 1,
             chapterNum: 52,
-            chapter:"Unit 1: Sumber Moral Asas Pembentukan Akhlak Mulia",
+            chapter:"Chapter 1: Sumber Moral Asas Pembentukan Akhlak Mulia",
             status:"Not Started",
             confidence:0,
             last_updated:"2026-06-21"
@@ -3417,7 +3417,7 @@ export const moralData = {
             form:"T2",
             globalNum: 2,
             chapterNum: 53,
-            chapter:"Unit 2: Agama atau Kepercayaan Membentuk Keperibadian Mulia",
+            chapter:"Chapter 2: Agama atau Kepercayaan Membentuk Keperibadian Mulia",
             status:"Not Started",
             confidence:0,
             last_updated:"2026-06-21"
@@ -3427,7 +3427,7 @@ export const moralData = {
             form:"T2",
             globalNum: 3,
             chapterNum: 54,
-            chapter:"Unit 3: Tanggungjawab Diri Terlaksana hidup makin bahagia",
+            chapter:"Chapter 3: Tanggungjawab Diri Terlaksana hidup makin bahagia",
             status:"Not Started",
             confidence:0,
             last_updated:"2026-06-21"
@@ -3437,7 +3437,7 @@ export const moralData = {
             form:"T2",
             globalNum: 4,
             chapterNum: 55,
-            chapter:"Unit 4: Tanggungjawab Diri Membentuk Keluarga Bahagia",
+            chapter:"Chapter 4: Tanggungjawab Diri Membentuk Keluarga Bahagia",
             status:"Not Started",
             confidence:0,
             last_updated:"2026-06-21"
@@ -3447,7 +3447,7 @@ export const moralData = {
             form:"T2",
             globalNum: 5,
             chapterNum: 56,
-            chapter:"Unit 5: adab dijaga persahabatan terbela",
+            chapter:"Chapter 5: adab dijaga persahabatan terbela",
             status:"Not Started",
             confidence:0,
             last_updated:"2026-06-21"
@@ -3457,7 +3457,7 @@ export const moralData = {
             form:"T2",
             globalNum: 6,
             chapterNum: 57,
-            chapter:"Unit 6: Jiran Sepakat Membawa Berkat",
+            chapter:"Chapter 6: Jiran Sepakat Membawa Berkat",
             status:"Not Started",
             confidence:0,
             last_updated:"2026-06-21"
@@ -3467,7 +3467,7 @@ export const moralData = {
             form:"T2",
             globalNum: 7,
             chapterNum: 58,
-            chapter:"Unit 7: Masyarakat Penyayang Tonggak aspirasi Negara",
+            chapter:"Chapter 7: Masyarakat Penyayang Tonggak aspirasi Negara",
             status:"Not Started",
             confidence:0,
             last_updated:"2026-06-21"
@@ -3477,7 +3477,7 @@ export const moralData = {
             form:"T2",
             globalNum: 8,
             chapterNum: 59,
-            chapter:"Unit 8: Perkhidmatan Awam Pemangkin Pembangunan Negara",
+            chapter:"Chapter 8: Perkhidmatan Awam Pemangkin Pembangunan Negara",
             status:"Not Started",
             confidence:0,
             last_updated:"2026-06-21"
@@ -3487,7 +3487,7 @@ export const moralData = {
             form:"T2",
             globalNum: 9,
             chapterNum: 60,
-            chapter:"Unit 9: Hargai Alam Warisan Kita",
+            chapter:"Chapter 9: Hargai Alam Warisan Kita",
             status:"Not Started",
             confidence:0,
             last_updated:"2026-06-21"
@@ -3497,7 +3497,7 @@ export const moralData = {
             form:"T2",
             globalNum: 10,
             chapterNum: 61,
-            chapter:"Unit 10: Gaya Hidup Sihat dan Selamat Menjamin Keharmonian Bersama",
+            chapter:"Chapter 10: Gaya Hidup Sihat dan Selamat Menjamin Keharmonian Bersama",
             status:"Not Started",
             confidence:0,
             last_updated:"2026-06-21"
@@ -3507,7 +3507,7 @@ export const moralData = {
             form:"T2",
             globalNum: 11,
             chapterNum: 62,
-            chapter:"Unit 11: adab di tempat awam dijaga, nikmat hidup dirasai bersama",
+            chapter:"Chapter 11: adab di tempat awam dijaga, nikmat hidup dirasai bersama",
             status:"Not Started",
             confidence:0,
             last_updated:"2026-06-21"
@@ -3517,7 +3517,7 @@ export const moralData = {
             form:"T2",
             globalNum: 12,
             chapterNum: 63,
-            chapter:"Unit 12: etika dan undang-undang siber membantu pembentukan jati diri",
+            chapter:"Chapter 12: etika dan undang-undang siber membantu pembentukan jati diri",
             status:"Not Started",
             confidence:0,
             last_updated:"2026-06-21"
@@ -3527,7 +3527,7 @@ export const moralData = {
             form:"T2",
             globalNum: 13,
             chapterNum: 64,
-            chapter:"Unit 13: keselamatan di jalan raya tanggungjawab bersama",
+            chapter:"Chapter 13: keselamatan di jalan raya tanggungjawab bersama",
             status:"Not Started",
             confidence:0,
             last_updated:"2026-06-21",
@@ -3538,7 +3538,7 @@ export const moralData = {
             form:"T2",
             globalNum: 14,
             chapterNum: 65,
-            chapter:"Unit 14: menangani konflik identity diri asas pembentukan personaliti",
+            chapter:"Chapter 14: menangani konflik identity diri asas pembentukan personaliti",
             status:"Not Started",
             confidence:0,
             last_updated:"2026-06-21",
@@ -3549,7 +3549,7 @@ export const moralData = {
             form:"T2",
             globalNum: 15,
             chapterNum: 66,
-            chapter:"Unit 15: Hak Asasi Manusia Dilindungi Bersama",
+            chapter:"Chapter 15: Hak Asasi Manusia Dilindungi Bersama",
             status:"Not Started",
             confidence:0,
             last_updated:"2026-06-21"
