@@ -15,7 +15,7 @@ content="width=device-width, initial-scale=1.0">
 <title>Story Books Dashboard</title>
 
 <link rel="stylesheet"
-href="../css/style.css?v=30">
+href="../css/style.css?v=31">
 
 <style>
 
@@ -228,6 +228,18 @@ body{
     font-weight:bold;
 }
 
+.chapter-link{
+    display:inline-block;
+    margin-top:10px;
+    color:#4f46e5;
+    font-size:14px;
+    text-decoration:none;
+}
+
+.chapter-link:hover{
+    text-decoration:underline;
+}
+
 /* ===================================================== */
 /* MOBILE */
 /* ===================================================== */
@@ -364,6 +376,84 @@ let data =
 
 
 // =========================================================
+// SYNC
+// =========================================================
+
+function syncSeedData(subjectData){
+
+    let changed = false;
+
+    if(!Array.isArray(subjectData.chapters)){
+
+        subjectData.chapters =
+            structuredClone(storybooksData.chapters);
+
+        return true;
+
+    }
+
+    const existingByKey =
+        new Map(
+            subjectData.chapters.map(chapter => [
+                `${chapter.form}|${chapter.globalNum}`,
+                chapter
+            ])
+        );
+
+    const seededChapters =
+        storybooksData.chapters.map(seedChapter => {
+
+            const existingChapter =
+                existingByKey.get(
+                    `${seedChapter.form}|${seedChapter.globalNum}`
+                );
+
+            if(!existingChapter){
+
+                changed = true;
+
+                return {
+                    ...seedChapter
+                };
+
+            }
+
+            let updatedChapter = existingChapter;
+
+            if(existingChapter.chapter !== seedChapter.chapter){
+
+                changed = true;
+
+                updatedChapter = {
+                    ...updatedChapter,
+                    chapter:seedChapter.chapter
+                };
+
+            }
+
+            if(!existingChapter.resourceUrl && seedChapter.resourceUrl){
+
+                changed = true;
+
+                updatedChapter = {
+                    ...updatedChapter,
+                    resourceUrl:seedChapter.resourceUrl
+                };
+
+            }
+
+            return updatedChapter;
+
+        });
+
+    subjectData.chapters = seededChapters;
+
+    return changed;
+
+}
+
+
+// =========================================================
 // LOAD
 // =========================================================
 
@@ -375,6 +465,13 @@ async function loadData(){
     if(snap.exists()){
 
         data = snap.data();
+
+        if(syncSeedData(data)){
+
+            data.last_saved = new Date().toISOString();
+            await setDoc(docRef,data);
+
+        }
 
     }else{
 
@@ -573,6 +670,10 @@ function render(){
             card.className =
                 `chapter-card ${cardClass}`;
 
+            const chapterResource = chapter.resourceUrl
+                ? `<a class="chapter-link" href="${chapter.resourceUrl}">Open notes</a>`
+                : "";
+
             card.innerHTML = `
 
                 <div class="chapter-top">
@@ -588,6 +689,9 @@ function render(){
                         <div class="chapter-title">
                             ${chapter.chapter}
                         </div>
+
+                        ${chapterResource}
+
                     </div>
 
                 </div>
@@ -596,7 +700,9 @@ function render(){
 
             card.addEventListener(
                 "click",
-                async ()=>{
+                async (e)=>{
+
+                    if(e.target.closest(".chapter-link")){ return; }
 
                     chapter.status =
                         nextStatus(
