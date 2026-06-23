@@ -41,6 +41,7 @@ const STATIC_ASSETS = [
     "/chemistry/t4_chapter1.html",
     "/biology/biology_chapter8.html",
     "/chinese/zh_030.html",
+    "/science/form2_science_chapter9_heat.html",
     "/moral/t2_moral_unit14.html",
     "/moral/t2_moral_unit13.html",
     "/moral/t2_moral_unit11.html",

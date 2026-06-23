@@ -108,7 +108,8 @@ export const scienceData = {
             chinese:"热学",
             status:"Not Started",
             confidence:0,
-            last_updated:"2026-05-20"
+            last_updated:"2026-05-20",
+            resourceUrl:"../science/form2_science_chapter9_heat.html"
         },
 
         {
