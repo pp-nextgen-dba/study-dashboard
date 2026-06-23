@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>思考的框架2</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Noto+Sans+SC:wght@400;500;700;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#0B132B;
+    --panel:#141B36;
+    --panel-light:#1C2541;
+    --line:#2B3461;
+    --blue:#3A86FF;
+    --amber:#FFB627;
+    --green:#06D6A0;
+    --rose:#FF6B6B;
+    --chalk:#F4F1ED;
+    --chalk-dim:#A8B0CC;
+    --radius:14px;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--ink);
+    background-image:
+      radial-gradient(circle at 12% 8%, rgba(58,134,255,0.10), transparent 45%),
+      radial-gradient(circle at 88% 18%, rgba(255,182,39,0.08), transparent 40%),
+      radial-gradient(circle at 50% 95%, rgba(6,214,160,0.07), transparent 45%);
+    color:var(--chalk);
+    font-family:'Noto Sans SC','Space Grotesk',sans-serif;
+    line-height:1.6;
+    overflow-x:hidden;
+  }
+  .en{font-family:'Space Grotesk',sans-serif;}
+  .mono{font-family:'JetBrains Mono',monospace;}
+
+  /* ---------- scroll progress + nav ---------- */
+  .topbar{
+    position:fixed;top:0;left:0;right:0;height:54px;z-index:100;
+    display:flex;align-items:center;justify-content:space-between;
+    padding:0 22px;
+    background:rgba(11,19,43,0.78);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  .topbar .brand{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:15px;letter-spacing:.04em;color:var(--chalk);display:flex;gap:8px;align-items:center;}
+  .brand .dot{width:8px;height:8px;border-radius:50%;background:var(--amber);box-shadow:0 0 10px var(--amber);}
+  .topbar nav{display:flex;gap:18px;}
+  .topbar nav a{
+    color:var(--chalk-dim);text-decoration:none;font-size:13px;font-family:'Space Grotesk',sans-serif;
+    padding:6px 4px;border-bottom:2px solid transparent;transition:.2s;
+  }
+  .topbar nav a:hover{color:var(--chalk);border-color:var(--blue);}
+  .progress{position:fixed;top:0;left:0;height:3px;background:linear-gradient(90deg,var(--blue),var(--green),var(--amber));z-index:101;width:0%;transition:width .1s;}
+
+  section{padding:90px 6vw 60px;max-width:1180px;margin:0 auto;}
+
+  /* ---------- HERO : activation-energy curve ---------- */
+  .hero{padding-top:130px;display:grid;grid-template-columns:1.05fr 1fr;gap:48px;align-items:center;min-height:88vh;}
+  @media (max-width:880px){.hero{grid-template-columns:1fr;min-height:auto;padding-top:110px;}}
+  .eyebrow{
+    display:inline-flex;align-items:center;gap:8px;
+    font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.12em;
+    color:var(--amber);text-transform:uppercase;margin-bottom:18px;
+  }
+  .eyebrow::before{content:'';width:18px;height:1px;background:var(--amber);}
+  h1{
+    font-family:'Space Grotesk',sans-serif;font-weight:700;
+    font-size:clamp(34px,5vw,58px);line-height:1.05;letter-spacing:-0.01em;
+    margin-bottom:6px;
+  }
+  h1 .zh{font-family:'Noto Sans SC',sans-serif;font-weight:900;display:block;font-size:clamp(30px,4.2vw,46px);color:var(--chalk);margin-bottom:4px;}
+  h1 .accent{color:var(--blue);}
+  .hero-sub{color:var(--chalk-dim);font-size:16px;max-width:480px;margin-top:16px;}
+  .hero-sub .zh-line{display:block;color:var(--chalk);font-size:17px;margin-bottom:6px;font-weight:500;}
+  .hero-cta{margin-top:30px;display:flex;gap:14px;flex-wrap:wrap;}
+  .btn{
+    font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:14px;
+    padding:13px 22px;border-radius:999px;cursor:pointer;border:1px solid transparent;
+    transition:.2s; text-decoration:none; display:inline-flex;align-items:center;gap:8px;
+  }
+  .btn-primary{background:var(--amber);color:#0B132B;}
+  .btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(255,182,39,0.3);}
+  .btn-ghost{border-color:var(--line);color:var(--chalk);background:transparent;}
+  .btn-ghost:hover{border-color:var(--blue);color:var(--blue);}
+
+  /* activation energy SVG diagram */
+  .diagram-wrap{
+    background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);
+    padding:22px 18px 8px;position:relative;
+  }
+  .diagram-label{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:6px;}
+  .diagram-label .t{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--chalk-dim);letter-spacing:.08em;text-transform:uppercase;}
+  .diagram-hint{font-size:12px;color:var(--chalk-dim);text-align:center;margin:6px 0 16px;font-family:'JetBrains Mono',monospace;}
+  #ea-svg{width:100%;height:auto;display:block;cursor:pointer;}
+  .ea-ball{transition:transform 1.8s cubic-bezier(.2,.8,.2,1);}
+  .diagram-wrap.popped .ea-ball{transform:translate(238px,-92px);}
+  .ea-glow{opacity:0;transition:opacity .6s ease .6s;}
+  .diagram-wrap.popped .ea-glow{opacity:1;}
+
+  /* ---------- section heads ---------- */
+  .sec-head{margin-bottom:38px;max-width:680px;}
+  .sec-head .eyebrow{margin-bottom:10px;}
+  .sec-head h2{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:clamp(26px,3.4vw,38px);}
+  .sec-head h2 .zh{font-family:'Noto Sans SC',sans-serif;font-weight:900;display:block;font-size:clamp(24px,3vw,32px);margin-bottom:2px;}
+  .sec-head p{color:var(--chalk-dim);margin-top:12px;font-size:15px;}
+
+  /* ---------- MIND MAP ---------- */
+  #map{padding-top:70px;}
+  .map-stage{
+    position:relative;background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);
+    padding:10px;overflow:hidden;
+  }
+  #map-svg{width:100%;height:auto;display:block;}
+  .map-node{cursor:pointer;}
+  .map-node circle{transition:r .25s ease, fill .25s ease, filter .25s ease;}
+  .map-node text{font-family:'Noto Sans SC',sans-serif;font-weight:700;pointer-events:none;}
+  .map-node .en-label{font-family:'JetBrains Mono',monospace;font-weight:400;pointer-events:none;}
+  .map-node:hover circle{filter:brightness(1.3);}
+  .map-node.active circle{stroke:#fff;stroke-width:2px;}
+  .map-link{stroke:var(--line);stroke-width:1.4;}
+  .map-center circle{fill:var(--amber);}
+  .map-center text{fill:#0B132B;}
+  .map-legend{display:flex;gap:18px;flex-wrap:wrap;margin-top:16px;font-family:'JetBrains Mono',monospace;font-size:11.5px;color:var(--chalk-dim);}
+  .map-legend span{display:inline-flex;align-items:center;gap:6px;}
+  .swatch{width:9px;height:9px;border-radius:50%;display:inline-block;}
+
+  /* ---------- CARDS / sections ---------- */
+  .group{padding-top:64px;border-top:1px solid var(--line);}
+  .group:first-of-type{border-top:none;}
+  .group-head{display:flex;align-items:baseline;gap:14px;margin-bottom:26px;flex-wrap:wrap;}
+  .group-icon{width:42px;height:42px;border-radius:11px;display:flex;align-items:center;justify-content:center;font-size:20px;flex:none;}
+  .group-title-zh{font-family:'Noto Sans SC',sans-serif;font-weight:900;font-size:26px;}
+  .group-title-en{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--chalk-dim);letter-spacing:.1em;text-transform:uppercase;}
+
+  .card-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;}
+  .card{
+    background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);
+    padding:20px 20px 18px;position:relative;overflow:hidden;
+    transition:transform .25s ease, border-color .25s ease;
+  }
+  .card::before{
+    content:'';position:absolute;top:0;left:0;width:100%;height:3px;
+    background:var(--accent,var(--blue));
+  }
+  .card:hover{transform:translateY(-4px);border-color:var(--accent,var(--blue));}
+  .card .zh-text{font-size:15.5px;font-weight:500;color:var(--chalk);margin-bottom:10px;}
+  .card .en-text{font-size:13px;color:var(--chalk-dim);font-style:italic;line-height:1.55;}
+  .card .tag{
+    display:inline-block;font-family:'JetBrains Mono',monospace;font-size:10.5px;
+    color:var(--accent,var(--blue));letter-spacing:.06em;text-transform:uppercase;margin-bottom:12px;
+  }
+
+  /* ---------- footer ---------- */
+  footer{padding:50px 6vw 90px;text-align:center;color:var(--chalk-dim);font-size:12.5px;font-family:'JetBrains Mono',monospace;}
+  footer .zh{color:var(--chalk);font-family:'Noto Sans SC',sans-serif;font-size:14px;margin-bottom:8px;}
+
+  /* reduced motion */
+  @media (prefers-reduced-motion: reduce){
+    *{transition-duration:0.01ms !important; animation-duration:0.01ms !important;}
+  }
+
+  /* focus visibility */
+  a:focus-visible, button:focus-visible, .map-node:focus-visible{outline:2px solid var(--blue);outline-offset:3px;}
+
+  @media (max-width:600px){
+    section{padding:80px 5vw 40px;}
+    .topbar nav{display:none;}
+  }
+</style>
+</head>
+<body>
+
+<div class="progress" id="progress"></div>
+<div class="topbar">
+  <div class="brand"><span class="dot"></span>思考的框架2<span class="en" style="color:var(--chalk-dim);font-weight:400;"> · Framework of Thinking 2</span></div>
+  <nav>
+    <a href="#map">脑图 Map</a>
+    <a href="#g1">物理 Physics</a>
+    <a href="#g2">进化 Evolution</a>
+    <a href="#g3">协作 People</a>
+  </nav>
+</div>
+
+<!-- ============ HERO ============ -->
+<section class="hero" id="top">
+  <div>
+    <div class="eyebrow">13 Concepts · 1 Idea</div>
+    <h1><span class="zh">思考的框架<span class="accent">2</span></span><span class="en">Framework of Thinking 2</span></h1>
+    <div class="hero-sub">
+      <span class="zh-line">改变最难的不是发力，是跨过那个临界点。</span>
+      The hardest part of change isn't pushing hard — it's crossing the tipping point. Once you clear it, momentum stops fighting you and starts carrying you.
+    </div>
+    <div class="hero-cta">
+      <a href="#map" class="btn btn-primary">看脑图 View the Map ↓</a>
+      <a href="#g1" class="btn btn-ghost">开始阅读 Start Reading</a>
+    </div>
+  </div>
+
+  <div class="diagram-wrap" id="diagramWrap">
+    <div class="diagram-label">
+      <span class="t mono">活化能 · Activation Energy</span>
+      <span class="t mono">点击小球 tap the ball</span>
+    </div>
+    <svg id="ea-svg" viewBox="0 0 420 220" role="img" aria-label="Diagram showing a ball needing a push of energy over a hill before rolling down into a stable, lower-energy state">
+      <!-- baseline -->
+      <line x1="20" y1="190" x2="400" y2="190" stroke="#2B3461" stroke-width="1"/>
+      <!-- energy curve: start low, hump (barrier), drop to lower stable state -->
+      <path d="M 40 160 C 90 160, 110 60, 150 60 C 190 60, 210 160, 260 180 C 300 195, 340 198, 390 198"
+            fill="none" stroke="#3A86FF" stroke-width="3" stroke-linecap="round"/>
+      <!-- labels -->
+      <text x="40" y="178" fill="#A8B0CC" font-size="11" font-family="JetBrains Mono">起点 start</text>
+      <text x="118" y="48" fill="#FFB627" font-size="11" font-family="JetBrains Mono">活化能 barrier</text>
+      <text x="320" y="212" fill="#06D6A0" font-size="11" font-family="JetBrains Mono">新稳态 new state</text>
+      <!-- glow at final resting state -->
+      <circle class="ea-glow" cx="382" cy="190" r="20" fill="#06D6A0" opacity="0.25"/>
+      <!-- the ball -->
+      <circle class="ea-ball" cx="44" cy="152" r="10" fill="#FFB627" stroke="#0B132B" stroke-width="1.5"/>
+    </svg>
+  </div>
+</section>
+
+<!-- ============ MIND MAP ============ -->
+<section id="map">
+  <div class="sec-head">
+    <div class="eyebrow">Memory Map</div>
+    <h2><span class="zh">概念脑图</span>Concept Map</h2>
+    <p>点击任意节点，跳到对应的笔记卡片。所有概念最终都指向中心：<strong style="color:var(--amber)">成长 Growth</strong>。<br>
+    Click any node to jump to its notes. Every branch leads back to the center: growth.</p>
+  </div>
+
+  <div class="map-stage">
+    <svg id="map-svg" viewBox="0 0 900 620" role="img" aria-label="Mind map connecting thirteen physics-and-life concepts to a central growth idea"></svg>
+  </div>
+
+  <div class="map-legend">
+    <span><span class="swatch" style="background:#3A86FF"></span>物理 Physics &amp; Force</span>
+    <span><span class="swatch" style="background:#06D6A0"></span>进化 Evolution &amp; Systems</span>
+    <span><span class="swatch" style="background:#FF6B6B"></span>协作 People &amp; Cooperation</span>
+    <span><span class="swatch" style="background:#FFB627"></span>成长 Growth (center)</span>
+  </div>
+</section>
+
+<!-- ============ GROUP 1: PHYSICS OF FORCE ============ -->
+<section class="group" id="g1">
+  <div class="group-head">
+    <div class="group-icon" style="background:rgba(58,134,255,0.15);">⚙️</div>
+    <div>
+      <div class="group-title-zh">物理与力</div>
+      <div class="group-title-en">Physics &amp; Force</div>
+    </div>
+  </div>
+
+  <div class="card-grid" id="grid-physics"></div>
+</section>
+
+<!-- ============ GROUP 2: EVOLUTION & SYSTEMS ============ -->
+<section class="group" id="g2">
+  <div class="group-head">
+    <div class="group-icon" style="background:rgba(6,214,160,0.15);">🌱</div>
+    <div>
+      <div class="group-title-zh">进化与系统</div>
+      <div class="group-title-en">Evolution &amp; Systems</div>
+    </div>
+  </div>
+
+  <div class="card-grid" id="grid-evolution"></div>
+</section>
+
+<!-- ============ GROUP 3: PEOPLE & COOPERATION ============ -->
+<section class="group" id="g3">
+  <div class="group-head">
+    <div class="group-icon" style="background:rgba(255,107,107,0.15);">🤝</div>
+    <div>
+      <div class="group-title-zh">协作与人</div>
+      <div class="group-title-en">People &amp; Cooperation</div>
+    </div>
+  </div>
+
+  <div class="card-grid" id="grid-people"></div>
+</section>
+
+<footer>
+  <div class="zh">愿你在每一次开始时，都有足够的勇气跨过临界点。</div>
+  May you always have the courage to cross the tipping point, every time you begin again.
+</footer>
+
+<script>
+/* ===================== DATA ===================== */
+const DATA = {
+  physics: {
+    title: "物理与力", color:"#3A86FF",
+    items: [
+      {tag:"惯性 Inertia", zh:"改变的最大阻力在开始；集中全力跨过逃逸速度，惯性就会从束缚你的引力，变成推动你前行的动力。",
+       en:"Resistance to change is greatest at the very start. Push hard enough to clear escape velocity, and inertia flips from the gravity holding you down to the force carrying you forward."},
+      {tag:"摩擦与黏度 Friction", zh:"世界永远有阻力，关键不是消除所有摩擦，而是把环境改造成低黏度、低无效摩擦的状态——让好想法、好行动能顺畅流动，让问题在萌芽时就能被解决。",
+       en:"Friction never fully disappears. The goal isn't a frictionless world — it's a low-viscosity one, where good ideas and good actions flow smoothly and problems get solved while they're still small."},
+      {tag:"摩擦与黏度 Friction", zh:"用力是本能，减阻是智慧；真正的效率，来自让正确的事能顺畅发生。",
+       en:"Pushing harder is instinct; removing friction is wisdom. Real efficiency comes from letting the right things happen smoothly."},
+      {tag:"速度 Speed", zh:"慢而准，胜过快而偏；方向对了，哪怕走得慢，每一步都在靠近目标。",
+       en:"Slow and accurate beats fast and off-course. If the direction is right, even a slow step still moves you closer to the goal."},
+      {tag:"杠杆 Leverage", zh:"勤奋决定下限，杠杆决定上限；找对支点，小力气也能撬动大目标。",
+       en:"Effort sets your floor; leverage sets your ceiling. Find the right fulcrum, and a small push can move a big goal."},
+      {tag:"杠杆 Leverage", zh:"筹码是放大价值的杠杆，不是控制他人的枷锁；用得好是双赢的桥梁，用过头就会变成反噬自己的陷阱。",
+       en:"Leverage is a lever for creating value, not a chain for controlling people. Used well it builds a win-win bridge; used too far it becomes a trap that snaps back on you."},
+      {tag:"活化能 Activation Energy", zh:"改变需要足够的初始能量来跨越临界点，而真正的成功，是让新状态在不再额外投入时，也能稳定持续。",
+       en:"Change needs enough initial energy to clear the critical point. Real success is reaching a new state stable enough to hold itself, without constant extra input."},
+      {tag:"活化能 Activation Energy", zh:"改变的最大误区，是以为“开始”就等于“完成”；真正的成功，是投入足够的能量，让新状态再也回不去。",
+       en:"The biggest mistake about change is assuming starting equals finishing. Real success means investing enough energy that there's no going back to the old state."},
+      {tag:"催化剂 Catalyst", zh:"催化剂不是让你不用努力，而是帮你把力气花在刀刃上，用更小的成本，走完最难的那段路。",
+       en:"A catalyst doesn't remove the need for effort — it helps you spend your effort where it counts, getting through the hardest stretch at the lowest cost."},
+      {tag:"自催化 Autocatalysis", zh:"最好的改变，不是靠硬撑一辈子，而是设计成“越做越容易、越发展越有动力”的自驱动循环。",
+       en:"The best change isn't something you grind through forever — it's designed as a self-driving loop that gets easier and more motivating the more you do it."},
+      {tag:"合金化 Alloying", zh:"真正的强大，从来不是单一的极致，而是把不同的优势熔合在一起，创造出远超个体之和的新整体。",
+       en:"True strength is never about maxing out one single trait — it's fusing different strengths together into a new whole that's far greater than the sum of its parts."},
+      {tag:"合金化 Alloying", zh:"真正的高手，不是单一技能练到极致，而是把不同维度的能力熔合成一种更强大、更有韧性的全新认知体系。",
+       en:"A real expert isn't someone who maxed out one skill — it's someone who fused abilities across many dimensions into a stronger, more resilient way of thinking."},
+    ]
+  },
+  evolution: {
+    title:"进化与系统", color:"#06D6A0",
+    items: [
+      {tag:"进化 Evolution", zh:"进化不奖励最强壮的，只奖励最能适应变化的；真正的竞争力，是永远保有调整与迭代的能力。",
+       en:"Evolution doesn't reward the strongest — only the most adaptable. Real competitive edge is the ability to keep adjusting and iterating, forever."},
+      {tag:"进化 Evolution", zh:"进化从不奖励完美的过去，只奖励能持续调整、适应新环境的当下。",
+       en:"Evolution never rewards a perfect past — only a present that keeps adjusting and adapting to its new environment."},
+      {tag:"进化 Evolution", zh:"进化的本质，是永远对变化保持开放；不是跑得最快，而是永远愿意调整方向，跟上环境的脚步。",
+       en:"The essence of evolution is staying forever open to change. It's not about running the fastest — it's about always being willing to change direction and keep pace with your environment."},
+      {tag:"进化 Evolution", zh:"进化的智慧，在于不执着于“原本的用途”，而是在竞争与变化中，把已有的一切，重新变成活下去的新优势。",
+       en:"The wisdom of evolution is letting go of what something was originally 'for' — and, amid competition and change, repurposing everything you already have into a new survival advantage."},
+      {tag:"生态系统 Ecosystem", zh:"生态思维的本质，是把世界看作相互关联的整体——尊重规律、保护根基、保持开放、接受变化，才能在复杂系统中长久存续。",
+       en:"Ecological thinking sees the world as one connected whole: respect the rules, protect the foundation, stay open, accept change — that's how you last inside a complex system."},
+      {tag:"生态系统 Ecosystem", zh:"生态思维的本质，是理解“整体大于部分之和”——尊重关联、保护多样性、保持开放与韧性，才能让系统在变化中长久存续。",
+       en:"Ecological thinking means understanding the whole is greater than the sum of its parts — respect connection, protect diversity, stay open and resilient, so the system can endure change."},
+      {tag:"生态位 Niche", zh:"通才胜在适应与抗风险，专才赢在壁垒与低竞争，最优策略是用通用能力打底，再打造不可替代的专业优势。",
+       en:"Generalists win on adaptability and risk resistance; specialists win on barriers and low competition. The best strategy: build broad general skills as a base, then craft an irreplaceable specialty on top."},
+      {tag:"趋同进化 Convergent Evolution", zh:"相似环境压力会让亲缘很远的物种，独立演化出功能相同的“最优解”；映射到商业与个人：稳定环境做细分专才可避竞争，动荡环境做通用通才更抗风险。",
+       en:"Similar environmental pressure makes unrelated species independently evolve the same 'best solution'. Applied to business and life: in stable environments, specialize to avoid competition; in turbulent ones, generalize to survive shocks."},
+      {tag:"自我保护 Self-Preservation", zh:"自我保护是生物的生存本能，既包括个体避险、争夺资源的领地行为，也包含亲缘与群体层面的牺牲利他；人类更能超越短期安全，为长期价值、后代与集体未来主动承担风险。",
+       en:"Self-preservation is a survival instinct — it covers individual risk-avoidance and territorial competition for resources, but also kin- and group-level self-sacrifice. Humans can go further, choosing risk for long-term value, future generations, and the collective good."},
+      {tag:"复制 Replication", zh:"好的东西要先学对核心，再根据自己的情况灵活调整，这样才能越用越好。",
+       en:"To copy something good, first learn its true core, then adapt it flexibly to your own situation — that's how it keeps getting better the more you use it."},
+    ]
+  },
+  people: {
+    title:"协作与人", color:"#FF6B6B",
+    items: [
+      {tag:"合作 Cooperation", zh:"每个人都有自己的长处和不足，互相帮助、彼此信任，就能做成一个人做不到的大事。",
+       en:"Everyone has their own strengths and gaps. Helping each other and trusting each other lets a group achieve what no single person could alone."},
+      {tag:"合作 Cooperation", zh:"合作让我们更强，但我们能深入信任的人数量有限，把真心和精力留给最重要的伙伴，才能把合作的价值发挥到最大。",
+       en:"Cooperation makes us stronger, but the number of people we can deeply trust is limited. Saving your real care and energy for the most important partners is how you get the most out of cooperation."},
+      {tag:"等级组织 Hierarchy", zh:"有秩序的等级能让团队更高效，但真正的地位靠责任与贡献赢得，而不是天生的身份。",
+       en:"An orderly hierarchy makes a team more efficient — but real standing is earned through responsibility and contribution, not by birthright."},
+      {tag:"等级组织 Hierarchy", zh:"真正的地位不是靠穿着或头衔，而是靠担当和贡献赢得的；好的秩序能让大家一起走得更远。",
+       en:"Real status isn't won with clothes or titles — it's earned through ownership and contribution. Good order lets everyone go further, together."},
+      {tag:"激励 Motivation", zh:"奖励和动力能帮我们进步，但要分清眼前的小好处和长远的大目标，别被一时的诱惑带偏了方向。",
+       en:"Rewards and motivation help us improve, but you have to tell apart the small near-term perk from the big long-term goal — don't let a moment's temptation pull you off course."},
+      {tag:"激励 Motivation", zh:"看清奖励背后的真正目的，别被眼前的小甜头骗走了更重要的未来。",
+       en:"See through to the real purpose behind a reward — don't let a small sweet treat in front of you trade away a more important future."},
+      {tag:"激励 Motivation", zh:"有挑战、有悬念的过程才更有意思，但如果目标足够重要，就要把稳赢放在第一位。",
+       en:"A process with challenge and suspense is more fun — but when the goal really matters, put a sure win first."},
+      {tag:"能量输出 Energy Output", zh:"能省力气的时候省力气，但遇到重要的事，就要愿意多花点心思，别让“偷懒”的本能挡住了成长。",
+       en:"Save your energy when you can — but for what really matters, be willing to put in more thought. Don't let the instinct to take it easy block your growth."},
+      {tag:"能量输出 Energy Output", zh:"学到的道理要亲自用起来，再不断反思改进，才能真正变成自己的本事。",
+       en:"A lesson only becomes truly yours once you put it into practice and keep refining it through reflection."},
+    ]
+  }
+};
+
+/* ===================== RENDER CARDS ===================== */
+function renderGroup(containerId, group){
+  const el = document.getElementById(containerId);
+  group.items.forEach((item,i)=>{
+    const card = document.createElement('div');
+    card.className='card';
+    card.style.setProperty('--accent', group.color);
+    card.id = containerId + '-' + i;
+    card.innerHTML = `
+      <span class="tag">${item.tag}</span>
+      <div class="zh-text">${item.zh}</div>
+      <div class="en-text">${item.en}</div>
+    `;
+    el.appendChild(card);
+  });
+}
+renderGroup('grid-physics', DATA.physics);
+renderGroup('grid-evolution', DATA.evolution);
+renderGroup('grid-people', DATA.people);
+
+/* ===================== MIND MAP ===================== */
+const svgNS = "http://www.w3.org/2000/svg";
+const mapSvg = document.getElementById('map-svg');
+const cx=450, cy=310, R=235;
+
+const nodes = [
+  {id:'inertia', zh:'惯性', en:'inertia', color:'#3A86FF', target:'grid-physics-0'},
+  {id:'friction', zh:'摩擦/黏度', en:'friction', color:'#3A86FF', target:'grid-physics-1'},
+  {id:'speed', zh:'速度', en:'speed', color:'#3A86FF', target:'grid-physics-3'},
+  {id:'lever', zh:'杠杆', en:'leverage', color:'#3A86FF', target:'grid-physics-4'},
+  {id:'activation', zh:'活化能', en:'activation energy', color:'#3A86FF', target:'grid-physics-6'},
+  {id:'catalyst', zh:'催化剂', en:'catalyst', color:'#3A86FF', target:'grid-physics-8'},
+  {id:'alloy', zh:'合金化', en:'alloying', color:'#3A86FF', target:'grid-physics-10'},
+  {id:'evolution', zh:'进化', en:'evolution', color:'#06D6A0', target:'grid-evolution-0'},
+  {id:'ecosystem', zh:'生态系统', en:'ecosystem', color:'#06D6A0', target:'grid-evolution-4'},
+  {id:'niche', zh:'生态位', en:'niche', color:'#06D6A0', target:'grid-evolution-6'},
+  {id:'replicate', zh:'复制', en:'replication', color:'#06D6A0', target:'grid-evolution-9'},
+  {id:'coop', zh:'合作', en:'cooperation', color:'#FF6B6B', target:'grid-people-0'},
+  {id:'hierarchy', zh:'等级组织', en:'hierarchy', color:'#FF6B6B', target:'grid-people-2'},
+  {id:'motivation', zh:'激励', en:'motivation', color:'#FF6B6B', target:'grid-people-4'},
+];
+
+const n = nodes.length;
+nodes.forEach((node,i)=>{
+  const angle = (i / n) * 2*Math.PI - Math.PI/2;
+  node.x = cx + R*Math.cos(angle);
+  node.y = cy + R*Math.sin(angle);
+});
+
+// links from center
+nodes.forEach(node=>{
+  const link = document.createElementNS(svgNS,'line');
+  link.setAttribute('class','map-link');
+  link.setAttribute('x1',cx); link.setAttribute('y1',cy);
+  link.setAttribute('x2',node.x); link.setAttribute('y2',node.y);
+  mapSvg.appendChild(link);
+});
+
+// center node
+const centerG = document.createElementNS(svgNS,'g');
+centerG.setAttribute('class','map-node map-center');
+centerG.innerHTML = `
+  <circle cx="${cx}" cy="${cy}" r="46"></circle>
+  <text x="${cx}" y="${cy-2}" font-size="17" text-anchor="middle">成长</text>
+  <text x="${cx}" y="${cy+16}" font-size="10" text-anchor="middle" class="en-label" fill="#0B132B">GROWTH</text>
+`;
+mapSvg.appendChild(centerG);
+
+// outer nodes
+nodes.forEach(node=>{
+  const g = document.createElementNS(svgNS,'g');
+  g.setAttribute('class','map-node');
+  g.setAttribute('tabindex','0');
+  g.setAttribute('role','button');
+  g.setAttribute('aria-label', node.zh + ' ' + node.en);
+  const labelAbove = node.y < cy - 10;
+  const textY1 = labelAbove ? node.y - 24 : node.y + 30;
+  const textY2 = labelAbove ? node.y - 11 : node.y + 43;
+  g.innerHTML = `
+    <circle cx="${node.x}" cy="${node.y}" r="30" fill="${node.color}" opacity="0.92"></circle>
+    <text x="${node.x}" y="${node.y+5}" font-size="12.5" text-anchor="middle" fill="#0B132B">${node.zh}</text>
+    <text x="${node.x}" y="${textY1}" font-size="10" text-anchor="middle" class="en-label" fill="${node.color}">${node.en}</text>
+  `;
+  g.addEventListener('click', ()=>jumpTo(node, g));
+  g.addEventListener('keypress', (e)=>{ if(e.key==='Enter') jumpTo(node, g); });
+  mapSvg.appendChild(g);
+});
+
+function jumpTo(node, g){
+  document.querySelectorAll('.map-node').forEach(el=>el.classList.remove('active'));
+  g.classList.add('active');
+  const target = document.getElementById(node.target);
+  if(target){
+    target.scrollIntoView({behavior:'smooth', block:'center'});
+    target.style.transition='border-color .3s, transform .3s';
+    target.style.borderColor = node.color;
+    target.style.transform='translateY(-4px) scale(1.02)';
+    setTimeout(()=>{ target.style.transform='translateY(-4px)'; }, 700);
+  }
+}
+
+/* ===================== HERO DIAGRAM INTERACTION ===================== */
+const wrap = document.getElementById('diagramWrap');
+wrap.addEventListener('click', ()=>{
+  wrap.classList.toggle('popped');
+});
+
+/* ===================== SCROLL PROGRESS ===================== */
+const progressBar = document.getElementById('progress');
+window.addEventListener('scroll', ()=>{
+  const h = document.documentElement;
+  const scrolled = (h.scrollTop) / (h.scrollHeight - h.clientHeight) * 100;
+  progressBar.style.width = scrolled + '%';
+});
+</script>
+</body>
+</html>

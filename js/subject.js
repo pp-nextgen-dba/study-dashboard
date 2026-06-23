@@ -4215,10 +4215,11 @@ export const storybooksData = {
             form:"Story",
             globalNum: 1,
             chapterNum: 1,
-            chapter:"Story 1",
+            chapter:"Story 1: Inertia & Growth",
             status:"Not Started",
             confidence:0,
-            last_updated:"2026-06-21"
+            last_updated:"2026-06-21",
+            resourceUrl:"../story/inertia-growth-notes.html"
         }]
 
 };
