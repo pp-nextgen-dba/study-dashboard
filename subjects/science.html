@@ -485,7 +485,13 @@ async function loadData(){
 
         data = snap.data();
 
-        if(syncSeedData(data)){
+        if(data.chapters.length !== scienceData.chapters.length){
+
+            data.chapters = structuredClone(scienceData.chapters);
+            data.last_saved = new Date().toISOString();
+            await setDoc(docRef,data);
+
+        }else if(syncSeedData(data)){
 
             data.last_saved = new Date().toISOString();
             await setDoc(docRef,data);
