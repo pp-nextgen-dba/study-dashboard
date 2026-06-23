@@ -469,6 +469,13 @@
                 status: "completed",
                 description: "Add Story Book 1 - Inertia & Growth Notes\n\n✓ Story Book Setup\n  - File: story/inertia-growth-notes.html\n  - Content: Inertia and Growth study notes\n  - Form: Story, globalNum: 1, chapterNum: 1\n\n✓ Subject Data Integration\n  - Updated Story 1 chapter with descriptive title\n  - Added resourceUrl: \"../story/inertia-growth-notes.html\"\n  - Replaced placeholder with actual story\n\n✓ Service Worker & Offline Caching\n  - Added \"/story/inertia-growth-notes.html\" to STATIC_ASSETS in sw.js\n  - Enables offline access to story notes\n\n✓ File Management\n  - HTML file uploaded and committed to GitHub\n  - story/ directory created in repository\n\n✓ Validation & Version Control\n  - npm run validate: passed (15 subjects) ✓\n  - Commit: 6318cfd — feat: add Story Book 1 - Inertia & Growth Notes\n  - All changes pushed to GitHub ✓",
                 createdAt: new Date().toISOString()
+            },
+            {
+                id: 1719043200012,
+                date: "2026-06-21",
+                status: "completed",
+                description: "Fix Story Books Chapter Links Display\n\n✓ Link Display Logic\n  - Add .chapter-link CSS styling (indigo color #4f46e5)\n  - Add chapterResource variable to check for resourceUrl\n  - Display \"Open notes\" link in chapter cards when resourceUrl exists\n  - Link hover effect with underline\n\n✓ User Interaction\n  - Add click guard in event listener\n  - Prevent status toggle when clicking chapter link\n  - Allow direct navigation to story notes\n\n✓ Firestore Sync\n  - Add syncSeedData() function\n  - Sync missing resourceUrl from seed data to Firestore\n  - Update chapter titles if changed\n  - Automatic sync on page load\n\n✓ Cache Management\n  - Bump cache version: v=30 → v=31\n  - Force fresh asset load for updated pages\n\n✓ Validation & Version Control\n  - npm run validate: passed (15 subjects) ✓\n  - Commit: fa89834 — fix: add Story Books chapter links and Firestore sync\n  - All changes pushed to GitHub ✓\n\n✓ Result\n  - Story Book 1 \"Open notes\" link now visible and clickable\n  - Redirects to story/inertia-growth-notes.html",
+                createdAt: new Date().toISOString()
             }
         ];
 
