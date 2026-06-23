@@ -485,7 +485,33 @@ async function loadData(){
 
         data = snap.data();
 
-        if(data.chapters.length !== scienceData.chapters.length){
+        const seedMap = new Map(
+            scienceData.chapters.map(ch => [
+                `${ch.form}|${ch.globalNum}`,
+                ch
+            ])
+        );
+
+        let needsReset = data.chapters.length !== scienceData.chapters.length;
+
+        if(!needsReset){
+
+            for(let ch of data.chapters){
+
+                const seedCh = seedMap.get(`${ch.form}|${ch.globalNum}`);
+
+                if(seedCh && seedCh.resourceUrl && !ch.resourceUrl){
+
+                    needsReset = true;
+                    break;
+
+                }
+
+            }
+
+        }
+
+        if(needsReset){
 
             data.chapters = structuredClone(scienceData.chapters);
             data.last_saved = new Date().toISOString();
