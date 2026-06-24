@@ -1,0 +1,912 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=5.0"/>
+<meta name="theme-color" content="#a21caf"/>
+<title>Science Chapter 10 — Sound Waves</title>
+<style>
+:root{
+  --bg:#fdf4ff;--ink:#581c87;--muted:#6b7280;
+  --pri:#a21caf;--pri2:#d946ef;--acc:#f59e0b;
+  --gr:#16a34a;--rd:#dc2626;--bl:#2563eb;--tl:#0891b2;
+  --line:#f5d0fe;--soft:#fae8ff;
+  --shadow:0 14px 30px rgba(162,28,175,.13);--r:22px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:var(--ink)}
+
+.hdr{background:linear-gradient(135deg,#581c87,#a21caf 55%,#d946ef);
+  padding:26px 16px 68px;position:relative;overflow:hidden;color:#fff}
+.hdr:before,.hdr:after{content:"";position:absolute;border-radius:999px;background:rgba(255,255,255,.1)}
+.hdr:before{width:230px;height:230px;left:-95px;top:-75px}
+.hdr:after{width:290px;height:290px;right:-125px;bottom:-155px}
+.hero{max-width:1100px;margin:auto;position:relative;z-index:2}
+.badge{display:inline-flex;gap:7px;align-items:center;
+  background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.3);
+  padding:7px 13px;border-radius:999px;font-weight:700;font-size:.83rem;margin-bottom:10px}
+h1{font-size:clamp(1.7rem,5vw,3.5rem);line-height:1.08;letter-spacing:-1px;margin-bottom:6px}
+.hero-sub{font-size:clamp(.9rem,2vw,1.05rem);opacity:.93;max-width:680px;margin-bottom:4px}
+.lang-row{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap}
+.lbtn{border:2px solid rgba(255,255,255,.5);background:rgba(255,255,255,.15);
+  color:#fff;border-radius:999px;padding:8px 16px;font-weight:800;font-size:.83rem;cursor:pointer;transition:.15s}
+.lbtn.active{background:#fff;color:var(--pri)}
+
+main{max-width:1120px;margin:-48px auto 60px;padding:0 13px;position:relative;z-index:5}
+.panel{background:rgba(255,255,255,.94);border:1px solid var(--line);box-shadow:var(--shadow);border-radius:var(--r)}
+
+.ctrl{padding:12px 15px;display:flex;flex-wrap:wrap;gap:9px;align-items:center;
+  position:sticky;top:7px;z-index:50;backdrop-filter:blur(12px)}
+.srch{flex:1;min-width:140px;border:1px solid var(--line);background:#fffaff;
+  border-radius:17px;padding:11px 14px;font-size:.95rem;outline:none;color:var(--ink)}
+.srch:focus{border-color:var(--pri);box-shadow:0 0 0 3px rgba(162,28,175,.12)}
+
+.tabs{display:flex;overflow-x:auto;background:#581c87;scrollbar-width:none;
+  position:sticky;top:53px;z-index:49;-webkit-overflow-scrolling:touch}
+.tabs::-webkit-scrollbar{display:none}
+.tab{flex:0 0 auto;padding:11px 14px;font-size:12px;font-weight:800;
+  color:#c4b5fd;background:transparent;border:none;cursor:pointer;
+  border-bottom:3px solid transparent;white-space:nowrap;transition:.2s}
+.tab.t1.active{color:#f0abfc;border-bottom-color:#d946ef}
+.tab.t2.active{color:#7dd3fc;border-bottom-color:#0891b2}
+.tab.t3.active{color:#fde68a;border-bottom-color:#d97706}
+.tab.t4.active{color:#6ee7b7;border-bottom-color:#16a34a}
+.tab.tmm.active{color:#fbbf24;border-bottom-color:#f59e0b}
+
+.psec{display:none;padding:12px 12px 60px}
+.psec.active{display:block}
+
+.sec{border-radius:var(--r);margin-bottom:12px;overflow:hidden;border:2px solid}
+.sec-hdr{display:flex;align-items:center;gap:12px;padding:14px;cursor:pointer;user-select:none;-webkit-tap-highlight-color:transparent}
+.sec-icon{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;color:#fff}
+.sec-info{flex:1}
+.sec-num{font-size:10px;font-weight:800;letter-spacing:1px;text-transform:uppercase;margin-bottom:2px}
+.sec-t-en{font-size:15px;font-weight:900;line-height:1.25;color:#581c87}
+.sec-t-zh{font-size:12px;font-weight:700;color:#047857;margin-top:2px}
+.sec-chev{font-size:20px;color:#94a3b8;transition:transform .25s;flex-shrink:0}
+.sec-chev.open{transform:rotate(180deg)}
+.sec-body{display:none;padding:0 12px 14px}
+.sec-body.open{display:block}
+
+.tri{border-radius:12px;overflow:hidden;margin-bottom:9px;border:2px solid var(--line)}
+.bl-en{background:#fae8ff;border-left:5px solid var(--pri);padding:9px 12px}
+.bl-en-lbl{font-size:10px;font-weight:800;letter-spacing:2px;color:#86198f;text-transform:uppercase;margin-bottom:3px}
+.bl-en-t{font-size:13.5px;font-weight:700;color:#581c87;line-height:1.55}
+.bl-zh{background:#ecfdf5;border-left:5px solid var(--gr);padding:9px 12px}
+.bl-zh-lbl{font-size:10px;font-weight:800;letter-spacing:2px;color:#047857;text-transform:uppercase;margin-bottom:3px}
+.bl-zh-t{font-size:13px;font-weight:600;color:#064e3b;line-height:1.65}
+
+.tbl-wrap{overflow-x:auto;margin-bottom:10px;border-radius:13px}
+.tbl{width:100%;border-collapse:collapse;font-size:12px}
+.tbl th{padding:9px 10px;font-size:10px;font-weight:800;letter-spacing:1px;text-transform:uppercase;text-align:left;color:#fff}
+.tbl td{padding:9px 10px;vertical-align:top;line-height:1.45;border-bottom:1px solid rgba(0,0,0,.06)}
+.tbl tr:last-child td{border-bottom:none}
+
+/* FLOW */
+.flow-wrap{background:#581c87;border-radius:14px;padding:14px;margin-bottom:10px}
+.flow-lbl{font-size:10px;font-weight:800;letter-spacing:2px;color:#f0abfc;text-transform:uppercase;margin-bottom:9px}
+.fstep-wrap{margin-bottom:16px}
+.fstep-wrap:last-child{margin-bottom:0}
+.fstep{background:rgba(255,255,255,.13);border-radius:10px;padding:10px 13px;font-size:13px;font-weight:800;color:#fff;line-height:1.35;position:relative}
+.fstep:after{content:"↓";position:absolute;left:50%;transform:translateX(-50%);bottom:-16px;color:#e879f9;font-size:16px;font-weight:900}
+.fstep-wrap:last-child .fstep:after{display:none}
+.fstep-sub{font-size:11.5px;color:#a7f3d0;font-weight:600;margin-top:3px}
+
+/* CONCEPT CARDS */
+.concept-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin-bottom:10px}
+.concept-card{border-radius:14px;padding:13px;border:2px solid;text-align:center}
+.concept-icon{font-size:24px;margin-bottom:5px}
+.concept-en{font-size:13px;font-weight:900;color:#581c87;margin-bottom:3px}
+.concept-zh{font-size:11px;font-weight:600;color:#047857;margin-bottom:6px}
+.concept-desc{font-size:11.5px;font-weight:700;color:#374151;line-height:1.4;border-top:1px dashed rgba(0,0,0,.1);padding-top:6px}
+
+/* PILLS */
+.mem{border-radius:12px;padding:11px;background:#f1f5f9;border:2px solid #cbd5e1;margin-top:8px}
+.mem-lbl{font-size:10px;letter-spacing:2px;font-weight:800;margin-bottom:7px;color:#475569;text-transform:uppercase}
+.pills{display:flex;flex-wrap:wrap;gap:5px}
+.pill{padding:5px 9px;border-radius:999px;font-size:11.5px;font-weight:800;border:2px solid}
+.p-en{border-color:var(--pri);background:#fae8ff;color:#581c87}
+.p-zh{border-color:var(--gr);background:#d1fae5;color:#052e16}
+
+/* SECTION THEMES */
+.s-pk{background:#fae8ff;border-color:#d946ef}
+.s-pk .sec-hdr{background:#f5d0fe}.s-pk .sec-icon{background:#a21caf}
+.s-pk .sec-num{color:#86198f}.s-pk .sec-body{border-top:2px dashed #f0abfc}
+
+.s-cy{background:#e0f2fe;border-color:#0891b2}
+.s-cy .sec-hdr{background:#bae6fd}.s-cy .sec-icon{background:#0891b2}
+.s-cy .sec-num{color:#0369a1}.s-cy .sec-body{border-top:2px dashed #7dd3fc}
+
+.s-am{background:#fffbeb;border-color:#f59e0b}
+.s-am .sec-hdr{background:#fef3c7}.s-am .sec-icon{background:#d97706}
+.s-am .sec-num{color:#92400e}.s-am .sec-body{border-top:2px dashed #fde68a}
+
+.s-gr{background:#f0fdf4;border-color:#16a34a}
+.s-gr .sec-hdr{background:#d1fae5}.s-gr .sec-icon{background:#16a34a}
+.s-gr .sec-num{color:#15803d}.s-gr .sec-body{border-top:2px dashed #6ee7b7}
+
+/* WAVEFORM TABLE */
+.waveform-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:9px;margin-bottom:10px}
+.wf-card{border-radius:13px;padding:11px;border:2px solid #f5d0fe;background:#fae8ff;text-align:center}
+.wf-en{font-size:12.5px;font-weight:900;color:#581c87;margin-bottom:3px}
+.wf-zh{font-size:11px;font-weight:600;color:#047857}
+
+/* COMPARISON 2-COL */
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px}
+.info-box{border-radius:14px;padding:12px;border:2px solid}
+.info-box-title{font-size:11px;font-weight:800;letter-spacing:1px;text-transform:uppercase;margin-bottom:7px}
+
+/* MEMORY MAP */
+.mmap-item{border-radius:13px;overflow:hidden;margin-bottom:9px;border:2px solid var(--line);box-shadow:0 2px 6px rgba(0,0,0,.06)}
+.mm-en{background:#f5d0fe;padding:9px 13px;border-bottom:1px solid #f0abfc}
+.mm-en-t{font-size:13.5px;font-weight:800;color:#581c87}
+.mm-zh{background:#d1fae5;padding:9px 13px}
+.mm-zh-t{font-size:12.5px;font-weight:600;color:#064e3b}
+.mmap-hdr{background:#581c87;padding:14px;text-align:center;border-radius:13px 13px 0 0}
+.mmap-h1{font-size:15px;font-weight:800;color:#fbbf24;margin-bottom:2px}
+.mmap-h2{font-size:12px;color:#c4b5fd;font-style:italic}
+.mmap-h3{font-size:11px;color:#6ee7b7;margin-top:2px}
+
+.exam-box{border-radius:13px;overflow:hidden;border:2px solid var(--pri);margin-top:9px}
+.exam-hdr{background:var(--pri);padding:9px 13px}
+.exam-lbl{font-size:10px;letter-spacing:2px;font-weight:800;color:#fae8ff;text-transform:uppercase}
+.exam-en{background:#fae8ff;border-left:5px solid var(--pri);padding:9px 13px}
+.exam-en-t{font-size:13px;font-weight:700;color:#581c87;line-height:1.6}
+.exam-zh{background:#ecfdf5;border-left:5px solid var(--gr);padding:9px 13px}
+.exam-zh-t{font-size:12px;font-weight:600;color:#064e3b;line-height:1.7}
+
+body.lang-en .zh-only{display:none}
+body.lang-zh .en-only{display:none}
+
+.top-link{position:fixed;right:13px;bottom:13px;background:var(--pri);
+  color:#fff;text-decoration:none;padding:11px 13px;border-radius:999px;
+  font-weight:900;box-shadow:var(--shadow);z-index:70;font-size:.88rem}
+footer{text-align:center;color:var(--muted);padding:18px 14px 50px;font-size:.83rem;line-height:1.6}
+
+@media(max-width:900px){.two-col{grid-template-columns:1fr}}
+@media(max-width:560px){main{padding:0 10px;margin-top:-44px}.hdr{padding:22px 13px 66px}.concept-grid,.waveform-grid{grid-template-columns:repeat(2,1fr)}}
+</style>
+</head>
+<body id="top" class="lang-both">
+
+<div class="top-nav" style="background:#fff;padding:10px 16px;border-bottom:2px solid #e5e7eb;position:sticky;top:0;z-index:120">
+  <a class="dashboard-link" href="../index.html" style="display:inline-flex;align-items:center;gap:6px;padding:8px 12px;border-radius:8px;background:#1d4ed8;color:#fff;font-size:13px;font-weight:800;text-decoration:none">&larr; Back to Dashboard</a>
+</div>
+
+<header class="hdr">
+  <div class="hero">
+    <div class="badge">🔊 Science · Theme 3 · Chapter 10</div>
+    <h1>Sound Waves</h1>
+    <p class="hero-sub en-only">Characteristics, loudness & pitch, reflection, echo, ultrasonic waves, Doppler effect and hearing limitations.</p>
+    <p class="hero-sub zh-only" style="margin-top:5px">声波的特征、音量与音调、反射、回声、超声波、多普勒效应及听觉限制。</p>
+    <div class="lang-row">
+      <button class="lbtn active" data-lang="both" onclick="setLang(this)">EN + 中文</button>
+      <button class="lbtn" data-lang="en" onclick="setLang(this)">English Only</button>
+      <button class="lbtn" data-lang="zh" onclick="setLang(this)">仅中文</button>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section class="ctrl panel">
+    <input id="srch" class="srch" placeholder="Search: echo, amplitude, sonar, Doppler, frequency…"/>
+  </section>
+
+  <div class="tabs">
+    <button class="tab t1 active" onclick="showTab('t1',this)">10.1 Characteristics</button>
+    <button class="tab t2" onclick="showTab('t2',this)">10.2 Loudness &amp; Pitch</button>
+    <button class="tab t3" onclick="showTab('t3',this)">10.3 Reflection &amp; Echo</button>
+    <button class="tab t4" onclick="showTab('t4',this)">Ultrasonic &amp; Hearing</button>
+    <button class="tab tmm" onclick="showTab('tmm',this)">⭐ Memory Map</button>
+  </div>
+
+<!-- ══════ 10.1 CHARACTERISTICS ══════ -->
+<div id="tab-t1" class="psec active">
+
+  <div class="sec s-pk">
+    <div class="sec-hdr" onclick="exp(this)">
+      <div class="sec-icon">🎸</div>
+      <div class="sec-info">
+        <div class="sec-num">10.1</div>
+        <div class="sec-t-en">Sound &amp; Vibration</div>
+        <div class="sec-t-zh">声音与振动</div>
+      </div>
+      <span class="sec-chev open">⌄</span>
+    </div>
+    <div class="sec-body open">
+      <div class="tri">
+        <div class="bl-en"><div class="bl-en-lbl">🔵 English</div><div class="bl-en-t">
+          <b>Sound</b> is a form of energy produced by <b>vibrations</b>. When an object vibrates, kinetic energy turns into sound energy.<br><br>
+          • Musical instruments such as guitars and violins produce sounds through vibrations.<br>
+          • When we talk, the vocal cords in the throat vibrate to produce our voice.
+        </div></div>
+        <div class="bl-zh"><div class="bl-zh-lbl">🟢 中文</div><div class="bl-zh-t">
+          <b>声音</b>是由<b>振动</b>产生的一种能量形式。当物体振动时，动能转化为声能。<br><br>
+          • 吉他和小提琴等乐器通过振动产生声音。<br>
+          • 说话时，喉部的声带振动产生我们的声音。
+        </div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sec s-pk">
+    <div class="sec-hdr" onclick="exp(this)">
+      <div class="sec-icon">🌬️</div>
+      <div class="sec-info">
+        <div class="sec-num">10.1</div>
+        <div class="sec-t-en">Propagation of Sound — Needs a Medium</div>
+        <div class="sec-t-zh">声音的传播——需要介质</div>
+      </div>
+      <span class="sec-chev open">⌄</span>
+    </div>
+    <div class="sec-body open">
+      <div class="tri">
+        <div class="bl-en"><div class="bl-en-lbl">🔵 Vacuum Experiment (Bell Jar)</div><div class="bl-en-t">
+          As air is sucked out of the bell jar, the ringing of the alarm bell becomes <b>softer and softer until no sound is heard</b>.<br>
+          In a vacuum condition, gas particles are not present to act as the medium for propagation.<br><br>
+          <b>Conclusion:</b> Sound waves require a medium to propagate. Sound cannot propagate through a vacuum.
+        </div></div>
+        <div class="bl-zh"><div class="bl-zh-lbl">🟢 真空实验（钟形罐）</div><div class="bl-zh-t">
+          当空气被抽出钟形罐时，警铃声变得<b>越来越轻，直到听不到声音</b>。<br>
+          在真空状态下，没有气体粒子作为传播介质。<br><br>
+          <b>结论：</b>声波需要介质才能传播。声音不能在真空中传播。
+        </div></div>
+      </div>
+
+      <div class="tri">
+        <div class="bl-en"><div class="bl-en-lbl">🔵 Speed in Different Mediums</div><div class="bl-en-t">
+          Plastic containers filled with air (gas), water (liquid), flour (solid) — the loudest alarm is heard through the <b>flour (solid)</b>, then water (liquid), then air (gas).<br><br>
+          <b>Conclusion:</b> Sound is transmitted fastest through <b>solids</b>, followed by <b>liquids</b>, then <b>gases</b>.
+        </div></div>
+        <div class="bl-zh"><div class="bl-zh-lbl">🟢 不同介质中的速度</div><div class="bl-zh-t">
+          装有空气（气体）、水（液体）、面粉（固体）的塑料容器——通过<b>面粉（固体）</b>听到的警报声最大，然后是水（液体），再是空气（气体）。<br><br>
+          <b>结论：</b>声音在<b>固体</b>中传播最快，其次是<b>液体</b>，然后是<b>气体</b>。
+        </div></div>
+      </div>
+
+      <!-- WHY SOLID/LIQUID/GAS -->
+      <div class="two-col">
+        <div class="info-box" style="background:#f0fdf4;border-color:#86efac">
+          <div class="info-box-title" style="color:#15803d">🟢 Solids / 固体</div>
+          <div class="bl-en"><div class="bl-en-t">Particles arranged very closely together → vibration transfers <b>very rapidly</b>.</div></div>
+          <div class="bl-zh" style="background:transparent;border-left:none;padding:6px 0"><div class="bl-zh-t" style="font-size:11.5px">粒子排列非常紧密→振动传递<b>非常迅速</b>。</div></div>
+        </div>
+        <div class="info-box" style="background:#eff6ff;border-color:#93c5fd">
+          <div class="info-box-title" style="color:#1d4ed8">🔵 Liquids / 液体</div>
+          <div class="bl-en"><div class="bl-en-t">Particles arranged loosely → transfer occurs <b>less rapidly</b> than solids.</div></div>
+          <div class="bl-zh" style="background:transparent;border-left:none;padding:6px 0"><div class="bl-zh-t" style="font-size:11.5px">粒子排列松散→传递速度<b>比固体慢</b>。</div></div>
+        </div>
+      </div>
+      <div class="tri">
+        <div class="bl-en"><div class="bl-en-lbl">🔵 Gases / Why Slowest</div><div class="bl-en-t">
+          Sound waves travel <b>slowest</b> through gases because particles are arranged <b>very far apart</b>. The transfer of vibration from one particle to another occurs very slowly through gases.
+        </div></div>
+        <div class="bl-zh"><div class="bl-zh-lbl">🟢 气体/为何最慢</div><div class="bl-zh-t">
+          声波在气体中传播<b>最慢</b>，因为粒子排列得<b>非常分散</b>。气体中粒子间振动的传递非常缓慢。
+        </div></div>
+      </div>
+
+      <div class="mem">
+        <div class="mem-lbl">📝 Memory — Speed of Sound</div>
+        <div class="pills">
+          <span class="pill p-en">Solid &gt; Liquid &gt; Gas (fastest → slowest)</span>
+          <span class="pill p-zh">固体&gt;液体&gt;气体（最快→最慢）</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sec s-pk">
+    <div class="sec-hdr" onclick="exp(this)">
+      <div class="sec-icon">📡</div>
+      <div class="sec-info">
+        <div class="sec-num">10.1</div>
+        <div class="sec-t-en">Transfer of Sound — 4-Step Process</div>
+        <div class="sec-t-zh">声音传递——4步过程</div>
+      </div>
+      <span class="sec-chev">⌄</span>
+    </div>
+    <div class="sec-body">
+      <div class="flow-wrap">
+        <div class="flow-lbl">Transfer of Sound Waves / 声波传递</div>
+        <div class="fstep-wrap"><div class="fstep">① When an object vibrates, air molecules near the surface also vibrate and collide with nearby air molecules.
+          <div class="fstep-sub zh-only">当物体振动时，表面附近的空气分子也会振动并与附近的空气分子碰撞。</div>
+        </div></div>
+        <div class="fstep-wrap"><div class="fstep">② This vibration is transferred from one molecule to another molecule beside it in the form of waves.
+          <div class="fstep-sub zh-only">这种振动以波的形式从一个分子传递到旁边的另一个分子。</div>
+        </div></div>
+        <div class="fstep-wrap"><div class="fstep">③ The vibrating object produces sound that can be heard by the listener when the vibration reaches the ear.
+          <div class="fstep-sub zh-only">当振动到达耳朵时，振动物体产生的声音就能被听者听到。</div>
+        </div></div>
+      </div>
+
+      <div class="tri">
+        <div class="bl-en"><div class="bl-en-lbl">🔵 Key Facts</div><div class="bl-en-t">
+          • Sound requires a <b>medium</b> to propagate from one place to another.<br>
+          • Sound can propagate through <b>solids, liquids and gases</b>.<br>
+          • Sound propagation requires the <b>vibration of particles</b> in a matter.<br>
+          • Sound cannot propagate through a <b>vacuum</b> because there are no particles to transmit the vibration.
+        </div></div>
+        <div class="bl-zh"><div class="bl-zh-lbl">🟢 关键事实</div><div class="bl-zh-t">
+          • 声音需要<b>介质</b>从一处传播到另一处。<br>
+          • 声音可以通过<b>固体、液体和气体</b>传播。<br>
+          • 声音传播需要物质中<b>粒子的振动</b>。<br>
+          • 声音不能在<b>真空</b>中传播，因为没有粒子来传递振动。
+        </div></div>
+      </div>
+
+      <div class="tri">
+        <div class="bl-en"><div class="bl-en-lbl">🔵 Real-Life Examples</div><div class="bl-en-t">
+          • Sound of a heartbeat transferred through a <b>stethoscope</b> from patient to doctor's ears.<br>
+          • Sound made by dolphins transferred through <b>seawater</b>.<br>
+          • Sound of racing cars heard by spectators through <b>air</b>.
+        </div></div>
+        <div class="bl-zh"><div class="bl-zh-lbl">🟢 生活实例</div><div class="bl-zh-t">
+          • 心跳声通过<b>听诊器</b>从病人传递到医生的耳朵。<br>
+          • 海豚发出的声音通过<b>海水</b>传播。<br>
+          • 观众通过<b>空气</b>听到赛车的声音。
+        </div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sec s-pk">
+    <div class="sec-hdr" onclick="exp(this)">
+      <div class="sec-icon">🪞</div>
+      <div class="sec-info">
+        <div class="sec-num">10.1</div>
+        <div class="sec-t-en">Reflection &amp; Absorption — Surfaces</div>
+        <div class="sec-t-zh">反射与吸收——表面材质</div>
+      </div>
+      <span class="sec-chev">⌄</span>
+    </div>
+    <div class="sec-body">
+      <div class="tri">
+        <div class="bl-en"><div class="bl-en-lbl">🔵 Stopwatch Experiment</div><div class="bl-en-t">
+          Sound of ticking stopwatch heard: <b>loudest</b> when reflected by metal sheet, clearly when reflected by wooden plank, <b>softly</b> when a towel is used.<br><br>
+          <b>Conclusion:</b> Wood and metals have hard and smooth surfaces that <b>reflect sound well</b>. Towels have soft and rough surfaces that <b>absorb sound well</b>.
+        </div></div>
+        <div class="bl-zh"><div class="bl-zh-lbl">🟢 秒表实验</div><div class="bl-zh-t">
+          听到的秒表滴答声：被金属板反射时<b>最响</b>，被木板反射时清晰，使用毛巾时<b>变轻</b>。<br><br>
+          <b>结论：</b>木材和金属表面坚硬光滑，能<b>很好地反射声音</b>。毛巾表面柔软粗糙，能<b>很好地吸收声音</b>。
+        </div></div>
+      </div>
+
+      <div class="two-col">
+        <div class="info-box" style="background:#fae8ff;border-color:#d946ef">
+          <div class="info-box-title" style="color:#86198f">🟣 Good Reflectors / 良好反射体</div>
+          <div class="bl-en"><div class="bl-en-t">Hard and smooth surfaces. Examples: Concrete walls, glass, metals.</div></div>
+          <div class="bl-zh" style="background:transparent;border-left:none;padding:6px 0"><div class="bl-zh-t" style="font-size:11.5px">坚硬光滑的表面。例子：混凝土墙、玻璃、金属。</div></div>
+        </div>
+        <div class="info-box" style="background:#f0fdf4;border-color:#86efac">
+          <div class="info-box-title" style="color:#15803d">🟢 Good Absorbers / 良好吸收体</div>
+          <div class="bl-en"><div class="bl-en-t">Soft and rough surfaces. Examples: Carpets, curtains, cotton, sponges, rubber, soft boards.</div></div>
+          <div class="bl-zh" style="background:transparent;border-left:none;padding:6px 0"><div class="bl-zh-t" style="font-size:11.5px">柔软粗糙的表面。例子：地毯、窗帘、棉花、海绵、橡胶、软板。</div></div>
+        </div>
+      </div>
+
+      <div class="mem">
+        <div class="mem-lbl">📝 Memory — Surfaces</div>
+        <div class="pills">
+          <span class="pill p-en">Hard + smooth = good reflector, poor absorber</span>
+          <span class="pill p-zh">硬+光滑=好反射，差吸收</span>
+          <span class="pill p-en">Soft + rough = good absorber, poor reflector</span>
+          <span class="pill p-zh">软+粗糙=好吸收，差反射</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════ 10.2 LOUDNESS & PITCH ══════ -->
+<div id="tab-t2" class="psec">
+
+  <div class="sec s-cy">
+    <div class="sec-hdr" onclick="exp(this)">
+      <div class="sec-icon">📊</div>
+      <div class="sec-info">
+        <div class="sec-num">10.2</div>
+        <div class="sec-t-en">Waveform Properties (C.R.O.)</div>
+        <div class="sec-t-zh">波形特性（阴极射线示波器）</div>
+      </div>
+      <span class="sec-chev open">⌄</span>
+    </div>
+    <div class="sec-body open">
+      <div class="tri">
+        <div class="bl-en"><div class="bl-en-lbl">🔵 English</div><div class="bl-en-t">
+          The various types of sounds vary in <b>loudness</b> and <b>pitch</b>.<br>
+          • Loudness depends on the <b>amplitude</b>.<br>
+          • Pitch depends on the <b>frequency</b>.<br>
+          The waveform pattern can be observed on a <b>Cathode Ray Oscilloscope (C.R.O.)</b>.
+        </div></div>
+        <div class="bl-zh"><div class="bl-zh-lbl">🟢 中文</div><div class="bl-zh-t">
+          各种声音在<b>音量</b>和<b>音调</b>上各不相同。<br>
+          • 音量取决于<b>振幅</b>。<br>
+          • 音调取决于<b>频率</b>。<br>
+          波形图案可以在<b>阴极射线示波器（C.R.O.）</b>上观察到。
+        </div></div>
+      </div>
+
+      <div class="waveform-grid">
+        <div class="wf-card"><div class="wf-en">Crest</div><div class="wf-zh">波峰——波形最高点</div></div>
+        <div class="wf-card"><div class="wf-en">Trough</div><div class="wf-zh">波谷——波形最低点</div></div>
+        <div class="wf-card"><div class="wf-en">Wavelength</div><div class="wf-zh">波长——两个连续波峰（或波谷）间的距离</div></div>
+        <div class="wf-card"><div class="wf-en">Amplitude</div><div class="wf-zh">振幅——从平衡点到波峰/波谷的最大位移值</div></div>
+        <div class="wf-card"><div class="wf-en">Frequency</div><div class="wf-zh">频率——每秒完整波数；1频率=每秒1波</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sec s-cy">
+    <div class="sec-hdr" onclick="exp(this)">
+      <div class="sec-icon">🔊</div>
+      <div class="sec-info">
+        <div class="sec-num">10.2</div>
+        <div class="sec-t-en">Loudness vs Pitch — Comparison</div>
+        <div class="sec-t-zh">音量与音调——比较</div>
+      </div>
+      <span class="sec-chev open">⌄</span>
+    </div>
+    <div class="sec-body open">
+      <div class="tbl-wrap">
+        <table class="tbl">
+          <thead><tr>
+            <th style="background:#0891b2">Loudness / 音量</th>
+            <th style="background:#d946ef">Pitch / 音调</th>
+          </tr></thead>
+          <tbody>
+            <tr>
+              <td style="background:#e0f2fe;font-weight:700;color:#0c4a6e">Strength or weakness of a sound<br><span style="font-size:11px;color:#047857">声音的强弱</span></td>
+              <td style="background:#fae8ff;font-weight:700;color:#581c87">High or low tone of a sound<br><span style="font-size:11px;color:#047857">声音的高低音调</span></td>
+            </tr>
+            <tr>
+              <td style="background:#e0f2fe;font-weight:700;color:#0c4a6e">Depends on <b>amplitude</b><br><span style="font-size:11px;color:#047857">取决于振幅</span></td>
+              <td style="background:#fae8ff;font-weight:700;color:#581c87">Depends on <b>frequency</b><br><span style="font-size:11px;color:#047857">取决于频率</span></td>
+            </tr>
+            <tr>
+              <td style="background:#e0f2fe;font-weight:700;color:#0c4a6e">Measured in <b>decibel (dB)</b></td>
+              <td style="background:#fae8ff;font-weight:700;color:#581c87">Measured in <b>hertz (Hz)</b></td>
+            </tr>
+            <tr>
+              <td style="background:#e0f2fe;font-weight:700;color:#0c4a6e">Louder sound = <b>higher amplitude</b></td>
+              <td style="background:#fae8ff;font-weight:700;color:#581c87">Higher frequency = <b>higher pitch</b></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="mem">
+        <div class="mem-lbl">📝 Memory — Wave Patterns</div>
+        <div class="pills">
+          <span class="pill p-en">Small amplitude → weak loudness</span>
+          <span class="pill p-zh">小振幅→弱音量</span>
+          <span class="pill p-en">Large amplitude → strong loudness</span>
+          <span class="pill p-zh">大振幅→强音量</span>
+          <span class="pill p-en">Long wavelength → low frequency → low pitch</span>
+          <span class="pill p-zh">长波长→低频率→低音调</span>
+          <span class="pill p-en">Short wavelength → high frequency → high pitch</span>
+          <span class="pill p-zh">短波长→高频率→高音调</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sec s-cy">
+    <div class="sec-hdr" onclick="exp(this)">
+      <div class="sec-icon">🎺</div>
+      <div class="sec-info">
+        <div class="sec-num">10.2</div>
+        <div class="sec-t-en">Loudness &amp; Pitch in Musical Instruments</div>
+        <div class="sec-t-zh">乐器中的音量与音调</div>
+      </div>
+      <span class="sec-chev">⌄</span>
+    </div>
+    <div class="sec-body">
+      <div class="tri">
+        <div class="bl-en"><div class="bl-en-lbl">🔵 Guitar (Strumming)</div><div class="bl-en-t">
+          Stronger strumming → larger amplitude → <b>louder sound</b>.<br>
+          Weaker strumming → smaller amplitude → <b>weaker sound</b>.
+        </div></div>
+        <div class="bl-zh"><div class="bl-zh-lbl">🟢 吉他（弹奏）</div><div class="bl-zh-t">
+          弹奏力度更强→振幅更大→<b>声音更响</b>。<br>
+          弹奏力度更弱→振幅更小→<b>声音更弱</b>。
+        </div></div>
+      </div>
+
+      <div class="tri">
+        <div class="bl-en"><div class="bl-en-lbl">🔵 Strings (Thickness, Tension, Length)</div><div class="bl-en-t">
+          • <b>Thickness:</b> Thicker string → lower frequency → lower pitch.<br>
+          • <b>Tension:</b> Greater tension → higher pitch.<br>
+          • <b>Length:</b> Longer string → lower pitch.
+        </div></div>
+        <div class="bl-zh"><div class="bl-zh-lbl">🟢 弦乐（粗细、张力、长度）</div><div class="bl-zh-t">
+          • <b>粗细：</b>弦越粗→频率越低→音调越低。<br>
+          • <b>张力：</b>张力越大→音调越高。<br>
+          • <b>长度：</b>弦越长→音调越低。
+        </div></div>
+      </div>
+
+      <div class="tbl-wrap">
+        <table class="tbl">
+          <thead><tr><th style="background:#a21caf">Instrument / 乐器</th><th style="background:#a21caf">Characteristic / 特征</th></tr></thead>
+          <tbody>
+            <tr><td style="background:#fae8ff;font-weight:800;color:#581c87">Tuba</td><td style="background:#fae8ff;font-weight:700;color:#374151"><span class="en-only">Low-pitched, produces low frequency sound.</span><span class="zh-only">低音调，产生低频声音。</span></td></tr>
+            <tr><td style="background:#fae8ff;font-weight:800;color:#581c87">Trumpet</td><td style="background:#fae8ff;font-weight:700;color:#374151"><span class="en-only">High-pitched, produces high frequency sound.</span><span class="zh-only">高音调，产生高频声音。</span></td></tr>
+            <tr><td style="background:#fae8ff;font-weight:800;color:#581c87">Drum</td><td style="background:#fae8ff;font-weight:700;color:#374151"><span class="en-only">Stronger drumbeat → greater vibration → louder sound.</span><span class="zh-only">击鼓力度越强→振动越大→声音越响。</span></td></tr>
+            <tr><td style="background:#fae8ff;font-weight:800;color:#581c87">Recorder</td><td style="background:#fae8ff;font-weight:700;color:#374151"><span class="en-only">Pitch changed by covering holes — changes vibrations of air per second (frequency).</span><span class="zh-only">通过覆盖孔位改变音调——改变每秒空气振动次数（频率）。</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="tri">
+        <div class="bl-en"><div class="bl-en-lbl">🔵 Science Blog</div><div class="bl-en-t">
+          Percussions such as gongs and drums are <b>non-pitched instruments</b>.
+        </div></div>
+        <div class="bl-zh"><div class="bl-zh-lbl">🟢 科学小知识</div><div class="bl-zh-t">
+          锣和鼓等打击乐器属于<b>无固定音调乐器</b>。
+        </div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sec s-cy">
+    <div class="sec-hdr" onclick="exp(this)">
+      <div class="sec-icon">🌊</div>
+      <div class="sec-info">
+        <div class="sec-num">10.2</div>
+        <div class="sec-t-en">Doppler Effect</div>
+        <div class="sec-t-zh">多普勒效应</div>
+      </div>
+      <span class="sec-chev">⌄</span>
+    </div>
+    <div class="sec-body">
+      <div class="tri">
+        <div class="bl-en"><div class="bl-en-lbl">🔵 Definition</div><div class="bl-en-t">
+          The <b>Doppler effect</b> is the change in the frequency of sound waves caused by the <b>relative movement</b> of the source of sound, the observer, or both.<br><br>
+          This occurs when the source of sound moves nearer to or away from the observer; or when the observer moves towards or away from the source.
+        </div></div>
+        <div class="bl-zh"><div class="bl-zh-lbl">🟢 定义</div><div class="bl-zh-t">
+          <b>多普勒效应</b>是由声源、观察者或两者的<b>相对运动</b>引起的声波频率变化。<br><br>
+          当声源靠近或远离观察者时；或当观察者靠近或远离声源时，会发生这种现象。
+        </div></div>
+      </div>
+
+      <div class="two-col">
+        <div class="info-box" style="background:#fff5f5;border-color:#fca5a5">
+          <div class="info-box-title" style="color:#b91c1c">🔴 Ambulance Moves Away</div>
+          <div class="bl-en"><div class="bl-en-t">Frequency of siren <b>decreases</b>. Pitch heard <b>decreases</b>. Longer distance → lower frequency → lower pitch.</div></div>
+          <div class="bl-zh" style="background:transparent;border-left:none;padding:6px 0"><div class="bl-zh-t" style="font-size:11.5px">警报声频率<b>降低</b>，音调<b>降低</b>。距离越远→频率越低→音调越低。</div></div>
+        </div>
+        <div class="info-box" style="background:#f0fdf4;border-color:#86efac">
+          <div class="info-box-title" style="color:#15803d">🟢 Ambulance Moves Nearer</div>
+          <div class="bl-en"><div class="bl-en-t">Frequency of siren <b>increases</b>. Pitch heard <b>increases</b>. Shorter distance → higher frequency → higher pitch.</div></div>
+          <div class="bl-zh" style="background:transparent;border-left:none;padding:6px 0"><div class="bl-zh-t" style="font-size:11.5px">警报声频率<b>增加</b>，音调<b>增加</b>。距离越近→频率越高→音调越高。</div></div>
+        </div>
+      </div>
+
+      <div class="tri">
+        <div class="bl-en"><div class="bl-en-lbl">🔵 Why Doppler Effect Occurs</div><div class="bl-en-t">
+          Waves are <b>compressed into a lesser space</b> in the direction the source is heading.<br>
+          • Source &amp; observer approaching → observed frequency is <b>higher</b> than emitted frequency.<br>
+          • Source &amp; observer moving away → observed frequency is <b>lower</b> than emitted frequency.
+        </div></div>
+        <div class="bl-zh"><div class="bl-zh-lbl">🟢 为何发生多普勒效应</div><div class="bl-zh-t">
+          波在声源前进方向上被<b>压缩到更小的空间</b>内。<br>
+          • 声源和观察者互相靠近→观测频率<b>高于</b>发出频率。<br>
+          • 声源和观察者互相远离→观测频率<b>低于</b>发出频率。
+        </div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════ 10.3 REFLECTION & ECHO ══════ -->
+<div id="tab-t3" class="psec">
+
+  <div class="sec s-am">
+    <div class="sec-hdr" onclick="exp(this)">
+      <div class="sec-icon">📢</div>
+      <div class="sec-info">
+        <div class="sec-num">10.3</div>
+        <div class="sec-t-en">Echo — Definition &amp; Surfaces</div>
+        <div class="sec-t-zh">回声——定义与表面材质</div>
+      </div>
+      <span class="sec-chev open">⌄</span>
+    </div>
+    <div class="sec-body open">
+      <div class="tri">
+        <div class="bl-en"><div class="bl-en-lbl">🔵 English</div><div class="bl-en-t">
+          The <b>reflection of sound waves</b> from the surface of an object is known as an <b>echo</b>. The strength of an echo depends on the type of surface on which the sound waves are reflected.<br><br>
+          Echoes can be heard in enclosed areas such as <b>caves, tunnels, gorges and halls</b>. An echo cannot be produced when sound is absorbed by the surface.
+        </div></div>
+        <div class="bl-zh"><div class="bl-zh-lbl">🟢 中文</div><div class="bl-zh-t">
+          物体表面反射的<b>声波</b>被称为<b>回声</b>。回声的强度取决于声波反射的表面类型。<br><br>
+          回声可以在<b>洞穴、隧道、峡谷和大厅</b>等封闭区域听到。当声音被表面吸收时，无法产生回声。
+        </div></div>
+      </div>
+
+      <div class="tbl-wrap">
+        <table class="tbl">
+          <thead><tr>
+            <th style="background:#d97706">Type of Surface / 表面类型</th>
+            <th style="background:#d97706">Characteristic / 特征</th>
+            <th style="background:#d97706">Effect of Echo / 回声效果</th>
+          </tr></thead>
+          <tbody>
+            <tr>
+              <td style="background:#fef3c7;font-weight:800;color:#78350f">Smooth, flat, hard<br><span style="font-size:11px;color:#047857">光滑、平坦、坚硬</span></td>
+              <td style="background:#fef3c7;font-weight:700;color:#374151">
+                <span class="en-only">Good reflectors but weak absorbers. Examples: rock, walls, concrete, glass, metals.</span>
+                <span class="zh-only">良好反射体但吸收弱。例子：岩石、墙壁、混凝土、玻璃、金属。</span>
+              </td>
+              <td style="background:#fef3c7;font-weight:800;color:#b91c1c">Strong echoes / 强回声</td>
+            </tr>
+            <tr>
+              <td style="background:#fef3c7;font-weight:800;color:#78350f">Rough, hollow, soft<br><span style="font-size:11px;color:#047857">粗糙、空心、柔软</span></td>
+              <td style="background:#fef3c7;font-weight:700;color:#374151">
+                <span class="en-only">Weak reflectors but good absorbers. Examples: carpets, cushions, thick curtains, sponges, cork.</span>
+                <span class="zh-only">反射弱但吸收良好。例子：地毯、垫子、厚窗帘、海绵、软木。</span>
+              </td>
+              <td style="background:#fef3c7;font-weight:800;color:#15803d">Weak echoes / 弱回声</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="tri">
+        <div class="bl-en"><div class="bl-en-lbl">🔵 Echo Direction</div><div class="bl-en-t">
+          The reflected echo sounds the same as the original sound but takes <b>some time to reach the listener's ears</b>.<br>
+          The direction of the <b>original wave</b> is opposite to the direction of the <b>echo</b>.
+        </div></div>
+        <div class="bl-zh"><div class="bl-zh-lbl">🟢 回声方向</div><div class="bl-zh-t">
+          反射回声与原声相同，但需要<b>一些时间才能到达听者的耳朵</b>。<br>
+          <b>原始波</b>的方向与<b>回声</b>的方向相反。
+        </div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sec s-am">
+    <div class="sec-hdr" onclick="exp(this)">
+      <div class="sec-icon">🚢</div>
+      <div class="sec-info">
+        <div class="sec-num">10.3</div>
+        <div class="sec-t-en">Application — SONAR &amp; Reflection</div>
+        <div class="sec-t-zh">应用——声纳与反射</div>
+      </div>
+      <span class="sec-chev">⌄</span>
+    </div>
+    <div class="sec-body">
+      <div class="tri">
+        <div class="bl-en"><div class="bl-en-lbl">🔵 3 Wave Frequency Ranges</div><div class="bl-en-t">
+          • <b>Infrasonic wave:</b> &lt; 20 Hz. Heard by elephants, rhinoceroses, giraffes.<br>
+          • <b>Audio sonic wave:</b> 20 Hz – 20 kHz. Heard by humans.<br>
+          • <b>Ultrasonic wave:</b> &gt; 20 kHz. Heard by bats and dolphins, used for navigation.
+        </div></div>
+        <div class="bl-zh"><div class="bl-zh-lbl">🟢 三种频率范围</div><div class="bl-zh-t">
+          • <b>低频声波（次声波）：</b>&lt;20 Hz。由象、犀牛、长颈鹿听到。<br>
+          • <b>声波（可闻声）：</b>20 Hz – 20 kHz。人类可听到。<br>
+          • <b>超声波：</b>&gt;20 kHz。蝙蝠和海豚可听到，用于导航。
+        </div></div>
+      </div>
+
+      <div class="tri">
+        <div class="bl-en"><div class="bl-en-lbl">🔵 SONAR (Sound Navigation and Ranging)</div><div class="bl-en-t">
+          A reflection technology used to: detect underwater objects in shipping, detect fish location for fishermen, detect sea depth so boats can sail safely.
+        </div></div>
+        <div class="bl-zh"><div class="bl-zh-lbl">🟢 声纳（声音导航与测距）</div><div class="bl-zh-t">
+          一种反射技术，用于：检测航运中的水下物体、帮助渔民检测鱼群位置、检测海水深度以便船只安全航行。
+        </div></div>
+      </div>
+
+      <div class="mem">
+        <div class="mem-lbl">📝 7 Uses of Ultrasonic Waves</div>
+        <div class="pills">
+          <span class="pill p-en">Destroying kidney stones</span><span class="pill p-zh">击碎肾结石</span>
+          <span class="pill p-en">Manufacturing metal mixtures</span><span class="pill p-zh">制造金属混合物</span>
+          <span class="pill p-en">Cleaning lenses</span><span class="pill p-zh">清洁镜片</span>
+          <span class="pill p-en">Removing dental plaque</span><span class="pill p-zh">去除牙菌斑</span>
+          <span class="pill p-en">Facial skin cleaning</span><span class="pill p-zh">清洁面部皮肤</span>
+          <span class="pill p-en">Detecting sea objects/depth (SONAR)</span><span class="pill p-zh">检测海中物体/深度（声纳）</span>
+          <span class="pill p-en">Sonograms</span><span class="pill p-zh">超声波图像</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════ ULTRASONIC & HEARING ══════ -->
+<div id="tab-t4" class="psec">
+
+  <div class="sec s-gr">
+    <div class="sec-hdr" onclick="exp(this)">
+      <div class="sec-icon">🤰</div>
+      <div class="sec-info">
+        <div class="sec-num">10.3</div>
+        <div class="sec-t-en">Sonogram &amp; Echolocation</div>
+        <div class="sec-t-zh">超声波图像与回声定位</div>
+      </div>
+      <span class="sec-chev open">⌄</span>
+    </div>
+    <div class="sec-body open">
+      <div class="tri">
+        <div class="bl-en"><div class="bl-en-lbl">🔵 Sonogram</div><div class="bl-en-t">
+          A <b>sonogram</b> is an image produced by an ultrasound scanning machine. An ultrasound transducer turns electrical energy into sound energy producing ultrasonic waves. These waves are reflected by the foetus and internal organs, and the echoes are received by the transducer. The physical characteristics and gender of the foetus can be identified.
+        </div></div>
+        <div class="bl-zh"><div class="bl-zh-lbl">🟢 超声波图像</div><div class="bl-zh-t">
+          <b>超声波图像</b>是由超声波扫描机产生的图像。超声波传感器将电能转化为声能，产生超声波。这些波被胎儿和内脏器官反射，回声由传感器接收。可以由此识别胎儿的身体特征和性别。
+        </div></div>
+      </div>
+
+      <div class="tri">
+        <div class="bl-en"><div class="bl-en-lbl">🔵 Echolocation (Bats &amp; Dolphins)</div><div class="bl-en-t">
+          Bats cannot see clearly in the dark. Bats emit ultrasonic waves and detect reflected waves (echo) from their prey. This technique is known as <b>echolocation</b>. Bats also use echolocation to estimate distances and avoid obstacles when flying.
+        </div></div>
+        <div class="bl-zh"><div class="bl-zh-lbl">🟢 回声定位（蝙蝠与海豚）</div><div class="bl-zh-t">
+          蝙蝠在黑暗中看不清楚。蝙蝠发出超声波并检测猎物反射的波（回声）。这种技术称为<b>回声定位</b>。蝙蝠也利用回声定位来估计距离并在飞行时避开障碍物。
+        </div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sec s-gr">
+    <div class="sec-hdr" onclick="exp(this)">
+      <div class="sec-icon">👂</div>
+      <div class="sec-info">
+        <div class="sec-num">10.3</div>
+        <div class="sec-t-en">Limitations of Hearing &amp; Hearing Range</div>
+        <div class="sec-t-zh">听觉限制与听觉范围</div>
+      </div>
+      <span class="sec-chev">⌄</span>
+    </div>
+    <div class="sec-body">
+      <div class="tri">
+        <div class="bl-en"><div class="bl-en-lbl">🔵 English</div><div class="bl-en-t">
+          The <b>range of hearing</b> is the sound frequency that can be detected by the ears. <b>Human ears</b> can detect frequencies within the range of <b>20 Hz to 20 000 Hz</b>. Animals such as dogs, bats and dolphins have a <b>higher range of hearing</b> than humans.
+        </div></div>
+        <div class="bl-zh"><div class="bl-zh-lbl">🟢 中文</div><div class="bl-zh-t">
+          <b>听觉范围</b>是耳朵能检测到的声音频率。<b>人耳</b>可检测<b>20 Hz至20000 Hz</b>范围内的频率。狗、蝙蝠和海豚等动物的<b>听觉范围比人类更广</b>。
+        </div></div>
+      </div>
+
+      <div class="tbl-wrap">
+        <table class="tbl">
+          <thead><tr><th style="background:#16a34a">Animal / 动物</th><th style="background:#16a34a">Hearing Range / 听觉范围</th></tr></thead>
+          <tbody>
+            <tr><td style="background:#f0fdf4;font-weight:700">Bat 蝙蝠</td><td style="background:#f0fdf4;font-weight:700">2 kHz – 110 kHz</td></tr>
+            <tr><td style="background:#f0fdf4;font-weight:700">Dolphin 海豚</td><td style="background:#f0fdf4;font-weight:700">40 kHz – 100 kHz</td></tr>
+            <tr><td style="background:#f0fdf4;font-weight:700">Insect 昆虫</td><td style="background:#f0fdf4;font-weight:700">10 kHz – 80 kHz</td></tr>
+            <tr><td style="background:#f0fdf4;font-weight:700">Rat 鼠</td><td style="background:#f0fdf4;font-weight:700">900 Hz – 79 kHz</td></tr>
+            <tr><td style="background:#f0fdf4;font-weight:700">Bird 鸟</td><td style="background:#f0fdf4;font-weight:700">1 kHz – 4 kHz</td></tr>
+            <tr><td style="background:#f0fdf4;font-weight:700">Frog 青蛙</td><td style="background:#f0fdf4;font-weight:700">50 Hz – 4 kHz</td></tr>
+            <tr><td style="background:#f0fdf4;font-weight:700">Crocodile 鳄鱼</td><td style="background:#f0fdf4;font-weight:700">16 Hz – 18 kHz</td></tr>
+            <tr><td style="background:#f0fdf4;font-weight:700">Dog 狗</td><td style="background:#f0fdf4;font-weight:700">67 Hz – 45 kHz</td></tr>
+            <tr><td style="background:#f0fdf4;font-weight:700">Elephant 象</td><td style="background:#f0fdf4;font-weight:700">16 Hz – 12 kHz</td></tr>
+            <tr><td style="background:#f0fdf4;font-weight:700">Whale 鲸</td><td style="background:#f0fdf4;font-weight:700">14 Hz – 36 Hz</td></tr>
+            <tr><td style="background:#fef3c7;font-weight:800;color:#92400e">Human 人类</td><td style="background:#fef3c7;font-weight:800;color:#92400e">20 Hz – 20 kHz</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="tri">
+        <div class="bl-en"><div class="bl-en-lbl">🔵 Devices to Overcome Hearing Limitations</div><div class="bl-en-t">
+          • <b>Hearing aid:</b> helps individuals with hearing problems by amplifying sound entering the ear.<br>
+          • <b>Megaphone:</b> amplifies a person's voice and directs it so it can be heard from afar.<br>
+          • <b>Stethoscope:</b> enables doctors to listen to a patient's heartbeat.
+        </div></div>
+        <div class="bl-zh"><div class="bl-zh-lbl">🟢 克服听觉限制的设备</div><div class="bl-zh-t">
+          • <b>助听器：</b>通过放大进入耳朵的声音帮助听力有问题的人。<br>
+          • <b>扬声器：</b>放大一个人的声音并将其传向远处。<br>
+          • <b>听诊器：</b>使医生能够听到病人的心跳。
+        </div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════ MEMORY MAP ══════ -->
+<div id="tab-tmm" class="psec">
+  <div style="background:#581c87;border-radius:var(--r);overflow:hidden;margin-bottom:12px">
+    <div class="mmap-hdr">
+      <div class="mmap-h1">⭐ Super Compact Memory Map</div>
+      <div class="mmap-h2">Science Chapter 10 — Sound Waves</div>
+      <div class="mmap-h3">科学第十章 — 声波</div>
+    </div>
+    <div style="padding:14px">
+
+      <div class="mmap-item">
+        <div class="mm-en"><div class="mm-en-t">10.1 Sound = energy from vibrations. Needs a medium to propagate — cannot travel through vacuum. Speed: Solid &gt; Liquid &gt; Gas (particles closer together = faster transfer).</div></div>
+        <div class="mm-zh"><div class="mm-zh-t">10.1 声音=振动产生的能量。需要介质才能传播——不能在真空中传播。速度：固体&gt;液体&gt;气体（粒子越紧密=传递越快）。</div></div>
+      </div>
+
+      <div class="mmap-item">
+        <div class="mm-en"><div class="mm-en-t">10.1 Hard+smooth surfaces (metal, glass, concrete) = good reflectors, poor absorbers → strong echo. Soft+rough surfaces (carpet, curtain, sponge) = good absorbers, poor reflectors → weak echo.</div></div>
+        <div class="mm-zh"><div class="mm-zh-t">10.1 硬+光滑表面（金属、玻璃、混凝土）=良好反射，弱吸收→强回声。软+粗糙表面（地毯、窗帘、海绵）=良好吸收，弱反射→弱回声。</div></div>
+      </div>
+
+      <div class="mmap-item">
+        <div class="mm-en"><div class="mm-en-t">10.2 Loudness depends on Amplitude (dB). Pitch depends on Frequency (Hz). Crest=highest point, Trough=lowest point, Wavelength=distance between 2 crests/troughs.</div></div>
+        <div class="mm-zh"><div class="mm-zh-t">10.2 音量取决于振幅（dB）。音调取决于频率（Hz）。波峰=最高点，波谷=最低点，波长=两波峰/波谷间的距离。</div></div>
+      </div>
+
+      <div class="mmap-item">
+        <div class="mm-en"><div class="mm-en-t">10.2 Strings: thicker=lower pitch, more tension=higher pitch, longer=lower pitch. Doppler effect: source moves nearer→frequency &amp; pitch increase; source moves away→frequency &amp; pitch decrease.</div></div>
+        <div class="mm-zh"><div class="mm-zh-t">10.2 弦：越粗=音调越低，张力越大=音调越高，越长=音调越低。多普勒效应：声源靠近→频率和音调增加；声源远离→频率和音调降低。</div></div>
+      </div>
+
+      <div class="mmap-item">
+        <div class="mm-en"><div class="mm-en-t">10.3 Echo = reflected sound, heard in caves/tunnels/halls. 3 wave types: Infrasonic (&lt;20Hz, elephants) · Audio sonic (20Hz-20kHz, humans) · Ultrasonic (&gt;20kHz, bats/dolphins).</div></div>
+        <div class="mm-zh"><div class="mm-zh-t">10.3 回声=反射的声音，可在洞穴/隧道/大厅听到。3种波类型：次声波（&lt;20Hz，象）·声波（20Hz-20kHz，人类）·超声波（&gt;20kHz，蝙蝠/海豚）。</div></div>
+      </div>
+
+      <div class="mmap-item">
+        <div class="mm-en"><div class="mm-en-t">10.3 SONAR (Sound Navigation and Ranging) detects underwater objects, fish location, sea depth. Ultrasonic uses: kidney stones, metal mixtures, lens cleaning, dental plaque, skin cleaning, sonograms.</div></div>
+        <div class="mm-zh"><div class="mm-zh-t">10.3 声纳检测水下物体、鱼群位置、海水深度。超声波用途：肾结石、金属混合物、镜片清洁、牙菌斑、皮肤清洁、超声波图像。</div></div>
+      </div>
+
+      <div class="mmap-item">
+        <div class="mm-en"><div class="mm-en-t">Echolocation: bats/dolphins emit ultrasonic waves, detect echo from prey. Human hearing range: 20Hz-20kHz. Devices: hearing aid (amplifies), megaphone (directs voice), stethoscope (heartbeat).</div></div>
+        <div class="mm-zh"><div class="mm-zh-t">回声定位：蝙蝠/海豚发出超声波，检测猎物的回声。人类听觉范围：20Hz-20kHz。设备：助听器（放大）、扬声器（传声）、听诊器（心跳）。</div></div>
+      </div>
+
+      <div class="exam-box">
+        <div class="exam-hdr"><div class="exam-lbl">✏️ Exam Templates / 考试句型</div></div>
+        <div class="exam-en"><div class="exam-en-t">
+          <b>Why sound needs a medium:</b> "Sound propagation requires the vibration of particles in a matter. Sound cannot propagate through a vacuum because there are no particles to transmit the vibration."<br><br>
+          <b>Doppler effect:</b> "As the source of sound moves nearer to the observer, the frequency of the sound increases, resulting in a higher pitch being heard."<br><br>
+          <b>Echo:</b> "An echo is a reflected sound. The strength of an echo depends on the type of surface — hard, smooth surfaces produce strong echoes while soft, rough surfaces produce weak echoes."
+        </div></div>
+        <div class="exam-zh"><div class="exam-zh-t">
+          <b>为何声音需要介质：</b>"声音传播需要物质中粒子的振动。声音不能在真空中传播，因为没有粒子来传递振动。"<br><br>
+          <b>多普勒效应：</b>"当声源靠近观察者时，声音频率增加，导致听到的音调更高。"<br><br>
+          <b>回声：</b>"回声是反射的声音。回声的强度取决于表面类型——坚硬光滑的表面产生强回声，而柔软粗糙的表面产生弱回声。"
+        </div></div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+</main>
+
+<a class="top-link" href="#top">↑ Top</a>
+<footer>
+  <span class="en-only">Science Chapter 10 · Sound Waves · Single HTML · No internet required</span>
+  <span class="zh-only">科学第十章 · 声波 · 单一HTML · 无需网络</span>
+</footer>
+
+<script>
+function setLang(btn){
+  document.querySelectorAll('.lbtn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  document.body.className='lang-'+btn.dataset.lang;
+  localStorage.setItem('sci10-lang',btn.dataset.lang);
+}
+(function(){
+  const s=localStorage.getItem('sci10-lang')||'both';
+  const b=document.querySelector(`.lbtn[data-lang="${s}"]`);
+  if(b)setLang(b);
+})();
+function showTab(id,btn){
+  document.querySelectorAll('.psec').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById('tab-'+id).classList.add('active');
+  btn.classList.add('active');
+  window.scrollTo(0,document.querySelector('.tabs').offsetTop-60);
+}
+function exp(hdr){
+  const b=hdr.nextElementSibling;
+  const c=hdr.querySelector('.sec-chev');
+  const o=b.classList.toggle('open');
+  c.classList.toggle('open',o);
+}
+document.getElementById('srch').addEventListener('input',function(){
+  const q=this.value.trim().toLowerCase();
+  document.querySelectorAll('.sec').forEach(s=>{
+    s.style.display=!q||s.textContent.toLowerCase().includes(q)?'':'none';
+  });
+});
+</script>
+</body>
+</html>

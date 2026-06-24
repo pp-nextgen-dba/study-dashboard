@@ -120,7 +120,8 @@ export const scienceData = {
             chinese:"声波",
             status:"Not Started",
             confidence:0,
-            last_updated:"2026-05-20"
+            last_updated:"2026-05-20",
+            resourceUrl:"../science/t2_chapter10_sound_waves.html"
         },
 
         {

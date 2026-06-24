@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Paul & Khailer — Workspace Setup</title>
+<style>
+  :root {
+    --paul-color: #1a6fc4;
+    --paul-light: #e8f2fc;
+    --paul-border: #90bde8;
+    --khailer-color: #2a9d5c;
+    --khailer-light: #e8f7ef;
+    --khailer-border: #85d4aa;
+    --shared-color: #c47a1a;
+    --shared-light: #fdf3e3;
+    --shared-border: #e8c47a;
+    --github-color: #24292f;
+    --github-light: #f0f0f0;
+    --arrow: #888;
+    --bg: #f7f8fa;
+    --card-bg: #ffffff;
+    --text: #1a1a2e;
+    --muted: #666;
+    --radius: 10px;
+    --shadow: 0 2px 12px rgba(0,0,0,0.08);
+    --font: 'Segoe UI', system-ui, sans-serif;
+    --mono: 'Cascadia Code', 'Consolas', monospace;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: var(--font);
+    background: var(--bg);
+    color: var(--text);
+    padding: 30px 20px 60px;
+  }
+
+  h1 {
+    text-align: center;
+    font-size: 1.6rem;
+    font-weight: 700;
+    margin-bottom: 6px;
+    color: var(--text);
+  }
+
+  .subtitle {
+    text-align: center;
+    color: var(--muted);
+    font-size: 0.9rem;
+    margin-bottom: 36px;
+  }
+
+  /* ── SECTION LABELS ── */
+  .section-label {
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+    padding: 4px 10px;
+    border-radius: 4px;
+    display: inline-block;
+  }
+  .label-paul    { background: var(--paul-color);    color: #fff; }
+  .label-khailer { background: var(--khailer-color); color: #fff; }
+  .label-shared  { background: var(--shared-color);  color: #fff; }
+  .label-github  { background: var(--github-color);  color: #fff; }
+  .label-flow    { background: #555; color: #fff; }
+
+  /* ── GRID ── */
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    max-width: 1100px;
+    margin: 0 auto 20px;
+  }
+
+  .full-col {
+    max-width: 1100px;
+    margin: 0 auto 20px;
+  }
+
+  /* ── CARDS ── */
+  .card {
+    background: var(--card-bg);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 20px;
+    border-top: 4px solid transparent;
+  }
+  .card-paul    { border-top-color: var(--paul-color); }
+  .card-khailer { border-top-color: var(--khailer-color); }
+  .card-shared  { border-top-color: var(--shared-color); }
+  .card-github  { border-top-color: var(--github-color); }
+  .card-flow    { border-top-color: #555; }
+
+  .card h2 {
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  /* ── FILE TREE ── */
+  .tree {
+    font-family: var(--mono);
+    font-size: 0.8rem;
+    line-height: 1.8;
+    background: #f4f6f9;
+    border-radius: 6px;
+    padding: 14px 16px;
+    margin-bottom: 14px;
+    border: 1px solid #e0e4ea;
+  }
+
+  .tree .folder { color: #555; font-weight: 600; }
+  .tree .paul-file    { color: var(--paul-color); }
+  .tree .khailer-file { color: var(--khailer-color); }
+  .tree .shared-file  { color: var(--shared-color); font-weight: 600; }
+  .tree .comment      { color: #999; font-style: italic; }
+
+  /* ── COMMAND PILLS ── */
+  .commands { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 14px; }
+
+  .cmd {
+    font-family: var(--mono);
+    font-size: 0.78rem;
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-weight: 600;
+    border: 1.5px solid transparent;
+  }
+  .cmd-paul    { background: var(--paul-light);    border-color: var(--paul-border);    color: var(--paul-color); }
+  .cmd-khailer { background: var(--khailer-light); border-color: var(--khailer-border); color: var(--khailer-color); }
+  .cmd-shared  { background: var(--shared-light);  border-color: var(--shared-border);  color: var(--shared-color); }
+
+  /* ── RULES LIST ── */
+  .rules { list-style: none; font-size: 0.83rem; line-height: 1.7; }
+  .rules li::before { content: "✓ "; color: #2a9d5c; font-weight: 700; }
+  .rules li.warn::before { content: "⚠ "; color: #c47a1a; }
+  .rules li.block::before { content: "✗ "; color: #e05555; }
+
+  /* ── FLOW DIAGRAM ── */
+  .flow {
+    display: flex;
+    align-items: flex-start;
+    gap: 0;
+    overflow-x: auto;
+    padding: 10px 0;
+  }
+
+  .flow-step {
+    flex: 1;
+    min-width: 130px;
+    text-align: center;
+    position: relative;
+  }
+
+  .flow-step:not(:last-child)::after {
+    content: "→";
+    position: absolute;
+    right: -12px;
+    top: 20px;
+    font-size: 1.2rem;
+    color: var(--arrow);
+    z-index: 1;
+  }
+
+  .flow-box {
+    border-radius: 8px;
+    padding: 10px 8px;
+    font-size: 0.75rem;
+    line-height: 1.5;
+    font-weight: 600;
+    margin: 0 14px;
+  }
+  .flow-paul    { background: var(--paul-light);    border: 1.5px solid var(--paul-border);    color: var(--paul-color); }
+  .flow-khailer { background: var(--khailer-light); border: 1.5px solid var(--khailer-border); color: var(--khailer-color); }
+  .flow-shared  { background: var(--shared-light);  border: 1.5px solid var(--shared-border);  color: var(--shared-color); }
+  .flow-github  { background: var(--github-light);  border: 1.5px solid #ccc;                  color: var(--github-color); }
+
+  .flow-label {
+    font-size: 0.68rem;
+    color: var(--muted);
+    margin-top: 5px;
+    font-weight: 400;
+  }
+
+  /* ── GLOBAL CLAUDE.MD ── */
+  .claude-sections {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 10px;
+    margin-bottom: 14px;
+  }
+
+  .claude-section {
+    border-radius: 7px;
+    padding: 10px 12px;
+    font-size: 0.78rem;
+    line-height: 1.6;
+  }
+  .cs-universal { background: #f0f0f5; border-left: 3px solid #888; }
+  .cs-web       { background: var(--paul-light);    border-left: 3px solid var(--paul-color); }
+  .cs-python    { background: #eef4ff; border-left: 3px solid #5577cc; }
+  .cs-oracle    { background: #fff4ee; border-left: 3px solid #cc6633; }
+  .cs-guard     { background: #fff0f0; border-left: 3px solid #e05555; }
+
+  .claude-section strong {
+    display: block;
+    margin-bottom: 4px;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+
+  /* ── GITHUB SECTION ── */
+  .github-repos {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+  }
+
+  .repo-box {
+    border-radius: 8px;
+    padding: 14px;
+    font-size: 0.8rem;
+    line-height: 1.7;
+    border: 1px solid #ddd;
+  }
+  .repo-paul    { background: var(--paul-light);    border-color: var(--paul-border); }
+  .repo-khailer { background: var(--khailer-light); border-color: var(--khailer-border); }
+
+  .repo-box .repo-title {
+    font-weight: 700;
+    font-size: 0.85rem;
+    margin-bottom: 6px;
+  }
+  .repo-box .repo-url {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    color: var(--muted);
+    margin-bottom: 8px;
+    word-break: break-all;
+  }
+
+  /* ── NOTIFICATION FLOW ── */
+  .notif-flow {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: 10px;
+    align-items: center;
+    margin-top: 4px;
+  }
+
+  .notif-box {
+    border-radius: 8px;
+    padding: 12px 14px;
+    font-size: 0.8rem;
+    line-height: 1.6;
+  }
+
+  .notif-arrow {
+    font-size: 1.8rem;
+    color: var(--shared-color);
+    text-align: center;
+    font-weight: 700;
+  }
+
+  /* ── BADGE ── */
+  .badge {
+    display: inline-block;
+    font-size: 0.68rem;
+    font-weight: 700;
+    padding: 2px 7px;
+    border-radius: 10px;
+    margin-left: 6px;
+    vertical-align: middle;
+  }
+  .badge-paul    { background: var(--paul-color);    color: #fff; }
+  .badge-khailer { background: var(--khailer-color); color: #fff; }
+  .badge-auto    { background: #888; color: #fff; }
+
+  /* ── DIVIDER ── */
+  .divider {
+    max-width: 1100px;
+    margin: 10px auto 20px;
+    border: none;
+    border-top: 1px solid #dde;
+  }
+
+  @media (max-width: 700px) {
+    .two-col { grid-template-columns: 1fr; }
+    .github-repos { grid-template-columns: 1fr; }
+    .notif-flow { grid-template-columns: 1fr; }
+    .notif-arrow { transform: rotate(90deg); }
+    .flow { flex-direction: column; align-items: stretch; }
+    .flow-step:not(:last-child)::after { content: "↓"; right: unset; top: unset; position: static; display: block; }
+  }
+</style>
+</head>
+<body>
+
+<h1>🖥️ Paul & Khailer — Full Workspace Setup</h1>
+<p class="subtitle">Claude Code · GitHub Pages · Study Dashboard · Local Archive</p>
+
+<!-- ═══════════════════════════════════════════
+     SECTION 1 — PC FOLDER STRUCTURE
+═══════════════════════════════════════════ -->
+<div class="full-col">
+  <span class="section-label label-paul">📁 PC Folder Structure — C:\development\</span>
+  <div class="card card-paul">
+    <div class="tree">
+<span class="folder">C:\development\</span>
+│
+├── <span class="shared-file">_shared\</span>
+│   └── <span class="shared-file">pending-chapters.md</span>        <span class="comment">← notification bridge between Khailer & Paul</span>
+│
+├── <span class="paul-file">paul\</span>
+│   ├── <span class="paul-file">study-dashboard\</span>              <span class="comment">← Paul's GitHub repo (cloned)</span>
+│   │   ├── index.html
+│   │   ├── subjects\
+│   │   │   ├── maths.html
+│   │   │   ├── science.html
+│   │   │   └── ... (14 subjects)
+│   │   └── CLAUDE.md                    <span class="comment">← project-level rules</span>
+│   ├── <span class="paul-file">web\</span>                          <span class="comment">← Paul's standalone web projects</span>
+│   ├── <span class="paul-file">python\</span>                       <span class="comment">← Paul's Python/automation projects</span>
+│   └── <span class="paul-file">oracle\</span>                       <span class="comment">← Oracle monitoring & report tools</span>
+│
+├── <span class="khailer-file">khailer\</span>
+│   └── <span class="khailer-file">study-chapters\</span>             <span class="comment">← Khailer's GitHub repo (cloned)</span>
+│       ├── maths\
+│       │   └── chapter1\
+│       │       ├── index.html           <span class="comment">← Claude generates this</span>
+│       │       ├── styles.css
+│       │       ├── script.js
+│       │       ├── NOTES.md
+│       │       ├── CLAUDE.md
+│       │       ├── .gitignore           <span class="comment">← excludes _archive from GitHub</span>
+│       │       └── _archive\
+│       │           └── 2026-06-09\
+│       │               ├── notes.jpg    <span class="comment">← moved here after git push</span>
+│       │               └── formula.pdf
+│       ├── science\
+│       │   └── chapter1\ ...
+│       └── english\
+│           └── chapter1\ ...
+│
+└── <span class="folder">_template\</span>                            <span class="comment">← master template (optional)</span>
+    ├── index.html
+    ├── styles.css
+    └── script.js
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     SECTION 2 — GLOBAL CLAUDE.MD
+═══════════════════════════════════════════ -->
+<div class="full-col">
+  <span class="section-label label-paul">⚙️ Global CLAUDE.md — C:\Users\Paul\.claude\CLAUDE.md</span>
+  <div class="card card-paul">
+    <div class="claude-sections">
+      <div class="claude-section cs-universal">
+        <strong>🌐 Universal Rules</strong>
+        Never delete files<br>
+        English comments<br>
+        Read project CLAUDE.md first<br>
+        No cross-workspace access
+      </div>
+      <div class="claude-section cs-web">
+        <strong>🌍 Web Projects</strong>
+        HTML5 semantic tags<br>
+        Mobile-first CSS<br>
+        CSS variables for colors<br>
+        Chart.js for charts
+      </div>
+      <div class="claude-section cs-python">
+        <strong>🐍 Python Projects</strong>
+        python-oracledb<br>
+        keyring for credentials<br>
+        Virtual environment<br>
+        PEP8 + try/except
+      </div>
+      <div class="claude-section cs-oracle">
+        <strong>🗄️ Oracle Projects</strong>
+        Oracle 19c CDB/PDB<br>
+        No SELECT *<br>
+        Confirm before DDL/DML<br>
+        HTML or CSV output
+      </div>
+      <div class="claude-section cs-guard">
+        <strong>🔒 Guardrails</strong>
+        No global pip/npm install<br>
+        Never touch khailer\ from paul\<br>
+        No hardcoded passwords<br>
+        No inline HTML styles
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     SECTION 3 — SLASH COMMANDS
+═══════════════════════════════════════════ -->
+<div class="two-col">
+
+  <div>
+    <span class="section-label label-paul">⚡ Paul's Slash Commands</span>
+    <div class="card card-paul">
+      <h2>C:\Users\Paul\.claude\commands\</h2>
+      <div class="commands">
+        <span class="cmd cmd-paul">/new-webpage</span>
+        <span class="cmd cmd-paul">/new-python</span>
+        <span class="cmd cmd-paul">/new-oracle</span>
+        <span class="cmd cmd-paul">/check-chapters</span>
+        <span class="cmd cmd-paul">/link-chapter</span>
+      </div>
+      <ul class="rules">
+        <li><b>/new-webpage</b> "name" — scaffold web project under paul\web\</li>
+        <li><b>/new-python</b> "name" — scaffold Python project with keyring + logging</li>
+        <li><b>/new-oracle</b> "name" — scaffold Oracle collector + HTML report</li>
+        <li><b>/check-chapters</b> — read pending-chapters.md, bulk link to dashboard</li>
+        <li><b>/link-chapter</b> "subj|N|title|url" — manual single chapter link</li>
+      </ul>
+    </div>
+  </div>
+
+  <div>
+    <span class="section-label label-khailer">⚡ Khailer's Slash Commands</span>
+    <div class="card card-khailer">
+      <h2>C:\Users\Paul\.claude\commands\</h2>
+      <div class="commands">
+        <span class="cmd cmd-khailer">/new-khailer</span>
+      </div>
+      <ul class="rules">
+        <li><b>/new-khailer</b> "subject-chapterN" — full workflow:</li>
+        <li>Reads uploaded files (jpg, pdf, txt, png)</li>
+        <li>Generates index.html + styles.css + script.js</li>
+        <li>Khailer reviews in browser — request fixes</li>
+        <li>Quality checklist before push</li>
+        <li>Git push only when Khailer says "ready"</li>
+        <li>Auto-archive uploads → _archive\YYYY-MM-DD\</li>
+        <li>Writes to pending-chapters.md automatically</li>
+        <li>Shows ready-to-send message to Paul</li>
+      </ul>
+    </div>
+  </div>
+
+</div>
+
+<!-- ═══════════════════════════════════════════
+     SECTION 4 — GITHUB REPOS
+═══════════════════════════════════════════ -->
+<div class="full-col">
+  <span class="section-label label-github">🐙 GitHub Repositories</span>
+  <div class="card card-github">
+    <div class="github-repos">
+      <div class="repo-box repo-paul">
+        <div class="repo-title">📊 Paul's Dashboard Repo</div>
+        <div class="repo-url">github.com/pp-nextgen-dba/study-dashboard</div>
+        <div class="repo-url">🌐 pp-nextgen-dba.github.io/study-dashboard/</div>
+        <ul class="rules">
+          <li>14 subject pages (maths, science, english...)</li>
+          <li>Chapter links added by /check-chapters</li>
+          <li>Progress tracking per chapter</li>
+          <li>Paul manages all pushes</li>
+        </ul>
+      </div>
+      <div class="repo-box repo-khailer">
+        <div class="repo-title">📚 Khailer's Chapters Repo</div>
+        <div class="repo-url">github.com/khailer/study-chapters</div>
+        <div class="repo-url">🌐 khailer.github.io/study-chapters/</div>
+        <ul class="rules">
+          <li>One folder per chapter per subject</li>
+          <li>.gitignore excludes _archive\ folder</li>
+          <li>Only HTML/CSS/JS pushed — no source photos</li>
+          <li>Khailer pushes only when satisfied</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     SECTION 5 — NOTIFICATION BRIDGE
+═══════════════════════════════════════════ -->
+<div class="full-col">
+  <span class="section-label label-shared">🔔 Notification Bridge — pending-chapters.md</span>
+  <div class="card card-shared">
+    <div class="notif-flow">
+      <div class="notif-box" style="background:var(--khailer-light); border:1.5px solid var(--khailer-border);">
+        <strong style="color:var(--khailer-color)">Khailer finishes chapter</strong><br>
+        Claude auto-writes entry to<br>
+        <code style="font-size:0.75rem">_shared\pending-chapters.md</code><br><br>
+        Entry includes:<br>
+        • Date<br>
+        • Subject + Chapter number<br>
+        • Chapter title<br>
+        • Live GitHub Pages URL
+      </div>
+      <div class="notif-arrow">→</div>
+      <div class="notif-box" style="background:var(--paul-light); border:1.5px solid var(--paul-border);">
+        <strong style="color:var(--paul-color)">Paul runs /check-chapters</strong><br>
+        Claude reads pending-chapters.md<br>
+        Shows all pending entries<br><br>
+        Paul replies: "yes" → bulk link all<br>
+        Paul replies: "one by one" → confirm each<br><br>
+        After linking:<br>
+        • Dashboard updated ✅<br>
+        • Entry marked DONE ✅<br>
+        • git push dashboard ✅
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     SECTION 6 — KHAILER END-TO-END FLOW
+═══════════════════════════════════════════ -->
+<div class="full-col">
+  <span class="section-label label-khailer">🔄 Khailer's End-to-End Workflow</span>
+  <div class="card card-khailer">
+    <div class="flow">
+      <div class="flow-step">
+        <div class="flow-box flow-khailer">📸 Drop files<br>into chapter folder<br><small>(jpg, pdf, txt, png)</small></div>
+        <div class="flow-label">Khailer</div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-box flow-khailer">/new-khailer<br>"maths-chapter1"</div>
+        <div class="flow-label">Claude Code</div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-box flow-khailer">Claude reads<br>all files &<br>generates page</div>
+        <div class="flow-label">Auto</div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-box flow-khailer">Review in<br>browser<br>Request fixes</div>
+        <div class="flow-label">Khailer</div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-box flow-khailer">Quality<br>checklist<br>passed ✅</div>
+        <div class="flow-label">Auto</div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-box flow-github">git push<br>to GitHub<br>Pages ✅</div>
+        <div class="flow-label">Auto</div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-box flow-khailer">Archive<br>uploads to<br>_archive\ ✅</div>
+        <div class="flow-label">Auto</div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-box flow-shared">Write to<br>pending-chapters<br>.md ✅</div>
+        <div class="flow-label">Auto</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     SECTION 7 — PAUL END-TO-END FLOW
+═══════════════════════════════════════════ -->
+<div class="full-col">
+  <span class="section-label label-paul">🔄 Paul's End-to-End Workflow</span>
+  <div class="card card-paul">
+    <div class="flow">
+      <div class="flow-step">
+        <div class="flow-box flow-shared">pending-chapters<br>.md has new<br>entries</div>
+        <div class="flow-label">Notification</div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-box flow-paul">/check-chapters</div>
+        <div class="flow-label">Paul types</div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-box flow-paul">Claude shows<br>pending list<br>Paul: "yes"</div>
+        <div class="flow-label">Review</div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-box flow-paul">Claude updates<br>subjects\maths.html<br>+ other subjects</div>
+        <div class="flow-label">Auto</div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-box flow-shared">pending-chapters<br>.md entries<br>marked DONE ✅</div>
+        <div class="flow-label">Auto</div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-box flow-github">git push<br>study-dashboard<br>✅</div>
+        <div class="flow-label">Auto</div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-box flow-paul">Dashboard live<br>pp-nextgen-dba<br>.github.io ✅</div>
+        <div class="flow-label">Published</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     SECTION 8 — KHAILER QUALITY CHECKLIST
+═══════════════════════════════════════════ -->
+<div class="two-col">
+  <div>
+    <span class="section-label label-khailer">✅ Auto Quality Checklist (before push)</span>
+    <div class="card card-khailer">
+      <ul class="rules">
+        <li>Page has a title tag</li>
+        <li>Viewport meta tag present (mobile)</li>
+        <li>At least one content section exists</li>
+        <li>Back to Dashboard link present</li>
+        <li>No broken image src links</li>
+        <li>CSS file linked correctly</li>
+        <li>JS file linked correctly</li>
+        <li>Consistent page header (subject + chapter)</li>
+        <li>Last updated date shown</li>
+        <li class="warn">Remind: check desktop view in browser</li>
+        <li class="warn">Remind: check mobile view (F12 → toggle device)</li>
+        <li class="block">STOP if any check fails — fix before push</li>
+      </ul>
+    </div>
+  </div>
+
+  <div>
+    <span class="section-label label-khailer">📁 Chapter Folder After Archive</span>
+    <div class="card card-khailer">
+      <div class="tree">
+<span class="folder">maths\chapter1\</span>
+├── <span class="khailer-file">index.html</span>         <span class="comment">← stays ✅</span>
+├── <span class="khailer-file">styles.css</span>         <span class="comment">← stays ✅</span>
+├── <span class="khailer-file">script.js</span>          <span class="comment">← stays ✅</span>
+├── <span class="khailer-file">NOTES.md</span>           <span class="comment">← stays ✅</span>
+├── <span class="khailer-file">CLAUDE.md</span>          <span class="comment">← stays ✅</span>
+├── <span class="khailer-file">.gitignore</span>         <span class="comment">← stays ✅</span>
+└── <span class="shared-file">_archive\</span>
+    └── <span class="shared-file">2026-06-09\</span>
+        ├── notes.jpg      <span class="comment">← moved 📦</span>
+        ├── formula.pdf    <span class="comment">← moved 📦</span>
+        └── example.png    <span class="comment">← moved 📦</span>
+      </div>
+      <ul class="rules">
+        <li>_archive\ in .gitignore — not pushed to GitHub</li>
+        <li>Dated subfolder per session</li>
+        <li>Duplicate filenames auto-renamed</li>
+        <li class="block">Archive only runs after successful push</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     SECTION 9 — SUBJECT MAPPING
+═══════════════════════════════════════════ -->
+<div class="full-col">
+  <span class="section-label label-github">📚 Dashboard Subject → Chapter URL Mapping</span>
+  <div class="card card-github">
+    <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(200px,1fr)); gap:10px; font-size:0.78rem;">
+      <div style="background:#f4f6f9; border-radius:6px; padding:10px;">
+        <strong>subjects/maths.html</strong><br>
+        → khailer.github.io/.../maths/chapter1/<br>
+        → khailer.github.io/.../maths/chapter2/
+      </div>
+      <div style="background:#f4f6f9; border-radius:6px; padding:10px;">
+        <strong>subjects/science.html</strong><br>
+        → khailer.github.io/.../science/chapter1/<br>
+        → khailer.github.io/.../science/chapter2/
+      </div>
+      <div style="background:#f4f6f9; border-radius:6px; padding:10px;">
+        <strong>subjects/english.html</strong><br>
+        → khailer.github.io/.../english/chapter1/
+      </div>
+      <div style="background:#f4f6f9; border-radius:6px; padding:10px;">
+        <strong>subjects/chinese.html</strong><br>
+        → khailer.github.io/.../chinese/chapter1/
+      </div>
+      <div style="background:#f4f6f9; border-radius:6px; padding:10px;">
+        <strong>subjects/history.html</strong><br>
+        → khailer.github.io/.../history/chapter1/
+      </div>
+      <div style="background:#f4f6f9; border-radius:6px; padding:10px;">
+        <strong>+ 9 more subjects...</strong><br>
+        addmaths, malay, moral,<br>
+        geografi, rekabentuk,<br>
+        physics, chemistry, biology, seni
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
