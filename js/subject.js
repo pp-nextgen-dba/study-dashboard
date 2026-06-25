@@ -86,7 +86,8 @@ export const scienceData = {
             chinese:"电与磁",
             status:"Not Started",
             confidence:0,
-            last_updated:"2026-05-20"
+            last_updated:"2026-05-20",
+            resourceUrl: "../science/t2_Chapter7-Electricity-Magnetism.html"
         },
 
         {

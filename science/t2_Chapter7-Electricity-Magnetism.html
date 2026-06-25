@@ -1,0 +1,923 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chapter 7 · Electricity and Magnetism 电与磁</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Noto+Serif+SC:wght@400;500;600;700&family=Noto+Serif:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#F7F1E2;
+    --paper-deep:#EFE6D2;
+    --ink:#1B2A2F;
+    --green-deep:#0B3D2E;
+    --green-mid:#155C45;
+    --copper:#C2773A;
+    --copper-light:#E3A360;
+    --live:#F2BB2D;
+    --live-soft:#FBE6A8;
+    --blue-spark:#2E6F95;
+    --line:#0B3D2E;
+    --paper-rgb:247,241,226;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:"Noto Serif", "Noto Serif SC", serif;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  ::selection{background:var(--live-soft);}
+
+  h1,h2,h3,.ui{font-family:"Space Grotesk","Noto Serif SC",sans-serif;}
+  .mono{font-family:"JetBrains Mono",monospace;}
+
+  a{color:inherit;}
+
+  /* ===== circuit-trace backdrop ===== */
+  .trace-bg{
+    position:fixed; inset:0; z-index:0; pointer-events:none;
+    opacity:0.5;
+  }
+
+  /* ===== top bar ===== */
+  .topbar{
+    position:sticky; top:0; z-index:50;
+    background:rgba(247,241,226,0.92);
+    backdrop-filter:blur(6px);
+    border-bottom:2px solid var(--green-deep);
+  }
+  .topbar-inner{
+    max-width:1180px; margin:0 auto;
+    display:flex; align-items:center; justify-content:space-between;
+    padding:14px 24px;
+    gap:16px;
+  }
+  .brand{
+    display:flex; align-items:center; gap:10px;
+    font-weight:700; letter-spacing:0.02em;
+  }
+  .brand .chip{
+    width:34px;height:34px;border-radius:6px;
+    background:var(--green-deep);
+    display:flex;align-items:center;justify-content:center;
+    color:var(--live);
+    font-family:"JetBrains Mono",monospace; font-weight:700; font-size:13px;
+    box-shadow:inset 0 0 0 2px rgba(242,187,45,0.25);
+  }
+  .brand-text{display:flex;flex-direction:column;line-height:1.15;}
+  .brand-text .en{font-size:14px;color:var(--green-deep);}
+  .brand-text .cn{font-size:12px;color:var(--copper);font-family:"Noto Serif SC",serif;}
+
+  .lang-toggle{
+    display:flex; border:1.5px solid var(--green-deep); border-radius:999px; overflow:hidden;
+    font-family:"JetBrains Mono",monospace; font-size:12px; flex-shrink:0;
+  }
+  .lang-toggle button{
+    border:none; background:transparent; padding:7px 14px; cursor:pointer;
+    color:var(--green-deep); font-weight:600; letter-spacing:0.03em;
+  }
+  .lang-toggle button.active{background:var(--green-deep); color:var(--live);}
+
+  /* ===== hero ===== */
+  .hero{
+    position:relative; z-index:1;
+    max-width:1180px; margin:0 auto; padding:64px 24px 36px;
+  }
+  .eyebrow{
+    font-family:"JetBrains Mono",monospace; font-size:12px; letter-spacing:0.12em;
+    color:var(--copper); text-transform:uppercase; margin-bottom:14px;
+    display:flex; align-items:center; gap:8px;
+  }
+  .eyebrow .dot{width:7px;height:7px;border-radius:50%;background:var(--live); box-shadow:0 0 0 3px rgba(242,187,45,0.25); animation:pulse 1.8s infinite;}
+  @keyframes pulse{0%,100%{opacity:1;}50%{opacity:.35;}}
+
+  .hero h1{
+    font-size:clamp(34px,6vw,64px);
+    line-height:1.02; margin:0 0 6px; font-weight:700; color:var(--green-deep);
+    letter-spacing:-0.01em;
+  }
+  .hero h1 .cn-line{
+    display:block; font-family:"Noto Serif SC",serif; font-weight:700;
+    font-size:0.62em; color:var(--ink); margin-top:6px;
+  }
+  .hero p.lead{
+    max-width:640px; font-size:17px; line-height:1.7; color:#3a4744; margin-top:18px;
+  }
+  .hero p.lead .cn{display:block; font-family:"Noto Serif SC",serif; color:#5a6663; margin-top:6px; font-size:0.95em;}
+
+  /* ===== breadboard nav ===== */
+  .breadboard{
+    position:relative; z-index:1;
+    max-width:1180px; margin:18px auto 0; padding:0 24px;
+  }
+  .board-strip{
+    background:var(--green-deep);
+    border-radius:14px;
+    padding:18px 16px;
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(118px,1fr));
+    gap:10px;
+    box-shadow:0 14px 30px -16px rgba(11,61,46,0.55);
+  }
+  .pin{
+    background:rgba(247,241,226,0.06);
+    border:1px solid rgba(247,241,226,0.18);
+    border-radius:9px;
+    padding:11px 8px 9px;
+    text-align:center;
+    cursor:pointer;
+    transition:all .2s ease;
+    text-decoration:none;
+    display:flex; flex-direction:column; align-items:center; gap:6px;
+  }
+  .pin:hover{
+    background:rgba(242,187,45,0.14);
+    border-color:var(--live);
+    transform:translateY(-2px);
+  }
+  .pin svg{width:26px;height:18px; stroke:var(--live-soft); fill:none; stroke-width:1.6;}
+  .pin .lbl-en{font-family:"JetBrains Mono",monospace; font-size:10.5px; color:var(--live-soft); letter-spacing:0.02em; line-height:1.3;}
+  .pin .lbl-cn{font-family:"Noto Serif SC",serif; font-size:11.5px; color:#fff; font-weight:600;}
+
+  /* ===== sections ===== */
+  .wrap{max-width:1180px; margin:0 auto; padding:0 24px;}
+  section.block{
+    position:relative; z-index:1;
+    margin-top:74px;
+    scroll-margin-top:90px;
+  }
+  .sec-head{
+    display:flex; align-items:baseline; gap:14px; margin-bottom:22px;
+    border-bottom:3px solid var(--green-deep); padding-bottom:14px;
+  }
+  .sec-num{
+    font-family:"JetBrains Mono",monospace; font-size:13px; font-weight:600;
+    color:var(--copper); background:var(--paper-deep); border:1.5px solid var(--copper);
+    border-radius:6px; padding:3px 9px; flex-shrink:0;
+  }
+  .sec-head h2{
+    font-size:clamp(22px,3.4vw,32px); margin:0; color:var(--green-deep); font-weight:700;
+  }
+  .sec-head h2 .cn{font-family:"Noto Serif SC",serif; font-size:0.72em; color:var(--ink); margin-left:12px; font-weight:600;}
+
+  .grid2{display:grid; grid-template-columns:1.1fr 1fr; gap:28px;}
+  .grid3{display:grid; grid-template-columns:repeat(3,1fr); gap:16px;}
+  @media (max-width:860px){ .grid2{grid-template-columns:1fr;} .grid3{grid-template-columns:1fr;} }
+
+  .card{
+    background:#fff; border:1.5px solid #e2d8bf; border-radius:12px; padding:20px 22px;
+    box-shadow:0 6px 18px -12px rgba(27,42,47,0.18);
+  }
+  .card h3{margin:0 0 10px; font-size:16px; color:var(--green-mid); display:flex; align-items:center; gap:8px;}
+  .card h3 .cn{font-family:"Noto Serif SC",serif; font-size:0.9em; color:var(--copper); font-weight:600;}
+  .card p{margin:0 0 8px; font-size:14.5px; line-height:1.65; color:#2c3a37;}
+  .card p.cn{font-family:"Noto Serif SC",serif; color:#5b665f; font-size:0.94em;}
+  .card ul{margin:8px 0 0; padding-left:20px;}
+  .card li{font-size:14.5px; line-height:1.65; margin-bottom:6px; color:#2c3a37;}
+  .card li .cn{display:block; font-family:"Noto Serif SC",serif; color:#5b665f; font-size:0.92em;}
+
+  .highlight{background:linear-gradient(180deg,transparent 60%, var(--live-soft) 60%); padding:0 2px; font-weight:600;}
+  .key{color:var(--copper); font-weight:700;}
+
+  .formula-box{
+    background:var(--green-deep); color:var(--live-soft);
+    border-radius:10px; padding:16px 20px; font-family:"JetBrains Mono",monospace;
+    font-size:17px; text-align:center; margin:14px 0;
+    letter-spacing:0.02em;
+  }
+  .formula-box .sub{display:block; font-size:11px; color:rgba(255,255,255,0.65); margin-top:6px; font-family:"Noto Serif SC",serif;}
+
+  table.dtab{width:100%; border-collapse:collapse; font-size:13.5px; margin:10px 0;}
+  table.dtab th{background:var(--green-deep); color:var(--live-soft); padding:8px 10px; text-align:left; font-family:"JetBrains Mono",monospace; font-weight:500; font-size:12px;}
+  table.dtab td{padding:7px 10px; border-bottom:1px solid #eee2c6; vertical-align:top;}
+  table.dtab tr:nth-child(even) td{background:#fbf6e8;}
+  table.dtab td .cn{display:block; font-family:"Noto Serif SC",serif; color:#7a847e; font-size:0.92em; margin-top:1px;}
+
+  .tag{
+    display:inline-block; font-family:"JetBrains Mono",monospace; font-size:10.5px;
+    background:var(--copper-light); color:#3b2509; padding:2px 8px; border-radius:5px; margin-right:6px; font-weight:600;
+  }
+
+  .twocol-compare{display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:10px;}
+  .compare-col{border-radius:10px; padding:14px 16px;}
+  .compare-col.series{background:#fdf2e7; border:1.5px solid var(--copper-light);}
+  .compare-col.parallel{background:#eaf4ed; border:1.5px solid #9ec7ab;}
+  .compare-col h4{margin:0 0 8px; font-size:14px;}
+  .compare-col li{font-size:13px; line-height:1.55; margin-bottom:5px;}
+  @media (max-width:700px){.twocol-compare{grid-template-columns:1fr;}}
+
+  /* worked example */
+  .worked{
+    border-left:4px solid var(--live); background:#fffdf4; padding:14px 18px; border-radius:0 10px 10px 0; margin-top:10px;
+  }
+  .worked .step{font-family:"JetBrains Mono",monospace; font-size:13.5px; line-height:1.9; color:#3a3320;}
+
+  /* memory map */
+  .memmap-wrap{
+    background:#fff; border:1.5px solid #e2d8bf; border-radius:16px; padding:18px;
+    overflow:hidden;
+  }
+  .memmap-wrap svg{width:100%; height:auto; display:block;}
+
+  /* quiz */
+  .quiz-card{
+    background:#fff; border:1.5px solid #e2d8bf; border-radius:12px; padding:18px 20px; margin-bottom:12px;
+  }
+  .quiz-q{font-weight:600; font-size:14.5px; margin-bottom:10px; color:var(--green-deep);}
+  .quiz-q .cn{display:block; font-family:"Noto Serif SC",serif; color:#5b665f; font-weight:500; font-size:0.92em; margin-top:2px;}
+  .quiz-opts{display:grid; grid-template-columns:1fr 1fr; gap:8px;}
+  @media (max-width:600px){.quiz-opts{grid-template-columns:1fr;}}
+  .opt{
+    border:1.5px solid #d8cdae; border-radius:8px; padding:9px 12px; font-size:13.5px; cursor:pointer;
+    background:var(--paper); transition:all .15s;
+  }
+  .opt:hover{border-color:var(--copper);}
+  .opt.correct{background:#e3f3e6; border-color:#3f9156; font-weight:600;}
+  .opt.wrong{background:#fbe4e0; border-color:#c85c4e;}
+  .quiz-fb{margin-top:10px; font-size:13px; color:#5b665f; display:none; font-family:"Noto Serif SC",serif;}
+
+  footer{
+    margin:90px 0 40px; text-align:center; font-family:"JetBrains Mono",monospace; font-size:11.5px; color:#8a9089;
+  }
+
+  .scope-pill{
+    position:fixed; bottom:18px; right:18px; z-index:60;
+    background:var(--green-deep); color:var(--live);
+    font-family:"JetBrains Mono",monospace; font-size:11px;
+    padding:8px 14px; border-radius:999px; box-shadow:0 8px 20px -8px rgba(0,0,0,0.4);
+    display:flex; align-items:center; gap:6px;
+  }
+  .scope-pill .b{width:6px;height:6px;border-radius:50%;background:var(--live);animation:pulse 1.8s infinite;}
+
+  /* language hide rules */
+  body.en-only .cn,
+  body.en-only .zh-block { display:none; }
+  body.zh-only .en-block,
+  body.zh-only h1 > span:not(.cn-line) { }
+  body.zh-only .lead > span.en-text{display:none;}
+
+  .en-text{display:block;}
+</style>
+</head>
+<body>
+
+<div class="top-nav" style="background:#fff;padding:10px 16px;border-bottom:2px solid #e5e7eb;position:sticky;top:0;z-index:120">
+  <a class="dashboard-link" href="../index.html" style="display:inline-flex;align-items:center;gap:6px;padding:8px 12px;border-radius:8px;background:#1d4ed8;color:#fff;font-size:13px;font-weight:800;text-decoration:none">&larr; Back to Dashboard</a>
+</div>
+
+<canvas class="trace-bg" id="traceCanvas"></canvas>
+
+<div class="topbar">
+  <div class="topbar-inner">
+    <div class="brand">
+      <div class="chip">07</div>
+      <div class="brand-text">
+        <span class="en">Form 2 Science · Chapter 7</span>
+        <span class="cn">中二科学 · 第七章</span>
+      </div>
+    </div>
+    <div class="lang-toggle" id="langToggle">
+      <button data-mode="both" class="active">EN+中</button>
+      <button data-mode="en">EN</button>
+      <button data-mode="zh">中文</button>
+    </div>
+  </div>
+</div>
+
+<div class="hero">
+  <div class="eyebrow"><span class="dot"></span> THEME 3 · ENERGY AND SUSTAINABILITY</div>
+  <h1>Electricity<br>and Magnetism
+    <span class="cn-line">电与磁</span>
+  </h1>
+  <p class="lead">
+    <span class="en-text">From the spark on a polythene rod to the pull of a solenoid's core — this chapter traces how charge moves, how circuits resist it, and how current bends into magnetism. Tap a component below to jump straight to it.</span>
+    <span class="cn">从聚乙烯棒上的电火花，到螺线管铁芯的吸力——本章追踪电荷如何移动、电路如何产生阻力，以及电流如何转化为磁力。点击下方元件即可跳转到对应章节。</span>
+  </p>
+</div>
+
+<div class="breadboard">
+  <div class="board-strip">
+    <a class="pin" href="#sec-energy">
+      <svg viewBox="0 0 26 18"><path d="M0 9 H6 M20 9 H26 M6 9 L9 2 L13 16 L17 2 L20 9"/></svg>
+      <span class="lbl-en">7.1 ENERGY</span>
+      <span class="lbl-cn">能量</span>
+    </a>
+    <a class="pin" href="#sec-static">
+      <svg viewBox="0 0 26 18"><path d="M3 14 L11 3 L9 9 L17 9 L7 16 L9 10 L3 14 Z" stroke-linejoin="round"/></svg>
+      <span class="lbl-en">ELECTROSTATICS</span>
+      <span class="lbl-cn">静电</span>
+    </a>
+    <a class="pin" href="#sec-electroscope">
+      <svg viewBox="0 0 26 18"><rect x="2" y="2" width="22" height="14" rx="1"/><line x1="13" y1="2" x2="13" y2="9"/><path d="M13 9 L9 16 M13 9 L17 14"/></svg>
+      <span class="lbl-en">ELECTROSCOPE</span>
+      <span class="lbl-cn">验电器</span>
+    </a>
+    <a class="pin" href="#sec-current">
+      <svg viewBox="0 0 26 18"><circle cx="13" cy="9" r="7"/><text x="13" y="13" font-size="8" fill="#FBE6A8" stroke="none" text-anchor="middle" font-family="JetBrains Mono">A</text></svg>
+      <span class="lbl-en">CURRENT</span>
+      <span class="lbl-cn">电流</span>
+    </a>
+    <a class="pin" href="#sec-vr">
+      <svg viewBox="0 0 26 18"><circle cx="13" cy="9" r="7"/><text x="13" y="13" font-size="8" fill="#FBE6A8" stroke="none" text-anchor="middle" font-family="JetBrains Mono">V</text></svg>
+      <span class="lbl-en">V, R, OHM</span>
+      <span class="lbl-cn">电压电阻</span>
+    </a>
+    <a class="pin" href="#sec-circuits">
+      <svg viewBox="0 0 26 18"><rect x="2" y="2" width="9" height="5"/><rect x="2" y="11" width="9" height="5"/><line x1="11" y1="4" x2="24" y2="4"/><line x1="11" y1="13" x2="24" y2="13"/><line x1="24" y1="4" x2="24" y2="13"/></svg>
+      <span class="lbl-en">SERIES/PARALLEL</span>
+      <span class="lbl-cn">串并联</span>
+    </a>
+    <a class="pin" href="#sec-magnetism">
+      <svg viewBox="0 0 26 18"><path d="M5 16 C5 9 9 2 13 2 C17 2 21 9 21 16" stroke-linecap="round"/><path d="M9 16 V13 M17 16 V13"/></svg>
+      <span class="lbl-en">MAGNETISM</span>
+      <span class="lbl-cn">磁学</span>
+    </a>
+    <a class="pin" href="#sec-map">
+      <svg viewBox="0 0 26 18"><circle cx="13" cy="9" r="3"/><line x1="13" y1="6" x2="13" y2="1"/><line x1="13" y1="12" x2="13" y2="17"/><line x1="10" y1="9" x2="2" y2="9"/><line x1="16" y1="9" x2="24" y2="9"/></svg>
+      <span class="lbl-en">MEMORY MAP</span>
+      <span class="lbl-cn">记忆图</span>
+    </a>
+    <a class="pin" href="#sec-quiz">
+      <svg viewBox="0 0 26 18"><path d="M13 2 L13 9 L18 9 L13 16" stroke-linejoin="round" stroke-linecap="round"/></svg>
+      <span class="lbl-en">QUICK QUIZ</span>
+      <span class="lbl-cn">小测验</span>
+    </a>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <!-- 7.1 ENERGY -->
+  <section class="block" id="sec-energy">
+    <div class="sec-head">
+      <span class="sec-num">7.1</span>
+      <h2>Energy &amp; Its Sources <span class="cn">能量与能量来源</span></h2>
+    </div>
+
+    <div class="grid2">
+      <div class="card">
+        <h3>What is energy? <span class="cn">什么是能量？</span></h3>
+        <p><span class="key">Energy</span> is the <span class="highlight">ability to do work</span>. When work is done, energy transfers from one object to another. It's measured in the S.I. unit <span class="key">joule (J)</span>.</p>
+        <p class="cn">能量是<b>做功的能力</b>。当功被完成时，能量会从一个物体转移到另一个物体。能量的国际单位是<b>焦耳（J）</b>。</p>
+        <div class="formula-box">Energy cannot be created or destroyed — only changed in form
+          <span class="sub">能量守恒定律：能量不能被创造或毁灭，只能从一种形式转化为另一种形式</span>
+        </div>
+        <p><b>Example</b> — burning petrol: <span class="mono">Chemical energy → Heat energy + Light energy</span></p>
+      </div>
+
+      <div class="card">
+        <h3>9 forms of energy <span class="cn">九种能量形式</span></h3>
+        <ul>
+          <li>Gravitational potential — stored due to <i>position</i> <span class="cn">重力势能 — 因位置而储存</span></li>
+          <li>Elastic potential — stored due to <i>condition</i> (stretched/compressed) <span class="cn">弹性势能 — 因状态（拉伸/压缩）而储存</span></li>
+          <li>Kinetic — possessed by a <i>moving</i> object <span class="cn">动能 — 运动物体所拥有</span></li>
+          <li>Light, Nuclear, Chemical, Heat, Sound, Electrical <span class="cn">光能、核能、化学能、热能、声能、电能</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="grid3" style="margin-top:16px;">
+      <div class="card">
+        <h3>Sources of energy <span class="cn">能量来源</span></h3>
+        <p>Wave, hydro, solar, fossil fuels, wind, geothermal, biomass, radioactive substances. <span class="key">The Sun</span> is the main source on Earth.</p>
+        <p class="cn">波浪能、水力能、太阳能、化石燃料、风能、地热能、生物质能、放射性物质。<b>太阳</b>是地球上主要的能量来源。</p>
+      </div>
+      <div class="card">
+        <h3>Electrostatic charges <span class="cn">静电荷</span></h3>
+        <p>Produced when two objects are <span class="key">rubbed together</span> — electrons transfer between them.</p>
+        <p class="cn">当两个物体<b>相互摩擦</b>时产生 — 电子在两者之间转移。</p>
+      </div>
+      <div class="card">
+        <h3>Neutral object <span class="cn">中性物体</span></h3>
+        <p>Has equal protons &amp; electrons. <span class="key">Loses</span> electrons → positive. <span class="key">Gains</span> electrons → negative.</p>
+        <p class="cn">质子与电子数量相等。<b>失去</b>电子 → 带正电；<b>获得</b>电子 → 带负电。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ELECTROSTATICS -->
+  <section class="block" id="sec-static">
+    <div class="sec-head">
+      <span class="sec-num">7.1b</span>
+      <h2>Electrostatic Charges <span class="cn">静电荷</span></h2>
+    </div>
+
+    <div class="grid2">
+      <div class="card">
+        <h3>Producing charge by friction <span class="cn">摩擦生电</span></h3>
+        <p>Rub a polythene rod with woollen cloth: the cloth <span class="key">loses electrons</span> → becomes <b>positive</b>; the rod <span class="key">gains electrons</span> → becomes <b>negative</b>.</p>
+        <p class="cn">用羊毛布摩擦聚乙烯棒：布<b>失去电子</b> → 带<b>正电</b>；棒<b>获得电子</b> → 带<b>负电</b>。</p>
+        <table class="dtab">
+          <tr><th>Becomes negative<span style="display:block;font-weight:400;">变为负电</span></th><th>Becomes positive<span style="display:block;font-weight:400;">变为正电</span></th></tr>
+          <tr><td>Balloon, polythene, plastic, rubber</td><td>Woollen cloth</td></tr>
+          <tr><td>Silk cloth</td><td>Glass, acetate, cellulose</td></tr>
+          <tr><td>Rubber</td><td>Silk cloth</td></tr>
+          <tr><td>Nylon</td><td>Balloon</td></tr>
+        </table>
+      </div>
+
+      <div class="card">
+        <h3>Attraction &amp; repulsion <span class="cn">吸引与排斥</span></h3>
+        <p><span class="key">Similar charges repel</span>; <span class="key">different charges attract</span>.</p>
+        <p class="cn"><b>同性电荷相斥</b>；<b>异性电荷相吸</b>。</p>
+        <ul>
+          <li><b>Lightning ⚡</b> — friction charges clouds; negative charges at the cloud base jump to the ground or another cloud. <span class="cn">闪电 — 摩擦使云层带电；云底的负电荷跳向地面或另一云层。</span></li>
+          <li><b>Aeroplane tyres</b> — specially designed to let accumulated charge flow to earth on landing. <span class="cn">飞机轮胎 — 特别设计使降落时积聚的电荷流向地面。</span></li>
+          <li><b>Petrol tankers</b> — a metal chain lets charge flow to earth (rubber tyres block it). <span class="cn">油罐车 — 金属链让电荷流向地面（橡胶轮胎会阻隔电荷）。</span></li>
+          <li><b>Lightning conductor</b> — sharp metal rod + earthed copper plate protects tall buildings. <span class="cn">避雷针 — 尖锐金属棒加接地铜板，保护高层建筑。</span></li>
+          <li><b>Faraday's cage</b> — conducting enclosure that blocks an electromagnetic field (e.g. a car, a lift). <span class="cn">法拉第笼 — 能阻隔电磁场的导电外壳（例如汽车、电梯）。</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ELECTROSCOPE -->
+  <section class="block" id="sec-electroscope">
+    <div class="sec-head">
+      <span class="sec-num">7.1c</span>
+      <h2>The Electroscope <span class="cn">验电器</span></h2>
+    </div>
+    <div class="grid2">
+      <div class="card">
+        <h3>Structure &amp; purpose <span class="cn">结构与用途</span></h3>
+        <p>An <span class="key">electroscope</span> detects the presence of electric charges. It has a metal cap, insulator, metal rod, and a gold leaf attached at the bottom.</p>
+        <p class="cn">验电器用于检测电荷的存在。它由金属帽、绝缘体、金属杆和底部的金箔组成。</p>
+        <ul>
+          <li>Neutral object touches cap → leaf <span class="key">does not diverge</span> (no electron movement). <span class="cn">中性物体触碰金属帽 → 金箔<b>不张开</b>（没有电子移动）。</span></li>
+          <li>Charged object brought near/touches cap → leaf <span class="key">diverges</span> (rod &amp; leaf gain the same charge → repel). <span class="cn">带电物体靠近/触碰金属帽 → 金箔<b>张开</b>（金属杆与金箔带相同电荷而互相排斥）。</span></li>
+          <li>More charge accumulated → leaf diverges <span class="key">more</span>. <span class="cn">积聚的电荷越多 → 金箔张开得<b>越大</b>。</span></li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Charging by induction <span class="cn">感应充电</span></h3>
+        <p><b>Positive</b> object near cap → electrons move from leaf <span class="key">to</span> the cap (leaf becomes positive, diverges).</p>
+        <p class="cn">正电物体靠近金属帽 → 电子从金箔移<b>向</b>金属帽（金箔带正电，张开）。</p>
+        <p><b>Negative</b> object near cap → electrons move from cap <span class="key">to</span> the leaf (leaf becomes negative, diverges).</p>
+        <p class="cn">负电物体靠近金属帽 → 电子从金属帽移<b>向</b>金箔（金箔带负电，张开）。</p>
+        <div class="formula-box" style="font-size:14px;">Charges can be neutralised by touching a finger on the metal cap
+          <span class="sub">用手指触碰金属帽可中和电荷</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CURRENT -->
+  <section class="block" id="sec-current">
+    <div class="sec-head">
+      <span class="sec-num">7.1d</span>
+      <h2>Electric Current <span class="cn">电流</span></h2>
+    </div>
+    <div class="grid2">
+      <div class="card">
+        <h3>Definition &amp; direction <span class="cn">定义与方向</span></h3>
+        <p><span class="key">Electric current (I)</span> = the rate of flow of electric charges through a conductor. S.I. unit: <b>ampere (A)</b>; also mA, μA.</p>
+        <p class="cn"><b>电流（I）</b> = 电荷通过导体的流动速率。国际单位：<b>安培（A）</b>；也用毫安（mA）、微安（μA）。</p>
+        <p>Current flows from <span class="key">positive → negative</span> terminal. Electrons flow the <span class="key">opposite</span> way (negative → positive).</p>
+        <p class="cn">电流方向：从<b>正极流向负极</b>。电子流动方向<b>相反</b>（负极流向正极）。</p>
+        <p>Measured with an <span class="key">ammeter</span>, connected in <b>series</b>.</p>
+        <p class="cn">用<b>安培计</b>测量，以<b>串联</b>方式连接。</p>
+      </div>
+      <div class="card">
+        <h3>Voltage (potential difference) <span class="cn">电压（电位差）</span></h3>
+        <p><span class="key">Voltage (V)</span> = energy required to move a unit charge between two points. S.I. unit: <b>volt (V)</b>.</p>
+        <p class="cn"><b>电压（V）</b> = 移动单位电荷所需的能量。国际单位：<b>伏特（V）</b>。</p>
+        <p>Measured with a <span class="key">voltmeter</span>, connected in <b>parallel</b>.</p>
+        <p class="cn">用<b>电压计</b>测量，以<b>并联</b>方式连接。</p>
+      </div>
+    </div>
+
+    <div class="grid2" style="margin-top:16px;">
+      <div class="card">
+        <h3>Resistance <span class="cn">电阻</span></h3>
+        <p><span class="key">Resistance (R)</span> resists the flow of charge. Higher R → lower current. Unit: <b>ohm (Ω)</b>.</p>
+        <p class="cn"><b>电阻（R）</b>阻碍电荷的流动。电阻越大 → 电流越小。单位：<b>欧姆（Ω）</b>。</p>
+        <table class="dtab">
+          <tr><th>Factor 因素</th><th>Effect on resistance 对电阻的影响</th></tr>
+          <tr><td>Length ↑ <span class="cn">长度增加</span></td><td>Resistance ↑ <span class="cn">电阻增加</span></td></tr>
+          <tr><td>Diameter ↑ <span class="cn">直径增加</span></td><td>Resistance ↓ <span class="cn">电阻减少</span></td></tr>
+          <tr><td>Temperature ↑ <span class="cn">温度升高</span></td><td>Resistance ↑ <span class="cn">电阻增加</span></td></tr>
+          <tr><td>Type of material <span class="cn">材料种类</span></td><td>Different materials → different resistance <span class="cn">不同材料电阻不同</span></td></tr>
+        </table>
+      </div>
+      <div class="card">
+        <h3>Types of resistors <span class="cn">电阻器种类</span></h3>
+        <ul>
+          <li><b>Fixed resistor</b> — resistance cannot be adjusted. <span class="cn">固定电阻器 — 电阻不可调节。</span></li>
+          <li><b>Rheostat (variable resistor)</b> — changeable resistance. <span class="cn">变阻器 — 电阻可调节。</span></li>
+          <li><b>LDR (light-dependent resistor)</b> — resistance changes with light intensity. <span class="cn">光敏电阻 — 电阻随光照强度变化。</span></li>
+        </ul>
+        <p style="margin-top:10px;"><i>Why are iron/heater wires thick &amp; short?</i> Thicker, shorter wires → lower resistance → prevent overheating under large current.</p>
+        <p class="cn">为什么电熨斗、热水器的导线又粗又短？较粗较短的导线电阻较低，能防止大电流下过热。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- V R OHM -->
+  <section class="block" id="sec-vr">
+    <div class="sec-head">
+      <span class="sec-num">7.1e</span>
+      <h2>Ohm's Law <span class="cn">欧姆定律</span></h2>
+    </div>
+    <div class="grid2">
+      <div class="card">
+        <h3>The law <span class="cn">定律内容</span></h3>
+        <p>Current flowing through a conductor is <span class="key">directly proportional</span> to the voltage across it, provided temperature &amp; physical conditions stay constant.</p>
+        <p class="cn">在温度和物理条件不变的情况下，导体中流过的电流与其两端的电压<b>成正比</b>。</p>
+        <div class="formula-box">V = I × R
+          <span class="sub">V = 电压（伏特） · I = 电流（安培） · R = 电阻（欧姆）</span>
+        </div>
+        <p>The gradient of an <i>I</i> vs <i>V</i> graph = <span class="mono">1/R</span></p>
+        <p class="cn"><i>I</i>-<i>V</i> 图的斜率 = 1/R</p>
+      </div>
+      <div class="worked">
+        <h3 style="margin-top:0;">Worked example <span class="cn">例题</span></h3>
+        <div class="step">
+Find V across a 20 Ω resistor when I = 0.6 A.
+&gt; V = IR
+&gt; V = 0.6 × 20
+&gt; V = 12 V
+        </div>
+        <div class="step" style="margin-top:10px;">
+A 12 V supply drives current through a 60 Ω resistor. Find I.
+&gt; I = V / R
+&gt; I = 12 / 60
+&gt; I = 0.2 A
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERIES / PARALLEL -->
+  <section class="block" id="sec-circuits">
+    <div class="sec-head">
+      <span class="sec-num">7.2</span>
+      <h2>Series &amp; Parallel Circuits <span class="cn">串联与并联电路</span></h2>
+    </div>
+
+    <div class="card">
+      <h3>Circuit components &amp; symbols <span class="cn">电路元件与符号</span></h3>
+      <table class="dtab">
+        <tr><th>Component 元件</th><th>Function 功能</th></tr>
+        <tr><td>Dry cell 干电池</td><td>Power source 电源</td></tr>
+        <tr><td>Switch 开关</td><td>Connect/disconnect circuit 连接/断开电路</td></tr>
+        <tr><td>Ammeter (A) 安培计</td><td>Measure current — series 测量电流 — 串联</td></tr>
+        <tr><td>Voltmeter (V) 电压计</td><td>Measure voltage — parallel 测量电压 — 并联</td></tr>
+        <tr><td>Resistor / Rheostat 电阻器 / 变阻器</td><td>Control current flow 控制电流</td></tr>
+        <tr><td>Fuse 保险丝</td><td>Breaks circuit on overcurrent 过载时断开电路</td></tr>
+      </table>
+    </div>
+
+    <div class="twocol-compare">
+      <div class="compare-col series">
+        <h4>SERIES 串联</h4>
+        <ul>
+          <li><b>Current</b> same throughout: I = I₁ = I₂ = I₃ <span style="display:block;color:#7a5a36;">电流处处相同</span></li>
+          <li><b>Voltage</b> adds up: V = V₁ + V₂ + V₃ <span style="display:block;color:#7a5a36;">电压相加</span></li>
+          <li><b>Resistance</b> adds up: R = R₁ + R₂ + R₃ <span style="display:block;color:#7a5a36;">电阻相加</span></li>
+          <li>One faulty appliance → whole circuit breaks <span style="display:block;color:#7a5a36;">一个元件故障 → 整个电路断开</span></li>
+          <li>Controlled by <b>one</b> main switch <span style="display:block;color:#7a5a36;">由一个总开关控制</span></li>
+        </ul>
+      </div>
+      <div class="compare-col parallel">
+        <h4>PARALLEL 并联</h4>
+        <ul>
+          <li><b>Current</b> adds up: I = I₁ + I₂ + I₃ <span style="display:block;color:#3d6b4a;">电流相加</span></li>
+          <li><b>Voltage</b> same throughout: V = V₁ = V₂ = V₃ <span style="display:block;color:#3d6b4a;">电压处处相同</span></li>
+          <li><b>Resistance</b>: 1/R = 1/R₁ + 1/R₂ + 1/R₃ <span style="display:block;color:#3d6b4a;">电阻倒数相加</span></li>
+          <li>One faulty appliance → others keep working <span style="display:block;color:#3d6b4a;">一个元件故障 → 其他仍可运作</span></li>
+          <li>Each can have its own switch <span style="display:block;color:#3d6b4a;">各支路可有独立开关</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="grid2" style="margin-top:16px;">
+      <div class="worked">
+        <h3 style="margin-top:0;">Series example <span class="cn">串联例题</span></h3>
+        <div class="step">
+3 resistors in series: 10Ω, 6Ω, 8Ω. Battery = 6V.
+&gt; R = 10+6+8 = 24 Ω
+&gt; V = IR  →  6 = I × 24
+&gt; I = 0.25 A
+        </div>
+      </div>
+      <div class="worked">
+        <h3 style="margin-top:0;">Parallel example <span class="cn">并联例题</span></h3>
+        <div class="step">
+2 resistors in parallel: 4Ω, 12Ω. Battery = 1.5V.
+&gt; 1/R = 1/4 + 1/12 = 1/3
+&gt; R = 3 Ω
+&gt; I = V/R = 1.5/3 = 0.5 A
+        </div>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top:16px;">
+      <h3>Why home wiring is parallel <span class="cn">为什么家居布线采用并联</span></h3>
+      <p>All appliances get the <span class="key">same voltage</span> as the main supply, and other appliances keep working even if one is faulty.</p>
+      <p class="cn">所有电器获得与主电源<b>相同的电压</b>；即使其中一个电器故障，其他电器仍能正常运作。</p>
+    </div>
+  </section>
+
+  <!-- MAGNETISM -->
+  <section class="block" id="sec-magnetism">
+    <div class="sec-head">
+      <span class="sec-num">7.3</span>
+      <h2>Magnetism &amp; Electromagnets <span class="cn">磁学与电磁体</span></h2>
+    </div>
+
+    <div class="grid2">
+      <div class="card">
+        <h3>Magnetic field around conductors <span class="cn">导体周围的磁场</span></h3>
+        <p><b>Straight wire</b> — field forms <span class="key">concentric circles</span> around the wire.</p>
+        <p class="cn"><b>直导线</b> — 磁场形成围绕导线的<b>同心圆</b>。</p>
+        <p><b>Coiled / solenoid</b> — field resembles a bar magnet's field.</p>
+        <p class="cn"><b>螺线管</b> — 磁场类似条形磁铁的磁场。</p>
+        <div class="formula-box" style="font-size:14px;">Right-hand grip rule: thumb = current direction, fingers = field direction
+          <span class="sub">右手定则：拇指指向电流方向，弯曲手指指向磁场方向</span>
+        </div>
+        <p>For a <b>solenoid</b>: thumb points to the <span class="key">north pole</span>; fingers curl in the direction of current flow.</p>
+        <p class="cn">对于<b>螺线管</b>：拇指指向<b>北极</b>；手指弯曲方向为电流流动方向。</p>
+      </div>
+      <div class="card">
+        <h3>Factors affecting field strength <span class="cn">影响磁场强度的因素</span></h3>
+        <ul>
+          <li><b>Current magnitude ↑</b> → field stronger <span class="cn">电流强度增加 → 磁场增强</span></li>
+          <li><b>Number of coil turns ↑</b> → field stronger <span class="cn">线圈匝数增加 → 磁场增强</span></li>
+          <li><b>Soft iron core</b> → field stronger (vs no core) <span class="cn">使用软铁芯 → 磁场增强（相较于无铁芯）</span></li>
+        </ul>
+        <p style="margin-top:10px;">An <b>electromagnet</b> is a <span class="key">temporary</span> magnet — magnetic only while current flows.</p>
+        <p class="cn">电磁体是一种<b>暂时性</b>磁铁——只有电流通过时才具有磁性。</p>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top:16px;">
+      <h3>Applications in daily life <span class="cn">日常生活中的应用</span></h3>
+      <div class="grid3">
+        <ul style="margin:0;"><li>Cranes — move scrap metal <span class="cn">起重机 — 移动废金属</span></li></ul>
+        <ul style="margin:0;"><li>Magnetic door locks <span class="cn">磁性门锁</span></li></ul>
+        <ul style="margin:0;"><li>Compass — points to magnetic poles <span class="cn">指南针 — 指向磁极</span></li></ul>
+        <ul style="margin:0;"><li>Electric bell — hammer knocks repeatedly <span class="cn">电铃 — 锤子反复敲击</span></li></ul>
+        <ul style="margin:0;"><li>Power stations — generate electricity <span class="cn">发电站 — 产生电力</span></li></ul>
+        <ul style="margin:0;"><li>Credit/debit card magnetic strips <span class="cn">信用卡/借记卡磁条</span></li></ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- MEMORY MAP -->
+  <section class="block" id="sec-map">
+    <div class="sec-head">
+      <span class="sec-num">MAP</span>
+      <h2>Chapter Memory Map <span class="cn">本章记忆图</span></h2>
+    </div>
+    <div class="memmap-wrap">
+      <svg viewBox="0 0 1100 760" id="mapSvg">
+        <!-- connecting lines drawn first -->
+        <g stroke="#0B3D2E" stroke-width="2" fill="none" opacity="0.55">
+          <line x1="550" y1="380" x2="550" y2="120"/>
+          <line x1="550" y1="380" x2="270" y2="190"/>
+          <line x1="550" y1="380" x2="830" y2="190"/>
+          <line x1="550" y1="380" x2="180" y2="430"/>
+          <line x1="550" y1="380" x2="920" y2="430"/>
+          <line x1="550" y1="380" x2="300" y2="650"/>
+          <line x1="550" y1="380" x2="800" y2="650"/>
+        </g>
+
+        <!-- center -->
+        <g>
+          <circle cx="550" cy="380" r="70" fill="#0B3D2E"/>
+          <text x="550" y="372" text-anchor="middle" fill="#F2BB2D" font-family="Space Grotesk" font-weight="700" font-size="17">CHAPTER 7</text>
+          <text x="550" y="394" text-anchor="middle" fill="#F7F1E2" font-family="Noto Serif SC" font-size="14">电与磁</text>
+        </g>
+
+        <!-- node: Energy -->
+        <g>
+          <rect x="450" y="60" width="200" height="62" rx="10" fill="#fff" stroke="#C2773A" stroke-width="2"/>
+          <text x="550" y="84" text-anchor="middle" font-family="Space Grotesk" font-weight="700" font-size="14" fill="#0B3D2E">Energy &amp; Sources</text>
+          <text x="550" y="104" text-anchor="middle" font-family="Noto Serif SC" font-size="12" fill="#5b665f">能量与来源</text>
+        </g>
+
+        <!-- node: Electrostatics -->
+        <g>
+          <rect x="160" y="130" width="220" height="62" rx="10" fill="#fff" stroke="#C2773A" stroke-width="2"/>
+          <text x="270" y="154" text-anchor="middle" font-family="Space Grotesk" font-weight="700" font-size="14" fill="#0B3D2E">Electrostatics</text>
+          <text x="270" y="174" text-anchor="middle" font-family="Noto Serif SC" font-size="12" fill="#5b665f">静电荷 · 摩擦生电</text>
+        </g>
+
+        <!-- node: Electroscope -->
+        <g>
+          <rect x="720" y="130" width="220" height="62" rx="10" fill="#fff" stroke="#C2773A" stroke-width="2"/>
+          <text x="830" y="154" text-anchor="middle" font-family="Space Grotesk" font-weight="700" font-size="14" fill="#0B3D2E">Electroscope</text>
+          <text x="830" y="174" text-anchor="middle" font-family="Noto Serif SC" font-size="12" fill="#5b665f">验电器 · 金箔张开</text>
+        </g>
+
+        <!-- node: Current/Voltage/R -->
+        <g>
+          <rect x="40" y="395" width="280" height="70" rx="10" fill="#fff" stroke="#2E6F95" stroke-width="2"/>
+          <text x="180" y="418" text-anchor="middle" font-family="Space Grotesk" font-weight="700" font-size="14" fill="#0B3D2E">Current · Voltage · Resistance</text>
+          <text x="180" y="438" text-anchor="middle" font-family="Noto Serif SC" font-size="12" fill="#5b665f">电流 · 电压 · 电阻</text>
+          <text x="180" y="455" text-anchor="middle" font-family="JetBrains Mono" font-size="11" fill="#2E6F95">V = IR</text>
+        </g>
+
+        <!-- node: Series/Parallel -->
+        <g>
+          <rect x="780" y="395" width="280" height="70" rx="10" fill="#fff" stroke="#2E6F95" stroke-width="2"/>
+          <text x="920" y="418" text-anchor="middle" font-family="Space Grotesk" font-weight="700" font-size="14" fill="#0B3D2E">Series &amp; Parallel Circuits</text>
+          <text x="920" y="438" text-anchor="middle" font-family="Noto Serif SC" font-size="12" fill="#5b665f">串联 / 并联电路</text>
+          <text x="920" y="455" text-anchor="middle" font-family="JetBrains Mono" font-size="11" fill="#2E6F95">I=ΣI vs V=ΣV</text>
+        </g>
+
+        <!-- node: Magnetism -->
+        <g>
+          <rect x="180" y="615" width="240" height="68" rx="10" fill="#fff" stroke="#155C45" stroke-width="2"/>
+          <text x="300" y="638" text-anchor="middle" font-family="Space Grotesk" font-weight="700" font-size="14" fill="#0B3D2E">Magnetic Fields</text>
+          <text x="300" y="658" text-anchor="middle" font-family="Noto Serif SC" font-size="12" fill="#5b665f">磁场 · 右手定则</text>
+          <text x="300" y="675" text-anchor="middle" font-family="JetBrains Mono" font-size="10" fill="#155C45">straight wire · solenoid</text>
+        </g>
+
+        <!-- node: Electromagnets -->
+        <g>
+          <rect x="680" y="615" width="240" height="68" rx="10" fill="#fff" stroke="#155C45" stroke-width="2"/>
+          <text x="800" y="638" text-anchor="middle" font-family="Space Grotesk" font-weight="700" font-size="14" fill="#0B3D2E">Electromagnets</text>
+          <text x="800" y="658" text-anchor="middle" font-family="Noto Serif SC" font-size="12" fill="#5b665f">电磁体 · 应用</text>
+          <text x="800" y="675" text-anchor="middle" font-family="JetBrains Mono" font-size="10" fill="#155C45">crane · bell · lock</text>
+        </g>
+
+        <!-- small leaf nodes around Energy -->
+        <text x="550" y="45" text-anchor="middle" font-family="JetBrains Mono" font-size="10" fill="#C2773A">9 forms · conservation</text>
+      </svg>
+    </div>
+    <p style="text-align:center; font-size:12.5px; color:#8a9089; margin-top:10px; font-family:'JetBrains Mono',monospace;">tap-friendly overview — every branch links back to a section above</p>
+  </section>
+
+  <!-- QUIZ -->
+  <section class="block" id="sec-quiz">
+    <div class="sec-head">
+      <span class="sec-num">QUIZ</span>
+      <h2>Quick Self-Check <span class="cn">快速自测</span></h2>
+    </div>
+
+    <div class="quiz-card" data-answer="0">
+      <div class="quiz-q">1. What is the S.I. unit of resistance?<span class="cn">电阻的国际单位是什么？</span></div>
+      <div class="quiz-opts">
+        <div class="opt" data-correct="true">Ohm (Ω) <span style="display:block;font-size:11px;color:#7d8a83;">欧姆</span></div>
+        <div class="opt">Joule (J) <span style="display:block;font-size:11px;color:#7d8a83;">焦耳</span></div>
+        <div class="opt">Volt (V) <span style="display:block;font-size:11px;color:#7d8a83;">伏特</span></div>
+        <div class="opt">Ampere (A) <span style="display:block;font-size:11px;color:#7d8a83;">安培</span></div>
+      </div>
+      <div class="quiz-fb">Resistance is measured in ohms (Ω). 电阻以欧姆（Ω）为单位测量。</div>
+    </div>
+
+    <div class="quiz-card">
+      <div class="quiz-q">2. Two resistors of 4Ω and 12Ω are connected in parallel. What is the effective resistance?<span class="cn">4Ω和12Ω两个电阻并联，有效电阻是多少？</span></div>
+      <div class="quiz-opts">
+        <div class="opt">16 Ω</div>
+        <div class="opt" data-correct="true">3 Ω</div>
+        <div class="opt">8 Ω</div>
+        <div class="opt">48 Ω</div>
+      </div>
+      <div class="quiz-fb">1/R = 1/4 + 1/12 = 1/3 → R = 3 Ω. 1/R = 1/4 + 1/12 = 1/3 → R = 3 Ω。</div>
+    </div>
+
+    <div class="quiz-card">
+      <div class="quiz-q">3. In a series circuit, if one bulb blows, what happens to the rest?<span class="cn">在串联电路中，如果一个灯泡损坏，其他灯泡会怎样？</span></div>
+      <div class="quiz-opts">
+        <div class="opt">They glow brighter</div>
+        <div class="opt" data-correct="true">They all stop working</div>
+        <div class="opt">No change</div>
+        <div class="opt">Only the nearest one stops</div>
+      </div>
+      <div class="quiz-fb">A series circuit is one single path — if it breaks, the whole circuit stops. 串联电路只有一条路径——一旦断开，整个电路都会停止工作。</div>
+    </div>
+
+    <div class="quiz-card">
+      <div class="quiz-q">4. Which rule determines the magnetic poles of a solenoid?<span class="cn">哪个定则用于确定螺线管的磁极？</span></div>
+      <div class="quiz-opts">
+        <div class="opt">Fleming's left-hand rule</div>
+        <div class="opt" data-correct="true">Right-hand grip rule</div>
+        <div class="opt">Fleming's right-hand rule</div>
+        <div class="opt">Left-hand grip rule</div>
+      </div>
+      <div class="quiz-fb">The right-hand grip rule: thumb = north pole, fingers = current direction. 右手定则：拇指指向北极，手指弯曲方向为电流方向。</div>
+    </div>
+  </section>
+
+</div>
+
+<div class="scope-pill"><span class="b"></span> CH.7 · ELECTRICITY &amp; MAGNETISM</div>
+
+<footer>
+  FORM 2 SCIENCE · CHAPTER 7 STUDY DASHBOARD · 中二科学 第七章学习面板
+</footer>
+
+<script>
+  // ===== language toggle =====
+  const toggle = document.getElementById('langToggle');
+  toggle.addEventListener('click', (e)=>{
+    const btn = e.target.closest('button');
+    if(!btn) return;
+    [...toggle.children].forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    const mode = btn.dataset.mode;
+    document.body.classList.remove('en-only','zh-only');
+    if(mode==='en') document.body.classList.add('en-only');
+    if(mode==='zh') document.body.classList.add('zh-only');
+  });
+
+  // ===== quiz interactivity =====
+  document.querySelectorAll('.quiz-card').forEach(card=>{
+    const opts = card.querySelectorAll('.opt');
+    const fb = card.querySelector('.quiz-fb');
+    opts.forEach(opt=>{
+      opt.addEventListener('click', ()=>{
+        if(card.dataset.locked) return;
+        card.dataset.locked = "1";
+        opts.forEach(o=>{
+          if(o.dataset.correct==="true") o.classList.add('correct');
+          else if(o===opt) o.classList.add('wrong');
+        });
+        fb.style.display='block';
+      });
+    });
+  });
+
+  // ===== circuit trace canvas background =====
+  const canvas = document.getElementById('traceCanvas');
+  const ctx = canvas.getContext('2d');
+  let W,H;
+  function resize(){
+    W = canvas.width = window.innerWidth;
+    H = canvas.height = document.body.scrollHeight;
+  }
+  resize();
+  window.addEventListener('resize', resize);
+
+  // generate a grid of right-angle "trace" paths
+  const traces = [];
+  function genTraces(){
+    traces.length = 0;
+    const cols = Math.ceil(W/140);
+    const rows = Math.ceil(H/140);
+    for(let i=0;i<26;i++){
+      const x0 = Math.random()*W;
+      const y0 = Math.random()*H;
+      const segs = 2 + Math.floor(Math.random()*3);
+      let pts = [[x0,y0]];
+      let cx=x0, cy=y0;
+      for(let s=0;s<segs;s++){
+        if(Math.random()>0.5){ cx += (Math.random()>0.5?1:-1)*(60+Math.random()*100); }
+        else{ cy += (Math.random()>0.5?1:-1)*(60+Math.random()*100); }
+        pts.push([cx,cy]);
+      }
+      traces.push({pts, phase: Math.random()*Math.PI*2, speed: 0.004+Math.random()*0.006});
+    }
+  }
+  genTraces();
+  window.addEventListener('resize', genTraces);
+
+  function draw(t){
+    ctx.clearRect(0,0,W,H);
+    ctx.strokeStyle = 'rgba(11,61,46,0.10)';
+    ctx.lineWidth = 1.4;
+    traces.forEach(tr=>{
+      ctx.beginPath();
+      ctx.moveTo(tr.pts[0][0], tr.pts[0][1]);
+      for(let i=1;i<tr.pts.length;i++) ctx.lineTo(tr.pts[i][0], tr.pts[i][1]);
+      ctx.stroke();
+      // node dots
+      tr.pts.forEach(p=>{
+        ctx.beginPath();
+        ctx.arc(p[0],p[1],2,0,Math.PI*2);
+        ctx.fillStyle='rgba(11,61,46,0.14)';
+        ctx.fill();
+      });
+      // moving "current" pulse
+      const total = tr.pts.length-1;
+      const prog = (Math.sin(t*tr.speed+tr.phase)+1)/2; // 0..1
+      const segIdx = Math.min(total-1, Math.floor(prog*total));
+      const segT = (prog*total) - segIdx;
+      const p0 = tr.pts[segIdx], p1 = tr.pts[segIdx+1];
+      if(p0 && p1){
+        const px = p0[0] + (p1[0]-p0[0])*segT;
+        const py = p0[1] + (p1[1]-p0[1])*segT;
+        ctx.beginPath();
+        ctx.arc(px,py,2.6,0,Math.PI*2);
+        ctx.fillStyle='rgba(242,187,45,0.85)';
+        ctx.shadowColor='rgba(242,187,45,0.7)';
+        ctx.shadowBlur=6;
+        ctx.fill();
+        ctx.shadowBlur=0;
+      }
+    });
+    requestAnimationFrame(draw);
+  }
+  requestAnimationFrame(draw);
+</script>
+
+</body>
+</html>
