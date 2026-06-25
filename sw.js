@@ -45,6 +45,7 @@ const STATIC_ASSETS = [
     "/science/t2_Chapter7-Electricity-Magnetism.html",
     "/science/t2_chapter10_sound_waves.html",
     "/moral/t2_moral_unit14.html",
+    "/moral/t2_Unit14_KonflikIdentitiDiri.html",
     "/moral/t2_moral_unit13.html",
     "/moral/t2_moral_unit11.html",
     "/moral/t2_moral_unit10.html",

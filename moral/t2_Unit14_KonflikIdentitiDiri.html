@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Unit 14 · Menangani Konflik Identiti Diri</title>
+<style>
+  :root{
+    --ink:#1c2a3a;
+    --paper:#f6f1e6;
+    --paper2:#eee6d4;
+    --navy:#1f3a5f;
+    --navy-deep:#142840;
+    --brass:#a8762f;
+    --brass-light:#c99a4f;
+    --rule:#cdbf9e;
+    --factor:#9c4a5c;
+    --solution:#3c6e5e;
+    --importance:#5b5390;
+    --case:#a85a2a;
+    --good:#3c6e5e;
+    --bad:#9c4a5c;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Iowan Old Style','Songti SC','Noto Serif SC',Georgia,serif;
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+  .zh{font-family:'Songti SC','Noto Serif SC','PingFang SC',serif;}
+  .label{
+    font-family:'Helvetica Neue',Arial,sans-serif;
+    letter-spacing:.12em;
+    text-transform:uppercase;
+    font-size:.68rem;
+    font-weight:600;
+  }
+
+  /* ===== Masthead ===== */
+  .masthead{
+    background:linear-gradient(180deg,var(--navy-deep),var(--navy));
+    color:var(--paper);
+    padding:2.6rem 1.4rem 2rem;
+    position:relative;
+    overflow:hidden;
+    border-bottom:6px solid var(--brass);
+  }
+  .masthead::before{
+    content:"";
+    position:absolute; inset:0;
+    background-image:
+      repeating-linear-gradient(0deg, rgba(255,255,255,.035) 0 1px, transparent 1px 26px);
+    pointer-events:none;
+  }
+  .seal{width:64px;height:64px;margin:0 auto 1rem;position:relative;}
+  .seal svg{width:100%;height:100%;}
+  .mast-eyebrow{text-align:center;color:var(--brass-light);margin-bottom:.5rem;}
+  .mast-unit{
+    text-align:center;font-size:.95rem;color:#cdd9e6;
+    letter-spacing:.18em;text-transform:uppercase;margin-bottom:.3rem;
+  }
+  h1.mast-title{text-align:center;font-size:1.8rem;margin:.2rem 0 .15rem;font-weight:700;letter-spacing:.01em;}
+  .mast-title .zh{display:block;font-size:1.1rem;color:var(--brass-light);margin-top:.35rem;font-weight:500;letter-spacing:.04em;}
+  .mast-title .en{display:block;font-size:.92rem;font-style:italic;color:#cdd9e6;margin-top:.3rem;font-weight:400;}
+  .mast-sub{text-align:center;font-size:.78rem;color:#9fb0c4;margin-top:.9rem;font-family:'Helvetica Neue',Arial,sans-serif;}
+
+  /* ===== Sticky lang toggle ===== */
+  .langbar{
+    position:sticky; top:0; z-index:50;
+    background:var(--paper2);
+    border-bottom:1px solid var(--rule);
+    padding:.55rem .9rem;
+    display:flex; gap:.4rem; justify-content:center;
+    font-family:'Helvetica Neue',Arial,sans-serif;
+  }
+  .langbar button{
+    border:1px solid var(--rule);background:var(--paper);color:var(--ink);
+    padding:.35rem .85rem;font-size:.75rem;letter-spacing:.06em;
+    border-radius:3px;cursor:pointer;font-weight:600;
+  }
+  .langbar button.active{background:var(--navy);color:var(--paper);border-color:var(--navy);}
+
+  .wrap{max-width:880px;margin:0 auto;padding:0 1.1rem 4rem;}
+  section{margin-top:2.6rem;}
+
+  .section-head{
+    display:flex; align-items:baseline; gap:.6rem;
+    margin-bottom:.9rem;
+    border-bottom:2px solid var(--ink);
+    padding-bottom:.45rem;
+  }
+  .section-head .num{
+    font-family:'Helvetica Neue',Arial,sans-serif;font-size:.75rem;font-weight:700;
+    color:var(--brass);border:1px solid var(--brass);border-radius:50%;
+    width:1.5rem;height:1.5rem;display:flex;align-items:center;justify-content:center;flex-shrink:0;
+  }
+  .section-head h2{font-size:1.2rem;margin:0;font-weight:700;}
+  .section-head .sub{
+    font-family:'Helvetica Neue',Arial,sans-serif;font-size:.78rem;color:#6b6354;
+    margin-left:auto;white-space:nowrap;
+  }
+
+  /* ===== Mind map ===== */
+  .mindmap-frame{
+    background:var(--paper);border:1px solid var(--rule);border-radius:8px;
+    padding:1.4rem .6rem 1.8rem;overflow-x:auto;
+  }
+  .mindmap{min-width:680px;position:relative;}
+  .mm-center{
+    text-align:center;margin:0 auto 1.6rem;max-width:300px;
+    background:var(--navy);color:var(--paper);border-radius:10px;
+    padding:.8rem 1rem;box-shadow:0 3px 0 var(--brass);
+  }
+  .mm-center .ms{font-weight:700;font-size:.92rem;}
+  .mm-center .en{font-size:.7rem;font-style:italic;color:#cdd9e6;margin-top:.15rem;}
+  .mm-center .zh{font-size:.76rem;color:var(--brass-light);margin-top:.15rem;}
+
+  .mm-branches{display:grid;grid-template-columns:repeat(3,1fr);gap:.9rem;position:relative;}
+  .mm-branches::before{content:"";position:absolute;top:-.9rem;left:16.6%;right:16.6%;height:1px;background:var(--rule);}
+  .mm-branch{border-radius:8px;padding:.7rem .6rem .8rem;position:relative;border:1px solid var(--rule);}
+  .mm-branch::before{content:"";position:absolute;top:-.9rem;left:50%;width:1px;height:.9rem;background:var(--rule);}
+  .mm-branch.factors{background:#f3e7ea;}
+  .mm-branch.solutions{background:#e7eee9;}
+  .mm-branch.importance{background:#eae8f1;}
+
+  .mm-branch .head{
+    font-family:'Helvetica Neue',Arial,sans-serif;font-weight:700;font-size:.76rem;
+    margin-bottom:.5rem;padding-bottom:.35rem;border-bottom:1px solid rgba(0,0,0,.1);
+  }
+  .mm-branch.factors .head{color:var(--factor);}
+  .mm-branch.solutions .head{color:var(--solution);}
+  .mm-branch.importance .head{color:var(--importance);}
+  .mm-branch .head .zh{display:block;font-weight:500;font-size:.66rem;opacity:.85;margin-top:.1rem;}
+
+  .mm-branch ul{list-style:none;margin:0;padding:0;font-size:.72rem;display:flex;flex-direction:column;gap:.38rem;}
+  .mm-branch li{background:rgba(255,255,255,.65);border-radius:5px;padding:.32rem .4rem;line-height:1.3;}
+  .mm-branch li .ms{font-weight:600;display:block;}
+  .mm-branch li .zh{display:block;opacity:.8;font-size:.66rem;margin-top:.08rem;}
+
+  @media (max-width:680px){.mindmap{min-width:880px;}}
+
+  /* ===== Definition card ===== */
+  .def-card{
+    border:1px solid var(--rule);border-radius:8px;background:var(--paper);
+    padding:1rem 1.1rem;
+  }
+  .def-card p{margin:.4rem 0;font-size:.92rem;}
+  .def-card .zh{display:block;color:#6b6354;font-size:.82rem;margin-top:.15rem;}
+  .def-card .en{display:block;color:#8a8270;font-size:.8rem;font-style:italic;margin-top:.1rem;}
+
+  /* ===== Factor cards ===== */
+  .factor-card{
+    border:1px solid var(--rule);border-radius:8px;overflow:hidden;margin-bottom:.7rem;
+  }
+  .factor-card .bar{
+    padding:.55rem .85rem;font-family:'Helvetica Neue',Arial,sans-serif;font-weight:700;
+    font-size:.82rem;color:#fff;background:var(--factor);
+    display:flex;flex-wrap:wrap;align-items:baseline;gap:.4rem;
+  }
+  .factor-card .bar .zh{font-weight:500;opacity:.9;font-size:.74rem;}
+  .factor-card .body{background:var(--paper);padding:.7rem .9rem .8rem;font-size:.86rem;}
+  .factor-card .body .zh{display:block;color:#6b6354;font-size:.78rem;margin-top:.2rem;}
+
+  /* ===== Peer influence note ===== */
+  .peer-note{
+    background:var(--paper2);border-left:3px solid var(--brass);
+    padding:.7rem .9rem;border-radius:0 4px 4px 0;font-size:.88rem;margin-top:.8rem;
+  }
+  .peer-note .label{display:block;margin-bottom:.3rem;color:var(--brass);}
+  .peer-note .zh{display:block;color:#6b6354;font-size:.78rem;margin-top:.2rem;}
+  .peer-note .en{display:block;color:#8a8270;font-size:.76rem;font-style:italic;margin-top:.1rem;}
+
+  /* ===== Solutions list ===== */
+  .solutions-list{display:flex;flex-direction:column;gap:.5rem;}
+  .sol-item{
+    display:flex;gap:.6rem;align-items:flex-start;
+    border:1px solid var(--rule);border-radius:7px;
+    padding:.55rem .75rem;background:var(--paper);
+  }
+  .sol-item .sn{
+    font-family:'Helvetica Neue',Arial,sans-serif;font-weight:700;color:#fff;
+    background:var(--solution);border-radius:50%;width:1.4rem;height:1.4rem;
+    display:flex;align-items:center;justify-content:center;font-size:.72rem;flex-shrink:0;
+  }
+  .sol-item .st{font-size:.88rem;}
+  .sol-item .st .zh{display:block;color:#6b6354;font-size:.78rem;margin-top:.1rem;}
+  .sol-item .st .en{display:block;color:#8a8270;font-size:.76rem;font-style:italic;margin-top:.05rem;}
+
+  /* ===== Importance fan ===== */
+  .importance-grid{display:grid;grid-template-columns:1fr 1fr;gap:.6rem;}
+  .imp-item{
+    border:1px solid var(--rule);border-radius:8px;padding:.6rem .75rem;
+    background:#eae8f1;font-size:.84rem;
+  }
+  .imp-item .zh{display:block;color:#5b5390;font-size:.74rem;margin-top:.15rem;opacity:.85;}
+  @media (max-width:520px){.importance-grid{grid-template-columns:1fr;}}
+
+  /* ===== NGO/matching exercise (Q1) ===== */
+  .match-grid{display:flex;flex-direction:column;gap:.65rem;}
+  .match-row{
+    display:grid;grid-template-columns:1fr 1fr;gap:.6rem;
+    border:1px solid var(--rule);border-radius:8px;padding:.7rem .8rem;background:var(--paper);
+  }
+  .match-row .factor-side{
+    font-family:'Helvetica Neue',Arial,sans-serif;font-weight:700;font-size:.8rem;color:var(--factor);
+    border-right:1px dashed var(--rule);padding-right:.6rem;display:flex;align-items:center;
+  }
+  .match-row .situation-side{font-size:.8rem;}
+  .match-row .situation-side .zh{display:block;color:#6b6354;font-size:.72rem;margin-top:.15rem;}
+  @media (max-width:560px){
+    .match-row{grid-template-columns:1fr;}
+    .match-row .factor-side{border-right:none;border-bottom:1px dashed var(--rule);padding-bottom:.4rem;padding-right:0;}
+  }
+
+  /* ===== Case study (Arman) ===== */
+  .case-frame{
+    border:1px solid var(--rule);border-radius:8px;overflow:hidden;background:var(--paper);
+  }
+  .case-bar{
+    background:var(--case);color:#fff;padding:.55rem .85rem;
+    font-family:'Helvetica Neue',Arial,sans-serif;font-weight:700;font-size:.82rem;
+  }
+  .case-body{padding:1rem 1.1rem;}
+  .case-text{font-size:.9rem;margin-bottom:1rem;}
+  .case-text .zh{display:block;color:#6b6354;font-size:.8rem;margin-top:.35rem;}
+  .case-text .en{display:block;color:#8a8270;font-size:.78rem;font-style:italic;margin-top:.25rem;}
+
+  .qa-block{margin-bottom:1.1rem;}
+  .qa-q{
+    font-family:'Helvetica Neue',Arial,sans-serif;font-weight:700;font-size:.82rem;
+    color:var(--navy);margin-bottom:.3rem;
+    display:flex;gap:.4rem;align-items:baseline;flex-wrap:wrap;
+  }
+  .qa-q .marks{
+    font-weight:400;font-size:.7rem;color:var(--brass);margin-left:auto;
+    border:1px solid var(--brass);border-radius:999px;padding:.1rem .5rem;
+  }
+  .qa-q .zh{font-weight:500;font-size:.74rem;color:#6b6354;width:100%;}
+  .qa-ans{
+    background:var(--paper2);border-radius:6px;padding:.6rem .8rem;font-size:.86rem;
+  }
+  .qa-ans ul{margin:0;padding-left:1.1rem;}
+  .qa-ans li{margin-bottom:.4rem;}
+  .qa-ans li .zh,.qa-ans li .en{display:block;font-size:.74rem;color:#8a8270;margin-top:.08rem;}
+
+  /* ===== values & footer ===== */
+  .values-row{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:.3rem;}
+  .value-chip{
+    border:1px solid var(--brass);color:var(--brass);border-radius:999px;
+    padding:.3rem .8rem;font-size:.78rem;font-family:'Helvetica Neue',Arial,sans-serif;font-weight:600;
+  }
+  .value-chip .zh{margin-left:.3rem;opacity:.75;font-weight:400;}
+
+  footer{
+    text-align:center;margin-top:3rem;padding-top:1.2rem;border-top:1px solid var(--rule);
+    font-family:'Helvetica Neue',Arial,sans-serif;font-size:.72rem;color:#9a9180;
+  }
+
+  body.hide-en .en{display:none !important;}
+  body.hide-zh .zh{display:none !important;}
+</style>
+</head>
+<body>
+
+<div class="top-nav" style="background:#fff;padding:10px 16px;border-bottom:2px solid #e5e7eb;position:sticky;top:0;z-index:120">
+  <a class="dashboard-link" href="../index.html" style="display:inline-flex;align-items:center;gap:6px;padding:8px 12px;border-radius:8px;background:#1d4ed8;color:#fff;font-size:13px;font-weight:800;text-decoration:none">&larr; Back to Dashboard</a>
+</div>
+
+<header class="masthead">
+  <div class="seal">
+    <svg viewBox="0 0 64 64" fill="none">
+      <circle cx="32" cy="32" r="30" stroke="#c99a4f" stroke-width="2"/>
+      <circle cx="24" cy="26" r="6" stroke="#c99a4f" stroke-width="2"/>
+      <circle cx="40" cy="26" r="6" stroke="#c99a4f" stroke-width="2"/>
+      <path d="M16 46 Q24 36 32 46 Q40 36 48 46" stroke="#c99a4f" stroke-width="2" fill="none" stroke-linecap="round"/>
+    </svg>
+  </div>
+  <div class="mast-eyebrow label">Bidang 4 &middot; Moral, Peraturan dan Undang-undang &middot; Form 2 / 表 2</div>
+  <div class="mast-unit">Unit 14</div>
+  <h1 class="mast-title">
+    Menangani Konflik Identiti Diri
+    <span class="zh">应对自我认同冲突</span>
+    <span class="en">Managing Self-Identity Conflict</span>
+  </h1>
+  <div class="mast-sub">学习地图 &nbsp;·&nbsp; Study Map &nbsp;·&nbsp; Peta Ingatan</div>
+</header>
+
+<div class="langbar">
+  <button id="btn-en" class="active" onclick="setLang('en')">EN</button>
+  <button id="btn-zh" class="active" onclick="setLang('zh')">中文</button>
+</div>
+
+<div class="wrap">
+
+  <!-- VALUES -->
+  <section>
+    <div class="section-head">
+      <div class="num">①</div>
+      <h2>Cadangan Nilai <span class="zh" style="font-size:.85rem;font-weight:400;">建议价值观</span></h2>
+      <div class="sub en">Suggested Values</div>
+    </div>
+    <div class="values-row">
+      <span class="value-chip">Berdikari <span class="zh">自立</span></span>
+      <span class="value-chip">Kejujuran <span class="zh">诚实</span></span>
+      <span class="value-chip">Rasional <span class="zh">理性</span></span>
+      <span class="value-chip">Harga Diri <span class="zh">自尊</span></span>
+      <span class="value-chip">Keberanian <span class="zh">勇敢</span></span>
+    </div>
+  </section>
+
+  <!-- DEFINITION -->
+  <section>
+    <div class="section-head">
+      <div class="num">②</div>
+      <h2>Konflik Identiti Diri Sebagai Remaja <span class="zh" style="font-size:.8rem;font-weight:400;display:block;">作为青少年的自我认同冲突</span></h2>
+      <div class="sub en">Self-Identity Conflict as a Teenager</div>
+    </div>
+    <div class="def-card">
+      <p>
+        Konflik identiti diri merujuk kepada perselisihan atau pertentangan dalaman yang dialami oleh individu.
+        <span class="zh">自我认同冲突指个人内心所经历的分歧或矛盾。</span>
+        <span class="en">Identity conflict refers to the internal disagreement or contradiction experienced by an individual.</span>
+      </p>
+      <p>
+        Perselisihan ini juga mungkin timbul antara individu dengan orang lain berkaitan idea, kepentingan, matlamat dan kehendak, serta dalam perselisihan pengenalan personaliti, keperibadian dan perwatakan.
+        <span class="zh">这种分歧也可能产生于个人与他人之间，涉及想法、利益、目标与意愿，以及个性、人格与性格认同上的冲突。</span>
+        <span class="en">This disagreement may also arise between an individual and others over ideas, interests, goals and desires, as well as in conflicts of personality and character recognition.</span>
+      </p>
+    </div>
+  </section>
+
+  <!-- MIND MAP -->
+  <section>
+    <div class="section-head">
+      <div class="num">③</div>
+      <h2>Peta Minda <span class="zh" style="font-size:.85rem;font-weight:400;">思维导图</span></h2>
+      <div class="sub en">Mind Map</div>
+    </div>
+    <div class="mindmap-frame">
+      <div class="mindmap">
+        <div class="mm-center">
+          <div class="ms">KONFLIK IDENTITI DIRI</div>
+          <div class="zh">自我认同冲突</div>
+          <div class="en">Self-Identity Conflict</div>
+        </div>
+        <div class="mm-branches">
+
+          <div class="mm-branch factors">
+            <div class="head">FAKTOR<span class="zh">影响因素</span></div>
+            <ul>
+              <li><span class="ms">Kurang nilai agama/murni</span><span class="zh">缺乏宗教/纯洁价值观</span></li>
+              <li><span class="ms">Selalu tertekan</span><span class="zh">经常感到压力</span></li>
+              <li><span class="ms">Jati diri lemah</span><span class="zh">自我认同薄弱</span></li>
+              <li><span class="ms">Media massa &amp; rakan sebaya</span><span class="zh">媒体与同伴影响</span></li>
+              <li><span class="ms">Ingin tahu tinggi</span><span class="zh">好奇心强</span></li>
+            </ul>
+          </div>
+
+          <div class="mm-branch solutions">
+            <div class="head">CARA MENGATASI<span class="zh">应对方法</span></div>
+            <ul>
+              <li><span class="ms">Erat ikatan keluarga</span><span class="zh">加强家庭联系</span></li>
+              <li><span class="ms">Pegang teguh ajaran agama</span><span class="zh">坚守宗教教导</span></li>
+              <li><span class="ms">Bersahabat secara positif</span><span class="zh">结交正面朋友</span></li>
+              <li><span class="ms">Gaya hidup sihat</span><span class="zh">健康的生活方式</span></li>
+              <li><span class="ms">Sikap positif &amp; ikut norma</span><span class="zh">积极态度与遵守规范</span></li>
+            </ul>
+          </div>
+
+          <div class="mm-branch importance">
+            <div class="head">KEPENTINGAN<span class="zh">重要性</span></div>
+            <ul>
+              <li><span class="ms">Perkukuh hubungan</span><span class="zh">加强人际关系</span></li>
+              <li><span class="ms">Cegah tindakan negatif</span><span class="zh">防止负面行为</span></li>
+              <li><span class="ms">Jaga imej &amp; maruah</span><span class="zh">维护形象与尊严</span></li>
+              <li><span class="ms">Hidup bahagia &amp; tenteram</span><span class="zh">生活幸福安宁</span></li>
+              <li><span class="ms">Disukai orang lain</span><span class="zh">受他人喜爱</span></li>
+            </ul>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FACTORS DETAIL -->
+  <section>
+    <div class="section-head">
+      <div class="num">④</div>
+      <h2>Faktor yang Mempengaruhi <span class="zh" style="font-size:.8rem;font-weight:400;display:block;">影响因素详解</span></h2>
+      <div class="sub en">Influencing Factors</div>
+    </div>
+
+    <div class="factor-card">
+      <div class="bar">Kurang Penghayatan Agama dan Nilai-Nilai Murni <span class="zh">缺乏宗教与纯洁价值观的内化</span></div>
+      <div class="body">
+        Remaja yang kurang menghayati agama dan nilai-nilai murni cenderung terlibat dalam masalah sosial yang boleh memusnahkan diri mereka.
+        <span class="zh">缺乏宗教信仰与纯洁价值观内化的青少年，容易陷入可能毁掉自己的社会问题中。</span>
+      </div>
+    </div>
+
+    <div class="factor-card">
+      <div class="bar">Selalu Berasa Tertekan <span class="zh">经常感到压力</span></div>
+      <div class="body">
+        Remaja yang selalu mengalami tekanan cenderung melibatkan diri dalam tindakan yang tidak dapat dijangka.
+        <span class="zh">经常承受压力的青少年，容易做出无法预料的行为。</span>
+      </div>
+    </div>
+
+    <div class="factor-card">
+      <div class="bar">Tidak Mempunyai Jati Diri yang Kuat <span class="zh">缺乏坚强的自我认同</span></div>
+      <div class="body">
+        Jati diri yang lemah menyebabkan konflik identiti semakin serius kerana remaja gagal mengawal diri.
+        <span class="zh">薄弱的自我认同会使认同冲突更加严重，因为青少年无法控制自己。</span>
+      </div>
+    </div>
+
+    <div class="factor-card">
+      <div class="bar">Pengaruh Media Massa <span class="zh">媒体的影响</span></div>
+      <div class="body">
+        Remaja mudah dipengaruhi oleh drama dan filem yang mengandungi unsur keganasan.
+        <span class="zh">青少年容易受含有暴力元素的电视剧与电影影响。</span>
+      </div>
+    </div>
+
+    <div class="factor-card">
+      <div class="bar">Perasaan Ingin Mencuba dan Ingin Tahu yang Tinggi dalam Diri <span class="zh">强烈的尝试欲与好奇心</span></div>
+      <div class="body">
+        Remaja sanggup melakukan perkara yang tidak pernah dilakukan sehingga melanggar etika dan norma hidup akibat perasaan ini.
+        <span class="zh">青少年因这种心理而甘愿尝试从未做过的事，甚至违反道德与生活规范。</span>
+      </div>
+    </div>
+
+    <div class="peer-note">
+      <span class="label">Pengaruh Rakan Sebaya / 同伴影响 / Peer Influence</span>
+      Remaja mungkin dipengaruhi oleh rakan sebaya apabila tidak mempunyai pegangan dan matlamat hidup yang jelas.
+      <span class="zh">当青少年没有明确的人生信念与目标时，可能会受到同伴的影响。</span>
+      <span class="en">Teenagers may be influenced by peers when they lack a clear set of beliefs and life goals.</span>
+    </div>
+  </section>
+
+  <!-- SOLUTIONS DETAIL -->
+  <section>
+    <div class="section-head">
+      <div class="num">⑤</div>
+      <h2>Cara Mengatasi Konflik Identiti Diri <span class="zh" style="font-size:.8rem;font-weight:400;display:block;">应对自我认同冲突的方法</span></h2>
+      <div class="sub en">Ways to Overcome the Conflict</div>
+    </div>
+    <div class="solutions-list">
+      <div class="sol-item"><div class="sn">1</div><div class="st">Mempererat ikatan kekeluargaan.<span class="zh">加强家庭联系。</span><span class="en">Strengthen family bonds.</span></div></div>
+      <div class="sol-item"><div class="sn">2</div><div class="st">Berpegang teguh kepada ajaran agama.<span class="zh">坚守宗教教导。</span><span class="en">Hold firmly to religious teachings.</span></div></div>
+      <div class="sol-item"><div class="sn">3</div><div class="st">Bersahabat dengan individu yang bersikap positif.<span class="zh">结交态度积极的朋友。</span><span class="en">Befriend positive-minded individuals.</span></div></div>
+      <div class="sol-item"><div class="sn">4</div><div class="st">Mengamalkan gaya hidup yang sihat dan positif (cth. bersukan untuk meningkatkan daya tahan tubuh).<span class="zh">实践健康积极的生活方式（例如运动以增强体能）。</span><span class="en">Practise a healthy, positive lifestyle (e.g. sports to build resilience).</span></div></div>
+      <div class="sol-item"><div class="sn">5</div><div class="st">Memiliki sikap positif ketika menghadapi masalah.<span class="zh">面对问题时保持积极态度。</span><span class="en">Maintain a positive attitude when facing problems.</span></div></div>
+      <div class="sol-item"><div class="sn">6</div><div class="st">Menghindari tindakan yang tidak sesuai dengan adat dan budaya masyarakat.<span class="zh">避免做出不符合社会风俗与文化的行为。</span><span class="en">Avoid actions inconsistent with social customs and culture.</span></div></div>
+    </div>
+  </section>
+
+  <!-- IMPORTANCE DETAIL -->
+  <section>
+    <div class="section-head">
+      <div class="num">⑥</div>
+      <h2>Kepentingan Menangani Konflik Identiti Diri <span class="zh" style="font-size:.8rem;font-weight:400;display:block;">应对自我认同冲突的重要性</span></h2>
+      <div class="sub en">Importance of Managing the Conflict</div>
+    </div>
+    <div class="importance-grid">
+      <div class="imp-item">Memperkuatkan hubungan dengan orang lain.<span class="zh">加强与他人的关系。</span></div>
+      <div class="imp-item">Mencegah diri daripada terlibat dalam tindakan negatif.<span class="zh">防止自己陷入负面行为。</span></div>
+      <div class="imp-item">Menjaga imej dan maruah.<span class="zh">维护形象与尊严。</span></div>
+      <div class="imp-item">Menjalani kehidupan yang lebih bahagia dan tenteram.<span class="zh">过上更幸福安宁的生活。</span></div>
+      <div class="imp-item" style="grid-column:1/-1;">Disukai oleh orang lain.<span class="zh">受到他人的喜爱。</span></div>
+    </div>
+  </section>
+
+  <!-- MATCHING EXERCISE (Q1) -->
+  <section>
+    <div class="section-head">
+      <div class="num">⑦</div>
+      <h2>Latihan 1: Padankan Faktor dengan Situasi <span class="zh" style="font-size:.78rem;font-weight:400;display:block;">练习一：将因素与情境配对</span></h2>
+      <div class="sub en">[6 markah]</div>
+    </div>
+    <div class="match-grid">
+
+      <div class="match-row">
+        <div class="factor-side">(a) Kurang penghayatan agama dan nilai-nilai murni<span class="zh" style="display:block;font-size:.68rem;font-weight:400;margin-top:.2rem;">缺乏宗教与纯洁价值观的内化</span></div>
+        <div class="situation-side">
+          Remaja yang kurang penghayatan agama dan nilai-nilai murni mudah terlibat dengan masalah sosial yang boleh merosakkan diri.
+          <span class="zh">缺乏宗教与纯洁价值观内化的青少年，容易陷入可能损害自己的社会问题。</span>
+        </div>
+      </div>
+
+      <div class="match-row">
+        <div class="factor-side">(b) Tidak mempunyai jati diri yang kuat<span class="zh" style="display:block;font-size:.68rem;font-weight:400;margin-top:.2rem;">缺乏坚强的自我认同</span></div>
+        <div class="situation-side">
+          Remaja yang tidak mempunyai jati diri dan pendirian yang kuat akan mudah terjerumus dengan konflik identiti diri kerana kegagalan mengawal diri sendiri.
+          <span class="zh">缺乏坚强自我认同与立场的青少年，因无法自我控制而容易陷入认同冲突。</span>
+        </div>
+      </div>
+
+      <div class="match-row">
+        <div class="factor-side">(c) Perasaan ingin mencuba dan ingin tahu yang tinggi dalam diri<span class="zh" style="display:block;font-size:.68rem;font-weight:400;margin-top:.2rem;">强烈的尝试欲与好奇心</span></div>
+        <div class="situation-side">
+          Remaja mudah terpengaruh dengan drama dan filem yang berunsurkan keganasan.
+          <span class="zh">青少年容易受含有暴力元素的电视剧与电影影响。</span>
+        </div>
+      </div>
+
+      <div class="match-row">
+        <div class="factor-side">(d) Selalu berasa tertekan<span class="zh" style="display:block;font-size:.68rem;font-weight:400;margin-top:.2rem;">经常感到压力</span></div>
+        <div class="situation-side">
+          Remaja terdorong untuk melakukan sesuatu perkara di luar jangkaan apabila berasa tertekan.
+          <span class="zh">感到压力时，青少年会被驱使做出意料之外的事。</span>
+        </div>
+      </div>
+
+      <div class="match-row">
+        <div class="factor-side">(e) Pengaruh rakan sebaya<span class="zh" style="display:block;font-size:.68rem;font-weight:400;margin-top:.2rem;">同伴的影响</span></div>
+        <div class="situation-side">
+          Remaja mudah terpengaruh dengan rakan-rakan dan orang sekeliling kerana tiada pegangan dan matlamat hidup yang jelas.
+          <span class="zh">由于缺乏明确的人生信念与目标，青少年容易受朋友与周围人的影响。</span>
+        </div>
+      </div>
+
+      <div class="match-row">
+        <div class="factor-side">(f) Pengaruh media massa<span class="zh" style="display:block;font-size:.68rem;font-weight:400;margin-top:.2rem;">媒体的影响</span></div>
+        <div class="situation-side">
+          Remaja sememangnya mempunyai keinginan untuk mencuba sesuatu yang baharu sehingga boleh melanggar etika dan norma hidup.
+          <span class="zh">青少年本身就有尝试新事物的渴望，以致可能违反道德与生活规范。</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- CASE STUDY: ARMAN -->
+  <section>
+    <div class="section-head">
+      <div class="num">⑧</div>
+      <h2>Latihan 2: Kajian Kes — Arman <span class="zh" style="font-size:.78rem;font-weight:400;display:block;">练习二：案例研究——阿尔曼</span></h2>
+      <div class="sub en">(m/s 173&ndash;175)</div>
+    </div>
+
+    <div class="case-frame">
+      <div class="case-bar">Situasi Arman <span style="opacity:.85;font-weight:400;">情境 &middot; Scenario</span></div>
+      <div class="case-body">
+        <div class="case-text">
+          Arman berasal daripada golongan berada. Sikapnya yang bertagak dan meninggi diri tidak disukai oleh rakan-rakannya. Ibu bapanya sering tiada di rumah kerana sibuk mengurus perniagaan keluarga. Arman berasa sunyi dan mahukan perhatian daripada rakan-rakannya. Akibat tekanan yang dihadapi, kadangkala Arman akan memukul-mukul dinding untuk melepaskan tekanannya.
+          <span class="zh">阿尔曼来自富裕家庭。他傲气、自视甚高的态度不受朋友们的喜爱。他的父母因忙于打理家族生意而经常不在家。阿尔曼感到孤独，渴望朋友的关注。由于承受的压力，阿尔曼有时会用拳头捶打墙壁来释放压力。</span>
+          <span class="en">Arman comes from a wealthy family. His arrogant and condescending attitude is disliked by his friends. His parents are often absent from home as they are busy managing the family business. Arman feels lonely and craves attention from his friends. As a result of the pressure he faces, he sometimes punches the wall to release his stress.</span>
+        </div>
+
+        <div class="qa-block">
+          <div class="qa-q">a) Berikan punca yang menyebabkan Arman bertingkah laku sedemikian.
+            <span class="marks">2 markah</span>
+            <span class="zh">说出导致阿尔曼出现这种行为的原因。</span>
+          </div>
+          <div class="qa-ans">
+            <ul>
+              <li>Ibu bapanya sibuk mengurus perniagaan keluarga sehingga kurang memberi perhatian kepadanya.<span class="zh">父母忙于打理家族生意，因而对他疏于关注。</span></li>
+              <li>Arman berasa sunyi dan tertekan kerana sikapnya sendiri menyebabkan dia tidak disukai oleh rakan-rakan.<span class="zh">由于自身的态度使他不受朋友喜爱，阿尔曼感到孤独与压力。</span></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="qa-block">
+          <div class="qa-q">b) Cadangkan dua cara untuk menyelesaikan masalah Arman.
+            <span class="marks">4 markah</span>
+            <span class="zh">提出两种解决阿尔曼问题的方法。</span>
+          </div>
+          <div class="qa-ans">
+            <ul>
+              <li>Ibu bapa perlu meluangkan masa berkualiti bersama Arman walaupun sibuk dengan perniagaan, untuk mempererat ikatan kekeluargaan.<span class="zh">父母即使忙于生意，也应抽出优质时间陪伴阿尔曼，以加强家庭关系。</span></li>
+              <li>Arman perlu memperbaiki sikapnya dan belajar bersikap positif serta merendah diri agar dapat diterima oleh rakan-rakan.<span class="zh">阿尔曼应改善自己的态度，学习以积极、谦逊的方式待人，以获得朋友的接纳。</span></li>
+              <li>Arman boleh disalurkan kepada aktiviti yang sihat seperti bersukan untuk melepaskan tekanan secara positif.<span class="zh">可以引导阿尔曼参与如运动等健康活动，以积极方式释放压力。</span></li>
+              <li>Mendapatkan khidmat kaunseling sekolah untuk membantu Arman menguruskan emosi dan tekanannya.<span class="zh">寻求学校辅导服务，协助阿尔曼管理情绪与压力。</span></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="qa-block">
+          <div class="qa-q">c) Huraikan kepentingan cara menyelesaikan masalah Arman.
+            <span class="marks">4 markah</span>
+            <span class="zh">阐述解决阿尔曼问题的方法的重要性。</span>
+          </div>
+          <div class="qa-ans">
+            <ul>
+              <li>Hubungan yang erat dengan ibu bapa dapat memberi Arman rasa selamat dan disayangi, sekali gus mengurangkan rasa sunyi.<span class="zh">与父母关系密切能让阿尔曼感到安全与被爱，从而减少孤独感。</span></li>
+              <li>Sikap yang lebih positif membolehkan Arman membina hubungan baik dengan rakan-rakan, sekali gus mengelakkan dirinya daripada tersisih.<span class="zh">更积极的态度能让阿尔曼与朋友建立良好关系，避免被孤立。</span></li>
+              <li>Penyaluran tekanan melalui cara yang sihat dapat mengelakkan Arman daripada bertindak secara mencederakan diri sendiri.<span class="zh">以健康方式释放压力，能避免阿尔曼做出自我伤害的行为。</span></li>
+              <li>Bantuan kaunseling membolehkan Arman memahami dan menguruskan emosinya dengan lebih baik demi kesejahteraan jangka panjang.<span class="zh">辅导协助能让阿尔曼更好地理解与管理情绪，有利于长期的身心健康。</span></li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    KSSM Moral Tingkatan 2 &middot; Unit 14 &middot; Disediakan untuk rujukan pembelajaran peribadi.<br>
+    供个人学习参考使用 &middot; For personal study reference only.
+  </footer>
+
+</div>
+
+<script>
+function setLang(which){
+  const btn = document.getElementById('btn-'+which);
+  btn.classList.toggle('active');
+  const cls = 'hide-' + which;
+  document.body.classList.toggle(cls);
+}
+</script>
+
+</body>
+</html>
