@@ -1,0 +1,867 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Unit 15 · Hak Asasi Manusia Dilindungi Bersama</title>
+<style>
+  :root{
+    --ink:#1c2a3a;
+    --paper:#f6f1e6;
+    --paper2:#eee6d4;
+    --navy:#1f3a5f;
+    --navy-deep:#142840;
+    --brass:#a8762f;
+    --brass-light:#c99a4f;
+    --rule:#cdbf9e;
+    --women:#9c4a5c;
+    --consumer:#3c6e5e;
+    --oku:#5b5390;
+    --worker:#a85a2a;
+    --good:#3c6e5e;
+    --bad:#9c4a5c;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Iowan Old Style','Songti SC','Noto Serif SC',Georgia,serif;
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+  .zh{
+    font-family:'Songti SC','Noto Serif SC','PingFang SC',serif;
+  }
+  .label{
+    font-family:'Helvetica Neue',Arial,sans-serif;
+    letter-spacing:.12em;
+    text-transform:uppercase;
+    font-size:.68rem;
+    font-weight:600;
+  }
+
+  /* ===== Masthead ===== */
+  .masthead{
+    background:linear-gradient(180deg,var(--navy-deep),var(--navy));
+    color:var(--paper);
+    padding:2.6rem 1.4rem 2rem;
+    position:relative;
+    overflow:hidden;
+    border-bottom:6px solid var(--brass);
+  }
+  .masthead::before{
+    content:"";
+    position:absolute; inset:0;
+    background-image:
+      repeating-linear-gradient(0deg, rgba(255,255,255,.035) 0 1px, transparent 1px 26px);
+    pointer-events:none;
+  }
+  .seal{
+    width:64px;height:64px;
+    margin:0 auto 1rem;
+    position:relative;
+  }
+  .seal svg{width:100%;height:100%;}
+  .mast-eyebrow{
+    text-align:center;
+    color:var(--brass-light);
+    margin-bottom:.5rem;
+  }
+  .mast-unit{
+    text-align:center;
+    font-size:.95rem;
+    color:#cdd9e6;
+    letter-spacing:.18em;
+    text-transform:uppercase;
+    margin-bottom:.3rem;
+  }
+  h1.mast-title{
+    text-align:center;
+    font-size:1.9rem;
+    margin:.2rem 0 .15rem;
+    font-weight:700;
+    letter-spacing:.01em;
+  }
+  .mast-title .zh{
+    display:block;
+    font-size:1.15rem;
+    color:var(--brass-light);
+    margin-top:.35rem;
+    font-weight:500;
+    letter-spacing:.04em;
+  }
+  .mast-title .en{
+    display:block;
+    font-size:.95rem;
+    font-style:italic;
+    color:#cdd9e6;
+    margin-top:.3rem;
+    font-weight:400;
+  }
+  .mast-sub{
+    text-align:center;
+    font-size:.78rem;
+    color:#9fb0c4;
+    margin-top:.9rem;
+    font-family:'Helvetica Neue',Arial,sans-serif;
+  }
+
+  /* ===== Sticky lang toggle ===== */
+  .langbar{
+    position:sticky; top:0; z-index:50;
+    background:var(--paper2);
+    border-bottom:1px solid var(--rule);
+    padding:.55rem .9rem;
+    display:flex; gap:.4rem; justify-content:center;
+    font-family:'Helvetica Neue',Arial,sans-serif;
+  }
+  .langbar button{
+    border:1px solid var(--rule);
+    background:var(--paper);
+    color:var(--ink);
+    padding:.35rem .85rem;
+    font-size:.75rem;
+    letter-spacing:.06em;
+    border-radius:3px;
+    cursor:pointer;
+    font-weight:600;
+  }
+  .langbar button.active{
+    background:var(--navy);
+    color:var(--paper);
+    border-color:var(--navy);
+  }
+
+  /* ===== layout shell ===== */
+  .wrap{max-width:880px;margin:0 auto;padding:0 1.1rem 4rem;}
+  section{margin-top:2.6rem;}
+
+  .section-head{
+    display:flex; align-items:baseline; gap:.6rem;
+    margin-bottom:.9rem;
+    border-bottom:2px solid var(--ink);
+    padding-bottom:.45rem;
+  }
+  .section-head .num{
+    font-family:'Helvetica Neue',Arial,sans-serif;
+    font-size:.75rem;
+    font-weight:700;
+    color:var(--brass);
+    border:1px solid var(--brass);
+    border-radius:50%;
+    width:1.5rem;height:1.5rem;
+    display:flex;align-items:center;justify-content:center;
+    flex-shrink:0;
+  }
+  .section-head h2{
+    font-size:1.25rem;
+    margin:0;
+    font-weight:700;
+  }
+  .section-head .sub{
+    font-family:'Helvetica Neue',Arial,sans-serif;
+    font-size:.78rem;
+    color:#6b6354;
+    margin-left:auto;
+    white-space:nowrap;
+  }
+
+  /* ===== Mind map ===== */
+  .mindmap-frame{
+    background:var(--paper);
+    border:1px solid var(--rule);
+    border-radius:8px;
+    padding:1.4rem .6rem 1.8rem;
+    overflow-x:auto;
+  }
+  .mindmap{
+    min-width:680px;
+    position:relative;
+  }
+  .mm-center{
+    text-align:center;
+    margin:0 auto 1.6rem;
+    max-width:280px;
+    background:var(--navy);
+    color:var(--paper);
+    border-radius:10px;
+    padding:.8rem 1rem;
+    box-shadow:0 3px 0 var(--brass);
+  }
+  .mm-center .ms{font-weight:700;font-size:.95rem;}
+  .mm-center .en{font-size:.72rem;font-style:italic;color:#cdd9e6;margin-top:.15rem;}
+  .mm-center .zh{font-size:.78rem;color:var(--brass-light);margin-top:.15rem;}
+
+  .mm-branches{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:.9rem;
+    position:relative;
+  }
+  .mm-branches::before{
+    content:"";
+    position:absolute;
+    top:-.9rem; left:12.5%; right:12.5%;
+    height:1px;
+    background:var(--rule);
+  }
+  .mm-branch{
+    border-radius:8px;
+    padding:.7rem .6rem .8rem;
+    position:relative;
+    border:1px solid var(--rule);
+  }
+  .mm-branch::before{
+    content:"";
+    position:absolute;
+    top:-.9rem; left:50%;
+    width:1px; height:.9rem;
+    background:var(--rule);
+  }
+  .mm-branch.women{background:#f3e7ea;}
+  .mm-branch.consumer{background:#e7eee9;}
+  .mm-branch.oku{background:#eae8f1;}
+  .mm-branch.worker{background:#f3e9dd;}
+
+  .mm-branch .head{
+    font-family:'Helvetica Neue',Arial,sans-serif;
+    font-weight:700;
+    font-size:.78rem;
+    margin-bottom:.5rem;
+    padding-bottom:.35rem;
+    border-bottom:1px solid rgba(0,0,0,.1);
+  }
+  .mm-branch.women .head{color:var(--women);}
+  .mm-branch.consumer .head{color:var(--consumer);}
+  .mm-branch.oku .head{color:var(--oku);}
+  .mm-branch.worker .head{color:var(--worker);}
+  .mm-branch .head .zh{display:block;font-weight:500;font-size:.68rem;opacity:.85;margin-top:.1rem;}
+
+  .mm-branch ul{
+    list-style:none;margin:0;padding:0;
+    font-size:.74rem;
+    display:flex; flex-direction:column; gap:.4rem;
+  }
+  .mm-branch li{
+    background:rgba(255,255,255,.65);
+    border-radius:5px;
+    padding:.35rem .45rem;
+    line-height:1.35;
+  }
+  .mm-branch li .ms{font-weight:600;display:block;}
+  .mm-branch li .zh{display:block;opacity:.8;font-size:.7rem;margin-top:.1rem;}
+
+  @media (max-width:680px){
+    .mindmap{min-width:920px;}
+  }
+
+  /* ===== Rights cards (detail sections) ===== */
+  .rights-card{
+    border:1px solid var(--rule);
+    border-radius:8px;
+    overflow:hidden;
+    margin-bottom:1rem;
+  }
+  .rights-card .bar{
+    padding:.6rem .9rem;
+    font-family:'Helvetica Neue',Arial,sans-serif;
+    font-weight:700;
+    font-size:.85rem;
+    color:#fff;
+    display:flex;align-items:center;gap:.5rem;
+  }
+  .rights-card.women .bar{background:var(--women);}
+  .rights-card.consumer .bar{background:var(--consumer);}
+  .rights-card.oku .bar{background:var(--oku);}
+  .rights-card.worker .bar{background:var(--worker);}
+  .bar .zh{font-weight:500;opacity:.9;font-size:.78rem;}
+  .bar .en{font-style:italic;font-weight:400;opacity:.85;font-size:.75rem;margin-left:auto;}
+
+  .rights-card .body{
+    background:var(--paper);
+    padding:.9rem 1.1rem 1rem;
+  }
+  .rights-card ol{margin:0 0 0 0;padding-left:1.2rem;}
+  .rights-card li{margin-bottom:.55rem;font-size:.92rem;}
+  .rights-card li .zh{display:block;color:#6b6354;font-size:.82rem;margin-top:.1rem;}
+  .rights-card li .en{display:block;color:#8a8270;font-size:.8rem;font-style:italic;margin-top:.1rem;}
+
+  .why-box{
+    background:var(--paper2);
+    border-left:3px solid var(--brass);
+    padding:.6rem .8rem;
+    margin-top:.7rem;
+    font-size:.85rem;
+    border-radius:0 4px 4px 0;
+  }
+  .why-box .label{display:block;margin-bottom:.3rem;color:var(--brass);}
+  .why-box ul{margin:0;padding-left:1.1rem;}
+  .why-box li{margin-bottom:.3rem;}
+  .why-box li .zh, .why-box li .en{display:block;font-size:.78rem;color:#8a8270;}
+
+  .protect-box{
+    margin-top:.6rem;
+    font-size:.85rem;
+  }
+  .protect-box .label{display:block;margin-bottom:.3rem;color:var(--ink);}
+  .protect-box ul{margin:0;padding-left:1.1rem;}
+  .protect-box li{margin-bottom:.3rem;}
+  .protect-box li .zh, .protect-box li .en{display:block;font-size:.78rem;color:#8a8270;}
+
+  /* ===== NGO matching ===== */
+  .ngo-grid{display:flex;flex-direction:column;gap:.8rem;}
+  .ngo-row{
+    display:grid;
+    grid-template-columns:auto 1fr;
+    gap:.7rem;
+    border:1px solid var(--rule);
+    border-radius:8px;
+    padding:.7rem .8rem;
+    background:var(--paper);
+    align-items:center;
+  }
+  .ngo-logo{
+    width:54px;height:54px;
+    border-radius:6px;
+    background:var(--navy);
+    color:var(--paper);
+    display:flex;align-items:center;justify-content:center;
+    font-family:'Helvetica Neue',Arial,sans-serif;
+    font-weight:700;
+    font-size:.62rem;
+    text-align:center;
+    line-height:1.1;
+    flex-shrink:0;
+  }
+  .ngo-name{
+    font-family:'Helvetica Neue',Arial,sans-serif;
+    font-size:.78rem;
+    font-weight:700;
+    line-height:1.3;
+  }
+  .ngo-name .full{display:block;font-weight:400;font-size:.7rem;color:#6b6354;margin-top:.1rem;}
+  .ngo-roles{
+    margin-top:.45rem;
+    font-size:.82rem;
+  }
+  .ngo-roles li{margin-bottom:.3rem;}
+  .ngo-roles li .zh,.ngo-roles li .en{display:block;font-size:.74rem;color:#8a8270;}
+
+  /* ===== True/False quiz ===== */
+  .quiz-item{
+    border:1px solid var(--rule);
+    border-radius:7px;
+    margin-bottom:.6rem;
+    overflow:hidden;
+  }
+  .quiz-q{
+    padding:.6rem .8rem;
+    font-size:.88rem;
+    display:flex; gap:.6rem; align-items:flex-start;
+    background:var(--paper);
+  }
+  .quiz-q .qnum{
+    font-family:'Helvetica Neue',Arial,sans-serif;
+    font-weight:700;
+    font-size:.75rem;
+    color:var(--brass);
+    flex-shrink:0;
+    width:1.2rem;
+  }
+  .quiz-q .qtext .zh,.quiz-q .qtext .en{display:block;font-size:.76rem;color:#8a8270;margin-top:.15rem;}
+  .quiz-controls{
+    display:flex; gap:.4rem;
+    padding:.5rem .8rem .7rem 2.1rem;
+    background:var(--paper2);
+    font-family:'Helvetica Neue',Arial,sans-serif;
+  }
+  .quiz-controls button{
+    border:1px solid var(--rule);
+    background:var(--paper);
+    border-radius:4px;
+    padding:.3rem .7rem;
+    font-size:.78rem;
+    cursor:pointer;
+  }
+  .quiz-controls button.sel-good{background:var(--good);color:#fff;border-color:var(--good);}
+  .quiz-controls button.sel-bad{background:var(--bad);color:#fff;border-color:var(--bad);}
+  .quiz-feedback{
+    padding:0 .8rem .7rem 2.1rem;
+    font-size:.78rem;
+    background:var(--paper2);
+    display:none;
+  }
+  .quiz-feedback.show{display:block;}
+  .quiz-feedback.correct{color:var(--good);font-weight:600;}
+  .quiz-feedback.wrong{color:var(--bad);font-weight:600;}
+  .quiz-score{
+    text-align:center;
+    font-family:'Helvetica Neue',Arial,sans-serif;
+    margin-top:1rem;
+    font-size:.85rem;
+    color:var(--navy);
+    font-weight:700;
+  }
+  .quiz-reset{
+    display:block; margin:.6rem auto 0;
+    font-family:'Helvetica Neue',Arial,sans-serif;
+    font-size:.75rem;
+    background:var(--navy);
+    color:var(--paper);
+    border:none;
+    padding:.4rem 1rem;
+    border-radius:5px;
+    cursor:pointer;
+  }
+
+  /* values & vocab */
+  .values-row{
+    display:flex; flex-wrap:wrap; gap:.5rem;
+    margin-top:.3rem;
+  }
+  .value-chip{
+    border:1px solid var(--brass);
+    color:var(--brass);
+    border-radius:999px;
+    padding:.3rem .8rem;
+    font-size:.78rem;
+    font-family:'Helvetica Neue',Arial,sans-serif;
+    font-weight:600;
+  }
+  .value-chip .zh{margin-left:.3rem;opacity:.75;font-weight:400;}
+
+  footer{
+    text-align:center;
+    margin-top:3rem;
+    padding-top:1.2rem;
+    border-top:1px solid var(--rule);
+    font-family:'Helvetica Neue',Arial,sans-serif;
+    font-size:.72rem;
+    color:#9a9180;
+  }
+
+  /* language visibility classes, toggled by JS */
+  body.hide-en .en{display:none !important;}
+  body.hide-zh .zh{display:none !important;}
+  body.hide-ms .ms-only{display:none !important;}
+</style>
+</head>
+<body>
+
+<header class="masthead">
+  <div class="seal">
+    <svg viewBox="0 0 64 64" fill="none">
+      <circle cx="32" cy="32" r="30" stroke="#c99a4f" stroke-width="2"/>
+      <path d="M32 14 L32 50 M20 22 L44 22 M16 22 L16 30 Q16 34 20 34 Q24 34 24 30 L24 22 M40 22 L40 30 Q40 34 44 34 Q48 34 48 30 L48 22 M24 50 L40 50" stroke="#c99a4f" stroke-width="2" fill="none" stroke-linecap="round"/>
+    </svg>
+  </div>
+  <div class="mast-eyebrow label">Bidang 4 &middot; Moral &middot; Form 2 / 表 2</div>
+  <div class="mast-unit">Unit 15</div>
+  <h1 class="mast-title">
+    Hak Asasi Manusia Dilindungi Bersama
+    <span class="zh">人权共同受到保护</span>
+    <span class="en">Human Rights, Protected Together</span>
+  </h1>
+  <div class="mast-sub">学习地图 &nbsp;·&nbsp; Study Map &nbsp;·&nbsp; Peta Ingatan</div>
+</header>
+
+<div class="langbar">
+  <button id="btn-ms" class="active" onclick="setLang('ms')">BM</button>
+  <button id="btn-en" class="active" onclick="setLang('en')">EN</button>
+  <button id="btn-zh" class="active" onclick="setLang('zh')">中文</button>
+</div>
+
+<div class="wrap">
+
+  <!-- VALUES -->
+  <section>
+    <div class="section-head">
+      <div class="num">①</div>
+      <h2>Cadangan Nilai <span class="zh" style="font-size:.85rem;font-weight:400;">建议价值观</span></h2>
+      <div class="sub en">Suggested Values</div>
+    </div>
+    <div class="values-row">
+      <span class="value-chip">Hormat <span class="zh">尊重</span></span>
+      <span class="value-chip">Bertanggungjawab <span class="zh">负责任</span></span>
+      <span class="value-chip">Kasih Sayang <span class="zh">关爱</span></span>
+      <span class="value-chip">Kesederhanaan <span class="zh">合理</span></span>
+      <span class="value-chip">Keberanian <span class="zh">勇敢</span></span>
+    </div>
+  </section>
+
+  <!-- MIND MAP -->
+  <section>
+    <div class="section-head">
+      <div class="num">②</div>
+      <h2>Peta Minda <span class="zh" style="font-size:.85rem;font-weight:400;">思维导图</span></h2>
+      <div class="sub en">Mind Map</div>
+    </div>
+    <div class="mindmap-frame">
+      <div class="mindmap">
+        <div class="mm-center">
+          <div class="ms">HAK ASASI MANUSIA</div>
+          <div class="zh">人权 &middot; 共同受保护</div>
+          <div class="en">Human Rights — Protected Together</div>
+        </div>
+        <div class="mm-branches">
+
+          <div class="mm-branch women">
+            <div class="head">HAK WANITA<span class="zh">妇女权利</span></div>
+            <ul>
+              <li><span class="ms">Perlindungan &amp; suara</span><span class="zh">受保护与发言权</span></li>
+              <li><span class="ms">Pekerjaan &amp; kenaikan pangkat</span><span class="zh">工作与晋升机会</span></li>
+              <li><span class="ms">Akta 1973 &middot; KPWKM &middot; WAO</span></li>
+            </ul>
+          </div>
+
+          <div class="mm-branch consumer">
+            <div class="head">HAK PENGGUNA<span class="zh">消费者权利</span></div>
+            <ul>
+              <li><span class="ms">Maklumat &amp; pilihan</span><span class="zh">信息与选择权</span></li>
+              <li><span class="ms">Keperluan asas yang selamat</span><span class="zh">安全的基本需求</span></li>
+              <li><span class="ms">Akta 1946 &middot; KPDNHEP &middot; FOMCA</span></li>
+            </ul>
+          </div>
+
+          <div class="mm-branch oku">
+            <div class="head">HAK OKU<span class="zh">残障人士权利</span></div>
+            <ul>
+              <li><span class="ms">Sokongan untuk berdikari</span><span class="zh">支持自立</span></li>
+              <li><span class="ms">Tanpa diskriminasi</span><span class="zh">不受歧视</span></li>
+              <li><span class="ms">Akta OKU 2008 &middot; JKM &middot; MFD</span></li>
+            </ul>
+          </div>
+
+          <div class="mm-branch worker">
+            <div class="head">HAK PEKERJA<span class="zh">工人权利</span></div>
+            <ul>
+              <li><span class="ms">Gaji, cuti &amp; rawatan</span><span class="zh">工资、假期与医疗</span></li>
+              <li><span class="ms">Keselamatan tempat kerja</span><span class="zh">工作场所安全</span></li>
+              <li><span class="ms">Akta Kerja 1955 &middot; MOHR &middot; MTUC</span></li>
+            </ul>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HAK WANITA -->
+  <section>
+    <div class="section-head">
+      <div class="num">③</div>
+      <h2>Hak Wanita <span class="zh" style="font-size:.85rem;font-weight:400;">妇女权利</span></h2>
+      <div class="sub en">Women's Rights</div>
+    </div>
+    <div class="rights-card women">
+      <div class="bar">Hak Wanita <span class="zh">妇女权利</span><span class="en">Women's Rights</span></div>
+      <div class="body">
+        <ol>
+          <li>Hak untuk mendapat perlindungan.<span class="zh">获得保护的权利。</span><span class="en">Right to protection.</span></li>
+          <li>Hak untuk bersuara.<span class="zh">发表意见的权利。</span><span class="en">Right to voice opinions.</span></li>
+          <li>Hak untuk mendapat pekerjaan.<span class="zh">获得工作的权利。</span><span class="en">Right to employment.</span></li>
+          <li>Hak untuk mendapat peluang kenaikan pangkat.<span class="zh">获得升职机会的权利。</span><span class="en">Right to promotion opportunities.</span></li>
+          <li>Hak untuk mendapat pendidikan.<span class="zh">获得教育的权利。</span><span class="en">Right to education.</span></li>
+        </ol>
+        <div class="why-box">
+          <span class="label">Kepentingan / 重要性 / Importance</span>
+          <ul>
+            <li>Mengelakkan wanita daripada menjadi mangsa penganiayaan.<span class="zh">避免妇女成为受害者。</span></li>
+            <li>Membuka peluang mengembangkan potensi diri.<span class="zh">开拓发展个人潜能的机会。</span></li>
+            <li>Membantu wanita hidup berdikari.<span class="zh">帮助妇女自立生活。</span></li>
+          </ul>
+        </div>
+        <div class="protect-box">
+          <span class="label">Cara Melindungi / 保护方式 / How Protected</span>
+          <ul>
+            <li>Akta Perlindungan Wanita dan Gadis 1973.<span class="zh">1973年妇女与女童保护法令。</span></li>
+            <li>Kementerian Pembangunan Wanita, Keluarga dan Masyarakat (KPWKM).<span class="zh">妇女、家庭及社会发展部。</span></li>
+            <li>Pertubuhan Pertolongan Wanita (WAO).<span class="zh">妇女援助组织。</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HAK PENGGUNA -->
+  <section>
+    <div class="section-head">
+      <div class="num">④</div>
+      <h2>Hak Pengguna <span class="zh" style="font-size:.85rem;font-weight:400;">消费者权利</span></h2>
+      <div class="sub en">Consumer Rights</div>
+    </div>
+    <div class="rights-card consumer">
+      <div class="bar">Hak Pengguna <span class="zh">消费者权利</span><span class="en">Consumer Rights</span></div>
+      <div class="body">
+        <ol>
+          <li>Hak mendapat maklumat, membuat pilihan dan menyuarakan pendapat.<span class="zh">获取信息、做出选择并发表意见的权利。</span></li>
+          <li>Hak mendapat keperluan asas, barangan dan perkhidmatan yang selamat.<span class="zh">获得安全的基本需求、商品与服务的权利。</span></li>
+        </ol>
+        <div class="why-box">
+          <span class="label">Kepentingan / 重要性 / Importance</span>
+          <ul>
+            <li>Mencegah pengguna menjadi mangsa eksploitasi pengeluar.<span class="zh">防止消费者被生产商剥削。</span></li>
+            <li>Menyediakan akses kepada maklumat produk yang tepat.<span class="zh">提供准确的产品信息渠道。</span></li>
+            <li>Memastikan keselamatan dan kesihatan pengguna terjamin.<span class="zh">确保消费者的安全与健康。</span></li>
+          </ul>
+        </div>
+        <div class="protect-box">
+          <span class="label">Cara Melindungi / 保护方式 / How Protected</span>
+          <ul>
+            <li>Akta Kawalan Harga 1946 (Pindaan 1973).<span class="zh">1946年价格管制法令（1973年修正）。</span></li>
+            <li>Kementerian Perdagangan Dalam Negeri, Koperasi dan Kepenggunaan.<span class="zh">国内贸易、合作社及消费部。</span></li>
+            <li>Gabungan Persatuan-Persatuan Pengguna Malaysia (FOMCA).<span class="zh">马来西亚消费者协会联合会。</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HAK OKU -->
+  <section>
+    <div class="section-head">
+      <div class="num">⑤</div>
+      <h2>Hak Orang Kurang Upaya (OKU) <span class="zh" style="font-size:.85rem;font-weight:400;">残障人士权利</span></h2>
+      <div class="sub en">Rights of Persons with Disabilities</div>
+    </div>
+    <div class="rights-card oku">
+      <div class="bar">Hak OKU <span class="zh">残障人士权利</span><span class="en">OKU Rights</span></div>
+      <div class="body">
+        <ol>
+          <li>Hak mendapat sokongan untuk berdikari.<span class="zh">获得支持以自立生活的权利。</span></li>
+          <li>Hak dihormati dan menikmati kehidupan normal.<span class="zh">受到尊重并享有正常生活的权利。</span></li>
+          <li>Hak mendapat peluang yang sama.<span class="zh">获得平等机会的权利。</span></li>
+          <li>Hak menjalani kehidupan tanpa sebarang diskriminasi.<span class="zh">享有不受任何歧视的生活的权利。</span></li>
+        </ol>
+        <div class="why-box">
+          <span class="label">Kepentingan / 重要性 / Importance</span>
+          <ul>
+            <li>Meningkatkan keyakinan dan semangat OKU.<span class="zh">增强残障人士的信心与意志。</span></li>
+            <li>Memberi peluang menunjukkan potensi diri dengan yakin.<span class="zh">让他们有信心展现自身潜能。</span></li>
+            <li>Memastikan OKU tidak dipinggirkan oleh masyarakat.<span class="zh">确保残障人士不被社会边缘化。</span></li>
+          </ul>
+        </div>
+        <div class="protect-box">
+          <span class="label">Cara Melindungi / 保护方式 / How Protected</span>
+          <ul>
+            <li>Akta Orang Kurang Upaya 2008.<span class="zh">2008年残障人士法令。</span></li>
+            <li>Jabatan Kebajikan Masyarakat (JKM).<span class="zh">社会福利局。</span></li>
+            <li>Persekutuan Orang Pekak Malaysia (MFD).<span class="zh">马来西亚聋人联合会。</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HAK PEKERJA -->
+  <section>
+    <div class="section-head">
+      <div class="num">⑥</div>
+      <h2>Hak Pekerja <span class="zh" style="font-size:.85rem;font-weight:400;">工人权利</span></h2>
+      <div class="sub en">Workers' Rights</div>
+    </div>
+    <div class="rights-card worker">
+      <div class="bar">Hak Pekerja <span class="zh">工人权利</span><span class="en">Workers' Rights</span></div>
+      <div class="body">
+        <ol>
+          <li>Hak mendapat upah atau gaji dan cuti.<span class="zh">获得工资及假期的权利。</span></li>
+          <li>Hak mendapat rawatan apabila berlaku kemalangan di tempat kerja.<span class="zh">工伤事故时获得治疗的权利。</span></li>
+          <li>Hak mendapat perlindungan, keselamatan dan berpersatuan.<span class="zh">获得保护、安全及组织结社的权利。</span></li>
+        </ol>
+        <div class="why-box">
+          <span class="label">Kepentingan / 重要性 / Importance</span>
+          <ul>
+            <li>Memastikan pekerja menerima gaji setara dengan kerja dilakukan.<span class="zh">确保工资与工作量相匹配。</span></li>
+            <li>Memelihara dan menjaga kebajikan pekerja.<span class="zh">维护并照顾工人的福利。</span></li>
+            <li>Mendorong motivasi dan prestasi tinggi dalam kalangan pekerja.<span class="zh">激励工人保持高水平表现。</span></li>
+          </ul>
+        </div>
+        <div class="protect-box">
+          <span class="label">Cara Melindungi / 保护方式 / How Protected</span>
+          <ul>
+            <li>Akta Kerja 1955.<span class="zh">1955年劳工法令。</span></li>
+            <li>Kementerian Sumber Manusia (MOHR) &middot; Penetapan gaji minimum.<span class="zh">人力资源部 &middot; 最低工资制度。</span></li>
+            <li>Kongres Kesatuan Sekerja Malaysia (MTUC).<span class="zh">马来西亚职工大会。</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- NGO MATCHING -->
+  <section>
+    <div class="section-head">
+      <div class="num">⑦</div>
+      <h2>Padanan NGO <span class="zh" style="font-size:.85rem;font-weight:400;">非政府组织配对</span></h2>
+      <div class="sub en">NGO Matching</div>
+    </div>
+    <div class="ngo-grid">
+
+      <div class="ngo-row">
+        <div class="ngo-logo">FOMCA</div>
+        <div>
+          <div class="ngo-name">FOMCA <span class="full">Gabungan Persatuan-Persatuan Pengguna Malaysia<br><span class="zh">马来西亚消费者协会联合会</span></span></div>
+          <ul class="ngo-roles">
+            <li>Memperjuangkan hak &amp; kepentingan pengguna dengan membangkitkan isu kepenggunaan.<span class="zh">通过提出消费议题来争取消费者权益。</span></li>
+            <li>Badan penyelaras &amp; perunding bagi persatuan pengguna.<span class="zh">作为消费者协会的协调与咨询机构。</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="ngo-row">
+        <div class="ngo-logo">MTUC</div>
+        <div>
+          <div class="ngo-name">MTUC <span class="full">Kesatuan Sekerja Malaysia<br><span class="zh">马来西亚职工大会</span></span></div>
+          <ul class="ngo-roles">
+            <li>Mewujudkan saluran perhubungan antara majikan dan pekerja.<span class="zh">建立雇主与员工之间的沟通渠道。</span></li>
+            <li>Mengadakan kegiatan untuk meningkatkan pengetahuan &amp; kemahiran ahli.<span class="zh">举办活动以提升会员的知识与技能。</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="ngo-row">
+        <div class="ngo-logo">WAO</div>
+        <div>
+          <div class="ngo-name">WAO <span class="full">Pertubuhan Pertolongan Wanita<br><span class="zh">妇女援助组织</span></span></div>
+          <ul class="ngo-roles">
+            <li>Memberikan perlindungan kepada wanita mangsa keganasan rumah tangga.<span class="zh">为家庭暴力受害妇女提供保护。</span></li>
+            <li>Menyediakan khidmat kaunseling &amp; tempat tinggal untuk wanita tertindas.<span class="zh">为受压迫的妇女提供辅导服务与住所。</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="ngo-row">
+        <div class="ngo-logo">MFD</div>
+        <div>
+          <div class="ngo-name">MFD <span class="full">Persekutuan Orang Pekak Malaysia<br><span class="zh">马来西亚聋人联合会</span></span></div>
+          <ul class="ngo-roles">
+            <li>Memperbaik kualiti kehidupan orang cacat pendengaran.<span class="zh">改善听障人士的生活素质。</span></li>
+            <li>Memelihara hak dan kepentingan orang cacat pendengaran.<span class="zh">维护听障人士的权利与权益。</span></li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- TRUE/FALSE QUIZ -->
+  <section>
+    <div class="section-head">
+      <div class="num">⑧</div>
+      <h2>Latihan: Tindakan Berjaya / Tidak Berjaya <span class="zh" style="font-size:.78rem;font-weight:400;display:block;">练习：成功 / 不成功的行动</span></h2>
+    </div>
+    <p style="font-size:.85rem;color:#6b6354;">
+      Pilih 😊 jika tindakan itu BERJAYA melindungi hak asasi manusia, atau 😟 jika tindakan itu TIDAK BERJAYA.
+      <span class="zh" style="display:block;margin-top:.2rem;">如果该行动成功保护人权，请选择😊；如果不成功，请选择😟。</span>
+    </p>
+    <div id="quiz"></div>
+    <div class="quiz-score" id="quiz-score"></div>
+    <button class="quiz-reset" onclick="resetQuiz()">Mula Semula 重新开始 Reset</button>
+  </section>
+
+  <footer>
+    KSSM Moral Tingkatan 2 &middot; Unit 15 &middot; Disediakan untuk rujukan pembelajaran peribadi.<br>
+    供个人学习参考使用 &middot; For personal study reference only.
+  </footer>
+
+</div>
+
+<script>
+function setLang(which){
+  const btn = document.getElementById('btn-'+which);
+  btn.classList.toggle('active');
+  const cls = 'hide-' + which;
+  document.body.classList.toggle(cls);
+}
+
+const QUIZ = [
+  {q:["Masyarakat perlu mengakui sumbangan golongan wanita terhadap pembangunan negara.","社会应认可妇女对国家发展的贡献。","Society should acknowledge women's contribution to national development."], good:true},
+  {q:["Orang kurang upaya harus dibenarkan mengemis untuk membantu keluarga mereka yang susah.","应允许残障人士乞讨以帮助贫困的家人。","Persons with disabilities should be allowed to beg to help their poor families."], good:false},
+  {q:["Majikan perlu menyediakan suasana tempat kerja yang kondusif serta skim ganjaran yang adil.","雇主应提供良好的工作环境及公平的奖励制度。","Employers should provide a conducive workplace and fair reward schemes."], good:true},
+  {q:["Prinsip 'pelanggan ialah raja' membenarkan pengguna mengambil tindakan tanpa bukti yang sah.","\u201c顾客是上帝\u201d原则允许消费者在没有有效证据下采取行动。","The 'customer is king' principle allows consumers to act without valid proof."], good:false},
+  {q:["Golongan wanita wajar dipaparkan dalam semua jenis iklan kerana membantu pengeluar meningkatkan jualan.","妇女应出现在所有广告中，因为这有助生产商提升销量。","Women should appear in all advertisements because it helps producers boost sales."], good:false},
+  {q:["Pekerja perlu bersemuka dan berunding dengan majikan sekiranya menghadapi masalah di tempat kerja.","员工面临工作问题时应与雇主当面协商。","Workers should meet and negotiate with employers when facing workplace problems."], good:true},
+  {q:["Program latihan kemahiran oleh kerajaan membantu OKU hidup berdikari.","政府的技能培训计划帮助残障人士自立生活。","Government skills-training programmes help OKU live independently."], good:true},
+  {q:["Wanita yang didera oleh suami harus berdiam diri demi menjaga maruah keluarga.","遭受丈夫虐待的妇女应为了家庭面子而保持沉默。","A wife abused by her husband should stay silent to protect family honour."], good:false},
+  {q:["Pengambilan OKU dalam pekerjaan hanya akan merugikan majikan kerana kurang produktif.","聘用残障人士只会让雇主吃亏，因为他们生产力较低。","Hiring OKU only disadvantages employers because they are less productive."], good:false},
+  {q:["Penyediaan kaunter khas untuk OKU membantu mereka menyempurnakan urusan dengan cepat dan mudah.","为残障人士设立专用柜台有助他们更快更方便地办事。","Special counters for OKU help them complete tasks quickly and easily."], good:true},
+  {q:["Majikan yang gagal menyumbang KWSP boleh didakwa di mahkamah.","未缴交公积金的雇主可被告上法庭。","Employers who fail to contribute to KWSP can be charged in court."], good:true},
+  {q:["Hak pekerja warga asing tidak perlu diberi perhatian oleh badan bukan kerajaan.","非政府组织不需要关注外籍工人的权益。","NGOs do not need to pay attention to the rights of foreign workers."], good:false},
+  {q:["Program Minggu Suai Kenal membantu pekerja baharu menyesuaikan diri dengan lebih cepat.","新人适应周活动有助新员工更快适应环境。","An orientation-week programme helps new workers adapt more quickly."], good:true},
+  {q:["Penetapan harga barang kawalan membolehkan pengguna membeli keperluan harian pada harga berpatutan.","管制物品的定价让消费者能以合理价格购买日常用品。","Price controls on essential goods let consumers buy daily needs at fair prices."], good:true},
+  {q:["Tandas khas OKU boleh digunakan oleh orang ramai semasa kecemasan.","在紧急情况下，公众可以使用残障人士专用厕所。","The public may use OKU-designated toilets during an emergency."], good:true}
+];
+
+let answers = {};
+
+function renderQuiz(){
+  const c = document.getElementById('quiz');
+  c.innerHTML = '';
+  QUIZ.forEach((item,i)=>{
+    const div = document.createElement('div');
+    div.className = 'quiz-item';
+    div.innerHTML = `
+      <div class="quiz-q">
+        <span class="qnum">${i+1}.</span>
+        <span class="qtext">
+          <span class="ms">${item.q[0]}</span>
+          <span class="zh">${item.q[1]}</span>
+          <span class="en">${item.q[2]}</span>
+        </span>
+      </div>
+      <div class="quiz-controls">
+        <button onclick="answer(${i},true,this)">😊 Berjaya</button>
+        <button onclick="answer(${i},false,this)">😟 Tidak Berjaya</button>
+      </div>
+      <div class="quiz-feedback" id="fb-${i}"></div>
+    `;
+    c.appendChild(div);
+  });
+}
+
+function answer(i, val, btn){
+  answers[i] = val;
+  const controls = btn.parentElement;
+  controls.querySelectorAll('button').forEach(b=>b.classList.remove('sel-good','sel-bad'));
+  btn.classList.add(val ? 'sel-good' : 'sel-bad');
+
+  const fb = document.getElementById('fb-'+i);
+  const correct = QUIZ[i].good === val;
+  fb.classList.add('show');
+  if(correct){
+    fb.className = 'quiz-feedback show correct';
+    fb.textContent = '✓ Betul / 正确 / Correct';
+  } else {
+    fb.className = 'quiz-feedback show wrong';
+    fb.textContent = '✗ Cuba lagi — jawapan sebenar: ' + (QUIZ[i].good ? 'Berjaya 😊' : 'Tidak Berjaya 😟');
+  }
+  updateScore();
+}
+
+function updateScore(){
+  const total = QUIZ.length;
+  const answered = Object.keys(answers).length;
+  let correct = 0;
+  for(const k in answers){
+    if(answers[k] === QUIZ[k].good) correct++;
+  }
+  const el = document.getElementById('quiz-score');
+  if(answered === 0){
+    el.textContent = '';
+  } else {
+    el.textContent = `Skor / 分数 / Score: ${correct} / ${answered} dijawab (${total} jumlah)`;
+  }
+}
+
+function resetQuiz(){
+  answers = {};
+  renderQuiz();
+  document.getElementById('quiz-score').textContent = '';
+}
+
+renderQuiz();
+</script>
+
+</body>
+</html>
