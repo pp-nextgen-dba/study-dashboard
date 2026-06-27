@@ -44,6 +44,8 @@ const STATIC_ASSETS = [
     "/science/form2_science_chapter9_heat.html",
     "/science/t2_Chapter7-Electricity-Magnetism.html",
     "/science/t2_Chapter8-Force-and-Motion.html",
+    "/science/22_science_ch8_force_motion_note2.html",
+    "/science/t2_science_ch8_force_motion_note3.html",
     "/science/t2_chapter10_sound_waves.html",
     "/moral/t2_moral_unit14.html",
     "/moral/t2_Unit14_KonflikIdentitiDiri.html",

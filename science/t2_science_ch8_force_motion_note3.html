@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Form 2 Science Chapter 8: Force and Motion / 力与运动</title>
+<style>
+  :root{
+    --blue:#0b63ce;--sky:#e8f5ff;--teal:#00a6a6;--green:#28a745;--orange:#ff9f1c;--pink:#ff5c8a;--purple:#7b61ff;--yellow:#ffe066;--dark:#213547;--muted:#5d6d7e;--card:#ffffff;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:Inter,Segoe UI,Arial,"Microsoft YaHei",sans-serif;background:linear-gradient(180deg,#eaf6ff 0%,#fffaf0 45%,#f6fff8 100%);color:var(--dark);line-height:1.55}
+  .hero{position:relative;overflow:hidden;background:radial-gradient(circle at top left,#39c5ff 0,#0875d1 38%,#08499a 100%);color:white;padding:34px 18px 42px;text-align:center;border-bottom-left-radius:34px;border-bottom-right-radius:34px;box-shadow:0 10px 30px rgba(8,73,154,.25)}
+  .hero:before,.hero:after{content:"";position:absolute;border-radius:50%;background:rgba(255,255,255,.12)}
+  .hero:before{width:180px;height:180px;left:-55px;top:-50px}.hero:after{width:260px;height:260px;right:-90px;bottom:-120px}
+  .badge{display:inline-block;background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.35);padding:7px 16px;border-radius:999px;font-weight:800;letter-spacing:.3px}
+  h1{font-size:clamp(2rem,6vw,4.3rem);line-height:1.05;margin:15px 0 6px;text-shadow:0 4px 12px rgba(0,0,0,.25)}
+  .subtitle{display:inline-block;background:linear-gradient(90deg,#ffd43b,#ff9f1c);color:#573200;padding:10px 26px;border-radius:16px;font-size:clamp(1.1rem,3vw,1.65rem);font-weight:900;margin-top:10px;box-shadow:0 8px 0 rgba(0,0,0,.12)}
+  .emoji-row{font-size:2rem;margin-top:14px;letter-spacing:12px}
+  main{max-width:1180px;margin:-22px auto 40px;padding:0 14px;position:relative;z-index:2}
+  .card{background:rgba(255,255,255,.92);border:1px solid rgba(11,99,206,.12);border-radius:22px;padding:20px;margin:16px 0;box-shadow:0 12px 28px rgba(20,70,120,.09);backdrop-filter:blur(8px)}
+  .section-title{display:flex;align-items:center;gap:10px;margin:0 0 14px;color:#064fa8;font-size:1.35rem;font-weight:900}.section-title .num{background:var(--blue);color:white;border-radius:12px;padding:4px 10px;font-size:1rem}
+  .grid{display:grid;gap:16px}.grid-3{grid-template-columns:repeat(3,1fr)}.grid-2{grid-template-columns:repeat(2,1fr)}.grid-4{grid-template-columns:repeat(4,1fr)}
+  .mini{border-radius:18px;padding:16px;background:linear-gradient(180deg,#fff,#f8fbff);border:1px solid #dbeafe}.mini h3{margin:0 0 10px;color:#0a58ca;font-size:1.05rem}.cn{color:#0f766e;font-weight:700}.muted{color:var(--muted)}
+  .concept{display:grid;grid-template-columns:1fr 210px 1fr;gap:14px;align-items:center}.center-bubble{width:190px;height:190px;margin:auto;border-radius:50%;background:linear-gradient(135deg,#0b63ce,#18a0fb);color:white;display:grid;place-items:center;text-align:center;font-size:1.35rem;font-weight:900;box-shadow:0 16px 30px rgba(11,99,206,.35)}
+  .branch{display:flex;gap:12px;align-items:flex-start;margin:12px 0;padding:12px;border-radius:18px;background:#fff;border:1px dashed #b9d8ff}.branch b{color:#064fa8}.icon{font-size:2rem;min-width:36px;text-align:center}.branch ul{margin:6px 0 0 18px;padding:0}.pill{display:inline-block;border-radius:999px;padding:4px 10px;font-size:.84rem;font-weight:800;background:#edf6ff;color:#0b63ce;margin:2px}
+  .formula{background:linear-gradient(90deg,#fff7d6,#fff);border:2px solid #ffd43b;border-radius:15px;padding:14px;text-align:center;font-weight:900;color:#5c3900;margin:10px 0}.formula small{display:block;color:#784800;font-weight:800}.tip{border-left:6px solid var(--green);background:#f0fff4;border-radius:14px;padding:12px;margin:10px 0}.warn{border-left:6px solid var(--orange);background:#fff8e1;border-radius:14px;padding:12px;margin:10px 0}
+  .force-list{display:grid;gap:8px}.force-row{display:flex;gap:10px;align-items:flex-start;background:#f9fbff;border-radius:12px;padding:9px;border:1px solid #e5efff}.force-row span:first-child{font-size:1.4rem}.force-row b{color:#075bb5}
+  .lever-diagram{display:flex;align-items:center;justify-content:center;height:70px}.bar{position:relative;width:130px;height:8px;background:#34495e;border-radius:99px}.tri{width:0;height:0;border-left:12px solid transparent;border-right:12px solid transparent;border-bottom:24px solid #f59f00;position:absolute;bottom:-24px}.mark{position:absolute;top:-28px;font-size:.75rem;font-weight:900;color:#0b63ce}.quiz{counter-reset:q}.quiz-item{counter-increment:q;background:#fff;border:1px solid #d9ead3;border-radius:15px;margin:10px 0;padding:12px 12px 12px 48px;position:relative}.quiz-item:before{content:counter(q);position:absolute;left:12px;top:12px;width:25px;height:25px;border-radius:50%;background:#27ae60;color:#fff;font-weight:900;display:grid;place-items:center}.answer{margin-top:8px;background:#ecfdf5;border-radius:10px;padding:8px;color:#166534;font-weight:700}
+  .exam-table{width:100%;border-collapse:separate;border-spacing:0;overflow:hidden;border-radius:16px;border:1px solid #dbeafe}.exam-table th{background:#0b63ce;color:white}.exam-table th,.exam-table td{padding:10px;border-bottom:1px solid #dbeafe;text-align:left;vertical-align:top}.exam-table tr:last-child td{border-bottom:0}
+  .footer{background:#0b63ce;color:white;border-radius:18px;padding:16px;text-align:center;font-weight:800;margin-top:18px}.print-btn{position:fixed;right:18px;bottom:18px;background:#ff9f1c;color:#3b2500;border:none;border-radius:999px;padding:12px 18px;font-weight:900;box-shadow:0 10px 25px rgba(0,0,0,.18);cursor:pointer;z-index:9}
+  @media(max-width:900px){.grid-3,.grid-4,.grid-2{grid-template-columns:1fr}.concept{grid-template-columns:1fr}.center-bubble{width:160px;height:160px}.emoji-row{letter-spacing:5px;font-size:1.5rem}.card{padding:16px}.print-btn{display:none}}
+  @media print{.print-btn{display:none}body{background:white}.card{break-inside:avoid;box-shadow:none}.hero{border-radius:0}}
+</style>
+</head>
+<body>
+
+<div class="top-nav" style="background:#fff;padding:10px 16px;border-bottom:2px solid #e5e7eb;position:sticky;top:0;z-index:120">
+  <a class="dashboard-link" href="../index.html" style="display:inline-flex;align-items:center;gap:6px;padding:8px 12px;border-radius:8px;background:#1d4ed8;color:#fff;font-size:13px;font-weight:800;text-decoration:none">&larr; Back to Dashboard</a>
+</div>
+
+<header class="hero">
+  <div class="badge">Form 2 Science / 初中二科学</div>
+  <h1>Chapter 8: Force and Motion<br>第8章：力与运动</h1>
+  <div class="subtitle">Exam Essentials / 考试重点</div>
+  <div class="emoji-row">⚛️ 💡 🧲 🧪 📚 🚀</div>
+</header>
+<main>
+  <section class="card">
+    <h2 class="section-title"><span class="num">1</span> Chapter Concept Map / 概念地图</h2>
+    <div class="concept">
+      <div>
+        <div class="branch"><div class="icon">❓</div><div><b>What is force? / 什么是力？</b><ul><li>Push or pull / 推或拉</li><li>SI unit: Newton, N / 牛顿</li><li>Vector: magnitude + direction / 矢量：大小和方向</li><li>Point of application / 作用点</li></ul></div></div>
+        <div class="branch"><div class="icon">🏋️</div><div><b>Types of forces / 力的种类</b><ul><li>Gravitational, weight, normal, frictional, elastic, buoyant</li><li>重力、重量、支持力、摩擦力、弹力、浮力</li></ul></div></div>
+        <div class="branch"><div class="icon">🏃</div><div><b>Effects of force / 力的作用</b><ul><li>Move, stop, change speed/direction/shape</li><li>移动、停止、改变速度、方向、形状</li></ul></div></div>
+      </div>
+      <div class="center-bubble">Force and<br>Motion<br>力与运动</div>
+      <div>
+        <div class="branch"><div class="icon">⚖️</div><div><b>Lever & moment / 杠杆与力矩</b><ul><li>Fulcrum, load, effort / 支点、负载、用力</li><li>Moment = force × distance / 力矩 = 力 × 距离</li></ul></div></div>
+        <div class="branch"><div class="icon">📌</div><div><b>Pressure / 压强</b><ul><li>Pressure = force ÷ area / 压强 = 力 ÷ 面积</li><li>Smaller area → higher pressure / 面积小 → 压强大</li></ul></div></div>
+        <div class="branch"><div class="icon">🌬️</div><div><b>Fluid and air pressure / 流体压强与气压</b><ul><li>Gas, atmosphere, liquid pressure / 气压、大气压、液体压强</li><li>Depth and altitude effects / 深度与海拔影响</li></ul></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="grid grid-3">
+    <div class="card"><h2 class="section-title"><span class="num">2</span> What is Force? / 什么是力？</h2><div class="mini"><h3>Simple idea / 简单理解</h3><p><b>Force is a push or pull on an object.</b><br><span class="cn">力是作用在物体上的推力或拉力。</span></p><p>Force is a <b>vector quantity</b>, so it has <b>magnitude</b> and <b>direction</b>.<br><span class="cn">力是矢量，具有大小和方向。</span></p><p><span class="pill">Unit: N</span><span class="pill">1 kg ≈ 10 N on Earth</span><span class="pill">100 g ≈ 1 N</span></p></div></div>
+    <div class="card"><h2 class="section-title"><span class="num">3</span> Types of Forces / 力的种类</h2><div class="force-list">
+      <div class="force-row"><span>🌍</span><div><b>Gravitational force / 重力</b><br>Attraction towards Earth. / 地球对物体的吸引力。</div></div>
+      <div class="force-row"><span>⚖️</span><div><b>Weight / 重量</b><br>Gravitational force acting on mass. / 重力作用在物体上的力。</div></div>
+      <div class="force-row"><span>⬆️</span><div><b>Normal force / 支持力</b><br>Support force from a surface. / 表面对物体的支撑力。</div></div>
+      <div class="force-row"><span>🧱</span><div><b>Frictional force / 摩擦力</b><br>Opposes motion between touching surfaces. / 阻碍接触表面相对运动。</div></div>
+      <div class="force-row"><span>〰️</span><div><b>Elastic force / 弹力</b><br>Helps object return to original shape. / 使物体恢复原状。</div></div>
+      <div class="force-row"><span>🛟</span><div><b>Buoyant force / 浮力</b><br>Upward force from fluid. / 液体向上的力。</div></div>
+    </div></div>
+    <div class="card"><h2 class="section-title"><span class="num">4</span> Effects of Force / 力的作用</h2><div class="mini"><ul><li>Moves a stationary object / 使静止物体移动</li><li>Stops a moving object / 使运动物体停止</li><li>Changes direction / 改变运动方向</li><li>Changes speed / 改变速度</li><li>Changes shape or size / 改变形状或大小</li></ul><div class="tip"><b>Exam phrase:</b> “A force can change the state of motion or shape of an object.”<br><span class="cn">考试句子：力可以改变物体的运动状态或形状。</span></div></div></div>
+  </section>
+
+  <section class="grid grid-2">
+    <div class="card"><h2 class="section-title"><span class="num">5</span> Newton’s Third Law / 牛顿第三定律</h2><div class="formula">For every action, there is an equal reaction in the opposite direction.<small>每一个作用力，都有一个大小相等、方向相反的反作用力。</small></div><div class="grid grid-4"><div class="mini">🍎<br><b>Apple on table</b><br><span class="cn">苹果压桌子，桌子向上支持苹果。</span></div><div class="mini">🚣<br><b>Rowing boat</b><br><span class="cn">桨向后推水，水向前推船。</span></div><div class="mini">🚗<br><b>Trolley + spring</b><br><span class="cn">弹簧互推，两车反方向移动。</span></div><div class="mini">🦆<br><b>Floating duck</b><br><span class="cn">重量向下，浮力向上。</span></div></div></div>
+    <div class="card"><h2 class="section-title"><span class="num">6</span> Buoyant Force & Density / 浮力与密度</h2><div class="tip"><b>Floating rule / 浮沉规则</b><br>Object floats when buoyant force can support its weight.<br><span class="cn">当浮力足以支撑重量时，物体会浮起来。</span></div><div class="formula">Buoyant force = Real weight − Apparent weight<small>浮力 = 真实重量 − 视重量</small></div><div class="formula">Density = Mass ÷ Volume<small>密度 = 质量 ÷ 体积</small></div><table class="exam-table"><tr><th>Comparison / 比较</th><th>Result / 结果</th></tr><tr><td>Density of object &lt; density of water<br><span class="cn">物体密度 &lt; 水密度</span></td><td>Floats / 浮起</td></tr><tr><td>Density of object &gt; density of water<br><span class="cn">物体密度 &gt; 水密度</span></td><td>Sinks / 下沉</td></tr></table></div>
+  </section>
+
+  <section class="card">
+    <h2 class="section-title"><span class="num">7</span> Lever / 杠杆</h2>
+    <p>A lever is a simple machine that can rotate around a fixed point. It helps us do work using less force.<br><span class="cn">杠杆是能绕固定点转动的简单机械，可帮助我们省力。</span></p>
+    <div class="grid grid-3">
+      <div class="mini"><h3>First class lever / 第一类杠杆</h3><div class="lever-diagram"><div class="bar"><span class="mark" style="left:5px">E</span><span class="mark" style="right:5px">L</span><span class="tri" style="left:53px"></span></div></div><p><b>Fulcrum between effort and load.</b><br><span class="cn">支点在用力和负载之间。</span></p><p>Examples: scissors, pliers / 剪刀、钳子</p></div>
+      <div class="mini"><h3>Second class lever / 第二类杠杆</h3><div class="lever-diagram"><div class="bar"><span class="mark" style="left:5px">E</span><span class="mark" style="left:58px">L</span><span class="tri" style="right:8px"></span></div></div><p><b>Load between fulcrum and effort.</b><br><span class="cn">负载在支点和用力之间。</span></p><p>Examples: nutcracker, wheelbarrow / 核桃夹、独轮车</p></div>
+      <div class="mini"><h3>Third class lever / 第三类杠杆</h3><div class="lever-diagram"><div class="bar"><span class="mark" style="left:5px">L</span><span class="mark" style="left:60px">E</span><span class="tri" style="right:8px"></span></div></div><p><b>Effort between fulcrum and load.</b><br><span class="cn">用力在支点和负载之间。</span></p><p>Examples: ice tongs, fishing rod / 冰夹、钓鱼竿</p></div>
+    </div>
+  </section>
+
+  <section class="grid grid-2">
+    <div class="card"><h2 class="section-title"><span class="num">8</span> Moment of Force / 力矩</h2><p>Moment of force is the turning effect produced when a force acts on an object at a fixed point.<br><span class="cn">力矩是力使物体绕固定点转动所产生的转动效果。</span></p><div class="formula">Moment of force = Force × perpendicular distance<small>力矩 = 力 × 到支点的垂直距离</small></div><div class="warn"><b>Important:</b> Longer perpendicular distance gives larger moment, even if the force is the same.<br><span class="cn">重点：力相同，垂直距离越长，力矩越大。</span></div><div class="formula">Balance: Load × distance = Force × distance<small>平衡：负载 × 距离 = 用力 × 距离</small></div></div>
+    <div class="card"><h2 class="section-title"><span class="num">9</span> Pressure / 压强</h2><div class="formula">Pressure = Force ÷ Surface area<small>压强 = 力 ÷ 受力面积</small></div><p><span class="pill">SI unit: Pascal, Pa</span><span class="pill">1 Pa = 1 N/m²</span></p><table class="exam-table"><tr><th>Situation / 情况</th><th>Pressure / 压强</th><th>Example / 例子</th></tr><tr><td>Large surface area / 面积大</td><td>Low / 低</td><td>Tractor tyres, snow shoes / 拖拉机轮、雪鞋</td></tr><tr><td>Small surface area / 面积小</td><td>High / 高</td><td>Knife blade, skating boots, football studs / 刀刃、冰鞋、鞋钉</td></tr></table></div>
+  </section>
+
+  <section class="grid grid-2">
+    <div class="card"><h2 class="section-title"><span class="num">10</span> Gas Pressure & Atmospheric Pressure / 气压与大气压</h2><div class="mini"><h3>Gas pressure / 气体压强</h3><p>Air molecules move randomly and collide with the wall of the container. The force on the wall produces gas pressure.<br><span class="cn">空气分子随机运动并撞击容器壁，对壁产生的力形成气体压强。</span></p><ul><li>Temperature increases → particles move faster → pressure increases.<br><span class="cn">温度上升 → 分子运动更快 → 压强增加。</span></li><li>Volume decreases → more collisions → pressure increases.<br><span class="cn">体积减少 → 碰撞更频繁 → 压强增加。</span></li></ul></div><div class="mini"><h3>Atmospheric pressure / 大气压</h3><p>Atmospheric pressure is pressure exerted by air on Earth’s surface.<br><span class="cn">大气压是空气对地球表面施加的压强。</span></p><p><b>Higher altitude → lower atmospheric pressure.</b><br><span class="cn">海拔越高，大气压越低。</span></p></div></div>
+    <div class="card"><h2 class="section-title"><span class="num">11</span> Air Pressure in Daily Life / 气压应用</h2><div class="force-list"><div class="force-row"><span>🪠</span><div><b>Plunger / 吸盘</b><br>Low pressure inside, higher atmospheric pressure outside pushes it firmly. / 内部低压，外部较高大气压把它压紧。</div></div><div class="force-row"><span>🥤</span><div><b>Straw / 吸管</b><br>Lower pressure inside straw allows atmospheric pressure to push drink up. / 吸管内气压低，外部大气压把饮料推上来。</div></div><div class="force-row"><span>💉</span><div><b>Syringe / 注射器</b><br>Pull plunger → volume increases → pressure decreases → water enters. / 拉活塞使体积增加，压强降低，水被推入。</div></div><div class="force-row"><span>🧹</span><div><b>Vacuum cleaner / 吸尘器</b><br>Creates low pressure; outside air pushes dust in. / 制造低压，外部空气把灰尘推入。</div></div></div></div>
+  </section>
+
+  <section class="card">
+    <h2 class="section-title"><span class="num">12</span> Pressure in Liquid / 液体压强</h2>
+    <div class="grid grid-3"><div class="mini"><h3>Core rule / 核心规律</h3><p><b>Liquid pressure increases as depth increases.</b><br><span class="cn">深度越深，液体压强越大。</span></p></div><div class="mini"><h3>Why? / 为什么？</h3><p>At greater depth, there is more liquid above the object. The weight of liquid above causes greater pressure.<br><span class="cn">深处上方液体更多，液体重量更大，因此压强更大。</span></p></div><div class="mini"><h3>Examples / 例子</h3><ul><li>Dam wall is wider at the bottom / 大坝底部更宽</li><li>Diver suit resists high pressure / 潜水服抗高压</li><li>Submarine body is strong / 潜水艇外壳坚固</li><li>Air bubbles expand as they rise / 气泡上升时变大</li></ul></div></div>
+  </section>
+
+  <section class="grid grid-2">
+    <div class="card"><h2 class="section-title"><span class="num">13</span> Exam Quick Tips / 考试速记</h2><div class="tip">✅ Identify the type of force first. / 先判断是哪一种力。</div><div class="tip">✅ For floating/sinking, compare density with water. / 判断浮沉时，比较物体密度和水的密度。</div><div class="tip">✅ Formula questions: write formula → substitute values → answer with unit. / 计算题：写公式 → 代入数值 → 写单位。</div><div class="tip">✅ Newton’s Third Law answers must mention “same magnitude” and “opposite direction”. / 牛顿第三定律答案要写“大小相等、方向相反”。</div><div class="tip">✅ Lever questions: label fulcrum, load, effort and distance. / 杠杆题要标出支点、负载、用力和距离。</div></div>
+    <div class="card"><h2 class="section-title"><span class="num">14</span> Mini Quiz / 小测验</h2><div class="quiz"><div class="quiz-item">Why does a ship float on water?<br><span class="cn">船为什么能浮在水面上？</span><div class="answer">Hint: buoyant force supports weight. / 提示：浮力支撑重量。</div></div><div class="quiz-item">Which class of lever is a wheelbarrow?<br><span class="cn">独轮车属于哪一类杠杆？</span><div class="answer">Answer: second class lever. / 第二类杠杆。</div></div><div class="quiz-item">What happens to atmospheric pressure when altitude increases?<br><span class="cn">海拔升高时，大气压怎样变化？</span><div class="answer">Answer: it decreases. / 大气压降低。</div></div><div class="quiz-item">Why do tractor tyres sink less into soft soil?<br><span class="cn">为什么拖拉机轮胎不容易陷入软土？</span><div class="answer">Hint: larger surface area gives lower pressure. / 面积大，压强小。</div></div><div class="quiz-item">An object has density 1.3 g/cm³ in water. Sink or float?<br><span class="cn">物体密度 1.3 g/cm³，在水中下沉还是上浮？</span><div class="answer">Answer: sink, because 1.3 &gt; 1.0 g/cm³. / 下沉，因为密度比水大。</div></div></div></div>
+  </section>
+
+  <div class="footer">⭐ Key Idea / 核心思想：Force explains how objects move, stop, change direction, change shape, float, sink and exert pressure. 力帮助我们解释物体如何运动、停止、改变方向、变形、浮沉和产生压强。</div>
+</main>
+<button class="print-btn" onclick="window.print()">Print / Save PDF</button>
+</body>
+</html>

@@ -99,7 +99,9 @@ export const scienceData = {
             status:"Not Started",
             confidence:0,
             last_updated:"2026-05-20",
-            resourceUrl: "../science/t2_Chapter8-Force-and-Motion.html"
+            resourceUrl: "../science/t2_Chapter8-Force-and-Motion.html",
+            resourceUrl2: "../science/22_science_ch8_force_motion_note2.html",
+            resourceUrl3: "../science/t2_science_ch8_force_motion_note3.html"
         },
 
         {

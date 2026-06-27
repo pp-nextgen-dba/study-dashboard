@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Chapter 8: Force and Motion | 第8章：力与运动</title>
+  <style>
+    :root{
+      --blue:#155eab;
+      --blue2:#1f8ee6;
+      --dark:#17324d;
+      --soft:#eef7ff;
+      --teal:#0ea5a4;
+      --green:#16a34a;
+      --orange:#f59e0b;
+      --pink:#ec4899;
+      --purple:#7c3aed;
+      --card:#ffffff;
+      --line:#d6e6f7;
+      --text:#243648;
+      --muted:#60758a;
+      --shadow:0 10px 25px rgba(21,94,171,.08);
+      --radius:20px;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family:Arial, "Microsoft YaHei", "PingFang SC", "Noto Sans SC", sans-serif;
+      color:var(--text);
+      background:linear-gradient(180deg,#f8fbff 0%,#edf6ff 100%);
+      line-height:1.6;
+    }
+    .container{
+      max-width:1200px;
+      margin:0 auto;
+      padding:18px;
+    }
+    .hero{
+      background:linear-gradient(135deg,#ffffff,#e7f5ff);
+      border:1px solid var(--line);
+      border-radius:28px;
+      padding:28px;
+      box-shadow:var(--shadow);
+      display:grid;
+      grid-template-columns:1.4fr .8fr;
+      gap:20px;
+      align-items:center;
+    }
+    .hero h1{
+      margin:0;
+      font-size:clamp(2rem,4vw,3.5rem);
+      color:var(--dark);
+      line-height:1.08;
+    }
+    .hero .cn{
+      font-size:clamp(1.3rem,2vw,2rem);
+      color:var(--teal);
+      font-weight:700;
+      margin-top:8px;
+    }
+    .hero p{
+      color:var(--muted);
+      font-size:1rem;
+      margin-top:14px;
+      max-width:760px;
+    }
+    .hero-right{
+      display:grid;
+      gap:14px;
+      justify-items:end;
+    }
+    .pill{
+      background:#fff;
+      border:2px solid #b6daf8;
+      color:var(--blue);
+      border-radius:16px;
+      padding:14px 18px;
+      font-weight:700;
+      text-align:center;
+      min-width:220px;
+    }
+    .quicknav{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin-top:18px;
+    }
+    .quicknav a{
+      text-decoration:none;
+      color:var(--blue);
+      background:#fff;
+      border:1px solid var(--line);
+      padding:10px 14px;
+      border-radius:999px;
+      font-weight:700;
+      font-size:.95rem;
+    }
+    section{
+      margin-top:18px;
+      background:rgba(255,255,255,.9);
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      box-shadow:0 4px 15px rgba(20,50,90,.05);
+      padding:22px;
+    }
+    h2{
+      margin:0 0 14px;
+      color:var(--blue);
+      font-size:1.6rem;
+    }
+    h3{
+      margin:0 0 8px;
+      color:var(--dark);
+      font-size:1.08rem;
+    }
+    .sub{
+      color:var(--muted);
+      font-size:.98rem;
+      margin-top:-6px;
+      margin-bottom:12px;
+    }
+    .grid-2, .grid-3, .grid-4, .grid-5{
+      display:grid;
+      gap:14px;
+    }
+    .grid-2{grid-template-columns:repeat(auto-fit,minmax(280px,1fr))}
+    .grid-3{grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
+    .grid-4{grid-template-columns:repeat(auto-fit,minmax(200px,1fr))}
+    .grid-5{grid-template-columns:repeat(auto-fit,minmax(180px,1fr))}
+    .card{
+      background:var(--card);
+      border:1px solid var(--line);
+      border-radius:18px;
+      padding:16px;
+    }
+    .goal{
+      background:var(--soft);
+      border:1px solid #cfe4fb;
+      border-radius:18px;
+      padding:14px 16px;
+      font-weight:700;
+    }
+    .goal .en{display:block}
+    .goal .zh{display:block;color:#0f766e;margin-top:4px;font-weight:600}
+    .memory-map{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:16px;
+      align-items:stretch;
+    }
+    .mm{
+      border-radius:18px;
+      padding:16px;
+      border:2px solid;
+      background:#fff;
+    }
+    .mm ul{margin:8px 0 0;padding-left:20px}
+    .mm li{margin:5px 0}
+    .mm.green{border-color:#8ad9a8;background:#f4fff7}
+    .mm.purple{border-color:#cbb2ff;background:#faf7ff}
+    .mm.sky{border-color:#98d5ff;background:#f3faff}
+    .mm.orange{border-color:#f9ce84;background:#fff8ef}
+    .mm.pink{border-color:#ffb1d0;background:#fff4f8}
+    .mm-center{
+      display:grid;
+      place-items:center;
+      background:linear-gradient(135deg,#0b3b73,#155eab);
+      color:#fff;
+      border-radius:24px;
+      min-height:160px;
+      font-size:1.9rem;
+      font-weight:800;
+      text-align:center;
+      padding:10px;
+      box-shadow:var(--shadow);
+    }
+    .term .icon, .force .icon, .tip .icon, .law .icon{
+      font-size:1.9rem;
+      margin-bottom:8px;
+    }
+    .term p, .force p, .tip p, .law p, .example p, .practice p {margin:.35rem 0}
+    .label{
+      display:inline-block;
+      padding:6px 10px;
+      border-radius:999px;
+      font-weight:700;
+      font-size:.85rem;
+      background:#eef7ff;
+      color:var(--blue);
+      margin-bottom:10px;
+    }
+    .highlight{
+      background:linear-gradient(90deg,#eef7ff,#f6fbff);
+      border-left:5px solid var(--blue2);
+      padding:14px 16px;
+      border-radius:14px;
+      margin-top:12px;
+      font-weight:700;
+    }
+    .spring-box{
+      display:grid;
+      grid-template-columns:220px 1fr;
+      gap:18px;
+      align-items:center;
+    }
+    .spring{
+      width:110px;
+      height:300px;
+      margin:auto;
+      position:relative;
+      border:3px solid #64748b;
+      border-radius:50px;
+      background:linear-gradient(180deg,#fff,#eef6ff);
+    }
+    .spring::before{
+      content:"";
+      position:absolute;
+      left:49px;
+      top:25px;
+      width:10px;
+      height:200px;
+      background:repeating-linear-gradient(180deg,#64748b 0 3px,transparent 3px 11px);
+    }
+    .scale{
+      position:absolute;
+      right:14px;
+      top:35px;
+      display:grid;
+      gap:24px;
+      font-weight:700;
+      color:#334155;
+      font-size:.9rem;
+    }
+    .law-banner{
+      background:linear-gradient(135deg,#e8f5ff,#f8fcff);
+      border:2px solid #a4d4ff;
+      border-radius:16px;
+      padding:18px;
+      text-align:center;
+      font-weight:800;
+      color:var(--dark);
+      margin-bottom:12px;
+    }
+    .example.easy{border-top:6px solid var(--green)}
+    .example.medium{border-top:6px solid var(--orange)}
+    .example.hard{border-top:6px solid var(--pink)}
+    .practice .num{
+      width:30px;height:30px;border-radius:50%;
+      display:grid;place-items:center;
+      background:var(--blue);color:white;font-weight:800;
+      margin-bottom:8px;
+    }
+    details{
+      margin-top:14px;
+      background:#f4f9ff;
+      border:1px solid var(--line);
+      border-radius:16px;
+      padding:14px 16px;
+    }
+    summary{cursor:pointer;font-weight:800;color:var(--blue)}
+    .exam-tip{
+      background:#fffef7;
+      border:1px solid #fde2a1;
+      border-radius:18px;
+      padding:15px;
+    }
+    .footer{
+      margin:18px 0 10px;
+      padding:22px;
+      text-align:center;
+      color:#fff;
+      background:linear-gradient(135deg,#0b3b73,#155eab);
+      border-radius:20px;
+      font-weight:700;
+    }
+    .small{font-size:.95rem;color:var(--muted)}
+    .cnline{color:#0f766e}
+    @media (max-width:900px){
+      .hero{grid-template-columns:1fr}
+      .hero-right{justify-items:start}
+      .memory-map{grid-template-columns:1fr}
+      .spring-box{grid-template-columns:1fr}
+    }
+    @media print{
+      body{background:#fff}
+      section,.hero{box-shadow:none}
+    }
+  </style>
+</head>
+<body>
+
+<div class="top-nav" style="background:#fff;padding:10px 16px;border-bottom:2px solid #e5e7eb;position:sticky;top:0;z-index:120">
+  <a class="dashboard-link" href="../index.html" style="display:inline-flex;align-items:center;gap:6px;padding:8px 12px;border-radius:8px;background:#1d4ed8;color:#fff;font-size:13px;font-weight:800;text-decoration:none">&larr; Back to Dashboard</a>
+</div>
+
+  <div class="container">
+    <div class="hero">
+      <div>
+        <h1>Chapter 8: Force and Motion</h1>
+        <div class="cn">第8章：力与运动</div>
+        <p>
+          This page is designed to help a student understand the chapter step by step in
+          <b>English + Chinese</b>. Start with the memory map, then learn the key terms,
+          and finally practise the questions.
+          <br><span class="cnline">这个网页用英文和中文帮助学生一步一步理解本章内容。先看记忆导图，再学习重点术语，最后做练习题。</span>
+        </p>
+        <div class="quicknav">
+          <a href="#learn">Learning Goals 学习目标</a>
+          <a href="#map">Memory Map 记忆导图</a>
+          <a href="#terms">Key Terms 重点术语</a>
+          <a href="#types">Types of Forces 力的种类</a>
+          <a href="#law">Newton's Third Law 牛顿第三定律</a>
+          <a href="#practice">Practice 练习</a>
+        </div>
+      </div>
+      <div class="hero-right">
+        <div class="pill">Form 2 Science<br>中二科学</div>
+        <div class="pill">Topic: Force and Motion<br>主题：力与运动</div>
+      </div>
+    </div>
+
+    <section id="learn">
+      <h2>1. What to Learn / 学习目标</h2>
+      <div class="grid-3">
+        <div class="goal"><span class="en">Understand that force means a push or a pull.</span><span class="zh">理解“力”就是推或拉。</span></div>
+        <div class="goal"><span class="en">Know the types of forces and their examples.</span><span class="zh">认识各种力及它们的例子。</span></div>
+        <div class="goal"><span class="en">Understand the effects of force.</span><span class="zh">理解力所产生的作用。</span></div>
+        <div class="goal"><span class="en">Describe the characteristics of force.</span><span class="zh">说明力的特征。</span></div>
+        <div class="goal"><span class="en">Know how force is measured using a spring balance in newton (N).</span><span class="zh">知道如何用弹簧秤以牛顿（N）来测量力。</span></div>
+        <div class="goal"><span class="en">Explain Newton’s Third Law with daily-life examples.</span><span class="zh">能用生活中的例子解释牛顿第三定律。</span></div>
+      </div>
+    </section>
+
+    <section id="map">
+      <h2>2. Memory Map / 记忆导图</h2>
+      <div class="sub">A quick big-picture summary before studying the details. / 在学习细节前，先看整体概念。</div>
+      <div class="memory-map">
+        <div class="mm green">
+          <h3>Types / 种类</h3>
+          <ul>
+            <li>Gravitational force / 重力（引力）</li>
+            <li>Frictional force / 摩擦力</li>
+            <li>Normal force / 支持力（法向力）</li>
+            <li>Buoyant force / 浮力</li>
+            <li>Weight / 重量</li>
+            <li>Elastic force / 弹力</li>
+          </ul>
+        </div>
+        <div class="mm purple">
+          <h3>Measurement / 测量</h3>
+          <ul>
+            <li>Measured using a spring balance / 用弹簧秤测量</li>
+            <li>Unit: newton (N) / 单位：牛顿（N）</li>
+          </ul>
+        </div>
+        <div class="mm sky">
+          <h3>Effects / 作用</h3>
+          <ul>
+            <li>Move a stationary object / 使静止物体移动</li>
+            <li>Stop a moving object / 使运动物体停止</li>
+            <li>Change speed / 改变速度</li>
+            <li>Change direction / 改变方向</li>
+            <li>Change shape and size / 改变形状和大小</li>
+          </ul>
+        </div>
+        <div class="mm orange">
+          <h3>Characteristics / 特征</h3>
+          <ul>
+            <li>Magnitude / 大小</li>
+            <li>Direction / 方向</li>
+            <li>Point of application / 作用点</li>
+          </ul>
+        </div>
+        <div class="mm-center">
+          Force<br>力
+        </div>
+        <div class="mm pink">
+          <h3>Newton’s Third Law / 牛顿第三定律</h3>
+          <p><b>For every action force, there is a reaction force of the same magnitude but in the opposite direction.</b></p>
+          <p class="cnline"><b>每一个作用力，都有一个大小相同但方向相反的反作用力。</b></p>
+        </div>
+      </div>
+    </section>
+
+    <section id="terms">
+      <h2>3. Key Terms / 重点术语</h2>
+      <div class="grid-4">
+        <div class="card term"><div class="icon">↔️</div><h3>Force / 力</h3><p>Push or pull on an object.<br><span class="cnline">对物体的推或拉。</span></p></div>
+        <div class="card term"><div class="icon">🌍</div><h3>Gravitational force / 重力</h3><p>Force caused by gravity pulling an object.<br><span class="cnline">由地球引力造成的力。</span></p></div>
+        <div class="card term"><div class="icon">🌀</div><h3>Elastic force / 弹力</h3><p>Force when a material is stretched or compressed.<br><span class="cnline">物体被拉长或压缩时产生的力。</span></p></div>
+        <div class="card term"><div class="icon">⚖️</div><h3>Weight / 重量</h3><p>Force acting on a mass due to gravity.<br><span class="cnline">重力作用在物体上的力。</span></p></div>
+        <div class="card term"><div class="icon">👟</div><h3>Frictional force / 摩擦力</h3><p>Force between two surfaces in contact, opposing motion.<br><span class="cnline">两个接触面之间阻碍运动的力。</span></p></div>
+        <div class="card term"><div class="icon">📏</div><h3>Magnitude / 大小</h3><p>The amount or size of a force.<br><span class="cnline">力的数值或大小。</span></p></div>
+        <div class="card term"><div class="icon">⬆️</div><h3>Normal force / 支持力</h3><p>The force produced by a surface in contact with an object.<br><span class="cnline">表面对接触物体产生的支持力。</span></p></div>
+        <div class="card term"><div class="icon">🚪</div><h3>Point of application / 作用点</h3><p>The exact place where the force acts.<br><span class="cnline">力施加的准确位置。</span></p></div>
+      </div>
+    </section>
+
+    <section id="types">
+      <h2>4. Types of Forces / 力的种类</h2>
+      <div class="grid-3">
+        <div class="card force">
+          <div class="icon">👟</div>
+          <h3>Frictional force / 摩擦力</h3>
+          <p>Acts between two touching surfaces.</p>
+          <p class="cnline">存在于两个接触面之间。</p>
+          <div class="highlight">Example: Shoes grip the ground when walking. <br><span class="cnline">例子：走路时鞋子与地面之间有摩擦力。</span></div>
+        </div>
+        <div class="card force">
+          <div class="icon">🚢</div>
+          <h3>Buoyant force / 浮力</h3>
+          <p>Upward force exerted by a fluid.</p>
+          <p class="cnline">液体或气体向上托起物体的力。</p>
+          <div class="highlight">Example: A boat floats on water. <br><span class="cnline">例子：船浮在水面上。</span></div>
+        </div>
+        <div class="card force">
+          <div class="icon">🍎</div>
+          <h3>Gravitational force / 重力</h3>
+          <p>Pulls objects toward Earth.</p>
+          <p class="cnline">把物体拉向地球。</p>
+          <div class="highlight">Example: An apple falls down. <br><span class="cnline">例子：苹果往下掉。</span></div>
+        </div>
+        <div class="card force">
+          <div class="icon">🪀</div>
+          <h3>Elastic force / 弹力</h3>
+          <p>Exists when a spring or elastic object is stretched or compressed.</p>
+          <p class="cnline">弹簧或弹性物体被拉长或压缩时产生的力。</p>
+          <div class="highlight">Example: A stretched spring pulls back. <br><span class="cnline">例子：被拉长的弹簧会拉回去。</span></div>
+        </div>
+        <div class="card force">
+          <div class="icon">📚</div>
+          <h3>Normal force / 支持力</h3>
+          <p>Support force from a surface.</p>
+          <p class="cnline">表面对物体提供的支持力。</p>
+          <div class="highlight">Example: A table supports a book. <br><span class="cnline">例子：桌子支撑着书本。</span></div>
+        </div>
+        <div class="card force">
+          <div class="icon">🎒</div>
+          <h3>Weight / 重量</h3>
+          <p>Force due to gravity acting on an object.</p>
+          <p class="cnline">重力作用在物体上的力。</p>
+          <div class="highlight">Example: A school bag has weight. <br><span class="cnline">例子：书包有重量。</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>5. Characteristics of Force / 力的特征</h2>
+      <div class="grid-3">
+        <div class="card">
+          <span class="label">1. Magnitude / 大小</span>
+          <p>The amount of force, such as 10 N or 500 N.</p>
+          <p class="cnline">力的大小，例如 10 N 或 500 N。</p>
+        </div>
+        <div class="card">
+          <span class="label">2. Direction / 方向</span>
+          <p>The direction in which the force acts: up, down, left, right, forward, backward.</p>
+          <p class="cnline">力作用的方向：上、下、左、右、向前、向后。</p>
+        </div>
+        <div class="card">
+          <span class="label">3. Point of Application / 作用点</span>
+          <p>The exact point where the force is applied, such as the hand pushing a car.</p>
+          <p class="cnline">力施加的准确位置，例如手推车的地方。</p>
+        </div>
+      </div>
+      <div class="highlight">
+        Force is a vector quantity. It has magnitude and direction.
+        <br><span class="cnline">力是一个矢量，它有大小和方向。</span>
+      </div>
+    </section>
+
+    <section>
+      <h2>6. How to Measure Force / 如何测量力</h2>
+      <div class="spring-box">
+        <div class="spring">
+          <div class="scale"><span>0</span><span>5</span><span>10</span><span>15</span><span>20 N</span></div>
+        </div>
+        <div>
+          <p><b>Tool:</b> Spring balance<br><span class="cnline"><b>工具：</b>弹簧秤</span></p>
+          <p><b>Unit:</b> newton (N)<br><span class="cnline"><b>单位：</b>牛顿（N）</span></p>
+          <p>Read the value shown on the scale of the spring balance.</p>
+          <p class="cnline">读取弹簧秤刻度上显示的数值。</p>
+          <div class="highlight">
+            Remember: meter ruler measures length, but spring balance measures force.
+            <br><span class="cnline">记住：米尺测量长度，弹簧秤测量力。</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="law">
+      <h2>7. Newton’s Third Law / 牛顿第三定律</h2>
+      <div class="law-banner">
+        For every action force, there is a reaction force of the same magnitude but in the opposite direction.
+        <br><span class="cnline">每一个作用力，都有一个大小相同但方向相反的反作用力。</span>
+      </div>
+      <div class="grid-3">
+        <div class="card law">
+          <div class="icon">📘⬆️⬇️</div>
+          <h3>Book on a table / 书本放在桌上</h3>
+          <p>Weight pulls the book downward. The table pushes the book upward with normal force.</p>
+          <p class="cnline">重量把书往下拉，桌子用支持力把书向上推。</p>
+        </div>
+        <div class="card law">
+          <div class="icon">🏊‍♂️↔️🧱</div>
+          <h3>Swimmer pushes wall / 游泳者推墙</h3>
+          <p>The swimmer pushes the wall backward, and the wall pushes the swimmer forward.</p>
+          <p class="cnline">游泳者向后推墙，墙也向前推游泳者。</p>
+        </div>
+        <div class="card law">
+          <div class="icon">🦶⚽</div>
+          <h3>Kicking a ball / 踢球</h3>
+          <p>The foot pushes the ball forward, and the ball pushes the foot backward.</p>
+          <p class="cnline">脚把球向前踢，球也向后推脚。</p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>8. Worked Examples / 例题讲解</h2>
+      <div class="grid-3">
+        <div class="card example easy">
+          <span class="label">Easy / 简单</span>
+          <h3>Spring with loads / 弹簧与重物</h3>
+          <p><b>Question:</b> Which force acts on the spring when it is stretched?</p>
+          <p class="cnline"><b>问题：</b>当弹簧被拉长时，作用在弹簧上的是什么力？</p>
+          <div class="highlight">Answer: Elastic force / 答案：弹力</div>
+        </div>
+        <div class="card example medium">
+          <span class="label">Medium / 中等</span>
+          <h3>Cyclist / 骑自行车</h3>
+          <p><b>Question:</b> A force of 10 N is shown. State the magnitude and direction.</p>
+          <p class="cnline"><b>问题：</b>图中显示 10 N 的力，请写出它的大小和方向。</p>
+          <div class="highlight">Answer: Magnitude = 10 N, Direction = backward.<br><span class="cnline">答案：大小 = 10 N，方向 = 向后。</span></div>
+        </div>
+        <div class="card example hard">
+          <span class="label">Hard / 较难</span>
+          <h3>Book on table / 书在桌上</h3>
+          <p><b>Question:</b> According to Newton’s Third Law, what happens?</p>
+          <p class="cnline"><b>问题：</b>根据牛顿第三定律，会发生什么？</p>
+          <div class="highlight">Answer: Normal force and weight act in opposite directions.<br><span class="cnline">答案：支持力与重量方向相反。</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="practice">
+      <h2>9. Quick Practice / 快速练习</h2>
+      <div class="grid-5">
+        <div class="card practice"><div class="num">1</div><p>Which force keeps you from slipping while walking?</p><p class="cnline">走路时，哪一种力防止你滑倒？</p></div>
+        <div class="card practice"><div class="num">2</div><p>A ball is thrown upward. Which force pulls it down?</p><p class="cnline">球被抛向上方后，哪一种力把它拉下来？</p></div>
+        <div class="card practice"><div class="num">3</div><p>A spring is stretched. What force acts in the spring?</p><p class="cnline">弹簧被拉长时，弹簧里存在什么力？</p></div>
+        <div class="card practice"><div class="num">4</div><p>Which force acts perpendicular to the surface of a table?</p><p class="cnline">哪一种力垂直作用在桌面上？</p></div>
+        <div class="card practice"><div class="num">5</div><p>If you push a wall, what will the wall do to you?</p><p class="cnline">如果你推墙，墙会对你做什么？</p></div>
+      </div>
+      <details>
+        <summary>Show Answers / 显示答案</summary>
+        <ol>
+          <li>Frictional force / 摩擦力</li>
+          <li>Gravitational force / 重力</li>
+          <li>Elastic force / 弹力</li>
+          <li>Normal force / 支持力</li>
+          <li>The wall pushes you back with an equal force in the opposite direction. / 墙会以大小相同、方向相反的力推回你。</li>
+        </ol>
+      </details>
+    </section>
+
+    <section>
+      <h2>10. Parent Guide / 家长讲解小贴士</h2>
+      <div class="grid-2">
+        <div class="exam-tip">
+          <h3>How to explain “force” / 怎样解释“力”</h3>
+          <p>Use daily examples: pushing a door, pulling a drawer, kicking a ball.</p>
+          <p class="cnline">用生活例子来说明：推门、拉抽屉、踢球。</p>
+        </div>
+        <div class="exam-tip">
+          <h3>Ask 3 simple questions / 记住 3 个问题</h3>
+          <p>How big? Which direction? Where is the force applied?</p>
+          <p class="cnline">多大？什么方向？力作用在哪里？</p>
+        </div>
+        <div class="exam-tip">
+          <h3>For exam answers / 回答考试题时</h3>
+          <p>Encourage your son to use key words: magnitude, direction, point of application, equal force, opposite direction.</p>
+          <p class="cnline">鼓励孩子使用关键词：大小、方向、作用点、大小相同、方向相反。</p>
+        </div>
+        <div class="exam-tip">
+          <h3>Best study order / 最佳学习顺序</h3>
+          <p>Memory map → key terms → examples → practice questions.</p>
+          <p class="cnline">记忆导图 → 重点术语 → 例题 → 练习题。</p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>11. Exam Tips / 考试技巧</h2>
+      <div class="grid-4">
+        <div class="card tip"><div class="icon">📌</div><h3>Remember the unit / 记住单位</h3><p>Force is measured in newton (N).<br><span class="cnline">力的单位是牛顿（N）。</span></p></div>
+        <div class="card tip"><div class="icon">➡️</div><h3>Show direction / 写清方向</h3><p>Up, down, left, right, forward or backward.<br><span class="cnline">上、下、左、右、前、后都要写清楚。</span></p></div>
+        <div class="card tip"><div class="icon">🎯</div><h3>State the point / 写出作用点</h3><p>For example: hand, foot, table, wall.<br><span class="cnline">例如：手、脚、桌子、墙。</span></p></div>
+        <div class="card tip"><div class="icon">🔁</div><h3>Newton’s Law / 牛顿第三定律</h3><p>Always mention “same magnitude, opposite direction”.<br><span class="cnline">一定写“大小相同，方向相反”。</span></p></div>
+      </div>
+    </section>
+
+    <div class="footer">
+      Study smart: Review the memory map first, then practise the questions.<br>
+      先复习记忆导图，再练习题目，学习效果会更好。
+    </div>
+  </div>
+</body>
+</html>

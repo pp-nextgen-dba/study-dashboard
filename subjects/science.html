@@ -15,7 +15,7 @@ content="width=device-width, initial-scale=1.0">
 <title>Science Dashboard</title>
 
 <link rel="stylesheet"
-href="../css/style.css?v=33">
+href="../css/style.css?v=34">
 
 <style>
 
@@ -397,7 +397,7 @@ import {
     scienceData
 }
 from
-"../js/subject.js?v=18";
+"../js/subject.js?v=19";
 
 import { requireAuth } from "../js/auth.js";
 await requireAuth("../index.html");
@@ -457,6 +457,28 @@ function syncSeedData(subjectData){
                 updatedChapter = {
                     ...updatedChapter,
                     resourceUrl:seedChapter.resourceUrl
+                };
+
+            }
+
+            if(!existingChapter.resourceUrl2 && seedChapter.resourceUrl2){
+
+                changed = true;
+
+                updatedChapter = {
+                    ...updatedChapter,
+                    resourceUrl2:seedChapter.resourceUrl2
+                };
+
+            }
+
+            if(!existingChapter.resourceUrl3 && seedChapter.resourceUrl3){
+
+                changed = true;
+
+                updatedChapter = {
+                    ...updatedChapter,
+                    resourceUrl3:seedChapter.resourceUrl3
                 };
 
             }
@@ -728,7 +750,9 @@ function render(){
                 `chapter-card ${cardClass}`;
 
             const chapterResource = chapter.resourceUrl
-                ? `<a class="chapter-link" href="${chapter.resourceUrl}">Note 1</a>`
+                ? `<a class="chapter-link" href="${chapter.resourceUrl}">Note 1</a>` +
+                  (chapter.resourceUrl2 ? ` <a class="chapter-link" href="${chapter.resourceUrl2}">Note 2</a>` : "") +
+                  (chapter.resourceUrl3 ? ` <a class="chapter-link" href="${chapter.resourceUrl3}">Note 3</a>` : "")
                 : "";
 
             card.innerHTML = `
