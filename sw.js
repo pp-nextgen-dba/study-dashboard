@@ -43,6 +43,7 @@ const STATIC_ASSETS = [
     "/chinese/zh_030.html",
     "/science/form2_science_chapter9_heat.html",
     "/science/t2_Chapter7-Electricity-Magnetism.html",
+    "/science/t2_Chapter8-Force-and-Motion.html",
     "/science/t2_chapter10_sound_waves.html",
     "/moral/t2_moral_unit14.html",
     "/moral/t2_Unit14_KonflikIdentitiDiri.html",

@@ -98,7 +98,8 @@ export const scienceData = {
             chinese:"力与运动",
             status:"Not Started",
             confidence:0,
-            last_updated:"2026-05-20"
+            last_updated:"2026-05-20",
+            resourceUrl: "../science/t2_Chapter8-Force-and-Motion.html"
         },
 
         {

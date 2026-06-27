@@ -1,0 +1,783 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chapter 8 · Force and Motion 力与运动</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Noto+Serif+SC:wght@400;500;600;700&family=Noto+Serif:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#F7F1E2;
+    --paper-deep:#EFE6D2;
+    --ink:#1B2A2F;
+    --pivot:#7A4326;
+    --pivot-light:#B97A4C;
+    --gauge:#1F6F6B;
+    --gauge-light:#5FA39E;
+    --live:#F2BB2D;
+    --live-soft:#FBE6A8;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:"Noto Serif", "Noto Serif SC", serif;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  ::selection{background:var(--live-soft);}
+  h1,h2,h3,.ui{font-family:"Space Grotesk","Noto Serif SC",sans-serif;}
+  .mono{font-family:"JetBrains Mono",monospace;}
+  a{color:inherit;}
+
+  /* ===== top bar ===== */
+  .topbar{
+    position:sticky; top:0; z-index:50;
+    background:rgba(247,241,226,0.92);
+    backdrop-filter:blur(6px);
+    border-bottom:2px solid var(--pivot);
+  }
+  .topbar-inner{
+    max-width:1180px; margin:0 auto;
+    display:flex; align-items:center; justify-content:space-between;
+    padding:14px 24px; gap:16px;
+  }
+  .brand{display:flex; align-items:center; gap:10px; font-weight:700;}
+  .brand .chip{
+    width:34px;height:34px;border-radius:6px;
+    background:var(--pivot);
+    display:flex;align-items:center;justify-content:center;
+    color:var(--live);
+    font-family:"JetBrains Mono",monospace; font-weight:700; font-size:13px;
+    box-shadow:inset 0 0 0 2px rgba(242,187,45,0.25);
+  }
+  .brand-text{display:flex;flex-direction:column;line-height:1.15;}
+  .brand-text .en{font-size:14px;color:var(--pivot);}
+  .brand-text .cn{font-size:12px;color:var(--gauge);font-family:"Noto Serif SC",serif;}
+
+  .lang-toggle{
+    display:flex; border:1.5px solid var(--pivot); border-radius:999px; overflow:hidden;
+    font-family:"JetBrains Mono",monospace; font-size:12px; flex-shrink:0;
+  }
+  .lang-toggle button{
+    border:none; background:transparent; padding:7px 14px; cursor:pointer;
+    color:var(--pivot); font-weight:600; letter-spacing:0.03em;
+  }
+  .lang-toggle button.active{background:var(--pivot); color:var(--live);}
+
+  /* ===== hero with animated see-saw ===== */
+  .hero{
+    position:relative; z-index:1;
+    max-width:1180px; margin:0 auto; padding:54px 24px 20px;
+    display:grid; grid-template-columns:1.1fr 0.9fr; gap:30px; align-items:center;
+  }
+  @media (max-width:860px){ .hero{grid-template-columns:1fr;} }
+  .eyebrow{
+    font-family:"JetBrains Mono",monospace; font-size:12px; letter-spacing:0.12em;
+    color:var(--pivot-light); text-transform:uppercase; margin-bottom:14px;
+    display:flex; align-items:center; gap:8px;
+  }
+  .eyebrow .dot{width:7px;height:7px;border-radius:50%;background:var(--live); box-shadow:0 0 0 3px rgba(242,187,45,0.25); animation:pulse 1.8s infinite;}
+  @keyframes pulse{0%,100%{opacity:1;}50%{opacity:.35;}}
+  .hero h1{
+    font-size:clamp(32px,5.6vw,58px); line-height:1.02; margin:0 0 6px;
+    font-weight:700; color:var(--pivot); letter-spacing:-0.01em;
+  }
+  .hero h1 .cn-line{
+    display:block; font-family:"Noto Serif SC",serif; font-weight:700;
+    font-size:0.62em; color:var(--ink); margin-top:6px;
+  }
+  .hero p.lead{max-width:560px; font-size:16.5px; line-height:1.7; color:#3a4744; margin-top:16px;}
+  .hero p.lead .cn{display:block; font-family:"Noto Serif SC",serif; color:#5a6663; margin-top:6px; font-size:0.95em;}
+
+  /* see-saw widget */
+  .seesaw-wrap{display:flex; justify-content:center; align-items:flex-end; height:220px;}
+  .seesaw-svg{width:100%; max-width:340px; height:auto;}
+
+  /* ===== lever-bar nav ===== */
+  .breadboard{position:relative; z-index:1; max-width:1180px; margin:6px auto 0; padding:0 24px;}
+  .board-strip{
+    background:var(--pivot);
+    border-radius:14px; padding:18px 16px;
+    display:grid; grid-template-columns:repeat(auto-fit,minmax(118px,1fr)); gap:10px;
+    box-shadow:0 14px 30px -16px rgba(122,67,38,0.55);
+  }
+  .pin{
+    background:rgba(247,241,226,0.06);
+    border:1px solid rgba(247,241,226,0.18);
+    border-radius:9px; padding:11px 8px 9px; text-align:center; cursor:pointer;
+    transition:all .2s ease; text-decoration:none;
+    display:flex; flex-direction:column; align-items:center; gap:6px;
+  }
+  .pin:hover{background:rgba(242,187,45,0.14); border-color:var(--live); transform:translateY(-2px);}
+  .pin svg{width:26px;height:18px; stroke:var(--live-soft); fill:none; stroke-width:1.6;}
+  .pin .lbl-en{font-family:"JetBrains Mono",monospace; font-size:10.5px; color:var(--live-soft); letter-spacing:0.02em; line-height:1.3;}
+  .pin .lbl-cn{font-family:"Noto Serif SC",serif; font-size:11.5px; color:#fff; font-weight:600;}
+
+  /* ===== sections ===== */
+  .wrap{max-width:1180px; margin:0 auto; padding:0 24px;}
+  section.block{position:relative; z-index:1; margin-top:74px; scroll-margin-top:90px;}
+  .sec-head{
+    display:flex; align-items:baseline; gap:14px; margin-bottom:22px;
+    border-bottom:3px solid var(--pivot); padding-bottom:14px;
+  }
+  .sec-num{
+    font-family:"JetBrains Mono",monospace; font-size:13px; font-weight:600;
+    color:var(--gauge); background:var(--paper-deep); border:1.5px solid var(--gauge);
+    border-radius:6px; padding:3px 9px; flex-shrink:0;
+  }
+  .sec-head h2{font-size:clamp(22px,3.4vw,32px); margin:0; color:var(--pivot); font-weight:700;}
+  .sec-head h2 .cn{font-family:"Noto Serif SC",serif; font-size:0.72em; color:var(--ink); margin-left:12px; font-weight:600;}
+
+  .grid2{display:grid; grid-template-columns:1.1fr 1fr; gap:28px;}
+  .grid3{display:grid; grid-template-columns:repeat(3,1fr); gap:16px;}
+  @media (max-width:860px){ .grid2{grid-template-columns:1fr;} .grid3{grid-template-columns:1fr;} }
+
+  .card{
+    background:#fff; border:1.5px solid #e2d8bf; border-radius:12px; padding:20px 22px;
+    box-shadow:0 6px 18px -12px rgba(27,42,47,0.18);
+  }
+  .card h3{margin:0 0 10px; font-size:16px; color:var(--gauge); display:flex; align-items:center; gap:8px;}
+  .card h3 .cn{font-family:"Noto Serif SC",serif; font-size:0.9em; color:var(--pivot-light); font-weight:600;}
+  .card p{margin:0 0 8px; font-size:14.5px; line-height:1.65; color:#2c3a37;}
+  .card p.cn{font-family:"Noto Serif SC",serif; color:#5b665f; font-size:0.94em;}
+  .card ul{margin:8px 0 0; padding-left:20px;}
+  .card li{font-size:14.5px; line-height:1.65; margin-bottom:6px; color:#2c3a37;}
+  .card li .cn{display:block; font-family:"Noto Serif SC",serif; color:#5b665f; font-size:0.92em;}
+
+  .highlight{background:linear-gradient(180deg,transparent 60%, var(--live-soft) 60%); padding:0 2px; font-weight:600;}
+  .key{color:var(--pivot); font-weight:700;}
+
+  .formula-box{
+    background:var(--pivot); color:var(--live-soft);
+    border-radius:10px; padding:16px 20px; font-family:"JetBrains Mono",monospace;
+    font-size:16px; text-align:center; margin:14px 0; letter-spacing:0.01em;
+  }
+  .formula-box.gauge{background:var(--gauge);}
+  .formula-box .sub{display:block; font-size:11px; color:rgba(255,255,255,0.7); margin-top:6px; font-family:"Noto Serif SC",serif;}
+
+  table.dtab{width:100%; border-collapse:collapse; font-size:13.5px; margin:10px 0;}
+  table.dtab th{background:var(--pivot); color:var(--live-soft); padding:8px 10px; text-align:left; font-family:"JetBrains Mono",monospace; font-weight:500; font-size:12px;}
+  table.dtab td{padding:7px 10px; border-bottom:1px solid #eee2c6; vertical-align:top;}
+  table.dtab tr:nth-child(even) td{background:#fbf6e8;}
+  table.dtab td .cn{display:block; font-family:"Noto Serif SC",serif; color:#7a847e; font-size:0.92em; margin-top:1px;}
+
+  .twocol-compare{display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:10px;}
+  .compare-col{border-radius:10px; padding:14px 16px;}
+  .compare-col.first{background:#fdf2e7; border:1.5px solid var(--pivot-light);}
+  .compare-col.second{background:#e9f4f3; border:1.5px solid var(--gauge-light);}
+  .compare-col.third{background:#eef0e3; border:1.5px solid #a8b27a;}
+  .compare-col h4{margin:0 0 8px; font-size:14px;}
+  .compare-col li{font-size:12.5px; line-height:1.55; margin-bottom:5px;}
+  @media (max-width:700px){.twocol-compare{grid-template-columns:1fr;}}
+
+  .worked{border-left:4px solid var(--live); background:#fffdf4; padding:14px 18px; border-radius:0 10px 10px 0; margin-top:10px;}
+  .worked .step{font-family:"JetBrains Mono",monospace; font-size:13.5px; line-height:1.9; color:#3a3320;}
+
+  .memmap-wrap{background:#fff; border:1.5px solid #e2d8bf; border-radius:16px; padding:18px; overflow:hidden;}
+  .memmap-wrap svg{width:100%; height:auto; display:block;}
+
+  .quiz-card{background:#fff; border:1.5px solid #e2d8bf; border-radius:12px; padding:18px 20px; margin-bottom:12px;}
+  .quiz-q{font-weight:600; font-size:14.5px; margin-bottom:10px; color:var(--pivot);}
+  .quiz-q .cn{display:block; font-family:"Noto Serif SC",serif; color:#5b665f; font-weight:500; font-size:0.92em; margin-top:2px;}
+  .quiz-opts{display:grid; grid-template-columns:1fr 1fr; gap:8px;}
+  @media (max-width:600px){.quiz-opts{grid-template-columns:1fr;}}
+  .opt{border:1.5px solid #d8cdae; border-radius:8px; padding:9px 12px; font-size:13.5px; cursor:pointer; background:var(--paper); transition:all .15s;}
+  .opt:hover{border-color:var(--pivot);}
+  .opt.correct{background:#e3f3e6; border-color:#3f9156; font-weight:600;}
+  .opt.wrong{background:#fbe4e0; border-color:#c85c4e;}
+  .quiz-fb{margin-top:10px; font-size:13px; color:#5b665f; display:none; font-family:"Noto Serif SC",serif;}
+
+  footer{margin:90px 0 40px; text-align:center; font-family:"JetBrains Mono",monospace; font-size:11.5px; color:#8a9089;}
+
+  .scope-pill{
+    position:fixed; bottom:18px; right:18px; z-index:60;
+    background:var(--pivot); color:var(--live);
+    font-family:"JetBrains Mono",monospace; font-size:11px;
+    padding:8px 14px; border-radius:999px; box-shadow:0 8px 20px -8px rgba(0,0,0,0.4);
+    display:flex; align-items:center; gap:6px;
+  }
+  .scope-pill .b{width:6px;height:6px;border-radius:50%;background:var(--live);animation:pulse 1.8s infinite;}
+
+  body.en-only .cn{display:none;}
+  body.zh-only .en-text{display:none;}
+  .en-text{display:block;}
+</style>
+</head>
+<body>
+
+<div class="top-nav" style="background:#fff;padding:10px 16px;border-bottom:2px solid #e5e7eb;position:sticky;top:0;z-index:120">
+  <a class="dashboard-link" href="../index.html" style="display:inline-flex;align-items:center;gap:6px;padding:8px 12px;border-radius:8px;background:#1d4ed8;color:#fff;font-size:13px;font-weight:800;text-decoration:none">&larr; Back to Dashboard</a>
+</div>
+
+<div class="topbar">
+  <div class="topbar-inner">
+    <div class="brand">
+      <div class="chip">08</div>
+      <div class="brand-text">
+        <span class="en">Form 2 Science · Chapter 8</span>
+        <span class="cn">中二科学 · 第八章</span>
+      </div>
+    </div>
+    <div class="lang-toggle" id="langToggle">
+      <button data-mode="both" class="active">EN+中</button>
+      <button data-mode="en">EN</button>
+      <button data-mode="zh">中文</button>
+    </div>
+  </div>
+</div>
+
+<div class="hero">
+  <div>
+    <div class="eyebrow"><span class="dot"></span> THEME 3 · ENERGY AND SUSTAINABILITY</div>
+    <h1>Force and Motion
+      <span class="cn-line">力与运动</span>
+    </h1>
+    <p class="lead">
+      <span class="en-text">From a pushed trolley to a sunken stone, every force has a reaction, every lever has a balance point, and every gas pushes back. This chapter is about how pushes, pulls, weight, and pressure quietly run the physical world.</span>
+      <span class="cn">从被推动的手推车到沉入水中的石头，每一个力都有反作用力，每一个杠杆都有平衡点，每一种气体都会反推。本章探讨推力、拉力、重量与压力如何悄悄主宰物理世界。</span>
+    </p>
+  </div>
+  <div class="seesaw-wrap">
+    <svg class="seesaw-svg" viewBox="0 0 340 220">
+      <!-- ground -->
+      <line x1="20" y1="190" x2="320" y2="190" stroke="#0B3D2E" stroke-width="0" />
+      <!-- fulcrum -->
+      <polygon points="170,150 150,190 190,190" fill="#7A4326"/>
+      <rect x="140" y="188" width="60" height="8" rx="2" fill="#5b3a22"/>
+      <!-- beam, will rotate via JS -->
+      <g id="beam" style="transform-origin:170px 150px;">
+        <rect x="40" y="146" width="260" height="9" rx="3" fill="#B97A4C"/>
+        <circle cx="60" cy="150" r="16" fill="#1F6F6B"/>
+        <text x="60" y="154" text-anchor="middle" font-family="JetBrains Mono" font-size="10" fill="#FBE6A8">20kg</text>
+        <circle cx="280" cy="150" r="11" fill="#F2BB2D"/>
+        <text x="280" y="154" text-anchor="middle" font-family="JetBrains Mono" font-size="9" fill="#7A4326">10kg</text>
+      </g>
+      <text x="170" y="212" text-anchor="middle" font-family="Noto Serif SC" font-size="11" fill="#5b665f">力矩平衡 · moment balance</text>
+    </svg>
+  </div>
+</div>
+
+<div class="breadboard">
+  <div class="board-strip">
+    <a class="pin" href="#sec-force">
+      <svg viewBox="0 0 26 18"><path d="M2 9 H18 M14 4 L18 9 L14 14"/></svg>
+      <span class="lbl-en">8.1 FORCE</span>
+      <span class="lbl-cn">力</span>
+    </a>
+    <a class="pin" href="#sec-action">
+      <svg viewBox="0 0 26 18"><path d="M3 9 H12 M8 5 L12 9 L8 13 M23 9 H14 M18 5 L14 9 L18 13"/></svg>
+      <span class="lbl-en">ACTION-REACTION</span>
+      <span class="lbl-cn">作用反作用</span>
+    </a>
+    <a class="pin" href="#sec-effects">
+      <svg viewBox="0 0 26 18"><circle cx="13" cy="9" r="6"/><line x1="13" y1="2" x2="13" y2="0"/></svg>
+      <span class="lbl-en">EFFECTS &amp; BUOYANCY</span>
+      <span class="lbl-cn">力的效应</span>
+    </a>
+    <a class="pin" href="#sec-lever">
+      <svg viewBox="0 0 26 18"><polygon points="13,11 9,17 17,17"/><line x1="2" y1="9" x2="24" y2="9"/></svg>
+      <span class="lbl-en">MOMENT &amp; LEVERS</span>
+      <span class="lbl-cn">力矩与杠杆</span>
+    </a>
+    <a class="pin" href="#sec-pressure">
+      <svg viewBox="0 0 26 18"><circle cx="13" cy="9" r="7"/><line x1="13" y1="9" x2="17" y2="5"/></svg>
+      <span class="lbl-en">PRESSURE</span>
+      <span class="lbl-cn">压强</span>
+    </a>
+    <a class="pin" href="#sec-gaspressure">
+      <svg viewBox="0 0 26 18"><rect x="3" y="3" width="20" height="12" rx="1"/><circle cx="9" cy="9" r="1.4" fill="#FBE6A8" stroke="none"/><circle cx="17" cy="6" r="1.4" fill="#FBE6A8" stroke="none"/><circle cx="14" cy="12" r="1.4" fill="#FBE6A8" stroke="none"/></svg>
+      <span class="lbl-en">GAS &amp; AIR PRESSURE</span>
+      <span class="lbl-cn">气压</span>
+    </a>
+    <a class="pin" href="#sec-liquid">
+      <svg viewBox="0 0 26 18"><path d="M3 4 Q13 1 23 4 V14 Q13 17 3 14 Z"/></svg>
+      <span class="lbl-en">LIQUID PRESSURE</span>
+      <span class="lbl-cn">液压</span>
+    </a>
+    <a class="pin" href="#sec-map">
+      <svg viewBox="0 0 26 18"><circle cx="13" cy="9" r="3"/><line x1="13" y1="6" x2="13" y2="1"/><line x1="13" y1="12" x2="13" y2="17"/><line x1="10" y1="9" x2="2" y2="9"/><line x1="16" y1="9" x2="24" y2="9"/></svg>
+      <span class="lbl-en">MEMORY MAP</span>
+      <span class="lbl-cn">记忆图</span>
+    </a>
+    <a class="pin" href="#sec-quiz">
+      <svg viewBox="0 0 26 18"><path d="M13 2 L13 9 L18 9 L13 16" stroke-linejoin="round" stroke-linecap="round"/></svg>
+      <span class="lbl-en">QUICK QUIZ</span>
+      <span class="lbl-cn">小测验</span>
+    </a>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <!-- 8.1 FORCE -->
+  <section class="block" id="sec-force">
+    <div class="sec-head">
+      <span class="sec-num">8.1</span>
+      <h2>Force <span class="cn">力</span></h2>
+    </div>
+
+    <div class="grid2">
+      <div class="card">
+        <h3>What is force? <span class="cn">什么是力？</span></h3>
+        <p>A <span class="key">force</span> is a <span class="highlight">pull or a push</span> acting upon an object. We cannot see a force but we can feel or observe its effects.</p>
+        <p class="cn">力是作用在物体上的<b>拉力或推力</b>。我们看不见力，但能感觉到或观察到它的效果。</p>
+        <div class="formula-box">S.I. unit of force = newton (N)
+          <span class="sub">力的国际单位是牛顿（N）· 1 kg ≈ 10 N（地球重力近似值）</span>
+        </div>
+        <p>Measured using a <span class="key">spring balance</span> — the heavier the load, the more the spring extends, the bigger the reading.</p>
+        <p class="cn">用<b>弹簧测力计</b>测量——负载越重，弹簧伸展越多，读数越大。</p>
+      </div>
+      <div class="card">
+        <h3>Characteristics of force <span class="cn">力的特性</span></h3>
+        <p>Force is a <span class="key">vector quantity</span> with three characteristics:</p>
+        <ul>
+          <li><b>Magnitude</b> — the strength of the force <span class="cn">大小 — 力的强度</span></li>
+          <li><b>Direction</b> — the path the force moves toward <span class="cn">方向 — 力作用的路径</span></li>
+          <li><b>Point of application</b> — where the force is applied <span class="cn">作用点 — 力施加的位置</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="grid3" style="margin-top:16px;">
+      <div class="card">
+        <h3>Types of forces <span class="cn">力的种类</span></h3>
+        <ul>
+          <li><b>Gravitational force</b> — pulls objects to Earth's centre <span class="cn">重力 — 把物体拉向地心</span></li>
+          <li><b>Normal force</b> — perpendicular to a contact surface <span class="cn">正向力 — 垂直于接触面</span></li>
+          <li><b>Frictional force</b> — resists movement between surfaces <span class="cn">摩擦力 — 阻碍接触面间的运动</span></li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>More force types <span class="cn">更多力的种类</span></h3>
+        <ul>
+          <li><b>Weight</b> — gravitational force acting on an object <span class="cn">重量 — 作用在物体上的重力</span></li>
+          <li><b>Elastic force</b> — when a spring is stretched/compressed <span class="cn">弹力 — 弹簧被拉伸或压缩时产生</span></li>
+          <li><b>Buoyant force</b> — resists the weight of an object in air/liquid <span class="cn">浮力 — 抵抗物体在空气或液体中的重量</span></li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Tension force <span class="cn">张力</span></h3>
+        <p>A force acting on an object that is <span class="key">suspended on a rope</span>. The arrowhead shows the direction the force acts in.</p>
+        <p class="cn">作用在<b>悬挂于绳子上</b>的物体的力。箭头表示力的作用方向。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ACTION-REACTION -->
+  <section class="block" id="sec-action">
+    <div class="sec-head">
+      <span class="sec-num">8.1b</span>
+      <h2>Action–Reaction Pairs <span class="cn">作用力与反作用力</span></h2>
+    </div>
+    <div class="grid2">
+      <div class="card">
+        <h3>Newton's Third Law <span class="cn">牛顿第三运动定律</span></h3>
+        <p>For every <span class="key">action force</span>, there is a <span class="key">reaction force</span> of the <span class="highlight">same magnitude</span> but in the <span class="highlight">opposite direction</span>.</p>
+        <p class="cn">每一个<b>作用力</b>都有一个<b>大小相同、方向相反</b>的<b>反作用力</b>。</p>
+        <ul>
+          <li>Book on a table: weight (action, ↓) = normal force (reaction, ↑) <span class="cn">桌上的书：重量（作用力，向下）= 正向力（反作用力，向上）</span></li>
+          <li>Swimmer floating: weight (action, ↓) = buoyant force (reaction, ↑) <span class="cn">漂浮的游泳者：重量（作用力，向下）= 浮力（反作用力，向上）</span></li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>More examples <span class="cn">更多例子</span></h3>
+        <ul>
+          <li>Two trolleys + compressed spring: released, they move in <span class="key">opposite directions over the same distance</span> <span class="cn">两台手推车 + 压缩弹簧：释放后向相反方向移动相同距离</span></li>
+          <li>Pushing a box: woman pushes box (action) → box pushes back on woman (reaction) <span class="cn">推箱子：女子推箱子（作用力）→ 箱子反推女子（反作用力）</span></li>
+          <li>Rowing a boat: paddle pushes water back → water pushes boat forward <span class="cn">划船：船桨向后推水 → 水向前推船</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- EFFECTS & BUOYANCY -->
+  <section class="block" id="sec-effects">
+    <div class="sec-head">
+      <span class="sec-num">8.2</span>
+      <h2>Effects of Force &amp; Buoyancy <span class="cn">力的效应与浮力</span></h2>
+    </div>
+    <div class="grid2">
+      <div class="card">
+        <h3>What force can change <span class="cn">力能改变什么</span></h3>
+        <p>When a force acts on an object, it can change the object's <span class="key">size</span>, <span class="key">shape</span>, and <span class="key">motion</span>.</p>
+        <p class="cn">力作用于物体时，能改变物体的<b>大小</b>、<b>形状</b>和<b>运动状态</b>。</p>
+        <ul>
+          <li>Pushing a stationary object → it moves in the direction of the force <span class="cn">推动静止物体 → 物体沿力的方向移动</span></li>
+          <li>Force in opposite direction → object stops moving <span class="cn">反方向施力 → 物体停止移动</span></li>
+          <li>Force at an angle to a moving object → direction of motion changes <span class="cn">对运动物体斜向施力 → 运动方向改变</span></li>
+          <li>Pressing from two opposite directions → shape and size change <span class="cn">从两个相反方向挤压 → 形状和大小改变</span></li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Buoyant force <span class="cn">浮力</span></h3>
+        <p><span class="key">Buoyancy</span> in water depends on the magnitude of <b>weight</b> (action force, ↓) and <b>buoyant force</b> (reaction force, ↑).</p>
+        <p class="cn"><b>浮力</b>取决于<b>重量</b>（作用力，向下）和<b>浮力</b>（反作用力，向上）的大小。</p>
+        <div class="formula-box gauge">Buoyant force = Actual weight − Apparent weight
+          <span class="sub">实际重量 = 物体在空气中的重量 · 表观重量 = 物体浸入水中的重量</span>
+        </div>
+        <table class="dtab">
+          <tr><th>Condition 条件</th><th>Result 结果</th></tr>
+          <tr><td>F &gt; W <span class="cn">浮力 &gt; 重量</span></td><td>Object floats (less dense than water) <span class="cn">物体漂浮（密度小于水）</span></td></tr>
+          <tr><td>F = W <span class="cn">浮力 = 重量</span></td><td>Object suspended at a depth (same density) <span class="cn">物体悬浮于某深度（密度相同）</span></td></tr>
+          <tr><td>F &lt; W <span class="cn">浮力 &lt; 重量</span></td><td>Object sinks (denser than water) <span class="cn">物体下沉（密度大于水）</span></td></tr>
+        </table>
+      </div>
+    </div>
+    <div class="card" style="margin-top:16px;">
+      <h3>Plimsoll lines <span class="cn">船舶载重线</span></h3>
+      <p>Lines marked on a ship's body to indicate the <span class="key">maximum safe depth</span> it can be immersed when loaded, since seawater density varies with <span class="key">temperature and salt content</span> in different parts of the world.</p>
+      <p class="cn">标记在船身上的线，用以表示船舶载货时可安全浸入的<b>最大深度</b>，因为不同地区海水的密度会因<b>温度和盐含量</b>而不同。</p>
+    </div>
+  </section>
+
+  <!-- MOMENT & LEVERS -->
+  <section class="block" id="sec-lever">
+    <div class="sec-head">
+      <span class="sec-num">8.1c</span>
+      <h2>Moment of Force &amp; Levers <span class="cn">力矩与杠杆</span></h2>
+    </div>
+    <div class="grid2">
+      <div class="card">
+        <h3>Moment of force <span class="cn">力矩</span></h3>
+        <p>The <span class="key">turning effect</span> produced when a force acts on an object at a fixed point (pivot/fulcrum).</p>
+        <p class="cn">当力作用在固定点（支点/转轴）上的物体时所产生的<b>转动效应</b>。</p>
+        <div class="formula-box">Moment of force = Force (N) × perpendicular distance from pivot (m)
+          <span class="sub">力矩 = 力（牛顿）× 力到支点的垂直距离（米）</span>
+        </div>
+        <p>Moment increases by: (a) increasing the force applied, or (b) moving the force <span class="key">further</span> from the pivot.</p>
+        <p class="cn">增大力矩的方法：(a) 增加施加的力，或 (b) 把力移到离支点<b>更远</b>处。</p>
+      </div>
+      <div class="card">
+        <h3>Principle of moments <span class="cn">力矩原理</span></h3>
+        <div class="formula-box gauge">Anticlockwise moment = Clockwise moment
+          <span class="sub">逆时针力矩 = 顺时针力矩 → 杠杆系统达到平衡</span>
+        </div>
+        <p>Load (N) × distance of load from fulcrum (m) = Effort (N) × distance of effort from fulcrum (m)</p>
+        <p class="cn">负荷（N）× 负荷到支点的距离（m）= 用力（N）× 用力到支点的距离（m）</p>
+      </div>
+    </div>
+
+    <div class="worked" style="margin-top:16px;">
+      <h3 style="margin-top:0;">Worked example — see-saw <span class="cn">例题 — 跷跷板</span></h3>
+      <div class="step">
+X (20 kg) sits at distance d; Y (10 kg) sits 2 m from fulcrum. Balanced see-saw.
+&gt; 20 × 10 N × d = 10 × 10 N × 2 m
+&gt; d = 200 N·m / 200 N = 1 m
+      </div>
+    </div>
+
+    <div class="twocol-compare">
+      <div class="compare-col first">
+        <h4>First class lever 第一类杠杆</h4>
+        <ul>
+          <li>Fulcrum is between load and effort <span style="display:block;color:#7a5a36;">支点位于负荷与用力之间</span></li>
+          <li>Load and effort act in same direction <span style="display:block;color:#7a5a36;">负荷与用力方向相同</span></li>
+          <li>e.g. scissors, pliers, see-saw <span style="display:block;color:#7a5a36;">例：剪刀、钳子、跷跷板</span></li>
+        </ul>
+      </div>
+      <div class="compare-col second">
+        <h4>Second class lever 第二类杠杆</h4>
+        <ul>
+          <li>Load is between fulcrum and effort <span style="display:block;color:#1d5a56;">负荷位于支点与用力之间</span></li>
+          <li>Small effort overcomes a heavy load <span style="display:block;color:#1d5a56;">小用力可克服重负荷</span></li>
+          <li>e.g. wheelbarrow, nutcracker, bottle opener <span style="display:block;color:#1d5a56;">例：手推车、坚果夹、开瓶器</span></li>
+        </ul>
+      </div>
+      <div class="compare-col third">
+        <h4>Third class lever 第三类杠杆</h4>
+        <ul>
+          <li>Effort is between fulcrum and load <span style="display:block;color:#5c6a2e;">用力位于支点与负荷之间</span></li>
+          <li>Large effort needed; effort must be near load <span style="display:block;color:#5c6a2e;">需要较大用力；用力点须靠近负荷</span></li>
+          <li>e.g. fishing rod, broom, human arm, tongs <span style="display:block;color:#5c6a2e;">例：钓鱼竿、扫帚、人的手臂、夹子</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRESSURE -->
+  <section class="block" id="sec-pressure">
+    <div class="sec-head">
+      <span class="sec-num">8.3a</span>
+      <h2>Pressure <span class="cn">压强</span></h2>
+    </div>
+    <div class="grid2">
+      <div class="card">
+        <h3>Definition &amp; formula <span class="cn">定义与公式</span></h3>
+        <p><span class="key">Pressure</span> is the normal force acting perpendicularly on a surface per unit area.</p>
+        <p class="cn"><b>压强</b>是垂直作用于物体表面单位面积上的正向力。</p>
+        <div class="formula-box">Pressure (N m⁻²) = Normal force (N) / Surface area (m²)
+          <span class="sub">单位：牛顿每平方米（N m⁻²）或帕斯卡（Pa）· 1 N m⁻² = 1 Pa</span>
+        </div>
+        <p>The <span class="key">bigger</span> the surface area, the <span class="key">smaller</span> the pressure produced for the same force.</p>
+        <p class="cn">同样的力，表面积<b>越大</b>，产生的压强<b>越小</b>。</p>
+      </div>
+      <div class="card">
+        <h3>Applications <span class="cn">日常应用</span></h3>
+        <p><b>Increasing pressure (smaller area):</b> knife blades, thumbtacks, football boot studs, ice skate blades.</p>
+        <p class="cn"><b>增加压强（减小面积）：</b>刀刃、图钉、足球鞋鞴钉、滑冰鞋刀片。</p>
+        <p><b>Decreasing pressure (larger area):</b> shoulder pads, snowboards, tractor tyres.</p>
+        <p class="cn"><b>减少压强（增大面积）：</b>肩垫、滑雪板、拖拉机轮胎。</p>
+      </div>
+    </div>
+    <div class="worked" style="margin-top:16px;">
+      <h3 style="margin-top:0;">Worked example <span class="cn">例题</span></h3>
+      <div class="step">
+Force = 10 N, nail end cross-section = 0.01 cm²
+&gt; Pressure = 10 / 0.01 = 1000 N cm⁻² = 1.0 × 10⁷ N m⁻²
+      </div>
+    </div>
+  </section>
+
+  <!-- GAS & AIR PRESSURE -->
+  <section class="block" id="sec-gaspressure">
+    <div class="sec-head">
+      <span class="sec-num">8.3b</span>
+      <h2>Gas &amp; Atmospheric Pressure <span class="cn">气压与大气压</span></h2>
+    </div>
+    <div class="grid2">
+      <div class="card">
+        <h3>Kinetic theory of gases <span class="cn">气体分子运动论</span></h3>
+        <p>Air is made of tiny <span class="key">gas particles (molecules)</span> moving randomly at high speed. They collide with container walls — this force per area is <span class="key">air pressure</span>.</p>
+        <p class="cn">空气由微小的<b>气体粒子（分子）</b>组成，以高速随机运动。粒子撞击容器壁的力即为<b>气压</b>。</p>
+        <table class="dtab">
+          <tr><th>Factor 因素</th><th>Effect on pressure 对压强的影响</th></tr>
+          <tr><td>Volume ↓ <span class="cn">体积减小</span></td><td>Pressure ↑ (more collisions) <span class="cn">压强增加（碰撞更频繁）</span></td></tr>
+          <tr><td>Volume ↑ <span class="cn">体积增大</span></td><td>Pressure ↓ <span class="cn">压强减小</span></td></tr>
+          <tr><td>Temperature ↑ <span class="cn">温度升高</span></td><td>Particles move faster → Pressure ↑ <span class="cn">粒子移动更快 → 压强增加</span></td></tr>
+          <tr><td>Temperature ↓ <span class="cn">温度降低</span></td><td>Particles move slower → Pressure ↓ <span class="cn">粒子移动更慢 → 压强减小</span></td></tr>
+        </table>
+      </div>
+      <div class="card">
+        <h3>Atmospheric pressure &amp; altitude <span class="cn">大气压与高度</span></h3>
+        <p>The atmosphere exerts pressure on everything on Earth's surface — this is <span class="key">atmospheric pressure</span>.</p>
+        <p class="cn">大气对地球表面所有物体施加压力——这就是<b>大气压</b>。</p>
+        <p>As <span class="key">altitude increases</span>, atmospheric pressure <span class="key">decreases</span> (air is thinner, fewer particle collisions).</p>
+        <p class="cn">随着<b>高度增加</b>，大气压<b>减小</b>（空气更稀薄，粒子碰撞较少）。</p>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top:16px;">
+      <h3>Daily-life applications <span class="cn">日常应用</span></h3>
+      <div class="grid3">
+        <ul style="margin:0;"><li><b>Plunger</b> — reduced pressure clears blockages <span class="cn">吸盘 — 降低压强以疏通堵塞物</span></li></ul>
+        <ul style="margin:0;"><li><b>Drinking straw</b> — lower pressure inside draws liquid up <span class="cn">吸管 — 内部压强降低，吸起液体</span></li></ul>
+        <ul style="margin:0;"><li><b>Syphon</b> — transfers liquid from high to low level <span class="cn">虹吸管 — 把液体从高处转移到低处</span></li></ul>
+        <ul style="margin:0;"><li><b>Vacuum cleaner</b> — low pressure sucks in dust <span class="cn">真空吸尘器 — 低压吸入灰尘</span></li></ul>
+        <ul style="margin:0;"><li><b>Rubber sucker hook</b> — atmospheric pressure holds it on the wall <span class="cn">吸盘挂钩 — 大气压使其吸附在墙上</span></li></ul>
+        <ul style="margin:0;"><li><b>Condensed milk can</b> — needs 2 holes for air pressure balance <span class="cn">炼乳罐 — 需要两个孔以平衡气压</span></li></ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- LIQUID PRESSURE -->
+  <section class="block" id="sec-liquid">
+    <div class="sec-head">
+      <span class="sec-num">8.3c</span>
+      <h2>Liquid Pressure <span class="cn">液体压强</span></h2>
+    </div>
+    <div class="grid2">
+      <div class="card">
+        <h3>Effects of depth <span class="cn">深度的影响</span></h3>
+        <p><span class="key">Liquid pressure</span> is caused by the weight of the liquid acting on a body. It increases with the <span class="key">depth</span> of the liquid.</p>
+        <p class="cn"><b>液体压强</b>由作用在物体上的液体重量引起。它随液体的<b>深度</b>增加而增大。</p>
+        <ul>
+          <li>Deeper hole → liquid jet squirts further/stronger <span class="cn">孔越深 → 液体喷射得更远/更强</span></li>
+          <li>Air bubbles get bigger as they rise (pressure decreases towards surface) <span class="cn">气泡上升时变大（压强随接近水面而减小）</span></li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Daily-life applications <span class="cn">日常应用</span></h3>
+        <ul>
+          <li><b>Submarines</b> — thick steel/titanium cylindrical body withstands deep-ocean pressure <span class="cn">潜水艇 — 厚钢/钛圆柱体身能承受深海压力</span></li>
+          <li><b>Diving suits</b> — strong, rigid materials withstand high water pressure <span class="cn">潜水服 — 坚固刚性材料能承受高水压</span></li>
+          <li><b>Dam walls</b> — built thicker and curved at the base to spread pressure evenly <span class="cn">水坝壁 — 底部加厚并呈弧形以均匀分散压力</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- MEMORY MAP -->
+  <section class="block" id="sec-map">
+    <div class="sec-head">
+      <span class="sec-num">MAP</span>
+      <h2>Chapter Memory Map <span class="cn">本章记忆图</span></h2>
+    </div>
+    <div class="memmap-wrap">
+      <svg viewBox="0 0 1100 760" id="mapSvg">
+        <g stroke="#7A4326" stroke-width="2" fill="none" opacity="0.55">
+          <line x1="550" y1="380" x2="550" y2="120"/>
+          <line x1="550" y1="380" x2="270" y2="190"/>
+          <line x1="550" y1="380" x2="830" y2="190"/>
+          <line x1="550" y1="380" x2="180" y2="430"/>
+          <line x1="550" y1="380" x2="920" y2="430"/>
+          <line x1="550" y1="380" x2="300" y2="650"/>
+          <line x1="550" y1="380" x2="800" y2="650"/>
+        </g>
+
+        <g>
+          <circle cx="550" cy="380" r="70" fill="#7A4326"/>
+          <text x="550" y="372" text-anchor="middle" fill="#F2BB2D" font-family="Space Grotesk" font-weight="700" font-size="17">CHAPTER 8</text>
+          <text x="550" y="394" text-anchor="middle" fill="#F7F1E2" font-family="Noto Serif SC" font-size="14">力与运动</text>
+        </g>
+
+        <g>
+          <rect x="450" y="60" width="200" height="62" rx="10" fill="#fff" stroke="#B97A4C" stroke-width="2"/>
+          <text x="550" y="84" text-anchor="middle" font-family="Space Grotesk" font-weight="700" font-size="14" fill="#7A4326">Types of Force</text>
+          <text x="550" y="104" text-anchor="middle" font-family="Noto Serif SC" font-size="12" fill="#5b665f">力的种类</text>
+        </g>
+
+        <g>
+          <rect x="160" y="130" width="220" height="62" rx="10" fill="#fff" stroke="#B97A4C" stroke-width="2"/>
+          <text x="270" y="154" text-anchor="middle" font-family="Space Grotesk" font-weight="700" font-size="14" fill="#7A4326">Action–Reaction</text>
+          <text x="270" y="174" text-anchor="middle" font-family="Noto Serif SC" font-size="12" fill="#5b665f">作用与反作用力</text>
+        </g>
+
+        <g>
+          <rect x="720" y="130" width="220" height="62" rx="10" fill="#fff" stroke="#B97A4C" stroke-width="2"/>
+          <text x="830" y="154" text-anchor="middle" font-family="Space Grotesk" font-weight="700" font-size="14" fill="#7A4326">Effects &amp; Buoyancy</text>
+          <text x="830" y="174" text-anchor="middle" font-family="Noto Serif SC" font-size="12" fill="#5b665f">效应与浮力</text>
+        </g>
+
+        <g>
+          <rect x="40" y="395" width="280" height="70" rx="10" fill="#fff" stroke="#1F6F6B" stroke-width="2"/>
+          <text x="180" y="418" text-anchor="middle" font-family="Space Grotesk" font-weight="700" font-size="14" fill="#7A4326">Moment of Force &amp; Levers</text>
+          <text x="180" y="438" text-anchor="middle" font-family="Noto Serif SC" font-size="12" fill="#5b665f">力矩与杠杆</text>
+          <text x="180" y="455" text-anchor="middle" font-family="JetBrains Mono" font-size="11" fill="#1F6F6B">F×d = F×d</text>
+        </g>
+
+        <g>
+          <rect x="780" y="395" width="280" height="70" rx="10" fill="#fff" stroke="#1F6F6B" stroke-width="2"/>
+          <text x="920" y="418" text-anchor="middle" font-family="Space Grotesk" font-weight="700" font-size="14" fill="#7A4326">Pressure</text>
+          <text x="920" y="438" text-anchor="middle" font-family="Noto Serif SC" font-size="12" fill="#5b665f">压强</text>
+          <text x="920" y="455" text-anchor="middle" font-family="JetBrains Mono" font-size="11" fill="#1F6F6B">P = F/A</text>
+        </g>
+
+        <g>
+          <rect x="180" y="615" width="240" height="68" rx="10" fill="#fff" stroke="#8A9450" stroke-width="2"/>
+          <text x="300" y="638" text-anchor="middle" font-family="Space Grotesk" font-weight="700" font-size="14" fill="#7A4326">Gas &amp; Air Pressure</text>
+          <text x="300" y="658" text-anchor="middle" font-family="Noto Serif SC" font-size="12" fill="#5b665f">气压 · 大气压</text>
+          <text x="300" y="675" text-anchor="middle" font-family="JetBrains Mono" font-size="10" fill="#8A9450">volume · temperature</text>
+        </g>
+
+        <g>
+          <rect x="680" y="615" width="240" height="68" rx="10" fill="#fff" stroke="#8A9450" stroke-width="2"/>
+          <text x="800" y="638" text-anchor="middle" font-family="Space Grotesk" font-weight="700" font-size="14" fill="#7A4326">Liquid Pressure</text>
+          <text x="800" y="658" text-anchor="middle" font-family="Noto Serif SC" font-size="12" fill="#5b665f">液体压强</text>
+          <text x="800" y="675" text-anchor="middle" font-family="JetBrains Mono" font-size="10" fill="#8A9450">depth · submarines</text>
+        </g>
+
+        <text x="550" y="45" text-anchor="middle" font-family="JetBrains Mono" font-size="10" fill="#B97A4C">pull, push, weight, friction...</text>
+      </svg>
+    </div>
+    <p style="text-align:center; font-size:12.5px; color:#8a9089; margin-top:10px; font-family:'JetBrains Mono',monospace;">tap-friendly overview — every branch links back to a section above</p>
+  </section>
+
+  <!-- QUIZ -->
+  <section class="block" id="sec-quiz">
+    <div class="sec-head">
+      <span class="sec-num">QUIZ</span>
+      <h2>Quick Self-Check <span class="cn">快速自测</span></h2>
+    </div>
+
+    <div class="quiz-card">
+      <div class="quiz-q">1. Which force pulls an object to the centre of the Earth?<span class="cn">哪种力把物体拉向地心？</span></div>
+      <div class="quiz-opts">
+        <div class="opt" data-correct="true">Gravitational force <span style="display:block;font-size:11px;color:#7d8a83;">重力</span></div>
+        <div class="opt">Normal force <span style="display:block;font-size:11px;color:#7d8a83;">正向力</span></div>
+        <div class="opt">Buoyant force <span style="display:block;font-size:11px;color:#7d8a83;">浮力</span></div>
+        <div class="opt">Elastic force <span style="display:block;font-size:11px;color:#7d8a83;">弹力</span></div>
+      </div>
+      <div class="quiz-fb">Gravitational force pulls all objects towards Earth's centre. 重力把所有物体拉向地心。</div>
+    </div>
+
+    <div class="quiz-card">
+      <div class="quiz-q">2. A force of 5 N is exerted on a 5 cm × 5 cm wood surface. What is the pressure?<span class="cn">5N的力作用在5cm × 5cm的木板上，压强是多少？</span></div>
+      <div class="quiz-opts">
+        <div class="opt" data-correct="true">2000 N m⁻²</div>
+        <div class="opt">200 N m⁻²</div>
+        <div class="opt">500 N m⁻²</div>
+        <div class="opt">20 000 N m⁻²</div>
+      </div>
+      <div class="quiz-fb">Area = 0.05 × 0.05 = 0.0025 m². Pressure = 5 / 0.0025 = 2000 N m⁻². 面积 = 0.0025 m²，压强 = 5 / 0.0025 = 2000 N m⁻²。</div>
+    </div>
+
+    <div class="quiz-card">
+      <div class="quiz-q">3. In a second class lever, where is the load positioned?<span class="cn">在第二类杠杆中，负荷位于何处？</span></div>
+      <div class="quiz-opts">
+        <div class="opt" data-correct="true">Between fulcrum and effort</div>
+        <div class="opt">Between load and fulcrum</div>
+        <div class="opt">Beyond the effort</div>
+        <div class="opt">At the fulcrum itself</div>
+      </div>
+      <div class="quiz-fb">In a 2nd class lever, the load sits between the fulcrum and the effort — e.g. wheelbarrow. 第二类杠杆的负荷位于支点与用力之间——例如手推车。</div>
+    </div>
+
+    <div class="quiz-card">
+      <div class="quiz-q">4. What happens to atmospheric pressure as altitude increases?<span class="cn">随着高度增加，大气压会怎样？</span></div>
+      <div class="quiz-opts">
+        <div class="opt">It increases</div>
+        <div class="opt" data-correct="true">It decreases</div>
+        <div class="opt">It stays the same</div>
+        <div class="opt">It becomes zero</div>
+      </div>
+      <div class="quiz-fb">At higher altitudes, air is thinner with fewer particle collisions, so pressure decreases. 在较高海拔，空气较稀薄，粒子碰撞较少，所以压强减小。</div>
+    </div>
+  </section>
+
+</div>
+
+<div class="scope-pill"><span class="b"></span> CH.8 · FORCE &amp; MOTION</div>
+
+<footer>
+  FORM 2 SCIENCE · CHAPTER 8 STUDY DASHBOARD · 中二科学 第八章学习面板
+</footer>
+
+<script>
+  // language toggle
+  const toggle = document.getElementById('langToggle');
+  toggle.addEventListener('click', (e)=>{
+    const btn = e.target.closest('button');
+    if(!btn) return;
+    [...toggle.children].forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    const mode = btn.dataset.mode;
+    document.body.classList.remove('en-only','zh-only');
+    if(mode==='en') document.body.classList.add('en-only');
+    if(mode==='zh') document.body.classList.add('zh-only');
+  });
+
+  // quiz interactivity
+  document.querySelectorAll('.quiz-card').forEach(card=>{
+    const opts = card.querySelectorAll('.opt');
+    const fb = card.querySelector('.quiz-fb');
+    opts.forEach(opt=>{
+      opt.addEventListener('click', ()=>{
+        if(card.dataset.locked) return;
+        card.dataset.locked = "1";
+        opts.forEach(o=>{
+          if(o.dataset.correct==="true") o.classList.add('correct');
+          else if(o===opt) o.classList.add('wrong');
+        });
+        fb.style.display='block';
+      });
+    });
+  });
+
+  // animated see-saw: gentle oscillation tied to time
+  const beam = document.getElementById('beam');
+  let t0 = performance.now();
+  function animateSeesaw(now){
+    const t = (now - t0) / 1000;
+    const angle = Math.sin(t * 0.7) * 6; // degrees, gentle tilt
+    beam.style.transform = `rotate(${angle}deg)`;
+    requestAnimationFrame(animateSeesaw);
+  }
+  requestAnimationFrame(animateSeesaw);
+</script>
+
+</body>
+</html>
