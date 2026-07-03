@@ -87,7 +87,8 @@ export const scienceData = {
             status:"Not Started",
             confidence:0,
             last_updated:"2026-05-20",
-            resourceUrl: "../science/t2_Chapter7-Electricity-Magnetism.html"
+            resourceUrl: "../science/t2_Chapter7-Electricity-Magnetism.html",
+            resourceUrl2: "../science/t2_science_chapter7_note2.html"
         },
 
         {

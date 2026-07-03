@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Form 2 Science Chapter 7 — Electricity and Magnetism</title>
+<style>
+:root{
+  --bg:#f7fbff; --ink:#1d2733; --muted:#5d6b7a; --blue:#2563eb; --cyan:#06b6d4; --green:#16a34a; --orange:#f97316; --purple:#7c3aed; --pink:#db2777; --yellow:#facc15; --red:#dc2626; --card:#ffffff;
+}
+*{box-sizing:border-box}
+body{margin:0;background:linear-gradient(135deg,#ecfeff 0%,#eff6ff 40%,#fff7ed 100%);font-family:Arial,"Noto Sans SC","Microsoft YaHei",sans-serif;color:var(--ink);line-height:1.6}
+header{padding:34px 18px 26px;text-align:center;background:linear-gradient(135deg,#1d4ed8,#0891b2,#16a34a);color:white;border-bottom-left-radius:36px;border-bottom-right-radius:36px;box-shadow:0 8px 24px rgba(0,0,0,.18)}
+header h1{margin:.1rem 0;font-size:clamp(1.8rem,4vw,3.2rem);line-height:1.15} header p{max-width:900px;margin:12px auto 0;font-size:1.05rem;opacity:.96}.tag{display:inline-block;padding:6px 12px;border-radius:999px;background:rgba(255,255,255,.18);font-weight:700;margin:3px}
+nav{position:sticky;top:0;z-index:10;background:rgba(255,255,255,.92);backdrop-filter:blur(10px);padding:10px 8px;border-bottom:1px solid #dbeafe;overflow-x:auto;white-space:nowrap}nav a{display:inline-block;text-decoration:none;color:#1e40af;font-weight:700;margin:4px 6px;padding:8px 12px;border-radius:999px;background:#dbeafe}nav a:hover{background:#bfdbfe}
+main{max-width:1180px;margin:auto;padding:22px 14px 60px}.section{margin:26px 0}.section-title{font-size:1.6rem;margin:0 0 14px;padding:12px 16px;border-radius:18px;color:white;box-shadow:0 6px 18px rgba(0,0,0,.12)}.blue{background:linear-gradient(90deg,#2563eb,#06b6d4)}.green{background:linear-gradient(90deg,#16a34a,#65a30d)}.orange{background:linear-gradient(90deg,#f97316,#f59e0b)}.purple{background:linear-gradient(90deg,#7c3aed,#db2777)}.red{background:linear-gradient(90deg,#dc2626,#f97316)}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px}.card{background:rgba(255,255,255,.92);border:1px solid #e5e7eb;border-radius:22px;padding:18px;box-shadow:0 8px 22px rgba(30,64,175,.08)}.card h3{margin:0 0 10px;color:#1e3a8a}.cn{color:#7c2d12;font-weight:600}.small{font-size:.92rem;color:var(--muted)}.pill{display:inline-block;border-radius:999px;padding:4px 10px;margin:3px;background:#fef3c7;color:#92400e;font-weight:700}.formula{font-family:"Courier New",monospace;background:#111827;color:#fef3c7;border-radius:14px;padding:12px;margin:8px 0;overflow:auto}.tip{border-left:6px solid var(--green);background:#ecfdf5}.warn{border-left:6px solid var(--orange);background:#fff7ed}.exam{border-left:6px solid var(--purple);background:#faf5ff}.map{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));align-items:stretch}.node{padding:14px;border-radius:18px;color:#102a43;font-weight:700;text-align:center;border:2px solid rgba(0,0,0,.05);box-shadow:0 6px 14px rgba(0,0,0,.08)}.n1{background:#dbeafe}.n2{background:#cffafe}.n3{background:#dcfce7}.n4{background:#fef3c7}.n5{background:#fce7f3}.n6{background:#ede9fe}.n7{background:#fee2e2}.table-wrap{overflow-x:auto}table{width:100%;border-collapse:collapse;background:white;border-radius:16px;overflow:hidden}th,td{border:1px solid #e5e7eb;padding:10px;text-align:left;vertical-align:top}th{background:#1e40af;color:white}.check{font-weight:800;color:#16a34a}.x{font-weight:800;color:#dc2626}.svgbox{background:#f8fafc;border:1px solid #e2e8f0;border-radius:18px;padding:10px;text-align:center}.two-col{display:grid;grid-template-columns:1fr 1fr;gap:16px}@media(max-width:720px){.two-col{grid-template-columns:1fr}header{border-bottom-left-radius:22px;border-bottom-right-radius:22px}.card{padding:14px}}
+.quiz details{margin:10px 0;border:1px solid #ddd;border-radius:14px;background:white;padding:10px}.quiz summary{font-weight:800;cursor:pointer;color:#1e40af}.answer{background:#f0fdf4;border-radius:12px;padding:10px;margin-top:8px}.footer{text-align:center;color:#64748b;font-size:.9rem;margin-top:40px}.kbd{font-family:monospace;background:#e5e7eb;border-radius:6px;padding:2px 6px}.flow{display:flex;flex-wrap:wrap;gap:8px;align-items:center}.arrow{font-weight:900;color:#2563eb}.mini{font-size:.85rem}.badge{font-size:.82rem;color:white;border-radius:8px;padding:2px 8px;background:#2563eb}.circuit{font-family:monospace;white-space:pre;background:#f1f5f9;border-radius:12px;padding:10px;overflow:auto}
+</style>
+</head>
+<body>
+<div class="top-nav" style="background:#fff;padding:10px 16px;border-bottom:2px solid #e5e7eb;position:sticky;top:0;z-index:120">
+  <a class="dashboard-link" href="../index.html" style="display:inline-flex;align-items:center;gap:6px;padding:8px 12px;border-radius:8px;background:#1d4ed8;color:#fff;font-size:13px;font-weight:800;text-decoration:none">&larr; Back to Dashboard</a>
+</div>
+<header>
+  <div><span class="tag">Form 2 Science</span><span class="tag">Chapter 7</span><span class="tag">English + 中文</span></div>
+  <h1>Electricity and Magnetism<br/>电学与磁学</h1>
+  <p>Colourful revision notes based on the uploaded pages: key concepts, formulas, memory map, diagrams, exam tips and practice answers.</p>
+</header>
+<nav>
+  <a href="#map">Memory Map</a><a href="#terms">Terminology</a><a href="#energy">Energy & Static Charge</a><a href="#current">Current/Voltage/Resistance</a><a href="#series">Series & Parallel</a><a href="#magnet">Magnetism</a><a href="#emagnet">Electromagnet</a><a href="#apps">Applications</a><a href="#practice">Practice</a>
+</nav>
+<main>
+<section id="map" class="section">
+  <h2 class="section-title blue">🧠 Memory Map / 记忆导图</h2>
+  <div class="map">
+    <div class="node n1">Electricity 电学<br><span class="small">charges, current, voltage, resistance</span></div>
+    <div class="node n2">Electrical Energy 电能<br><span class="small">moving electric charges</span></div>
+    <div class="node n3">Electrostatic Charge 静电荷<br><span class="small">static charges after rubbing</span></div>
+    <div class="node n4">Circuit 电路<br><span class="small">series / parallel</span></div>
+    <div class="node n5">Ohm’s Law 欧姆定律<br><span class="small">V = IR</span></div>
+    <div class="node n6">Magnet 磁铁<br><span class="small">N/S poles, field lines</span></div>
+    <div class="node n7">Electromagnet 电磁铁<br><span class="small">current produces magnetic field</span></div>
+    <div class="node n3">Applications 应用<br><span class="small">motor, magnetic lock, fire alarm</span></div>
+  </div>
+  <div class="card tip" style="margin-top:16px">
+    <b>Fast memory sentence:</b> Rubbing transfers <b>electrons</b>; moving charges make <b>current</b>; current in wire makes <b>magnetic field</b>; stronger current or more coil turns makes a stronger <b>electromagnet</b>.<br>
+    <span class="cn">快速记忆：摩擦会转移电子；移动电荷形成电流；电流通过导线会产生磁场；电流越大或线圈匝数越多，电磁铁越强。</span>
+  </div>
+</section>
+
+<section id="terms" class="section">
+  <h2 class="section-title purple">📚 Key Terminology / 重要词汇</h2>
+  <div class="table-wrap">
+    <table><tr><th>English</th><th>中文</th><th>Meaning / 意思</th></tr>
+    <tr><td>Energy</td><td>能量</td><td>Ability to do work. <span class="cn">做功的能力。</span></td></tr>
+    <tr><td>Electrical energy</td><td>电能</td><td>Energy produced by moving electric charges. <span class="cn">由移动电荷产生的能量。</span></td></tr>
+    <tr><td>Electrostatic charge</td><td>静电荷</td><td>Electric charges that are static/not moving. <span class="cn">静止不流动的电荷。</span></td></tr>
+    <tr><td>Current</td><td>电流</td><td>Rate of flow of electric charges. <span class="cn">电荷流动的速率。</span></td></tr>
+    <tr><td>Voltage</td><td>电压</td><td>Potential difference between two points. <span class="cn">两点之间的电势差。</span></td></tr>
+    <tr><td>Resistance</td><td>电阻</td><td>Ability to resist current flow. <span class="cn">阻碍电流流动的能力。</span></td></tr>
+    <tr><td>Magnetic field</td><td>磁场</td><td>Area around a magnet where magnetic force exists. <span class="cn">磁铁周围存在磁力的区域。</span></td></tr>
+    <tr><td>Electromagnet</td><td>电磁铁</td><td>A temporary magnet produced by electric current. <span class="cn">由电流产生的暂时性磁铁。</span></td></tr>
+    <tr><td>Solenoid</td><td>螺线管</td><td>A coil of wire that acts like a magnet when current flows. <span class="cn">通电后像磁铁的线圈。</span></td></tr>
+    </table>
+  </div>
+</section>
+
+<section id="energy" class="section">
+  <h2 class="section-title green">⚡ Electrical Energy and Electrostatic Charge / 电能与静电荷</h2>
+  <div class="grid">
+    <div class="card"><h3>Forms of energy / 能量形式</h3>
+      <p><span class="pill">Electrical 电能</span> water heater, bulb, electronic devices</p>
+      <p><span class="pill">Kinetic 动能</span> running, cycling, flowing water, blowing air</p>
+      <p><span class="pill">Heat 热能</span> kettle, cooking, heater</p>
+      <p><span class="pill">Chemical 化学能</span> food, biomass, batteries</p>
+      <p><span class="pill">Elastic potential 弹性势能</span> bow, spring, stretched rubber band</p>
+    </div>
+    <div class="card"><h3>Sources of energy / 能源</h3>
+      <p><b>Main source on Earth:</b> The Sun. <span class="cn">地球主要能源：太阳。</span></p>
+      <p><b>Renewable examples:</b> solar, hydro, wind, biomass. <span class="cn">可再生：太阳能、水力、风能、生物质。</span></p>
+      <p><b>Non-renewable examples:</b> fossil fuels and radioactive substances. <span class="cn">不可再生：化石燃料和放射性物质。</span></p>
+    </div>
+    <div class="card"><h3>Static charge by rubbing / 摩擦产生静电</h3>
+      <ol>
+        <li>Objects are initially neutral. <span class="cn">物体起初通常是中性的。</span></li>
+        <li>When rubbed, <b>electrons transfer</b>; protons do not move. <span class="cn">摩擦时只有电子转移，质子不移动。</span></li>
+        <li>Object gaining electrons becomes negative. <span class="cn">得到电子的物体带负电。</span></li>
+        <li>Object losing electrons becomes positive. <span class="cn">失去电子的物体带正电。</span></li>
+      </ol>
+    </div>
+    <div class="card"><h3>Rules of charges / 电荷规则</h3>
+      <p><b>Same charges repel.</b> <span class="cn">同种电荷相斥。</span></p>
+      <p><b>Opposite charges attract.</b> <span class="cn">异种电荷相吸。</span></p>
+      <p><b>Electroscope:</b> detects the presence of electric charge. <span class="cn">验电器：用来探测物体是否带电。</span></p>
+    </div>
+  </div>
+  <div class="card warn" style="margin-top:16px"><b>Exam note:</b> For questions like “plastic comb becomes negatively charged”, answer: electrons move from the cloth to the plastic comb, so the comb has more electrons than protons. <br><span class="cn">考试答法：电子从布转移到塑料梳，所以塑料梳电子多于质子，带负电。</span></div>
+</section>
+
+<section id="current" class="section">
+  <h2 class="section-title orange">🔋 Current, Voltage, Resistance and Ohm’s Law / 电流、电压、电阻与欧姆定律</h2>
+  <div class="grid">
+    <div class="card"><h3>Current / 电流</h3><p>Current is the rate of flow of electric charges through a conductor. <span class="cn">电流是电荷通过导体的流动速率。</span></p><p><b>Measured by:</b> Ammeter. <span class="cn">测量工具：安培计。</span></p><p><b>Unit:</b> ampere, A. <span class="cn">单位：安培。</span></p></div>
+    <div class="card"><h3>Voltage / 电压</h3><p>Voltage is the potential difference between two points. <span class="cn">电压是两点之间的电势差。</span></p><p><b>Measured by:</b> Voltmeter. <span class="cn">测量工具：伏特计。</span></p><p><b>Unit:</b> volt, V. <span class="cn">单位：伏特。</span></p></div>
+    <div class="card"><h3>Resistance / 电阻</h3><p>Resistance limits or resists the flow of electric current. <span class="cn">电阻会限制或阻碍电流流动。</span></p><p><b>Unit:</b> ohm, Ω. <span class="cn">单位：欧姆。</span></p></div>
+    <div class="card"><h3>Ohm’s Law / 欧姆定律</h3><p>Current is directly proportional to voltage when temperature and other physical conditions are constant.</p><p class="cn">在温度和其他物理条件保持不变时，电流与电压成正比。</p><div class="formula">V = I × R<br>I = V / R<br>R = V / I</div></div>
+  </div>
+  <div class="card tip" style="margin-top:16px"><b>Relationship:</b> More dry cells → higher voltage → higher current → bulb becomes brighter. <br><span class="cn">关系：干电池越多 → 电压越高 → 电流越大 → 灯泡越亮。</span></div>
+</section>
+
+<section id="series" class="section">
+  <h2 class="section-title blue">💡 Series Circuit and Parallel Circuit / 串联与并联电路</h2>
+  <div class="two-col">
+    <div class="card"><h3>Series circuit / 串联电路</h3>
+      <div class="circuit">Battery ─ Bulb ─ Bulb ─ Bulb ─ back</div>
+      <p><b>Current:</b> same through each component. <span class="cn">电流：每个元件相同。</span></p>
+      <p><b>Voltage:</b> shared by components. <span class="cn">电压：由元件分配。</span></p>
+      <p><b>Resistance:</b> total resistance is the sum.</p>
+      <div class="formula">I = I₁ = I₂<br>V = V₁ + V₂<br>R = R₁ + R₂ + R₃</div>
+      <p><b>Disadvantage:</b> If one component breaks, the whole circuit stops. <span class="cn">缺点：一个元件坏了，整个电路停止。</span></p>
+    </div>
+    <div class="card"><h3>Parallel circuit / 并联电路</h3>
+      <div class="circuit">        ┌─ Bulb ─┐
+Battery ─┼─ Bulb ─┼─ back
+        └─ Bulb ─┘</div>
+      <p><b>Voltage:</b> same across each branch. <span class="cn">电压：每个支路相同。</span></p>
+      <p><b>Current:</b> total current is the sum of branch currents. <span class="cn">电流：总电流等于各支路电流之和。</span></p>
+      <p><b>Resistance:</b> effective resistance is smaller than any branch resistance.</p>
+      <div class="formula">I = I₁ + I₂<br>V = V₁ = V₂<br>1/R = 1/R₁ + 1/R₂</div>
+      <p><b>Advantage:</b> If one bulb burns out, others can still light up. <span class="cn">优点：一个灯泡坏了，其他灯泡仍可亮。</span></p>
+    </div>
+  </div>
+  <div class="card exam" style="margin-top:16px"><h3>Resistance examples / 电阻计算例子</h3>
+    <p><b>Set A series:</b> R = 5 Ω + 3 Ω + 4 Ω = <b>12 Ω</b>.</p>
+    <p><b>Set B parallel:</b> 1/R = 1/6 + 1/4 = 5/12, so R = <b>2.4 Ω</b>.</p>
+    <p class="cn">串联总电阻会变大；并联有效电阻会变小。</p>
+  </div>
+</section>
+
+<section id="magnet" class="section">
+  <h2 class="section-title purple">🧲 Magnetism / 磁学</h2>
+  <div class="grid">
+    <div class="card"><h3>Properties of a magnet / 磁铁性质</h3>
+      <ul><li>Attracts magnetic materials. <span class="cn">吸引磁性材料。</span></li><li>Has north and south poles. <span class="cn">有北极和南极。</span></li><li>Like poles repel, unlike poles attract. <span class="cn">同极相斥，异极相吸。</span></li><li>Shows north-south direction when suspended freely. <span class="cn">自由悬挂时指向南北方向。</span></li></ul>
+    </div>
+    <div class="card"><h3>Magnetic field / 磁场</h3><p>Magnetic field is the area around a magnet where magnetic force exists. <span class="cn">磁场是磁铁周围存在磁力作用的区域。</span></p><p>Magnetic field is strongest near the poles. <span class="cn">磁极附近磁场最强。</span></p></div>
+    <div class="card"><h3>Magnetic field lines / 磁力线</h3><ul><li>Never meet or cross. <span class="cn">不会相交或重叠。</span></li><li>Outside the magnet, they go from north pole to south pole. <span class="cn">在磁铁外部，由北极指向南极。</span></li><li>Closer lines mean stronger field. <span class="cn">线越密，磁场越强。</span></li></ul></div>
+    <div class="card svgbox"><h3>Bar magnet field / 条形磁铁磁场</h3>
+      <svg viewBox="0 0 420 190" width="100%" height="190" role="img" aria-label="magnetic field around bar magnet">
+        <defs><marker id="arr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#2563eb"/></marker></defs>
+        <rect x="135" y="75" width="150" height="40" rx="6" fill="#fecaca" stroke="#991b1b" stroke-width="2"/><text x="155" y="102" font-size="22" font-weight="700">N</text><text x="250" y="102" font-size="22" font-weight="700">S</text>
+        <path d="M140,75 C70,35 70,155 140,115" fill="none" stroke="#2563eb" stroke-width="3" marker-end="url(#arr)"/><path d="M280,75 C350,35 350,155 280,115" fill="none" stroke="#2563eb" stroke-width="3" marker-end="url(#arr)"/>
+        <path d="M150,70 C200,10 240,10 275,70" fill="none" stroke="#0891b2" stroke-width="2" marker-end="url(#arr)"/><path d="M150,120 C200,180 240,180 275,120" fill="none" stroke="#0891b2" stroke-width="2" marker-end="url(#arr)"/>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<section id="emagnet" class="section">
+  <h2 class="section-title red">🧲⚡ Electromagnetism / 电磁学</h2>
+  <div class="grid">
+    <div class="card"><h3>What is an electromagnet? / 什么是电磁铁？</h3><p>An electromagnet is a temporary magnet produced when electric current flows through a coil of wire. <span class="cn">电磁铁是电流通过线圈时产生的暂时性磁铁。</span></p></div>
+    <div class="card"><h3>Direction of magnetic field / 磁场方向</h3><p>The direction depends on the direction of electric current. Use the <b>right-hand grip rule</b>. <span class="cn">磁场方向取决于电流方向。可使用右手握拳定则。</span></p><p>Thumb = current direction; curled fingers = magnetic field direction. <span class="cn">拇指代表电流方向；弯曲手指代表磁场方向。</span></p></div>
+    <div class="card"><h3>Field pattern by conductor / 导体形状影响磁场图案</h3><ul><li>Straight wire: circular field lines around wire. <span class="cn">直导线：磁力线呈圆形围绕导线。</span></li><li>Coiled wire: field becomes stronger and more concentrated. <span class="cn">线圈：磁场更集中更强。</span></li><li>Solenoid: magnetic field resembles a bar magnet. <span class="cn">螺线管：磁场像条形磁铁。</span></li></ul></div>
+    <div class="card"><h3>Factors increasing strength / 增强电磁铁的方法</h3><ul><li>Increase current. <span class="cn">增加电流。</span></li><li>Increase number of turns of coil. <span class="cn">增加线圈匝数。</span></li><li>Use an iron core/iron nail/iron rod. <span class="cn">使用铁芯/铁钉/铁棒。</span></li></ul></div>
+  </div>
+  <div class="card exam" style="margin-top:16px"><h3>Experiment language / 实验答题句型</h3>
+    <p><b>Manipulated variable:</b> current OR number of turns of coil. <span class="cn">操纵变量：电流 或 线圈匝数。</span></p>
+    <p><b>Responding variable:</b> number of pins/paper clips attracted. <span class="cn">反应变量：被吸引的大头针/回形针数量。</span></p>
+    <p><b>Hypothesis:</b> The more the number of turns of coil, the stronger the magnetic field. <span class="cn">假设：线圈匝数越多，磁场越强。</span></p>
+    <p><b>Operational definition:</b> Strength of magnetic field is shown by the number of pins/paper clips attracted. <span class="cn">操作性定义：磁场强度以被吸引的大头针/回形针数量表示。</span></p>
+  </div>
+</section>
+
+<section id="apps" class="section">
+  <h2 class="section-title green">🛠 Applications / 应用题重点</h2>
+  <div class="grid">
+    <div class="card"><h3>Magnetic lock / 磁力门锁</h3><p>When the switch is turned on, current flows through the coil. The coil becomes an electromagnet and attracts the iron bolt, pulling it away so the door can open.</p><p class="cn">开关闭合后，电流通过线圈，线圈变成电磁铁，吸引铁栓，使铁栓被拉开，门就能打开。</p></div>
+    <div class="card"><h3>Electric motor / 电动机</h3><p>A stronger magnetic field gives a stronger turning effect and higher speed. More coil turns and more batteries usually produce a stronger motor effect.</p><p class="cn">磁场越强，转动效果越强，速度越快。线圈匝数更多、电池更多，通常能产生更强的电动机效果。</p></div>
+    <div class="card"><h3>Fire alarm uses parallel circuit / 火警系统用并联电路</h3><p>Parallel circuit allows each alarm/bell to work independently. If one part fails, the others can still operate.</p><p class="cn">并联电路让每个警报器/铃可以独立工作。即使其中一个损坏，其他仍可操作。</p></div>
+    <div class="card"><h3>Dusty TV screen / 电视屏幕容易沾灰尘</h3><p>Static charges on the screen attract dust. Use microfibre cloth or anti-static cloth to reduce static charge.</p><p class="cn">电视屏幕上的静电会吸引灰尘。可使用超细纤维布或防静电布来减少静电。</p></div>
+  </div>
+</section>
+
+<section id="practice" class="section quiz">
+  <h2 class="section-title orange">✅ Practice and Quick Answers / 练习与快速答案</h2>
+  <details open><summary>1. Name the energy forms: kettle, running boy, archer with bow.</summary><div class="answer">Kettle: heat energy. Running boy: kinetic energy. Archer with bow: elastic potential energy. <br><span class="cn">水壶：热能；跑步：动能；拉弓：弹性势能。</span></div></details>
+  <details><summary>2. Why does a balloon become negatively charged after rubbing with towel?</summary><div class="answer">Electrons are transferred from the towel to the balloon. The balloon has more electrons than protons, so it becomes negatively charged. <br><span class="cn">电子从毛巾转移到气球，气球电子多于质子，所以带负电。</span></div></details>
+  <details><summary>3. Series circuit: R1 = 5 Ω, R2 = 3 Ω, R3 = 4 Ω. Find total resistance.</summary><div class="answer">R = 5 + 3 + 4 = <b>12 Ω</b>. <span class="cn">串联电阻相加。</span></div></details>
+  <details><summary>4. Parallel circuit: R1 = 4 Ω, R2 = 6 Ω. Find effective resistance.</summary><div class="answer">1/R = 1/4 + 1/6 = 5/12, so R = <b>2.4 Ω</b>. <span class="cn">并联有效电阻小于任何一个支路电阻。</span></div></details>
+  <details><summary>5. Magnetic field lines: write two characteristics.</summary><div class="answer">They never meet or cross. They begin from the north pole and end at the south pole outside the magnet. <br><span class="cn">磁力线不会相交；在磁铁外部由北极指向南极。</span></div></details>
+  <details><summary>6. In an electromagnet experiment, what happens if current increases?</summary><div class="answer">More pins/paper clips are attracted because the magnetic field becomes stronger. <br><span class="cn">被吸引的大头针/回形针数量增加，因为磁场变强。</span></div></details>
+  <details><summary>7. Choose faster electric motor: Fan P has 10 coil turns and 1 battery; Fan Q has 50 coil turns and 2 batteries.</summary><div class="answer">Choose <b>Fan Q</b>. It has more coil turns and more batteries, so it produces a stronger magnetic field and rotates faster. <br><span class="cn">选择风扇 Q。它有更多线圈匝数和更多电池，磁场更强，转得更快。</span></div></details>
+  <details><summary>8. Correct measuring equipment for current and voltage.</summary><div class="answer">Current is measured by an <b>ammeter</b>. Voltage is measured by a <b>voltmeter</b>. <br><span class="cn">电流用安培计测量；电压用伏特计测量。</span></div></details>
+</section>
+
+<section class="section">
+  <h2 class="section-title blue">📝 Exam Answer Templates / 考试答题模板</h2>
+  <div class="grid">
+    <div class="card"><h3>Explain static charge / 解释静电</h3><p>When two objects are rubbed together, electrons are transferred from one object to another. The object that gains electrons becomes negatively charged.</p><p class="cn">当两个物体互相摩擦时，电子从一个物体转移到另一个物体。得到电子的物体会带负电。</p></div>
+    <div class="card"><h3>Compare series and parallel / 比较串联与并联</h3><p>In a series circuit, all components are connected in one path and share the current. In a parallel circuit, components are connected in different branches and each branch can operate independently.</p><p class="cn">串联电路只有一条路径；并联电路有多个支路，各支路可独立工作。</p></div>
+    <div class="card"><h3>Explain stronger electromagnet / 解释电磁铁增强</h3><p>Increasing the current or the number of turns of coil increases the strength of the magnetic field. Therefore, more paper clips can be attracted.</p><p class="cn">增加电流或线圈匝数会增强磁场，因此能吸引更多回形针。</p></div>
+    <div class="card"><h3>Relationship of field lines and strength / 磁力线与强度关系</h3><p>The closer the magnetic field lines are to one another, the stronger the magnetic field.</p><p class="cn">磁力线越密，磁场越强。</p></div>
+  </div>
+</section>
+
+<div class="footer">Generated study webpage for Form 2 Science Chapter 7 — Electricity and Magnetism. 建议：先读记忆导图，再做练习题。</div>
+</main>
+</body>
+</html>
