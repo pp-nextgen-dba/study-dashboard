@@ -163,6 +163,17 @@ export const subjectRegistry = [
         progressTextId:"storybooksProgressText",
         seedExport:"storybooksData",
         loadSeed:true
+    },
+
+    {
+        id:"network",
+        title:"Network",
+        icon:"🌐",
+        href:"subjects/network.html",
+        progressBarId:"networkProgressBar",
+        progressTextId:"networkProgressText",
+        seedExport:"networkData",
+        loadSeed:true
     }
 
 ];

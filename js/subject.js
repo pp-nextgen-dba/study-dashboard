@@ -4232,3 +4232,44 @@ export const storybooksData = {
         }]
 
 };
+
+
+// =========================================================
+// NETWORK
+// =========================================================
+
+export const networkData = {
+
+    subject:"Network",
+
+    chapters:[{
+            form:"Network",
+            globalNum: 1,
+            chapterNum: 1,
+            chapter:"Chapter 1",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-07-03"
+        },
+
+        {
+            form:"Network",
+            globalNum: 2,
+            chapterNum: 2,
+            chapter:"Chapter 2",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-07-03"
+        },
+
+        {
+            form:"Network",
+            globalNum: 3,
+            chapterNum: 3,
+            chapter:"Chapter 3",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-07-03"
+        }]
+
+};
