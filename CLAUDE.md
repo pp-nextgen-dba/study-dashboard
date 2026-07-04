@@ -157,7 +157,17 @@ When triggered, the workflow:
 3. Create `subjects/<name>.html` following existing subject page pattern — include the Back to Dashboard button (same CSS/HTML as the chapter notes pattern above)
 4. Add subject card to `index.html` with matching progress bar IDs
 5. Add page path to `STATIC_ASSETS` in `sw.js`
-6. Run `npm run validate`
+6. **Bump `CACHE` in `sw.js`** (e.g. `study-dashboard-v2` → `study-dashboard-v3`) — required, not optional. The service worker is cache-first (`sw.js` fetch handler checks `caches.match` before network), so returning visitors with an already-installed service worker will keep seeing the old cached `index.html` (missing the new subject card) until the cache name changes and forces a refresh.
+7. Run `npm run validate`
+8. Commit & push
+9. Tell users to hard-refresh (or clear site data) once on the live site to pick up the new service worker
+
+### Completion % showing wrong for a new/placeholder subject
+
+The dashboard's percent is always `Mastered chapters / total chapters` computed live from Firestore (`js/dashboard.js` → `updateSubjectProgress`), not from `js/subject.js` seed data once the Firestore doc exists. If a new subject shows an unexpected % (e.g. 100% on placeholder chapters), it's almost always because someone clicked the chapter cards on that subject's page — each click cycles `Not Started → In Progress → Mastered → Not Started` and saves immediately via `setDoc`. It's not a bug: check/reset the actual chapter statuses by clicking through the cards on `subjects/<name>.html`, or verify current state directly:
+```bash
+curl -s "https://firestore.googleapis.com/v1/projects/study-dashboard-7ca48/databases/(default)/documents/subjects/<id>"
+```
 
 ## Changing the PIN
 
