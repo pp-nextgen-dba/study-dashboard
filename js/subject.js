@@ -4246,7 +4246,7 @@ export const networkData = {
             form:"Network",
             globalNum: 1,
             chapterNum: 1,
-            chapter:"Chapter 1",
+            chapter:"Wireshark",
             resourceUrl:"../networking/wireshark_dba_guide.html",
             status:"Not Started",
             confidence:0,
