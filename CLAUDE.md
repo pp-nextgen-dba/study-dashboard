@@ -41,6 +41,8 @@ Reload the app — it should work again.
 
 **Subjects (14):** Maths, Add Maths, Science, Physics, Chemistry, Biology, English, Chinese, Malay, Moral, History, Geografi, Reka Bentuk, Seni (T2–T3).
 
+**Daily Progress tracker** (`daily-progress.html` / `js/daily-progress.js`) is separate from the chapter dashboard — it logs which subjects were studied on which calendar day, stored in its own Firestore doc (`studyProgress/daily`), with month-grid and yearly summary views. Not part of the per-chapter `resourceUrl`/`STATIC_ASSETS` workflow below.
+
 ## Chapter HTML File Locations
 
 Chapter notes pages live in **root-level subject folders**, not inside `subjects/`:
