@@ -4247,6 +4247,7 @@ export const networkData = {
             globalNum: 1,
             chapterNum: 1,
             chapter:"Chapter 1",
+            resourceUrl:"../networking/wireshark_dba_guide.html",
             status:"Not Started",
             confidence:0,
             last_updated:"2026-07-03"

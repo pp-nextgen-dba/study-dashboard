@@ -1,4 +1,4 @@
-const CACHE = "study-dashboard-v3";
+const CACHE = "study-dashboard-v4";
 
 const STATIC_ASSETS = [
     "/index.html",
@@ -25,6 +25,7 @@ const STATIC_ASSETS = [
     "/subjects/seni.html",
     "/subjects/storybooks.html",
     "/subjects/network.html",
+    "/networking/wireshark_dba_guide.html",
     "/daily-progress.html",
     "/js/daily-progress.js",
     "/history/melaka_chapter5.html",

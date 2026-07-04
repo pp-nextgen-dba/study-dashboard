@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Wireshark Guide — HTTP / MSSQL / PostgreSQL / Oracle / Middleboxes</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.9.0/mermaid.min.js"></script>
+<style>
+  :root{
+    --navy:#0b2545; --blue:#1e6091; --teal:#2ec4b6; --coral:#ff6b6b;
+    --amber:#ffb703; --purple:#7b2cbf; --green:#2d8a3e; --bg:#f4f7fb; --card:#ffffff; --ink:#1b263b; --sub:#5c6b7a;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;font-family:"Segoe UI",Helvetica,Arial,"Microsoft YaHei",sans-serif;background:var(--bg);color:var(--ink);line-height:1.55;}
+  header{background:linear-gradient(120deg,var(--navy),var(--blue));color:#fff;padding:40px 24px;text-align:center;}
+  header h1{margin:0 0 8px;font-size:2rem;}
+  header p{margin:0;opacity:.9;font-size:1.05rem;}
+  .wrap{max-width:980px;margin:0 auto;padding:24px;}
+  nav.toc{background:var(--card);border-radius:12px;padding:18px 24px;margin:-30px auto 30px;max-width:920px;box-shadow:0 6px 18px rgba(11,37,69,.08);}
+  nav.toc h2{margin-top:0;font-size:1.05rem;color:var(--blue);}
+  nav.toc ol{columns:2;padding-left:20px;margin:0;}
+  nav.toc a{color:var(--ink);text-decoration:none;}
+  nav.toc a:hover{color:var(--teal);}
+  section{background:var(--card);border-radius:14px;padding:26px 30px;margin-bottom:22px;box-shadow:0 4px 14px rgba(11,37,69,.06);}
+  section h2{color:var(--navy);border-left:6px solid var(--teal);padding-left:12px;margin-top:0;}
+  section h3{margin-bottom:6px;color:var(--blue);}
+  .cn{color:var(--sub);font-size:.95rem;}
+  code, .code-inline{background:#eef3fa;color:#c0392b;padding:2px 6px;border-radius:5px;font-family:Consolas,monospace;font-size:.92em;}
+  pre{background:var(--ink);color:#e6f1ff;padding:14px 18px;border-radius:10px;overflow-x:auto;font-family:Consolas,monospace;font-size:.9rem;}
+  table{width:100%;border-collapse:collapse;margin:14px 0;}
+  th,td{border:1px solid #dde6f0;padding:10px 12px;text-align:left;font-size:.92rem;vertical-align:top;}
+  th{background:var(--navy);color:#fff;}
+  tr:nth-child(even){background:#f7fafd;}
+  .badge{display:inline-block;color:#fff;padding:3px 12px;border-radius:20px;font-size:.78rem;font-weight:600;margin-right:6px;}
+  .b-http{background:var(--coral);} .b-mssql{background:var(--purple);} .b-pg{background:var(--blue);} .b-ora{background:#c0392b;} .b-new{background:var(--amber);color:#3a2b00;} .b-lb{background:var(--green);} .b-rvbd{background:#8d5524;} .b-redis{background:#a41e11;}
+  .tip{border-left:5px solid var(--teal);background:#eafffb;padding:10px 16px;border-radius:8px;margin:14px 0;}
+  .warn{border-left:5px solid var(--coral);background:#fff0ee;padding:10px 16px;border-radius:8px;margin:14px 0;}
+  .quote{border-left:5px solid var(--amber);background:#fff9ea;padding:10px 16px;border-radius:8px;margin:14px 0;font-style:italic;}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+  @media(max-width:640px){.grid2{grid-template-columns:1fr;} nav.toc ol{columns:1;}}
+  .card-mini{border:1px solid #e1e8f0;border-radius:10px;padding:14px 16px;}
+  .mermaid{background:#fff;border-radius:10px;padding:10px;}
+  footer{text-align:center;padding:30px;color:var(--sub);font-size:.85rem;}
+</style>
+</head>
+<body>
+
+<div class="top-nav" style="background:#fff;padding:10px 16px;border-bottom:2px solid #e5e7eb;position:sticky;top:0;z-index:120">
+  <a class="dashboard-link" href="../index.html" style="display:inline-flex;align-items:center;gap:6px;padding:8px 12px;border-radius:8px;background:#1d4ed8;color:#fff;font-size:13px;font-weight:800;text-decoration:none">&larr; Back to Dashboard</a>
+</div>
+
+<header>
+  <h1>🦈 Wireshark Guide</h1>
+  <p>HTTP · MSSQL · PostgreSQL · Oracle · Load Balancer · Riverbed — 抓包分析双语学习指南 (EN + 中文)</p>
+</header>
+
+<div class="wrap">
+
+<nav class="toc">
+  <h2>Contents 目录</h2>
+  <ol>
+    <li><a href="#basics">Beginner Basics 新手基础</a></li>
+    <li><a href="#concepts">Core Concepts 核心概念</a></li>
+    <li><a href="#interface">Interface Tour 界面导览</a></li>
+    <li><a href="#ports">Ports & Dissectors 端口与解析器</a></li>
+    <li><a href="#http">HTTP Traffic HTTP流量</a></li>
+    <li><a href="#middlebox">Load Balancer & Riverbed 负载均衡与广域网优化</a></li>
+    <li><a href="#riverbed-example">↳ Riverbed Client-Web-DB Example 示例图解</a></li>
+    <li><a href="#caching">Caching & Redis 缓存与Redis</a></li>
+    <li><a href="#mssql">MSSQL / TDS</a></li>
+    <li><a href="#pg">PostgreSQL</a></li>
+    <li><a href="#ora">Oracle / TNS</a></li>
+    <li><a href="#stream">Follow Stream 跟踪流</a></li>
+    <li><a href="#latency">Latency & Errors 延迟与故障</a></li>
+    <li><a href="#stats">Statistics Tools 统计工具</a></li>
+    <li><a href="#team">Team Discussion Guide 团队讨论指南</a></li>
+    <li><a href="#mindmap">Mind Map 思维导图</a></li>
+    <li><a href="#practice">Practice 练习建议</a></li>
+  </ol>
+</nav>
+
+<section id="basics">
+  <h2>0. Beginner Basics <span class="cn">新手基础</span> <span class="badge b-new">start here</span></h2>
+
+  <h3>What is a packet? <span class="cn">什么是数据包？</span></h3>
+  <p>Data travelling over a network is chopped into small chunks called <b>packets</b>. Each packet is wrapped in layers of "envelopes" — like a letter, inside an envelope, inside another envelope. Wireshark shows you every layer when you expand a packet in the Details pane.
+  <br><span class="cn">网络中传输的数据会被切分成一个个小块，称为"数据包"。每个数据包像信封套信封一样，包裹着多层信息。展开Wireshark的数据包详情面板即可看到每一层。</span></p>
+
+  <div class="grid2">
+    <div class="card-mini">
+      <b>Simplified layers 简化分层</b>
+      <table>
+        <tr><th>Layer</th><th>Example</th></tr>
+        <tr><td>Frame <span class="cn">帧</span></td><td>Ethernet / Wi-Fi</td></tr>
+        <tr><td>Network <span class="cn">网络层</span></td><td>IP address (who → who)</td></tr>
+        <tr><td>Transport <span class="cn">传输层</span></td><td>TCP/UDP (port, reliability)</td></tr>
+        <tr><td>Application <span class="cn">应用层</span></td><td>HTTP / TDS / pgsql / TNS</td></tr>
+      </table>
+    </div>
+    <div class="card-mini">
+      <b>Client ↔ Server model 客户端-服务器模型</b>
+      <p style="margin:6px 0 0;">The <b>client</b> (browser, app, DB tool) sends a request; the <b>server</b> (web server, MSSQL/PostgreSQL/Oracle engine) sends back a response. Nearly every capture you'll read is one of these request/response pairs.
+      <br><span class="cn">客户端（浏览器、应用、数据库工具）发送请求，服务器（Web服务器或数据库引擎）返回响应。几乎所有抓包分析都是在读这一组组请求与响应。</span></p>
+    </div>
+  </div>
+
+  <h3>The TCP handshake, in plain terms <span class="cn">TCP三次握手（通俗讲解）</span></h3>
+  <p>Before any SQL query or HTTP request can be sent, TCP does a quick "hello" — 3 packets, no data yet. If you ever see a capture where the handshake never finishes, the connection never really started.
+  <br><span class="cn">在发送任何SQL查询或HTTP请求之前，TCP会先完成一次简短的"握手"——3个数据包，此时还没有真正的数据。如果握手没有完成，说明连接根本没建立起来。</span></p>
+  <div class="mermaid">
+sequenceDiagram
+    participant C as Client 客户端
+    participant S as Server 服务器
+    C->>S: SYN (let's connect 我要连接)
+    S->>C: SYN-ACK (ok, you there? 好的，收到)
+    C->>S: ACK (confirmed 确认)
+    Note over C,S: Connection established 连接建立，可以开始发送数据/SQL/HTTP请求
+  </div>
+
+  <h3>Glossary <span class="cn">术语表</span></h3>
+  <table>
+    <tr><th>Term</th><th>Plain-English meaning 通俗解释</th></tr>
+    <tr><td>Port <span class="cn">端口</span></td><td>A number identifying which service on a machine (80=web, 1433=MSSQL, 5432=PostgreSQL, 1521=Oracle). Like an apartment number at a street address.</td></tr>
+    <tr><td>TCP vs UDP</td><td>TCP = reliable, ordered, confirms delivery (used by DBs & HTTP). UDP = fire-and-forget, faster but no guarantee (used by DNS, SQL Browser discovery).</td></tr>
+    <tr><td>RTT (Round-Trip Time) <span class="cn">往返时延</span></td><td>Time for a packet to go out and its acknowledgment to come back — a core "is it slow?" measurement.</td></tr>
+    <tr><td>Latency vs Throughput <span class="cn">延迟 vs 吞吐量</span></td><td>Latency = how long one packet takes. Throughput = how much data moves per second. A link can have low throughput but still low latency, or vice versa.</td></tr>
+    <tr><td>Retransmission <span class="cn">重传</span></td><td>Sender didn't get confirmation in time, so it resends the packet — usually means packet loss somewhere.</td></tr>
+    <tr><td>Socket <span class="cn">套接字</span></td><td>The combination of IP address + port + protocol that uniquely identifies one connection.</td></tr>
+    <tr><td>Dissector <span class="cn">解析器</span></td><td>The piece of Wireshark that knows how to read a specific protocol (e.g. the "tds" dissector understands MSSQL's language).</td></tr>
+    <tr><td>NAT (SNAT/DNAT) <span class="cn">网络地址转换</span></td><td>A device (e.g. load balancer) rewrites source/destination IP so the client and real server never talk to each other's real address directly.</td></tr>
+  </table>
+  <div class="tip"><b>Beginner tip:</b> You don't need to understand every layer to be useful — start by filtering to your protocol (<code>http</code>, <code>tds</code>, <code>pgsql</code>, <code>tns</code>) and reading the "Info" column in the Packet List. Everything else can wait.
+  <br><span class="cn">新手提示：不需要一开始就搞懂每一层，先用协议过滤（http/tds/pgsql/tns），看数据包列表的"Info"信息列即可，其余内容可以慢慢学。</span></div>
+</section>
+
+<section id="concepts">
+  <h2>1. Core Concepts <span class="cn">核心概念</span></h2>
+  <p><b>Capture filter</b> — set before capture starts, BPF syntax (e.g. <code>port 1433</code>), reduces what's written to disk.<br>
+  <span class="cn">抓包过滤器：开始抓包前设置，BPF语法，减少写入磁盘的数据量。</span></p>
+  <p><b>Display filter</b> — applied after capture, Wireshark syntax (e.g. <code>tcp.port==1433</code>), used 95% of the time.<br>
+  <span class="cn">显示过滤器：抓包后筛选已捕获数据，日常分析主要使用。</span></p>
+  <div class="tip"><b>Tip:</b> Capture broadly (e.g. just <code>host &lt;server_ip&gt;</code>), narrow down later with display filters.
+  <br><span class="cn">建议：抓包范围宽松一些（例如只按IP过滤），之后用显示过滤器精细筛选。</span></div>
+</section>
+
+<section id="interface">
+  <h2>2. Interface Tour <span class="cn">界面导览</span></h2>
+  <table>
+    <tr><th>Pane 区域</th><th>What it shows 作用</th></tr>
+    <tr><td>Packet List <span class="cn">数据包列表</span></td><td>One row per packet: time, source, destination, protocol, info.</td></tr>
+    <tr><td>Packet Details <span class="cn">数据包详情</span></td><td>Expandable layers: Frame → Ethernet → IP → TCP → app protocol (HTTP/TDS/pgsql/TNS).</td></tr>
+    <tr><td>Packet Bytes <span class="cn">字节视图</span></td><td>Raw hex/ASCII — spot SQL text, URLs, headers in the payload.</td></tr>
+    <tr><td>Filter Bar <span class="cn">过滤栏</span></td><td>Green = valid filter, red = invalid.</td></tr>
+  </table>
+  <div class="tip">Right-click any field → <b>Apply as Filter</b> — build filters without memorizing syntax.
+  <span class="cn">右键任意字段选择"应用为过滤器"，无需记忆语法即可生成过滤条件。</span></div>
+</section>
+
+<section id="ports">
+  <h2>3. Ports & Dissectors <span class="cn">端口与解析器速查</span></h2>
+  <table>
+    <tr><th>Protocol</th><th>Default Port</th><th>Wireshark Filter</th><th>Dissector name</th></tr>
+    <tr><td><span class="badge b-http">HTTP</span></td><td>80 (443 for HTTPS)</td><td><code>http</code> / <code>tcp.port==80</code></td><td>http</td></tr>
+    <tr><td><span class="badge b-mssql">MSSQL</span></td><td>1433</td><td><code>tds</code> / <code>tcp.port==1433</code></td><td>tds (Tabular Data Stream)</td></tr>
+    <tr><td><span class="badge b-pg">PostgreSQL</span></td><td>5432</td><td><code>pgsql</code> / <code>tcp.port==5432</code></td><td>pgsql</td></tr>
+    <tr><td><span class="badge b-ora">Oracle</span></td><td>1521</td><td><code>tns</code> / <code>tcp.port==1521</code></td><td>tns (Transparent Network Substrate)</td></tr>
+  </table>
+  <div class="tip">If Wireshark shows plain <code>TCP</code> instead of the protocol name, right-click a packet → <b>Decode As...</b> → pick the dissector (tds / pgsql / tns / http).
+  <br><span class="cn">若只显示TCP而非协议名，右键数据包选择"Decode As"手动指定解析器。</span></div>
+</section>
+
+<section id="http">
+  <h2>4. HTTP Website Traffic <span class="badge b-http">HTTP</span></h2>
+  <table>
+    <tr><th>Goal 目的</th><th>Filter</th></tr>
+    <tr><td>All HTTP traffic</td><td><code>http</code></td></tr>
+    <tr><td>Only requests <span class="cn">仅请求</span></td><td><code>http.request</code></td></tr>
+    <tr><td>Only responses <span class="cn">仅响应</span></td><td><code>http.response</code></td></tr>
+    <tr><td>Errors (4xx/5xx) <span class="cn">错误状态码</span></td><td><code>http.response.code >= 400</code></td></tr>
+    <tr><td>Specific host <span class="cn">指定主机名</span></td><td><code>http.host == "example.com"</code></td></tr>
+    <tr><td>GET/POST only</td><td><code>http.request.method == "POST"</code></td></tr>
+    <tr><td>Slow requests <span class="cn">慢请求</span></td><td><code>http.time > 1</code></td></tr>
+    <tr><td>DNS lookups <span class="cn">DNS查询</span></td><td><code>dns</code></td></tr>
+  </table>
+  <div class="warn"><b>Note:</b> HTTPS traffic is encrypted (TLS) — Wireshark can only see the handshake (SNI hostname, cert) unless you provide the TLS session keys (<code>SSLKEYLOGFILE</code>) for decryption.
+  <br><span class="cn">HTTPS流量已加密，Wireshark只能看到握手信息（如SNI主机名、证书），除非提供TLS会话密钥进行解密。</span></div>
+</section>
+
+<section id="middlebox">
+  <h2>5. Web Slowness & Middleboxes <span class="badge b-lb">Load Balancer</span><span class="badge b-rvbd">Riverbed</span></h2>
+  <p>For "the website is slow" tickets, the path is rarely just Client → Server. A load balancer and/or a WAN optimizer usually sit in between, and each one changes what your capture looks like.
+  <br><span class="cn">对于"网站慢"类工单，路径很少是客户端直连服务器，中间通常还有负载均衡器和/或广域网优化设备（如Riverbed），它们都会改变抓包的表现形式。</span></p>
+
+  <div class="mermaid">
+flowchart LR
+    C[Client 客户端] -->|"TCP #1"| LB[Load Balancer<br/>VIP + SNAT/DNAT]
+    LB -->|"TCP #2"| RVL[Riverbed LAN-side<br/>optional]
+    RVL -.optimized WAN link.-> RVR[Riverbed WAN-side<br/>optional]
+    RVR -->|"TCP #3"| S[Backend Server 后端服务器]
+  </div>
+  <p><span class="cn">注意：客户端到服务器实际上可能是多段独立的TCP连接（Client→LB, LB→Riverbed, Riverbed→Server），每一段都要单独抓包对比才能定位延迟发生在哪一段。</span></p>
+
+  <h3>Why / Who / How — the plain-language framework <span class="cn">为什么 / 谁负责 / 怎么设计——简明框架</span></h3>
+  <p style="margin-top:0;"><b>Simple analogy first:</b> think of Riverbed as a courier relay between two warehouses. It repacks boxes to ship faster and cheaper between the two points — it never changes the delivery address, and it's invisible to the sender and receiver.
+  <br><span class="cn">先打个比方：Riverbed就像两个仓库之间的"快递中转站"。它把包裹重新打包压缩以便更快更省地在两点之间运输——从不改变收货地址，对发件人和收件人来说都是"隐形"的。</span></p>
+
+  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:14px 0;">
+    <div class="card-mini" style="border-top:4px solid var(--rvbd,#8d5524);">
+      <b>WHY do we need it? <span class="cn">为什么需要它？</span></b>
+      <ul style="margin:8px 0 0;padding-left:18px;font-size:.9rem;">
+        <li><b>Physics:</b> a round trip across a long-distance WAN (e.g. branch ↔ HQ, or cross-country/cross-country DC) has a minimum delay just from distance — no amount of bandwidth fixes that. <span class="cn">跨地域的一次往返本身就有最低延迟，带宽再大也无法消除。</span></li>
+        <li><b>Cost:</b> WAN/MPLS bandwidth between sites is expensive; sending less data (compression/dedup) means the company can use cheaper links. <span class="cn">站点间专线带宽昂贵，压缩去重后可以用更便宜的链路。</span></li>
+        <li><b>Chatty protocols:</b> some protocols need many small round trips to do one task; each one pays the full distance-delay, so they feel painfully slow over a WAN without help. <span class="cn">部分协议一次操作需要多次小的往返，每次都要付出完整的距离延迟。</span></li>
+      </ul>
+    </div>
+    <div class="card-mini" style="border-top:4px solid var(--blue);">
+      <b>WHO manages it? <span class="cn">谁来管理？</span></b>
+      <ul style="margin:8px 0 0;padding-left:18px;font-size:.9rem;">
+        <li><b>Network/Infrastructure team</b> owns the appliances, licensing, and tunnel health — same team that owns routers/firewalls. <span class="cn">网络/基础设施团队负责设备、许可证与隧道健康状态，和路由器防火墙是同一团队。</span></li>
+        <li><b>App/DB teams</b> don't configure it, but should know it exists on the path and loop in network team when diagnosing performance. <span class="cn">应用/数据库团队不负责配置，但应知道它的存在，排查性能问题时要拉上网络团队。</span></li>
+        <li><b>Security team</b> gets involved only if Riverbed is configured to inspect/optimize encrypted (TLS) traffic, since that requires sharing certificates/keys. <span class="cn">只有当Riverbed需要对加密流量做深度优化时才涉及安全团队，因为需要共享证书/密钥。</span></li>
+      </ul>
+    </div>
+    <div class="card-mini" style="border-top:4px solid var(--green);">
+      <b>HOW to design apps around it <span class="cn">应用设计时如何考虑</span></b>
+      <ul style="margin:8px 0 0;padding-left:18px;font-size:.9rem;">
+        <li>Ask early in design: "does this traffic cross a WAN with Riverbed in the path?" — involve network team before go-live, not after complaints. <span class="cn">设计初期就问网络团队路径上是否有Riverbed，而不是等用户投诉后才问。</span></li>
+        <li>Avoid chatty designs: batch multiple small calls into fewer, larger ones where possible — fewer round trips = less exposed to WAN distance-delay. <span class="cn">尽量把多次小请求合并成更少、更大的请求，减少往返次数。</span></li>
+        <li>Expect a "cold vs warm" curve: don't panic if the very first user/report load is slower — repeat access is expected to speed up. <span class="cn">预期"冷热"效应：第一次加载慢属正常，无需立即报警。</span></li>
+        <li>If traffic is end-to-end encrypted (HTTPS/TLS everywhere), Riverbed can still speed up the TCP mechanics but can't compress/dedupe the payload unless keys are shared — decide this trade-off with security/network up front. <span class="cn">若全程加密，Riverbed仍可优化TCP机制，但无法压缩/去重载荷内容，除非共享密钥，需提前与安全/网络团队权衡。</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="tip"><b>3-question framework to reuse for any new project 可复用的"三个问题"框架:</b>
+    <ol style="margin:8px 0 0;padding-left:18px;">
+      <li>Does this traffic cross a WAN link with Riverbed (or similar) in the path? <span class="cn">该流量是否会经过带有Riverbed的广域网链路？</span></li>
+      <li>Is it encrypted end-to-end? <span class="cn">是否全程加密？</span> (affects how much optimization is possible / 影响可优化的程度)</li>
+      <li>Is the protocol chatty (many small round trips per transaction)? <span class="cn">协议是否"多话"（一次操作需要多次往返）？</span> (affects how much warm-cache benefit to expect / 影响热缓存能带来多少提升)</li>
+    </ol>
+  </div>
+
+  <h3>Load Balancer (F5 / HAProxy / Nginx / ALB) <span class="badge b-lb">LB</span></h3>
+  <table>
+    <tr><th>What changes in the capture 抓包中的变化</th><th>Why it matters 为什么重要</th></tr>
+    <tr><td>Client sees the LB's <b>VIP</b> as "the server"; the real backend never appears in the client-side capture.</td><td>You must capture on both sides (client-facing and server-facing) to see the whole picture. <span class="cn">需要在LB两侧分别抓包才能看到完整路径。</span></td></tr>
+    <tr><td>Server-side capture shows the LB's IP as source (SNAT), not the real client IP — unless <code>X-Forwarded-For</code> / proxy protocol is used.</td><td>Don't be confused when "client IP" in the backend capture is actually the LB. <span class="cn">后端抓包里的"客户端IP"其实是负载均衡器的IP。</span></td></tr>
+    <tr><td>Health-check probes mixed in with real traffic (regular, tiny requests to a fixed path like <code>/health</code>).</td><td>Filter these out so they don't skew your read of real user traffic. <span class="cn">过滤健康检查流量，避免误判为真实用户请求。</span></td></tr>
+  </table>
+  <p><b>Useful filter:</b> <code>http.request.uri contains "/health"</code> (exclude with <code>!</code>) to separate health checks from real traffic.</p>
+
+  <h3>Riverbed / WAN Optimization (SteelHead) <span class="badge b-rvbd">Riverbed</span></h3>
+  <table>
+    <tr><th>What changes in the capture 抓包中的变化</th><th>Why it matters 为什么重要</th></tr>
+    <tr><td>Riverbed splits one logical connection into a <b>LAN-side</b> and a <b>WAN-side</b> TCP connection (transparent proxy).</td><td>What looks like "the same connection" in your capture may actually be two separate TCP sessions stitched together. <span class="cn">看似同一条连接，实际可能是两段独立的TCP会话被拼接在一起。</span></td></tr>
+    <tr><td>TCP options may show a Riverbed auto-discovery probe (vendor-specific TCP option during the handshake).</td><td>Confirms Riverbed is in the path even if no one told you. <span class="cn">可用于确认路径中确实存在Riverbed设备。</span></td></tr>
+    <tr><td>Data reduction (SDR/compression) changes byte counts and can make throughput look unusually good or introduce extra latency on cache misses.</td><td>Don't assume "less data on the wire" always equals "faster" — first-pass (cold) transfers may be slower than expected. <span class="cn">首次传输（未命中缓存）时反而可能比预期慢。</span></td></tr>
+  </table>
+  <div class="warn"><b>Common misdiagnosis trap:</b> Riverbed's connection splitting can look like retransmissions or resets to someone unfamiliar with it — always confirm with the network team whether WAN optimization is active on the path before concluding "packet loss."
+  <br><span class="cn">常见误诊陷阱：Riverbed的连接拆分在不了解的人看来可能像是重传或连接重置——下结论说"丢包"之前，务必先向网络团队确认该路径是否启用了广域网优化。</span></div>
+
+  <h3>Troubleshooting approach <span class="cn">排查思路</span></h3>
+  <ol>
+    <li>Capture as close to the client as possible, and as close to the backend server as possible, <b>at the same time</b>.<br><span class="cn">尽量在客户端附近和服务器附近同时抓包。</span></li>
+    <li>Compare timestamps for the same logical request across both captures — the gap tells you which segment (client↔LB, LB↔Riverbed, Riverbed↔server) owns the delay.<br><span class="cn">对比同一请求在两侧抓包中的时间戳，差值即为延迟所在的具体路段。</span></li>
+    <li>Exclude health-check noise, then re-check retransmissions/ack_rtt per segment rather than end-to-end.<br><span class="cn">排除健康检查流量后，分段核查重传与ack_rtt，而不是只看端到端总时延。</span></li>
+  </ol>
+
+  <h3 id="riverbed-example">Detailed example: how Riverbed sits between Client → Web Server → DB <span class="cn">详细示例：Riverbed在客户端—Web服务器—数据库之间的作用</span></h3>
+  <p>Typical scenario: a branch-office client hits a web application at HQ/datacenter over a slow WAN link, and that web server talks to a DB server that's usually right next to it on the same LAN (so Riverbed normally optimizes the <b>Client↔Web Server</b> leg, not the Web Server↔DB leg — unless the DB is itself at another site).
+  <br><span class="cn">典型场景：分支机构的客户端通过较慢的广域网访问总部/数据中心的Web应用，该Web服务器通常与数据库服务器在同一局域网内（因此Riverbed通常优化的是"客户端↔Web服务器"这一段，而不是"Web服务器↔数据库"这一段——除非数据库本身也在异地）。</span></p>
+
+  <div class="mermaid">
+flowchart LR
+    subgraph Branch["Branch Office 分支机构"]
+      C[Client 客户端]
+    end
+    subgraph WAN["WAN Link 广域网链路"]
+      SH1[Riverbed SteelHead<br/>near-end 近端]
+      SH2[Riverbed SteelHead<br/>far-end 远端]
+    end
+    subgraph DC["Datacenter 数据中心 (LAN)"]
+      W[Web Server]
+      D[(DB Server)]
+    end
+    C -- "Leg 1: LAN, plain TCP<br/>client thinks it talks to Web Server directly" --> SH1
+    SH1 -. "Leg 2: Optimized WAN tunnel<br/>compression + SDR + MX-TCP" .-> SH2
+    SH2 -- "Leg 3: LAN, plain TCP" --> W
+    W == "usually same LAN, no Riverbed needed" ==> D
+  </div>
+
+  <p><b>Key point for the team:</b> unlike a load balancer, Riverbed does <u>not</u> change IP addresses (no NAT). The client's packets still show the real web server IP as destination, and vice versa — SteelHead devices sit "in-path" and transparently intercept, so from the app's point of view it looks like one direct connection, even though underneath it is 3 separate TCP legs.
+  <br><span class="cn">关键点：与负载均衡器不同，Riverbed不做地址转换（无NAT）。客户端数据包中的目的IP仍然是Web服务器的真实IP，反之亦然——SteelHead设备是"透明在线"部署，应用层看起来像一条直连，但底层实际上是3段独立的TCP连接。</span></p>
+
+  <h4 style="margin-bottom:6px;">How the connection gets split (auto-discovery) <span class="cn">连接如何被自动识别并拆分</span></h4>
+  <div class="mermaid">
+sequenceDiagram
+    participant C as Client 客户端
+    participant N as Near SteelHead 近端
+    participant F as Far SteelHead 远端
+    participant W as Web Server
+
+    C->>N: SYN (carries Riverbed "probe" TCP option)
+    N->>F: forwards SYN with probe query
+    F->>W: SYN (normal, on behalf of client)
+    W->>F: SYN-ACK
+    F->>N: SYN-ACK (carries probe response = "I am here, let's optimize")
+    N->>C: SYN-ACK (probe stripped, looks like a normal handshake)
+    Note over C,W: Now 3 TCP legs exist:<br/>Client-Near (LAN) | Near-Far (optimized WAN) | Far-WebServer (LAN)
+    C->>N: HTTP/SQL request (plain)
+    N-->>F: compressed / deduped over WAN tunnel
+    F->>W: HTTP/SQL request (plain, reconstructed)
+  </div>
+  <p><span class="cn">客户端发出的SYN包中带有Riverbed探测选项；近端SteelHead截获后转发探测请求给远端；远端确认存在Riverbed后，双方"握手"确认可以优化，随后的数据在两端SteelHead之间以压缩、去重、优化TCP（MX-TCP）的方式传输，到达远端后再还原成普通流量转发给真正的服务器。</span></p>
+
+  <h4 style="margin-bottom:6px;">First load vs repeat load — a giveaway pattern <span class="cn">首次加载 vs 重复加载——一个可辨识的规律</span></h4>
+  <table>
+    <tr><th>Scenario</th><th>What you'd see 现象</th><th>What it suggests 说明</th></tr>
+    <tr><td>First time opening a report/page (cold) <span class="cn">首次打开（冷数据）</span></td><td>Full data volume crosses the WAN tunnel; normal or even slightly slower than expected.</td><td>SDR reference library hasn't seen this data yet — nothing to reduce. <span class="cn">SDR尚未建立该数据的参考库，无法压缩去重。</span></td></tr>
+    <tr><td>Same report/page again shortly after (warm) <span class="cn">短时间内重复打开（热数据）</span></td><td>Byte count on the WAN leg drops sharply; feels much faster.</td><td>Riverbed replaced repeated byte patterns with small references — this is expected and good. <span class="cn">重复的数据模式被替换为小引用，属正常优化效果。</span></td></tr>
+    <tr><td>Every load is slow, warm or cold <span class="cn">无论冷热都慢</span></td><td>No improvement on repeat access.</td><td>Points away from Riverbed and toward the backend (DB query, web server processing) or the LAN leg. <span class="cn">说明问题更可能出在后端（数据库查询、Web服务器处理）或局域网段，而非Riverbed。</span></td></tr>
+  </table>
+
+  <div class="quote"><b>Talking-point script for the meeting:</b> "If this page is slow only the first time and fast on reload, that's consistent with Riverbed's data reduction warming up — not a bug. If it's slow every single time regardless of reload, Riverbed likely isn't the cause and we should look at the DB query plan or web server processing time instead."
+  <br><span class="cn">会议话术参考："如果这个页面只是第一次慢、刷新后就快，这符合Riverbed数据缩减预热的正常表现，不是故障。如果每次都慢，跟是否刷新无关，那问题更可能不在Riverbed，应该去看数据库执行计划或Web服务器处理时间。"</span></div>
+
+  <h4 style="margin-bottom:6px;">Where to place Wireshark captures for this example <span class="cn">本示例中抓包点建议</span></h4>
+  <table>
+    <tr><th>Capture point 抓包位置</th><th>What it tells you 能看出什么</th></tr>
+    <tr><td>At the client (Leg 1)</td><td>Real end-user experience: total time from request to response. <span class="cn">真实终端用户体验：请求到响应的总耗时。</span></td></tr>
+    <tr><td>At near SteelHead's LAN interface</td><td>Confirms what the client actually sent before any optimization. <span class="cn">确认优化前客户端实际发送的内容。</span></td></tr>
+    <tr><td>At far SteelHead's LAN interface (DC side)</td><td>Shows the reconstructed traffic reaching the datacenter — compare timing to isolate WAN tunnel delay. <span class="cn">显示还原后到达数据中心的流量，用于对比隔离WAN隧道段的延迟。</span></td></tr>
+    <tr><td>At the web/DB server</td><td>True backend processing time, isolated from network and WAN optimization effects. <span class="cn">纯后端处理时间，排除了网络与WAN优化的影响。</span></td></tr>
+  </table>
+  <div class="tip">If you only have time/access for one extra capture point beyond the client, pick the <b>far SteelHead / datacenter-side</b> capture — subtracting its timestamps from the client-side capture isolates "WAN + Riverbed" time from "backend" time in one comparison.
+  <br><span class="cn">如果只能多加一个抓包点，建议选在"远端SteelHead/数据中心侧"——用它与客户端侧时间戳相减，即可一次性区分出"广域网+Riverbed优化"耗时与"后端处理"耗时。</span></div>
+</section>
+
+<section id="caching">
+  <h2>6. Application Caching & Redis <span class="badge b-redis">Redis</span></h2>
+
+  <p><b>Simple analogy first:</b> instead of walking to the filing cabinet in the basement (the database) every single time you need a fact, you write it on a sticky note on your desk (the cache). Next time you need the same fact, you glance at the sticky note — much faster than another trip downstairs.
+  <br><span class="cn">先打个比方：与其每次都跑去地下室的档案柜（数据库）翻找资料，不如把常用的答案写在桌上的便签纸（缓存）上。下次要用时看一眼便签就行，比再跑一趟地下室快得多。</span></p>
+
+  <h3>Where caching sits in the path <span class="cn">缓存在整条链路中的位置</span></h3>
+  <div class="mermaid">
+flowchart LR
+    C[Client 客户端] --> W[Web / App Server]
+    W -- "1: check cache first" --> R[(Redis<br/>in-memory cache)]
+    R -- "HIT: return cached value 命中" --> W
+    R -. "MISS: not found 未命中" .-> D[(DB Server<br/>Oracle/PostgreSQL/MSSQL)]
+    D -- "2: query result" --> W
+    W -. "3: store result back in Redis for next time" .-> R
+    W --> C
+  </div>
+  <p><span class="cn">应用/Web服务器先查Redis：命中则直接返回（快）；未命中则查数据库，拿到结果后再顺手写回Redis，供下次请求使用。</span></p>
+
+  <h3>Layers of caching, from closest to the user to the database itself <span class="cn">从离用户最近到数据库本身的各层缓存</span></h3>
+  <table>
+    <tr><th>Layer 层级</th><th>Example 示例</th><th>Who manages it 谁管理</th></tr>
+    <tr><td>Browser cache <span class="cn">浏览器缓存</span></td><td>Cached images/JS/CSS in the user's browser</td><td>Browser + web dev headers</td></tr>
+    <tr><td>CDN cache <span class="cn">CDN缓存</span></td><td>Cloudflare, Akamai, CloudFront edge caching</td><td>Web/Infra team</td></tr>
+    <tr><td>App-level / distributed cache <span class="cn">应用级/分布式缓存</span></td><td><b>Redis</b>, Memcached</td><td>App / Platform / DevOps team</td></tr>
+    <tr><td>DB engine's own internal cache <span class="cn">数据库引擎自身缓存</span></td><td>Oracle Buffer Cache (SGA), PostgreSQL <code>shared_buffers</code>, MSSQL Buffer Pool</td><td><b>DBA</b> (this is the layer you already tune today)</td></tr>
+  </table>
+  <div class="tip"><b>Important distinction for DBAs:</b> Redis is a completely separate, external cache that your application code chooses to check <i>before</i> ever reaching the database. It is not the same as the buffer cache/shared_buffers/buffer pool you already manage inside Oracle/PostgreSQL/MSSQL — that one caches raw data pages and is invisible to the app; Redis caches whole application-level results and is explicitly read/written by app code.
+  <br><span class="cn">对DBA来说的关键区别：Redis是应用代码在"到达数据库之前"主动查询的一个完全独立、外部的缓存层。它与你现在管理的Oracle/PostgreSQL/MSSQL内部缓存（Buffer Cache/shared_buffers/Buffer Pool）不同——那些缓存的是原始数据页且对应用透明；而Redis缓存的是整份应用层结果，需要应用代码显式读写。</span></div>
+
+  <h3>Why teams add Redis <span class="cn">为什么团队要用Redis</span></h3>
+  <ul>
+    <li>Cuts repeated, expensive DB reads — the same popular query result is served from memory instead of re-executed. <span class="cn">避免重复执行相同的高成本查询，直接从内存返回结果。</span></li>
+    <li>Microsecond-level response time (RAM) vs milliseconds for a disk-backed DB query. <span class="cn">内存级响应时间（微秒级），远快于依赖磁盘的数据库查询（毫秒级）。</span></li>
+    <li>Also commonly used for session storage, rate limiting, and pub/sub messaging — not just query caching. <span class="cn">除了查询缓存，也常用于会话存储、限流和发布/订阅消息。</span></li>
+  </ul>
+
+  <h3>Redis basics for Wireshark <span class="cn">Wireshark视角下的Redis基础</span></h3>
+  <table>
+    <tr><th>Item</th><th>Detail</th></tr>
+    <tr><td>Default port</td><td><code>6379</code></td></tr>
+    <tr><td>Protocol / dissector</td><td>RESP (REdis Serialization Protocol); Wireshark filter: <code>redis</code></td></tr>
+    <tr><td>Common commands you'll see</td><td><code>GET</code>, <code>SET</code>, <code>EXPIRE</code>, <code>DEL</code>, <code>HGET</code>/<code>HSET</code> (hash fields), <code>MULTI</code>/<code>EXEC</code> (transactions)</td></tr>
+    <tr><td>Port-based fallback filter</td><td><code>tcp.port == 6379</code></td></tr>
+  </table>
+  <div class="warn">If Redis is configured with TLS (Redis 6+) or deployed as a cluster, plain protocol decoding may be limited or the traffic encrypted — same caveat as the other DB protocols above.
+  <br><span class="cn">若Redis启用了TLS（Redis 6+）或部署为集群模式，协议解析可能受限或流量被加密——与前面提到的其他数据库协议注意事项相同。</span></div>
+
+  <h3>Two "cold vs warm" patterns that look similar but aren't <span class="cn">两种看似相同、实则不同的"冷热"现象</span></h3>
+  <p>You now have <i>two different layers</i> that both cause "first time slow, then fast" behavior — telling them apart matters for the team discussion:</p>
+  <table>
+    <tr><th>Layer 层级</th><th>Why first load is slower 为什么首次慢</th><th>How to tell which one it is 如何判断</th></tr>
+    <tr><td>Riverbed (WAN optimization)</td><td>Data-reduction library hasn't seen these bytes before. <span class="cn">数据缩减库尚未见过这些字节。</span></td><td>Capture on the WAN leg — byte count is high on first load, low on repeat, even though the request/query itself is identical.</td></tr>
+    <tr><td>Redis (app cache)</td><td>Cache key doesn't exist yet, so the app must fall through to the DB. <span class="cn">缓存键尚不存在，应用必须回源查数据库。</span></td><td>Capture on <code>tcp.port==6379</code> — first request shows a cache <b>MISS</b> plus a DB query; repeat request shows only a fast Redis <b>GET/HIT</b>, no DB traffic at all.</td></tr>
+  </table>
+  <div class="quote"><b>Talking-point script:</b> "Slow-then-fast doesn't automatically mean Riverbed. If we see a DB query happen on the first request but not on the second, that's Redis cache warm-up, not WAN optimization — two different layers, two different owners."
+  <br><span class="cn">会议话术参考："先慢后快不一定就是Riverbed的功劳。如果第一次请求时能看到数据库查询、第二次却没有，那是Redis缓存预热的效果，不是广域网优化——是两个不同的层，归属不同的团队。"</span></div>
+
+  <h3>A common incident pattern: cache stampede <span class="cn">常见故障模式：缓存击穿/雪崩</span></h3>
+  <p>When a popular cache key expires (TTL runs out), many concurrent requests can miss the cache at the same moment and all hit the database simultaneously — a sudden DB load spike that looks like "the database suddenly got slow" but is really a caching/expiry design issue.
+  <br><span class="cn">当一个热门缓存键过期（TTL到期）时，大量并发请求可能同时未命中缓存，全部同时打到数据库——表现为"数据库突然变慢"，但根源其实是缓存过期策略的设计问题。</span></p>
+  <div class="tip">If the DB shows a sudden spike in identical queries at the same moment a cache TTL would have expired, ask the app/platform team about the Redis <b>TTL</b> and <b>eviction policy</b> (e.g. <code>maxmemory-policy</code>) before assuming a DB-side regression.
+  <br><span class="cn">如果数据库在某个时间点突然出现大量相同查询，且该时间点恰好可能是某个缓存TTL到期的时刻，应先向应用/平台团队询问Redis的TTL与淘汰策略（如maxmemory-policy），而不是先假设是数据库本身的问题。</span></div>
+
+  <h3>Who owns what — quick RACI <span class="cn">简要职责划分</span></h3>
+  <table>
+    <tr><th>Component</th><th>Typically owned/managed by</th></tr>
+    <tr><td>Redis instance, TTLs, eviction policy</td><td>App / Platform / DevOps team</td></tr>
+    <tr><td>What gets cached and for how long (cache logic in code)</td><td>App / Dev team</td></tr>
+    <tr><td>DB engine's internal buffer cache (SGA/shared_buffers/Buffer Pool)</td><td>DBA (you)</td></tr>
+    <tr><td>Whether a "slow" incident is cache-layer or DB-layer</td><td>Joint investigation — this is exactly what the capture comparison above is for</td></tr>
+  </table>
+</section>
+
+<section id="mssql">
+  <h2>7. MSSQL / TDS <span class="badge b-mssql">MSSQL</span></h2>
+  <table>
+    <tr><th>Goal 目的</th><th>Filter</th></tr>
+    <tr><td>All TDS traffic</td><td><code>tds</code></td></tr>
+    <tr><td>Login/auth packets <span class="cn">登录/认证包</span></td><td><code>tds.type == 16</code></td></tr>
+    <tr><td>SQL batch queries <span class="cn">SQL查询批处理</span></td><td><code>tds.type == 1</code></td></tr>
+    <tr><td>RPC calls (stored procs) <span class="cn">存储过程调用</span></td><td><code>tds.type == 3</code></td></tr>
+    <tr><td>Port-based fallback</td><td><code>tcp.port == 1433</code></td></tr>
+  </table>
+  <p><span class="cn">MSSQL默认使用1433端口，Wireshark解析器名为</span> <code>tds</code> <span class="cn">（表格数据流协议）。若客户端使用"命名管道"或动态端口（SQL Browser服务，UDP 1434），需先抓取UDP 1434解析出实际TCP端口。</span></p>
+  <div class="tip">If SQL Server uses dynamic ports, check <b>UDP 1434</b> (SQL Browser) first to discover which TCP port the instance is actually listening on.</div>
+</section>
+
+<section id="pg">
+  <h2>8. PostgreSQL <span class="badge b-pg">PostgreSQL</span></h2>
+  <table>
+    <tr><th>Goal 目的</th><th>Filter</th></tr>
+    <tr><td>All pgsql traffic</td><td><code>pgsql</code></td></tr>
+    <tr><td>Query messages <span class="cn">查询消息</span></td><td><code>pgsql.type == "Query"</code></td></tr>
+    <tr><td>Parse/Bind/Execute (prepared stmts) <span class="cn">预编译语句</span></td><td><code>pgsql.type in {"Parse","Bind","Execute"}</code></td></tr>
+    <tr><td>Authentication <span class="cn">认证过程</span></td><td><code>pgsql.type == "Authentication"</code></td></tr>
+    <tr><td>Port-based fallback</td><td><code>tcp.port == 5432</code></td></tr>
+  </table>
+  <div class="warn">If <code>sslmode=require</code> (or higher) is set, payload is TLS-encrypted and query text won't be visible in plaintext.
+  <br><span class="cn">若启用了 sslmode=require 等级以上的SSL，载荷将被加密，无法直接看到明文查询内容。</span></div>
+</section>
+
+<section id="ora">
+  <h2>9. Oracle / TNS <span class="badge b-ora">Oracle</span></h2>
+  <table>
+    <tr><th>Goal 目的</th><th>Filter</th></tr>
+    <tr><td>All TNS traffic</td><td><code>tns</code></td></tr>
+    <tr><td>Connect/Accept handshake <span class="cn">连接握手</span></td><td><code>tns.type == 1 || tns.type == 2</code></td></tr>
+    <tr><td>Data packets (contains SQL) <span class="cn">数据包（含SQL）</span></td><td><code>tns.type == 6</code></td></tr>
+    <tr><td>Port-based fallback</td><td><code>tcp.port == 1521</code></td></tr>
+    <tr><td>Search payload text <span class="cn">载荷关键字搜索</span></td><td><code>tcp contains "SELECT"</code></td></tr>
+  </table>
+  <p><span class="cn">Oracle使用TNS（透明网络基础）协议，监听端口通常为1521。若使用Oracle原生加密（Native Network Encryption）或TLS，载荷同样无法直接解读。</span></p>
+</section>
+
+<section id="stream">
+  <h2>10. Follow TCP Stream <span class="cn">跟踪TCP流</span></h2>
+  <p>Right-click any packet → <b>Follow → TCP Stream</b> (or <b>HTTP Stream</b> for web traffic). Reassembles the full exchange in order, colored by direction — the fastest way to read a request/query and its response end-to-end.
+  <br><span class="cn">右键数据包选择"Follow → TCP Stream"（HTTP流量可选HTTP Stream），按顺序、按方向着色重组完整交互过程，是查看请求/查询与响应完整内容最快的方法。</span></p>
+</section>
+
+<section id="latency">
+  <h2>11. Latency & Error Diagnostics <span class="cn">延迟与故障诊断</span></h2>
+  <table>
+    <tr><th>Filter</th><th>Meaning 含义</th></tr>
+    <tr><td><code>tcp.analysis.retransmission</code></td><td>Packet re-sent — network loss. <span class="cn">数据包重传，网络丢包。</span></td></tr>
+    <tr><td><code>tcp.analysis.duplicate_ack</code></td><td>Receiver signaling missing data. <span class="cn">接收方提示数据缺失。</span></td></tr>
+    <tr><td><code>tcp.analysis.ack_rtt > 0.2</code></td><td>Round-trip time over 200ms. <span class="cn">往返时延超过200毫秒。</span></td></tr>
+    <tr><td><code>tcp.analysis.zero_window</code></td><td>Receiver buffer full, sender must pause. <span class="cn">接收缓冲区已满。</span></td></tr>
+    <tr><td><code>tcp.flags.reset==1</code></td><td>Connection forcibly closed. <span class="cn">连接被强制关闭。</span></td></tr>
+    <tr><td><code>tcp.analysis.flags</code></td><td>Any expert-flagged TCP problem. <span class="cn">任何专家诊断标记的TCP问题。</span></td></tr>
+  </table>
+  <div class="tip"><b>Rule of thumb:</b> low <code>ack_rtt</code> but big gap before the response = server-side processing delay. High <code>ack_rtt</code> + retransmissions = network problem. If a load balancer or Riverbed is in the path, check <b>which segment</b> shows the delay before blaming the backend.
+  <br><span class="cn">经验法则：ACK时延低但响应前有明显间隔 → 服务端处理延迟；ACK时延高且伴随重传 → 网络问题。若路径中有负载均衡器或Riverbed，先确认延迟出现在哪一段，再下结论是否是后端问题。</span></div>
+</section>
+
+<section id="stats">
+  <h2>12. Statistics Tools <span class="cn">统计工具</span></h2>
+  <table>
+    <tr><th>Menu path</th><th>Use for 用途</th></tr>
+    <tr><td>Statistics → Conversations</td><td>Bytes/packets per connection — find the busiest session. <span class="cn">找出流量最大的会话。</span></td></tr>
+    <tr><td>Statistics → IO Graph</td><td>Throughput/retransmissions over time. <span class="cn">吞吐量与重传随时间变化图。</span></td></tr>
+    <tr><td>Analyze → Expert Information</td><td>Auto-flagged warnings/errors. <span class="cn">自动标记的警告与错误。</span></td></tr>
+    <tr><td>Statistics → Protocol Hierarchy</td><td>Traffic breakdown by protocol. <span class="cn">按协议层统计流量占比。</span></td></tr>
+  </table>
+</section>
+
+<section id="team">
+  <h2>13. Team Discussion Guide <span class="cn">团队讨论指南</span> <span class="badge b-new">for meetings</span></h2>
+
+  <h3>When to bring a capture to a cross-team meeting <span class="cn">何时该在跨团队会议上展示抓包</span></h3>
+  <ul>
+    <li>App team blames "the database"; DB team blames "the network" — a capture settles it with evidence instead of opinions.<br><span class="cn">应用团队怀疑数据库，DB团队怀疑网络——抓包能用证据而非猜测来定位问题。</span></li>
+    <li>Intermittent issue that's hard to reproduce — a capture over the incident window is often the only hard evidence available afterward.<br><span class="cn">难以复现的间歇性问题——事发窗口内的抓包往往是事后唯一的确凿证据。</span></li>
+    <li>Before escalating to a vendor (Microsoft/Oracle/PostgreSQL/F5/Riverbed support) — most support tickets ask for a packet capture anyway.<br><span class="cn">升级给厂商支持前——大多数支持工单本来就会要求提供抓包文件。</span></li>
+  </ul>
+
+  <h3>The 3-line finding template <span class="cn">三行结论模板</span></h3>
+  <p>When presenting to the team, skip the raw packet list — summarize with this structure so non-Wireshark users can follow:</p>
+  <pre>Filter used:     tcp.port==1433 && tcp.analysis.flags
+What we saw:     14 retransmissions between 10:02–10:04, all client→server
+Conclusion:      Packet loss on the network path, not DB server load — escalate to network team</pre>
+  <p><span class="cn">向团队汇报时，不要直接甩数据包列表，用"过滤条件 → 观察到什么 → 结论"三行结构总结，非Wireshark用户也能看懂。</span></p>
+
+  <h3>Do's and Don'ts before sharing a capture <span class="cn">分享抓包文件前的注意事项</span></h3>
+  <div class="grid2">
+    <div class="card-mini">
+      <b>✅ Do</b>
+      <ul style="margin:8px 0 0;padding-left:18px;">
+        <li>Trim to the relevant window: <b>File → Export Specified Packets</b> (only the filtered/marked packets).</li>
+        <li>Note the capture start time and timezone in your message.</li>
+        <li>Confirm whether the payload is plaintext (HTTP/pgsql/tds/tns without TLS) before sending externally.</li>
+        <li>State clearly which segment you captured (client-side, LB-side, backend-side) if middleboxes are involved.</li>
+      </ul>
+    </div>
+    <div class="card-mini">
+      <b>❌ Don't</b>
+      <ul style="margin:8px 0 0;padding-left:18px;">
+        <li>Don't send a full, unfiltered production capture — it's large and may contain unrelated sensitive traffic.</li>
+        <li>Don't share captures containing plaintext credentials or customer data over open channels — check with security first.</li>
+        <li>Don't leave a capture running indefinitely on a production box — it fills disk and can add CPU overhead.</li>
+        <li>Don't call it "packet loss" from a single-segment capture if a Riverbed/LB split could explain the pattern.</li>
+      </ul>
+    </div>
+  </div>
+  <div class="warn"><span class="cn">抓包文件（.pcap/.pcapng）可能包含明文密码或客户数据，对外分享前务必先做脱敏处理，并与安全团队确认。</span></div>
+
+  <h3>Good questions to ask other teams <span class="cn">可以向其他团队提出的问题</span></h3>
+  <table>
+    <tr><th>Ask the network team 可问网络团队</th><th>Ask the app/dev team 可问应用/开发团队</th></tr>
+    <tr><td>"Any firewall/load-balancer idle timeout shorter than our connection pool timeout?"</td><td>"Does the app retry automatically on connection reset, or does the user see an error?"</td></tr>
+    <tr><td>"Was there a routing change or maintenance during the incident window?"</td><td>"Is the query using a prepared statement, or built dynamically each time?"</td></tr>
+    <tr><td>"Can you confirm packet loss on your side (switch/router counters) for this time range?"</td><td>"What's the expected/normal response time for this endpoint or query?"</td></tr>
+    <tr><td>"Is Riverbed/WAN optimization active on this path, and is it auto-discovery or fixed-target rules?"</td><td>"Does the app connect through the load balancer's VIP directly, or through a different path in this environment?"</td></tr>
+    <tr><td>"Is the load balancer's health-check interval/threshold something that could cause brief backend removal?"</td><td>"Is the client-side timeout shorter than what the server/DB is actually taking to respond?"</td></tr>
+    <tr><td colspan="2"><b>Ask the app/platform team about caching 可问应用/平台团队（缓存相关）:</b> "Is this request going through Redis? What's the TTL and eviction policy on this key? Did a cache flush/deploy happen right before the DB load spike?"</td></tr>
+  </table>
+
+  <h3>One-slide incident summary template <span class="cn">单页事件汇报模板</span></h3>
+  <pre>Incident:        Checkout API 500 errors, 10:00-10:15
+Capture window:  10:00:00 - 10:15:00 (server time, UTC+8)
+Segments captured: Client-side, LB-side, Backend-side
+Protocol:        HTTP (port 443) + PostgreSQL (port 5432)
+Key filter:      tcp.analysis.retransmission || tcp.flags.reset==1
+Finding:         12 TCP resets sent BY the app server to the DB server;
+                 LB-side capture shows no loss, so issue is backend segment
+Likely cause:    App-side connection pool timeout shorter than idle DB session
+Next step:       DBA to check idle_in_transaction_session_timeout; App team to review pool config</pre>
+</section>
+
+<section id="mindmap">
+  <h2>14. Mind Map <span class="cn">思维导图</span></h2>
+  <div class="mermaid">
+mindmap
+  root((Wireshark))
+    Basics 基础
+      Packet 数据包
+      Client/Server 客户端服务器
+      TCP handshake 三次握手
+      Glossary 术语
+    Capture 抓包
+      Interfaces 网卡
+      Capture filters 抓包过滤器
+      Decode As 手动解码
+    HTTP
+      port 80 / 443
+      http.request / http.response
+      TLS = encrypted 加密
+    Middleboxes 中间设备
+      Load Balancer
+        VIP / SNAT-DNAT
+        Health checks 健康检查
+      Riverbed
+        LAN-side / WAN-side split
+        SDR compression
+        Auto-discovery probe
+    Caching 缓存
+      Redis
+        port 6379 / RESP
+        GET SET EXPIRE
+        Cache hit vs miss
+        Cache stampede 缓存击穿
+      DB internal cache
+        Oracle SGA
+        PG shared_buffers
+        MSSQL Buffer Pool
+    MSSQL
+      port 1433
+      tds dissector
+      tds.type 16/1/3
+      UDP 1434 SQL Browser
+    PostgreSQL
+      port 5432
+      pgsql dissector
+      Query/Parse/Bind/Execute
+      sslmode encrypted
+    Oracle
+      port 1521
+      tns dissector
+      tns.type Connect/Accept/Data
+      Native encryption
+    Diagnostics 诊断
+      Retransmission 重传
+      ack_rtt 往返时延
+      Zero window 窗口为零
+      TCP reset 连接重置
+    Statistics 统计
+      Conversations 会话
+      IO Graph 吞吐图
+      Expert Info 专家诊断
+    Team Discussion 团队讨论
+      3-line finding template
+      Dos and Donts 分享注意事项
+      Questions for other teams
+      Incident summary template
+  </div>
+</section>
+
+<section id="practice">
+  <h2>15. Practice Suggestions <span class="cn">练习建议</span></h2>
+  <ol>
+    <li>Capture a browser visit to a plain HTTP site; find the GET request and response headers.<br><span class="cn">抓取一次访问HTTP网站的过程，找到GET请求与响应头。</span></li>
+    <li>Capture a login + query against MSSQL, PostgreSQL, and Oracle; identify each handshake (TDS Login7 / pgsql Startup / TNS Connect).<br><span class="cn">分别抓取MSSQL、PostgreSQL、Oracle的登录与查询，识别各自的握手过程。</span></li>
+    <li>If you have access to a load-balanced app, capture simultaneously on the client side and backend side; compare source IPs and timestamps.<br><span class="cn">若有条件，在负载均衡应用的客户端侧与后端侧同时抓包，比较源IP与时间戳差异。</span></li>
+    <li>If the app uses Redis, filter <code>tcp.port==6379</code> and request the same page twice — compare the first (cache MISS + DB query) against the second (cache HIT only, no DB traffic).<br><span class="cn">若应用使用了Redis，用tcp.port==6379过滤，连续请求同一页面两次，对比第一次（未命中+数据库查询）与第二次（仅命中，无数据库流量）的区别。</span></li>
+    <li>Use Follow Stream to locate the SQL text or HTTP body in the payload.<br><span class="cn">用Follow Stream找到载荷中的SQL文本或HTTP正文。</span></li>
+    <li>Force a connection drop and locate the RST packet — note which side sent it.<br><span class="cn">主动中断一次连接，找到RST包并确认由哪一方发出。</span></li>
+    <li>Write up one finding using the 3-line template above and share it with a colleague — practice explaining it to a non-Wireshark user.<br><span class="cn">用上面的三行模板写一条结论，分享给同事，练习向不懂Wireshark的人讲清楚。</span></li>
+  </ol>
+</section>
+
+</div>
+
+<footer>Generated for Paul · Wireshark 4.6.6 · 2026-07-03</footer>
+
+<script>
+  mermaid.initialize({ startOnLoad: true, theme: 'default' });
+</script>
+</body>
+</html>
