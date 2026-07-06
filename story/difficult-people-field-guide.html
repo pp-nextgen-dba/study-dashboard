@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Difficult People Field Guide · 职场博弈手册</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zilla+Slab:wght@400;500;600;700&family=Libre+Franklin:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&family=Noto+Serif+SC:wght@600;700&family=Noto+Sans+SC:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#eae2d0;
+    --paper-deep:#ddd2b8;
+    --ink:#2a2318;
+    --ink-soft:#5b5240;
+    --line:#b9ac8e;
+    --hostile:#a13d2f;
+    --hostile-soft:#e7cec6;
+    --arrogant:#a67418;
+    --arrogant-soft:#ecdcb8;
+    --deceitful:#37456b;
+    --deceitful-soft:#ccd2e2;
+    --rules:#3f6b5c;
+    --rules-soft:#cfe0d8;
+    --card-bg:#f5efe0;
+    --shadow: 0 3px 0 rgba(42,35,24,0.15);
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:
+      radial-gradient(circle at 1px 1px, rgba(42,35,24,0.05) 1px, transparent 1.5px) 0 0/16px 16px,
+      var(--paper);
+    color:var(--ink);
+    font-family:'Libre Franklin',sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  .cn{font-family:'Noto Sans SC',sans-serif; color:var(--ink-soft); font-size:0.92em; margin-top:.15em;}
+  h1,h2,h3,.display{font-family:'Zilla Slab',serif;}
+  .display-cn{font-family:'Noto Serif SC',serif;}
+
+  /* ===== Masthead ===== */
+  .masthead{
+    padding:14px 20px;
+    border-bottom:2px solid var(--ink);
+    display:flex;justify-content:space-between;align-items:center;
+    font-family:'JetBrains Mono',monospace;
+    font-size:11px;letter-spacing:.08em;text-transform:uppercase;
+    color:var(--ink-soft);
+    position:sticky;top:0;background:var(--paper);z-index:20;
+  }
+  .masthead b{color:var(--ink);}
+
+  /* ===== Hero ===== */
+  .hero{
+    position:relative;
+    padding:56px 22px 40px;
+    text-align:center;
+    border-bottom:2px solid var(--ink);
+    overflow:hidden;
+  }
+  .stamp{
+    position:absolute; top:18px; right:18px;
+    font-family:'JetBrains Mono',monospace;
+    font-size:10px; letter-spacing:.12em;
+    border:2px solid var(--hostile); color:var(--hostile);
+    padding:5px 8px; transform:rotate(8deg);
+    border-radius:3px; opacity:.85;
+  }
+  .hero .eyebrow{
+    font-family:'JetBrains Mono',monospace;
+    font-size:11px;letter-spacing:.16em;text-transform:uppercase;
+    color:var(--ink-soft); margin-bottom:14px;
+  }
+  .hero h1{font-size:2rem;line-height:1.15;margin:0 0 6px;}
+  .hero h1 .cn-title{display:block;font-family:'Noto Serif SC',serif;font-size:1.15rem;color:var(--ink-soft);font-weight:700;margin-top:6px;}
+  .hero p{max-width:520px;margin:16px auto 0;font-size:0.98rem;line-height:1.6;color:var(--ink-soft);}
+  .hero p.cn{max-width:520px;margin:8px auto 0;}
+
+  /* ===== Section headers ===== */
+  .section{padding:38px 18px;border-bottom:2px solid var(--ink);}
+  .section-head{text-align:center;margin-bottom:22px;}
+  .section-head .tag{
+    display:inline-block;font-family:'JetBrains Mono',monospace;font-size:10px;
+    letter-spacing:.12em;text-transform:uppercase;color:#fff;
+    background:var(--ink); padding:3px 9px; border-radius:2px; margin-bottom:10px;
+  }
+  .section-head h2{margin:0;font-size:1.5rem;}
+  .section-head .h2-cn{font-family:'Noto Serif SC',serif;font-size:1.05rem;color:var(--ink-soft);margin-top:4px;font-weight:700;}
+  .hint{font-family:'JetBrains Mono',monospace;font-size:10.5px;color:var(--ink-soft);text-align:center;margin-top:8px;}
+
+  /* ===== Mind map / org chart ===== */
+  .map-scroll{overflow-x:auto; padding-bottom:8px;}
+  ul.tree, ul.tree ul{
+    list-style:none;margin:0;padding:0;position:relative;
+    display:flex;
+  }
+  ul.tree{justify-content:center;min-width:900px;}
+  ul.tree ul{margin-top:22px;}
+  .tree li{
+    display:flex;flex-direction:column;align-items:center;
+    padding:22px 10px 0;position:relative;flex:1;
+  }
+  .tree > li::before, .tree > li::after,
+  .tree li li::before, .tree li li::after{
+    content:'';position:absolute;top:0;right:50%;
+    border-top:2px solid var(--line); width:50%;height:22px;
+  }
+  .tree li li::after{right:auto;left:50%;border-left:2px solid var(--line);}
+  .tree li li::before{border-left:2px solid var(--line);}
+  .tree > li::after{right:auto;left:50%;border-left:2px solid var(--line);}
+  .tree li:only-child::after,.tree li:only-child::before{display:none;}
+  .tree li:only-child{padding-top:0;}
+  .tree > li:first-child::before, .tree li li:first-child::before{border:0 none;}
+  .tree > li:last-child::after, .tree li li:last-child::after{border:0 none;}
+  .tree ul::before{
+    content:'';position:absolute;top:-22px;left:50%;
+    border-left:2px solid var(--line);width:0;height:22px;
+  }
+  .node{
+    font-family:'JetBrains Mono',monospace;
+    font-size:11px;letter-spacing:.03em;text-align:center;
+    padding:8px 12px;border-radius:4px;border:2px solid var(--ink);
+    background:var(--card-bg); white-space:nowrap; box-shadow:var(--shadow);
+  }
+  .node .en{display:block;font-weight:700;}
+  .node .zh{display:block;font-family:'Noto Sans SC',sans-serif;font-size:10px;color:var(--ink-soft);font-weight:400;letter-spacing:0;}
+  .node.root{background:var(--ink);color:var(--paper);}
+  .node.root .zh{color:var(--paper-deep);}
+  .node.cat-hostile{border-color:var(--hostile);background:var(--hostile-soft);}
+  .node.cat-arrogant{border-color:var(--arrogant);background:var(--arrogant-soft);}
+  .node.cat-deceitful{border-color:var(--deceitful);background:var(--deceitful-soft);}
+  .node.role{background:var(--card-bg);}
+  .leaf-group{display:flex;flex-direction:column;gap:6px;margin-top:22px;position:relative;}
+  .leaf-group::before{content:'';position:absolute;top:-22px;left:50%;border-left:2px solid var(--line);width:0;height:22px;}
+  .leaf{
+    font-family:'JetBrains Mono',monospace;font-size:10.5px;
+    padding:5px 9px;border-radius:3px;border:1.5px dashed var(--line);
+    background:#fff8ea; white-space:nowrap; text-decoration:none;color:var(--ink);
+    transition:background .15s, transform .15s;
+  }
+  .leaf:hover, .leaf:focus-visible{background:var(--ink);color:var(--paper);transform:translateY(-1px);}
+
+  /* ===== Directory ===== */
+  .cat-block{margin-bottom:34px;}
+  .cat-band{
+    display:flex;align-items:center;gap:10px;
+    padding:9px 14px;border-radius:4px;margin-bottom:16px;
+    font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.05em;text-transform:uppercase;
+    color:#fff;
+  }
+  .cat-band.hostile{background:var(--hostile);}
+  .cat-band.arrogant{background:var(--arrogant);}
+  .cat-band.deceitful{background:var(--deceitful);}
+  .cat-core{font-family:'Libre Franklin',sans-serif;font-size:0.9rem;color:var(--ink-soft);
+    max-width:640px;margin:0 auto 18px;text-align:center;line-height:1.55;padding:0 8px;}
+  .cat-core .cn{text-align:center;}
+  .role-label{
+    font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;
+    color:var(--ink-soft);margin:18px 0 10px;padding-left:4px;border-left:3px solid var(--ink);padding-left:8px;
+  }
+  .card-grid{display:grid;grid-template-columns:1fr;gap:12px;}
+  .card{
+    background:var(--card-bg);border:2px solid var(--ink);border-radius:6px;
+    padding:14px 16px;position:relative;box-shadow:var(--shadow);
+    scroll-margin-top:70px;
+  }
+  .card::before{ /* tape corner */
+    content:'';position:absolute;top:-7px;left:16px;width:34px;height:14px;
+    background:rgba(255,255,255,.55); border:1px solid rgba(0,0,0,.08);
+    transform:rotate(-3deg);
+  }
+  .card .name{font-family:'Zilla Slab',serif;font-weight:700;font-size:1.05rem;}
+  .card .name-cn{font-family:'Noto Serif SC',serif;font-weight:700;font-size:0.92rem;color:var(--ink-soft);margin-bottom:8px;}
+  .card .tactic{font-size:0.92rem;line-height:1.5;margin-top:6px;}
+  .card .tactic.cn{font-size:0.9rem;}
+  .card.hostile{border-left:6px solid var(--hostile);}
+  .card.arrogant{border-left:6px solid var(--arrogant);}
+  .card.deceitful{border-left:6px solid var(--deceitful);}
+  .rule-note{
+    margin-top:14px;text-align:center;font-family:'JetBrains Mono',monospace;font-size:12px;
+    padding:10px;border:2px dashed var(--deceitful);border-radius:4px;color:var(--deceitful);
+  }
+  .rule-note .cn{color:var(--deceitful);font-family:'Noto Sans SC',sans-serif;}
+
+  /* ===== Golden rules ===== */
+  .rules-grid{display:grid;grid-template-columns:1fr;gap:12px;max-width:600px;margin:0 auto;}
+  .rule-card{
+    background:var(--rules-soft);border:2px solid var(--rules);border-radius:6px;
+    padding:12px 14px;display:flex;gap:12px;align-items:flex-start;
+  }
+  .rule-num{
+    font-family:'JetBrains Mono',monospace;font-weight:700;font-size:1.1rem;color:var(--rules);
+    min-width:24px;
+  }
+  .rule-text .en{font-size:0.95rem;line-height:1.45;}
+  .rule-text .cn{font-size:0.9rem;color:var(--ink-soft);margin-top:3px;}
+
+  footer{padding:26px 20px 40px;text-align:center;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--ink-soft);}
+  footer .q{font-family:'Zilla Slab',serif;font-size:1rem;color:var(--ink);margin-bottom:6px;font-style:italic;}
+  footer .q-cn{font-family:'Noto Serif SC',serif;color:var(--ink-soft);margin-bottom:14px;}
+
+  @media (min-width:640px){
+    .card-grid{grid-template-columns:1fr 1fr;}
+    .rules-grid{grid-template-columns:1fr 1fr;}
+  }
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    .leaf{transition:none;}
+  }
+</style>
+</head>
+<body>
+
+<div class="top-nav" style="background:#fff;padding:10px 16px;border-bottom:2px solid #e5e7eb">
+  <a class="dashboard-link" href="../index.html" style="display:inline-flex;align-items:center;gap:6px;padding:8px 12px;border-radius:8px;background:#1d4ed8;color:#fff;font-size:13px;font-weight:800;text-decoration:none">&larr; Back to Dashboard</a>
+</div>
+
+<div class="masthead">
+  <span>CASE FILE · 案卷</span>
+  <b>NO. 2026-07</b>
+</div>
+
+<section class="hero">
+  <div class="stamp">CONFIDENTIAL<br>机密</div>
+  <div class="eyebrow">Know Your Adversary · 知己知彼</div>
+  <h1>The Difficult People Field Guide
+    <span class="cn-title">职场博弈手册</span>
+  </h1>
+  <p>Twenty-four archetypes across three families of difficult behaviour — hostile, arrogant, and deceitful — each filed with its counter-tactic. Their behaviour is a symptom of their own insecurity, not a verdict on you.</p>
+  <p class="cn">三大类、二十四种职场难缠人格，逐一归档并附对策。他们的行为是自身不安的表现，不是对你的评判。</p>
+</section>
+
+<!-- ================= MEMORY MAP ================= -->
+<section class="section" id="map">
+  <div class="section-head">
+    <span class="tag">Memory Map · 记忆图谱</span>
+    <h2>The Case Board</h2>
+    <div class="h2-cn">案情看板</div>
+  </div>
+  <div class="map-scroll">
+    <ul class="tree">
+      <li>
+        <div class="node root"><span class="en">DIFFICULT PEOPLE</span><span class="zh">难缠人格</span></div>
+        <ul>
+          <li>
+            <div class="node cat-hostile"><span class="en">HOSTILE</span><span class="zh">敌意型</span></div>
+            <ul>
+              <li>
+                <div class="node role"><span class="en">Boss 上司</span></div>
+                <div class="leaf-group">
+                  <a class="leaf" href="#h-b-narcissist">Narcissist 自恋型</a>
+                  <a class="leaf" href="#h-b-bully">Bully 霸道型</a>
+                  <a class="leaf" href="#h-b-ruthless">Ruthless 冷酷型</a>
+                </div>
+              </li>
+              <li>
+                <div class="node role"><span class="en">Colleague 同事</span></div>
+                <div class="leaf-group">
+                  <a class="leaf" href="#h-c-ragingbull">Raging Bull 暴怒型</a>
+                  <a class="leaf" href="#h-c-tackler">Tackler 找茬型</a>
+                  <a class="leaf" href="#h-c-cyberbully">Cyberbully 网络攻击</a>
+                  <a class="leaf" href="#h-c-envier">Envier 嫉妒型</a>
+                  <a class="leaf" href="#h-c-intimidator">Intimidator 施压型</a>
+                </div>
+              </li>
+              <li>
+                <div class="node role"><span class="en">Subordinate 下属</span></div>
+                <div class="leaf-group">
+                  <a class="leaf" href="#h-s-ambusher">Ambusher 暗讽型</a>
+                  <a class="leaf" href="#h-s-hothead">Hothead 暴躁型</a>
+                  <a class="leaf" href="#h-s-revenger">Revenger 报复型</a>
+                  <a class="leaf" href="#h-s-quitter">Quitter 离职型</a>
+                </div>
+              </li>
+            </ul>
+          </li>
+          <li>
+            <div class="node cat-arrogant"><span class="en">ARROGANT</span><span class="zh">傲慢型</span></div>
+            <ul>
+              <li>
+                <div class="node role"><span class="en">Boss 上司</span></div>
+                <div class="leaf-group">
+                  <a class="leaf" href="#a-b-dictator">Dictator 独裁型</a>
+                  <a class="leaf" href="#a-b-fameclaimer">Fame Claimer 抢功型</a>
+                  <a class="leaf" href="#a-b-blocker">Blocker 保守型</a>
+                </div>
+              </li>
+              <li>
+                <div class="node role"><span class="en">Colleague 同事</span></div>
+                <div class="leaf-group">
+                  <a class="leaf" href="#a-c-moocher">Moocher 占便宜</a>
+                  <a class="leaf" href="#a-c-crusher">Crusher 压制型</a>
+                  <a class="leaf" href="#a-c-kneejerker">Knee-Jerker 冲动型</a>
+                  <a class="leaf" href="#a-c-competitor">Competitor 竞争型</a>
+                </div>
+              </li>
+              <li>
+                <div class="node role"><span class="en">Subordinate 下属</span></div>
+                <div class="leaf-group">
+                  <a class="leaf" href="#a-s-rulebender">Rule Bender 不守规</a>
+                  <a class="leaf" href="#a-s-clansman">Clansman 拉帮派</a>
+                  <a class="leaf" href="#a-s-commandant">Commandant 自傲型</a>
+                </div>
+              </li>
+            </ul>
+          </li>
+          <li>
+            <div class="node cat-deceitful"><span class="en">DECEITFUL</span><span class="zh">虚伪型</span></div>
+            <ul>
+              <li>
+                <div class="node role"><span class="en">Boss 上司</span></div>
+                <div class="leaf-group">
+                  <a class="leaf" href="#d-b-hypocrite">Hypocrite 两面派</a>
+                  <a class="leaf" href="#d-b-weasel">Weasel 言而无信</a>
+                  <a class="leaf" href="#d-b-backpedaler">Backpedaler 临时变卦</a>
+                  <a class="leaf" href="#d-b-forkedtongue">Forked Tongue 含糊其辞</a>
+                </div>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+  <div class="hint">← Scroll to explore · tap a tag to jump to its file → 左右滑动浏览，点击标签跳转档案</div>
+</section>
+
+<!-- ================= DIRECTORY ================= -->
+<section class="section" id="directory">
+  <div class="section-head">
+    <span class="tag">Directory · 档案目录</span>
+    <h2>The Files</h2>
+    <div class="h2-cn">人物档案</div>
+  </div>
+
+  <!-- HOSTILE -->
+  <div class="cat-block">
+    <div class="cat-band hostile">Part 1 · Hostile / Belligerent 敌意 / 好斗型</div>
+    <p class="cat-core">Their anger = their own stress/insecurity, not your fault. Stay calm, set boundaries.
+      <span class="cn">对方的敌意大多来自自身压力/自卑，不是你的错。保持冷静，划清底线。</span></p>
+
+    <div class="role-label">Boss · 上司</div>
+    <div class="card-grid">
+      <div class="card hostile" id="h-b-narcissist"><div class="name">Narcissist</div><div class="name-cn">自恋型</div>
+        <div class="tactic">Respect yourself, confirm in writing, focus on goals.</div>
+        <div class="tactic cn">保持自尊，书面确认，围绕目标做事。</div></div>
+      <div class="card hostile" id="h-b-bully"><div class="name">Bully</div><div class="name-cn">霸道型</div>
+        <div class="tactic">Do not fear; confidence removes their power.</div>
+        <div class="tactic cn">别示弱；自信能削弱他的气势。</div></div>
+      <div class="card hostile" id="h-b-ruthless"><div class="name">Ruthless</div><div class="name-cn">冷酷型</div>
+        <div class="tactic">Demand respect, keep records, use HR.</div>
+        <div class="tactic cn">要求尊重，留好证据，善用公司制度。</div></div>
+    </div>
+
+    <div class="role-label">Colleague · 同事</div>
+    <div class="card-grid">
+      <div class="card hostile" id="h-c-ragingbull"><div class="name">Raging Bull</div><div class="name-cn">暴怒型</div>
+        <div class="tactic">Let them vent, offer support.</div>
+        <div class="tactic cn">让他发泄，再提供帮助。</div></div>
+      <div class="card hostile" id="h-c-tackler"><div class="name">Tackler</div><div class="name-cn">找茬型</div>
+        <div class="tactic">Stay professional, focus on work, not personal attacks.</div>
+        <div class="tactic cn">保持专业，只谈工作，不接人身攻击。</div></div>
+      <div class="card hostile" id="h-c-cyberbully"><div class="name">Cyberbully</div><div class="name-cn">网络攻击</div>
+        <div class="tactic">Save evidence, report clearly.</div>
+        <div class="tactic cn">保存记录，正式举报。</div></div>
+      <div class="card hostile" id="h-c-envier"><div class="name">Envier</div><div class="name-cn">嫉妒型</div>
+        <div class="tactic">Be polite, praise their strengths.</div>
+        <div class="tactic cn">客气友善，肯定他的优点。</div></div>
+      <div class="card hostile" id="h-c-intimidator"><div class="name">Intimidator</div><div class="name-cn">施压型</div>
+        <div class="tactic">Prepare replies, stay calm.</div>
+        <div class="tactic cn">提前准备回应，保持从容。</div></div>
+    </div>
+
+    <div class="role-label">Subordinate · 下属</div>
+    <div class="card-grid">
+      <div class="card hostile" id="h-s-ambusher"><div class="name">Ambusher</div><div class="name-cn">暗讽型</div>
+        <div class="tactic">Call out sarcasm, talk privately.</div>
+        <div class="tactic cn">指出问题，私下沟通。</div></div>
+      <div class="card hostile" id="h-s-hothead"><div class="name">Hothead</div><div class="name-cn">暴躁型</div>
+        <div class="tactic">Wait for calm, listen fully.</div>
+        <div class="tactic cn">等他冷静，耐心倾听。</div></div>
+      <div class="card hostile" id="h-s-revenger"><div class="name">Revenger</div><div class="name-cn">报复型</div>
+        <div class="tactic">Clear misunderstandings, give recognition.</div>
+        <div class="tactic cn">消除误解，及时肯定付出。</div></div>
+      <div class="card hostile" id="h-s-quitter"><div class="name">Quitter</div><div class="name-cn">离职型</div>
+        <div class="tactic">Do exit interviews, offer trust &amp; flexibility.</div>
+        <div class="tactic cn">了解真实原因，给予信任与弹性。</div></div>
+    </div>
+  </div>
+
+  <!-- ARROGANT -->
+  <div class="cat-block">
+    <div class="cat-band arrogant">Part 2 · Arrogant / Pushy 傲慢 / 强势型</div>
+    <p class="cat-core">Their arrogance = fear of losing control / insecurity. Work with their ego, not against it.
+      <span class="cn">傲慢强势 = 害怕失控/内心不安。顺着他的自尊，比硬刚更有效。</span></p>
+
+    <div class="role-label">Boss · 上司</div>
+    <div class="card-grid">
+      <div class="card arrogant" id="a-b-dictator"><div class="name">Dictator</div><div class="name-cn">独裁型</div>
+        <div class="tactic">Give regular updates, reduce micromanaging.</div>
+        <div class="tactic cn">主动汇报，减少过度干预。</div></div>
+      <div class="card arrogant" id="a-b-fameclaimer"><div class="name">Fame Claimer</div><div class="name-cn">抢功型</div>
+        <div class="tactic">Share credit openly, keep your own records.</div>
+        <div class="tactic cn">公开分享功劳，私下保留证据。</div></div>
+      <div class="card arrogant" id="a-b-blocker"><div class="name">Blocker</div><div class="name-cn">保守型</div>
+        <div class="tactic">Frame ideas as theirs, use facts.</div>
+        <div class="tactic cn">把方案说成"完善您的思路"，用数据说话。</div></div>
+    </div>
+
+    <div class="role-label">Colleague · 同事</div>
+    <div class="card-grid">
+      <div class="card arrogant" id="a-c-moocher"><div class="name">Moocher</div><div class="name-cn">占便宜</div>
+        <div class="tactic">Say "no" gently but firmly.</div>
+        <div class="tactic cn">温和但坚定地拒绝。</div></div>
+      <div class="card arrogant" id="a-c-crusher"><div class="name">Crusher</div><div class="name-cn">压制型</div>
+        <div class="tactic">Assert your role clearly.</div>
+        <div class="tactic cn">明确自己的权责范围。</div></div>
+      <div class="card arrogant" id="a-c-kneejerker"><div class="name">Knee-Jerker</div><div class="name-cn">冲动型</div>
+        <div class="tactic">Ask details, use facts to slow them down.</div>
+        <div class="tactic cn">追问细节，用事实降温。</div></div>
+      <div class="card arrogant" id="a-c-competitor"><div class="name">Competitor</div><div class="name-cn">竞争型</div>
+        <div class="tactic">Give sincere recognition.</div>
+        <div class="tactic cn">真诚肯定他的长处。</div></div>
+    </div>
+
+    <div class="role-label">Subordinate · 下属</div>
+    <div class="card-grid">
+      <div class="card arrogant" id="a-s-rulebender"><div class="name">Rule Bender</div><div class="name-cn">不守规</div>
+        <div class="tactic">Clear rules + consequences.</div>
+        <div class="tactic cn">明确规则+后果。</div></div>
+      <div class="card arrogant" id="a-s-clansman"><div class="name">Clansman</div><div class="name-cn">拉帮派</div>
+        <div class="tactic">Win over leader, break isolation.</div>
+        <div class="tactic cn">争取领头人，打散封闭圈子。</div></div>
+      <div class="card arrogant" id="a-s-commandant"><div class="name">Commandant</div><div class="name-cn">自傲型</div>
+        <div class="tactic">Praise publicly, correct privately.</div>
+        <div class="tactic cn">公开表扬能力，私下纠正态度。</div></div>
+    </div>
+  </div>
+
+  <!-- DECEITFUL -->
+  <div class="cat-block">
+    <div class="cat-band deceitful">Part 3 · Deceitful / Underhanded 虚伪 / 耍手段型</div>
+    <p class="cat-core">Their dishonesty = self-protection / control. Protect yourself with clarity + written proof.
+      <span class="cn">虚伪耍手段 = 自保/掌控欲。用清晰沟通+书面证据保护自己。</span></p>
+
+    <div class="role-label">Boss · 上司</div>
+    <div class="card-grid">
+      <div class="card deceitful" id="d-b-hypocrite"><div class="name">Hypocrite</div><div class="name-cn">两面派</div>
+        <div class="tactic">Ask direct questions; never trust only words.</div>
+        <div class="tactic cn">追问具体问题；别只信口头承诺。</div></div>
+      <div class="card deceitful" id="d-b-weasel"><div class="name">Weasel</div><div class="name-cn">言而无信</div>
+        <div class="tactic">Confirm promises in writing; list needed support.</div>
+        <div class="tactic cn">书面确认约定；列出所需资源。</div></div>
+      <div class="card deceitful" id="d-b-backpedaler"><div class="name">Backpedaler</div><div class="name-cn">临时变卦</div>
+        <div class="tactic">Insist on advance notice of changes.</div>
+        <div class="tactic cn">要求变动提前告知。</div></div>
+      <div class="card deceitful" id="d-b-forkedtongue"><div class="name">Forked Tongue</div><div class="name-cn">含糊其辞</div>
+        <div class="tactic">Restate instructions to confirm.</div>
+        <div class="tactic cn">复述指令，确认理解一致。</div></div>
+    </div>
+    <div class="rule-note">Rule: If it's not written, it's not real.
+      <div class="cn">原则：没白纸黑字，就不算数。</div></div>
+  </div>
+</section>
+
+<!-- ================= GOLDEN RULES ================= -->
+<section class="section" id="rules">
+  <div class="section-head">
+    <span class="tag" style="background:var(--rules);">Field Manual · 黄金法则</span>
+    <h2>5 Golden Rules</h2>
+    <div class="h2-cn">五条黄金法则</div>
+  </div>
+  <div class="rules-grid">
+    <div class="rule-card"><div class="rule-num">1</div><div class="rule-text">
+      <div class="en">Don't take it personally — it's about them, not you.</div>
+      <div class="cn">别往心里去 — 是他们的问题，不是你的错。</div></div></div>
+    <div class="rule-card"><div class="rule-num">2</div><div class="rule-text">
+      <div class="en">Stay calm, not emotional — anger makes you lose control.</div>
+      <div class="cn">保持冷静 — 情绪化只会让你被动。</div></div></div>
+    <div class="rule-card"><div class="rule-num">3</div><div class="rule-text">
+      <div class="en">Set clear boundaries — say "no" firmly but politely.</div>
+      <div class="cn">划清边界 — 温和但坚定地说"不"。</div></div></div>
+    <div class="rule-card"><div class="rule-num">4</div><div class="rule-text">
+      <div class="en">Keep records — emails, notes, proof = your best defense.</div>
+      <div class="cn">留好证据 — 邮件、记录、凭证就是保障。</div></div></div>
+    <div class="rule-card"><div class="rule-num">5</div><div class="rule-text">
+      <div class="en">Focus on results, not fights — win the situation, not the argument.</div>
+      <div class="cn">对事不对人 — 要解决问题，不是争输赢。</div></div></div>
+  </div>
+</section>
+
+<footer>
+  <div class="q">"Would you like this condensed into a single-page cheat sheet?"</div>
+  <div class="q-cn">"是否需要浓缩成一页速查表？"</div>
+  This is that cheat sheet. · 这就是那份速查表。
+</footer>
+
+</body>
+</html>

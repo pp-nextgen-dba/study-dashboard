@@ -4229,6 +4229,17 @@ export const storybooksData = {
             confidence:0,
             last_updated:"2026-06-21",
             resourceUrl:"../story/inertia-growth-notes.html"
+        },
+
+        {
+            form:"Story",
+            globalNum: 2,
+            chapterNum: 2,
+            chapter:"Story 2: The Difficult People Field Guide",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-07-06",
+            resourceUrl:"../story/difficult-people-field-guide.html"
         }]
 
 };
