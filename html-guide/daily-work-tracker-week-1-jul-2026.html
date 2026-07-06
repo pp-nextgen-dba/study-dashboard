@@ -366,6 +366,13 @@
         // Pre-populate with this week's work entries
         const DEFAULT_ENTRIES = [
             {
+                id: 1751792400000,
+                date: "2026-07-06",
+                status: "completed",
+                description: "Add Story 2 (Difficult People Field Guide) to Story Books + fix GitHub Pages deploy failure\n\n✓ Story Books - Story 2\n  - File: story/difficult-people-field-guide.html (uploaded by user)\n  - Added non-sticky Back to Dashboard link (page already has its own sticky masthead at top:0, so a second sticky bar would overlap it on scroll)\n  - Added resourceUrl to storybooksData chapter 2 in js/subject.js\n  - Added \"/story/difficult-people-field-guide.html\" to STATIC_ASSETS in sw.js, bumped CACHE v5 -> v6\n  - Bumped subjects/storybooks.html: style.css v31->v32, subject.js import v15->v16\n  - Bumped js/dashboard.js subject.js import v14->v15, index.html dashboard.js script tag v14->v15\n  - npm run validate: passed (16 subjects)\n  - Commit d9b4d40 - feat: add Story 2 (Difficult People Field Guide) to Story Books\n\n✓ Diagnosed GitHub Pages deploy failure\n  - Push succeeded but live site (pp-nextgen-dba.github.io/study-dashboard) still served old sw.js/subject.js after hard refresh\n  - Verified via Firestore REST query that storybooks doc still only had Story 1 (last synced 2026-06-25) - ruled out simple browser cache\n  - Checked GitHub Actions API: \"pages build and deployment\" run build step succeeded but deploy step failed (transient GitHub-side error)\n  - Fixed by pushing empty commit to retrigger deploy - commit 718c8f3, new run succeeded\n  - Verified live sw.js now shows CACHE v6, subject.js shows v16 with Story 2 chapter present\n\n✓ Documentation\n  - Added \"I pushed but the live site still shows the old version\" troubleshooting section to CLAUDE.md - explains checking Actions API / live curl before assuming browser cache, and the empty-commit retrigger fix",
+                createdAt: new Date().toISOString()
+            },
+            {
                 id: 1751587200000,
                 date: "2026-07-04",
                 status: "completed",

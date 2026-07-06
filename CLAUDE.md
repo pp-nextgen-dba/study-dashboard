@@ -169,6 +169,18 @@ The dashboard's percent is always `Mastered chapters / total chapters` computed 
 curl -s "https://firestore.googleapis.com/v1/projects/study-dashboard-7ca48/databases/(default)/documents/subjects/<id>"
 ```
 
+### "I pushed but the live site still shows the old version"
+
+Don't assume browser cache is the cause — a pushed commit can fail to actually deploy. GitHub Pages runs a `pages build and deployment` workflow on every push to `main`; the deploy step occasionally fails on GitHub's side even though the build step succeeds. Verify before troubleshooting the browser:
+
+```bash
+# Check the live files directly (bypasses your browser entirely)
+curl -s "https://pp-nextgen-dba.github.io/study-dashboard/sw.js" | head -1
+curl -s "https://api.github.com/repos/pp-nextgen-dba/study-dashboard/actions/runs?per_page=1" | grep -o '"conclusion": "[^"]*"'
+```
+
+If the live `sw.js` `CACHE` value or a recently-changed file doesn't match what's in the repo, and/or the latest Actions run shows `"conclusion": "failure"`, the deploy failed — it's not a cache problem. Fix: re-run the failed job from the GitHub Actions tab, or push a new commit (`git commit --allow-empty -m "chore: retrigger pages deploy"`) to trigger a fresh deployment. Only tell users to hard-refresh/clear site data *after* confirming the live files actually updated.
+
 ## Changing the PIN
 
 Replace `CORRECT_PIN_HASH` in `js/auth.js` with SHA-256 of the new PIN:
