@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SPN & Kerberos Lesson Learned</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#1D4ED8',
+                        secondary: '#0284C7',
+                        success: '#10B981',
+                        warning: '#F59E0B',
+                        danger: '#EF4444',
+                        light: '#F8FAFC',
+                        dark: '#0F172A'
+                    },
+                    fontFamily: {
+                        sans: ['Segoe UI', 'Microsoft YaHei', 'PingFang SC', 'system-ui', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .card {
+                @apply bg-white rounded-xl shadow-lg p-6 border-l-4 transition-all duration-300 hover:shadow-xl;
+            }
+            .code-block {
+                @apply bg-gray-900 text-gray-100 p-4 rounded-lg overflow-x-auto font-mono text-sm;
+            }
+            .highlight {
+                @apply bg-blue-50 border-l-4 border-primary p-3 rounded;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-sky-50 to-blue-50 text-gray-800 min-h-screen">
+    <div class="top-nav" style="background:#fff;padding:10px 16px;border-bottom:2px solid #e5e7eb;position:sticky;top:0;z-index:120">
+      <a class="dashboard-link" href="../index.html" style="display:inline-flex;align-items:center;gap:6px;padding:8px 12px;border-radius:8px;background:#1d4ed8;color:#fff;font-size:13px;font-weight:800;text-decoration:none">&larr; Back to Dashboard</a>
+    </div>
+
+    <!-- Header Banner -->
+    <header class="bg-gradient-to-r from-primary via-secondary to-cyan-500 text-white py-10 px-6 shadow-xl">
+        <div class="container mx-auto max-w-6xl text-center">
+            <h1 class="text-4xl md:text-5xl font-bold mb-3">SPN & Kerberos Authentication</h1>
+            <p class="text-xl md:text-2xl opacity-95 mb-2">Lesson Learned & Resolution Guide</p>
+            <div class="mt-4 text-sm opacity-90">
+                <i class="fa fa-language mr-2"></i> English / 中文
+                &nbsp;&nbsp;|&nbsp;&nbsp;
+                <i class="fa fa-shield mr-2"></i> Active Directory Infrastructure
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="container mx-auto max-w-6xl px-4 py-10 space-y-8">
+
+        <!-- Overview Section -->
+        <section class="card border-primary">
+            <h2 class="text-2xl md:text-3xl font-semibold text-primary mb-5 flex items-center">
+                <i class="fa fa-info-circle mr-3"></i> Overview / 概述
+            </h2>
+            <div class="grid md:grid-cols-2 gap-6">
+                <div>
+                    <h3 class="font-medium text-lg mb-2 text-gray-700">English</h3>
+                    <p class="leading-relaxed text-gray-700">
+                        <strong>SPN (Service Principal Name)</strong> is a unique identifier stored in Active Directory. It links a service instance to the security account that runs it, and is <span class="text-primary font-medium">mandatory for Kerberos authentication</span>.
+                        <br><br>
+                        Missing, incorrect, or duplicate SPNs cause Kerberos to fail silently. The system automatically falls back to slower NTLM authentication, which results in sudden slowness when users access HTTP-based web applications.
+                    </p>
+                </div>
+                <div>
+                    <h3 class="font-medium text-lg mb-2 text-gray-700">中文</h3>
+                    <p class="leading-relaxed text-gray-700">
+                        <strong>SPN（服务主体名称）</strong>是 Active Directory 中存储的唯一标识符，用于将服务实例与其运行的安全账户关联，是实现 <span class="text-primary font-medium">Kerberos 身份验证的必要条件</span>。
+                        <br><br>
+                        当 SPN 缺失、配置错误或重复时，Kerberos 验证会失败。系统会自动降级使用速度较慢的 NTLM 验证，这会导致所有用户访问 HTTP 网页服务时出现性能突然下降的问题。
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Memory Map -->
+        <section class="card border-primary">
+            <h2 class="text-2xl md:text-3xl font-semibold text-primary mb-5 flex items-center">
+                <i class="fa fa-sitemap mr-3"></i> Memory Map / 知识地图
+            </h2>
+            <div class="overflow-x-auto">
+                <svg viewBox="0 0 900 520" class="w-full" style="min-width:700px" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Microsoft YaHei, PingFang SC, sans-serif">
+                    <!-- spokes -->
+                    <line x1="450" y1="260" x2="160" y2="115" stroke="#CBD5E1" stroke-width="2"/>
+                    <line x1="450" y1="260" x2="740" y2="115" stroke="#CBD5E1" stroke-width="2"/>
+                    <line x1="450" y1="260" x2="160" y2="405" stroke="#CBD5E1" stroke-width="2"/>
+                    <line x1="450" y1="260" x2="740" y2="405" stroke="#CBD5E1" stroke-width="2"/>
+
+                    <!-- Root causes -->
+                    <rect x="40" y="50" width="240" height="130" rx="12" fill="#FFFBEB" stroke="#F59E0B" stroke-width="1.5"/>
+                    <rect x="40" y="50" width="6" height="130" fill="#F59E0B"/>
+                    <text x="60" y="75" font-size="15" font-weight="600" fill="#92400E">Root causes / 常见原因</text>
+                    <text x="60" y="98" font-size="12" fill="#78350F">
+                        <tspan x="60" dy="0">• Duplicate SPNs 重复注册</tspan>
+                        <tspan x="60" dy="18">• Account/password reset 账户密码重置</tspan>
+                        <tspan x="60" dy="18">• DNS alias missing SPN 别名缺注册</tspan>
+                        <tspan x="60" dy="18">• Time drift &gt;5min 时间偏差超5分钟</tspan>
+                    </text>
+
+                    <!-- Registration rules -->
+                    <rect x="620" y="50" width="240" height="130" rx="12" fill="#ECFDF5" stroke="#10B981" stroke-width="1.5"/>
+                    <rect x="620" y="50" width="6" height="130" fill="#10B981"/>
+                    <text x="640" y="75" font-size="15" font-weight="600" fill="#065F46">Registration rules / 注册规则</text>
+                    <text x="640" y="98" font-size="12" fill="#064E3B">
+                        <tspan x="640" dy="0">• User acct → register on user</tspan>
+                        <tspan x="640" dy="18">  用户账户→注册于用户账户</tspan>
+                        <tspan x="640" dy="18">• System acct → on computer</tspan>
+                        <tspan x="640" dy="18">  系统账户→注册于计算机账户</tspan>
+                    </text>
+
+                    <!-- Diagnosis steps -->
+                    <rect x="40" y="340" width="240" height="130" rx="12" fill="#EFF6FF" stroke="#0284C7" stroke-width="1.5"/>
+                    <rect x="40" y="340" width="6" height="130" fill="#0284C7"/>
+                    <text x="60" y="365" font-size="15" font-weight="600" fill="#075985">Diagnosis steps / 排查步骤</text>
+                    <text x="60" y="388" font-size="12" fill="#0C4A6E">
+                        <tspan x="60" dy="0">• klist / packet capture 抓包确认</tspan>
+                        <tspan x="60" dy="18">• setspn -X 查重复</tspan>
+                        <tspan x="60" dy="18">• w32tm time check 时间检查</tspan>
+                        <tspan x="60" dy="18">• nslookup DNS check DNS检查</tspan>
+                    </text>
+
+                    <!-- Prevention -->
+                    <rect x="620" y="340" width="240" height="130" rx="12" fill="#EEF2FF" stroke="#1D4ED8" stroke-width="1.5"/>
+                    <rect x="620" y="340" width="6" height="130" fill="#1D4ED8"/>
+                    <text x="640" y="365" font-size="15" font-weight="600" fill="#1E3A8A">Prevention / 预防要点</text>
+                    <text x="640" y="388" font-size="12" fill="#1E3A8A">
+                        <tspan x="640" dy="0">• Mandatory at provisioning 供应时必须</tspan>
+                        <tspan x="640" dy="18">• Central SPN inventory 集中清单</tspan>
+                        <tspan x="640" dy="18">• Add to change checklist 加入检查表</tspan>
+                        <tspan x="640" dy="18">• Alert on NTLM fallback 降级告警</tspan>
+                    </text>
+
+                    <!-- Hub -->
+                    <circle cx="450" cy="260" r="72" fill="#1D4ED8"/>
+                    <text x="450" y="252" font-size="16" font-weight="700" fill="#FFFFFF" text-anchor="middle">Kerberos</text>
+                    <text x="450" y="272" font-size="16" font-weight="700" fill="#FFFFFF" text-anchor="middle">&amp; SPN</text>
+                    <text x="450" y="292" font-size="12" fill="#DBEAFE" text-anchor="middle">核心概念</text>
+                </svg>
+            </div>
+        </section>
+
+        <!-- Why Sudden Slowness -->
+        <section class="card border-warning">
+            <h2 class="text-2xl md:text-3xl font-semibold text-warning mb-5 flex items-center">
+                <i class="fa fa-bolt mr-3"></i> Why Slowness Happens Suddenly / 为何性能突然变慢
+            </h2>
+            <div class="grid md:grid-cols-2 gap-6">
+                <div>
+                    <h3 class="font-medium text-lg mb-3 text-gray-700">English</h3>
+                    <ul class="list-disc list-inside space-y-3 text-gray-700">
+                        <li><span class="font-medium">Duplicate SPNs:</span> Same SPN registered on two different accounts → Kerberos cannot resolve.</li>
+                        <li><span class="font-medium">Account Changes:</span> App pool identity, service password, or computer account reset.</li>
+                        <li><span class="font-medium">DNS Updates:</span> New CNAME alias created but no corresponding SPN added.</li>
+                        <li><span class="font-medium">AD Replication:</span> Changes take time to sync; issue appears after old tickets expire.</li>
+                        <li><span class="font-medium">Policy Changes:</span> Authentication order, encryption types, or firewall rules modified.</li>
+                        <li><span class="font-medium">Time Drift:</span> Time difference > 5 minutes between client and domain controller.</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="font-medium text-lg mb-3 text-gray-700">中文</h3>
+                    <ul class="list-disc list-inside space-y-3 text-gray-700">
+                        <li><span class="font-medium">SPN 重复：</span>同一 SPN 被注册到两个不同账户，导致 Kerberos 无法解析。</li>
+                        <li><span class="font-medium">账户变更：</span>应用池运行身份、服务账户密码或计算机账户被重置。</li>
+                        <li><span class="font-medium">DNS 变更：</span>新增域名别名（CNAME），但未配置对应的 SPN 记录。</li>
+                        <li><span class="font-medium">AD 复制延迟：</span>配置变更后需要时间同步，问题通常在旧验证票据过期后集中出现。</li>
+                        <li><span class="font-medium">策略变更：</span>验证方式顺序、加密类型或防火墙规则被修改。</li>
+                        <li><span class="font-medium">时间不同步：</span>客户端与域控制器时差超过 5 分钟，直接导致 Kerberos 失效。</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Registration Rules -->
+        <section class="card border-success">
+            <h2 class="text-2xl md:text-3xl font-semibold text-success mb-5 flex items-center">
+                <i class="fa fa-check-circle mr-3"></i> Where & How to Register / 注册位置与规则
+            </h2>
+            <div class="grid md:grid-cols-2 gap-6">
+                <div>
+                    <h3 class="font-medium text-lg mb-3 text-gray-700">English</h3>
+                    <ul class="list-disc list-inside space-y-3 text-gray-700">
+                        <li><span class="font-medium">Domain user accounts:</span> If a service (e.g. an IIS app pool) runs as a domain user, register the SPN on <em>that user account</em>, not the computer account.</li>
+                        <li><span class="font-medium">Local System / Network Service:</span> Register the SPN on the <em>computer account</em> instead, since the service runs under the machine's identity.</li>
+                        <li><span class="font-medium">Cover every access path:</span> Register the short hostname, the FQDN, and any CNAME/DNS aliases users might type in a browser — a missing alias SPN causes NTLM fallback for that alias only.</li>
+                        <li><span class="font-medium">Check before adding:</span> Always run a duplicate check across the domain first; adding a conflicting SPN breaks Kerberos for both accounts.</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="font-medium text-lg mb-3 text-gray-700">中文</h3>
+                    <ul class="list-disc list-inside space-y-3 text-gray-700">
+                        <li><span class="font-medium">域用户账户：</span>若服务（如 IIS 应用池）以域用户身份运行，SPN 应注册在<em>该用户账户</em>上，而非计算机账户。</li>
+                        <li><span class="font-medium">Local System / Network Service：</span>此时服务以机器身份运行，SPN 应注册在<em>计算机账户</em>上。</li>
+                        <li><span class="font-medium">覆盖所有访问路径：</span>短主机名、完整域名（FQDN）以及用户可能使用的 CNAME 别名都需要各自注册 SPN，遗漏别名会导致该别名访问时降级为 NTLM。</li>
+                        <li><span class="font-medium">添加前先检查：</span>务必先在全域范围内检查重复项，冲突的 SPN 会同时破坏两个账户的 Kerberos 验证。</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="mt-6">
+                <h3 class="font-medium text-lg mb-2 text-gray-700">Common commands / 常用命令</h3>
+                <div class="code-block">
+# List SPNs registered on an account / 查看账户已注册的 SPN
+setspn -L domain\serviceaccount
+
+# Check for duplicate SPNs domain-wide / 检查全域内重复的 SPN
+setspn -X
+
+# Register an SPN / 注册 SPN
+setspn -S HTTP/webapp.contoso.com domain\serviceaccount
+setspn -S HTTP/webapp domain\serviceaccount
+
+# Remove an SPN / 删除 SPN
+setspn -D HTTP/webapp.contoso.com domain\serviceaccount
+                </div>
+            </div>
+        </section>
+
+        <!-- Diagnosis Steps -->
+        <section class="card border-secondary">
+            <h2 class="text-2xl md:text-3xl font-semibold text-secondary mb-5 flex items-center">
+                <i class="fa fa-search mr-3"></i> Diagnosis Steps / 排查步骤
+            </h2>
+            <div class="grid md:grid-cols-2 gap-6">
+                <div>
+                    <h3 class="font-medium text-lg mb-3 text-gray-700">English</h3>
+                    <ol class="list-decimal list-inside space-y-3 text-gray-700">
+                        <li>Confirm the fallback: check the active auth package with <code class="bg-gray-100 px-1 rounded">klist</code> or a Kerberos-filtered network capture.</li>
+                        <li>Run <code class="bg-gray-100 px-1 rounded">setspn -X</code> to look for duplicate SPNs across the domain.</li>
+                        <li>Verify time sync between the client and domain controller with <code class="bg-gray-100 px-1 rounded">w32tm /stripchart /computer:&lt;DC&gt;</code>.</li>
+                        <li>Confirm DNS resolution for every hostname/alias in use with <code class="bg-gray-100 px-1 rounded">nslookup</code>.</li>
+                        <li>Review the Security event log on the client and server for Kerberos error IDs (4, 11, 17, 27).</li>
+                    </ol>
+                </div>
+                <div>
+                    <h3 class="font-medium text-lg mb-3 text-gray-700">中文</h3>
+                    <ol class="list-decimal list-inside space-y-3 text-gray-700">
+                        <li>确认是否降级：使用 <code class="bg-gray-100 px-1 rounded">klist</code> 或带 Kerberos 过滤的网络抓包，确认当前使用的验证方式。</li>
+                        <li>执行 <code class="bg-gray-100 px-1 rounded">setspn -X</code>，检查全域内是否存在重复的 SPN。</li>
+                        <li>使用 <code class="bg-gray-100 px-1 rounded">w32tm /stripchart /computer:&lt;DC&gt;</code> 验证客户端与域控制器的时间是否同步。</li>
+                        <li>使用 <code class="bg-gray-100 px-1 rounded">nslookup</code> 确认所有正在使用的主机名/别名解析是否正常。</li>
+                        <li>检查客户端与服务器的安全事件日志，查看 Kerberos 相关错误事件 ID（4、11、17、27）。</li>
+                    </ol>
+                </div>
+            </div>
+        </section>
+
+        <!-- Lessons Learned -->
+        <section class="card border-danger">
+            <h2 class="text-2xl md:text-3xl font-semibold text-danger mb-5 flex items-center">
+                <i class="fa fa-lightbulb-o mr-3"></i> Lessons Learned / 经验总结
+            </h2>
+            <div class="grid md:grid-cols-2 gap-6">
+                <div>
+                    <h3 class="font-medium text-lg mb-3 text-gray-700">English</h3>
+                    <ul class="list-disc list-inside space-y-3 text-gray-700">
+                        <li>Register SPNs as a required step when provisioning a new service account or DNS alias — not an optional cleanup task afterward.</li>
+                        <li>Keep a central inventory of which account owns which SPN, so duplicate checks are fast during an incident.</li>
+                        <li>Add an SPN/Kerberos sanity check to the change-management checklist for any AD account or DNS change.</li>
+                        <li>Set up alerting on NTLM fallback so an SPN problem surfaces before users notice slowness.</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="font-medium text-lg mb-3 text-gray-700">中文</h3>
+                    <ul class="list-disc list-inside space-y-3 text-gray-700">
+                        <li>在新建服务账户或 DNS 别名时，将 SPN 注册作为必须步骤，而非事后才补做的清理工作。</li>
+                        <li>维护一份集中的 SPN 归属清单，方便在故障发生时快速排查重复项。</li>
+                        <li>在涉及 AD 账户或 DNS 变更的变更管理清单中，加入 SPN/Kerberos 检查项。</li>
+                        <li>针对 NTLM 降级设置告警，以便在用户察觉变慢之前就发现 SPN 问题。</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Technical Discussion Notes -->
+        <section class="card border-secondary">
+            <h2 class="text-2xl md:text-3xl font-semibold text-secondary mb-5 flex items-center">
+                <i class="fa fa-users mr-3"></i> Technical Discussion Notes / 技术团队讨论要点
+            </h2>
+
+            <div class="mb-8">
+                <h3 class="font-medium text-lg mb-3 text-gray-700">Quick reference: symptom → likely cause / 现象与可能原因速查</h3>
+                <div class="overflow-x-auto">
+                    <table class="min-w-full text-sm text-left border border-gray-200 rounded-lg overflow-hidden">
+                        <thead class="bg-gray-100 text-gray-700">
+                            <tr>
+                                <th class="px-4 py-2 border-b">Symptom / 现象</th>
+                                <th class="px-4 py-2 border-b">Likely cause / 可能原因</th>
+                                <th class="px-4 py-2 border-b">Check with / 排查命令</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-gray-700">
+                            <tr class="border-b">
+                                <td class="px-4 py-2">One app suddenly slow<br>单个应用突然变慢</td>
+                                <td class="px-4 py-2">Missing/duplicate SPN for that alias<br>该别名缺失或重复的 SPN</td>
+                                <td class="px-4 py-2"><code class="bg-gray-100 px-1 rounded">setspn -L</code>, <code class="bg-gray-100 px-1 rounded">setspn -X</code></td>
+                            </tr>
+                            <tr class="border-b bg-gray-50">
+                                <td class="px-4 py-2">All users slow after AD change<br>AD变更后所有用户变慢</td>
+                                <td class="px-4 py-2">Policy or encryption type changed<br>策略或加密类型被修改</td>
+                                <td class="px-4 py-2">Review GPO / Security log<br>检查组策略与安全日志</td>
+                            </tr>
+                            <tr class="border-b">
+                                <td class="px-4 py-2">Only one alias/CNAME slow<br>仅特定别名访问变慢</td>
+                                <td class="px-4 py-2">Alias missing its own SPN<br>该别名未单独注册 SPN</td>
+                                <td class="px-4 py-2"><code class="bg-gray-100 px-1 rounded">setspn -L &lt;account&gt;</code></td>
+                            </tr>
+                            <tr class="bg-gray-50">
+                                <td class="px-4 py-2">Intermittent failures at certain times<br>特定时间段间歇性失败</td>
+                                <td class="px-4 py-2">Time drift between client/DC<br>客户端与域控制器时间偏差</td>
+                                <td class="px-4 py-2"><code class="bg-gray-100 px-1 rounded">w32tm /stripchart</code></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-6 mb-8">
+                <div>
+                    <h3 class="font-medium text-lg mb-3 text-gray-700">Discussion questions / 讨论问题 (English)</h3>
+                    <ul class="list-disc list-inside space-y-2 text-gray-700">
+                        <li>Do we have a complete inventory of service accounts and their SPNs?</li>
+                        <li>Should SPN registration be automated during account/DNS provisioning?</li>
+                        <li>What alerting exists today for NTLM fallback events?</li>
+                        <li>Who owns SPN cleanup when a service is decommissioned?</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="font-medium text-lg mb-3 text-gray-700">中文</h3>
+                    <ul class="list-disc list-inside space-y-2 text-gray-700">
+                        <li>目前是否有完整的服务账户与 SPN 对应清单？</li>
+                        <li>是否应在账户/DNS 供应流程中自动完成 SPN 注册？</li>
+                        <li>目前对 NTLM 降级事件是否有告警机制？</li>
+                        <li>服务下线时，由谁负责清理对应的 SPN？</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div>
+                <h3 class="font-medium text-lg mb-3 text-gray-700">Action items (fill in during discussion) / 行动项（讨论中填写）</h3>
+                <div class="overflow-x-auto">
+                    <table class="min-w-full text-sm text-left border border-gray-200 rounded-lg overflow-hidden">
+                        <thead class="bg-gray-100 text-gray-700">
+                            <tr>
+                                <th class="px-4 py-2 border-b">Owner / 负责人</th>
+                                <th class="px-4 py-2 border-b">Action / 行动项</th>
+                                <th class="px-4 py-2 border-b">Target date / 目标日期</th>
+                                <th class="px-4 py-2 border-b">Status / 状态</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-gray-700">
+                            <tr class="border-b"><td class="px-4 py-2">&nbsp;</td><td class="px-4 py-2">&nbsp;</td><td class="px-4 py-2">&nbsp;</td><td class="px-4 py-2">&nbsp;</td></tr>
+                            <tr class="border-b bg-gray-50"><td class="px-4 py-2">&nbsp;</td><td class="px-4 py-2">&nbsp;</td><td class="px-4 py-2">&nbsp;</td><td class="px-4 py-2">&nbsp;</td></tr>
+                            <tr><td class="px-4 py-2">&nbsp;</td><td class="px-4 py-2">&nbsp;</td><td class="px-4 py-2">&nbsp;</td><td class="px-4 py-2">&nbsp;</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- Footer -->
+    <footer class="text-center text-sm text-gray-500 py-8">
+        <p>SPN & Kerberos Authentication — Lesson Learned Reference / 经验总结参考文档</p>
+    </footer>
+
+</body>
+</html>

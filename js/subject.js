@@ -4268,10 +4268,11 @@ export const networkData = {
             form:"Network",
             globalNum: 2,
             chapterNum: 2,
-            chapter:"Chapter 2",
+            chapter:"SPN & Kerberos Lesson Learned",
+            resourceUrl:"../networking/spn-kerberos-lesson-learned_2.html",
             status:"Not Started",
             confidence:0,
-            last_updated:"2026-07-03"
+            last_updated:"2026-07-07"
         },
 
         {
