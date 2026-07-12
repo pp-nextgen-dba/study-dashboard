@@ -324,7 +324,7 @@ subjectsWithoutSeed.forEach(subject =>
     )
 );
 
-import("./subject.js?v=19")
+import("./subject.js?v=20")
     .then(subjectData => {
 
         subjectsWithSeed.forEach(subject =>

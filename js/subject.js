@@ -4224,24 +4224,12 @@ export const storybooksData = {
 
     chapters:[{
             form:"Story",
-            globalNum: 1,
+            globalNum: 100,
             chapterNum: 1,
-            chapter:"Story 1: Inertia & Growth",
+            chapter:"Book 1",
             status:"Not Started",
             confidence:0,
-            last_updated:"2026-06-21",
-            resourceUrl:"../story/inertia-growth-notes.html"
-        },
-
-        {
-            form:"Story",
-            globalNum: 2,
-            chapterNum: 2,
-            chapter:"Story 2: The Difficult People Field Guide",
-            status:"Not Started",
-            confidence:0,
-            last_updated:"2026-07-06",
-            resourceUrl:"../story/difficult-people-field-guide.html"
+            last_updated:"2026-07-12"
         }]
 
 };
@@ -4323,10 +4311,22 @@ export const motivationBooksData = {
             form:"Motivation",
             globalNum: 1,
             chapterNum: 1,
-            chapter:"Book 1",
+            chapter:"Story 1: Inertia & Growth",
             status:"Not Started",
             confidence:0,
-            last_updated:"2026-07-12"
+            last_updated:"2026-06-21",
+            resourceUrl:"../story/inertia-growth-notes.html"
+        },
+
+        {
+            form:"Motivation",
+            globalNum: 2,
+            chapterNum: 2,
+            chapter:"Story 2: The Difficult People Field Guide",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-07-06",
+            resourceUrl:"../story/difficult-people-field-guide.html"
         }]
 
 };
