@@ -160,7 +160,8 @@ export const scienceData = {
             status:"Not Started",
             confidence:0,
             last_updated:"2026-05-20",
-            resourceUrl: "../science/t2_kssm_chapter13_meteoroid_asteroid_comet.html"
+            resourceUrl: "../science/t2_kssm_chapter13_meteoroid_asteroid_comet.html",
+            resourceUrl2: "../science/t2_chapter13_note2.html"
         },
 
 

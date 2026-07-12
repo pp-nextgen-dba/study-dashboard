@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chapter 13 Practice · Meteoroid, Asteroid, Comet 练习</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=JetBrains+Mono:wght@400;500;700&family=Noto+Sans+SC:wght@400;500;700&family=Noto+Serif+SC:wght@500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --void:#0B0E23; --panel:#141936; --panel-2:#1B2147;
+    --gold:#F2C14E; --ember:#E8622C; --ice:#6FC3DF;
+    --paper:#F4F1E8; --mute:#A7ADC6; --line:rgba(167,173,198,0.18);
+    --good:#6FC3DF; --bad:#E8622C;
+  }
+  *{box-sizing:border-box;}
+  body{ margin:0; background:var(--void); color:var(--paper); font-family:'Source Serif 4','Noto Serif SC',serif; line-height:1.65; }
+  body.zh{ font-family:'Noto Serif SC','Source Serif 4',serif; }
+  h1,h2,h3,h4,.eyebrow,nav,.lang-toggle,button{ font-family:'Space Grotesk','Noto Sans SC',sans-serif; }
+  body.zh h1,body.zh h2,body.zh h3,body.zh h4{ font-family:'Noto Sans SC','Space Grotesk',sans-serif; }
+  .mono{ font-family:'JetBrains Mono',monospace; }
+
+  .lang-en, .lang-zh{ display:none; }
+  body.en span.lang-en, body.zh span.lang-zh{ display:inline; }
+  body.en div.lang-en, body.zh div.lang-zh{ display:block; }
+  body.en li.lang-en, body.zh li.lang-zh{ display:list-item; }
+
+  .lang-toggle{ position:fixed; top:64px; right:16px; z-index:100; display:flex; background:var(--panel); border:1px solid var(--line); border-radius:999px; padding:4px; gap:2px; box-shadow:0 8px 24px rgba(0,0,0,.4); }
+  .lang-toggle button{ border:none; background:transparent; color:var(--mute); padding:8px 16px; border-radius:999px; font-size:13px; font-weight:600; cursor:pointer; transition:.2s; }
+  .lang-toggle button.active{ background:var(--gold); color:var(--void); }
+
+  section{ max-width:920px; margin:0 auto; padding:56px 24px; }
+  .hero{ max-width:920px; margin:0 auto; padding:110px 24px 50px; }
+  .eyebrow{ color:var(--gold); font-size:13px; letter-spacing:.16em; text-transform:uppercase; font-weight:600; margin-bottom:16px; display:flex; align-items:center; gap:10px; }
+  .eyebrow::before{ content:''; width:26px; height:1px; background:var(--gold); }
+  .hero h1{ font-size:clamp(34px,6vw,60px); line-height:1.05; margin:0 0 16px; font-weight:700;
+    background:linear-gradient(100deg, var(--paper) 30%, var(--gold) 65%, var(--ember) 90%);
+    -webkit-background-clip:text; background-clip:text; color:transparent; }
+  .hero p.sub{ color:var(--mute); font-size:17px; max-width:620px; margin:0 0 30px; }
+  .progress-bar{ height:8px; border-radius:999px; background:var(--panel); overflow:hidden; margin-top:10px; }
+  .progress-fill{ height:100%; width:0%; background:linear-gradient(90deg,var(--gold),var(--ember)); transition:width .4s; }
+  .progress-label{ font-size:13px; color:var(--mute); margin-top:8px; }
+
+  .toc{ display:flex; flex-wrap:wrap; gap:10px; margin-top:20px; }
+  .toc a{ color:var(--paper); text-decoration:none; font-size:12.5px; font-weight:600; border:1px solid var(--line); padding:8px 14px; border-radius:999px; background:rgba(255,255,255,.03); }
+  .toc a:hover{ border-color:var(--gold); color:var(--gold); }
+
+  .section-kicker{ color:var(--gold); font-size:12.5px; text-transform:uppercase; letter-spacing:.14em; font-weight:600; margin-bottom:10px; }
+  h2.section-title{ font-size:clamp(24px,3.6vw,32px); margin:0 0 10px; font-weight:700; }
+  .section-intro{ color:var(--mute); font-size:15.5px; margin:0 0 28px; }
+
+  .qcard{ background:var(--panel); border:1px solid var(--line); border-radius:16px; padding:22px 24px; margin-bottom:16px; }
+  .qhead{ display:flex; justify-content:space-between; align-items:flex-start; gap:12px; margin-bottom:14px; }
+  .qnum{ font-family:'Space Grotesk',sans-serif; font-weight:700; color:var(--gold); font-size:14px; flex:0 0 auto; }
+  .qtext{ font-size:15.5px; }
+
+  /* fill blank paragraph */
+  .fillp{ font-size:15.5px; color:var(--paper); }
+  .blank{ display:inline-block; min-width:110px; border-bottom:2px dashed var(--gold); text-align:center; color:transparent; cursor:pointer; position:relative; padding:0 4px; }
+  .blank.shown{ color:var(--gold); border-bottom-style:solid; cursor:default; }
+  .blank::after{ content:'tap'; position:absolute; top:-16px; left:50%; transform:translateX(-50%); font-size:9px; color:var(--mute); text-transform:uppercase; letter-spacing:.06em;}
+  .blank.shown::after{ content:''; }
+
+  /* true false */
+  .tf-row{ display:flex; justify-content:space-between; align-items:center; gap:16px; flex-wrap:wrap; }
+  .tf-btns{ display:flex; gap:8px; flex:0 0 auto; }
+  .tf-btn{ border:1px solid var(--line); background:transparent; color:var(--paper); padding:8px 16px; border-radius:8px; cursor:pointer; font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:13px; }
+  .tf-btn.correct{ background:rgba(111,195,223,.2); border-color:var(--ice); }
+  .tf-btn.wrong{ background:rgba(232,98,44,.2); border-color:var(--ember); }
+  .tf-explain{ margin-top:10px; font-size:13.5px; color:var(--ice); display:none; }
+
+  /* MCQ underline choice */
+  .choice-row{ display:flex; gap:10px; flex-wrap:wrap; margin-top:8px; }
+  .choice-btn{ border:1px solid var(--line); background:rgba(255,255,255,.03); color:var(--paper); padding:9px 18px; border-radius:999px; cursor:pointer; font-size:14px; }
+  .choice-btn.correct{ background:rgba(111,195,223,.2); border-color:var(--ice); text-decoration:underline; }
+  .choice-btn.wrong{ background:rgba(232,98,44,.2); border-color:var(--ember); text-decoration:line-through; opacity:.7; }
+
+  /* matching */
+  .match-row{ display:grid; grid-template-columns:1fr 1fr; gap:16px; align-items:center; margin-bottom:10px; }
+  @media(max-width:640px){ .match-row{ grid-template-columns:1fr; } }
+  .match-label{ background:var(--panel-2); border:1px solid var(--line); border-radius:10px; padding:10px 14px; font-size:14px; font-weight:600; }
+  .match-select{ width:100%; background:var(--panel-2); color:var(--paper); border:1px solid var(--line); border-radius:10px; padding:10px 14px; font-size:14px; font-family:inherit; }
+  .match-select.correct{ border-color:var(--ice); }
+  .match-select.wrong{ border-color:var(--ember); }
+
+  /* sequence */
+  .seq-list{ display:flex; flex-direction:column; gap:8px; }
+  .seq-item{ background:var(--panel-2); border:1px solid var(--line); border-radius:10px; padding:12px 16px; cursor:pointer; display:flex; gap:12px; align-items:center; }
+  .seq-item .badge{ flex:0 0 26px; height:26px; border-radius:50%; background:var(--gold); color:var(--void); display:flex; align-items:center; justify-content:center; font-weight:700; font-size:13px; opacity:0; }
+  .seq-item.picked .badge{ opacity:1; }
+  .seq-item.picked{ border-color:var(--gold); }
+  .seq-reset{ margin-top:10px; background:none; border:1px solid var(--line); color:var(--mute); padding:8px 14px; border-radius:8px; cursor:pointer; font-size:12.5px; }
+
+  /* reveal answer */
+  .reveal-btn{ background:var(--gold); color:var(--void); border:none; padding:9px 18px; border-radius:999px; font-weight:700; font-size:13px; cursor:pointer; font-family:'Space Grotesk',sans-serif; }
+  .reveal-box{ margin-top:12px; padding:14px 16px; background:rgba(111,195,223,.1); border:1px solid var(--ice); border-radius:10px; font-size:14.5px; display:none; }
+
+  /* diagram */
+  .diagram-wrap{ display:flex; gap:24px; align-items:center; margin-bottom:20px; flex-wrap:wrap; }
+  .diagram-wrap svg{ flex:0 0 220px; }
+
+  .passage{ background:var(--panel-2); border-left:3px solid var(--gold); border-radius:0 12px 12px 0; padding:16px 20px; margin-bottom:22px; font-style:italic; color:var(--mute); font-size:14.5px; }
+
+  .marks-tag{ font-size:11px; color:var(--void); background:var(--gold); padding:3px 9px; border-radius:999px; font-weight:700; font-family:'Space Grotesk',sans-serif; white-space:nowrap; }
+
+  footer{ text-align:center; padding:50px 24px 80px; color:var(--mute); font-size:13px; }
+</style>
+</head>
+<body class="en">
+
+<div class="top-nav" style="background:#fff;padding:10px 16px;border-bottom:2px solid #e5e7eb;position:sticky;top:0;z-index:120">
+  <a class="dashboard-link" href="../index.html" style="display:inline-flex;align-items:center;gap:6px;padding:8px 12px;border-radius:8px;background:#1d4ed8;color:#fff;font-size:13px;font-weight:800;text-decoration:none">&larr; Back to Dashboard</a>
+</div>
+
+<div class="lang-toggle">
+  <button id="btn-en" class="active" onclick="setLang('en')">EN</button>
+  <button id="btn-zh" onclick="setLang('zh')">中文</button>
+</div>
+
+<div class="hero">
+  <div class="eyebrow"><span class="lang-en">Form 2 Science · Chapter 13 · Practice Set</span><span class="lang-zh">中二科学 · 第13章 · 练习集</span></div>
+  <h1><span class="lang-en">Practice &amp; Exercises</span><span class="lang-zh">练习与测验</span></h1>
+  <p class="sub">
+    <span class="lang-en">True/false, matching, sequencing and structured questions from the workbook (Praktis Strategi &amp; Modul PBD), translated into English and Chinese. Tap any dashed underline or button to reveal the answer.</span>
+    <span class="lang-zh">来自练习册（Praktis Strategi 与 Modul PBD）的是非题、配对题、排序题与结构题，已译成英文与中文。点击虚线或按钮即可显示答案。</span>
+  </p>
+  <div class="progress-bar"><div class="progress-fill" id="progress-fill"></div></div>
+  <div class="progress-label" id="progress-label"><span class="lang-en">0 of 24 revealed</span><span class="lang-zh">已显示 0 / 24</span></div>
+  <div class="toc">
+    <a href="#fillblank"><span class="lang-en">Fill in the blanks</span><span class="lang-zh">填空</span></a>
+    <a href="#truefalse"><span class="lang-en">True / False</span><span class="lang-zh">是非题</span></a>
+    <a href="#underline"><span class="lang-en">Choose the correct answer</span><span class="lang-zh">选择正确答案</span></a>
+    <a href="#matching"><span class="lang-en">Matching</span><span class="lang-zh">配对</span></a>
+    <a href="#sequence"><span class="lang-en">Arrange in order</span><span class="lang-zh">排序</span></a>
+    <a href="#structured"><span class="lang-en">Structured questions</span><span class="lang-zh">结构题</span></a>
+    <a href="#reading"><span class="lang-en">Reading: Apophis 2036</span><span class="lang-zh">阅读理解：阿波菲斯 2036</span></a>
+    <a href="#hots"><span class="lang-en">HOTS</span><span class="lang-zh">高阶思维题</span></a>
+  </div>
+</div>
+
+<!-- FILL IN THE BLANK -->
+<section id="fillblank">
+  <div class="section-kicker"><span class="lang-en">Praktis Strategi 13.1–13.3</span><span class="lang-zh">策略练习 13.1–13.3</span></div>
+  <h2 class="section-title"><span class="lang-en">Complete the paragraph</span><span class="lang-zh">完成段落</span></h2>
+  <p class="section-intro"><span class="lang-en">Tap each dashed word to reveal it.</span><span class="lang-zh">点击每个虚线词以显示答案。</span></p>
+
+  <div class="qcard">
+    <div class="qnum">1 · <span class="lang-en">Movement of a meteoroid</span><span class="lang-zh">流星体的运行</span></div>
+    <p class="fillp lang-en">A meteoroid is a small fragment of rock and metal that floats and moves in outer space. When a meteoroid enters the Earth's <span class="blank" data-a="atmosphere">atmosphere</span>, it will be called a <span class="blank" data-a="meteor">meteor</span>. A meteor that reaches the Earth is called a <span class="blank" data-a="meteorite">meteorite</span>. A <span class="blank" data-a="crater">crater</span> will form as a result of the meteorite's impact.</p>
+    <p class="fillp lang-zh">流星体是漂浮并在外太空中运行的细小石块与金属碎片。当流星体进入地球的<span class="blank" data-a="大气层">大气层</span>时，它会被称为<span class="blank" data-a="流星">流星</span>。抵达地球的流星称为<span class="blank" data-a="陨石">陨石</span>。陨石撞击后会形成<span class="blank" data-a="陨石坑">陨石坑</span>。</p>
+  </div>
+
+  <div class="qcard">
+    <div class="qnum">2 · <span class="lang-en">Movement of an asteroid</span><span class="lang-zh">小行星的运行</span></div>
+    <p class="fillp lang-en">Asteroids move at an average speed of <span class="blank" data-a="25 km s⁻¹">25 km s⁻¹</span>. Most asteroids are found in the <span class="blank" data-a="asteroid belt">asteroid belt</span>. However, some asteroid orbits lie outside the belt, such as <span class="blank" data-a="Apollo, Amor and Aten">Apollo, Amor and Aten</span>. Collisions with large asteroids can result in the <span class="blank" data-a="destruction of living things">destruction of living things</span> on Earth.</p>
+    <p class="fillp lang-zh">小行星以平均<span class="blank" data-a="25 km/s">25 km/s</span>的速度运行。大多数小行星位于<span class="blank" data-a="小行星带">小行星带</span>内。然而，部分小行星轨道位于带外，例如<span class="blank" data-a="阿波罗群、阿莫尔群与阿登群">阿波罗群、阿莫尔群与阿登群</span>。与大型小行星碰撞可能导致地球上<span class="blank" data-a="生物的毁灭">生物的毁灭</span>。</p>
+  </div>
+
+  <div class="qcard">
+    <div class="qnum">3 · <span class="lang-en">Movement of a comet</span><span class="lang-zh">彗星的运行</span></div>
+    <p class="fillp lang-en">Comets move at a speed range of <span class="blank" data-a="10 to 70 km s⁻¹">10 to 70 km s⁻¹</span>. Most comets come from the <span class="blank" data-a="Kuiper belt and Oort cloud">Kuiper belt and Oort cloud</span>. When a comet gets closer to the Sun, it increases in speed, melts, and appears to have a <span class="blank" data-a="long tail">long tail</span>. The tail of a comet always points away from the Sun due to <span class="blank" data-a="solar wind">solar wind</span>.</p>
+    <p class="fillp lang-zh">彗星以<span class="blank" data-a="10至70 km/s">10至70 km/s</span>的速度范围运行。大多数彗星来自<span class="blank" data-a="柯伊伯带与奥尔特云">柯伊伯带与奥尔特云</span>。当彗星靠近太阳时，它会加速、融化，并出现<span class="blank" data-a="长长的尾巴">长长的尾巴</span>。彗尾因<span class="blank" data-a="太阳风">太阳风</span>的吹动而总是背向太阳。</p>
+  </div>
+</section>
+
+<!-- TRUE/FALSE -->
+<section id="truefalse">
+  <div class="section-kicker"><span class="lang-en">Bahagian B · Q1(b)</span><span class="lang-zh">B部分 · 第1(b)题</span></div>
+  <h2 class="section-title"><span class="lang-en">True or False</span><span class="lang-zh">是非题</span></h2>
+  <div id="tf-container"></div>
+</section>
+
+<!-- UNDERLINE / CHOOSE -->
+<section id="underline">
+  <div class="section-kicker"><span class="lang-en">Bahagian B · Q1(a)</span><span class="lang-zh">B部分 · 第1(a)题</span></div>
+  <h2 class="section-title"><span class="lang-en">Choose the correct answer</span><span class="lang-zh">选择正确答案</span></h2>
+  <p class="section-intro"><span class="lang-en">In the original workbook, students underline the correct word.</span><span class="lang-zh">在原练习册中，学生需划线选出正确的字词。</span></p>
+  <div id="choice-container"></div>
+</section>
+
+<!-- MATCHING -->
+<section id="matching">
+  <div class="section-kicker"><span class="lang-en">Bahagian B &amp; C · Matching</span><span class="lang-zh">B与C部分 · 配对题</span></div>
+  <h2 class="section-title"><span class="lang-en">Match the object to its characteristic</span><span class="lang-zh">将天体与其特征配对</span></h2>
+  <p class="section-intro"><span class="lang-en">One characteristic is a distractor and belongs to neither object — that's normal for this type of question.</span><span class="lang-zh">其中一个特征是干扰项，两者皆不适用——这在此类题型中是正常的。</span></p>
+  <div class="qcard">
+    <div id="match-container"></div>
+    <button class="reveal-btn" onclick="checkMatch()"><span class="lang-en">Check answers</span><span class="lang-zh">核对答案</span></button>
+  </div>
+</section>
+
+<!-- SEQUENCE -->
+<section id="sequence">
+  <div class="section-kicker"><span class="lang-en">Modul PBD · Q3</span><span class="lang-zh">PBD模组 · 第3题</span></div>
+  <h2 class="section-title"><span class="lang-en">Arrange to show meteor crater formation</span><span class="lang-zh">排列出陨石坑的形成过程</span></h2>
+  <p class="section-intro"><span class="lang-en">Tap the steps in the correct order, earliest first.</span><span class="lang-zh">依正确顺序点击步骤，最早发生的先点。</span></p>
+  <div class="qcard">
+    <div class="seq-list" id="seq-list"></div>
+    <button class="seq-reset" onclick="resetSeq()"><span class="lang-en">Reset</span><span class="lang-zh">重置</span></button>
+    <div class="reveal-box" id="seq-feedback"></div>
+  </div>
+</section>
+
+<!-- STRUCTURED -->
+<section id="structured">
+  <div class="section-kicker"><span class="lang-en">Bahagian C · Q1</span><span class="lang-zh">C部分 · 第1题</span></div>
+  <h2 class="section-title"><span class="lang-en">Object P in space</span><span class="lang-zh">太空中的物体P</span></h2>
+  <p class="section-intro"><span class="lang-en">The diagram shows Object P — a tailed object approaching Earth.</span><span class="lang-zh">图中显示物体P——一个带尾巴、正接近地球的天体。</span></p>
+
+  <div class="diagram-wrap">
+    <svg viewBox="0 0 220 180"><circle cx="60" cy="120" r="42" fill="#1B2147" stroke="#6FC3DF" stroke-width="2"/>
+      <text x="60" y="124" text-anchor="middle" fill="#F4F1E8" font-size="11" font-family="Space Grotesk">Earth</text>
+      <circle cx="170" cy="50" r="8" fill="#F4F1E8"/>
+      <line x1="150" y1="70" x2="178" y2="42" stroke="#E8622C" stroke-width="4" stroke-linecap="round" opacity=".8"/>
+      <line x1="140" y1="80" x2="176" y2="46" stroke="#F2C14E" stroke-width="2" stroke-linecap="round" opacity=".5"/>
+      <text x="170" y="34" text-anchor="middle" fill="#F4F1E8" font-size="11" font-family="Space Grotesk">P</text>
+      <path d="M120,90 Q95,105 78,115" stroke="#A7ADC6" stroke-width="1" fill="none" stroke-dasharray="3 3"/>
+    </svg>
+    <div style="flex:1; min-width:200px;">
+      <p style="color:var(--mute); font-size:14px; margin:0;"><span class="lang-en">Object P has a glowing head and a bright tail, streaking towards Earth.</span><span class="lang-zh">物体P有发光的头部与明亮的尾巴，正朝地球划过。</span></p>
+    </div>
+  </div>
+
+  <div class="qcard">
+    <div class="qhead"><div class="qnum">(a)</div><span class="marks-tag mono">1 mark</span></div>
+    <div class="qtext"><span class="lang-en">What is object P?</span><span class="lang-zh">物体P是什么？</span></div>
+    <button class="reveal-btn" onclick="this.nextElementSibling.style.display='block'"><span class="lang-en">Reveal</span><span class="lang-zh">显示答案</span></button>
+    <div class="reveal-box"><span class="lang-en">A comet — it has a glowing head and a long tail.</span><span class="lang-zh">彗星——它有发光的头部与长长的尾巴。</span></div>
+  </div>
+
+  <div class="qcard">
+    <div class="qhead"><div class="qnum">(b)</div><span class="marks-tag mono">1 mark</span></div>
+    <div class="qtext"><span class="lang-en">Does object P move in its own orbit?</span><span class="lang-zh">物体P是否在自己的轨道上运行？</span></div>
+    <button class="reveal-btn" onclick="this.nextElementSibling.style.display='block'"><span class="lang-en">Reveal</span><span class="lang-zh">显示答案</span></button>
+    <div class="reveal-box"><span class="lang-en">Yes — a comet moves in its own elliptical orbit around the Sun.</span><span class="lang-zh">是——彗星在自己围绕太阳运行的椭圆轨道上运行。</span></div>
+  </div>
+
+  <div class="qcard">
+    <div class="qhead"><div class="qnum">(c)</div><span class="marks-tag mono">1 mark</span></div>
+    <div class="qtext"><span class="lang-en">What influences the movement of object P?</span><span class="lang-zh">是什么影响了物体P的运行？</span></div>
+    <button class="reveal-btn" onclick="this.nextElementSibling.style.display='block'"><span class="lang-en">Reveal</span><span class="lang-zh">显示答案</span></button>
+    <div class="reveal-box"><span class="lang-en">The gravitational pull of the Sun and outer planets; solar wind also shapes the direction of its tail.</span><span class="lang-zh">太阳与外行星的引力；太阳风也影响其尾巴的方向。</span></div>
+  </div>
+
+  <div class="qcard">
+    <div class="qhead"><div class="qnum">(d)</div><span class="marks-tag mono">1 mark</span></div>
+    <div class="qtext"><span class="lang-en">Why does object P's tail form and glow?</span><span class="lang-zh">为什么物体P的尾巴会形成并发光？</span></div>
+    <button class="reveal-btn" onclick="this.nextElementSibling.style.display='block'"><span class="lang-en">Reveal</span><span class="lang-zh">显示答案</span></button>
+    <div class="reveal-box"><span class="lang-en">As it nears the Sun, heat melts and vaporises its ice and dust, releasing gas that glows and streams away from the Sun.</span><span class="lang-zh">当它靠近太阳时，热量使其冰与尘埃融化并汽化，释放出会发光并朝远离太阳方向流出的气体。</span></div>
+  </div>
+
+  <div class="qcard">
+    <div class="qhead"><div class="qnum">(e)</div><span class="marks-tag mono">1 mark</span></div>
+    <div class="qtext"><span class="lang-en">State one difference between object P and an asteroid.</span><span class="lang-zh">说出物体P与小行星之间的一个差别。</span></div>
+    <button class="reveal-btn" onclick="this.nextElementSibling.style.display='block'"><span class="lang-en">Reveal</span><span class="lang-zh">显示答案</span></button>
+    <div class="reveal-box"><span class="lang-en">Object P (a comet) is made of ice, gas and frozen dust and has a tail; an asteroid is made of rock and metal and has no tail.</span><span class="lang-zh">物体P（彗星）由冰、气体与冻结尘埃组成，并有尾巴；小行星则由岩石与金属组成，没有尾巴。</span></div>
+  </div>
+</section>
+
+<!-- READING -->
+<section id="reading">
+  <div class="section-kicker"><span class="lang-en">Bahagian C · Q1(f)</span><span class="lang-zh">C部分 · 第1(f)题</span></div>
+  <h2 class="section-title"><span class="lang-en">Reading: the Apophis asteroid</span><span class="lang-zh">阅读理解：阿波菲斯小行星</span></h2>
+  <div class="passage">
+    <span class="lang-en">"In 2013, NASA stated the probability of the Apophis asteroid colliding with the Earth in 2036."</span>
+    <span class="lang-zh">「2013年，NASA表示阿波菲斯小行星在2036年撞击地球的可能性。」</span>
+  </div>
+
+  <div class="qcard">
+    <div class="qhead"><div class="qnum">(i)</div><span class="marks-tag mono">1 mark</span></div>
+    <div class="qtext"><span class="lang-en">What kind of scale is used to measure how much an asteroid impact could endanger Earth?</span><span class="lang-zh">用什么样的量表来衡量小行星撞击对地球的危害程度？</span></div>
+    <button class="reveal-btn" onclick="this.nextElementSibling.style.display='block'"><span class="lang-en">Reveal</span><span class="lang-zh">显示答案</span></button>
+    <div class="reveal-box"><span class="lang-en">A numbered hazard scale (such as the Torino Scale) that rates the risk from 0 — no hazard — up to 10 — a certain, globally catastrophic collision. <i>(Check this against your teacher's answer scheme, as the exact scale name isn't printed on the page you shared.)</i></span><span class="lang-zh">一种以数字分级的危险量表（例如托里诺量表），从0（无危险）到10（确定发生、造成全球性灾难的撞击）。<i>（由于你提供的页面上没有印出确切的量表名称，请以老师的答案为准。）</i></span></div>
+  </div>
+
+  <div class="qcard">
+    <div class="qhead"><div class="qnum">(ii)</div><span class="marks-tag mono">1 mark</span></div>
+    <div class="qtext"><span class="lang-en">Explain one step used to prevent an asteroid impact.</span><span class="lang-zh">解释一个用来防止小行星撞击的方法。</span></div>
+    <button class="reveal-btn" onclick="this.nextElementSibling.style.display='block'"><span class="lang-en">Reveal</span><span class="lang-zh">显示答案</span></button>
+    <div class="reveal-box"><span class="lang-en">Scientists can send a spacecraft to nudge or deflect the asteroid so it changes course and misses Earth, or attach explosives to break it into smaller, safer fragments.</span><span class="lang-zh">科学家可派遣太空船轻推或使小行星偏转，使其改变路线而避开地球，或在其上安装炸药使其碎裂成较小、较安全的碎片。</span></div>
+  </div>
+</section>
+
+<!-- HOTS -->
+<section id="hots">
+  <div class="section-kicker"><span class="lang-en">Modul PBD · HOTS</span><span class="lang-zh">PBD模组 · 高阶思维题</span></div>
+  <h2 class="section-title"><span class="lang-en">Predict &amp; suggest</span><span class="lang-zh">预测与建议</span></h2>
+
+  <div class="qcard">
+    <div class="qhead"><div class="qnum">4</div></div>
+    <div class="qtext"><span class="lang-en">Predict the condition of Earth if a meteoroid, asteroid or comet collides with it.</span><span class="lang-zh">预测流星体、小行星或彗星撞击地球后的情况。</span></div>
+    <button class="reveal-btn" onclick="this.nextElementSibling.style.display='block'"><span class="lang-en">Sample answer</span><span class="lang-zh">参考答案</span></button>
+    <div class="reveal-box"><span class="lang-en">A large impact could destroy buildings and living things near the impact zone, throw dust into the atmosphere that blocks sunlight and changes temperatures, and — if the object is very large (≥10 km) — even cause mass extinction, as scientists believe happened to the dinosaurs.</span><span class="lang-zh">大规模撞击可能摧毁撞击区附近的建筑物与生物，将尘埃扬入大气层遮挡阳光并改变气温，若撞击物极大（≥10公里），甚至可能如科学家所推测导致恐龙灭绝般，造成物种大灭绝。</span></div>
+  </div>
+
+  <div class="qcard">
+    <div class="qhead"><div class="qnum">5</div></div>
+    <div class="qtext"><span class="lang-en">Suggest two methods scientists use to avoid an asteroid collision.</span><span class="lang-zh">建议两种科学家用来避免小行星撞击的方法。</span></div>
+    <button class="reveal-btn" onclick="this.nextElementSibling.style.display='block'"><span class="lang-en">Sample answer</span><span class="lang-zh">参考答案</span></button>
+    <div class="reveal-box"><span class="lang-en">(1) Change the asteroid's course using a spacecraft. (2) Break it apart with explosives or a bomb before it reaches Earth.</span><span class="lang-zh">（1）利用太空船改变小行星的运行路线。（2）在小行星抵达地球前用炸药或炸弹将其炸碎。</span></div>
+  </div>
+</section>
+
+<footer>
+  <span class="lang-en">KSSM Form 2 Science · Chapter 13 practice set · Companion to the main revision page</span>
+  <span class="lang-zh">KSSM 中二科学 · 第13章练习集 · 主复习页面的配套练习</span>
+</footer>
+
+<script>
+function setLang(l){
+  document.body.className = l;
+  document.getElementById('btn-en').classList.toggle('active', l==='en');
+  document.getElementById('btn-zh').classList.toggle('active', l==='zh');
+}
+
+let revealedCount = 0;
+const TOTAL_REVEALS = 24;
+function bumpProgress(){
+  revealedCount = Math.min(revealedCount+1, TOTAL_REVEALS);
+  document.getElementById('progress-fill').style.width = (revealedCount/TOTAL_REVEALS*100)+'%';
+  document.getElementById('progress-label').innerHTML =
+    `<span class="lang-en">${revealedCount} of ${TOTAL_REVEALS} revealed</span><span class="lang-zh">已显示 ${revealedCount} / ${TOTAL_REVEALS}</span>`;
+  document.body.className = document.body.className; // keep lang
+}
+
+// blanks
+document.querySelectorAll('.blank').forEach(b=>{
+  b.addEventListener('click', ()=>{
+    if(b.classList.contains('shown')) return;
+    b.classList.add('shown');
+    bumpProgress();
+  });
+});
+
+// TRUE/FALSE data
+const TF = [
+  {en:"Meteoroid is a floating piece of stone and metal that moves in space.", zh:"流星体是漂浮在太空中并移动的石块与金属碎片。", answer:true},
+  {en:"A comet is a small body made up of stone and metal which orbits the Sun.", zh:"彗星是由石块与金属组成、绕太阳运行的小天体。", answer:false, why_en:"Comets are made of ice, gas and frozen dust — not stone and metal.", why_zh:"彗星由冰、气体与冻结尘埃组成——而非石块与金属。"},
+  {en:"The asteroid belt is located between Mars and Jupiter.", zh:"小行星带位于火星与木星之间。", answer:true}
+];
+const tfContainer = document.getElementById('tf-container');
+TF.forEach((item, idx)=>{
+  const card = document.createElement('div');
+  card.className = 'qcard';
+  card.innerHTML = `
+    <div class="tf-row">
+      <div class="qtext"><span class="qnum">(${['i','ii','iii'][idx]})</span> &nbsp;
+        <span class="lang-en">${item.en}</span><span class="lang-zh">${item.zh}</span>
+      </div>
+      <div class="tf-btns">
+        <button class="tf-btn" data-v="true"><span class="lang-en">TRUE</span><span class="lang-zh">是</span></button>
+        <button class="tf-btn" data-v="false"><span class="lang-en">FALSE</span><span class="lang-zh">非</span></button>
+      </div>
+    </div>
+    <div class="tf-explain">${item.why_en ? `<span class="lang-en">${item.why_en}</span><span class="lang-zh">${item.why_zh}</span>` : ''}</div>
+  `;
+  const btns = card.querySelectorAll('.tf-btn');
+  let answered = false;
+  btns.forEach(btn=>{
+    btn.onclick = ()=>{
+      if(answered) return; answered = true;
+      const chosen = btn.dataset.v === 'true';
+      btns.forEach(b=> b.style.pointerEvents='none');
+      if(chosen === item.answer){ btn.classList.add('correct'); }
+      else{
+        btn.classList.add('wrong');
+        [...btns].find(b=> (b.dataset.v==='true')===item.answer).classList.add('correct');
+      }
+      if(item.why_en) card.querySelector('.tf-explain').style.display='block';
+      bumpProgress();
+    };
+  });
+  tfContainer.appendChild(card);
+});
+
+// CHOICE (underline correct)
+const CHOICES = [
+  {en:"A [cosmologist / petrologist] studies the origin, composition, structure and changes in rocks.",
+   zh:"[宇宙学家 / 岩石学家] 研究岩石的起源、组成、结构与变化。",
+   opts:[{en:"cosmologist", zh:"宇宙学家", correct:false},{en:"petrologist", zh:"岩石学家", correct:true}]},
+  {en:"When a comet approaches the [Earth / Sun], it increases in speed, melts and appears to have a long tail.",
+   zh:"当彗星靠近 [地球 / 太阳] 时，它会加速、融化，并出现长长的尾巴。",
+   opts:[{en:"Earth", zh:"地球", correct:false},{en:"Sun", zh:"太阳", correct:true}]}
+];
+const choiceContainer = document.getElementById('choice-container');
+CHOICES.forEach((c,idx)=>{
+  const card = document.createElement('div');
+  card.className = 'qcard';
+  card.innerHTML = `<div class="qtext"><span class="qnum">(${['i','ii'][idx]})</span> <span class="lang-en">${c.en}</span><span class="lang-zh">${c.zh}</span></div>
+    <div class="choice-row"></div>`;
+  const row = card.querySelector('.choice-row');
+  let answered = false;
+  c.opts.forEach(o=>{
+    const btn = document.createElement('button');
+    btn.className = 'choice-btn';
+    btn.innerHTML = `<span class="lang-en">${o.en}</span><span class="lang-zh">${o.zh}</span>`;
+    btn.onclick = ()=>{
+      if(answered) return; answered = true;
+      [...row.children].forEach(b=>b.style.pointerEvents='none');
+      if(o.correct) btn.classList.add('correct');
+      else { btn.classList.add('wrong'); [...row.children].find((b,i)=>c.opts[i].correct).classList.add('correct'); }
+      bumpProgress();
+    };
+    row.appendChild(btn);
+  });
+  choiceContainer.appendChild(card);
+});
+
+// MATCHING
+const OBJECTS = [
+  {key:"asteroid", en:"Asteroid", zh:"小行星"},
+  {key:"comet", en:"Comet", zh:"彗星"}
+];
+const TRAITS = [
+  {key:"comet", en:"Mixture of ice, gas and frozen dust", zh:"冰、气体与冻结尘埃的混合物"},
+  {key:"asteroid", en:"Large rock and metal", zh:"大块的岩石与金属"},
+  {key:"distractor", en:"Smaller piece of stone and metal from other objects (this is a meteoroid trait)", zh:"来自其他天体的较小石块与金属碎片（这其实是流星体的特征）"}
+];
+const matchContainer = document.getElementById('match-container');
+OBJECTS.forEach(obj=>{
+  const row = document.createElement('div');
+  row.className = 'match-row';
+  const label = document.createElement('div');
+  label.className = 'match-label';
+  label.innerHTML = `<span class="lang-en">${obj.en}</span><span class="lang-zh">${obj.zh}</span>`;
+  const select = document.createElement('select');
+  select.className = 'match-select';
+  select.dataset.key = obj.key;
+  const blank = document.createElement('option');
+  blank.value=''; blank.textContent = '— choose / 选择 —';
+  select.appendChild(blank);
+  TRAITS.forEach(t=>{
+    const o = document.createElement('option');
+    o.value = t.key;
+    o.textContent = (document.body.className==='zh'? t.zh : t.en);
+    select.appendChild(o);
+  });
+  row.appendChild(label); row.appendChild(select);
+  matchContainer.appendChild(row);
+});
+function checkMatch(){
+  document.querySelectorAll('.match-select').forEach(sel=>{
+    sel.classList.remove('correct','wrong');
+    if(sel.value === sel.dataset.key) sel.classList.add('correct');
+    else if(sel.value) sel.classList.add('wrong');
+  });
+  bumpProgress();
+}
+
+// SEQUENCE
+const SEQ = [
+  {id:1, en:"Meteoroid floats and moves freely in outer space", zh:"流星体漂浮并在外太空中自由运行", order:1},
+  {id:2, en:"Meteoroid enters the Earth's atmosphere", zh:"流星体进入地球的大气层", order:2},
+  {id:3, en:"The meteor burns and produces a streak of light due to friction with air molecules", zh:"流星燃烧，并因与空气分子摩擦而产生一道光", order:3},
+  {id:4, en:"The unburned meteorite hits the Earth and forms a meteor crater", zh:"未燃尽的陨石撞击地球并形成陨石坑", order:4}
+];
+const shuffled = [...SEQ].sort(()=>Math.random()-0.5);
+const seqList = document.getElementById('seq-list');
+let picks = [];
+function renderSeq(){
+  seqList.innerHTML='';
+  shuffled.forEach(item=>{
+    const div = document.createElement('div');
+    div.className = 'seq-item' + (picks.includes(item.id) ? ' picked':'');
+    const pos = picks.indexOf(item.id);
+    div.innerHTML = `<div class="badge">${pos>=0?pos+1:''}</div><div><span class="lang-en">${item.en}</span><span class="lang-zh">${item.zh}</span></div>`;
+    div.onclick = ()=>{
+      if(picks.includes(item.id)) return;
+      picks.push(item.id);
+      renderSeq();
+      if(picks.length === SEQ.length){
+        const fb = document.getElementById('seq-feedback');
+        const correctOrder = picks.every((id,i)=> SEQ.find(s=>s.id===id).order === i+1);
+        fb.style.display='block';
+        fb.innerHTML = correctOrder
+          ? '<span class="lang-en">✅ Correct order!</span><span class="lang-zh">✅ 顺序正确！</span>'
+          : '<span class="lang-en">Not quite — tap Reset and try again. Correct order: float → enter atmosphere → burn (meteor) → hit ground (meteorite).</span><span class="lang-zh">还不太对——点击重置再试一次。正确顺序：漂浮→进入大气层→燃烧（流星）→落地（陨石）。</span>';
+        bumpProgress();
+      }
+    };
+    seqList.appendChild(div);
+  });
+}
+function resetSeq(){ picks = []; document.getElementById('seq-feedback').style.display='none'; renderSeq(); }
+renderSeq();
+</script>
+</body>
+</html>
