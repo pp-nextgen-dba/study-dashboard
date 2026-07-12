@@ -397,7 +397,7 @@ import {
     moralData
 }
 from
-"../js/subject.js?v=18";
+"../js/subject.js?v=19";
 
 import { requireAuth } from "../js/auth.js";
 await requireAuth("../index.html");
@@ -503,6 +503,17 @@ function mergeSeedChapters(subjectData){
                 updatedChapter = {
                     ...updatedChapter,
                     resourceUrl2:seedChapter.resourceUrl2
+                };
+
+            }
+
+            if(!existingChapter.resourceUrl2Label && seedChapter.resourceUrl2Label){
+
+                changed = true;
+
+                updatedChapter = {
+                    ...updatedChapter,
+                    resourceUrl2Label:seedChapter.resourceUrl2Label
                 };
 
             }
@@ -769,7 +780,7 @@ function render(){
 
             const chapterResource = chapter.resourceUrl
                 ? `<a class="chapter-link" href="${chapter.resourceUrl}">Note 1</a>` +
-                  (chapter.resourceUrl2 ? ` <a class="chapter-link" href="${chapter.resourceUrl2}">Note 2</a>` : "")
+                  (chapter.resourceUrl2 ? ` <a class="chapter-link" href="${chapter.resourceUrl2}">${chapter.resourceUrl2Label || "Note 2"}</a>` : "")
                 : "";
 
             card.innerHTML = `

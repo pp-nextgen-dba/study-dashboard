@@ -3521,7 +3521,8 @@ export const moralData = {
             confidence:0,
             last_updated:"2026-06-21",
             resourceUrl:"../moral/t2_moral_unit11.html",
-            resourceUrl2:"../moral/t2_unit11-kssm_adab-tempat-awam.html"
+            resourceUrl2:"../moral/t2_unit11-kssm_adab-tempat-awam.html",
+            resourceUrl2Label:"Note 2 (kssm)"
         },
 
         {
