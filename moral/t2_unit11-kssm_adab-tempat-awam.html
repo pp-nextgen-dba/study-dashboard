@@ -1,0 +1,839 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Unit 11 · Adab di Tempat Awam | Public Etiquette | 公共场所礼仪</title>
+<style>
+  :root{
+    --pine:#1f3d2b;
+    --pine-dk:#12261a;
+    --cream:#f6f0e1;
+    --paper:#fbf7ec;
+    --signal:#f2b705;
+    --brick:#c0533e;
+    --sky:#4f83a0;
+    --ink:#20241f;
+    --line:#cdbf9c;
+    --good:#2e7d4f;
+    --bad:#b23a2f;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--cream);
+    color:var(--ink);
+    font-family:Georgia,'Times New Roman',serif;
+    line-height:1.55;
+  }
+  h1,h2,h3,h4{
+    font-family:'Arial Black','Arial Narrow',Impact,sans-serif;
+    letter-spacing:0.5px;
+    margin:0 0 .4em 0;
+    text-transform:uppercase;
+    color:var(--pine-dk);
+  }
+  .mono{
+    font-family:'Courier New',Courier,monospace;
+    letter-spacing:1px;
+  }
+  a{color:inherit;}
+
+  /* ===== Language toggle bar ===== */
+  .langbar{
+    position:sticky;top:0;z-index:50;
+    background:var(--pine);
+    color:var(--cream);
+    display:flex;align-items:center;justify-content:space-between;
+    padding:.6rem 1.2rem;
+    box-shadow:0 3px 8px rgba(0,0,0,.25);
+    flex-wrap:wrap;gap:.5rem;
+  }
+  .langbar .badge{
+    font-family:'Arial Black',sans-serif;
+    background:var(--signal);color:var(--pine-dk);
+    padding:.25rem .6rem;border-radius:3px;
+    font-size:.75rem;letter-spacing:1px;
+  }
+  .langbtns{display:flex;gap:.4rem;}
+  .langbtns button{
+    font-family:'Courier New',monospace;
+    background:transparent;
+    border:2px solid var(--cream);
+    color:var(--cream);
+    padding:.35rem .8rem;
+    border-radius:20px;
+    cursor:pointer;
+    font-weight:bold;
+    font-size:.8rem;
+    transition:.2s;
+  }
+  .langbtns button.active,.langbtns button:hover{
+    background:var(--signal);
+    border-color:var(--signal);
+    color:var(--pine-dk);
+  }
+
+  /* ===== Hero / notice board ===== */
+  .hero{
+    background:
+      repeating-linear-gradient(135deg, rgba(255,255,255,.03) 0 2px, transparent 2px 14px),
+      var(--pine);
+    color:var(--paper);
+    padding:3rem 1.2rem 2.5rem;
+    position:relative;
+    overflow:hidden;
+    border-bottom:6px solid var(--signal);
+  }
+  .hero::after{
+    content:"";
+    position:absolute;inset:0;
+    background:radial-gradient(circle at 85% 20%, rgba(242,183,5,.18), transparent 45%),
+               radial-gradient(circle at 10% 80%, rgba(79,131,160,.25), transparent 40%);
+    pointer-events:none;
+  }
+  .hero-inner{max-width:980px;margin:0 auto;position:relative;}
+  .unit-tag{
+    display:inline-block;
+    background:var(--brick);color:#fff;
+    padding:.3rem 1rem;border-radius:4px;
+    font-family:'Arial Black',sans-serif;
+    font-size:.85rem;letter-spacing:2px;
+    margin-bottom:.8rem;
+  }
+  .hero h1{
+    color:#fff;font-size:clamp(1.5rem,4vw,2.6rem);
+    line-height:1.15;margin-bottom:.6rem;
+  }
+  .hero .sub{
+    font-family:Georgia,serif;font-style:italic;
+    color:var(--signal);font-size:1.05rem;max-width:640px;
+  }
+  .pin-row{
+    display:flex;flex-wrap:wrap;gap:.8rem;margin-top:1.6rem;
+  }
+  .pin{
+    background:var(--signal);
+    color:var(--pine-dk);
+    padding:.5rem .9rem;
+    font-family:'Courier New',monospace;
+    font-weight:bold;
+    font-size:.82rem;
+    border-radius:2px;
+    box-shadow:2px 3px 0 rgba(0,0,0,.35);
+    transform:rotate(-1.2deg);
+  }
+  .pin:nth-child(even){transform:rotate(1.4deg);background:#fff;}
+
+  /* ===== Section shell ===== */
+  section{
+    max-width:980px;margin:0 auto;
+    padding:2.6rem 1.2rem;
+  }
+  .section-head{
+    display:flex;align-items:baseline;gap:.7rem;
+    border-bottom:3px solid var(--pine);
+    padding-bottom:.5rem;margin-bottom:1.4rem;
+  }
+  .section-head .num{
+    font-family:'Arial Black',sans-serif;
+    color:var(--brick);font-size:1.6rem;
+  }
+  .section-head h2{margin:0;font-size:1.3rem;}
+  .section-head .en-sub{
+    font-family:'Courier New',monospace;
+    font-size:.75rem;color:var(--sky);text-transform:none;
+    display:block;margin-top:.15rem;
+  }
+
+  /* ===== translation blocks ===== */
+  .tri{display:block;}
+  .tri .zh{font-family:"PingFang SC","Microsoft YaHei","Songti SC",serif;}
+  [data-lang]{display:none;}
+  [data-lang].show{display:block;}
+  span[data-lang].show{display:inline;}
+
+  /* ===== Park map / mind map ===== */
+  .parkmap{
+    background:var(--paper);
+    border:2px dashed var(--line);
+    border-radius:10px;
+    padding:2rem 1rem;
+    position:relative;
+  }
+  .map-svg{width:100%;height:auto;display:block;}
+  .map-node{
+    font-family:'Courier New',monospace;
+    font-size:11px;font-weight:bold;
+    fill:var(--pine-dk);
+  }
+  .map-node-en{font-size:8.5px;font-weight:normal;fill:var(--sky);font-family:Georgia,serif;font-style:italic;}
+  .map-node-zh{font-size:9px;fill:var(--brick);}
+
+  /* ===== compare cards ===== */
+  .compare{
+    display:grid;grid-template-columns:1fr 1fr;gap:1.2rem;
+  }
+  @media(max-width:680px){.compare{grid-template-columns:1fr;}}
+  .card{
+    background:var(--paper);
+    border-radius:10px;
+    padding:1.2rem 1.3rem;
+    box-shadow:0 4px 0 rgba(0,0,0,.08);
+    border-top:6px solid var(--pine);
+  }
+  .card.bad{border-top-color:var(--bad);}
+  .card.good{border-top-color:var(--good);}
+  .card h3{font-size:1rem;display:flex;align-items:center;gap:.4rem;}
+  .card h3 .icon{font-size:1.3rem;}
+  .card ul{margin:.4rem 0 0 0;padding-left:1.2rem;}
+  .card li{margin-bottom:.5rem;}
+  .card li .en, .card li .zh{
+    display:block;font-size:.83rem;opacity:.85;margin-top:.1rem;
+  }
+  .card li .en{color:var(--sky);font-style:italic;}
+  .card li .zh{color:var(--brick);}
+
+  /* ===== importance grid ===== */
+  .impgrid{
+    display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+    gap:1rem;
+  }
+  .impcell{
+    background:var(--pine);color:var(--paper);
+    border-radius:8px;padding:1rem;
+    position:relative;overflow:hidden;
+  }
+  .impcell::before{
+    content:attr(data-n);
+    position:absolute;right:-6px;top:-16px;
+    font-family:'Arial Black',sans-serif;
+    font-size:3.4rem;color:rgba(255,255,255,.08);
+  }
+  .impcell h4{color:var(--signal);font-size:.88rem;margin-bottom:.3rem;}
+  .impcell p{margin:0;font-size:.82rem;}
+  .impcell .en{color:#bcd4c2;font-style:italic;font-size:.78rem;margin-top:.3rem;}
+  .impcell .zh{color:#f6d98c;font-size:.78rem;margin-top:.2rem;}
+
+  /* ===== notice / law box ===== */
+  .notice{
+    background:#fffef7;
+    border:1px solid var(--line);
+    box-shadow:0 6px 18px rgba(0,0,0,.12);
+    padding:1.3rem 1.4rem;
+    position:relative;
+    transform:rotate(-0.4deg);
+  }
+  .notice::before{
+    content:"⚠ VANDALISME";
+    position:absolute;top:-14px;left:20px;
+    background:var(--brick);color:#fff;
+    padding:.2rem .7rem;font-family:'Arial Black',sans-serif;
+    font-size:.75rem;letter-spacing:1px;border-radius:3px;
+  }
+  .notice h4{font-family:'Courier New',monospace;font-size:1.05rem;color:var(--brick);margin-top:.4rem;}
+  .notice .clip{
+    font-family:'Courier New',monospace;font-size:.85rem;
+    border-left:3px solid var(--brick);padding-left:.8rem;margin-top:.6rem;
+    color:#333;
+  }
+
+  /* ===== role model cards ===== */
+  .rolewrap{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1.1rem;}
+  .role{
+    background:var(--paper);border-radius:10px;overflow:hidden;
+    box-shadow:0 4px 0 rgba(0,0,0,.08);
+  }
+  .role .flag{
+    height:6px;
+  }
+  .role.jp .flag{background:linear-gradient(90deg,#bc002d,#bc002d);}
+  .role.my .flag{background:linear-gradient(90deg,var(--brick),var(--signal),var(--pine));}
+  .role.sg .flag{background:linear-gradient(90deg,#ee2536,#ee2536);}
+  .role-body{padding:1rem 1.1rem;}
+  .role-body h4{font-size:.95rem;margin-bottom:.3rem;}
+  .role-body p{font-size:.86rem;margin:.3rem 0;}
+  .role-body .en{color:var(--sky);font-style:italic;}
+  .role-body .zh{color:var(--brick);}
+
+  /* ===== debate ===== */
+  .debate{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem;}
+  @media(max-width:680px){.debate{grid-template-columns:1fr;}}
+  .debate .side{
+    border-radius:10px;padding:1.1rem 1.2rem;
+  }
+  .debate .pro{background:#e8f3ec;border:2px solid var(--good);}
+  .debate .con{background:#f3e9e6;border:2px solid var(--brick);}
+  .debate h4{font-size:.9rem;}
+  .debate ul{padding-left:1.1rem;margin:.5rem 0 0;}
+  .debate li{margin-bottom:.6rem;font-size:.87rem;}
+  .debate li .en{display:block;color:var(--sky);font-style:italic;font-size:.8rem;}
+  .debate li .zh{display:block;color:var(--brick);font-size:.8rem;}
+
+  /* ===== vocab web ===== */
+  .vocabwrap{
+    display:flex;flex-wrap:wrap;gap:.6rem;justify-content:center;
+    padding:1rem;
+  }
+  .vocab-chip{
+    background:var(--sky);color:#fff;
+    padding:.4rem .9rem;border-radius:20px;
+    font-size:.85rem;font-family:'Courier New',monospace;
+    cursor:default;
+  }
+
+  /* ===== quiz ===== */
+  .quiz-item{
+    background:var(--paper);border-radius:8px;
+    padding:1rem 1.2rem;margin-bottom:.9rem;
+    border-left:5px solid var(--sky);
+  }
+  .quiz-item p{margin:0 0 .5rem 0;font-weight:bold;}
+  .quiz-item .opts{display:flex;flex-direction:column;gap:.4rem;}
+  .quiz-item button.opt{
+    text-align:left;
+    background:#fff;border:1.5px solid var(--line);
+    padding:.5rem .8rem;border-radius:6px;
+    cursor:pointer;font-family:Georgia,serif;font-size:.9rem;
+    transition:.15s;
+  }
+  .quiz-item button.opt:hover{border-color:var(--sky);}
+  .quiz-item button.opt.correct{background:#d9f0e1;border-color:var(--good);font-weight:bold;}
+  .quiz-item button.opt.wrong{background:#f5d9d5;border-color:var(--bad);}
+  .quiz-item .explain{
+    display:none;margin-top:.6rem;font-size:.85rem;
+    background:#fff9e6;padding:.5rem .7rem;border-radius:6px;
+  }
+  .quiz-item .explain.show{display:block;}
+
+  footer{
+    text-align:center;padding:2rem 1rem 3rem;
+    color:var(--pine);font-size:.8rem;font-family:'Courier New',monospace;
+  }
+
+  ::selection{background:var(--signal);color:var(--pine-dk);}
+</style>
+</head>
+<body>
+
+<div class="top-nav" style="background:#fff;padding:10px 16px;border-bottom:2px solid #e5e7eb;position:sticky;top:0;z-index:120">
+  <a class="dashboard-link" href="../index.html" style="display:inline-flex;align-items:center;gap:6px;padding:8px 12px;border-radius:8px;background:#1d4ed8;color:#fff;font-size:13px;font-weight:800;text-decoration:none">&larr; Back to Dashboard</a>
+</div>
+
+<div class="langbar">
+  <div class="badge mono">UNIT 11 · MORAL F2</div>
+  <div class="langbtns">
+    <button class="lang-btn active" data-lang="bm">BM</button>
+    <button class="lang-btn" data-lang="en">EN</button>
+    <button class="lang-btn" data-lang="zh">中文</button>
+  </div>
+</div>
+
+<div class="hero">
+  <div class="hero-inner">
+    <span class="unit-tag">UNIT 11 · PEND. MORAL TINGKATAN 2</span>
+    <h1>Adab di Tempat Awam Dijaga,<br>Nikmat Hidup Dirasai Bersama</h1>
+    <p class="sub">
+      <span data-lang="bm" class="show">Nota ulang kaji peperiksaan akhir tahun — disediakan dalam tiga bahasa.</span>
+      <span data-lang="en">Final exam revision notes — prepared in three languages.</span>
+      <span data-lang="zh">期末考试复习笔记——三语版本。</span>
+    </p>
+    <div class="pin-row">
+      <div class="pin">📍 <span data-lang="bm" class="show">Tempat-tempat awam</span><span data-lang="en">Public places</span><span data-lang="zh">公共场所</span></div>
+      <div class="pin">🤝 <span data-lang="bm" class="show">Cara &amp; kepentingan beradab</span><span data-lang="en">Manners &amp; their importance</span><span data-lang="zh">礼仪与重要性</span></div>
+      <div class="pin">⚠️ <span data-lang="bm" class="show">Amalan beradab / tidak beradab</span><span data-lang="en">Good vs bad conduct</span><span data-lang="zh">良好与不良行为</span></div>
+      <div class="pin">🌍 <span data-lang="bm" class="show">Teladan masyarakat dunia</span><span data-lang="en">Role-model societies</span><span data-lang="zh">世界典范社会</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== 1. MIND MAP: PUBLIC PLACES ===================== -->
+<section id="map">
+  <div class="section-head">
+    <span class="num">01</span>
+    <div>
+      <h2><span data-lang="bm" class="show">Peta Minda — Contoh Tempat Awam</span>
+          <span data-lang="en">Mind Map — Examples of Public Places</span>
+          <span data-lang="zh">思维导图——公共场所示例</span></h2>
+      <span class="en-sub">Places where the public gathers to carry out shared activities</span>
+    </div>
+  </div>
+
+  <div class="parkmap">
+    <svg class="map-svg" viewBox="0 0 800 560" xmlns="http://www.w3.org/2000/svg">
+      <!-- connecting paths (trail lines) -->
+      <g stroke="#c0533e" stroke-width="2.5" stroke-dasharray="1 8" stroke-linecap="round" fill="none">
+        <line x1="400" y1="280" x2="400" y2="90"/>
+        <line x1="400" y1="280" x2="620" y2="140"/>
+        <line x1="400" y1="280" x2="700" y2="280"/>
+        <line x1="400" y1="280" x2="620" y2="430"/>
+        <line x1="400" y1="280" x2="400" y2="480"/>
+        <line x1="400" y1="280" x2="180" y2="430"/>
+        <line x1="400" y1="280" x2="100" y2="280"/>
+        <line x1="400" y1="280" x2="180" y2="140"/>
+      </g>
+      <!-- center -->
+      <circle cx="400" cy="280" r="62" fill="#1f3d2b"/>
+      <circle cx="400" cy="280" r="62" fill="none" stroke="#f2b705" stroke-width="4"/>
+      <text x="400" y="273" text-anchor="middle" class="map-node" fill="#f6f0e1" font-size="13">TEMPAT AWAM</text>
+      <text x="400" y="288" text-anchor="middle" class="map-node-en" fill="#f2b705">public places</text>
+      <text x="400" y="301" text-anchor="middle" class="map-node-zh" fill="#fff">公共场所</text>
+
+      <!-- nodes -->
+      <!-- hospital -->
+      <g><circle cx="400" cy="90" r="46" fill="#c0533e"/>
+        <text x="400" y="83" text-anchor="middle" class="map-node" fill="#fff">HOSPITAL</text>
+        <text x="400" y="97" text-anchor="middle" class="map-node-en" fill="#ffe">hospital</text>
+        <text x="400" y="109" text-anchor="middle" class="map-node-zh" fill="#ffe">医院</text></g>
+
+      <!-- RTC -->
+      <g><circle cx="620" cy="140" r="46" fill="#4f83a0"/>
+        <text x="620" y="130" text-anchor="middle" class="map-node" fill="#fff" font-size="10">PUSAT TRANSFORMASI</text>
+        <text x="620" y="143" text-anchor="middle" class="map-node" fill="#fff" font-size="10">LUAR BANDAR (RTC)</text>
+        <text x="620" y="157" text-anchor="middle" class="map-node-zh" fill="#ffe">乡村转型中心</text></g>
+
+      <!-- stesen kereta api -->
+      <g><circle cx="700" cy="280" r="46" fill="#2e7d4f"/>
+        <text x="700" y="272" text-anchor="middle" class="map-node" fill="#fff" font-size="10">STESEN</text>
+        <text x="700" y="285" text-anchor="middle" class="map-node" fill="#fff" font-size="10">KERETA API</text>
+        <text x="700" y="298" text-anchor="middle" class="map-node-en" fill="#dff" font-size="8">train station 火车站</text></g>
+
+      <!-- perpustakaan -->
+      <g><circle cx="620" cy="430" r="46" fill="#f2b705"/>
+        <text x="620" y="424" text-anchor="middle" class="map-node" fill="#1f3d2b">PERPUSTAKAAN</text>
+        <text x="620" y="437" text-anchor="middle" class="map-node-en" fill="#5a4400">library</text>
+        <text x="620" y="449" text-anchor="middle" class="map-node-zh" fill="#5a4400">图书馆</text></g>
+
+      <!-- tempat menunggu bas -->
+      <g><circle cx="400" cy="480" r="46" fill="#c0533e"/>
+        <text x="400" y="470" text-anchor="middle" class="map-node" fill="#fff" font-size="10">TEMPAT MENUNGGU</text>
+        <text x="400" y="483" text-anchor="middle" class="map-node" fill="#fff" font-size="10">BAS</text>
+        <text x="400" y="496" text-anchor="middle" class="map-node-en" fill="#ffe" font-size="8">bus stop 巴士站</text></g>
+
+      <!-- pasar awam -->
+      <g><circle cx="180" cy="430" r="46" fill="#4f83a0"/>
+        <text x="180" y="423" text-anchor="middle" class="map-node" fill="#fff">PASAR AWAM</text>
+        <text x="180" y="437" text-anchor="middle" class="map-node-en" fill="#eef">public market</text>
+        <text x="180" y="449" text-anchor="middle" class="map-node-zh" fill="#eef">公共市场</text></g>
+
+      <!-- lapangan terbang -->
+      <g><circle cx="100" cy="280" r="46" fill="#2e7d4f"/>
+        <text x="100" y="272" text-anchor="middle" class="map-node" fill="#fff" font-size="10">LAPANGAN</text>
+        <text x="100" y="285" text-anchor="middle" class="map-node" fill="#fff" font-size="10">TERBANG</text>
+        <text x="100" y="298" text-anchor="middle" class="map-node-en" fill="#dfe" font-size="8">airport 机场</text></g>
+
+      <!-- kawasan rekreasi -->
+      <g><circle cx="180" cy="140" r="46" fill="#f2b705"/>
+        <text x="180" y="130" text-anchor="middle" class="map-node" fill="#1f3d2b" font-size="10">KAWASAN</text>
+        <text x="180" y="143" text-anchor="middle" class="map-node" fill="#1f3d2b" font-size="10">REKREASI</text>
+        <text x="180" y="157" text-anchor="middle" class="map-node-en" fill="#5a4400" font-size="8">rec. area 休闲区</text></g>
+    </svg>
+  </div>
+  <p style="text-align:center;font-size:.85rem;margin-top:.8rem;">
+    <span data-lang="bm" class="show"><b>Tempat awam</b> = tempat umumnya terdapat ramai orang berkumpul untuk melakukan sesuatu aktiviti, disediakan oleh kerajaan/swasta untuk kebaikan bersama.</span>
+    <span data-lang="en"><b>Public place</b> = a place where people commonly gather to carry out an activity, provided by the government/private sector for everyone's benefit.</span>
+    <span data-lang="zh"><b>公共场所</b>＝人们通常聚集进行活动的地方，由政府或私人机构提供，供大众共同受益。</span>
+  </p>
+</section>
+
+<!-- ===================== 2. GOOD VS BAD BEHAVIOUR ===================== -->
+<section id="behaviour">
+  <div class="section-head">
+    <span class="num">02</span>
+    <div>
+      <h2><span data-lang="bm" class="show">Perlakuan Beradab vs Tidak Beradab</span>
+          <span data-lang="en">Good vs Bad Conduct in Public</span>
+          <span data-lang="zh">良好行为与不良行为</span></h2>
+      <span class="en-sub">Behaviours at public places</span>
+    </div>
+  </div>
+
+  <div class="compare">
+    <div class="card good">
+      <h3><span class="icon">✅</span>
+        <span data-lang="bm" class="show">Perlakuan BERADAB</span>
+        <span data-lang="en">GOOD conduct</span>
+        <span data-lang="zh">良好行为</span>
+      </h3>
+      <ul>
+        <li>Menggunakan harta benda awam dengan baik.
+          <span class="en">Using public property properly.</span>
+          <span class="zh">妥善使用公共财物。</span></li>
+        <li>Menggunakan tong sampah yang disediakan.
+          <span class="en">Using the rubbish bins provided.</span>
+          <span class="zh">使用提供的垃圾桶。</span></li>
+        <li>Menjaga adab dan kelakuan di tempat awam.
+          <span class="en">Maintaining manners and behaviour in public.</span>
+          <span class="zh">在公共场所保持礼貌和良好行为。</span></li>
+        <li>Menggunakan air di tandas mengikut keperluan.
+          <span class="en">Using water in toilets only as needed.</span>
+          <span class="zh">按需使用厕所用水。</span></li>
+        <li>Memberikan laluan kepada orang ramai.
+          <span class="en">Giving way to the public.</span>
+          <span class="zh">为公众让路。</span></li>
+      </ul>
+    </div>
+
+    <div class="card bad">
+      <h3><span class="icon">❌</span>
+        <span data-lang="bm" class="show">Perlakuan TIDAK BERADAB</span>
+        <span data-lang="en">BAD conduct</span>
+        <span data-lang="zh">不良行为</span>
+      </h3>
+      <ul>
+        <li>Merosakkan harta benda awam (vandalisme).
+          <span class="en">Damaging public property (vandalism).</span>
+          <span class="zh">破坏公共财物（破坏行为）。</span></li>
+        <li>Membuang sampah di merata-rata tempat.
+          <span class="en">Littering everywhere.</span>
+          <span class="zh">到处乱丢垃圾。</span></li>
+        <li>Pergaulan bebas tanpa batasan.
+          <span class="en">Unrestrained free mixing between genders.</span>
+          <span class="zh">男女之间不受约束的自由交往。</span></li>
+        <li>Membiarkan pili air tidak ditutup selepas guna.
+          <span class="en">Leaving taps running after use.</span>
+          <span class="zh">用完后不关水龙头。</span></li>
+        <li>Menghalang laluan orang ramai.
+          <span class="en">Blocking public walkways.</span>
+          <span class="zh">阻挡公众通道。</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <div style="margin-top:1.3rem;background:#fff9e6;border-radius:8px;padding:1rem 1.2rem;border-left:5px solid var(--signal);">
+    <b>INFO — <span data-lang="bm" class="show">Hedonisme</span><span data-lang="en">Hedonism</span><span data-lang="zh">享乐主义</span>:</b>
+    <p style="margin:.4rem 0 0;font-size:.88rem;">
+      <span data-lang="bm" class="show">Pegangan/pandangan hidup yang mementingkan keseronokan sebagai tujuan hidup. Sikap hedonistik sering menyebabkan tingkah laku tidak beradab di tempat awam kerana kepuasan diri diutamakan berbanding kepentingan orang lain.</span>
+      <span data-lang="en">A life philosophy that places pleasure/enjoyment as life's main purpose. A hedonistic attitude often causes bad public conduct because self-satisfaction is prioritised over others' interests.</span>
+      <span data-lang="zh">一种把享乐视为人生目的的生活观。享乐主义态度常导致公共场所的不良行为，因为个人满足被置于他人利益之上。</span>
+    </p>
+  </div>
+</section>
+
+<!-- ===================== 3. IMPORTANCE ===================== -->
+<section id="importance">
+  <div class="section-head">
+    <span class="num">03</span>
+    <div>
+      <h2><span data-lang="bm" class="show">Kepentingan Beradab di Tempat Awam</span>
+          <span data-lang="en">Importance of Manners in Public Places</span>
+          <span data-lang="zh">在公共场所讲礼貌的重要性</span></h2>
+      <span class="en-sub">5 key reasons — memorise for structured questions</span>
+    </div>
+  </div>
+
+  <div class="impgrid">
+    <div class="impcell" data-n="1">
+      <h4><span data-lang="bm" class="show">Menjimatkan Perbelanjaan</span><span data-lang="en">Saves Spending</span><span data-lang="zh">节省开支</span></h4>
+      <p>Penyelenggaraan kemudahan awam dapat dijimatkan.</p>
+      <p class="en">Maintenance costs of public facilities are reduced.</p>
+      <p class="zh">减少公共设施的维护费用。</p>
+    </div>
+    <div class="impcell" data-n="2">
+      <h4><span data-lang="bm" class="show">Meningkatkan Imej Negara</span><span data-lang="en">Boosts Country's Image</span><span data-lang="zh">提升国家形象</span></h4>
+      <p>Negara dilihat lebih maju dan bertamadun.</p>
+      <p class="en">The nation appears more developed and civilised.</p>
+      <p class="zh">国家显得更发达、更文明。</p>
+    </div>
+    <div class="impcell" data-n="3">
+      <h4><span data-lang="bm" class="show">Kemudahan Tahan Lama</span><span data-lang="en">Facilities Last Longer</span><span data-lang="zh">设施使用更久</span></h4>
+      <p>Kemudahan awam boleh digunakan dalam jangka masa panjang.</p>
+      <p class="en">Public facilities can be used over a long period.</p>
+      <p class="zh">公共设施可长期使用。</p>
+    </div>
+    <div class="impcell" data-n="4">
+      <h4><span data-lang="bm" class="show">Melatih Disiplin</span><span data-lang="en">Trains Discipline</span><span data-lang="zh">培养纪律</span></h4>
+      <p>Melatih diri berdisiplin dan mematuhi peraturan.</p>
+      <p class="en">Trains self-discipline and rule-compliance.</p>
+      <p class="zh">训练自律并遵守规则。</p>
+    </div>
+    <div class="impcell" data-n="5">
+      <h4><span data-lang="bm" class="show">Selesa &amp; Selamat</span><span data-lang="en">Comfort &amp; Safety</span><span data-lang="zh">舒适与安全</span></h4>
+      <p>Kemudahan selesa dan selamat untuk digunakan semua.</p>
+      <p class="en">Facilities stay comfortable and safe for everyone.</p>
+      <p class="zh">设施对所有人来说都舒适安全。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== 4. VANDALISM LAW ===================== -->
+<section id="law">
+  <div class="section-head">
+    <span class="num">04</span>
+    <div>
+      <h2><span data-lang="bm" class="show">Vandalisme &amp; Undang-undang</span>
+          <span data-lang="en">Vandalism &amp; the Law</span>
+          <span data-lang="zh">破坏行为与法律</span></h2>
+      <span class="en-sub">Local Government Act 9 — Vandalism By-law</span>
+    </div>
+  </div>
+
+  <div class="notice">
+    <h4><span data-lang="bm" class="show">Budaya Vandalisme Perlu Ditangani</span>
+        <span data-lang="en">Vandalism Culture Must Be Addressed</span>
+        <span data-lang="zh">必须遏制破坏文化</span></h4>
+    <div class="clip">
+      <span data-lang="bm" class="show">Kuala Lumpur — Di bawah Akta Kerajaan Tempatan 9, Undang-undang Kecil Vandalisme, sesiapa yang didapati merosakkan harta benda awam boleh dikenakan denda sehingga RM2,000 atau penjara tidak melebihi setahun jika sabit kesalahan. Tindakan tegas perlu dikenakan agar menjadi teladan kepada individu lain.</span>
+      <span data-lang="en">Kuala Lumpur — Under Local Government Act 9, Vandalism By-law, anyone found damaging public property may be fined up to RM2,000 or jailed up to one year upon conviction. Firmer action must be taken as a lesson to others.</span>
+      <span data-lang="zh">吉隆坡——根据《地方政府法令9》破坏行为附则，任何被发现破坏公共财物者，一旦罪名成立，可被罚款最高RM2,000或监禁不超过一年。必须采取更严厉的行动，以此警示他人。</span>
+    </div>
+    <p style="margin-top:.7rem;font-size:.85rem;">
+      <b><span data-lang="bm" class="show">Definisi Vandalisme:</span><span data-lang="en">Definition of Vandalism:</span><span data-lang="zh">破坏行为的定义：</span></b><br>
+      <span data-lang="bm" class="show">Perbuatan membinasakan atau merosakkan harta benda awam atau persendirian.</span>
+      <span data-lang="en">The act of destroying or damaging public or private property.</span>
+      <span data-lang="zh">破坏或损毁公共或私人财物的行为。</span>
+    </p>
+  </div>
+
+  <p style="margin-top:1rem;text-align:center;font-size:.85rem;">
+    <span data-lang="bm" class="show">Amaran biasa di tempat awam (contoh: MP Kajang, taman/kawasan Wall Climbing):</span>
+    <span data-lang="en">Common public-place warning signs (e.g. Kajang Municipal Council, park/Wall Climbing area):</span>
+    <span data-lang="zh">常见公共场所警示（例如：加影市议会、攀岩公园）：</span>
+  </p>
+  <div class="vocabwrap">
+    <span class="vocab-chip">🚫 <span data-lang="bm" class="show">Membawa anjing berjalan</span><span data-lang="en">no dog walking</span><span data-lang="zh">禁止遛狗</span></span>
+    <span class="vocab-chip">🚫 <span data-lang="bm" class="show">Berkelakuan tidak sopan</span><span data-lang="en">no indecent behaviour</span><span data-lang="zh">禁止不雅行为</span></span>
+    <span class="vocab-chip">🚫 <span data-lang="bm" class="show">Merosakkan kemudahan awam</span><span data-lang="en">no damaging facilities</span><span data-lang="zh">禁止破坏设施</span></span>
+    <span class="vocab-chip">🚫 <span data-lang="bm" class="show">Bercucuk tanam</span><span data-lang="en">no planting</span><span data-lang="zh">禁止种植</span></span>
+    <span class="vocab-chip">🚫 <span data-lang="bm" class="show">Membuang sampah</span><span data-lang="en">no littering</span><span data-lang="zh">禁止丢垃圾</span></span>
+    <span class="vocab-chip">🚫 <span data-lang="bm" class="show">Merosakkan tanaman</span><span data-lang="en">no damaging plants</span><span data-lang="zh">禁止损坏植物</span></span>
+  </div>
+</section>
+
+<!-- ===================== 5. ROLE MODEL SOCIETIES ===================== -->
+<section id="roles">
+  <div class="section-head">
+    <span class="num">05</span>
+    <div>
+      <h2><span data-lang="bm" class="show">Sikap Masyarakat yang Patut Dicontohi</span>
+          <span data-lang="en">Attitudes Worth Emulating</span>
+          <span data-lang="zh">值得效仿的社会态度</span></h2>
+      <span class="en-sub">Japan · Malaysia · Singapore</span>
+    </div>
+  </div>
+
+  <div class="rolewrap">
+    <div class="role jp">
+      <div class="flag"></div>
+      <div class="role-body">
+        <h4>🇯🇵 <span data-lang="bm" class="show">Jepun — Menjaga Kebersihan</span><span data-lang="en">Japan — Cleanliness</span><span data-lang="zh">日本——保持清洁</span></h4>
+        <p><span data-lang="bm" class="show">Masyarakat tidak membuang sampah merata-rata, malah mengutip sampah yang dijumpai. Kanak-kanak dilatih membersihkan kelas, tandas dan kawasan sekolah sejak kecil.</span>
+        <span data-lang="en">People don't litter — they even pick up rubbish they find. Children are trained from young to clean classrooms, toilets and school grounds.</span>
+        <span data-lang="zh">民众不乱丢垃圾，甚至会捡起看到的垃圾。孩子从小就被训练打扫教室、厕所和校园。</span></p>
+      </div>
+    </div>
+    <div class="role my">
+      <div class="flag"></div>
+      <div class="role-body">
+        <h4>🇲🇾 <span data-lang="bm" class="show">Malaysia — Menghormati Orang Lain</span><span data-lang="en">Malaysia — Respecting Others</span><span data-lang="zh">马来西亚——尊重他人</span></h4>
+        <p><span data-lang="bm" class="show">Terkenal dengan sikap sopan dan menghormati orang lain termasuk pelancong asing. Pekerja kedai mengucapkan "selamat datang" dan "terima kasih, datang lagi".</span>
+        <span data-lang="en">Known for politeness and respect toward others, including foreign tourists. Shop staff say "welcome" and "thank you, come again".</span>
+        <span data-lang="zh">以礼貌待人闻名，包括对外国游客。店员会说"欢迎光临"和"谢谢惠顾，欢迎再来"。</span></p>
+      </div>
+    </div>
+    <div class="role sg">
+      <div class="flag"></div>
+      <div class="role-body">
+        <h4>🇸🇬 <span data-lang="bm" class="show">Singapura — Tidak Merokok di Tempat Awam</span><span data-lang="en">Singapore — No Smoking in Public</span><span data-lang="zh">新加坡——不在公共场所吸烟</span></h4>
+        <p><span data-lang="bm" class="show">Perokok tidak merokok di tempat awam/kawasan terbuka kerana dianggap kurang beradab. Mereka hanya merokok di tempat khas dan bangga mematuhi peraturan.</span>
+        <span data-lang="en">Smokers avoid public/open areas as it's seen as bad manners. They smoke only in designated areas and take pride in following rules.</span>
+        <span data-lang="zh">吸烟者不在公共场所或开放区域吸烟，因为这被视为不礼貌。他们只在指定地点吸烟，并以遵守规则为荣。</span></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== 6. GENERATION DEBATE ===================== -->
+<section id="debate">
+  <div class="section-head">
+    <span class="num">06</span>
+    <div>
+      <h2><span data-lang="bm" class="show">Perbahasan — Adab Generasi Lama vs Generasi Baharu</span>
+          <span data-lang="en">Debate — Old vs New Generation Manners</span>
+          <span data-lang="zh">辩论——旧一代与新一代的礼仪</span></h2>
+      <span class="en-sub">Topic: "Adab dan Budaya Generasi Baharu" — for oral/essay practice</span>
+    </div>
+  </div>
+
+  <div class="debate">
+    <div class="side pro">
+      <h4>🟢 <span data-lang="bm" class="show">PIHAK PENCADANG</span><span data-lang="en">PROPOSING SIDE (old generation more disciplined)</span><span data-lang="zh">正方（旧一代更守规矩）</span></h4>
+      <ul>
+        <li>Generasi lama lebih patuh dengan adab di tempat awam.
+          <span class="en">The old generation obeys public manners more.</span>
+          <span class="zh">旧一代更遵守公共场所礼仪。</span></li>
+        <li>Generasi lama lebih menitikberatkan adab dan budaya dalam kehidupan.
+          <span class="en">They emphasise manners and culture more in life.</span>
+          <span class="zh">他们更重视生活中的礼仪与文化。</span></li>
+        <li>Generasi lama akur peraturan yang ditetapkan, melambangkan jati diri masyarakat.
+          <span class="en">They comply with set rules, reflecting society's identity.</span>
+          <span class="zh">他们遵守既定规则，体现社会的自我认同。</span></li>
+      </ul>
+    </div>
+    <div class="side con">
+      <h4>🔴 <span data-lang="bm" class="show">PIHAK PEMBANGKANG</span><span data-lang="en">OPPOSING SIDE (new generation also well-mannered)</span><span data-lang="zh">反方（新一代同样有礼）</span></h4>
+      <ul>
+        <li>Generasi baharu juga akur adab, tidak merosakkan harta benda awam.
+          <span class="en">The new generation also follows manners, not damaging public property.</span>
+          <span class="zh">新一代同样守礼，不破坏公共财物。</span></li>
+        <li>Generasi baharu suka meluangkan masa di tempat awam untuk bersosial secara sihat.
+          <span class="en">They enjoy spending time in public places socialising healthily.</span>
+          <span class="zh">他们喜欢在公共场所健康社交。</span></li>
+        <li>Hubungan generasi baharu dengan rakan/keluarga lebih akrab dengan aplikasi sosial.
+          <span class="en">Their bonds with friends/family are closer thanks to social apps.</span>
+          <span class="zh">借助社交应用，他们与朋友/家人的关系更亲密。</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== 7. VOCABULARY WEB ===================== -->
+<section id="vocab">
+  <div class="section-head">
+    <span class="num">07</span>
+    <div>
+      <h2><span data-lang="bm" class="show">Contoh Perkataan Berkaitan "BERADAB"</span>
+          <span data-lang="en">Related Vocabulary — "Beradab" (Well-mannered)</span>
+          <span data-lang="zh">与"礼貌"相关的词汇</span></h2>
+      <span class="en-sub">Useful for essay / karangan writing</span>
+    </div>
+  </div>
+  <div class="vocabwrap">
+    <span class="vocab-chip">Khalayak <span data-lang="en">/ audience / </span><span data-lang="zh">公众</span></span>
+    <span class="vocab-chip">Maruah <span data-lang="en">/ dignity / </span><span data-lang="zh">尊严</span></span>
+    <span class="vocab-chip">Menjaga <span data-lang="en">/ to uphold / </span><span data-lang="zh">维护</span></span>
+    <span class="vocab-chip">Mulia <span data-lang="en">/ noble / </span><span data-lang="zh">高尚</span></span>
+    <span class="vocab-chip">Sanjungi <span data-lang="en">/ to admire / </span><span data-lang="zh">敬仰</span></span>
+    <span class="vocab-chip">Tingkah laku <span data-lang="en">/ behaviour / </span><span data-lang="zh">行为</span></span>
+    <span class="vocab-chip">Akhlak <span data-lang="en">/ moral character / </span><span data-lang="zh">品德</span></span>
+    <span class="vocab-chip">Dihormati <span data-lang="en">/ respected / </span><span data-lang="zh">受尊重</span></span>
+    <span class="vocab-chip">Sejahtera <span data-lang="en">/ well-being / </span><span data-lang="zh">安宁</span></span>
+    <span class="vocab-chip">Berjaya <span data-lang="en">/ successful / </span><span data-lang="zh">成功</span></span>
+    <span class="vocab-chip">Terpuji <span data-lang="en">/ praiseworthy / </span><span data-lang="zh">值得称赞</span></span>
+    <span class="vocab-chip">Diri <span data-lang="en">/ self / </span><span data-lang="zh">自我</span></span>
+  </div>
+</section>
+
+<!-- ===================== 8. QUICK QUIZ ===================== -->
+<section id="quiz">
+  <div class="section-head">
+    <span class="num">08</span>
+    <div>
+      <h2><span data-lang="bm" class="show">Kuiz Ulang Kaji Pantas</span>
+          <span data-lang="en">Quick Revision Quiz</span>
+          <span data-lang="zh">快速复习测验</span></h2>
+      <span class="en-sub">Tap an answer to check yourself</span>
+    </div>
+  </div>
+
+  <div class="quiz-item" data-answer="0">
+    <p>1. <span data-lang="bm" class="show">Antara berikut, yang manakah BUKAN kepentingan beradab di tempat awam?</span>
+      <span data-lang="en">Which of the following is NOT an importance of good manners in public places?</span>
+      <span data-lang="zh">以下哪一项不属于在公共场所讲礼貌的重要性？</span></p>
+    <div class="opts">
+      <button class="opt" data-correct="false">Meningkatkan kos penyelenggaraan / Increases maintenance cost / 增加维护成本</button>
+      <button class="opt" data-correct="true">Meningkatkan imej negara / Boosts country's image / 提升国家形象</button>
+      <button class="opt" data-correct="false">Melatih disiplin diri / Trains self-discipline / 培养自律</button>
+    </div>
+    <div class="explain">
+      <span data-lang="bm" class="show">Jawapan: Meningkatkan kos penyelenggaraan — sebenarnya beradab MENJIMATKAN kos, bukan meningkatkannya.</span>
+      <span data-lang="en">Answer: "Increases maintenance cost" — good manners actually SAVE cost, not increase it.</span>
+      <span data-lang="zh">答案："增加维护成本"——讲礼貌实际上是节省成本，而不是增加。</span>
+    </div>
+  </div>
+
+  <div class="quiz-item" data-answer="1">
+    <p>2. <span data-lang="bm" class="show">Denda maksimum di bawah Undang-undang Kecil Vandalisme ialah?</span>
+      <span data-lang="en">The maximum fine under the Vandalism By-law is?</span>
+      <span data-lang="zh">《破坏行为附则》规定的最高罚款是多少？</span></p>
+    <div class="opts">
+      <button class="opt" data-correct="false">RM500</button>
+      <button class="opt" data-correct="true">RM2,000</button>
+      <button class="opt" data-correct="false">RM5,000</button>
+    </div>
+    <div class="explain">
+      <span data-lang="bm" class="show">Jawapan: RM2,000 atau penjara tidak melebihi setahun.</span>
+      <span data-lang="en">Answer: RM2,000, or jail up to one year.</span>
+      <span data-lang="zh">答案：RM2,000，或监禁不超过一年。</span>
+    </div>
+  </div>
+
+  <div class="quiz-item" data-answer="2">
+    <p>3. <span data-lang="bm" class="show">Negara manakah yang terkenal kerana perokok tidak merokok di tempat awam sebagai tanda beradab?</span>
+      <span data-lang="en">Which country is known for smokers avoiding public places as a sign of good manners?</span>
+      <span data-lang="zh">哪个国家以吸烟者不在公共场所吸烟以示礼貌而闻名？</span></p>
+    <div class="opts">
+      <button class="opt" data-correct="false">Jepun / Japan / 日本</button>
+      <button class="opt" data-correct="false">Malaysia</button>
+      <button class="opt" data-correct="true">Singapura / Singapore / 新加坡</button>
+    </div>
+    <div class="explain">
+      <span data-lang="bm" class="show">Jawapan: Singapura.</span>
+      <span data-lang="en">Answer: Singapore.</span>
+      <span data-lang="zh">答案：新加坡。</span>
+    </div>
+  </div>
+
+  <div class="quiz-item" data-answer="0">
+    <p>4. <span data-lang="bm" class="show">Pegangan hidup yang mementingkan keseronokan sebagai tujuan hidup dipanggil?</span>
+      <span data-lang="en">A life philosophy that treats pleasure as life's purpose is called?</span>
+      <span data-lang="zh">把享乐视为人生目的的生活观被称为？</span></p>
+    <div class="opts">
+      <button class="opt" data-correct="true">Hedonisme / Hedonism / 享乐主义</button>
+      <button class="opt" data-correct="false">Vandalisme / Vandalism / 破坏行为</button>
+      <button class="opt" data-correct="false">Rasionalisme / Rationalism / 理性主义</button>
+    </div>
+    <div class="explain">
+      <span data-lang="bm" class="show">Jawapan: Hedonisme.</span>
+      <span data-lang="en">Answer: Hedonism.</span>
+      <span data-lang="zh">答案：享乐主义。</span>
+    </div>
+  </div>
+
+</section>
+
+<footer>
+  <span data-lang="bm" class="show">Nota disediakan untuk Khailer · Ulang kaji Peperiksaan Akhir Tahun · Pend. Moral Tingkatan 2 · Unit 11</span>
+  <span data-lang="en">Notes prepared for Khailer · Final Exam Revision · Moral Education Form 2 · Unit 11</span>
+  <span data-lang="zh">为凯乐尔准备的笔记 · 期末考试复习 · 中学二年级道德教育 · 第11单元</span>
+</footer>
+
+<script>
+  // ---- language toggle ----
+  const langBtns = document.querySelectorAll('.lang-btn');
+  const langNodes = document.querySelectorAll('[data-lang]');
+  function setLang(lang){
+    langNodes.forEach(n=>{
+      if(n.getAttribute('data-lang')===lang){ n.classList.add('show'); }
+      else { n.classList.remove('show'); }
+    });
+    langBtns.forEach(b=>{
+      b.classList.toggle('active', b.getAttribute('data-lang')===lang);
+    });
+  }
+  langBtns.forEach(b=>{
+    b.addEventListener('click', ()=> setLang(b.getAttribute('data-lang')));
+  });
+  setLang('bm');
+
+  // ---- quiz interactivity ----
+  document.querySelectorAll('.quiz-item').forEach(item=>{
+    const opts = item.querySelectorAll('.opt');
+    const explain = item.querySelector('.explain');
+    opts.forEach(opt=>{
+      opt.addEventListener('click', ()=>{
+        if(item.dataset.answered) return;
+        item.dataset.answered = "true";
+        opts.forEach(o=>{
+          if(o.dataset.correct === "true"){ o.classList.add('correct'); }
+          else { o.classList.add('wrong'); }
+        });
+        explain.classList.add('show');
+      });
+    });
+  });
+</script>
+
+</body>
+</html>
