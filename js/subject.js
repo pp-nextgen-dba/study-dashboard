@@ -4253,7 +4253,7 @@ export const storybooksData = {
 
 export const networkData = {
 
-    subject:"Network",
+    subject:"Network & Security",
 
     chapters:[{
             form:"Network",
@@ -4285,6 +4285,69 @@ export const networkData = {
             status:"Not Started",
             confidence:0,
             last_updated:"2026-07-03"
+        }]
+
+};
+
+
+// =========================================================
+// TRADING BOOKS
+// =========================================================
+
+export const tradingBooksData = {
+
+    subject:"Trading Books",
+
+    chapters:[{
+            form:"Trading",
+            globalNum: 1,
+            chapterNum: 1,
+            chapter:"Book 1",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-07-12"
+        }]
+
+};
+
+
+// =========================================================
+// MOTIVATION BOOKS
+// =========================================================
+
+export const motivationBooksData = {
+
+    subject:"Motivation Books",
+
+    chapters:[{
+            form:"Motivation",
+            globalNum: 1,
+            chapterNum: 1,
+            chapter:"Book 1",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-07-12"
+        }]
+
+};
+
+
+// =========================================================
+// DATABASES
+// =========================================================
+
+export const databasesData = {
+
+    subject:"Databases",
+
+    chapters:[{
+            form:"Databases",
+            globalNum: 1,
+            chapterNum: 1,
+            chapter:"Book 1",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-07-12"
         }]
 
 };

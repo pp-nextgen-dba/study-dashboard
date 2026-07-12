@@ -1,4 +1,4 @@
-const CACHE = "study-dashboard-v9";
+const CACHE = "study-dashboard-v10";
 
 const STATIC_ASSETS = [
     "/index.html",
@@ -24,7 +24,10 @@ const STATIC_ASSETS = [
     "/subjects/rekabentuk.html",
     "/subjects/seni.html",
     "/subjects/storybooks.html",
+    "/subjects/tradingbooks.html",
+    "/subjects/motivationbooks.html",
     "/subjects/network.html",
+    "/subjects/databases.html",
     "/networking/wireshark_dba_guide.html",
     "/networking/spn-kerberos-lesson-learned_2.html",
     "/daily-progress.html",

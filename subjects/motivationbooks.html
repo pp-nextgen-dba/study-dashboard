@@ -1,5 +1,5 @@
 <!-- ===================================================== -->
-<!-- FILE: subjects/network.html -->
+<!-- FILE: subjects/motivationbooks.html -->
 <!-- ===================================================== -->
 
 <!DOCTYPE html>
@@ -12,10 +12,10 @@
 <meta name="viewport"
 content="width=device-width, initial-scale=1.0">
 
-<title>Network & Security Dashboard</title>
+<title>Motivation Books Dashboard</title>
 
 <link rel="stylesheet"
-href="../css/style.css?v=38">
+href="../css/style.css?v=1">
 
 <style>
 
@@ -355,10 +355,10 @@ from
 "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
 import {
-    networkData
+    motivationBooksData
 }
 from
-"../js/subject.js?v=25";
+"../js/subject.js?v=1";
 
 import { requireAuth } from "../js/auth.js";
 await requireAuth("../index.html");
@@ -369,10 +369,10 @@ await requireAuth("../index.html");
 // =========================================================
 
 const docRef =
-    doc(db,"subjects","network");
+    doc(db,"subjects","motivationbooks");
 
 let data =
-    structuredClone(networkData);
+    structuredClone(motivationBooksData);
 
 
 // =========================================================
@@ -386,7 +386,7 @@ function syncSeedData(subjectData){
     if(!Array.isArray(subjectData.chapters)){
 
         subjectData.chapters =
-            structuredClone(networkData.chapters);
+            structuredClone(motivationBooksData.chapters);
 
         return true;
 
@@ -401,7 +401,7 @@ function syncSeedData(subjectData){
         );
 
     const seededChapters =
-        networkData.chapters.map(seedChapter => {
+        motivationBooksData.chapters.map(seedChapter => {
 
             const existingChapter =
                 existingByKey.get(
@@ -477,11 +477,11 @@ async function loadData(){
 
         await setDoc(
             docRef,
-            networkData
+            motivationBooksData
         );
 
         data =
-            structuredClone(networkData);
+            structuredClone(motivationBooksData);
 
     }
 

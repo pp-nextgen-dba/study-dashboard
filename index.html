@@ -121,7 +121,7 @@ href="css/style.css">
         <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:12px; margin-bottom:16px;">
 
             <h2 style="margin:0;">
-                📚 Subjects Progress Overview
+                📚 Subject Study Progress
             </h2>
 
             <button id="exportBtn" style="padding:8px 16px; background:#0d6efd; color:#fff; border:none; border-radius:6px; cursor:pointer; font-size:14px;">
@@ -457,6 +457,22 @@ href="css/style.css">
 
             </a>
 
+        </div>
+
+    </section>
+
+    <section class="subject-section">
+
+        <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:12px; margin-bottom:16px;">
+
+            <h2 style="margin:0;">
+                🎯 Beyond Academics
+            </h2>
+
+        </div>
+
+        <div class="subject-grid">
+
             <a class="subject-card"
             href="subjects/storybooks.html">
 
@@ -478,9 +494,49 @@ href="css/style.css">
             </a>
 
             <a class="subject-card"
+            href="subjects/tradingbooks.html">
+
+                <h3>📈 Trading Books</h3>
+
+                <div class="progress-bar">
+
+                    <div
+                        class="progress-fill"
+                        id="tradingBooksProgressBar"
+                    ></div>
+
+                </div>
+
+                <p id="tradingBooksProgressText">
+                    0% Completed
+                </p>
+
+            </a>
+
+            <a class="subject-card"
+            href="subjects/motivationbooks.html">
+
+                <h3>💡 Motivation Books</h3>
+
+                <div class="progress-bar">
+
+                    <div
+                        class="progress-fill"
+                        id="motivationBooksProgressBar"
+                    ></div>
+
+                </div>
+
+                <p id="motivationBooksProgressText">
+                    0% Completed
+                </p>
+
+            </a>
+
+            <a class="subject-card"
             href="subjects/network.html">
 
-                <h3>🌐 Network</h3>
+                <h3>🌐 Network & Security</h3>
 
                 <div class="progress-bar">
 
@@ -492,6 +548,26 @@ href="css/style.css">
                 </div>
 
                 <p id="networkProgressText">
+                    0% Completed
+                </p>
+
+            </a>
+
+            <a class="subject-card"
+            href="subjects/databases.html">
+
+                <h3>🗄️ Databases</h3>
+
+                <div class="progress-bar">
+
+                    <div
+                        class="progress-fill"
+                        id="databasesProgressBar"
+                    ></div>
+
+                </div>
+
+                <p id="databasesProgressText">
                     0% Completed
                 </p>
 
@@ -875,7 +951,7 @@ if(examCards){
 
 </script>
 
-<script type="module" src="js/dashboard.js?v=18"></script>
+<script type="module" src="js/dashboard.js?v=19"></script>
 
 <script>
 if ("serviceWorker" in navigator) {

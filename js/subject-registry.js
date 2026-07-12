@@ -167,12 +167,45 @@ export const subjectRegistry = [
 
     {
         id:"network",
-        title:"Network",
+        title:"Network & Security",
         icon:"🌐",
         href:"subjects/network.html",
         progressBarId:"networkProgressBar",
         progressTextId:"networkProgressText",
         seedExport:"networkData",
+        loadSeed:true
+    },
+
+    {
+        id:"tradingbooks",
+        title:"Trading Books",
+        icon:"📈",
+        href:"subjects/tradingbooks.html",
+        progressBarId:"tradingBooksProgressBar",
+        progressTextId:"tradingBooksProgressText",
+        seedExport:"tradingBooksData",
+        loadSeed:true
+    },
+
+    {
+        id:"motivationbooks",
+        title:"Motivation Books",
+        icon:"💡",
+        href:"subjects/motivationbooks.html",
+        progressBarId:"motivationBooksProgressBar",
+        progressTextId:"motivationBooksProgressText",
+        seedExport:"motivationBooksData",
+        loadSeed:true
+    },
+
+    {
+        id:"databases",
+        title:"Databases",
+        icon:"🗄️",
+        href:"subjects/databases.html",
+        progressBarId:"databasesProgressBar",
+        progressTextId:"databasesProgressText",
+        seedExport:"databasesData",
         loadSeed:true
     }
 
