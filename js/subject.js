@@ -159,7 +159,8 @@ export const scienceData = {
             chinese:"流星体、小行星与彗星",
             status:"Not Started",
             confidence:0,
-            last_updated:"2026-05-20"
+            last_updated:"2026-05-20",
+            resourceUrl: "../science/t2_kssm_chapter13_meteoroid_asteroid_comet.html"
         },
 
 

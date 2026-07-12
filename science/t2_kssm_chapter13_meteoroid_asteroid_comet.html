@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chapter 13 · Meteoroid, Asteroid, Comet 流星体、小行星、彗星</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=JetBrains+Mono:wght@400;500;700&family=Noto+Sans+SC:wght@400;500;700&family=Noto+Serif+SC:wght@500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --void:#0B0E23;
+    --panel:#141936;
+    --panel-2:#1B2147;
+    --gold:#F2C14E;
+    --ember:#E8622C;
+    --ice:#6FC3DF;
+    --paper:#F4F1E8;
+    --mute:#A7ADC6;
+    --line:rgba(167,173,198,0.18);
+    --exact:#6FC3DF;
+    --partial:#F2C14E;
+    --severe:#E8622C;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--void);
+    color:var(--paper);
+    font-family:'Source Serif 4', 'Noto Serif SC', serif;
+    line-height:1.65;
+    overflow-x:hidden;
+  }
+  body.zh{ font-family:'Noto Serif SC','Source Serif 4', serif; }
+  h1,h2,h3,h4,.eyebrow,.stat-num,nav,.lang-toggle,button{ font-family:'Space Grotesk','Noto Sans SC',sans-serif; }
+  body.zh h1,body.zh h2,body.zh h3,body.zh h4{ font-family:'Noto Sans SC','Space Grotesk',sans-serif; }
+  .mono{ font-family:'JetBrains Mono',monospace; }
+
+  /* starfield background */
+  .stars, .stars2, .stars3{
+    position:fixed; inset:0; pointer-events:none; z-index:0;
+  }
+  .stars{ background-image: radial-gradient(2px 2px at 20% 30%, #fff, transparent), radial-gradient(1.5px 1.5px at 60% 70%, #fff, transparent), radial-gradient(1.5px 1.5px at 80% 20%, #fff, transparent), radial-gradient(1px 1px at 40% 85%, #fff, transparent), radial-gradient(2px 2px at 90% 60%, #fff, transparent), radial-gradient(1px 1px at 10% 60%, #fff, transparent); background-size: 600px 600px; opacity:.5;}
+
+  /* language toggle */
+  .lang-toggle{
+    position:fixed; top:16px; right:16px; z-index:100;
+    display:flex; background:var(--panel); border:1px solid var(--line);
+    border-radius:999px; padding:4px; gap:2px; box-shadow:0 8px 24px rgba(0,0,0,.4);
+  }
+  .lang-toggle button{
+    border:none; background:transparent; color:var(--mute);
+    padding:8px 16px; border-radius:999px; font-size:13px; font-weight:600;
+    cursor:pointer; letter-spacing:.03em; transition:.2s;
+  }
+  .lang-toggle button.active{ background:var(--gold); color:var(--void); }
+
+  .lang-en, .lang-zh{ display:none; }
+  body.en .lang-en{ display:initial; }
+  body.zh .lang-zh{ display:initial; }
+  body.en span.lang-en, body.zh span.lang-zh{ display:inline; }
+  body.en div.lang-en, body.zh div.lang-zh{ display:block; }
+
+  section{ position:relative; z-index:1; padding:80px 24px; max-width:1080px; margin:0 auto; }
+
+  /* HERO */
+  .hero{
+    min-height:92vh; display:flex; flex-direction:column; justify-content:center;
+    max-width:1080px; margin:0 auto; padding:120px 24px 60px; position:relative;
+  }
+  .eyebrow{
+    color:var(--gold); font-size:13px; letter-spacing:.18em; text-transform:uppercase;
+    font-weight:600; margin-bottom:18px; display:flex; align-items:center; gap:10px;
+  }
+  .eyebrow::before{ content:''; width:28px; height:1px; background:var(--gold); display:inline-block;}
+  .hero h1{
+    font-size:clamp(40px, 7vw, 84px); line-height:1.02; margin:0 0 20px; font-weight:700;
+    background:linear-gradient(100deg, var(--paper) 30%, var(--gold) 60%, var(--ember) 85%);
+    -webkit-background-clip:text; background-clip:text; color:transparent;
+  }
+  .hero p.sub{ font-size:19px; color:var(--mute); max-width:640px; margin:0 0 36px; }
+  .hero-scene{
+    position:absolute; right:-4%; top:8%; width:46%; height:70%; z-index:-1; opacity:.85;
+  }
+  @media (max-width:860px){ .hero-scene{ display:none; } }
+
+  .streak{ position:absolute; height:2px; border-radius:2px; opacity:0; }
+  .streak.gold{ background:linear-gradient(90deg, transparent, var(--gold), #fff); }
+  .streak.ember{ background:linear-gradient(90deg, transparent, var(--ember), #fff); }
+  .streak.ice{ background:linear-gradient(90deg, transparent, var(--ice), #fff); }
+  @keyframes shoot{
+    0%{ transform: translate(0,0) rotate(-32deg) scaleX(0); opacity:0; }
+    8%{ opacity:1; }
+    45%{ transform: translate(-380px,220px) rotate(-32deg) scaleX(1); opacity:1;}
+    60%{ opacity:0; }
+    100%{ opacity:0; transform: translate(-380px,220px) rotate(-32deg) scaleX(1);}
+  }
+  .streak1{ width:160px; top:10%; left:70%; animation:shoot 4.5s ease-in infinite; }
+  .streak2{ width:110px; top:35%; left:85%; animation:shoot 4.5s ease-in infinite 1.6s; }
+  .streak3{ width:130px; top:55%; left:60%; animation:shoot 4.5s ease-in infinite 3s; }
+
+  /* nav pills */
+  .toc{ display:flex; flex-wrap:wrap; gap:10px; margin-top:8px; }
+  .toc a{
+    color:var(--paper); text-decoration:none; font-size:13px; font-weight:600;
+    border:1px solid var(--line); padding:9px 16px; border-radius:999px;
+    background:rgba(255,255,255,0.03); transition:.2s;
+  }
+  .toc a:hover{ border-color:var(--gold); color:var(--gold); }
+
+  h2.section-title{
+    font-size:clamp(28px,4vw,40px); margin:0 0 8px; font-weight:700;
+  }
+  .section-kicker{ color:var(--gold); font-size:13px; text-transform:uppercase; letter-spacing:.15em; font-weight:600; margin-bottom:10px;}
+  .section-intro{ color:var(--mute); max-width:720px; margin:0 0 48px; font-size:17px; }
+
+  /* three characteristic cards */
+  .trio{ display:grid; grid-template-columns:repeat(3,1fr); gap:20px; }
+  @media (max-width:800px){ .trio{ grid-template-columns:1fr; } }
+  .card{
+    background:linear-gradient(160deg, var(--panel), var(--panel-2));
+    border:1px solid var(--line); border-radius:18px; padding:26px 22px;
+    position:relative; overflow:hidden;
+  }
+  .card::before{
+    content:''; position:absolute; top:-30%; right:-30%; width:200px; height:200px;
+    border-radius:50%; filter:blur(50px); opacity:.35;
+  }
+  .card.meteoroid::before{ background:var(--gold); }
+  .card.asteroid::before{ background:var(--ice); }
+  .card.comet::before{ background:var(--ember); }
+  .card-icon{ width:56px; height:56px; margin-bottom:16px; }
+  .card h3{ margin:0 0 6px; font-size:22px; }
+  .card .tagline{ color:var(--mute); font-size:14px; margin-bottom:18px; font-style:italic; }
+  .card dl{ margin:0; padding:0; }
+  .card dt{ font-size:11px; text-transform:uppercase; letter-spacing:.08em; color:var(--mute); margin-top:12px; font-family:'Space Grotesk',sans-serif; font-weight:600;}
+  body.zh .card dt{ font-family:'Noto Sans SC',sans-serif; }
+  .card dd{ margin:2px 0 0; font-size:15px; }
+  .card.meteoroid dt{ color:var(--gold); }
+  .card.asteroid dt{ color:var(--ice); }
+  .card.comet dt{ color:var(--ember); }
+
+  /* pipeline meteoroid -> meteor -> meteorite */
+  .pipeline{ display:flex; align-items:center; justify-content:space-between; gap:8px; margin:50px 0; flex-wrap:wrap; }
+  .pipe-node{ flex:1; min-width:150px; text-align:center; }
+  .pipe-node .glyph{ width:64px; height:64px; margin:0 auto 12px; }
+  .pipe-node h4{ margin:0 0 6px; font-size:16px; }
+  .pipe-node p{ color:var(--mute); font-size:13px; margin:0; }
+  .pipe-arrow{ color:var(--gold); font-size:22px; flex:0 0 auto; }
+  @media(max-width:700px){ .pipeline{ flex-direction:column; } .pipe-arrow{ transform:rotate(90deg); } }
+
+  /* orbit diagrams */
+  .orbit-wrap{
+    display:grid; grid-template-columns:1.1fr .9fr; gap:32px; align-items:center;
+    background:var(--panel); border:1px solid var(--line); border-radius:20px; padding:32px; margin:28px 0;
+  }
+  @media(max-width:800px){ .orbit-wrap{ grid-template-columns:1fr; } }
+  .orbit-svg{ width:100%; height:auto; }
+  .orbit-notes{ display:flex; flex-direction:column; gap:14px; }
+  .note-chip{ display:flex; gap:12px; align-items:flex-start; }
+  .note-num{
+    flex:0 0 26px; height:26px; width:26px; border-radius:50%; background:var(--gold); color:var(--void);
+    display:flex; align-items:center; justify-content:center; font-weight:700; font-size:13px; font-family:'Space Grotesk',sans-serif;
+  }
+  .note-chip p{ margin:0; font-size:14.5px; color:var(--paper); }
+  .note-chip.ice .note-num{ background:var(--ice); }
+  .note-chip.ember .note-num{ background:var(--ember); }
+
+  /* comparison / stat strip */
+  .fact-strip{ display:grid; grid-template-columns:repeat(4,1fr); gap:14px; margin:36px 0; }
+  @media(max-width:760px){ .fact-strip{ grid-template-columns:repeat(2,1fr); } }
+  .fact{ background:var(--panel-2); border:1px solid var(--line); border-radius:14px; padding:18px; text-align:center;}
+  .fact .stat-num{ font-size:26px; font-weight:700; color:var(--gold); }
+  .fact .stat-label{ font-size:12px; color:var(--mute); margin-top:4px; }
+
+  /* protection section */
+  .protect-panel{
+    background:radial-gradient(circle at 20% 20%, rgba(232,98,44,.18), transparent 60%), var(--panel);
+    border:1px solid var(--line); border-radius:20px; padding:36px; margin-top:20px;
+  }
+  .method-grid{ display:grid; grid-template-columns:repeat(2,1fr); gap:16px; margin-top:20px; }
+  @media(max-width:700px){ .method-grid{ grid-template-columns:1fr; } }
+  .method{ border-left:3px solid var(--ember); padding:6px 0 6px 16px; }
+  .method h4{ margin:0 0 4px; font-size:15.5px; }
+  .method p{ margin:0; color:var(--mute); font-size:14px; }
+
+  /* mind map */
+  .mindmap-frame{ background:var(--panel); border:1px solid var(--line); border-radius:20px; padding:24px; overflow-x:auto;}
+
+  /* quiz */
+  .quiz-card{
+    background:var(--panel-2); border:1px solid var(--line); border-radius:18px; padding:24px 26px; margin-bottom:16px;
+  }
+  .quiz-q{ font-weight:600; margin-bottom:14px; font-size:16px; }
+  .quiz-opts{ display:flex; flex-direction:column; gap:10px; }
+  .quiz-opt{
+    text-align:left; background:rgba(255,255,255,.03); border:1px solid var(--line); color:var(--paper);
+    padding:12px 16px; border-radius:10px; cursor:pointer; font-size:14.5px; font-family:inherit;
+    transition:.15s;
+  }
+  .quiz-opt:hover{ border-color:var(--gold); }
+  .quiz-opt.correct{ background:rgba(111,195,223,.18); border-color:var(--ice); }
+  .quiz-opt.wrong{ background:rgba(232,98,44,.18); border-color:var(--ember); }
+  .quiz-fb{ margin-top:12px; font-size:14px; color:var(--ice); display:none; }
+  .quiz-score{
+    position:sticky; bottom:16px; margin:20px auto 0; max-width:280px; text-align:center;
+    background:var(--gold); color:var(--void); padding:12px 20px; border-radius:999px; font-weight:700;
+    font-family:'Space Grotesk',sans-serif; box-shadow:0 8px 24px rgba(0,0,0,.5);
+  }
+
+  /* checklist self reflection */
+  .checklist{ display:flex; flex-direction:column; gap:12px; }
+  .check-item{ display:flex; gap:14px; align-items:center; background:var(--panel); border:1px solid var(--line); border-radius:12px; padding:14px 18px; cursor:pointer; }
+  .check-item input{ width:20px; height:20px; accent-color:var(--gold); }
+  .check-item span{ font-size:14.5px; }
+
+  footer{ text-align:center; padding:50px 24px 80px; color:var(--mute); font-size:13px; }
+
+  /* keyword pill */
+  .kw{ color:var(--gold); font-weight:600; }
+  .kw.ice{ color:var(--ice); }
+  .kw.ember{ color:var(--ember); }
+
+  ::selection{ background:var(--gold); color:var(--void); }
+</style>
+</head>
+<body class="en">
+
+<div class="top-nav" style="background:#fff;padding:10px 16px;border-bottom:2px solid #e5e7eb;position:sticky;top:0;z-index:120">
+  <a class="dashboard-link" href="../index.html" style="display:inline-flex;align-items:center;gap:6px;padding:8px 12px;border-radius:8px;background:#1d4ed8;color:#fff;font-size:13px;font-weight:800;text-decoration:none">&larr; Back to Dashboard</a>
+</div>
+
+<div class="stars"></div>
+
+<div class="lang-toggle">
+  <button id="btn-en" class="active" onclick="setLang('en')">EN</button>
+  <button id="btn-zh" onclick="setLang('zh')">中文</button>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-scene">
+    <div class="streak gold streak1"></div>
+    <div class="streak ember streak2"></div>
+    <div class="streak ice streak3"></div>
+  </div>
+  <div class="eyebrow"><span class="lang-en">Form 2 Science · Chapter 13</span><span class="lang-zh">中二科学 · 第13章</span></div>
+  <h1><span class="lang-en">Meteoroid, Asteroid, Comet</span><span class="lang-zh">流星体、小行星、彗星</span></h1>
+  <p class="sub">
+    <span class="lang-en">Three travellers of the solar system — where they come from, how they move, and what happens when their paths cross Earth's. A revision page built for final exam prep.</span>
+    <span class="lang-zh">太阳系中的三位「旅行者」——它们从哪里来、如何运行，以及当它们的路径与地球交会时会发生什么。为期末考试复习而制作。</span>
+  </p>
+  <div class="toc">
+    <a href="#characteristics"><span class="lang-en">13.1 Characteristics</span><span class="lang-zh">13.1 特征</span></a>
+    <a href="#pipeline"><span class="lang-en">Meteoroid → Meteor → Meteorite</span><span class="lang-zh">流星体→流星→陨石</span></a>
+    <a href="#asteroid-move"><span class="lang-en">Asteroid Orbits</span><span class="lang-zh">小行星轨道</span></a>
+    <a href="#comet-move"><span class="lang-en">Comet Orbits</span><span class="lang-zh">彗星轨道</span></a>
+    <a href="#protect"><span class="lang-en">Protecting Earth</span><span class="lang-zh">保护地球</span></a>
+    <a href="#mindmap"><span class="lang-en">Mind Map</span><span class="lang-zh">思维导图</span></a>
+    <a href="#quiz"><span class="lang-en">Quiz</span><span class="lang-zh">测验</span></a>
+  </div>
+</div>
+
+<!-- 13.1 CHARACTERISTICS -->
+<section id="characteristics">
+  <div class="section-kicker"><span class="lang-en">13.1 · Other Objects in the Solar System</span><span class="lang-zh">13.1 · 太阳系中的其他天体</span></div>
+  <h2 class="section-title"><span class="lang-en">Three objects, three identities</span><span class="lang-zh">三种天体，三种身份</span></h2>
+  <p class="section-intro">
+    <span class="lang-en">Besides stars and planets, meteoroids, asteroids and comets travel through the solar system. Each has its own size, composition, temperature and speed.</span>
+    <span class="lang-zh">除了恒星和行星，流星体、小行星和彗星也在太阳系中运行。它们各自拥有不同的大小、组成、温度和速度。</span>
+  </p>
+
+  <div class="trio">
+    <div class="card meteoroid">
+      <svg class="card-icon" viewBox="0 0 64 64"><g fill="none" stroke="#F2C14E" stroke-width="2.4"><circle cx="32" cy="34" r="12" fill="#F2C14E" fill-opacity=".25"/><circle cx="24" cy="28" r="2" fill="#F2C14E"/><circle cx="38" cy="40" r="1.6" fill="#F2C14E"/><path d="M32 34l16-18" stroke-dasharray="3 3"/></g></svg>
+      <h3><span class="lang-en">Meteoroid</span><span class="lang-zh">流星体</span></h3>
+      <div class="tagline"><span class="lang-en">A floating fragment of stone and metal</span><span class="lang-zh">漂浮在太空中的石块与金属碎片</span></div>
+      <dl>
+        <dt><span class="lang-en">Size</span><span class="lang-zh">大小</span></dt><dd class="mono">10 μm – 1 m</dd>
+        <dt><span class="lang-en">Made of</span><span class="lang-zh">组成</span></dt><dd><span class="lang-en">Stones &amp; metals (iron, nickel)</span><span class="lang-zh">石块与金属（铁、镍）</span></dd>
+        <dt><span class="lang-en">Surface temp.</span><span class="lang-zh">表面温度</span></dt><dd class="mono">0 °C</dd>
+        <dt><span class="lang-en">Fastest speed</span><span class="lang-zh">最快速度</span></dt><dd class="mono">42 km s⁻¹</dd>
+        <dt><span class="lang-en">Origin</span><span class="lang-zh">来源</span></dt><dd><span class="lang-en">Fragments of asteroids &amp; comets in outer space</span><span class="lang-zh">外太空小行星与彗星的碎片</span></dd>
+      </dl>
+    </div>
+
+    <div class="card asteroid">
+      <svg class="card-icon" viewBox="0 0 64 64"><g fill="none" stroke="#6FC3DF" stroke-width="2.4"><path d="M32 12l14 8 4 16-10 14-18-2-6-14 6-16z" fill="#6FC3DF" fill-opacity=".2"/><circle cx="30" cy="30" r="2.4" fill="#6FC3DF"/></g></svg>
+      <h3><span class="lang-en">Asteroid</span><span class="lang-zh">小行星</span></h3>
+      <div class="tagline"><span class="lang-en">A large metal-and-rock body with its own orbit</span><span class="lang-zh">拥有自己轨道的大型金属岩石天体</span></div>
+      <dl>
+        <dt><span class="lang-en">Size</span><span class="lang-zh">大小</span></dt><dd class="mono">1 – 1 000 km</dd>
+        <dt><span class="lang-en">Made of</span><span class="lang-zh">组成</span></dt><dd><span class="lang-en">Cold, metal (iron &amp; nickel)</span><span class="lang-zh">冰冷的铁镍金属</span></dd>
+        <dt><span class="lang-en">Location</span><span class="lang-zh">位置</span></dt><dd><span class="lang-en"><b>Asteroid belt</b>, between Mars &amp; Jupiter</span><span class="lang-zh"><b>小行星带</b>，位于火星与木星之间</span></dd>
+        <dt><span class="lang-en">Avg. orbit speed</span><span class="lang-zh">平均轨道速度</span></dt><dd class="mono">25 km s⁻¹</dd>
+        <dt><span class="lang-en">Large examples</span><span class="lang-zh">较大的例子</span></dt><dd>Ceres · Pallas · Juno · Vesta</dd>
+      </dl>
+    </div>
+
+    <div class="card comet">
+      <svg class="card-icon" viewBox="0 0 64 64"><g fill="none" stroke="#E8622C" stroke-width="2.4"><circle cx="24" cy="30" r="7" fill="#E8622C" fill-opacity=".3"/><path d="M30 26l24-10M29 32l26-2M27 37l22 8" stroke-linecap="round"/></g></svg>
+      <h3><span class="lang-en">Comet</span><span class="lang-zh">彗星</span></h3>
+      <div class="tagline"><span class="lang-en">Ice, gas and dust with a head and a tail</span><span class="lang-zh">由冰、气体和尘埃组成，有彗头与彗尾</span></div>
+      <dl>
+        <dt><span class="lang-en">Made of</span><span class="lang-zh">组成</span></dt><dd><span class="lang-en">Ice, gas &amp; frozen dust</span><span class="lang-zh">冰、气体与冻结的尘埃</span></dd>
+        <dt><span class="lang-en">Parts</span><span class="lang-zh">部分</span></dt><dd><span class="lang-en"><b>Head</b> &amp; <b>tail</b> (tail up to 250 000 km)</span><span class="lang-zh"><b>彗头</b>与<b>彗尾</b>（彗尾可达250 000 km）</span></dd>
+        <dt><span class="lang-en">Orbit</span><span class="lang-zh">轨道</span></dt><dd><span class="lang-en">Own <b>elliptical orbit</b> around the Sun</span><span class="lang-zh">围绕太阳的<b>椭圆轨道</b></span></dd>
+        <dt><span class="lang-en">Speed range</span><span class="lang-zh">速度范围</span></dt><dd class="mono">10 – 70 km s⁻¹</dd>
+        <dt><span class="lang-en">Famous example</span><span class="lang-zh">著名例子</span></dt><dd><span class="lang-en">Halley's Comet — seen 1986, returns 2061</span><span class="lang-zh">哈雷彗星——1986年出现，将于2061年再现</span></dd>
+      </dl>
+    </div>
+  </div>
+
+  <div class="fact-strip">
+    <div class="fact"><div class="stat-num">80,000</div><div class="stat-label"><span class="lang-en">years — age of the Hoba Meteorite, Namibia (largest ever found)</span><span class="lang-zh">年——纳米比亚霍巴陨石的年龄（已知最大陨石）</span></div></div>
+    <div class="fact"><div class="stat-num">1.2 km</div><div class="stat-label"><span class="lang-en">diameter of the meteorite crater in Arizona, USA</span><span class="lang-zh">美国亚利桑那州陨石坑直径</span></div></div>
+    <div class="fact"><div class="stat-num">50,000</div><div class="stat-label"><span class="lang-en">years ago — the Arizona crater impact occurred</span><span class="lang-zh">年前——亚利桑那州陨石坑撞击发生</span></div></div>
+    <div class="fact"><div class="stat-num">2061</div><div class="stat-label"><span class="lang-en">next return of Halley's Comet</span><span class="lang-zh">哈雷彗星下次回归年份</span></div></div>
+  </div>
+</section>
+
+<!-- PIPELINE -->
+<section id="pipeline">
+  <div class="section-kicker"><span class="lang-en">Movement of a Meteoroid</span><span class="lang-zh">流星体的运行</span></div>
+  <h2 class="section-title"><span class="lang-en">One rock, three names</span><span class="lang-zh">同一块岩石，三个名字</span></h2>
+  <p class="section-intro">
+    <span class="lang-en">A meteoroid only changes its name as it changes what it's doing — floating, burning, or landing.</span>
+    <span class="lang-zh">流星体的名字会随着它所处的状态而改变——漂浮、燃烧或落地。</span>
+  </p>
+  <div class="pipeline">
+    <div class="pipe-node">
+      <svg class="glyph" viewBox="0 0 64 64"><circle cx="32" cy="32" r="10" fill="none" stroke="#F2C14E" stroke-width="2.5"/><circle cx="26" cy="27" r="1.6" fill="#F2C14E"/></svg>
+      <h4><span class="lang-en">Meteoroid</span><span class="lang-zh">流星体</span></h4>
+      <p><span class="lang-en">A rock/metal fragment floating in outer space, travelling around the Sun.</span><span class="lang-zh">在外太空漂浮、绕太阳运行的岩石／金属碎片。</span></p>
+    </div>
+    <div class="pipe-arrow">→</div>
+    <div class="pipe-node">
+      <svg class="glyph" viewBox="0 0 64 64"><path d="M16 48 L48 16" stroke="#E8622C" stroke-width="3" stroke-linecap="round"/><path d="M40 16h8v8" stroke="#E8622C" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <h4><span class="lang-en">Meteor</span><span class="lang-zh">流星</span></h4>
+      <p><span class="lang-en">Enters Earth's atmosphere; friction with air produces heat until it burns — a "streak of light".</span><span class="lang-zh">进入地球大气层；与空气摩擦产生热量并燃烧——形成「一道光」。</span></p>
+    </div>
+    <div class="pipe-arrow">→</div>
+    <div class="pipe-node">
+      <svg class="glyph" viewBox="0 0 64 64"><circle cx="32" cy="40" r="10" fill="#6FC3DF" fill-opacity=".3" stroke="#6FC3DF" stroke-width="2.5"/><path d="M10 50 Q32 44 54 50" stroke="#6FC3DF" stroke-width="2" fill="none"/></svg>
+      <h4><span class="lang-en">Meteorite</span><span class="lang-zh">陨石</span></h4>
+      <p><span class="lang-en">A meteor that survives and reaches Earth's surface, sometimes forming a crater.</span><span class="lang-zh">未完全燃烧、抵达地球表面的流星，有时会形成陨石坑。</span></p>
+    </div>
+  </div>
+  <div class="fact-strip" style="grid-template-columns:1fr 1fr;">
+    <div class="fact"><div class="stat-num" style="font-size:16px; color:var(--paper);"><span class="lang-en">Meteor shower</span><span class="lang-zh">流星雨</span></div><div class="stat-label"><span class="lang-en">Happens when many meteors enter Earth at the same time.</span><span class="lang-zh">许多流星同时进入地球时发生的现象。</span></div></div>
+    <div class="fact"><div class="stat-num" style="font-size:16px; color:var(--paper);"><span class="lang-en">Dinosaur link</span><span class="lang-zh">恐龙灭绝之说</span></div><div class="stat-label"><span class="lang-en">Paleontologists believe a 10 km-wide asteroid impact caused dinosaur extinction.</span><span class="lang-zh">古生物学家认为一个直径10公里的小行星撞击导致了恐龙灭绝。</span></div></div>
+  </div>
+</section>
+
+<!-- ASTEROID MOVEMENT -->
+<section id="asteroid-move">
+  <div class="section-kicker"><span class="lang-en">Movement of an Asteroid</span><span class="lang-zh">小行星的运行</span></div>
+  <h2 class="section-title"><span class="lang-en">Life in the asteroid belt</span><span class="lang-zh">小行星带中的运行</span></h2>
+  <div class="orbit-wrap">
+    <svg class="orbit-svg" viewBox="0 0 400 300">
+      <circle cx="200" cy="150" r="18" fill="#F2C14E"/>
+      <ellipse cx="200" cy="150" rx="70" ry="46" fill="none" stroke="#6FC3DF" stroke-width="16" opacity=".18"/>
+      <ellipse cx="200" cy="150" rx="70" ry="46" fill="none" stroke="#6FC3DF" stroke-width="1" stroke-dasharray="2 3" opacity=".6"/>
+      <ellipse cx="200" cy="150" rx="110" ry="72" fill="none" stroke="#A7ADC6" stroke-width="1" stroke-dasharray="4 4" opacity=".5"/>
+      <ellipse cx="200" cy="150" rx="150" ry="98" fill="none" stroke="#E8622C" stroke-width="1" stroke-dasharray="5 4" opacity=".55" transform="rotate(12 200 150)"/>
+      <ellipse cx="200" cy="150" rx="170" ry="60" fill="none" stroke="#F2C14E" stroke-width="1" stroke-dasharray="3 3" opacity=".5" transform="rotate(-18 200 150)"/>
+      <g>
+        <circle r="3.4" fill="#6FC3DF">
+          <animateMotion dur="7s" repeatCount="indefinite" path="M270,150 A70,46 0 1,1 130,150 A70,46 0 1,1 270,150"/>
+        </circle>
+        <circle r="3" fill="#A7ADC6">
+          <animateMotion dur="10s" repeatCount="indefinite" path="M310,150 A110,72 0 1,1 90,150 A110,72 0 1,1 310,150"/>
+        </circle>
+      </g>
+      <text x="200" y="150" text-anchor="middle" dy="-26" fill="#F4F1E8" font-size="10" font-family="Space Grotesk">Sun</text>
+      <text x="270" y="112" fill="#6FC3DF" font-size="9" font-family="Space Grotesk">Asteroid belt</text>
+      <text x="345" y="150" fill="#A7ADC6" font-size="9" font-family="Space Grotesk">Mars</text>
+      <text x="230" y="252" fill="#E8622C" font-size="9" font-family="Space Grotesk" transform="rotate(12 230 252)">Apollo / Amor / Aten</text>
+      <text x="50" y="72" fill="#F2C14E" font-size="9" font-family="Space Grotesk">Jupiter</text>
+    </svg>
+    <div class="orbit-notes">
+      <div class="note-chip"><div class="note-num">1</div><p><span class="lang-en">Most asteroids move at ~25 km s⁻¹ in the <b>asteroid belt</b>, between the orbits of Mars &amp; Jupiter.</span><span class="lang-zh">大多数小行星以约25 km/s的速度在火星与木星轨道之间的<b>小行星带</b>中运行。</span></p></div>
+      <div class="note-chip ember"><div class="note-num">2</div><p><span class="lang-en">Some orbit <b>outside</b> the belt — near or even intersecting Earth's orbit: the <b>Apollo</b>, <b>Amor</b> and <b>Aten</b> groups.</span><span class="lang-zh">部分小行星轨道在带外——甚至与地球轨道相交：<b>阿波罗群</b>、<b>阿莫尔群</b>与<b>阿登群</b>。</span></p></div>
+      <div class="note-chip"><div class="note-num">3</div><p><span class="lang-en">Collisions near or crossing Earth's orbit can result in the <b>destruction of living things</b> on Earth.</span><span class="lang-zh">在地球轨道附近或相交处发生的碰撞可能导致地球上<b>生物的毁灭</b>。</span></p></div>
+    </div>
+  </div>
+</section>
+
+<!-- COMET MOVEMENT -->
+<section id="comet-move">
+  <div class="section-kicker"><span class="lang-en">Movement of a Comet</span><span class="lang-zh">彗星的运行</span></div>
+  <h2 class="section-title"><span class="lang-en">The tail always points away from the Sun</span><span class="lang-zh">彗尾始终背向太阳</span></h2>
+  <p class="section-intro">
+    <span class="lang-en">Comets travel between the <b class="kw ice">Kuiper belt</b> and the <b class="kw ember">Oort cloud</b> at 10–70 km s⁻¹. Watch the tail flip direction as the comet orbits the Sun.</span>
+    <span class="lang-zh">彗星以10–70 km/s的速度在<b class="kw ice">柯伊伯带</b>与<b class="kw ember">奥尔特云</b>之间运行。观察彗尾在绕日运行时如何转向。</span>
+  </p>
+  <div class="orbit-wrap">
+    <svg class="orbit-svg" viewBox="0 0 400 300">
+      <circle cx="200" cy="150" r="130" fill="none" stroke="var(--mute)" stroke-width="1" stroke-dasharray="2 4" opacity=".25"/>
+      <circle cx="200" cy="150" r="14" fill="#F2C14E"/>
+      <ellipse id="cometOrbit" cx="200" cy="150" rx="140" ry="60" fill="none" stroke="#E8622C" stroke-width="1" stroke-dasharray="4 4" opacity=".5"/>
+      <g id="cometGroup">
+        <circle r="4" fill="#F4F1E8"/>
+        <line id="cometTail" x1="0" y1="0" x2="20" y2="0" stroke="url(#tailGrad)" stroke-width="3" stroke-linecap="round"/>
+      </g>
+      <animateMotion xlink:href="#cometGroup" dur="8s" repeatCount="indefinite"
+        path="M340,150 A140,60 0 1,1 60,150 A140,60 0 1,1 340,150"/>
+      <defs>
+        <linearGradient id="tailGrad" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0%" stop-color="#E8622C" stop-opacity="1"/>
+          <stop offset="100%" stop-color="#E8622C" stop-opacity="0"/>
+        </linearGradient>
+      </defs>
+      <text x="200" y="150" text-anchor="middle" dy="-22" fill="#F4F1E8" font-size="10" font-family="Space Grotesk">Sun</text>
+      <text x="200" y="285" text-anchor="middle" fill="#A7ADC6" font-size="9" font-family="Space Grotesk">Kuiper belt (near)</text>
+      <text x="200" y="18" text-anchor="middle" fill="#6FC3DF" font-size="9" font-family="Space Grotesk">Oort cloud (far)</text>
+    </svg>
+    <div class="orbit-notes">
+      <div class="note-chip"><div class="note-num">1</div><p><span class="lang-en">A comet moves at 10–70 km s⁻¹, ranging between the <b>Kuiper belt</b> and the <b>Oort cloud</b>.</span><span class="lang-zh">彗星以10–70 km/s的速度运行，范围在<b>柯伊伯带</b>与<b>奥尔特云</b>之间。</span></p></div>
+      <div class="note-chip"><div class="note-num">2</div><p><span class="lang-en">Closer to the Sun, it speeds up — heat melts and vaporises ice, growing a long tail.</span><span class="lang-zh">越靠近太阳，速度越快——热量使冰融化并汽化，形成长长的彗尾。</span></p></div>
+      <div class="note-chip ember"><div class="note-num">3</div><p><span class="lang-en">The tail always points <b>away from the Sun</b>, blown by the solar wind — not by the direction of travel.</span><span class="lang-zh">彗尾因太阳风的吹动而始终<b>背向太阳</b>——而非取决于运行方向。</span></p></div>
+      <div class="note-chip ice"><div class="note-num">4</div><p><span class="lang-en">Strong gravitational pull from outer planets can easily fling a comet out of its orbit.</span><span class="lang-zh">外行星强大的引力很容易使彗星脱离原来的轨道。</span></p></div>
+      <div class="note-chip"><div class="note-num">5</div><p><span class="lang-en">A comet's orbit crossing Earth's carries a risk of colliding with Earth at high speed.</span><span class="lang-zh">若彗星轨道与地球轨道相交，就有可能以高速与地球相撞。</span></p></div>
+    </div>
+  </div>
+</section>
+
+<!-- PROTECTION -->
+<section id="protect">
+  <div class="section-kicker"><span class="lang-en">Applying What We Know</span><span class="lang-zh">知识应用</span></div>
+  <h2 class="section-title"><span class="lang-en">Protecting the Earth from asteroid impacts</span><span class="lang-zh">保护地球免受小行星撞击</span></h2>
+  <div class="protect-panel">
+    <p style="color:var(--mute); margin-top:0;">
+      <span class="lang-en">Scientists constantly monitor asteroids to ensure their orbits stay a safe distance from Earth. Warnings are issued if an asteroid's path risks colliding with Earth — it may then be destroyed or have its course changed. In Malaysia, <b style="color:var(--paper)">ANGKASA</b> (the National Space Agency) runs the <b style="color:var(--paper)">Near-Earth Object Programme</b> to monitor and develop this science locally.</span>
+      <span class="lang-zh">科学家持续监测小行星，确保它们的轨道与地球保持安全距离。若某小行星的路径有撞击地球的风险，就会发出警报——之后可能将其摧毁或改变其运行路线。在马来西亚，<b style="color:var(--paper)">国家太空局（ANGKASA）</b>负责推动与监督「近地天体计划」的太空科学发展。</span>
+    </p>
+    <div class="method-grid">
+      <div class="method">
+        <h4><span class="lang-en">🛰️ Change its course</span><span class="lang-zh">🛰️ 改变其运行路线</span></h4>
+        <p><span class="lang-en">A spacecraft nudges the asteroid so it slips past Earth instead of hitting it.</span><span class="lang-zh">利用太空船轻推小行星，使其偏离原路径而不撞上地球。</span></p>
+      </div>
+      <div class="method">
+        <h4><span class="lang-en">💥 Break it apart</span><span class="lang-zh">💥 使其碎裂</span></h4>
+        <p><span class="lang-en">Explosives attached to the asteroid, or a bomb fired at it, break it into smaller, safer fragments.</span><span class="lang-zh">在小行星上安装炸药，或向其发射炸弹，使其碎裂成较小、较安全的碎片。</span></p>
+      </div>
+      <div class="method">
+        <h4><span class="lang-en">🔭 Early warning</span><span class="lang-zh">🔭 提早预警</span></h4>
+        <p><span class="lang-en">Continuous monitoring gives scientists time to plan a response before impact.</span><span class="lang-zh">持续监测让科学家有足够时间在撞击发生前作出应对。</span></p>
+      </div>
+      <div class="method">
+        <h4><span class="lang-en">🌍 Impact scale matters</span><span class="lang-zh">🌍 撞击规模决定后果</span></h4>
+        <p><span class="lang-en">&lt;10 km asteroid: regional destruction (~100 km radius). ≥10 km asteroid: risk of mass extinction, as with the dinosaurs.</span><span class="lang-zh">小于10公里的小行星：区域性破坏（半径约100公里）。10公里或以上：可能造成如恐龙般的物种大灭绝。</span></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MIND MAP -->
+<section id="mindmap">
+  <div class="section-kicker"><span class="lang-en">Chapter Summary</span><span class="lang-zh">章节总结</span></div>
+  <h2 class="section-title"><span class="lang-en">Mind map</span><span class="lang-zh">思维导图</span></h2>
+  <p class="section-intro"><span class="lang-en">The whole chapter at a glance — trace each branch back to the section above.</span><span class="lang-zh">一图掌握整章内容——每个分支都可对应到上方相关章节。</span></p>
+  <div class="mindmap-frame">
+    <svg viewBox="0 0 1000 480" width="100%" style="min-width:760px;">
+      <!-- center -->
+      <rect x="400" y="10" width="200" height="46" rx="10" fill="#E8622C"/>
+      <text x="500" y="38" text-anchor="middle" fill="#0B0E23" font-size="14" font-weight="700" font-family="Space Grotesk"><tspan class="lang-en-svg">Other objects in the</tspan></text>
+      <text x="500" y="14" text-anchor="middle" fill="#0B0E23" font-size="0"></text>
+      <!-- lines down to three branches -->
+      <path d="M500,56 L500,90 L120,90 L120,120" stroke="#A7ADC6" stroke-width="1.5" fill="none"/>
+      <path d="M500,56 L500,120" stroke="#A7ADC6" stroke-width="1.5" fill="none"/>
+      <path d="M500,56 L500,90 L860,90 L860,120" stroke="#A7ADC6" stroke-width="1.5" fill="none"/>
+
+      <!-- meteoroid branch -->
+      <rect x="40" y="120" width="160" height="42" rx="10" fill="#F2C14E"/>
+      <text x="120" y="146" text-anchor="middle" fill="#0B0E23" font-size="13" font-weight="700" font-family="Space Grotesk">Meteoroid</text>
+      <path d="M120,162 L120,192" stroke="#F2C14E" stroke-width="1.5"/>
+      <rect x="40" y="192" width="160" height="38" rx="9" fill="#141936" stroke="#F2C14E"/>
+      <text x="120" y="216" text-anchor="middle" fill="#F4F1E8" font-size="12" font-family="Space Grotesk">Meteor</text>
+      <path d="M120,230 L120,260" stroke="#F2C14E" stroke-width="1.5"/>
+      <rect x="40" y="260" width="160" height="38" rx="9" fill="#141936" stroke="#F2C14E"/>
+      <text x="120" y="284" text-anchor="middle" fill="#F4F1E8" font-size="12" font-family="Space Grotesk">Meteorite</text>
+
+      <!-- asteroid branch -->
+      <rect x="420" y="120" width="160" height="42" rx="10" fill="#6FC3DF"/>
+      <text x="500" y="146" text-anchor="middle" fill="#0B0E23" font-size="13" font-weight="700" font-family="Space Grotesk">Asteroid</text>
+
+      <!-- comet branch -->
+      <rect x="780" y="120" width="160" height="42" rx="10" fill="#E8622C"/>
+      <text x="860" y="146" text-anchor="middle" fill="#0B0E23" font-size="13" font-weight="700" font-family="Space Grotesk">Comet</text>
+
+      <!-- merge to effects -->
+      <path d="M120,298 L120,340 L500,340 L500,360" stroke="#A7ADC6" stroke-width="1.5" fill="none"/>
+      <path d="M500,162 L500,360" stroke="#A7ADC6" stroke-width="1.5" fill="none"/>
+      <path d="M860,162 L860,340 L500,340" stroke="#A7ADC6" stroke-width="1.5" fill="none"/>
+
+      <rect x="380" y="360" width="240" height="44" rx="10" fill="#1B2147" stroke="#F4F1E8"/>
+      <text x="500" y="387" text-anchor="middle" fill="#F4F1E8" font-size="12.5" font-family="Space Grotesk">Effects of movement towards Earth</text>
+
+      <path d="M500,404 L500,430" stroke="#A7ADC6" stroke-width="1.5"/>
+      <rect x="300" y="430" width="400" height="44" rx="10" fill="#1B2147" stroke="#F2C14E"/>
+      <text x="500" y="457" text-anchor="middle" fill="#F2C14E" font-size="12" font-family="Space Grotesk">How to reduce / prevent collision with Earth</text>
+    </svg>
+  </div>
+</section>
+
+<!-- QUIZ -->
+<section id="quiz">
+  <div class="section-kicker"><span class="lang-en">Self-Test</span><span class="lang-zh">自我测验</span></div>
+  <h2 class="section-title"><span class="lang-en">Quick quiz</span><span class="lang-zh">快速测验</span></h2>
+  <p class="section-intro"><span class="lang-en">Tap an answer for instant feedback. Try it in both languages!</span><span class="lang-zh">点击答案立即获得反馈，可用两种语言作答！</span></p>
+
+  <div id="quiz-container"></div>
+  <div class="quiz-score" id="quiz-score"><span class="lang-en">Score: 0 / 6</span><span class="lang-zh">得分：0 / 6</span></div>
+</section>
+
+<!-- SELF REFLECTION -->
+<section id="reflection">
+  <div class="section-kicker"><span class="lang-en">Self-Reflection</span><span class="lang-zh">自我反思</span></div>
+  <h2 class="section-title"><span class="lang-en">Can you...?</span><span class="lang-zh">你能做到吗？</span></h2>
+  <div class="checklist">
+    <label class="check-item"><input type="checkbox"><span><span class="lang-en">Discuss the movement of meteoroids, asteroids and comets in the solar system.</span><span class="lang-zh">讨论流星体、小行星和彗星在太阳系中的运行。</span></span></label>
+    <label class="check-item"><input type="checkbox"><span><span class="lang-en">Communicate on other objects in the solar system, such as meteoroids, asteroids and comets and their effects.</span><span class="lang-zh">阐述太阳系中的其他天体（如流星体、小行星和彗星）及其影响。</span></span></label>
+    <label class="check-item"><input type="checkbox"><span><span class="lang-en">Discuss the effects of asteroids colliding with the Earth based on data.</span><span class="lang-zh">根据资料讨论小行星撞击地球的影响。</span></span></label>
+    <label class="check-item"><input type="checkbox"><span><span class="lang-en">Generate ideas on how to reduce or prevent the possibility of a collision with the Earth.</span><span class="lang-zh">提出减少或防止与地球碰撞可能性的想法。</span></span></label>
+  </div>
+</section>
+
+<footer>
+  <span class="lang-en">KSSM Form 2 Science · Chapter 13 revision page · Built for final exam preparation</span>
+  <span class="lang-zh">KSSM 中二科学 · 第13章复习页面 · 为期末考试准备而制作</span>
+</footer>
+
+<script>
+function setLang(l){
+  document.body.className = l;
+  document.getElementById('btn-en').classList.toggle('active', l==='en');
+  document.getElementById('btn-zh').classList.toggle('active', l==='zh');
+  document.documentElement.lang = l;
+}
+
+// Quiz data
+const QUIZ = [
+  {
+    en: "What object did Nicol most likely see if a shower of light crossed the sky then disappeared?",
+    zh: "如果一道光划过天空后消失，妮可最可能看到的是什么？",
+    opts: [
+      {en:"A meteor — it burns up in the atmosphere", zh:"流星——它在大气层中燃烧殆尽", correct:true},
+      {en:"A comet — it has a long tail", zh:"彗星——它有一条长长的尾巴", correct:false},
+      {en:"An asteroid — it orbits the Sun", zh:"小行星——它绕太阳运行", correct:false}
+    ],
+    fb_en:"Correct idea: a brief streak that disappears is a meteor burning up from friction with Earth's atmosphere.",
+    fb_zh:"正确概念：一道短暂出现后消失的光是流星因与大气层摩擦而燃烧所致。"
+  },
+  {
+    en:"Between a meteor and a meteorite, which would you find in a museum?",
+    zh:"在流星和陨石之间，你会在博物馆看到哪一个？",
+    opts:[
+      {en:"Meteorite — it survives and reaches Earth's surface", zh:"陨石——它能存留并抵达地球表面", correct:true},
+      {en:"Meteor — it is a beam of light in the sky", zh:"流星——它是天空中的一道光", correct:false}
+    ],
+    fb_en:"A meteor burns up before reaching Earth; only a meteorite (the solid remains) can be displayed.",
+    fb_zh:"流星在抵达地球前已燃烧殆尽；只有陨石（固体残留物）才能被展示。"
+  },
+  {
+    en:"Where is the asteroid belt located?",
+    zh:"小行星带位于哪里？",
+    opts:[
+      {en:"Between Mars and Jupiter", zh:"火星与木星之间", correct:true},
+      {en:"Between Earth and Mars", zh:"地球与火星之间", correct:false},
+      {en:"Between Jupiter and Saturn", zh:"木星与土星之间", correct:false}
+    ],
+    fb_en:"The main asteroid belt sits between the orbits of Mars and Jupiter.",
+    fb_zh:"主小行星带位于火星与木星的轨道之间。"
+  },
+  {
+    en:"Why does a comet's tail always point away from the Sun?",
+    zh:"为什么彗星的尾巴总是背向太阳？",
+    opts:[
+      {en:"It is blown by the solar wind", zh:"它被太阳风吹动", correct:true},
+      {en:"It always trails behind the direction of travel", zh:"它总是拖在运行方向的后方", correct:false},
+      {en:"Gravity pulls it backwards", zh:"重力将它向后拉", correct:false}
+    ],
+    fb_en:"Solar wind — not the direction of motion — pushes ice/dust away from the Sun, so the tail always points outward.",
+    fb_zh:"是太阳风（而非运行方向）将冰与尘埃推离太阳，因此彗尾总是朝外。"
+  },
+  {
+    en:"What is believed to have caused the extinction of the dinosaurs?",
+    zh:"恐龙灭绝被认为是由什么造成的？",
+    opts:[
+      {en:"A large asteroid impact ~65 million years ago", zh:"约6500万年前一次大型小行星撞击", correct:true},
+      {en:"A comet's tail sweeping the Earth", zh:"彗星的尾巴扫过地球", correct:false},
+      {en:"A meteor shower over one night", zh:"一夜之间的流星雨", correct:false}
+    ],
+    fb_en:"Paleontologists link dinosaur extinction to a large asteroid impact that drastically changed Earth's temperature.",
+    fb_zh:"古生物学家认为恐龙灭绝与一次大型小行星撞击有关，该撞击使地球温度剧烈变化。"
+  },
+  {
+    en:"Which is the best way to protect Earth from a threatening asteroid?",
+    zh:"以下哪一项是保护地球免受具威胁性小行星撞击的最佳方法？",
+    opts:[
+      {en:"Monitor its orbit and change its course before impact", zh:"监测其轨道并在撞击前改变其路线", correct:true},
+      {en:"Wait until it enters the atmosphere to react", zh:"等它进入大气层后才作出反应", correct:false},
+      {en:"Do nothing, since asteroids always miss Earth", zh:"不采取任何行动，因为小行星总是会错过地球", correct:false}
+    ],
+    fb_en:"Continuous monitoring gives scientists time to deflect or destroy an asteroid before it reaches Earth.",
+    fb_zh:"持续监测能让科学家有足够时间在小行星抵达地球前使其偏离路线或将其摧毁。"
+  }
+];
+
+let score = 0;
+const container = document.getElementById('quiz-container');
+QUIZ.forEach((q, qi)=>{
+  const card = document.createElement('div');
+  card.className = 'quiz-card';
+  const question = document.createElement('div');
+  question.className = 'quiz-q';
+  question.innerHTML = `<span class="lang-en">${qi+1}. ${q.en}</span><span class="lang-zh">${qi+1}. ${q.zh}</span>`;
+  card.appendChild(question);
+  const optsWrap = document.createElement('div');
+  optsWrap.className = 'quiz-opts';
+  const fb = document.createElement('div');
+  fb.className = 'quiz-fb';
+  fb.innerHTML = `<span class="lang-en">${q.fb_en}</span><span class="lang-zh">${q.fb_zh}</span>`;
+
+  let answered = false;
+  q.opts.forEach(opt=>{
+    const btn = document.createElement('button');
+    btn.className = 'quiz-opt';
+    btn.innerHTML = `<span class="lang-en">${opt.en}</span><span class="lang-zh">${opt.zh}</span>`;
+    btn.onclick = ()=>{
+      if(answered) return;
+      answered = true;
+      [...optsWrap.children].forEach(b=>b.style.pointerEvents='none');
+      if(opt.correct){
+        btn.classList.add('correct');
+        score++;
+        updateScore();
+      } else {
+        btn.classList.add('wrong');
+        [...optsWrap.children].find((b,i)=>q.opts[i].correct)?.classList.add('correct');
+      }
+      fb.style.display = 'block';
+    };
+    optsWrap.appendChild(btn);
+  });
+  card.appendChild(optsWrap);
+  card.appendChild(fb);
+  container.appendChild(card);
+});
+
+function updateScore(){
+  document.getElementById('quiz-score').innerHTML =
+    `<span class="lang-en">Score: ${score} / ${QUIZ.length}</span><span class="lang-zh">得分：${score} / ${QUIZ.length}</span>`;
+}
+</script>
+</body>
+</html>
