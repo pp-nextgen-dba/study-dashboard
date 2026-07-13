@@ -148,7 +148,8 @@ export const scienceData = {
             chinese:"太阳系",
             status:"Not Started",
             confidence:0,
-            last_updated:"2026-05-20"
+            last_updated:"2026-05-20",
+            resourceUrl: "../science/form2_science_chapter12_solar_system_bilingual.html"
         },
 
         {

@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Form 2 Science – Chapter 12 Solar System | 中二科学：第12章 太阳系</title>
+<style>
+:root{
+  --bg:#07111f; --panel:#10243a; --panel2:#16314d; --text:#eef7ff; --muted:#b9d3e8;
+  --cyan:#49d6ff; --yellow:#ffd166; --pink:#ff7eb6; --green:#72e6a0; --orange:#ff9b54;
+  --purple:#b69cff; --red:#ff6b6b; --line:rgba(255,255,255,.12);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;font-family:Inter,Segoe UI,Arial,"Noto Sans SC","Microsoft YaHei",sans-serif;
+  background:
+    radial-gradient(circle at 20% 10%, rgba(73,214,255,.14), transparent 22%),
+    radial-gradient(circle at 82% 15%, rgba(182,156,255,.14), transparent 24%),
+    linear-gradient(180deg,#06101d,#0b1c2d 45%,#07111f);
+  color:var(--text); line-height:1.65;
+}
+.hero{min-height:88vh;display:grid;place-items:center;text-align:center;padding:48px 18px;position:relative;overflow:hidden}
+.hero:before{
+  content:"";position:absolute;inset:-40%;
+  background-image:radial-gradient(circle,rgba(255,255,255,.8) 0 1px,transparent 1.5px);
+  background-size:34px 34px;opacity:.22;transform:rotate(14deg)
+}
+.sun{width:180px;height:180px;border-radius:50%;margin:auto;background:radial-gradient(circle at 35% 35%,#fff7b0,#ffd166 40%,#ff8c42 72%,#c84b31);box-shadow:0 0 80px #ffb347,0 0 160px rgba(255,177,71,.55);position:relative;z-index:2}
+.hero h1{font-size:clamp(2.3rem,6vw,5.2rem);line-height:1.05;margin:30px auto 12px;max-width:1050px;position:relative;z-index:2}
+.hero p{font-size:clamp(1rem,2.2vw,1.35rem);color:var(--muted);max-width:900px;margin:auto;position:relative;z-index:2}
+.badges{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-top:24px;position:relative;z-index:2}
+.badge{padding:8px 14px;border:1px solid var(--line);border-radius:999px;background:rgba(255,255,255,.06);backdrop-filter:blur(8px)}
+nav{position:sticky;top:0;z-index:50;background:rgba(5,15,27,.88);backdrop-filter:blur(14px);border-bottom:1px solid var(--line);overflow-x:auto}
+nav .wrap{display:flex;gap:6px;padding:10px 14px;max-width:1200px;margin:auto;white-space:nowrap}
+nav a{color:var(--muted);text-decoration:none;padding:8px 11px;border-radius:10px;font-size:.92rem}
+nav a:hover{background:rgba(255,255,255,.08);color:#fff}
+main{max-width:1200px;margin:auto;padding:28px 16px 80px}
+section{margin:34px 0}
+h2{font-size:clamp(1.75rem,3.5vw,2.6rem);margin:0 0 10px}
+h3{margin:0 0 8px;font-size:1.22rem}
+.sub{color:var(--muted);margin:0 0 20px}
+.grid{display:grid;gap:16px}
+.g2{grid-template-columns:repeat(2,minmax(0,1fr))}
+.g3{grid-template-columns:repeat(3,minmax(0,1fr))}
+.g4{grid-template-columns:repeat(4,minmax(0,1fr))}
+.card{
+  background:linear-gradient(145deg,rgba(22,49,77,.95),rgba(10,29,47,.95));
+  border:1px solid var(--line);border-radius:20px;padding:20px;box-shadow:0 14px 35px rgba(0,0,0,.22)
+}
+.card strong{color:#fff}
+.en{color:#f8fbff}.zh{color:#cfeeff;margin-top:6px}
+.kicker{display:inline-block;font-size:.78rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;padding:5px 9px;border-radius:8px;margin-bottom:8px}
+.cyan{background:rgba(73,214,255,.15);color:var(--cyan)}
+.yellow{background:rgba(255,209,102,.16);color:var(--yellow)}
+.green{background:rgba(114,230,160,.16);color:var(--green)}
+.pink{background:rgba(255,126,182,.16);color:var(--pink)}
+.purple{background:rgba(182,156,255,.16);color:var(--purple)}
+.orange{background:rgba(255,155,84,.16);color:var(--orange)}
+.callout{border-left:5px solid var(--yellow);background:rgba(255,209,102,.08);padding:15px 18px;border-radius:12px;margin:14px 0}
+.formula{font-size:1.15rem;font-weight:800;text-align:center;background:#061728;border:1px dashed rgba(73,214,255,.5);padding:16px;border-radius:14px;margin:12px 0;color:#dff9ff}
+.table-wrap{overflow:auto;border-radius:16px;border:1px solid var(--line)}
+table{width:100%;border-collapse:collapse;min-width:760px;background:rgba(8,24,40,.78)}
+th,td{padding:11px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+th{position:sticky;top:0;background:#17324d;text-align:left;color:#fff}
+tr:hover td{background:rgba(255,255,255,.03)}
+.planet-row{display:flex;gap:10px;align-items:center}
+.dot{width:34px;height:34px;border-radius:50%;flex:0 0 auto;box-shadow:inset -6px -6px 10px rgba(0,0,0,.25)}
+.mercury{background:linear-gradient(135deg,#b8b8b8,#6a6a6a)}
+.venus{background:linear-gradient(135deg,#ffd27f,#c56b2d)}
+.earth{background:linear-gradient(135deg,#3ba7ff,#2cb76b)}
+.mars{background:linear-gradient(135deg,#d87945,#8e321e)}
+.jupiter{background:linear-gradient(135deg,#e8d1aa,#9b6b4d)}
+.saturn{background:linear-gradient(135deg,#f0d592,#b78a52)}
+.uranus{background:linear-gradient(135deg,#a7edf2,#4ea1b4)}
+.neptune{background:linear-gradient(135deg,#69a8ff,#244b9d)}
+.memory{display:flex;flex-direction:column;align-items:center;gap:18px;padding:28px 10px}
+.center-node{padding:20px 32px;border-radius:999px;background:linear-gradient(135deg,#ffd166,#ff8c42);color:#231300;font-weight:900;font-size:1.4rem;box-shadow:0 0 35px rgba(255,177,71,.35)}
+.branch-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;width:100%}
+.node{padding:16px;border-radius:16px;background:rgba(255,255,255,.07);border:1px solid var(--line);text-align:center;position:relative}
+.node:before{content:"";position:absolute;width:2px;height:18px;background:rgba(255,255,255,.25);top:-18px;left:50%}
+ul{margin:8px 0 0;padding-left:20px}
+li{margin:6px 0}
+.exam{background:linear-gradient(145deg,rgba(114,230,160,.12),rgba(73,214,255,.08));border:1px solid rgba(114,230,160,.35)}
+.q{margin:14px 0;padding:16px;border-radius:14px;background:rgba(255,255,255,.05);border:1px solid var(--line)}
+.q button{display:block;width:100%;text-align:left;margin:7px 0;padding:10px 12px;border-radius:10px;border:1px solid var(--line);background:#102943;color:#fff;cursor:pointer}
+.q button:hover{background:#173a5c}
+.result{font-weight:800;margin-top:8px}
+details{background:rgba(255,255,255,.05);border:1px solid var(--line);border-radius:14px;padding:13px 16px;margin:10px 0}
+summary{cursor:pointer;font-weight:800}
+footer{text-align:center;color:var(--muted);padding:30px 16px;border-top:1px solid var(--line)}
+.small{font-size:.9rem;color:var(--muted)}
+@media(max-width:850px){.g2,.g3,.g4,.branch-grid{grid-template-columns:1fr}.hero{min-height:78vh}.sun{width:130px;height:130px}}
+@media print{nav,.hero:before,.quiz{display:none!important}body{background:white;color:#111}.card,details{break-inside:avoid;background:#fff;color:#111;border:1px solid #ccc;box-shadow:none}.zh,.sub,.small{color:#333}main{max-width:none}}
+</style>
+</head>
+<body>
+<div class="top-nav" style="background:#fff;padding:10px 16px;border-bottom:2px solid #e5e7eb;position:sticky;top:0;z-index:120">
+  <a class="dashboard-link" href="../index.html" style="display:inline-flex;align-items:center;gap:6px;padding:8px 12px;border-radius:8px;background:#1d4ed8;color:#fff;font-size:13px;font-weight:800;text-decoration:none">&larr; Back to Dashboard</a>
+</div>
+<header class="hero">
+  <div>
+    <div class="sun"></div>
+    <h1>Form 2 Science: Solar System<br>中二科学：太阳系</h1>
+    <p>A complete bilingual revision webpage covering the planets, astronomical units, light years, gravity, temperature, rotation, Earth, the Moon, hypothetical situations and ecological footprint.</p>
+    <p>双语完整复习：行星、天文单位、光年、引力、温度、自转、地球、月球、假设情境与生态足迹。</p>
+    <div class="badges">
+      <span class="badge">🌍 Bilingual 双语</span><span class="badge">🧠 Memory Map 思维导图</span>
+      <span class="badge">📝 Exam Answers 考试作答</span><span class="badge">🎯 Interactive Quiz 互动测验</span>
+    </div>
+  </div>
+</header>
+
+<nav><div class="wrap">
+<a href="#overview">Overview</a><a href="#units">Units</a><a href="#planets">Planets</a>
+<a href="#relations">Relationships</a><a href="#rotation">Rotation</a><a href="#moon">Moon</a>
+<a href="#earth">Earth</a><a href="#hypothesis">Hypothetical</a><a href="#eco">Ecological Footprint</a>
+<a href="#mindmap">Mind Map</a><a href="#exam">Exam Tips</a><a href="#quiz">Quiz</a>
+</div></nav>
+
+<main>
+<section id="overview">
+  <h2>1. The Solar System 太阳系</h2>
+  <p class="sub">The Sun, eight planets, natural satellites, asteroids, comets and other smaller bodies form the solar system.</p>
+  <div class="grid g3">
+    <div class="card"><span class="kicker yellow">Core idea</span><h3>Sun 太阳</h3><p class="en">The Sun is a star at the centre of the solar system. Its gravity keeps planets in orbit.</p><p class="zh">太阳是位于太阳系中心的一颗恒星。太阳的引力使各行星保持在轨道上运行。</p></div>
+    <div class="card"><span class="kicker cyan">Eight planets</span><h3>Order from the Sun 离太阳顺序</h3><p class="en">Mercury, Venus, Earth, Mars, Jupiter, Saturn, Uranus, Neptune.</p><p class="zh">水星、金星、地球、火星、木星、土星、天王星、海王星。</p></div>
+    <div class="card"><span class="kicker purple">Orbit</span><h3>Revolution 公转</h3><p class="en">A planet moves around the Sun along an orbit because of the Sun’s gravitational pull.</p><p class="zh">行星在太阳引力作用下沿轨道绕太阳公转。</p></div>
+  </div>
+  <div class="callout"><strong>Memory sentence 记忆口诀：</strong><br>
+  <span class="en">My Very Educated Mother Just Served Us Noodles.</span><br>
+  <span class="zh">水金地火，木土天海。</span></div>
+</section>
+
+<section id="units">
+  <h2>2. Astronomical Distance Units 天文距离单位</h2>
+  <div class="grid g2">
+    <div class="card">
+      <span class="kicker cyan">A.U.</span><h3>Astronomical Unit 天文单位</h3>
+      <p class="en">1 A.U. is the average distance between Earth and the Sun.</p>
+      <p class="zh">1 个天文单位是地球与太阳之间的平均距离。</p>
+      <div class="formula">1 A.U. = 1.5 × 10<sup>8</sup> km</div>
+      <p class="small">Used mainly for distances inside the solar system. 主要用于太阳系内部距离。</p>
+    </div>
+    <div class="card">
+      <span class="kicker purple">Light year</span><h3>Light Year 光年</h3>
+      <p class="en">A light year is the distance travelled by light in one year. It is a unit of distance, not time.</p>
+      <p class="zh">光年是光在一年内传播的距离，是距离单位，不是时间单位。</p>
+      <div class="formula">1 ly = 9.5 × 10<sup>12</sup> km</div>
+      <p class="small">Used for very large distances between stars and galaxies. 用于恒星和星系之间的巨大距离。</p>
+    </div>
+  </div>
+  <div class="card" style="margin-top:16px">
+    <h3>Conversion Formula 换算公式</h3>
+    <div class="grid g2">
+      <div><div class="formula">Distance in A.U. = Distance in km ÷ (1.5 × 10<sup>8</sup>)</div></div>
+      <div><div class="formula">Distance in ly = Distance in km ÷ (9.5 × 10<sup>12</sup>)</div></div>
+    </div>
+    <p><strong>Example 例子：</strong> Saturn is 1.43 × 10<sup>9</sup> km from the Sun.</p>
+    <p>In A.U.: (1.43 × 10<sup>9</sup>) ÷ (1.5 × 10<sup>8</sup>) ≈ <strong>9.5 A.U.</strong></p>
+  </div>
+</section>
+
+<section id="planets">
+  <h2>3. The Eight Planets 八大行星</h2>
+  <p class="sub">Key textbook facts for comparison. 适合考试比较题的重要资料。</p>
+  <div class="table-wrap">
+  <table>
+    <thead><tr><th>Planet 行星</th><th>Distance from Sun (million km)</th><th>Special features 主要特点</th><th>Moons 卫星</th></tr></thead>
+    <tbody>
+      <tr><td><div class="planet-row"><span class="dot mercury"></span><strong>Mercury 水星</strong></div></td><td>57.9</td><td>Closest and smallest planet; almost no atmosphere; many craters; large day–night temperature difference.<br>最靠近太阳、最小；几乎没有大气层；陨石坑多；昼夜温差大。</td><td>0</td></tr>
+      <tr><td><div class="planet-row"><span class="dot venus"></span><strong>Venus 金星</strong></div></td><td>108.2</td><td>Hottest planet due to strong greenhouse effect; thick carbon-dioxide atmosphere; rotates east to west.<br>因强烈温室效应而最热；二氧化碳大气浓厚；由东向西自转。</td><td>0</td></tr>
+      <tr><td><div class="planet-row"><span class="dot earth"></span><strong>Earth 地球</strong></div></td><td>149.6</td><td>Liquid water, oxygen-rich atmosphere, suitable temperature and life.<br>有液态水、富含氧气的大气层、适宜温度与生命。</td><td>1</td></tr>
+      <tr><td><div class="planet-row"><span class="dot mars"></span><strong>Mars 火星</strong></div></td><td>227.9</td><td>“Red Planet”; thin atmosphere; polar ice; two small moons, Phobos and Deimos.<br>“红色星球”；大气稀薄；有极地冰；两颗小卫星。</td><td>2</td></tr>
+      <tr><td><div class="planet-row"><span class="dot jupiter"></span><strong>Jupiter 木星</strong></div></td><td>778.3</td><td>Largest planet; gas giant; Great Red Spot; strongest gravity among planets.<br>最大行星；气态巨行星；大红斑；行星中引力最强。</td><td>Many</td></tr>
+      <tr><td><div class="planet-row"><span class="dot saturn"></span><strong>Saturn 土星</strong></div></td><td>1,429</td><td>Gas giant with the most obvious ring system made mainly of ice and rock particles.<br>拥有最明显的光环系统，主要由冰粒和岩石碎片组成。</td><td>Many</td></tr>
+      <tr><td><div class="planet-row"><span class="dot uranus"></span><strong>Uranus 天王星</strong></div></td><td>2,871</td><td>Ice giant; axis tilted almost sideways; rotates east to west.<br>冰巨星；自转轴几乎横躺；由东向西自转。</td><td>Many</td></tr>
+      <tr><td><div class="planet-row"><span class="dot neptune"></span><strong>Neptune 海王星</strong></div></td><td>4,504</td><td>Farthest planet; ice giant; very strong winds; takes about 165 Earth years to orbit the Sun.<br>最远行星；冰巨星；风速极高；公转约需165个地球年。</td><td>Many</td></tr>
+    </tbody>
+  </table></div>
+  <div class="grid g2" style="margin-top:16px">
+    <div class="card"><h3>Terrestrial planets 类地行星</h3><p>Mercury, Venus, Earth, Mars. Small, rocky, dense, with solid surfaces.<br>水星、金星、地球、火星：体积较小、由岩石构成、密度较高、有固体表面。</p></div>
+    <div class="card"><h3>Giant planets 巨行星</h3><p>Jupiter, Saturn, Uranus, Neptune. Large, lower average density, many moons, ring systems.<br>木星、土星、天王星、海王星：体积大、平均密度较低、卫星多，并有光环。</p></div>
+  </div>
+</section>
+
+<section id="relations">
+  <h2>4. Relationships Between Planet Characteristics 行星特征之间的关系</h2>
+  <div class="grid g2">
+    <div class="card">
+      <span class="kicker orange">Distance & temperature</span>
+      <h3>Distance from Sun vs Surface Temperature 距离与表面温度</h3>
+      <p class="en">Generally, the farther a planet is from the Sun, the lower its surface temperature because it receives less solar energy.</p>
+      <p class="zh">一般来说，行星离太阳越远，接收到的太阳能越少，因此表面温度越低。</p>
+      <p><strong>Anomaly 例外：</strong> Venus is hotter than Mercury because its thick CO₂ atmosphere traps heat through the greenhouse effect.<br>金星比水星更热，因为浓厚的二氧化碳大气层产生强烈温室效应。</p>
+    </div>
+    <div class="card">
+      <span class="kicker green">Mass & gravity</span>
+      <h3>Mass / Density / Gravitational Pull 质量、密度与引力</h3>
+      <p class="en">A planet with greater mass usually has a stronger gravitational pull. Gravity also depends on distance from the planet’s centre.</p>
+      <p class="zh">质量越大的行星通常引力越强；引力也会受到与行星中心距离的影响。</p>
+      <p><strong>Example:</strong> Jupiter has very high mass, so its gravitational pull is strong.<br><strong>例子：</strong>木星质量巨大，因此引力很强。</p>
+    </div>
+    <div class="card">
+      <span class="kicker purple">Distance & orbital period</span>
+      <h3>Distance, Time and Speed 距离、时间与速度</h3>
+      <p class="en">The farther a planet is from the Sun, the longer its orbit and usually the longer it takes to complete one revolution.</p>
+      <p class="zh">行星离太阳越远，轨道越长，完成一次公转所需时间通常越长。</p>
+      <p>Mercury: about 88 days; Neptune: about 165 Earth years.<br>水星约88天；海王星约165个地球年。</p>
+    </div>
+    <div class="card">
+      <span class="kicker cyan">Atmosphere</span>
+      <h3>Atmosphere and Temperature 大气层与温度</h3>
+      <p class="en">An atmosphere can trap heat and reduce heat loss. A thick greenhouse-gas atmosphere causes higher surface temperature.</p>
+      <p class="zh">大气层能够储存热量并减少热量流失。温室气体越浓厚，表面温度可能越高。</p>
+    </div>
+  </div>
+</section>
+
+<section id="rotation">
+  <h2>5. Rotation of Planets 行星自转</h2>
+  <div class="grid g2">
+    <div class="card">
+      <h3>Rotation 自转</h3>
+      <p class="en">Rotation is the spinning of a planet on its own axis. One complete rotation determines the length of a day.</p>
+      <p class="zh">自转是行星绕自身轴旋转。完成一次自转的时间决定“一天”的长度。</p>
+      <ul>
+        <li>Most planets rotate from west to east. 大多数行星由西向东自转。</li>
+        <li>Venus and Uranus rotate in the opposite direction. 金星和天王星自转方向相反。</li>
+        <li>Earth rotates once in about 24 hours. 地球约24小时自转一周。</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Rotational Axis 自转轴</h3>
+      <p class="en">Planets have different axial tilts. Uranus has an extreme tilt, so it appears to rotate on its side.</p>
+      <p class="zh">各行星的自转轴倾角不同。天王星倾角极大，看起来像“躺着”旋转。</p>
+      <p><strong>Exam keyword 考试关键词：</strong> axis / rotational direction / rotational period<br>自转轴 / 自转方向 / 自转周期</p>
+    </div>
+  </div>
+</section>
+
+<section id="moon">
+  <h2>6. Natural Satellites and the Moon 天然卫星与月球</h2>
+  <div class="grid g2">
+    <div class="card">
+      <span class="kicker yellow">Definition</span>
+      <h3>Natural Satellite 天然卫星</h3>
+      <p class="en">A natural satellite is an object that revolves around a planet in its own orbit.</p>
+      <p class="zh">天然卫星是沿自身轨道绕行星公转的天体。</p>
+      <p>The Moon is Earth’s only natural satellite.<br>月球是地球唯一的天然卫星。</p>
+    </div>
+    <div class="card">
+      <span class="kicker cyan">Moon motion</span>
+      <h3>Why we see the same side of the Moon 为什么总看到月球同一面</h3>
+      <p class="en">The Moon takes about the same time to rotate once on its axis as to revolve once around Earth—about 27 days.</p>
+      <p class="zh">月球自转一周与绕地球公转一周所需时间大致相同，约27天。</p>
+      <p>Therefore, the same side always faces Earth. 因此，月球总是以同一面朝向地球。</p>
+    </div>
+  </div>
+  <div class="callout"><strong>Important correction 重要：</strong> “Dark side of the Moon” does not mean it never receives sunlight. Every part of the Moon receives sunlight at different times.<br>“月球背面”并不代表永远没有阳光；月球各部分都会在不同时间受到阳光照射。</div>
+</section>
+
+<section id="earth">
+  <h2>7. Earth as a Planet for Living Things 地球为何适合生命生存</h2>
+  <div class="grid g3">
+    <div class="card"><h3>💧 Water 水</h3><p>Plenty of liquid water for life processes.<br>有大量液态水，可供生命活动使用。</p></div>
+    <div class="card"><h3>🌬️ Oxygen 氧气</h3><p>Atmosphere contains enough oxygen for respiration.<br>大气层含有足够氧气供生物呼吸。</p></div>
+    <div class="card"><h3>🌡️ Suitable temperature 适宜温度</h3><p>Not too hot and not too cold, allowing liquid water to exist.<br>温度不过热或过冷，使液态水得以存在。</p></div>
+    <div class="card"><h3>🛡️ Atmosphere 大气层</h3><p>Blocks harmful ultraviolet radiation and burns up many meteoroids.<br>阻挡有害紫外线，并使许多流星体在进入时燃烧。</p></div>
+    <div class="card"><h3>⚖️ Gravity 引力</h3><p>Keeps the atmosphere, water and living things from drifting into space.<br>使大气、水和生物不会飘离地球。</p></div>
+    <div class="card"><h3>☀️ Sunlight 阳光</h3><p>Provides energy for photosynthesis and supports food chains.<br>为光合作用提供能量，并维持食物链。</p></div>
+  </div>
+  <div class="card exam" style="margin-top:16px">
+    <h3>Full-mark answer 高分作答</h3>
+    <p><strong>English:</strong> Earth supports life because it has liquid water, a suitable temperature range, sufficient oxygen, sunlight for photosynthesis, gravity to retain the atmosphere, and an atmosphere that protects living things from harmful radiation and meteoroids.</p>
+    <p><strong>中文：</strong>地球适合生命生存，因为它拥有液态水、适宜的温度范围、足够的氧气、供光合作用使用的阳光、能够留住大气层的引力，以及可保护生物免受有害辐射和流星体伤害的大气层。</p>
+  </div>
+</section>
+
+<section id="hypothesis">
+  <h2>8. Hypothetical Situations 假设情境</h2>
+  <div class="grid g2">
+    <div class="card">
+      <h3>If Earth rotates more slowly 如果地球自转变慢</h3>
+      <ul>
+        <li>Days and nights become longer. 白天和夜晚会变长。</li>
+        <li>Sun-facing regions heat for longer; dark regions cool for longer. 向阳区受热更久，背阳区降温更久。</li>
+        <li>Day–night temperature difference increases. 昼夜温差增大。</li>
+        <li>Weather and biological rhythms are disrupted. 天气系统与生物节律受到干扰。</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>If Earth stops rotating 如果地球停止自转</h3>
+      <ul>
+        <li>One side may experience prolonged daylight, the other prolonged darkness. 一侧长期白昼，另一侧长期黑夜。</li>
+        <li>Extreme temperature differences develop. 出现极端温差。</li>
+        <li>Strong atmospheric and oceanic disturbances occur. 大气和海洋会剧烈变化。</li>
+        <li>Many ecosystems may collapse. 许多生态系统可能崩溃。</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>If Earth had no atmosphere 如果地球没有大气层</h3>
+      <ul>
+        <li>No breathable oxygen. 没有可供呼吸的氧气。</li>
+        <li>No protection from harmful ultraviolet radiation. 无法阻挡有害紫外线。</li>
+        <li>Most meteoroids reach the surface. 大多数流星体会直接撞击地面。</li>
+        <li>Very large temperature difference between day and night. 昼夜温差极大。</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Earth viewed from the Moon 从月球看地球</h3>
+      <p class="en">Because the Moon shows nearly the same face to Earth, an observer on the near side would see Earth remain in almost the same position in the lunar sky, while Earth phases change.</p>
+      <p class="zh">由于月球几乎总以同一面朝向地球，位于月球正面的观察者会看到地球在月球天空中大致停留在同一位置，但地球会呈现不同“地相”。</p>
+    </div>
+  </div>
+</section>
+
+<section id="eco">
+  <h2>9. Ecological Footprint 生态足迹</h2>
+  <div class="grid g2">
+    <div class="card">
+      <h3>Definition 定义</h3>
+      <p class="en">Ecological footprint measures how much biologically productive land and water are needed to supply the resources a population uses and absorb the wastes it produces.</p>
+      <p class="zh">生态足迹衡量一个人口群体为了获得所需资源并吸收其产生的废物，需要多少具有生物生产力的土地和水域。</p>
+      <p><strong>Includes 包括：</strong> carbon footprint, construction areas, forests, farming areas, grazing areas and fishing areas.<br>碳足迹、建设用地、森林、农业用地、放牧区与渔业区。</p>
+    </div>
+    <div class="card">
+      <h3>How to reduce it 如何减少生态足迹</h3>
+      <ul>
+        <li>Reduce energy use and use public transport. 节约能源并使用公共交通。</li>
+        <li>Reduce, reuse and recycle. 减少使用、重复使用、回收再造。</li>
+        <li>Choose local food and reduce food waste. 选择本地食物并减少食物浪费。</li>
+        <li>Save water and protect forests. 节约用水并保护森林。</li>
+        <li>Use renewable energy where possible. 尽可能使用可再生能源。</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="mindmap">
+  <h2>10. Memory Map 思维导图</h2>
+  <div class="card memory">
+    <div class="center-node">☀️ Solar System 太阳系</div>
+    <div class="branch-grid">
+      <div class="node"><strong>Sun 太阳</strong><br>Centre, star, gravity<br>中心、恒星、引力</div>
+      <div class="node"><strong>8 Planets 八大行星</strong><br>Inner 4 + Outer 4<br>内行星4颗＋外行星4颗</div>
+      <div class="node"><strong>Distance Units 距离单位</strong><br>A.U. & light year<br>天文单位与光年</div>
+      <div class="node"><strong>Relationships 关系</strong><br>Distance–temperature<br>Mass–gravity<br>距离–温度；质量–引力</div>
+      <div class="node"><strong>Rotation 自转</strong><br>Axis, direction, period<br>自转轴、方向、周期</div>
+      <div class="node"><strong>Earth 地球</strong><br>Water, oxygen, suitable temperature, atmosphere<br>水、氧气、适温、大气层</div>
+      <div class="node"><strong>Moon 月球</strong><br>Natural satellite; same-face phenomenon<br>天然卫星；同一面朝地球</div>
+      <div class="node"><strong>Hypothetical 假设</strong><br>Slow/stop rotation, no atmosphere<br>自转变慢/停止、无大气层</div>
+      <div class="node"><strong>Ecological Footprint 生态足迹</strong><br>Resources used + wastes produced<br>资源消耗＋废物产生</div>
+    </div>
+  </div>
+</section>
+
+<section id="exam">
+  <h2>11. Exam Skills & Model Answers 考试技巧与参考答案</h2>
+  <details open>
+    <summary>Q1. Why is Venus hotter than Mercury? 为什么金星比水星更热？</summary>
+    <p><strong>English:</strong> Venus has a thick atmosphere rich in carbon dioxide. It traps heat through a strong greenhouse effect, so its surface temperature is higher than Mercury’s.</p>
+    <p><strong>中文：</strong>金星拥有浓厚且富含二氧化碳的大气层，强烈温室效应会困住热量，因此金星表面温度比水星高。</p>
+  </details>
+  <details>
+    <summary>Q2. Why does Neptune take longer to orbit the Sun? 为什么海王星公转时间更长？</summary>
+    <p><strong>English:</strong> Neptune is farther from the Sun, so its orbital path is much longer. Therefore, it takes more time to complete one revolution.</p>
+    <p><strong>中文：</strong>海王星离太阳更远，轨道路径更长，因此完成一次公转需要更长时间。</p>
+  </details>
+  <details>
+    <summary>Q3. Why does Mercury have a very large day–night temperature difference? 为什么水星昼夜温差大？</summary>
+    <p><strong>English:</strong> Mercury has almost no atmosphere to trap and distribute heat. The sunlit side becomes very hot, while the dark side loses heat rapidly and becomes very cold.</p>
+    <p><strong>中文：</strong>水星几乎没有大气层来储存和传递热量，因此向阳面很热，而背阳面迅速散热并变得非常寒冷。</p>
+  </details>
+  <details>
+    <summary>Q4. Explain the relationship between mass and gravitational pull. 说明质量与引力的关系。</summary>
+    <p><strong>English:</strong> The greater the mass of a planet, the stronger its gravitational pull, provided the distance is comparable.</p>
+    <p><strong>中文：</strong>在距离相近的情况下，行星质量越大，引力越强。</p>
+  </details>
+  <details>
+    <summary>Q5. State two effects if Earth stops rotating. 写出地球停止自转的两个影响。</summary>
+    <p><strong>English:</strong> One side would experience prolonged heating while the other experiences prolonged cooling, causing extreme temperature differences and severe disruption to weather and ecosystems.</p>
+    <p><strong>中文：</strong>一侧会长期受热，另一侧长期降温，造成极端温差，并严重破坏天气系统和生态系统。</p>
+  </details>
+  <div class="card exam" style="margin-top:16px">
+    <h3>Answer structure 作答结构</h3>
+    <p><strong>Use C-E-R:</strong> Claim → Evidence → Reasoning.</p>
+    <p><strong>使用“结论—证据—解释”：</strong>先写答案，再写课本事实，最后说明科学原因。</p>
+    <p><strong>Example:</strong> “Venus is hottest <em>because</em> its thick CO₂ atmosphere <em>traps heat</em> through the greenhouse effect.”</p>
+  </div>
+</section>
+
+<section id="quiz" class="quiz">
+  <h2>12. Quick Interactive Quiz 快速互动测验</h2>
+  <p class="sub">Tap an answer. 点击答案即可检查。</p>
+  <div class="q" data-answer="b">
+    <strong>1. Which planet is the hottest? 哪颗行星最热？</strong>
+    <button data-v="a">A. Mercury 水星</button><button data-v="b">B. Venus 金星</button><button data-v="c">C. Earth 地球</button>
+    <div class="result"></div>
+  </div>
+  <div class="q" data-answer="c">
+    <strong>2. What does 1 A.U. represent? 1天文单位代表什么？</strong>
+    <button data-v="a">A. Distance light travels in one year 光一年走的距离</button>
+    <button data-v="b">B. Distance between Earth and Moon 地月距离</button>
+    <button data-v="c">C. Average distance between Earth and Sun 地日平均距离</button>
+    <div class="result"></div>
+  </div>
+  <div class="q" data-answer="a">
+    <strong>3. Why does Earth retain its atmosphere? 为什么地球能留住大气层？</strong>
+    <button data-v="a">A. Gravity 引力</button><button data-v="b">B. Moonlight 月光</button><button data-v="c">C. Rotation only 仅靠自转</button>
+    <div class="result"></div>
+  </div>
+  <div class="q" data-answer="b">
+    <strong>4. Which statement is correct? 哪项正确？</strong>
+    <button data-v="a">A. Light year is a unit of time 光年是时间单位</button>
+    <button data-v="b">B. Light year is a unit of distance 光年是距离单位</button>
+    <button data-v="c">C. All planets rotate in the same direction 所有行星自转方向相同</button>
+    <div class="result"></div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <strong>Study tip 学习建议：</strong> Read one section, close the page, explain it aloud in English and Chinese, then answer one exam question from memory.<br>
+  每读完一节，关掉页面，用英文与中文口头解释，再凭记忆回答一道题。
+</footer>
+
+<script>
+document.querySelectorAll('.q button').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    const q=btn.closest('.q'), correct=q.dataset.answer, result=q.querySelector('.result');
+    q.querySelectorAll('button').forEach(b=>b.style.outline='none');
+    if(btn.dataset.v===correct){
+      result.textContent='✅ Correct! 答对了！';
+      result.style.color='#72e6a0'; btn.style.outline='2px solid #72e6a0';
+    }else{
+      result.textContent='❌ Try again. 再试一次。';
+      result.style.color='#ff8f8f'; btn.style.outline='2px solid #ff6b6b';
+    }
+  });
+});
+</script>
+</body>
+</html>
