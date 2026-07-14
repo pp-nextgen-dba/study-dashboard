@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Form 2 Science Chapter 10 – Sound Waves | 中二科学第10章：声波</title>
+<style>
+:root{
+  --bg:#f6fbff; --ink:#18324a; --muted:#5d7185; --card:#ffffff;
+  --blue:#3b82f6; --cyan:#06b6d4; --purple:#8b5cf6; --pink:#ec4899;
+  --yellow:#f59e0b; --green:#10b981; --red:#ef4444;
+  --shadow:0 14px 35px rgba(27,70,110,.12);
+}
+*{box-sizing:border-box}
+body{
+  margin:0; font-family:Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
+  background:
+    radial-gradient(circle at 10% 10%, rgba(59,130,246,.14), transparent 28%),
+    radial-gradient(circle at 90% 0%, rgba(236,72,153,.12), transparent 25%),
+    linear-gradient(180deg,#f8fcff,#eef8ff 55%,#f9fbff);
+  color:var(--ink); line-height:1.6;
+}
+header{
+  padding:52px 20px 34px; text-align:center;
+  background:linear-gradient(135deg,#2563eb,#7c3aed 55%,#ec4899);
+  color:white; position:relative; overflow:hidden;
+}
+header:before,header:after{
+  content:"";position:absolute;border-radius:50%;filter:blur(2px);opacity:.22;background:white
+}
+header:before{width:220px;height:220px;left:-70px;top:-90px}
+header:after{width:280px;height:280px;right:-90px;bottom:-160px}
+h1{font-size:clamp(2rem,5vw,4.2rem);margin:0;line-height:1.05}
+.subtitle{font-size:clamp(1rem,2.5vw,1.35rem);opacity:.95;margin-top:14px}
+.badges{margin-top:20px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+.badge{background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.35);padding:7px 12px;border-radius:999px;font-weight:700}
+.container{max-width:1180px;margin:auto;padding:28px 18px 70px}
+.nav{
+  position:sticky;top:8px;z-index:10;background:rgba(255,255,255,.86);backdrop-filter:blur(12px);
+  border:1px solid rgba(59,130,246,.15);box-shadow:var(--shadow);
+  border-radius:18px;padding:10px;display:flex;gap:8px;overflow-x:auto;margin-bottom:25px
+}
+.nav a{white-space:nowrap;text-decoration:none;color:var(--ink);font-weight:800;padding:9px 13px;border-radius:12px}
+.nav a:hover{background:#eaf3ff;color:#2459d6}
+.section{margin:32px 0}
+.section-title{display:flex;align-items:center;gap:12px;margin-bottom:14px}
+.section-title .icon{
+  width:48px;height:48px;border-radius:15px;display:grid;place-items:center;
+  color:white;font-size:24px;background:linear-gradient(135deg,var(--blue),var(--purple));box-shadow:var(--shadow)
+}
+.section-title h2{margin:0;font-size:clamp(1.5rem,3vw,2.2rem)}
+.grid{display:grid;gap:18px}
+.grid-2{grid-template-columns:repeat(2,minmax(0,1fr))}
+.grid-3{grid-template-columns:repeat(3,minmax(0,1fr))}
+.card{
+  background:var(--card);border-radius:22px;padding:22px;box-shadow:var(--shadow);
+  border:1px solid rgba(30,80,130,.09)
+}
+.card h3{margin-top:0}
+.en{font-weight:750;color:#173a58}
+.cn{color:#6d28d9;font-weight:650}
+.note{background:#fff8dc;border-left:6px solid var(--yellow);padding:14px 16px;border-radius:12px}
+.key{display:inline-block;background:#eaf2ff;color:#174fb8;border-radius:9px;padding:1px 8px;font-weight:850}
+.formula{font-size:1.15rem;text-align:center;background:#eef7ff;border:2px dashed #60a5fa;padding:14px;border-radius:14px;font-weight:900}
+.mindmap{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;align-items:stretch}
+.node{border-radius:18px;padding:18px;color:white;min-height:135px;box-shadow:var(--shadow)}
+.n1{background:linear-gradient(135deg,#2563eb,#06b6d4)}
+.n2{background:linear-gradient(135deg,#7c3aed,#ec4899)}
+.n3{background:linear-gradient(135deg,#059669,#22c55e)}
+.n4{background:linear-gradient(135deg,#ea580c,#f59e0b)}
+.n5{background:linear-gradient(135deg,#db2777,#8b5cf6)}
+.n6{background:linear-gradient(135deg,#0f766e,#0891b2)}
+.node b{font-size:1.1rem}
+.wavebox{background:#f8fbff;border-radius:18px;padding:15px;border:1px solid #dbeafe}
+svg{width:100%;height:120px}
+.exam{border-left:7px solid var(--blue)}
+.answer{margin-top:12px;padding:14px;border-radius:13px;background:#f3f8ff}
+.answer strong{color:#1d4ed8}
+.steps{counter-reset:step}
+.step{position:relative;padding:12px 12px 12px 52px;background:#fff;border-radius:14px;margin:10px 0;border:1px solid #e6eef8}
+.step:before{counter-increment:step;content:counter(step);position:absolute;left:12px;top:10px;width:28px;height:28px;border-radius:50%;display:grid;place-items:center;background:var(--purple);color:white;font-weight:900}
+.quiz button{
+  width:100%;text-align:left;padding:12px 14px;margin:7px 0;border-radius:12px;border:1px solid #d9e5f2;background:white;
+  cursor:pointer;font-weight:700;color:var(--ink)
+}
+.quiz button:hover{background:#eef6ff}
+.quiz button.correct{background:#dcfce7;border-color:#22c55e}
+.quiz button.wrong{background:#fee2e2;border-color:#ef4444}
+.result{margin-top:10px;font-weight:900}
+table{width:100%;border-collapse:collapse}
+th,td{padding:12px;border-bottom:1px solid #e8eef5;text-align:left;vertical-align:top}
+th{background:#eff6ff}
+.small{font-size:.92rem;color:var(--muted)}
+footer{text-align:center;color:var(--muted);padding:25px}
+@media(max-width:850px){
+  .grid-2,.grid-3,.mindmap{grid-template-columns:1fr}
+  header{padding-top:38px}
+}
+@media print{
+  .nav,.quiz{display:none}
+  body{background:white}
+  .card{box-shadow:none;break-inside:avoid}
+}
+</style>
+</head>
+<body>
+<div class="top-nav" style="background:#fff;padding:10px 16px;border-bottom:2px solid #e5e7eb;position:sticky;top:0;z-index:120">
+  <a class="dashboard-link" href="../index.html" style="display:inline-flex;align-items:center;gap:6px;padding:8px 12px;border-radius:8px;background:#1d4ed8;color:#fff;font-size:13px;font-weight:800;text-decoration:none">&larr; Back to Dashboard</a>
+</div>
+<header>
+  <h1>Sound Waves<br>声波</h1>
+  <div class="subtitle">Form 2 Science Chapter 10 Revision · 中二科学第10章考试复习</div>
+  <div class="badges">
+    <span class="badge">Bilingual 双语</span>
+    <span class="badge">Exam Answers 作答技巧</span>
+    <span class="badge">Interactive Quiz 互动测验</span>
+  </div>
+</header>
+
+<div class="container">
+  <nav class="nav">
+    <a href="#map">Mind Map 思维图</a>
+    <a href="#basic">Basic Ideas 基础概念</a>
+    <a href="#waves">Loudness & Pitch 响度与音调</a>
+    <a href="#reflection">Reflection & Absorption 反射与吸收</a>
+    <a href="#applications">Applications 应用</a>
+    <a href="#exam">Exam Questions 考题</a>
+    <a href="#quiz">Quiz 测验</a>
+  </nav>
+
+  <section class="section" id="map">
+    <div class="section-title"><div class="icon">🧠</div><h2>Memory Map 思维导图</h2></div>
+    <div class="mindmap">
+      <div class="node n1"><b>Sound is energy<br>声音是一种能量</b><br>Produced by vibration<br>由物体振动产生</div>
+      <div class="node n2"><b>Needs a medium<br>需要介质</b><br>Solid · Liquid · Gas<br>固体 · 液体 · 气体</div>
+      <div class="node n3"><b>Speed of sound<br>声音传播速度</b><br>Fastest in solids<br>固体中最快</div>
+      <div class="node n4"><b>Loudness 响度</b><br>Depends on amplitude<br>取决于振幅</div>
+      <div class="node n5"><b>Pitch 音调</b><br>Depends on frequency<br>取决于频率</div>
+      <div class="node n6"><b>Applications 应用</b><br>Stethoscope · Ultrasound · Sonar<br>听诊器 · 超声波 · 声纳</div>
+    </div>
+  </section>
+
+  <section class="section" id="basic">
+    <div class="section-title"><div class="icon">🔊</div><h2>Core Concepts 核心概念</h2></div>
+    <div class="grid grid-2">
+      <div class="card">
+        <h3>1. What is sound? 什么是声音？</h3>
+        <p class="en">Sound is a form of <span class="key">energy</span>.</p>
+        <p class="cn">声音是一种<span class="key">能量</span>。</p>
+        <p class="en">Sound is produced by <span class="key">vibration</span>.</p>
+        <p class="cn">声音由物体的<span class="key">振动</span>产生。</p>
+      </div>
+      <div class="card">
+        <h3>2. Medium 介质</h3>
+        <p class="en">Sound needs a medium to travel. It can move through solids, liquids and gases.</p>
+        <p class="cn">声音需要介质才能传播，可通过固体、液体和气体传播。</p>
+        <div class="note"><b>Important:</b> Sound cannot travel through a vacuum.<br><b>重点：</b>声音不能在真空中传播。</div>
+      </div>
+      <div class="card">
+        <h3>3. Speed of sound 声速</h3>
+        <p class="en"><b>Solid &gt; Liquid &gt; Gas</b></p>
+        <p class="cn"><b>固体 &gt; 液体 &gt; 气体</b></p>
+        <p class="small">Reason: particles in solids are packed closely, so vibrations are transferred more quickly.<br>原因：固体粒子排列紧密，振动能更快传递。</p>
+      </div>
+      <div class="card">
+        <h3>4. Human hearing range 人类听觉范围</h3>
+        <div class="formula">20 Hz – 20 000 Hz</div>
+        <p class="en">Below 20 Hz: infrasound. Above 20 000 Hz: ultrasound.</p>
+        <p class="cn">低于20 Hz：次声波。高于20 000 Hz：超声波。</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="waves">
+    <div class="section-title"><div class="icon">〰️</div><h2>Loudness and Pitch 响度与音调</h2></div>
+    <div class="grid grid-2">
+      <div class="card">
+        <h3>Loudness 响度</h3>
+        <p class="en">Determined by <span class="key">amplitude</span>.</p>
+        <p class="cn">由<span class="key">振幅</span>决定。</p>
+        <div class="wavebox">
+          <svg viewBox="0 0 500 120" aria-label="large amplitude wave">
+            <line x1="0" y1="60" x2="500" y2="60" stroke="#94a3b8" stroke-width="2"/>
+            <path d="M0 60 C40 5,80 5,120 60 S200 115,240 60 S320 5,360 60 S440 115,500 60" fill="none" stroke="#2563eb" stroke-width="5"/>
+          </svg>
+        </div>
+        <p class="small">Larger amplitude = louder sound<br>振幅越大 = 声音越响</p>
+      </div>
+      <div class="card">
+        <h3>Pitch 音调</h3>
+        <p class="en">Determined by <span class="key">frequency</span>.</p>
+        <p class="cn">由<span class="key">频率</span>决定。</p>
+        <div class="wavebox">
+          <svg viewBox="0 0 500 120" aria-label="high frequency wave">
+            <line x1="0" y1="60" x2="500" y2="60" stroke="#94a3b8" stroke-width="2"/>
+            <path d="M0 60 C15 20,30 20,45 60 S75 100,90 60 S120 20,135 60 S165 100,180 60 S210 20,225 60 S255 100,270 60 S300 20,315 60 S345 100,360 60 S390 20,405 60 S435 100,450 60 S480 20,500 60" fill="none" stroke="#ec4899" stroke-width="5"/>
+          </svg>
+        </div>
+        <p class="small">Higher frequency = higher pitch<br>频率越高 = 音调越高</p>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top:18px">
+      <h3>How to compare waveforms 如何比较波形</h3>
+      <table>
+        <tr><th>Feature 特征</th><th>Look at 看什么</th><th>Meaning 含义</th></tr>
+        <tr><td>Loudness 响度</td><td>Height of wave 波峰高度</td><td>Higher amplitude → louder 较大振幅→较响</td></tr>
+        <tr><td>Pitch 音调</td><td>Number of waves in same time 相同时间内波数</td><td>More waves → higher frequency → higher pitch 波数越多→频率越高→音调越高</td></tr>
+      </table>
+    </div>
+  </section>
+
+  <section class="section" id="reflection">
+    <div class="section-title"><div class="icon">🪞</div><h2>Reflection and Absorption 声音反射与吸收</h2></div>
+    <div class="grid grid-2">
+      <div class="card">
+        <h3>Hard, smooth surface 硬而光滑的表面</h3>
+        <p class="en">Reflects sound well.</p>
+        <p class="cn">能很好地反射声音。</p>
+        <p>Examples 例子：glass, concrete, metal<br>玻璃、混凝土、金属</p>
+      </div>
+      <div class="card">
+        <h3>Soft, rough surface 柔软而粗糙的表面</h3>
+        <p class="en">Absorbs sound well.</p>
+        <p class="cn">能很好地吸收声音。</p>
+        <p>Examples 例子：carpet, curtain, foam<br>地毯、窗帘、泡棉</p>
+      </div>
+    </div>
+    <div class="card exam" style="margin-top:18px">
+      <h3>Classic apparatus question 经典实验题</h3>
+      <p><b>Question:</b> Can student B hear the stopwatch through reflection from a glass sheet?</p>
+      <div class="answer">
+        <strong>Model answer (EN):</strong> Yes. The sound of the stopwatch is reflected by the glass sheet toward student B.<br><br>
+        <strong>标准答案（中）：</strong> 可以。秒表发出的声音被玻璃片反射，并传向学生B。
+      </div>
+      <p><b>When glass is replaced by carpet:</b></p>
+      <div class="answer">
+        <strong>Model answer (EN):</strong> The sound becomes very weak or cannot be heard because carpet is soft and rough, so it absorbs sound well.<br><br>
+        <strong>标准答案（中）：</strong> 声音会变得很弱或听不见，因为地毯柔软且粗糙，能很好地吸收声音。
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="applications">
+    <div class="section-title"><div class="icon">🩺</div><h2>Applications of Sound 声音的应用</h2></div>
+    <div class="grid grid-3">
+      <div class="card">
+        <h3>Stethoscope 听诊器</h3>
+        <p class="en">Helps doctors listen to heartbeat and breathing sounds.</p>
+        <p class="cn">帮助医生听取心跳和呼吸声。</p>
+      </div>
+      <div class="card">
+        <h3>Ultrasound 超声波</h3>
+        <p class="en">Sound with frequency above 20 000 Hz.</p>
+        <p class="cn">频率高于20 000 Hz的声波。</p>
+        <p class="small">Used in medical imaging and pregnancy scans.<br>用于医学成像及胎儿扫描。</p>
+      </div>
+      <div class="card">
+        <h3>Sonar 声纳</h3>
+        <p class="en">Uses reflected sound to detect objects underwater.</p>
+        <p class="cn">利用反射声波探测水下物体。</p>
+        <p class="small">Example: locating fish or measuring sea depth.<br>例如：寻找鱼群或测量海深。</p>
+      </div>
+    </div>
+    <div class="card" style="margin-top:18px">
+      <h3>Why does an ultrasound image form? 为什么能形成超声图像？</h3>
+      <p class="en">Different body tissues reflect ultrasound differently. The machine detects the reflected waves and converts them into an image.</p>
+      <p class="cn">不同身体组织对超声波的反射程度不同。仪器接收反射波后，把它转换成图像。</p>
+    </div>
+  </section>
+
+  <section class="section" id="exam">
+    <div class="section-title"><div class="icon">✍️</div><h2>Exam Answering Guide 考试作答指南</h2></div>
+    <div class="card">
+      <h3>Use this 3-part structure 使用“三段式”</h3>
+      <div class="steps">
+        <div class="step"><b>Name the concept 写出概念</b><br>Reflection, absorption, amplitude, frequency, vibration, medium.</div>
+        <div class="step"><b>State the relationship 写出关系</b><br>“A larger amplitude produces a louder sound.”</div>
+        <div class="step"><b>Link to the situation 联系题目情境</b><br>“The carpet absorbs the sound, so less sound reaches the listener.”</div>
+      </div>
+    </div>
+
+    <div class="grid grid-2" style="margin-top:18px">
+      <div class="card exam">
+        <h3>Q1. What produces sound?</h3>
+        <div class="answer"><strong>EN:</strong> Sound is produced by vibrating objects.<br><strong>中：</strong>声音由振动物体产生。</div>
+      </div>
+      <div class="card exam">
+        <h3>Q2. Why is sound faster in solids?</h3>
+        <div class="answer"><strong>EN:</strong> The particles in solids are closely packed, so vibrations are transferred quickly.<br><strong>中：</strong>固体粒子排列紧密，因此振动能快速传递。</div>
+      </div>
+      <div class="card exam">
+        <h3>Q3. Which graph has the highest pitch?</h3>
+        <div class="answer"><strong>EN:</strong> The graph with the most complete waves in the same time, because it has the highest frequency.<br><strong>中：</strong>在相同时间内波数最多的图，因为它的频率最高。</div>
+      </div>
+      <div class="card exam">
+        <h3>Q4. State the Doppler effect.</h3>
+        <div class="answer"><strong>EN:</strong> The Doppler effect is an apparent change in frequency caused by relative motion between the sound source and the observer.<br><strong>中：</strong>多普勒效应是由于声源与观察者之间发生相对运动，导致观察到的频率改变。</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="quiz">
+    <div class="section-title"><div class="icon">🎯</div><h2>Quick Quiz 快速测验</h2></div>
+    <div class="grid grid-2">
+      <div class="card quiz" data-answer="b">
+        <h3>1. Loudness depends on…<br>响度取决于……</h3>
+        <button data-choice="a">A. Frequency 频率</button>
+        <button data-choice="b">B. Amplitude 振幅</button>
+        <button data-choice="c">C. Speed 速度</button>
+        <div class="result"></div>
+      </div>
+      <div class="card quiz" data-answer="c">
+        <h3>2. Sound travels fastest in…<br>声音传播最快的是……</h3>
+        <button data-choice="a">A. Gas 气体</button>
+        <button data-choice="b">B. Liquid 液体</button>
+        <button data-choice="c">C. Solid 固体</button>
+        <div class="result"></div>
+      </div>
+      <div class="card quiz" data-answer="a">
+        <h3>3. Which material absorbs sound best?<br>哪种材料最能吸收声音？</h3>
+        <button data-choice="a">A. Carpet 地毯</button>
+        <button data-choice="b">B. Glass 玻璃</button>
+        <button data-choice="c">C. Metal 金属</button>
+        <div class="result"></div>
+      </div>
+      <div class="card quiz" data-answer="b">
+        <h3>4. Ultrasound has a frequency…<br>超声波的频率……</h3>
+        <button data-choice="a">A. Below 20 Hz 低于20 Hz</button>
+        <button data-choice="b">B. Above 20 000 Hz 高于20 000 Hz</button>
+        <button data-choice="c">C. Exactly 20 Hz 正好20 Hz</button>
+        <div class="result"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="card">
+      <h3>One-minute final recap 一分钟总复习</h3>
+      <p><b>Vibration → Sound → Needs medium → Travels fastest in solids</b><br>
+      <b>振动 → 产生声音 → 需要介质 → 在固体中传播最快</b></p>
+      <p><b>Amplitude controls loudness; frequency controls pitch.</b><br>
+      <b>振幅决定响度；频率决定音调。</b></p>
+      <p><b>Hard smooth surfaces reflect; soft rough surfaces absorb.</b><br>
+      <b>硬而光滑的表面反射声音；柔软粗糙的表面吸收声音。</b></p>
+    </div>
+  </section>
+</div>
+
+<footer>Form 2 Science Revision · 中二科学复习网页</footer>
+
+<script>
+document.querySelectorAll('.quiz').forEach(q=>{
+  q.querySelectorAll('button').forEach(btn=>{
+    btn.addEventListener('click',()=>{
+      q.querySelectorAll('button').forEach(b=>b.classList.remove('correct','wrong'));
+      const ok=btn.dataset.choice===q.dataset.answer;
+      btn.classList.add(ok?'correct':'wrong');
+      q.querySelector('.result').textContent=ok?'✅ Correct! 答对了！':'❌ Try again. 再想一想。';
+      if(!ok){
+        const right=q.querySelector(`button[data-choice="${q.dataset.answer}"]`);
+        right.classList.add('correct');
+      }
+    });
+  });
+});
+</script>
+</body>
+</html>

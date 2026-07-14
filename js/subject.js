@@ -126,7 +126,8 @@ export const scienceData = {
             status:"Not Started",
             confidence:0,
             last_updated:"2026-05-20",
-            resourceUrl:"../science/t2_chapter10_sound_waves.html"
+            resourceUrl:"../science/t2_chapter10_sound_waves.html",
+            resourceUrl2:"../science/t2_science_ch10_sound_waves_bilingual-note2.html"
         },
 
         {

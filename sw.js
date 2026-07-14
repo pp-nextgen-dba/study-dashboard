@@ -1,4 +1,4 @@
-const CACHE = "study-dashboard-v15";
+const CACHE = "study-dashboard-v16";
 
 const STATIC_ASSETS = [
     "/index.html",
@@ -54,6 +54,7 @@ const STATIC_ASSETS = [
     "/science/22_science_ch8_force_motion_note2.html",
     "/science/t2_science_ch8_force_motion_note3.html",
     "/science/t2_chapter10_sound_waves.html",
+    "/science/t2_science_ch10_sound_waves_bilingual-note2.html",
     "/science/t2_kssm_chapter13_meteoroid_asteroid_comet.html",
     "/science/t2_chapter13_note2.html",
     "/science/form2_science_chapter12_solar_system_bilingual.html",
