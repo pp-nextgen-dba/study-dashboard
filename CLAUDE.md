@@ -85,7 +85,14 @@ No `archive/` subdirectories — all files sit directly in `<subject>/`.
 5. **Bump cache versions** — increment `?v=N` on the subject page's CSS and module imports
 6. Run `npm run validate`
 7. Commit & push
-8. **Browser cache clearing:** After pushing, users should clear site data (DevTools → Application → Storage → Clear site data) to load the updated Firestore document with the new `resourceUrl`
+8. **Tell the user the Firestore sync step up front — don't wait for a "not found" report.** A pushed `resourceUrl` doesn't reach Firestore until a browser actually loads `subjects/<name>.html`, enters the PIN, and runs the page's sync logic (see "Why `addMissingChineseLabels` is needed" below). Pushing the code alone is not enough — this is the #1 cause of "not found" reports right after a chapter is added.
+   - **Claude cannot trigger this itself.** Every subject page runs `await requireAuth(...)` at the top of its module *before* `loadData()` — the whole script (including the Firestore read/sync) is blocked until the PIN is entered. Claude doesn't have the PIN and must not guess it. Loading the subject page in the Browser pane only shows the PIN overlay with 0 chapters; it does not sync anything.
+   - So: after pushing, immediately tell the user to open the live subject page, enter the PIN, and (if the service worker hasn't picked up the new cache version) clear site data first — this is a required manual step, not an optional cache-clearing suggestion.
+   - Claude *can* verify after the user confirms they've done this:
+     ```bash
+     curl -s "https://firestore.googleapis.com/v1/projects/study-dashboard-7ca48/databases/(default)/documents/subjects/<id>" | grep -A2 "<chapter name>"
+     ```
+     Absence of `resourceUrl` in that output means either the user hasn't visited yet, or that page's sync mechanism doesn't handle the field you added (name/shape varies per subject — some use `addMissingChineseLabels()`, others `mergeSeedData()`, others inline `needsReset` logic).
 
 ## Auto-Integration Workflow
 
@@ -180,6 +187,14 @@ curl -s "https://api.github.com/repos/pp-nextgen-dba/study-dashboard/actions/run
 ```
 
 If the live `sw.js` `CACHE` value or a recently-changed file doesn't match what's in the repo, and/or the latest Actions run shows `"conclusion": "failure"`, the deploy failed — it's not a cache problem. Fix: re-run the failed job from the GitHub Actions tab, or push a new commit (`git commit --allow-empty -m "chore: retrigger pages deploy"`) to trigger a fresh deployment. Only tell users to hard-refresh/clear site data *after* confirming the live files actually updated.
+
+### "Not found" right after adding a chapter/note (deploy is fine)
+
+If the deploy checks above are clean (live `sw.js` matches, file returns 200, latest Actions run succeeded) but the notes link still doesn't show or 404s, it's almost always the Firestore sync gap described in step 8 of "Adding a Chapter Notes Page" — the new `resourceUrl` was pushed to `js/subject.js` but never written into the live Firestore document, because that only happens when a browser loads the subject page. Confirm with:
+```bash
+curl -s "https://firestore.googleapis.com/v1/projects/study-dashboard-7ca48/databases/(default)/documents/subjects/<id>" | grep -A2 "<chapter name>"
+```
+If `resourceUrl` is missing from that output, Claude cannot fix it directly — every subject page blocks its Firestore read/sync behind `await requireAuth(...)` (the PIN gate) before `loadData()` runs, so loading the page in the Browser pane just shows the PIN overlay with 0 chapters, not a synced document. Ask the user to open the live subject page, enter the PIN, and clear site data if needed — then re-run the curl above to confirm.
 
 ## Changing the PIN
 
