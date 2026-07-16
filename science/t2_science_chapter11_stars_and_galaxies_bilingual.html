@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Form 2 Science – Chapter 11 Stars and Galaxies in the Universe | 中二科学：第11章 宇宙中的恒星与星系</title>
+<style>
+:root{
+  --bg:#07111f;
+  --panel:#10243a;
+  --panel2:#16314d;
+  --text:#eef7ff;
+  --muted:#bdd7ed;
+  --cyan:#49d6ff;
+  --yellow:#ffd166;
+  --pink:#ff7eb6;
+  --green:#72e6a0;
+  --orange:#ff9b54;
+  --purple:#b69cff;
+  --red:#ff6b6b;
+  --line:rgba(255,255,255,.12);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  font-family:Inter,Segoe UI,Arial,"Noto Sans SC","Microsoft YaHei",sans-serif;
+  color:var(--text);
+  line-height:1.68;
+  background:
+    radial-gradient(circle at 18% 10%, rgba(255,126,182,.13), transparent 22%),
+    radial-gradient(circle at 82% 14%, rgba(73,214,255,.12), transparent 24%),
+    radial-gradient(circle at 70% 60%, rgba(182,156,255,.08), transparent 30%),
+    linear-gradient(180deg,#05101b,#0c1a2d 45%,#08121f);
+}
+.hero{
+  min-height:92vh;
+  display:grid;
+  place-items:center;
+  text-align:center;
+  padding:46px 16px;
+  position:relative;
+  overflow:hidden;
+}
+.hero:before{
+  content:"";
+  position:absolute;
+  inset:-30%;
+  background-image:radial-gradient(circle,rgba(255,255,255,.85) 0 1px,transparent 1.4px);
+  background-size:34px 34px;
+  opacity:.24;
+  transform:rotate(12deg);
+}
+.planet{
+  width:180px;height:180px;border-radius:50%;margin:auto;
+  background:
+    radial-gradient(circle at 34% 32%, #d7f2ff, #87c5ff 35%, #4671c7 65%, #243566);
+  box-shadow:0 0 40px rgba(95,174,255,.55), 0 0 120px rgba(95,174,255,.22);
+  position:relative;z-index:2;
+}
+.planet:after{
+  content:"";
+  position:absolute; inset:-18px;
+  border:2px solid rgba(255,255,255,.18);
+  border-radius:50%;
+  transform:rotate(18deg);
+}
+.hero h1{
+  font-size:clamp(2.25rem,6vw,5rem);
+  line-height:1.05;
+  margin:28px auto 12px;
+  max-width:1100px;
+  position:relative;z-index:2;
+}
+.hero p{
+  max-width:940px;
+  margin:0 auto 8px;
+  color:var(--muted);
+  font-size:clamp(1rem,2vw,1.25rem);
+  position:relative;z-index:2;
+}
+.badges{
+  display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-top:22px;position:relative;z-index:2;
+}
+.badge{
+  padding:8px 14px;border-radius:999px;border:1px solid var(--line);
+  background:rgba(255,255,255,.06);backdrop-filter:blur(8px);
+}
+nav{
+  position:sticky;top:0;z-index:50;background:rgba(5,14,25,.9);
+  backdrop-filter:blur(14px);border-bottom:1px solid var(--line);overflow-x:auto
+}
+nav .wrap{
+  max-width:1250px;margin:auto;display:flex;gap:6px;padding:10px 12px;white-space:nowrap
+}
+nav a{
+  color:var(--muted);text-decoration:none;padding:8px 11px;border-radius:10px;font-size:.93rem
+}
+nav a:hover{background:rgba(255,255,255,.08);color:#fff}
+main{max-width:1220px;margin:auto;padding:28px 16px 80px}
+section{margin:34px 0}
+h2{font-size:clamp(1.75rem,3.5vw,2.6rem);margin:0 0 10px}
+h3{font-size:1.22rem;margin:0 0 8px}
+.sub{color:var(--muted);margin:0 0 18px}
+.grid{display:grid;gap:16px}
+.g2{grid-template-columns:repeat(2,minmax(0,1fr))}
+.g3{grid-template-columns:repeat(3,minmax(0,1fr))}
+.g4{grid-template-columns:repeat(4,minmax(0,1fr))}
+.card{
+  background:linear-gradient(145deg,rgba(22,49,77,.95),rgba(10,29,47,.95));
+  border:1px solid var(--line);border-radius:20px;padding:20px;
+  box-shadow:0 14px 35px rgba(0,0,0,.23)
+}
+.en{color:#f7fbff}
+.zh{color:#d8ecff;margin-top:6px}
+.small{font-size:.9rem;color:var(--muted)}
+.kicker{
+  display:inline-block;padding:5px 9px;border-radius:8px;margin-bottom:8px;
+  font-size:.77rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase
+}
+.cyan{background:rgba(73,214,255,.15);color:var(--cyan)}
+.yellow{background:rgba(255,209,102,.16);color:var(--yellow)}
+.pink{background:rgba(255,126,182,.16);color:var(--pink)}
+.green{background:rgba(114,230,160,.16);color:var(--green)}
+.orange{background:rgba(255,155,84,.16);color:var(--orange)}
+.purple{background:rgba(182,156,255,.16);color:var(--purple)}
+.callout{
+  border-left:5px solid var(--yellow);
+  background:rgba(255,209,102,.08);
+  padding:15px 18px;border-radius:12px;margin:14px 0
+}
+.formula{
+  font-size:1.1rem;font-weight:800;text-align:center;
+  background:#061728;border:1px dashed rgba(73,214,255,.5);
+  padding:14px;border-radius:14px;margin:10px 0;color:#dff9ff
+}
+.table-wrap{overflow:auto;border-radius:16px;border:1px solid var(--line)}
+table{width:100%;border-collapse:collapse;min-width:820px;background:rgba(8,24,40,.82)}
+th,td{padding:11px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+th{background:#17324d;position:sticky;top:0;text-align:left}
+tr:hover td{background:rgba(255,255,255,.03)}
+.memory{
+  display:flex;flex-direction:column;align-items:center;gap:18px;padding:28px 12px
+}
+.center-node{
+  padding:20px 34px;border-radius:999px;
+  background:linear-gradient(135deg,#ffd166,#ff8c42);
+  color:#271400;font-weight:900;font-size:1.4rem;
+  box-shadow:0 0 35px rgba(255,177,71,.35)
+}
+.branch-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;width:100%}
+.node{
+  position:relative;text-align:center;padding:16px;border-radius:16px;
+  background:rgba(255,255,255,.07);border:1px solid var(--line)
+}
+.node:before{
+  content:"";position:absolute;width:2px;height:18px;background:rgba(255,255,255,.24);top:-18px;left:50%
+}
+ul{margin:8px 0 0;padding-left:20px}
+li{margin:6px 0}
+details{
+  background:rgba(255,255,255,.05);border:1px solid var(--line);
+  border-radius:14px;padding:13px 16px;margin:10px 0
+}
+summary{cursor:pointer;font-weight:800}
+.exam{
+  background:linear-gradient(145deg,rgba(114,230,160,.12),rgba(73,214,255,.08));
+  border:1px solid rgba(114,230,160,.35)
+}
+.quiz .q{
+  margin:14px 0;padding:16px;border-radius:14px;background:rgba(255,255,255,.05);border:1px solid var(--line)
+}
+.quiz button{
+  display:block;width:100%;text-align:left;margin:7px 0;padding:10px 12px;
+  border-radius:10px;border:1px solid var(--line);background:#102943;color:#fff;cursor:pointer
+}
+.quiz button:hover{background:#173a5c}
+.result{font-weight:800;margin-top:8px}
+footer{text-align:center;color:var(--muted);padding:30px 16px;border-top:1px solid var(--line)}
+@media(max-width:860px){
+  .g2,.g3,.g4,.branch-grid{grid-template-columns:1fr}
+  .hero{min-height:80vh}
+  .planet{width:130px;height:130px}
+}
+@media print{
+  nav,.hero:before,.quiz{display:none!important}
+  body{background:#fff;color:#111}
+  .card,details{background:#fff;color:#111;border:1px solid #ccc;box-shadow:none;break-inside:avoid}
+  .zh,.sub,.small{color:#333}
+  main{max-width:none}
+}
+</style>
+</head>
+<body>
+<div class="top-nav" style="background:#fff;padding:10px 16px;border-bottom:2px solid #e5e7eb;position:sticky;top:0;z-index:120">
+  <a class="dashboard-link" href="../index.html" style="display:inline-flex;align-items:center;gap:6px;padding:8px 12px;border-radius:8px;background:#1d4ed8;color:#fff;font-size:13px;font-weight:800;text-decoration:none">&larr; Back to Dashboard</a>
+</div>
+<header class="hero">
+  <div>
+    <div class="planet"></div>
+    <h1>Form 2 Science: Chapter 11<br>Stars and Galaxies in the Universe<br>中二科学：第11章 宇宙中的恒星与星系</h1>
+    <p>A colourful bilingual final-exam revision webpage with key notes, memory map, model answers and quick quiz.</p>
+    <p>这是一个色彩丰富的双语期末复习网页，包含重点笔记、思维导图、参考答案和快速测验。</p>
+    <div class="badges">
+      <span class="badge">🌌 Chapter 11 第11章</span>
+      <span class="badge">🧠 Memory Map 思维导图</span>
+      <span class="badge">📝 Exam Prep 考试准备</span>
+      <span class="badge">🇬🇧🇨🇳 English + 中文</span>
+    </div>
+  </div>
+</header>
+
+<nav><div class="wrap">
+  <a href="#overview">Overview</a>
+  <a href="#galaxies">Galaxies</a>
+  <a href="#milkyway">Milky Way</a>
+  <a href="#stars">Stars</a>
+  <a href="#temperature">Star Colour & Temperature</a>
+  <a href="#lifecycle">Life Cycle</a>
+  <a href="#sizes">Relative Size</a>
+  <a href="#mindmap">Mind Map</a>
+  <a href="#exam">Exam Tips</a>
+  <a href="#quiz">Quiz</a>
+</div></nav>
+
+<main>
+<section id="overview">
+  <h2>1. Big Picture 总览</h2>
+  <p class="sub">This chapter connects the universe, galaxies, the solar system and stars. 这一章把宇宙、星系、太阳系和恒星联系起来。</p>
+  <div class="grid g3">
+    <div class="card">
+      <span class="kicker yellow">Universe 宇宙</span>
+      <h3>What is the universe? 什么是宇宙？</h3>
+      <p class="en">The universe includes everything that exists: galaxies, stars, planets, gas, dust, energy and space.</p>
+      <p class="zh">宇宙包括所有存在的事物：星系、恒星、行星、气体、尘埃、能量和空间。</p>
+    </div>
+    <div class="card">
+      <span class="kicker cyan">Galaxy 星系</span>
+      <h3>Main idea 重点</h3>
+      <p class="en">A galaxy is a huge collection of stars, gas and dust held together by gravity.</p>
+      <p class="zh">星系是由引力结合在一起的大量恒星、气体和尘埃所组成的巨大天体系统。</p>
+    </div>
+    <div class="card">
+      <span class="kicker purple">Solar system 太阳系</span>
+      <h3>Location 位置</h3>
+      <p class="en">Our solar system is found in the Milky Way galaxy.</p>
+      <p class="zh">我们的太阳系位于银河系之中。</p>
+    </div>
+  </div>
+
+  <div class="callout">
+    <strong>Hierarchy 层次关系：</strong><br>
+    <span class="en">Universe → Galaxy → Solar System → Sun → Earth</span><br>
+    <span class="zh">宇宙 → 星系 → 太阳系 → 太阳 → 地球</span>
+  </div>
+</section>
+
+<section id="galaxies">
+  <h2>2. Galaxies 星系</h2>
+  <div class="grid g2">
+    <div class="card">
+      <h3>Definition 定义</h3>
+      <p class="en">Galaxies contain millions or billions of stars together with gas and dust particles.</p>
+      <p class="zh">星系包含数百万甚至数十亿颗恒星，以及气体和尘埃粒子。</p>
+      <p class="small">Technology such as telescopes helps humans observe distant galaxies. 望远镜等科技帮助人类观察遥远星系。</p>
+    </div>
+    <div class="card">
+      <h3>Types of galaxies 星系的种类</h3>
+      <ul>
+        <li><strong>Spiral 螺旋星系</strong> – spiral arms; example: Milky Way, Andromeda.<br>有旋臂；例子：银河系、仙女座星系。</li>
+        <li><strong>Elliptical 椭圆星系</strong> – oval or round shape; example: Messier 87.<br>椭圆或圆形；例子：梅西耶87。</li>
+        <li><strong>Irregular 不规则星系</strong> – no clear regular shape; example: Magellanic Clouds.<br>没有固定形状；例子：麦哲伦星云。</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card" style="margin-top:16px">
+    <h3>Quick comparison 快速比较</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Type 种类</th><th>Shape 形状</th><th>Examples 例子</th></tr></thead>
+        <tbody>
+          <tr><td>Spiral 螺旋</td><td>Has spiral arms 有旋臂</td><td>Milky Way 银河系, Andromeda 仙女座星系</td></tr>
+          <tr><td>Elliptical 椭圆</td><td>Oval / round 椭圆形或圆形</td><td>Messier 87 梅西耶87</td></tr>
+          <tr><td>Irregular 不规则</td><td>No fixed shape 无固定形状</td><td>Large / Small Magellanic Cloud 大/小麦哲伦星云</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section id="milkyway">
+  <h2>3. The Milky Way 银河系</h2>
+  <div class="grid g2">
+    <div class="card">
+      <span class="kicker green">Important</span>
+      <h3>Key facts 重点事实</h3>
+      <ul>
+        <li>The Milky Way is a medium-sized spiral galaxy. 银河系是一个中型螺旋星系。</li>
+        <li>Our solar system is located at the edge of one spiral arm. 我们的太阳系位于其中一个旋臂的边缘。</li>
+        <li>The Sun is one of billions of stars in the Milky Way. 太阳只是银河系中数十亿颗恒星之一。</li>
+      </ul>
+    </div>
+    <div class="card">
+      <span class="kicker pink">Remember 记住</span>
+      <h3>Position concept 位置概念</h3>
+      <p class="en">Earth is inside the solar system, the solar system is inside the Milky Way, and the Milky Way is only one galaxy in the universe.</p>
+      <p class="zh">地球位于太阳系中，太阳系位于银河系中，而银河系只是宇宙中的一个星系。</p>
+    </div>
+  </div>
+</section>
+
+<section id="stars">
+  <h2>4. Stars 恒星</h2>
+  <div class="grid g3">
+    <div class="card">
+      <span class="kicker yellow">Star 恒星</span>
+      <h3>Definition 定义</h3>
+      <p class="en">A star is a hot ball of gases that produces its own light and heat.</p>
+      <p class="zh">恒星是能够自行发光发热的高温气体球。</p>
+    </div>
+    <div class="card">
+      <span class="kicker cyan">Sun 太阳</span>
+      <h3>Important fact 重要事实</h3>
+      <p class="en">The Sun is a star, not a planet.</p>
+      <p class="zh">太阳是一颗恒星，不是行星。</p>
+    </div>
+    <div class="card">
+      <span class="kicker purple">Observed properties 观察到的特征</span>
+      <h3>Characteristics of stars 恒星的特征</h3>
+      <p class="en">Stars can be compared by <strong>temperature, colour, size, distance from Earth, and brightness</strong>.</p>
+      <p class="zh">恒星可以从<strong>温度、颜色、大小、与地球的距离、亮度</strong>来分类和比较。</p>
+    </div>
+  </div>
+
+  <div class="card" style="margin-top:16px">
+    <h3>Five characteristics of stars 五大特征</h3>
+    <div class="grid g5" style="grid-template-columns:repeat(5,minmax(0,1fr));gap:12px">
+      <div class="node">Temperature<br>温度</div>
+      <div class="node">Colour<br>颜色</div>
+      <div class="node">Size<br>大小</div>
+      <div class="node">Distance from Earth<br>与地球的距离</div>
+      <div class="node">Brightness<br>亮度</div>
+    </div>
+  </div>
+</section>
+
+<section id="temperature">
+  <h2>5. Star Colour and Temperature 恒星的颜色与温度</h2>
+  <div class="grid g2">
+    <div class="card">
+      <h3>Main relationship 主要关系</h3>
+      <p class="en">In general, star colour shows surface temperature. From lower to higher temperature, the sequence is:</p>
+      <p class="zh">一般来说，恒星的颜色反映它的表面温度。从低温到高温，顺序如下：</p>
+      <div class="formula">Red → Orange → Yellow → Yellowish-white → White → Bluish-white → Blue<br>红 → 橙 → 黄 → 黄白 → 白 → 蓝白 → 蓝</div>
+      <p class="small">Blue stars are the hottest; red stars are the coolest. 蓝色恒星最热，红色恒星最冷。</p>
+    </div>
+    <div class="card">
+      <h3>Approximate temperature ranges 大约温度范围</h3>
+      <ul>
+        <li>Red 红色: below 3,500 K</li>
+        <li>Orange 橙色: 3,500 – 5,000 K</li>
+        <li>Yellow 黄色: 5,000 – 6,000 K</li>
+        <li>Yellowish-white 黄白色: 6,000 – 7,500 K</li>
+        <li>White 白色: 7,500 – 11,000 K</li>
+        <li>Bluish-white 蓝白色: 11,000 – 25,000 K</li>
+        <li>Blue 蓝色: more than 25,000 K</li>
+      </ul>
+    </div>
+  </div>
+  <div class="callout">
+    <strong>Exam tip 考试技巧：</strong>
+    <span class="en">Do not confuse brightness with temperature. A star may look dim because it is far away, not because it is cool.</span><br>
+    <span class="zh">不要把亮度和温度混淆。恒星看起来暗，可能是因为它离地球很远，而不是因为温度低。</span>
+  </div>
+</section>
+
+<section id="lifecycle">
+  <h2>6. Life Cycle of a Star 恒星的生命周期</h2>
+  <p class="sub">The chapter shows the nebular hypothesis. 本章采用“星云假说”说明恒星的诞生与死亡。</p>
+  <div class="grid g2">
+    <div class="card">
+      <span class="kicker green">Birth 出生</span>
+      <h3>How stars are formed 恒星如何形成</h3>
+      <ul>
+        <li>Stars form from <strong>nebulae</strong> (clouds of gas and dust). 恒星由<strong>星云</strong>（气体和尘埃云）形成。</li>
+        <li>Strong gravitational force pulls gas and dust together. 强大的引力把气体和尘埃拉向中心。</li>
+        <li>The gas cloud shrinks and becomes denser, forming a core. 气体云收缩并变得更密，形成核心。</li>
+        <li>Hydrogen changes into helium and releases a lot of heat and light. 氢转变成氦，并释放大量热和光。</li>
+        <li>A star is formed. 一颗恒星形成了。</li>
+      </ul>
+    </div>
+    <div class="card">
+      <span class="kicker orange">Death 死亡</span>
+      <h3>What happens when a star dies 恒星死亡时会发生什么</h3>
+      <ul>
+        <li>As hydrogen is used up, changes happen in the star. 当氢逐渐耗尽时，恒星开始发生变化。</li>
+        <li>The star expands and becomes a <strong>red giant</strong> or <strong>supergiant</strong>. 恒星膨胀，变成<strong>红巨星</strong>或<strong>超巨星</strong>。</li>
+        <li>Small/medium stars end as <strong>white dwarfs</strong>. 较小或中等恒星最后会成为<strong>白矮星</strong>。</li>
+        <li>Massive stars may explode as a <strong>supernova</strong>, then become a <strong>neutron star</strong> or <strong>black hole</strong>. 大质量恒星可能爆炸成<strong>超新星</strong>，最后变成<strong>中子星</strong>或<strong>黑洞</strong>。</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card" style="margin-top:16px">
+    <h3>Life-cycle pathways 生命周期路线</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Starting point 起点</th><th>Path 路线</th><th>End 最终结果</th></tr></thead>
+        <tbody>
+          <tr><td>Nebula 星云</td><td>Medium-sized star → Red giant<br>中等大小恒星 → 红巨星</td><td>White dwarf 白矮星</td></tr>
+          <tr><td>Nebula 星云</td><td>Large star → Red giant → Supergiant<br>大恒星 → 红巨星 → 超巨星</td><td>Supernova → Neutron star<br>超新星 → 中子星</td></tr>
+          <tr><td>Nebula 星云</td><td>Super-large star → Red giant → Supergiant<br>超大恒星 → 红巨星 → 超巨星</td><td>Supernova → Black hole<br>超新星 → 黑洞</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="callout">
+    <strong>Memory shortcut 记忆捷径：</strong><br>
+    <span class="en">Small star → White dwarf. Big star → Supernova → Neutron star / Black hole.</span><br>
+    <span class="zh">小恒星 → 白矮星。大恒星 → 超新星 → 中子星 / 黑洞。</span>
+  </div>
+</section>
+
+<section id="sizes">
+  <h2>7. Relative Size Comparison 大小的相对比较</h2>
+  <div class="grid g2">
+    <div class="card">
+      <h3>Earth and the Universe 地球与宇宙</h3>
+      <p class="en">Earth is tiny compared with the solar system. The solar system is tiny compared with the Milky Way. The Milky Way is only one galaxy among countless galaxies in the universe.</p>
+      <p class="zh">与太阳系相比，地球非常渺小；与银河系相比，太阳系也很渺小；而银河系只是宇宙中无数星系之一。</p>
+    </div>
+    <div class="card">
+      <h3>Star sizes 恒星大小</h3>
+      <p class="en">Very large stars are called <strong>supergiants</strong>, large stars are <strong>giants</strong>, and small stars are <strong>dwarfs</strong>.</p>
+      <p class="zh">很大的恒星称为<strong>超巨星</strong>，较大的称为<strong>巨星</strong>，较小的称为<strong>矮星</strong>。</p>
+    </div>
+  </div>
+</section>
+
+<section id="mindmap">
+  <h2>8. Memory Map 思维导图</h2>
+  <div class="card memory">
+    <div class="center-node">🌌 Stars & Galaxies 宇宙中的恒星与星系</div>
+    <div class="branch-grid">
+      <div class="node"><strong>Universe 宇宙</strong><br>Everything that exists<br>所有存在的事物</div>
+      <div class="node"><strong>Galaxy 星系</strong><br>Stars + gas + dust<br>恒星＋气体＋尘埃</div>
+      <div class="node"><strong>Types of galaxies 星系类型</strong><br>Spiral / Elliptical / Irregular<br>螺旋 / 椭圆 / 不规则</div>
+      <div class="node"><strong>Milky Way 银河系</strong><br>Medium-sized spiral galaxy<br>中型螺旋星系</div>
+      <div class="node"><strong>Solar System 太阳系</strong><br>Located in the Milky Way<br>位于银河系内</div>
+      <div class="node"><strong>Stars 恒星</strong><br>Produce own light and heat<br>自行发光发热</div>
+      <div class="node"><strong>Star characteristics 恒星特征</strong><br>Temperature, colour, size, distance, brightness<br>温度、颜色、大小、距离、亮度</div>
+      <div class="node"><strong>Birth of stars 恒星诞生</strong><br>Nebula → gravitational collapse → star<br>星云 → 引力收缩 → 恒星</div>
+      <div class="node"><strong>Death of stars 恒星死亡</strong><br>White dwarf / Supernova / Neutron star / Black hole<br>白矮星 / 超新星 / 中子星 / 黑洞</div>
+    </div>
+  </div>
+</section>
+
+<section id="exam">
+  <h2>9. Final Exam Preparation 期末考试准备</h2>
+
+  <details open>
+    <summary>Q1. What is a galaxy? 什么是星系？</summary>
+    <p><strong>English:</strong> A galaxy is a huge collection of stars, gas and dust particles held together by gravity.</p>
+    <p><strong>中文：</strong>星系是由引力结合在一起的大量恒星、气体和尘埃粒子所组成的巨大天体系统。</p>
+  </details>
+
+  <details>
+    <summary>Q2. State the three types of galaxies. 写出三种星系类型。</summary>
+    <p><strong>English:</strong> The three types are spiral galaxies, elliptical galaxies and irregular galaxies.</p>
+    <p><strong>中文：</strong>三种星系类型是螺旋星系、椭圆星系和不规则星系。</p>
+  </details>
+
+  <details>
+    <summary>Q3. Why is the Sun a star? 为什么太阳是一颗恒星？</summary>
+    <p><strong>English:</strong> The Sun is a star because it produces its own light and heat.</p>
+    <p><strong>中文：</strong>太阳是一颗恒星，因为它能够自行发光和发热。</p>
+  </details>
+
+  <details>
+    <summary>Q4. How are stars born? 恒星如何形成？</summary>
+    <p><strong>English:</strong> Stars are formed from nebulae. Gas and dust are pulled together by gravitational force, forming a dense core. When hydrogen changes to helium and releases heat and light, a star is formed.</p>
+    <p><strong>中文：</strong>恒星由星云形成。气体和尘埃在引力作用下聚集，形成致密核心。当氢转变成氦并释放热和光时，一颗恒星便形成了。</p>
+  </details>
+
+  <details>
+    <summary>Q5. How are star colours related to temperature? 恒星颜色与温度有什么关系？</summary>
+    <p><strong>English:</strong> Generally, red stars have lower surface temperature while blue stars have higher surface temperature.</p>
+    <p><strong>中文：</strong>一般来说，红色恒星表面温度较低，而蓝色恒星表面温度较高。</p>
+  </details>
+
+  <details>
+    <summary>Q6. What can a massive star become after a supernova? 大质量恒星在超新星爆炸后会变成什么？</summary>
+    <p><strong>English:</strong> It can become a neutron star or a black hole.</p>
+    <p><strong>中文：</strong>它可以变成中子星或黑洞。</p>
+  </details>
+
+  <div class="card exam" style="margin-top:16px">
+    <h3>Scoring Strategy 得分策略</h3>
+    <ul>
+      <li><strong>Use keywords:</strong> gravity, nebula, spiral galaxy, white dwarf, supernova, black hole.<br><strong>善用关键词：</strong>引力、星云、螺旋星系、白矮星、超新星、黑洞。</li>
+      <li><strong>Answer directly first</strong>, then add one explanation sentence.<br><strong>先直接作答</strong>，再补上一句解释。</li>
+      <li><strong>For comparison questions</strong>, write both the similarity and the difference.<br><strong>比较题</strong>要写出相同点与不同点。</li>
+    </ul>
+  </div>
+</section>
+
+<section id="quiz" class="quiz">
+  <h2>10. Quick Quiz 快速测验</h2>
+  <p class="sub">Tap an answer to check. 点击答案检查。</p>
+
+  <div class="q" data-answer="c">
+    <strong>1. Which type of galaxy is the Milky Way? 银河系属于哪一种星系？</strong>
+    <button data-v="a">A. Elliptical 椭圆星系</button>
+    <button data-v="b">B. Irregular 不规则星系</button>
+    <button data-v="c">C. Spiral 螺旋星系</button>
+    <div class="result"></div>
+  </div>
+
+  <div class="q" data-answer="a">
+    <strong>2. Which colour usually indicates the hottest star? 哪种颜色通常代表最热的恒星？</strong>
+    <button data-v="a">A. Blue 蓝色</button>
+    <button data-v="b">B. Yellow 黄色</button>
+    <button data-v="c">C. Red 红色</button>
+    <div class="result"></div>
+  </div>
+
+  <div class="q" data-answer="b">
+    <strong>3. Stars are formed from ______. 恒星由什么形成？</strong>
+    <button data-v="a">A. asteroids 小行星</button>
+    <button data-v="b">B. nebulae 星云</button>
+    <button data-v="c">C. oceans 海洋</button>
+    <div class="result"></div>
+  </div>
+
+  <div class="q" data-answer="c">
+    <strong>4. After a supernova, a very massive star may become a ______. 超新星爆炸后，质量非常大的恒星可能变成什么？</strong>
+    <button data-v="a">A. planet 行星</button>
+    <button data-v="b">B. comet 彗星</button>
+    <button data-v="c">C. black hole 黑洞</button>
+    <div class="result"></div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <strong>Study tip 学习建议：</strong> Read one section, say it aloud in English and Chinese, then redraw the memory map from memory.<br>
+  每读完一节，就用英文和中文口述一次，然后凭记忆重画思维导图。
+</footer>
+
+<script>
+document.querySelectorAll('.q button').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    const q=btn.closest('.q');
+    const correct=q.dataset.answer;
+    const result=q.querySelector('.result');
+    q.querySelectorAll('button').forEach(b=>b.style.outline='none');
+    if(btn.dataset.v===correct){
+      result.textContent='✅ Correct! 答对了！';
+      result.style.color='#72e6a0';
+      btn.style.outline='2px solid #72e6a0';
+    }else{
+      result.textContent='❌ Try again. 再试一次。';
+      result.style.color='#ff8f8f';
+      btn.style.outline='2px solid #ff6b6b';
+    }
+  });
+});
+</script>
+</body>
+</html>

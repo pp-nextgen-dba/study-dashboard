@@ -138,7 +138,8 @@ export const scienceData = {
             chinese:"宇宙中的恒星与星系",
             status:"Not Started",
             confidence:0,
-            last_updated:"2026-05-20"
+            last_updated:"2026-05-20",
+            resourceUrl: "../science/t2_science_chapter11_stars_and_galaxies_bilingual.html"
         },
 
         {
