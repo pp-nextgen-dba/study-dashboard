@@ -3482,7 +3482,8 @@ export const moralData = {
             chapter:"Chapter 7: Masyarakat Penyayang Tonggak aspirasi Negara",
             status:"Not Started",
             confidence:0,
-            last_updated:"2026-06-21"
+            last_updated:"2026-06-21",
+            resourceUrl: "../moral/t2_moral_unit7_masyarakat_penyayang_trilingual.html"
         },
 
         {
