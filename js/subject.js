@@ -3931,7 +3931,8 @@ export const addMathsData = {
             chinese:"指数、根式与对数",
             status:"Not Started",
             confidence:0,
-            last_updated:"2026-05-17"
+            last_updated:"2026-05-17",
+            resourceUrl: "../addmaths/form4-chapter4-indices-surds-logs.html"
         },
 
         {

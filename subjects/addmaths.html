@@ -15,7 +15,7 @@ content="width=device-width, initial-scale=1.0">
 <title>Additional Maths Dashboard</title>
 
 <link rel="stylesheet"
-href="../css/style.css?v=30">
+href="../css/style.css?v=31">
 
 <style>
 
@@ -263,6 +263,9 @@ body{
     margin-top:4px;
 }
 
+.chapter-link{display:inline-block;margin-top:10px;color:#1d4ed8;font-size:14px;text-decoration:none}
+.chapter-link:hover{text-decoration:underline}
+
 /* ===================================================== */
 /* MOBILE */
 /* ===================================================== */
@@ -388,7 +391,7 @@ import {
     addMathsData
 }
 from
-"../js/subject.js?v=15";
+"../js/subject.js?v=16";
 
 import { requireAuth } from "../js/auth.js";
 await requireAuth("../index.html");
@@ -417,6 +420,7 @@ async function loadData(){
     if(snap.exists()){
 
         data = snap.data();
+        await addMissingChineseLabels();
 
     }else{
 
@@ -431,6 +435,28 @@ async function loadData(){
     }
 
     render();
+
+}
+
+
+// =========================================================
+// SYNC MISSING FIELDS FROM SEED
+// =========================================================
+
+async function addMissingChineseLabels(){
+
+    data.chapters.forEach((ch, idx)=>{
+        const seed = addMathsData.chapters[idx];
+        if(!seed) return;
+        if(seed.resourceUrl && !ch.resourceUrl){
+            ch.resourceUrl = seed.resourceUrl;
+        }
+        if(seed.chinese && !ch.chinese){
+            ch.chinese = seed.chinese;
+        }
+    });
+
+    await saveData();
 
 }
 
@@ -630,6 +656,10 @@ function render(){
 
             }
 
+            const chapterResource = chapter.resourceUrl
+                ? `<a class="chapter-link" href="${chapter.resourceUrl}">Open notes</a>`
+                : "";
+
             const card =
                 document.createElement("div");
 
@@ -657,6 +687,8 @@ function render(){
                             ${chapter.chinese}
                         </div>
 
+                        ${chapterResource}
+
                     </div>
 
                 </div>
@@ -665,7 +697,9 @@ function render(){
 
             card.addEventListener(
                 "click",
-                async ()=>{
+                async (e)=>{
+
+                    if(e.target.closest(".chapter-link")){ return; }
 
                     chapter.status =
                         nextStatus(

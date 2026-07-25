@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Indices, Surds & Logarithms | 指数·根式·对数</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Noto+Serif+SC:wght@500;700;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0B1026;
+  --panel:#141A38;
+  --panel2:#1B2350;
+  --line:#2B3468;
+  --indices:#FFB443;
+  --indices-dim:#4a3a1e;
+  --surds:#45E0C4;
+  --surds-dim:#173a35;
+  --logs:#B98CF2;
+  --logs-dim:#31255a;
+  --text:#EDEFFB;
+  --dim:#9AA3C7;
+  --coral:#FF7A6B;
+}
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--text);
+  font-family:'Space Grotesk',sans-serif;
+  line-height:1.6;
+  overflow-x:hidden;
+}
+body[data-lang="cn"] .en{display:none;}
+body[data-lang="en"] .cn{display:none;}
+.cn{font-family:'Noto Serif SC',serif;}
+.mono{font-family:'JetBrains Mono',monospace;}
+
+/* background texture */
+.bg-grid{
+  position:fixed;inset:0;z-index:0;pointer-events:none;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+  background-size:40px 40px;
+  mask-image:radial-gradient(ellipse at 50% 0%, black 40%, transparent 80%);
+}
+
+/* topbar */
+.topbar{
+  position:sticky;top:0;z-index:100;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:14px 24px;
+  background:rgba(11,16,38,0.85);
+  backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--line);
+}
+.brand{display:flex;align-items:center;gap:10px;font-weight:700;font-size:15px;letter-spacing:0.3px;}
+.brand .dot{width:8px;height:8px;border-radius:50%;background:var(--indices);box-shadow:0 0 10px var(--indices);}
+.navlinks{display:flex;gap:4px;flex-wrap:wrap;}
+.navlinks a{
+  color:var(--dim);text-decoration:none;font-size:12.5px;padding:6px 10px;border-radius:20px;
+  border:1px solid transparent;white-space:nowrap;
+}
+.navlinks a:hover{border-color:var(--line);color:var(--text);}
+.langtoggle{
+  display:flex;background:var(--panel2);border-radius:20px;padding:3px;border:1px solid var(--line);
+  flex-shrink:0;
+}
+.langtoggle button{
+  border:none;background:transparent;color:var(--dim);padding:6px 14px;border-radius:16px;
+  font-family:inherit;font-size:13px;cursor:pointer;font-weight:600;transition:all .2s;
+}
+.langtoggle button.active{background:var(--indices);color:#1a1400;}
+
+main{position:relative;z-index:1;max-width:1080px;margin:0 auto;padding:0 24px 100px;}
+
+/* hero */
+.hero{padding:70px 0 40px;text-align:center;}
+.eyebrow{
+  display:inline-block;font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:2px;
+  color:var(--surds);text-transform:uppercase;border:1px solid var(--surds-dim);background:var(--surds-dim);
+  padding:5px 14px;border-radius:20px;margin-bottom:20px;
+}
+.hero h1{
+  font-size:clamp(32px,6vw,58px);margin:0 0 12px;font-weight:700;letter-spacing:-1px;
+  background:linear-gradient(100deg,var(--indices),var(--surds) 50%,var(--logs));
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+}
+.hero h1.cn{font-weight:900;letter-spacing:2px;}
+.hero p.sub{color:var(--dim);font-size:16px;max-width:600px;margin:0 auto;}
+
+/* the power line - signature animation */
+.powerline{
+  margin:50px auto 20px;max-width:920px;
+  background:var(--panel);border:1px solid var(--line);border-radius:20px;padding:30px 20px 20px;
+}
+.powerline svg{width:100%;height:auto;display:block;}
+.pl-caption{text-align:center;color:var(--dim);font-size:13px;margin-top:10px;}
+
+/* section shell */
+section.chapter{margin-top:70px;scroll-margin-top:90px;}
+.chapter-head{display:flex;align-items:baseline;gap:14px;margin-bottom:6px;}
+.chapter-num{font-family:'JetBrains Mono',monospace;font-size:14px;color:var(--dim);}
+.chapter-head h2{font-size:clamp(24px,4vw,34px);margin:0;font-weight:700;}
+.chapter-desc{color:var(--dim);max-width:640px;margin:8px 0 28px;font-size:14.5px;}
+
+.tag-indices h2{color:var(--indices);}
+.tag-surds h2{color:var(--surds);}
+.tag-logs h2{color:var(--logs);}
+
+/* law cards grid */
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px;margin-bottom:24px;}
+.card{
+  background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:18px 18px 16px;
+  position:relative;overflow:hidden;
+}
+.card::before{content:'';position:absolute;top:0;left:0;width:4px;height:100%;background:var(--accent,var(--indices));}
+.card h4{margin:0 0 10px;font-size:13px;color:var(--dim);text-transform:uppercase;letter-spacing:1px;font-weight:600;}
+.card .formula{
+  font-family:'JetBrains Mono',monospace;font-size:17px;color:var(--text);background:rgba(255,255,255,0.03);
+  padding:10px 12px;border-radius:8px;margin-bottom:8px;border:1px dashed var(--line);
+}
+.card p{margin:8px 0 0;font-size:13.5px;color:var(--dim);}
+
+.indices .card::before{background:var(--indices);}
+.surds .card::before{background:var(--surds);}
+.logs .card::before{background:var(--logs);}
+
+/* worked example */
+.example{
+  background:var(--panel2);border:1px solid var(--line);border-radius:14px;padding:20px 22px;margin-bottom:16px;
+}
+.example .ex-label{font-size:12px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--accent,var(--indices));margin-bottom:8px;}
+.example .q{font-family:'JetBrains Mono',monospace;font-size:15px;margin-bottom:10px;}
+.example .steps{font-family:'JetBrains Mono',monospace;font-size:14px;color:var(--dim);line-height:2;}
+.example .steps b{color:var(--text);font-weight:700;}
+
+/* caution box */
+.caution{
+  border:1px solid #5a2b28;background:#2a1614;border-radius:12px;padding:14px 16px;margin:16px 0;
+  font-size:13.5px;color:#ffb3ab;display:flex;gap:10px;align-items:flex-start;
+}
+.caution .ico{font-size:16px;flex-shrink:0;}
+
+/* memory tip */
+.memtip{
+  border:1px solid var(--indices-dim);background:linear-gradient(135deg,var(--indices-dim),transparent);
+  border-radius:12px;padding:14px 16px;margin:16px 0;font-size:13.5px;
+}
+.memtip b{color:var(--indices);}
+.surds .memtip{border-color:var(--surds-dim);background:linear-gradient(135deg,var(--surds-dim),transparent);}
+.surds .memtip b{color:var(--surds);}
+.logs .memtip{border-color:var(--logs-dim);background:linear-gradient(135deg,var(--logs-dim),transparent);}
+.logs .memtip b{color:var(--logs);}
+
+/* quiz */
+.quiz{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:20px 22px;margin-top:10px;}
+.quiz h4{margin:0 0 14px;font-size:14px;color:var(--dim);text-transform:uppercase;letter-spacing:1px;}
+.qitem{margin-bottom:14px;}
+.qitem .qtext{font-family:'JetBrains Mono',monospace;font-size:14.5px;margin-bottom:8px;}
+.qopts{display:flex;gap:8px;flex-wrap:wrap;}
+.qopts button{
+  font-family:'JetBrains Mono',monospace;background:var(--panel2);border:1px solid var(--line);color:var(--text);
+  padding:7px 14px;border-radius:8px;cursor:pointer;font-size:13.5px;transition:.15s;
+}
+.qopts button:hover{border-color:var(--dim);}
+.qopts button.correct{background:#1c3a2e;border-color:#3fd68a;color:#8ff5bb;}
+.qopts button.wrong{background:#3a1c1c;border-color:#e05555;color:#ff9a9a;}
+
+/* mind map section */
+.mindmap-wrap{background:var(--panel);border:1px solid var(--line);border-radius:20px;padding:20px;overflow-x:auto;}
+.mindmap-wrap svg{display:block;margin:0 auto;min-width:900px;}
+
+/* footer */
+footer{text-align:center;color:var(--dim);font-size:12.5px;margin-top:80px;padding-top:24px;border-top:1px solid var(--line);}
+
+@media(max-width:640px){
+  .navlinks{display:none;}
+  .topbar{justify-content:space-between;}
+}
+</style>
+</head>
+<body data-lang="en">
+<div class="bg-grid"></div>
+
+<div class="topbar">
+  <div class="brand"><span class="dot"></span><span class="en">Add Maths · Ch.4</span><span class="cn">附加数学 · 第4章</span></div>
+  <div class="navlinks">
+    <a href="../index.html">&larr; Dashboard</a>
+    <a href="#map"><span class="en">Mind Map</span><span class="cn">思维导图</span></a>
+    <a href="#indices"><span class="en">Indices</span><span class="cn">指数</span></a>
+    <a href="#surds"><span class="en">Surds</span><span class="cn">根式</span></a>
+    <a href="#logs"><span class="en">Logarithms</span><span class="cn">对数</span></a>
+  </div>
+  <div class="langtoggle">
+    <button id="btn-en" class="active" onclick="setLang('en')">EN</button>
+    <button id="btn-cn" onclick="setLang('cn')">中文</button>
+  </div>
+</div>
+
+<main>
+
+  <!-- HERO -->
+  <div class="hero">
+    <span class="eyebrow">Form 4 · KSSM Add Maths · Chapter 4</span>
+    <h1 class="en">Indices, Surds &amp; Logarithms</h1>
+    <h1 class="cn">指数、根式与对数</h1>
+    <p class="sub en">Three topics, one idea: they're all different views of the same relationship — a base, a power, and a result. Master how to move between them and this chapter falls into place.</p>
+    <p class="sub cn">三个主题，一个核心概念：它们都在描述同一种关系——底数、指数与结果。学会在三者之间自由转换，这一章就迎刃而解。</p>
+  </div>
+
+  <!-- POWER LINE signature -->
+  <div class="powerline">
+    <svg viewBox="0 0 900 170" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto">
+          <path d="M0,0 L8,3 L0,6 Z" fill="#5b649a"/>
+        </marker>
+      </defs>
+      <!-- nodes -->
+      <g id="pl-node-1">
+        <circle cx="90" cy="85" r="46" fill="#1B2350" stroke="#FFB443" stroke-width="2"/>
+        <text x="90" y="80" text-anchor="middle" fill="#FFB443" font-family="JetBrains Mono" font-size="20" font-weight="700">2</text>
+        <text x="90" y="102" text-anchor="middle" fill="#EDEFFB" font-family="JetBrains Mono" font-size="15">³ = 8</text>
+      </g>
+      <line x1="140" y1="85" x2="270" y2="85" stroke="#5b649a" stroke-width="1.5" marker-end="url(#arrow)"/>
+      <text x="205" y="72" text-anchor="middle" fill="#9AA3C7" font-size="11" font-family="JetBrains Mono">index</text>
+
+      <g id="pl-node-2">
+        <circle cx="320" cy="85" r="46" fill="#173a35" stroke="#45E0C4" stroke-width="2"/>
+        <text x="320" y="80" text-anchor="middle" fill="#45E0C4" font-family="JetBrains Mono" font-size="15" font-weight="700">³√8</text>
+        <text x="320" y="102" text-anchor="middle" fill="#EDEFFB" font-family="JetBrains Mono" font-size="15">= 2</text>
+      </g>
+      <line x1="370" y1="85" x2="500" y2="85" stroke="#5b649a" stroke-width="1.5" marker-end="url(#arrow)"/>
+      <text x="435" y="72" text-anchor="middle" fill="#9AA3C7" font-size="11" font-family="JetBrains Mono">root</text>
+
+      <g id="pl-node-3">
+        <circle cx="550" cy="85" r="46" fill="#31255a" stroke="#B98CF2" stroke-width="2"/>
+        <text x="550" y="78" text-anchor="middle" fill="#B98CF2" font-family="JetBrains Mono" font-size="13" font-weight="700">log₂8</text>
+        <text x="550" y="100" text-anchor="middle" fill="#EDEFFB" font-family="JetBrains Mono" font-size="15">= 3</text>
+      </g>
+      <line x1="600" y1="85" x2="730" y2="85" stroke="#5b649a" stroke-width="1.5" marker-end="url(#arrow)"/>
+      <text x="665" y="72" text-anchor="middle" fill="#9AA3C7" font-size="11" font-family="JetBrains Mono">log</text>
+
+      <g id="pl-node-4">
+        <circle cx="800" cy="85" r="46" fill="#1B2350" stroke="#FF7A6B" stroke-width="2" stroke-dasharray="4 3"/>
+        <text x="800" y="80" text-anchor="middle" fill="#FF7A6B" font-family="JetBrains Mono" font-size="20" font-weight="700">3</text>
+        <text x="800" y="102" text-anchor="middle" fill="#EDEFFB" font-family="JetBrains Mono" font-size="12">the index</text>
+      </g>
+    </svg>
+    <p class="pl-caption en"><b style="color:var(--indices)">Raising to a power</b>, <b style="color:var(--surds)">taking a root</b>, and <b style="color:var(--logs)">taking a logarithm</b> are three moves on the same triangle of numbers — a surd undoes a power, a log finds the missing power.</p>
+    <p class="pl-caption cn"><b style="color:var(--indices)">乘方</b>、<b style="color:var(--surds)">开根</b>、<b style="color:var(--logs)">取对数</b>其实是同一组数字关系的三种表达方式——根式是乘方的逆运算，对数则是用来求"未知的指数"。</p>
+  </div>
+
+  <!-- MIND MAP -->
+  <section class="chapter" id="map">
+    <div class="chapter-head"><span class="chapter-num">MAP</span><h2 class="en">Chapter Memory Map</h2><h2 class="cn">章节思维导图</h2></div>
+    <p class="chapter-desc en">The whole chapter at a glance. Follow the branches from the centre outward.</p>
+    <p class="chapter-desc cn">整章内容一览无遗，从中心向外沿分支阅读。</p>
+    <div class="mindmap-wrap">
+      <svg viewBox="0 0 1000 620" xmlns="http://www.w3.org/2000/svg">
+        <!-- connecting lines -->
+        <g stroke="#2B3468" stroke-width="2" fill="none">
+          <path d="M500,310 C420,250 320,180 220,120"/>
+          <path d="M500,310 C420,340 320,380 220,420"/>
+          <path d="M500,310 C420,240 400,180 300,90"/>
+          <path d="M500,310 C580,250 680,180 780,120"/>
+          <path d="M500,310 C580,340 680,380 780,420"/>
+          <path d="M500,310 C560,260 620,180 700,90"/>
+        </g>
+        <!-- indices branch lines -->
+        <g stroke="#4a3a1e" stroke-width="1.5" fill="none">
+          <path d="M220,120 L110,60"/>
+          <path d="M220,120 L90,130"/>
+          <path d="M220,120 L110,190"/>
+        </g>
+        <g stroke="#173a35" stroke-width="1.5" fill="none">
+          <path d="M220,420 L90,370"/>
+          <path d="M220,420 L80,440"/>
+          <path d="M220,420 L100,510"/>
+        </g>
+        <g stroke="#31255a" stroke-width="1.5" fill="none">
+          <path d="M780,120 L900,60"/>
+          <path d="M780,120 L920,140"/>
+          <path d="M780,120 L900,200"/>
+        </g>
+        <g stroke="#31255a" stroke-width="1.5" fill="none">
+          <path d="M780,420 L900,370"/>
+          <path d="M780,420 L920,450"/>
+          <path d="M780,420 L900,520"/>
+        </g>
+
+        <!-- center -->
+        <circle cx="500" cy="310" r="70" fill="#141A38" stroke="#EDEFFB" stroke-width="2"/>
+        <text x="500" y="304" text-anchor="middle" fill="#EDEFFB" font-family="Space Grotesk" font-size="14" font-weight="700">Chapter 4</text>
+        <text x="500" y="322" text-anchor="middle" fill="#9AA3C7" font-family="Space Grotesk" font-size="11">Indices · Surds</text>
+        <text x="500" y="336" text-anchor="middle" fill="#9AA3C7" font-family="Space Grotesk" font-size="11">Logarithms</text>
+
+        <!-- indices main -->
+        <circle cx="220" cy="120" r="42" fill="#4a3a1e" stroke="#FFB443" stroke-width="2"/>
+        <text x="220" y="117" text-anchor="middle" fill="#FFB443" font-size="12" font-weight="700">4.1 Laws of</text>
+        <text x="220" y="130" text-anchor="middle" fill="#FFB443" font-size="12" font-weight="700">Indices</text>
+        <text x="110" y="55" text-anchor="middle" fill="#EDEFFB" font-size="10">aᵐ×aⁿ=aᵐ⁺ⁿ</text>
+        <text x="110" y="70" text-anchor="middle" fill="#EDEFFB" font-size="10">aᵐ÷aⁿ=aᵐ⁻ⁿ</text>
+        <text x="80" y="125" text-anchor="middle" fill="#EDEFFB" font-size="10">(aᵐ)ⁿ=aᵐⁿ</text>
+        <text x="80" y="140" text-anchor="middle" fill="#EDEFFB" font-size="10">a⁰=1, a⁻ⁿ=1/aⁿ</text>
+        <text x="110" y="185" text-anchor="middle" fill="#EDEFFB" font-size="10">aᵐ×bᵐ=(ab)ᵐ</text>
+        <text x="110" y="200" text-anchor="middle" fill="#EDEFFB" font-size="10">a^(1/n)=ⁿ√a</text>
+
+        <!-- indices apps -->
+        <circle cx="220" cy="420" r="42" fill="#4a3a1e" stroke="#FFB443" stroke-width="2"/>
+        <text x="220" y="417" text-anchor="middle" fill="#FFB443" font-size="12" font-weight="700">Solving</text>
+        <text x="220" y="430" text-anchor="middle" fill="#FFB443" font-size="12" font-weight="700">index eqns</text>
+        <text x="90" y="365" text-anchor="middle" fill="#EDEFFB" font-size="10">same base→</text>
+        <text x="90" y="378" text-anchor="middle" fill="#EDEFFB" font-size="10">equate index</text>
+        <text x="80" y="435" text-anchor="middle" fill="#EDEFFB" font-size="10">same index→</text>
+        <text x="80" y="448" text-anchor="middle" fill="#EDEFFB" font-size="10">equate base</text>
+        <text x="100" y="505" text-anchor="middle" fill="#EDEFFB" font-size="10">substitution</text>
+        <text x="100" y="518" text-anchor="middle" fill="#EDEFFB" font-size="10">(quadratic form)</text>
+
+        <!-- surds -->
+        <circle cx="300" cy="90" r="36" fill="#173a35" stroke="#45E0C4" stroke-width="2"/>
+        <text x="300" y="86" text-anchor="middle" fill="#45E0C4" font-size="11" font-weight="700">4.2 Surds</text>
+        <text x="300" y="99" text-anchor="middle" fill="#45E0C4" font-size="11" font-weight="700">根式</text>
+
+        <!-- logs main upper -->
+        <circle cx="780" cy="120" r="42" fill="#31255a" stroke="#B98CF2" stroke-width="2"/>
+        <text x="780" y="117" text-anchor="middle" fill="#B98CF2" font-size="12" font-weight="700">4.3 Basics of</text>
+        <text x="780" y="130" text-anchor="middle" fill="#B98CF2" font-size="12" font-weight="700">Logarithms</text>
+        <text x="900" y="55" text-anchor="middle" fill="#EDEFFB" font-size="10">N=aˣ ⇔ logₐN=x</text>
+        <text x="920" y="135" text-anchor="middle" fill="#EDEFFB" font-size="10">logₐ1=0, logₐa=1</text>
+        <text x="900" y="195" text-anchor="middle" fill="#EDEFFB" font-size="10">logₐ0 undefined</text>
+
+        <!-- logs laws -->
+        <circle cx="780" cy="420" r="42" fill="#31255a" stroke="#B98CF2" stroke-width="2"/>
+        <text x="780" y="410" text-anchor="middle" fill="#B98CF2" font-size="12" font-weight="700">4.3 Laws +</text>
+        <text x="780" y="423" text-anchor="middle" fill="#B98CF2" font-size="12" font-weight="700">Change of</text>
+        <text x="780" y="436" text-anchor="middle" fill="#B98CF2" font-size="12" font-weight="700">Base</text>
+        <text x="900" y="365" text-anchor="middle" fill="#EDEFFB" font-size="10">log(xy)=logx+logy</text>
+        <text x="920" y="455" text-anchor="middle" fill="#EDEFFB" font-size="10">log(x/y)=logx−logy</text>
+        <text x="900" y="515" text-anchor="middle" fill="#EDEFFB" font-size="10">logₐb=log꜀b/log꜀a</text>
+
+        <!-- solving log eqns -->
+        <circle cx="700" cy="90" r="36" fill="#31255a" stroke="#B98CF2" stroke-width="2"/>
+        <text x="700" y="86" text-anchor="middle" fill="#B98CF2" font-size="10" font-weight="700">Solving log</text>
+        <text x="700" y="98" text-anchor="middle" fill="#B98CF2" font-size="10" font-weight="700">equations</text>
+      </svg>
+    </div>
+  </section>
+
+  <!-- 4.1 INDICES -->
+  <section class="chapter tag-indices indices" id="indices" style="--accent:var(--indices)">
+    <div class="chapter-head"><span class="chapter-num">4.1</span><h2 class="en">Laws of Indices</h2><h2 class="cn">指数定律</h2></div>
+    <p class="chapter-desc en">Indices (powers) tell you how many times a base is multiplied by itself. Every law below is just a shortcut for that repeated multiplication.</p>
+    <p class="chapter-desc cn">指数（乘方）表示底数自乘的次数。以下所有定律都只是"重复相乘"的简便写法。</p>
+
+    <div class="cards">
+      <div class="card"><h4 class="en">Same Base</h4><h4 class="cn">同底数</h4>
+        <div class="formula">aᵐ × aⁿ = aᵐ⁺ⁿ</div>
+        <div class="formula">aᵐ ÷ aⁿ = aᵐ⁻ⁿ</div>
+        <div class="formula">(aᵐ)ⁿ = aᵐⁿ</div>
+      </div>
+      <div class="card"><h4 class="en">Same Index</h4><h4 class="cn">同指数</h4>
+        <div class="formula">aᵐ × bᵐ = (ab)ᵐ</div>
+        <div class="formula">aᵐ ÷ bᵐ = (a/b)ᵐ</div>
+      </div>
+      <div class="card"><h4 class="en">Zero, Negative &amp; Fractional</h4><h4 class="cn">零、负与分数指数</h4>
+        <div class="formula">a⁰ = 1</div>
+        <div class="formula">a⁻ⁿ = 1/aⁿ</div>
+        <div class="formula">a^(1/n) = ⁿ√a</div>
+      </div>
+    </div>
+
+    <div class="caution">
+      <span class="ico">⚠️</span>
+      <div>
+        <span class="en"><b>Common trap:</b> 2⁴ × 2² ≠ 4⁶, and a⁻ⁿ ≠ −1/aⁿ. Indices only add/subtract when the base is the <i>same number</i> — never combine different bases by adding powers.</span>
+        <span class="cn"><b>常见陷阱：</b>2⁴ × 2² ≠ 4⁶，a⁻ⁿ ≠ −1/aⁿ。只有<i>底数相同</i>时指数才能相加减——底数不同绝不能把指数直接相加。</span>
+      </div>
+    </div>
+
+    <div class="example" style="--accent:var(--indices)">
+      <div class="ex-label en">Worked Example</div>
+      <div class="ex-label cn">例题</div>
+      <div class="q en">Simplify 16^(3/4) m⁵n⁸ ÷ m⁹n⁶</div>
+      <div class="q cn">化简 16^(3/4) m⁵n⁸ ÷ m⁹n⁶</div>
+      <div class="steps">
+        = (2⁴)^(3/4) m⁵⁻⁹ n⁸⁻⁶ &nbsp;<b>← convert 16 to base 2, subtract indices</b><br>
+        = 2³ m⁻⁴ n²<br>
+        = <b>8n²/m⁴</b> &nbsp;<b>← a⁻ⁿ = 1/aⁿ</b>
+      </div>
+    </div>
+
+    <div class="memtip">
+      <span class="en"><b>Memory hook:</b> "Same base → add/subtract the roof. Same roof → multiply/divide the floor." Picture the index as a little roof sitting on top of the base.</span>
+      <span class="cn"><b>记忆口诀：</b>"底同加减头上小数；头同则把地基相乘除。"把指数想象成底数头顶上的小屋顶。</span>
+    </div>
+
+    <div class="quiz">
+      <h4 class="en">Quick Check</h4><h4 class="cn">快速自测</h4>
+      <div class="qitem">
+        <div class="qtext">3ᵐ × 3⁴ = 3⁹, so m = ?</div>
+        <div class="qopts" data-answer="5">
+          <button onclick="checkAns(this,'5')">4</button>
+          <button onclick="checkAns(this,'5')">5</button>
+          <button onclick="checkAns(this,'5')">13</button>
+          <button onclick="checkAns(this,'5')">36</button>
+        </div>
+      </div>
+      <div class="qitem">
+        <div class="qtext">5⁻² = ?</div>
+        <div class="qopts" data-answer="1/25">
+          <button onclick="checkAns(this,'1/25')">−10</button>
+          <button onclick="checkAns(this,'1/25')">1/25</button>
+          <button onclick="checkAns(this,'1/25')">−1/25</button>
+          <button onclick="checkAns(this,'1/25')">25</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4.2 SURDS -->
+  <section class="chapter tag-surds surds" id="surds" style="--accent:var(--surds)">
+    <div class="chapter-head"><span class="chapter-num">4.2</span><h2 class="en">Surds</h2><h2 class="cn">根式</h2></div>
+    <p class="chapter-desc en">A surd is a root that can't be simplified into an exact number — like √2 or √5. Numbers split into rational (fractions, terminating/recurring decimals) and irrational (surds, π) — this section is about handling the irrational ones cleanly.</p>
+    <p class="chapter-desc cn">根式是无法化成精确数值的方根，例如 √2、√5。数分为有理数（分数、有限或循环小数）与无理数（根式、π）——本节专门处理无理数的运算。</p>
+
+    <div class="cards">
+      <div class="card"><h4 class="en">Simplifying Surds</h4><h4 class="cn">化简根式</h4>
+        <div class="formula">√a × √b = √(ab)</div>
+        <div class="formula">√a ÷ √b = √(a/b)</div>
+        <p class="en">Break the number under the root into a perfect square × remainder.</p>
+        <p class="cn">把根号下的数拆成"完全平方数 × 其余因数"。</p>
+      </div>
+      <div class="card"><h4 class="en">Rationalising Denominators</h4><h4 class="cn">分母有理化</h4>
+        <div class="formula">1/√a × √a/√a = √a/a</div>
+        <div class="formula">(a+√b)(a−√b) = a²−b</div>
+        <p class="en">Multiply top and bottom by the conjugate to remove the surd from the denominator.</p>
+        <p class="cn">分子分母同乘以"共轭根式"，即可消去分母中的根号。</p>
+      </div>
+    </div>
+
+    <div class="caution">
+      <span class="ico">⚠️</span>
+      <div>
+        <span class="en"><b>Common trap:</b> √a + √b ≠ √(a+b), and √a − √b ≠ √(a−b). Addition/subtraction of surds needs a <i>common surd part</i> — you can't merge them under one root.</span>
+        <span class="cn"><b>常见陷阱：</b>√a + √b ≠ √(a+b)，√a − √b ≠ √(a−b)。根式相加减必须有<i>相同的根式部分</i>，不能直接合并到同一个根号里。</span>
+      </div>
+    </div>
+
+    <div class="example" style="--accent:var(--surds)">
+      <div class="ex-label en">Worked Example</div>
+      <div class="ex-label cn">例题</div>
+      <div class="q en">Rationalise 5/(√7+1) + 5/(√7−1)</div>
+      <div class="q cn">化简 5/(√7+1) + 5/(√7−1)</div>
+      <div class="steps">
+        = [5(√7−1) + 5(√7+1)] / [(√7+1)(√7−1)]<br>
+        = (5√7 − 5 + 5√7 + 5) / (7 − 1)<br>
+        = 10√7 / 6<br>
+        = <b>5√7 / 3</b>
+      </div>
+    </div>
+
+    <div class="memtip">
+      <span class="en"><b>Memory hook:</b> "Whatever's stuck under the root, kick it out the back door — multiply by its conjugate twin." A conjugate flips the sign in the middle: (a+√b) ↔ (a−√b).</span>
+      <span class="cn"><b>记忆口诀：</b>"根号赖着不肯走，乘上'孪生共轭'就赶走。"共轭根式只是把中间的正负号反过来：(a+√b) ↔ (a−√b)。</span>
+    </div>
+
+    <div class="quiz">
+      <h4 class="en">Quick Check</h4><h4 class="cn">快速自测</h4>
+      <div class="qitem">
+        <div class="qtext">√50 = ?</div>
+        <div class="qopts" data-answer="5√2">
+          <button onclick="checkAns(this,'5√2')">25√2</button>
+          <button onclick="checkAns(this,'5√2')">5√2</button>
+          <button onclick="checkAns(this,'5√2')">2√5</button>
+          <button onclick="checkAns(this,'5√2')">10√5</button>
+        </div>
+      </div>
+      <div class="qitem">
+        <div class="qtext">The conjugate of (3 − √2) is ?</div>
+        <div class="qopts" data-answer="3+√2">
+          <button onclick="checkAns(this,'3+√2')">3+√2</button>
+          <button onclick="checkAns(this,'3+√2')">−3−√2</button>
+          <button onclick="checkAns(this,'3+√2')">√2−3</button>
+          <button onclick="checkAns(this,'3+√2')">3×√2</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4.3 LOGARITHMS -->
+  <section class="chapter tag-logs logs" id="logs" style="--accent:var(--logs)">
+    <div class="chapter-head"><span class="chapter-num">4.3</span><h2 class="en">Logarithms</h2><h2 class="cn">对数</h2></div>
+    <p class="chapter-desc en">A logarithm answers one question: "what power do I need?" It's the exact reverse of an index — if aˣ = N, then the log form just isolates x.</p>
+    <p class="chapter-desc cn">对数只回答一个问题："需要多少次方？"它正是指数的逆运算——若 aˣ = N，对数形式就是把 x 单独解出来。</p>
+
+    <div class="cards">
+      <div class="card"><h4 class="en">Index ⇔ Log Form</h4><h4 class="cn">指数式与对数式互换</h4>
+        <div class="formula">N = aˣ ⇔ logₐN = x</div>
+        <p class="en">Index form → base stays as the base, power moves out. Log form → answer is the power itself.</p>
+        <p class="cn">指数式：底数依然是底数，指数才是重点；对数式：答案就是那个指数。</p>
+      </div>
+      <div class="card"><h4 class="en">Key Values</h4><h4 class="cn">关键值</h4>
+        <div class="formula">logₐ1 = 0</div>
+        <div class="formula">logₐa = 1</div>
+        <p class="en">log₈0, log₁N and log with a negative number are all undefined.</p>
+        <p class="cn">底数为0、1的对数以及负数的对数皆无定义。</p>
+      </div>
+      <div class="card"><h4 class="en">Product / Quotient / Power Laws</h4><h4 class="cn">积、商、幂法则</h4>
+        <div class="formula">logₐxy = logₐx + logₐy</div>
+        <div class="formula">logₐ(x/y) = logₐx − logₐy</div>
+        <div class="formula">logₐxⁿ = n·logₐx</div>
+      </div>
+      <div class="card"><h4 class="en">Change of Base</h4><h4 class="cn">换底公式</h4>
+        <div class="formula">logₐb = log꜀b / log꜀a</div>
+        <div class="formula">logₐb = 1 / log_b a</div>
+        <p class="en">Use this whenever two logs in a question don't share the same base.</p>
+        <p class="cn">当题目中两个对数底数不同时，用换底公式统一底数。</p>
+      </div>
+    </div>
+
+    <div class="caution">
+      <span class="ico">⚠️</span>
+      <div>
+        <span class="en"><b>Common trap:</b> logₐ(x+y) ≠ logₐx + logₐy. The product law needs a <i>multiplication</i> inside the log, not addition. Also logₐx − logₐy ≠ logₐ(x−y).</span>
+        <span class="cn"><b>常见陷阱：</b>logₐ(x+y) ≠ logₐx + logₐy。积法则要求括号内是<i>相乘</i>，而不是相加；同样 logₐx − logₐy ≠ logₐ(x−y)。</span>
+      </div>
+    </div>
+
+    <div class="example" style="--accent:var(--logs)">
+      <div class="ex-label en">Worked Example</div>
+      <div class="ex-label cn">例题</div>
+      <div class="q en">Given log₃2 = p and log₃5 = q, express log₃3.6 in terms of p and/or q.</div>
+      <div class="q cn">已知 log₃2 = p，log₃5 = q，用 p 和/或 q 表示 log₃3.6</div>
+      <div class="steps">
+        3.6 = 18/5 = (2×3²)/5<br>
+        log₃3.6 = log₃2 + log₃3² − log₃5<br>
+        = log₃2 + 2 − log₃5<br>
+        = <b>p + 2 − q</b>
+      </div>
+    </div>
+
+    <div class="memtip">
+      <span class="en"><b>Memory hook:</b> "Multiply inside → add outside. Divide inside → subtract outside. Power inside → the power jumps out front." Log laws mirror index laws exactly, because a log <i>is</i> an index in disguise.</span>
+      <span class="cn"><b>记忆口诀：</b>"括号里相乘 → 外面相加；括号里相除 → 外面相减；括号里有指数 → 指数跳到前面来。"对数法则其实就是指数法则的另一副面孔。</span>
+    </div>
+
+    <div class="quiz">
+      <h4 class="en">Quick Check</h4><h4 class="cn">快速自测</h4>
+      <div class="qitem">
+        <div class="qtext">log₂8 = ?</div>
+        <div class="qopts" data-answer="3">
+          <button onclick="checkAns(this,'3')">2</button>
+          <button onclick="checkAns(this,'3')">3</button>
+          <button onclick="checkAns(this,'3')">4</button>
+          <button onclick="checkAns(this,'3')">16</button>
+        </div>
+      </div>
+      <div class="qitem">
+        <div class="qtext">log₅25 + log₅5 = ?</div>
+        <div class="qopts" data-answer="3">
+          <button onclick="checkAns(this,'3')">1</button>
+          <button onclick="checkAns(this,'3')">2</button>
+          <button onclick="checkAns(this,'3')">3</button>
+          <button onclick="checkAns(this,'3')">30</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <span class="en">Form 4 Additional Mathematics · Chapter 4 · For revision use</span>
+    <span class="cn">中四附加数学 · 第4章 · 复习专用</span>
+  </footer>
+
+</main>
+
+<script>
+function setLang(lang){
+  document.body.setAttribute('data-lang', lang);
+  document.getElementById('btn-en').classList.toggle('active', lang==='en');
+  document.getElementById('btn-cn').classList.toggle('active', lang==='cn');
+}
+function checkAns(btn, correct){
+  const group = btn.parentElement;
+  const buttons = group.querySelectorAll('button');
+  const chosenCorrect = btn.textContent.trim() === correct;
+  buttons.forEach(b=>{
+    b.disabled = true;
+    if(b.textContent.trim() === correct){ b.classList.add('correct'); }
+    else if(b === btn){ b.classList.add('wrong'); }
+  });
+}
+</script>
+</body>
+</html>
