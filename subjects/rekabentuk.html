@@ -15,7 +15,7 @@ content="width=device-width, initial-scale=1.0">
 <title>Reka Bentuk Dashboard</title>
 
 <link rel="stylesheet"
-href="../css/style.css?v=31">
+href="../css/style.css?v=32">
 
 <style>
 
@@ -398,7 +398,7 @@ import {
     rekaBentukData
 }
 from
-"../js/subject.js?v=14";
+"../js/subject.js?v=16";
 
 import { requireAuth } from "../js/auth.js";
 await requireAuth("../index.html");
@@ -476,6 +476,17 @@ function mergeSeedChapters(subjectData){
 
             }
 
+            if(existingChapter.resourceUrl2 !== seedChapter.resourceUrl2){
+
+                changed = true;
+
+                return {
+                    ...existingChapter,
+                    resourceUrl2:seedChapter.resourceUrl2
+                };
+
+            }
+
             return existingChapter;
 
         });
@@ -506,6 +517,9 @@ async function addMissingChineseLabels(){
         const seed = rekaBentukData.chapters[idx];
         if(seed.resourceUrl && !ch.resourceUrl){
             ch.resourceUrl = seed.resourceUrl;
+        }
+        if(seed.resourceUrl2 && !ch.resourceUrl2){
+            ch.resourceUrl2 = seed.resourceUrl2;
         }
         if(seed.chinese && !ch.chinese){
             ch.chinese = seed.chinese;
@@ -745,7 +759,8 @@ function render(){
 
             const chapterResource =
                 chapter.resourceUrl
-                    ? `<a class="chapter-link" href="${chapter.resourceUrl}">Note 1</a>`
+                    ? `<a class="chapter-link" href="${chapter.resourceUrl}">Note 1</a>` +
+                      (chapter.resourceUrl2 ? ` <a class="chapter-link" href="${chapter.resourceUrl2}">Note 2</a>` : "")
                     : "";
 
             card.innerHTML = `

@@ -1,4 +1,4 @@
-const CACHE = "study-dashboard-v20";
+const CACHE = "study-dashboard-v21";
 
 const STATIC_ASSETS = [
     "/index.html",
@@ -42,6 +42,7 @@ const STATIC_ASSETS = [
     "/rbt/t2_elektronik.html",
     "/rbt/t2_elektrik.html",
     "/rbt/t4_chapter_mekanikal.html",
+    "/rbt/form2_rbt_reka_bentuk_mekanikal_trilingual.html",
     "/english/T4_T5_english_grammar.html",
     "/addmaths/form4-chapter4-indices-surds-logs.html",
     "/physics/t4_force_motion.html",
