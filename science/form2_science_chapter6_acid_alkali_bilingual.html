@@ -1,0 +1,794 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Form 2 Science KSSM | Chapter 6: Acid and Alkali | 酸与碱</title>
+<style>
+  :root{
+    --ink:#20304a;
+    --muted:#667085;
+    --paper:#fffdf8;
+    --card:#ffffff;
+    --acid:#ff5a76;
+    --acid-dark:#c72c4c;
+    --alkali:#5d67e8;
+    --alkali-dark:#343da7;
+    --neutral:#2fbf8f;
+    --gold:#ffb020;
+    --cyan:#2aa8d8;
+    --lav:#8b5cf6;
+    --line:#e7eaf0;
+    --shadow:0 12px 34px rgba(41,51,86,.12);
+    --radius:22px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0;
+    font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI","Noto Sans SC","Microsoft YaHei",Arial,sans-serif;
+    color:var(--ink);
+    background:
+      radial-gradient(circle at 6% 2%, rgba(255,90,118,.13), transparent 24rem),
+      radial-gradient(circle at 96% 11%, rgba(93,103,232,.13), transparent 28rem),
+      linear-gradient(180deg,#fff8ee 0,#f7f8ff 36%,#f7fcfa 100%);
+    line-height:1.62;
+  }
+  a{color:inherit}
+  button{font:inherit}
+  .container{width:min(1180px,92vw);margin:auto}
+  .topbar{
+    position:sticky;top:0;z-index:50;
+    background:rgba(255,255,255,.88);
+    backdrop-filter:blur(16px);
+    border-bottom:1px solid rgba(221,226,236,.85);
+  }
+  .topbar-inner{
+    min-height:64px;display:flex;align-items:center;justify-content:space-between;gap:14px;
+  }
+  .brand{font-weight:900;letter-spacing:-.02em}
+  .brand small{font-weight:700;color:var(--muted)}
+  .toolbar{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}
+  .toolbar button,.pill-btn{
+    border:1px solid #d9deea;background:#fff;color:var(--ink);
+    padding:9px 13px;border-radius:999px;cursor:pointer;font-weight:800;
+    transition:.2s ease;
+  }
+  .toolbar button:hover,.pill-btn:hover{transform:translateY(-1px);box-shadow:0 6px 16px rgba(32,48,74,.10)}
+  .toolbar button.active{background:var(--ink);color:#fff;border-color:var(--ink)}
+  .hero{padding:68px 0 42px;position:relative;overflow:hidden}
+  .hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:38px;align-items:center}
+  .eyebrow{
+    display:inline-flex;align-items:center;gap:9px;
+    padding:8px 13px;border-radius:999px;background:#fff;border:1px solid #ece4d7;
+    font-size:.9rem;font-weight:900;color:#7a4b1b;
+  }
+  h1{font-size:clamp(2.55rem,6vw,5.4rem);line-height:.97;margin:18px 0 22px;letter-spacing:-.055em}
+  h1 .acid-word{color:var(--acid-dark)}
+  h1 .alkali-word{color:var(--alkali-dark)}
+  .lead{font-size:clamp(1.05rem,2vw,1.3rem);max-width:760px;color:#45546d}
+  .hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:26px}
+  .cta{
+    display:inline-flex;align-items:center;gap:9px;text-decoration:none;
+    padding:13px 18px;border-radius:14px;font-weight:900;border:0;
+  }
+  .cta.primary{background:linear-gradient(135deg,var(--acid),var(--lav));color:#fff;box-shadow:0 10px 25px rgba(139,92,246,.24)}
+  .cta.secondary{background:#fff;border:1px solid #dfe3ec}
+  .hero-visual{
+    min-height:380px;border-radius:34px;padding:26px;position:relative;
+    background:linear-gradient(145deg,rgba(255,255,255,.92),rgba(255,255,255,.72));
+    box-shadow:var(--shadow);border:1px solid rgba(255,255,255,.8);
+    display:flex;align-items:center;justify-content:center;
+  }
+  .beakers{display:flex;gap:22px;align-items:flex-end}
+  .beaker{
+    width:125px;height:205px;border:8px solid #c8d1dd;border-top:0;border-radius:0 0 32px 32px;
+    position:relative;overflow:hidden;background:rgba(255,255,255,.55);
+  }
+  .beaker:before{content:"";position:absolute;top:-8px;left:-16px;width:157px;border-top:8px solid #c8d1dd;border-radius:50%}
+  .liquid{position:absolute;left:0;right:0;bottom:0;height:64%;border-radius:28px 28px 20px 20px}
+  .acid-liquid{background:linear-gradient(#ff8ca0,#ff496b)}
+  .alkali-liquid{background:linear-gradient(#9ca4ff,#5964e9)}
+  .bubbles i{position:absolute;width:12px;height:12px;border:2px solid rgba(255,255,255,.8);border-radius:50%;animation:float 3.8s infinite ease-in}
+  .bubbles i:nth-child(1){left:20%;bottom:20%;animation-delay:.4s}
+  .bubbles i:nth-child(2){left:45%;bottom:12%;width:18px;height:18px;animation-delay:1.1s}
+  .bubbles i:nth-child(3){left:72%;bottom:28%;width:9px;height:9px;animation-delay:2s}
+  @keyframes float{to{transform:translateY(-130px);opacity:0}}
+  .beaker-label{text-align:center;font-weight:950;margin-top:12px}
+  .ph-token{
+    position:absolute;background:#fff;border-radius:16px;padding:10px 14px;font-weight:900;box-shadow:0 8px 20px rgba(44,55,95,.13)
+  }
+  .ph-token.one{top:23px;right:28px;color:var(--acid-dark);transform:rotate(5deg)}
+  .ph-token.two{bottom:26px;left:24px;color:var(--alkali-dark);transform:rotate(-6deg)}
+  section{padding:42px 0}
+  .section-head{margin-bottom:23px}
+  .section-kicker{font-weight:950;color:var(--lav);text-transform:uppercase;letter-spacing:.12em;font-size:.78rem}
+  h2{font-size:clamp(1.75rem,4vw,3rem);line-height:1.08;letter-spacing:-.035em;margin:7px 0 8px}
+  h3{line-height:1.2;margin-top:0}
+  .sub{color:var(--muted);max-width:790px}
+  .card{
+    background:var(--card);border:1px solid rgba(219,224,234,.9);border-radius:var(--radius);
+    box-shadow:0 8px 24px rgba(47,59,93,.07);padding:24px;
+  }
+  .grid-2{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
+  .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+  .grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+  .learning-card{position:relative;overflow:hidden}
+  .learning-card:after{
+    content:"";position:absolute;width:100px;height:100px;border-radius:50%;
+    right:-30px;top:-30px;background:rgba(139,92,246,.09)
+  }
+  .num{
+    width:42px;height:42px;border-radius:14px;display:grid;place-items:center;
+    font-weight:950;color:#fff;background:linear-gradient(135deg,var(--acid),var(--lav));margin-bottom:14px
+  }
+  .cn{display:block;color:#5b6682;font-size:.94em;margin-top:3px}
+  body[data-lang="en"] .cn{display:none}
+  body[data-lang="zh"] .en{display:none}
+  body[data-lang="zh"] .cn{display:block;color:inherit;font-size:inherit;margin:0}
+  .mindmap-wrap{background:linear-gradient(145deg,#fff,#fbfbff);padding:30px}
+  .mindmap{
+    display:grid;grid-template-columns:repeat(4,1fr);gap:15px;align-items:stretch;
+    position:relative;
+  }
+  .mind-center{
+    grid-column:1/-1;justify-self:center;min-width:290px;text-align:center;
+    background:linear-gradient(135deg,#ffedf1,#efefff);border:2px solid #fff;box-shadow:var(--shadow);
+    padding:18px 26px;border-radius:22px;font-size:1.25rem;font-weight:950;margin-bottom:12px
+  }
+  .branch{border-top:7px solid;border-radius:18px;background:#fff;padding:18px;box-shadow:0 6px 18px rgba(31,45,81,.07)}
+  .branch ul{padding-left:20px;margin-bottom:0}
+  .branch.acid{border-color:var(--acid)}
+  .branch.indicator{border-color:var(--gold)}
+  .branch.uses{border-color:var(--neutral)}
+  .branch.neut{border-color:var(--alkali)}
+  .branch h3{font-size:1.05rem}
+  .compare{overflow:auto}
+  table{width:100%;border-collapse:separate;border-spacing:0;min-width:720px}
+  th,td{padding:14px 15px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+  th{font-size:.84rem;text-transform:uppercase;letter-spacing:.04em;color:#5f6b82;background:#f8f9fc}
+  tr:last-child td{border-bottom:0}
+  .acid-head{background:#fff0f3;color:var(--acid-dark)}
+  .alkali-head{background:#eff0ff;color:var(--alkali-dark)}
+  .tag{display:inline-flex;align-items:center;padding:5px 9px;border-radius:999px;font-size:.8rem;font-weight:900}
+  .tag.acid{background:#ffe8ed;color:var(--acid-dark)}
+  .tag.alkali{background:#eceeff;color:var(--alkali-dark)}
+  .tag.neutral{background:#e5fbf4;color:#168564}
+  .water-note{
+    background:linear-gradient(135deg,#eaf8ff,#f3f0ff);
+    border:1px solid #cfe7f4;display:grid;grid-template-columns:auto 1fr;gap:18px;align-items:center
+  }
+  .water-icon{font-size:4rem}
+  .ph-scale{
+    display:grid;grid-template-columns:repeat(15,1fr);overflow:hidden;border-radius:16px;border:5px solid #fff;
+    box-shadow:0 10px 24px rgba(32,48,74,.12)
+  }
+  .ph-cell{min-height:74px;display:flex;flex-direction:column;align-items:center;justify-content:center;color:white;font-weight:950;text-shadow:0 1px 2px rgba(0,0,0,.3)}
+  .ph-cell small{font-weight:800}
+  .ph-0,.ph-1{background:#c92b4d}.ph-2{background:#e84a43}.ph-3{background:#f06b32}.ph-4{background:#f49b2f}.ph-5{background:#efc52f}.ph-6{background:#b4c936}.ph-7{background:#34aa71}.ph-8{background:#20a7a2}.ph-9{background:#258dc4}.ph-10{background:#3471c7}.ph-11{background:#4559bd}.ph-12{background:#6044b5}.ph-13{background:#7237a7}.ph-14{background:#852b91}
+  .strength-row{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:18px;margin-top:16px}
+  .arrow{font-size:2rem;font-weight:950;color:#8490a6}
+  .simulator{display:grid;grid-template-columns:.75fr 1.25fr;gap:22px}
+  .choice-row{display:flex;gap:10px;flex-wrap:wrap;margin:14px 0 18px}
+  .choice{
+    border:2px solid #e3e6ef;background:#fff;padding:11px 15px;border-radius:13px;cursor:pointer;font-weight:950
+  }
+  .choice[data-kind="acid"].selected{border-color:var(--acid);background:#fff0f3;color:var(--acid-dark)}
+  .choice[data-kind="neutral"].selected{border-color:var(--neutral);background:#eafbf5;color:#137a5c}
+  .choice[data-kind="alkali"].selected{border-color:var(--alkali);background:#eff0ff;color:var(--alkali-dark)}
+  .indicator-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}
+  .indicator-tube{text-align:center}
+  .tube{
+    height:128px;width:62px;margin:0 auto 10px;border:5px solid #cbd4df;border-top:0;border-radius:0 0 22px 22px;
+    display:flex;align-items:flex-end;overflow:hidden;background:#f7fbff;position:relative
+  }
+  .tube:before{content:"";position:absolute;top:0;left:-8px;width:68px;border-top:5px solid #cbd4df}
+  .tube-liquid{height:67%;width:100%;background:#ddd;transition:.35s ease}
+  .tube-label{font-size:.78rem;font-weight:900}
+  .examples .card{padding:20px}
+  .icon{font-size:2.25rem;margin-bottom:8px}
+  .formula{
+    font-size:clamp(1.25rem,3vw,2rem);font-weight:950;text-align:center;
+    padding:22px;border-radius:18px;background:linear-gradient(135deg,#fff0f3,#eff0ff);
+    border:2px dashed #cfc9ec
+  }
+  .chem{font-family:"Cambria Math","Times New Roman",serif}
+  .steps{counter-reset:step;display:grid;gap:12px}
+  .step{display:grid;grid-template-columns:44px 1fr;gap:12px;align-items:start}
+  .step:before{
+    counter-increment:step;content:counter(step);width:38px;height:38px;border-radius:13px;
+    display:grid;place-items:center;background:var(--ink);color:#fff;font-weight:950
+  }
+  .calc{
+    background:#17213a;color:#eff6ff;border-radius:18px;padding:20px;font-family:ui-monospace,SFMono-Regular,Consolas,monospace;
+    line-height:1.85
+  }
+  .application-card{border-left:7px solid}
+  .application-card:nth-child(1){border-color:var(--cyan)}
+  .application-card:nth-child(2){border-color:var(--neutral)}
+  .application-card:nth-child(3){border-color:var(--lav)}
+  .application-card:nth-child(4){border-color:var(--gold)}
+  .memory-strip{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+  .memory-rule{padding:18px;border-radius:18px;font-weight:850}
+  .memory-rule:nth-child(1){background:#fff0f3}
+  .memory-rule:nth-child(2){background:#eef0ff}
+  .memory-rule:nth-child(3){background:#eafbf5}
+  details{
+    border:1px solid #dfe4ee;background:#fff;border-radius:16px;padding:0 18px;margin:10px 0;
+    box-shadow:0 5px 16px rgba(38,48,80,.05)
+  }
+  summary{cursor:pointer;font-weight:900;padding:16px 0}
+  details[open] summary{color:var(--lav)}
+  .answer{border-top:1px solid #edf0f4;padding:14px 0 18px}
+  .quiz-card{margin-bottom:16px}
+  .options{display:grid;gap:8px;margin:13px 0}
+  .option{
+    display:flex;gap:9px;align-items:flex-start;padding:10px 12px;background:#f8f9fc;border-radius:12px;cursor:pointer
+  }
+  .check-btn{
+    border:0;background:var(--ink);color:#fff;font-weight:900;padding:10px 14px;border-radius:12px;cursor:pointer
+  }
+  .feedback{margin-left:10px;font-weight:900}
+  .correct{color:#11845f}.wrong{color:#c72c4c}
+  .flashcards{display:grid;grid-template-columns:repeat(4,1fr);gap:15px}
+  .flashcard{height:190px;perspective:900px;cursor:pointer}
+  .flash-inner{position:relative;width:100%;height:100%;transition:transform .55s;transform-style:preserve-3d}
+  .flashcard.flipped .flash-inner{transform:rotateY(180deg)}
+  .flash-face{
+    position:absolute;inset:0;backface-visibility:hidden;border-radius:20px;padding:20px;
+    display:flex;align-items:center;justify-content:center;text-align:center;box-shadow:var(--shadow);border:1px solid #e3e6ee
+  }
+  .flash-front{background:linear-gradient(135deg,#fff,#f1f2ff);font-weight:950;font-size:1.1rem}
+  .flash-back{background:linear-gradient(135deg,#202b48,#3d4871);color:white;transform:rotateY(180deg)}
+  .checklist label{display:flex;gap:12px;padding:10px 0;border-bottom:1px solid var(--line);cursor:pointer}
+  .checklist label:last-child{border-bottom:0}
+  input[type="checkbox"]{width:20px;height:20px;accent-color:var(--lav)}
+  .exam-box{background:linear-gradient(135deg,#1f2a46,#3e4a78);color:#fff}
+  .exam-box h2,.exam-box .sub{color:#fff}
+  .method{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+  .method div{padding:18px;border-radius:16px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.16)}
+  footer{padding:42px 0 60px;text-align:center;color:var(--muted)}
+  .print-only{display:none}
+  @media(max-width:900px){
+    .hero-grid,.grid-2,.simulator{grid-template-columns:1fr}
+    .grid-3,.grid-4,.flashcards{grid-template-columns:repeat(2,1fr)}
+    .mindmap{grid-template-columns:repeat(2,1fr)}
+    .indicator-grid{grid-template-columns:repeat(3,1fr)}
+    .hero-visual{min-height:320px}
+  }
+  @media(max-width:620px){
+    .topbar-inner{align-items:flex-start;padding:10px 0;flex-direction:column}
+    h1{font-size:2.65rem}
+    .grid-3,.grid-4,.flashcards,.memory-strip,.method,.mindmap{grid-template-columns:1fr}
+    .mind-center{min-width:0;width:100%}
+    .indicator-grid{grid-template-columns:repeat(2,1fr)}
+    .ph-scale{grid-template-columns:repeat(5,1fr)}
+    .ph-cell{min-height:58px}
+    .strength-row{grid-template-columns:1fr;text-align:center}.arrow{transform:rotate(90deg)}
+    .beaker{width:94px;height:165px}
+  }
+  @media print{
+    body{background:#fff;font-size:10pt}
+    .topbar,.hero-actions,.simulator-controls,.quiz-actions,button{display:none!important}
+    .hero{padding:20px 0}
+    .hero-grid{grid-template-columns:1fr}.hero-visual{display:none}
+    section{padding:18px 0}
+    .card{box-shadow:none;break-inside:avoid}
+    details{break-inside:avoid}
+    details > *{display:block}
+    .print-only{display:block}
+  }
+</style>
+</head>
+
+<body data-lang="both">
+<div class="top-nav" style="background:#fff;padding:10px 16px;border-bottom:2px solid #e5e7eb;position:sticky;top:0;z-index:120">
+  <a class="dashboard-link" href="../index.html" style="display:inline-flex;align-items:center;gap:6px;padding:8px 12px;border-radius:8px;background:#1d4ed8;color:#fff;font-size:13px;font-weight:800;text-decoration:none">&larr; Back to Dashboard</a>
+</div>
+<header class="topbar">
+  <div class="container topbar-inner">
+    <div class="brand">🧪 Form 2 Science <small>• Chapter 6</small></div>
+    <div class="toolbar">
+      <button class="lang active" data-lang="both">EN + 中文</button>
+      <button class="lang" data-lang="en">English</button>
+      <button class="lang" data-lang="zh">中文</button>
+      <button onclick="window.print()">🖨️ Print / 打印</button>
+    </div>
+  </div>
+</header>
+
+<main>
+<section class="hero">
+  <div class="container hero-grid">
+    <div>
+      <span class="eyebrow">KSSM • Final Exam Revision • 期末考试复习</span>
+      <h1><span class="acid-word">Acid</span> &amp; <span class="alkali-word">Alkali</span><br><span style="font-size:.52em">酸与碱</span></h1>
+      <p class="lead en">A colourful bilingual revision guide with memory maps, indicator experiments, pH skills, neutralisation, HOTS questions and an interactive quiz.</p>
+      <p class="lead cn">一份有趣的双语复习网页，包含思维导图、指示剂实验、pH 技巧、中和作用、高阶思维题与互动测验。</p>
+      <div class="hero-actions">
+        <a class="cta primary" href="#mindmap">🧠 Start with Memory Map</a>
+        <a class="cta secondary" href="#quiz">✅ Try Exam Questions</a>
+      </div>
+    </div>
+    <div class="hero-visual" aria-label="Acid and alkali beakers illustration">
+      <span class="ph-token one">pH &lt; 7 = Acid</span>
+      <span class="ph-token two">pH &gt; 7 = Alkali</span>
+      <div class="beakers">
+        <div>
+          <div class="beaker"><div class="liquid acid-liquid bubbles"><i></i><i></i><i></i></div></div>
+          <div class="beaker-label">Acid<br><span class="cn">酸</span></div>
+        </div>
+        <div>
+          <div class="beaker"><div class="liquid alkali-liquid bubbles"><i></i><i></i><i></i></div></div>
+          <div class="beaker-label">Alkali<br><span class="cn">碱</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="section-head">
+      <div class="section-kicker">Learning goals</div>
+      <h2><span class="en">What must you master?</span><span class="cn">你必须掌握什么？</span></h2>
+    </div>
+    <div class="grid-4">
+      <article class="card learning-card"><div class="num">1</div><h3>Properties<span class="cn">性质</span></h3><p class="en">Compare acids, alkalis and neutral substances using pH, taste, litmus, corrosiveness and reaction with metals.</p><p class="cn">用 pH、味道、石蕊试纸、腐蚀性及与金属的反应比较酸、碱和中性物质。</p></article>
+      <article class="card learning-card"><div class="num">2</div><h3>Indicators<span class="cn">指示剂</span></h3><p class="en">Predict colour changes for litmus, universal indicator, methyl orange and phenolphthalein.</p><p class="cn">预测石蕊、通用指示剂、甲基橙和酚酞的颜色变化。</p></article>
+      <article class="card learning-card"><div class="num">3</div><h3>pH &amp; strength<span class="cn">pH 与强度</span></h3><p class="en">Use pH values to classify substances and compare acid or alkali strength.</p><p class="cn">利用 pH 值判断物质类别并比较酸或碱的强弱。</p></article>
+      <article class="card learning-card"><div class="num">4</div><h3>Neutralisation<span class="cn">中和作用</span></h3><p class="en">Write the word equation, understand titration and explain daily-life applications.</p><p class="cn">写出文字方程式，理解滴定，并解释日常生活中的应用。</p></article>
+    </div>
+  </div>
+</section>
+
+<section id="mindmap">
+  <div class="container">
+    <div class="section-head">
+      <div class="section-kicker">Master memory map</div>
+      <h2><span class="en">The whole chapter on one map</span><span class="cn">一张图掌握整章</span></h2>
+    </div>
+    <div class="card mindmap-wrap">
+      <div class="mindmap">
+        <div class="mind-center">🧪 ACID &amp; ALKALI<br><span class="cn">酸与碱</span></div>
+        <div class="branch acid">
+          <h3>1. Properties <span class="cn">性质</span></h3>
+          <ul>
+            <li>pH value <span class="cn">pH 值</span></li>
+            <li>Taste <span class="cn">味道</span></li>
+            <li>Corrosiveness <span class="cn">腐蚀性</span></li>
+            <li>Litmus changes <span class="cn">石蕊变色</span></li>
+            <li>Reaction with metals <span class="cn">与金属反应</span></li>
+            <li>Role of water <span class="cn">水的作用</span></li>
+          </ul>
+        </div>
+        <div class="branch indicator">
+          <h3>2. Indicators <span class="cn">指示剂</span></h3>
+          <ul>
+            <li>Blue &amp; red litmus <span class="cn">蓝/红石蕊</span></li>
+            <li>Universal indicator <span class="cn">通用指示剂</span></li>
+            <li>Methyl orange <span class="cn">甲基橙</span></li>
+            <li>Phenolphthalein <span class="cn">酚酞</span></li>
+            <li>pH meter <span class="cn">pH 计</span></li>
+          </ul>
+        </div>
+        <div class="branch uses">
+          <h3>3. Uses <span class="cn">用途</span></h3>
+          <ul>
+            <li>Food &amp; drinks <span class="cn">食物与饮料</span></li>
+            <li>Agriculture <span class="cn">农业</span></li>
+            <li>Industry <span class="cn">工业</span></li>
+            <li>Medicine <span class="cn">医药</span></li>
+            <li>Cleaning products <span class="cn">清洁用品</span></li>
+          </ul>
+        </div>
+        <div class="branch neut">
+          <h3>4. Neutralisation <span class="cn">中和</span></h3>
+          <ul>
+            <li>Acid + alkali <span class="cn">酸 + 碱</span></li>
+            <li>Salt + water <span class="cn">盐 + 水</span></li>
+            <li>Titration <span class="cn">滴定</span></li>
+            <li>Daily applications <span class="cn">日常应用</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="properties">
+  <div class="container">
+    <div class="section-head">
+      <div class="section-kicker">6.1 Properties</div>
+      <h2><span class="en">Acid vs alkali: the high-score comparison</span><span class="cn">酸与碱：高分比较表</span></h2>
+    </div>
+    <div class="card compare">
+      <table>
+        <thead><tr><th>Characteristic<br><span class="cn">特征</span></th><th class="acid-head">Acid 酸</th><th class="alkali-head">Alkali 碱</th></tr></thead>
+        <tbody>
+          <tr><td><strong>pH value</strong><span class="cn">pH 值</span></td><td><span class="tag acid">Less than 7 小于 7</span></td><td><span class="tag alkali">More than 7 大于 7</span></td></tr>
+          <tr><td><strong>Taste</strong><span class="cn">味道</span></td><td>Sour <span class="cn">酸味</span></td><td>Bitter <span class="cn">苦味</span></td></tr>
+          <tr><td><strong>Corrosiveness</strong><span class="cn">腐蚀性</span></td><td>Corrosive <span class="cn">具腐蚀性</span></td><td>Corrosive <span class="cn">具腐蚀性</span></td></tr>
+          <tr><td><strong>Blue litmus paper</strong><span class="cn">蓝色石蕊试纸</span></td><td>Turns red <span class="cn">变红</span></td><td>Remains blue <span class="cn">保持蓝色</span></td></tr>
+          <tr><td><strong>Red litmus paper</strong><span class="cn">红色石蕊试纸</span></td><td>Remains red <span class="cn">保持红色</span></td><td>Turns blue <span class="cn">变蓝</span></td></tr>
+          <tr><td><strong>Reaction with magnesium</strong><span class="cn">与镁反应</span></td><td>Produces hydrogen gas; “pop” test <span class="cn">产生氢气；点燃时发出“啵”声</span></td><td>No reaction in the Form 2 experiment <span class="cn">在中二实验中无反应</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="card water-note" style="margin-top:20px">
+      <div class="water-icon">💧</div>
+      <div>
+        <h3><span class="en">The role of water</span><span class="cn">水的作用</span></h3>
+        <p class="en"><strong>Acids and alkalis show their characteristic properties only when water is present.</strong> Water allows particles to form mobile ions, so indicators can change colour and reactions can occur.</p>
+        <p class="cn"><strong>酸和碱只有在水存在时才会表现出特有性质。</strong> 水使粒子形成可移动的离子，因此指示剂能变色，化学反应也能发生。</p>
+        <p><strong>Exam clue / 考试提示:</strong> Dry hydrogen chloride gas does not change dry blue litmus paper. Moist blue litmus paper turns red.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="indicators">
+  <div class="container">
+    <div class="section-head">
+      <div class="section-kicker">Indicators</div>
+      <h2><span class="en">Colour-change table you must memorise</span><span class="cn">必须背熟的颜色变化表</span></h2>
+    </div>
+    <div class="card compare">
+      <table>
+        <thead><tr><th>Indicator 指示剂</th><th class="acid-head">Acid 酸</th><th>Neutral 中性</th><th class="alkali-head">Alkali 碱</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Phenolphthalein 酚酞</strong></td><td>Colourless 无色</td><td>Colourless 无色</td><td>Pink 粉红色</td></tr>
+          <tr><td><strong>Methyl orange 甲基橙</strong></td><td>Red 红色</td><td>Yellow 黄色</td><td>Yellow 黄色</td></tr>
+          <tr><td><strong>Universal indicator 通用指示剂</strong></td><td>Red–orange 红至橙</td><td>Green 绿色</td><td>Blue–purple 蓝至紫</td></tr>
+          <tr><td><strong>Blue litmus 蓝色石蕊</strong></td><td>Red 红色</td><td>Blue 蓝色</td><td>Blue 蓝色</td></tr>
+          <tr><td><strong>Red litmus 红色石蕊</strong></td><td>Red 红色</td><td>Red 红色</td><td>Blue 蓝色</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="card simulator" style="margin-top:20px">
+      <div class="simulator-controls">
+        <h3>🧫 Indicator Lab <span class="cn">指示剂实验室</span></h3>
+        <p class="en">Choose the type of solution and observe the expected colours.</p>
+        <p class="cn">选择溶液类别，观察各种指示剂的预期颜色。</p>
+        <div class="choice-row">
+          <button class="choice selected" data-kind="acid">Acid 酸</button>
+          <button class="choice" data-kind="neutral">Neutral 中性</button>
+          <button class="choice" data-kind="alkali">Alkali 碱</button>
+        </div>
+        <div id="sim-text"><strong>Acid selected:</strong> pH less than 7; blue litmus turns red.</div>
+      </div>
+      <div class="indicator-grid">
+        <div class="indicator-tube"><div class="tube"><div class="tube-liquid" data-ind="phenol"></div></div><div class="tube-label">Phenolphthalein<br>酚酞</div></div>
+        <div class="indicator-tube"><div class="tube"><div class="tube-liquid" data-ind="methyl"></div></div><div class="tube-label">Methyl orange<br>甲基橙</div></div>
+        <div class="indicator-tube"><div class="tube"><div class="tube-liquid" data-ind="universal"></div></div><div class="tube-label">Universal<br>通用指示剂</div></div>
+        <div class="indicator-tube"><div class="tube"><div class="tube-liquid" data-ind="blueLitmus"></div></div><div class="tube-label">Blue litmus<br>蓝石蕊</div></div>
+        <div class="indicator-tube"><div class="tube"><div class="tube-liquid" data-ind="redLitmus"></div></div><div class="tube-label">Red litmus<br>红石蕊</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="ph">
+  <div class="container">
+    <div class="section-head">
+      <div class="section-kicker">pH scale</div>
+      <h2><span class="en">Classify first, then compare strength</span><span class="cn">先分类，再比较强弱</span></h2>
+    </div>
+    <div class="card">
+      <div class="ph-scale" aria-label="pH scale from 0 to 14">
+        <div class="ph-cell ph-0">0<small>acid</small></div><div class="ph-cell ph-1">1</div><div class="ph-cell ph-2">2</div><div class="ph-cell ph-3">3</div><div class="ph-cell ph-4">4</div>
+        <div class="ph-cell ph-5">5</div><div class="ph-cell ph-6">6</div><div class="ph-cell ph-7">7<small>neutral</small></div><div class="ph-cell ph-8">8</div><div class="ph-cell ph-9">9</div>
+        <div class="ph-cell ph-10">10</div><div class="ph-cell ph-11">11</div><div class="ph-cell ph-12">12</div><div class="ph-cell ph-13">13</div><div class="ph-cell ph-14">14<small>alkali</small></div>
+      </div>
+      <div class="strength-row">
+        <div><span class="tag acid">Lower pH → stronger acid</span><br><span class="cn">pH 越低 → 酸性越强</span></div>
+        <div class="arrow">⇄</div>
+        <div style="text-align:right"><span class="tag alkali">Higher pH → stronger alkali</span><br><span class="cn">pH 越高 → 碱性越强</span></div>
+      </div>
+      <div class="grid-3" style="margin-top:20px">
+        <div class="card" style="box-shadow:none;background:#fff5f7"><strong>Example 1</strong><p>pH 2 is a stronger acid than pH 5.<span class="cn">pH 2 的酸性比 pH 5 强。</span></p></div>
+        <div class="card" style="box-shadow:none;background:#f0fbf6"><strong>Example 2</strong><p>pH 7 is neutral, not a weak acid or weak alkali.<span class="cn">pH 7 是中性，不是弱酸或弱碱。</span></p></div>
+        <div class="card" style="box-shadow:none;background:#f2f3ff"><strong>Example 3</strong><p>pH 13 is a stronger alkali than pH 9.<span class="cn">pH 13 的碱性比 pH 9 强。</span></p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="uses">
+  <div class="container">
+    <div class="section-head">
+      <div class="section-kicker">Daily life</div>
+      <h2><span class="en">Where do we use acids and alkalis?</span><span class="cn">酸与碱在生活中的用途</span></h2>
+    </div>
+    <div class="grid-4 examples">
+      <article class="card"><div class="icon">🥤</div><h3>Food &amp; drinks<span class="cn">食品与饮料</span></h3><p>Carbonic acid in fizzy drinks; vinegar for pickling; tartaric/citric acids in foods.<span class="cn">汽水中的碳酸、腌制用醋，以及食品中的酒石酸/柠檬酸。</span></p></article>
+      <article class="card"><div class="icon">🔋</div><h3>Industry<span class="cn">工业</span></h3><p>Sulphuric acid in car batteries; acids and alkalis in manufacturing and cleaning.<span class="cn">汽车电池中的硫酸；制造和清洁过程中的酸与碱。</span></p></article>
+      <article class="card"><div class="icon">🌱</div><h3>Agriculture<span class="cn">农业</span></h3><p>Ammonia compounds in fertilisers; slaked lime treats acidic soil.<span class="cn">肥料中的氨类物质；熟石灰处理酸性土壤。</span></p></article>
+      <article class="card"><div class="icon">💊</div><h3>Health &amp; cleaning<span class="cn">医药与清洁</span></h3><p>Magnesium hydroxide in antacids; potassium hydroxide in soap; sodium hydroxide in detergents.<span class="cn">抗酸剂中的氢氧化镁、肥皂中的氢氧化钾、清洁剂中的氢氧化钠。</span></p></article>
+    </div>
+  </div>
+</section>
+
+<section id="neutralisation">
+  <div class="container">
+    <div class="section-head">
+      <div class="section-kicker">6.2 Neutralisation</div>
+      <h2><span class="en">Acid + alkali → salt + water</span><span class="cn">酸 + 碱 → 盐 + 水</span></h2>
+    </div>
+    <div class="formula">ACID + ALKALI → SALT + WATER<br><span class="cn">酸 + 碱 → 盐 + 水</span></div>
+    <div class="grid-2" style="margin-top:20px">
+      <div class="card">
+        <h3>Balanced examples <span class="cn">配平例子</span></h3>
+        <p class="chem">HCl + NaOH → NaCl + H₂O</p>
+        <p class="chem">H₂SO₄ + 2KOH → K₂SO₄ + 2H₂O</p>
+        <p class="chem">HNO₃ + NaOH → NaNO₃ + H₂O</p>
+        <p class="en"><strong>Key idea:</strong> The acidic property and alkaline property are removed when the correct amounts react.</p>
+        <p class="cn"><strong>关键概念：</strong>当适量的酸与碱完全反应时，酸性和碱性会被消除。</p>
+      </div>
+      <div class="card">
+        <h3>How the salt name is formed <span class="cn">盐的名称怎样形成</span></h3>
+        <ul>
+          <li>Hydrochloric acid → <strong>chloride</strong> <span class="cn">盐酸 → 氯化物</span></li>
+          <li>Sulphuric acid → <strong>sulphate</strong> <span class="cn">硫酸 → 硫酸盐</span></li>
+          <li>Nitric acid → <strong>nitrate</strong> <span class="cn">硝酸 → 硝酸盐</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="grid-2" style="margin-top:20px">
+      <div class="card">
+        <h3>🧪 Titration steps <span class="cn">滴定步骤</span></h3>
+        <div class="steps">
+          <div class="step"><div><strong>Measure the alkali.</strong><br><span class="cn">用移液管量取一定体积的碱液，放入锥形瓶。</span></div></div>
+          <div class="step"><div><strong>Add a few drops of indicator.</strong><br><span class="cn">加入几滴指示剂（例如酚酞）。</span></div></div>
+          <div class="step"><div><strong>Add acid slowly from the burette while swirling.</strong><br><span class="cn">边摇动锥形瓶，边从滴定管慢慢加入酸。</span></div></div>
+          <div class="step"><div><strong>Stop at the permanent colour change.</strong><br><span class="cn">颜色刚好持久改变时停止。</span></div></div>
+          <div class="step"><div><strong>Read the final burette value.</strong><br><span class="cn">读取滴定管终读数。</span></div></div>
+        </div>
+      </div>
+      <div class="card">
+        <h3>Calculation <span class="cn">计算</span></h3>
+        <div class="calc">
+Volume of acid used<br>
+= final burette reading − initial burette reading<br><br>
+Example:<br>
+= 27.60 mL − 2.40 mL<br>
+= <strong>25.20 mL</strong>
+        </div>
+        <p class="cn">所用酸的体积 = 滴定管终读数 − 初读数。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="applications">
+  <div class="container">
+    <div class="section-head">
+      <div class="section-kicker">Applications</div>
+      <h2><span class="en">Neutralisation in daily life</span><span class="cn">中和作用的日常应用</span></h2>
+    </div>
+    <div class="grid-2">
+      <article class="card application-card"><h3>🦷 Teeth <span class="cn">牙齿</span></h3><p class="en">Bacteria produce acids. Mildly alkaline toothpaste helps neutralise the acids and reduce tooth decay.</p><p class="cn">细菌会产生酸。弱碱性的牙膏帮助中和酸，减少蛀牙。</p></article>
+      <article class="card application-card"><h3>🌾 Acidic soil <span class="cn">酸性土壤</span></h3><p class="en">Farmers add slaked lime to reduce soil acidity so crops can grow better.</p><p class="cn">农民加入熟石灰来降低土壤酸性，使农作物生长得更好。</p></article>
+      <article class="card application-card"><h3>👕 Fabric &amp; hair care <span class="cn">衣物与护发</span></h3><p class="en">Acidic fabric softener can neutralise alkaline detergent residue. Slightly acidic conditioner can neutralise alkaline shampoo residue.</p><p class="cn">酸性柔顺剂可中和衣物上残留的碱性清洁剂；微酸性护发素可中和碱性洗发水残留。</p></article>
+      <article class="card application-card"><h3>🏭 Industrial waste <span class="cn">工业废料</span></h3><p class="en">Acidic waste is treated with an alkali, while alkaline waste is treated with an acid before safe discharge.</p><p class="cn">酸性废料在排放前用碱处理；碱性废料则用酸处理。</p></article>
+    </div>
+    <div class="memory-strip" style="margin-top:18px">
+      <div class="memory-rule">🧠 <strong>Opposites neutralise.</strong><br><span class="cn">相反性质互相中和。</span></div>
+      <div class="memory-rule">🧠 <strong>Acid problem → use suitable alkali.</strong><br><span class="cn">酸性问题 → 用适合的碱。</span></div>
+      <div class="memory-rule">🧠 <strong>Alkali problem → use suitable acid.</strong><br><span class="cn">碱性问题 → 用适合的酸。</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="exam-skills">
+  <div class="container">
+    <div class="card exam-box">
+      <div class="section-kicker" style="color:#ffe086">Exam technique</div>
+      <h2><span class="en">How to answer experiment questions</span><span class="cn">实验题的高分作答法</span></h2>
+      <p class="sub">Use the O-I-R method: Observation → Inference → Reason. <span class="cn">使用“观察 → 推论 → 原因”的作答结构。</span></p>
+      <div class="method">
+        <div><strong>1. Observation 观察</strong><br>State what you can see: colour change, gas bubbles, temperature, precipitate.</div>
+        <div><strong>2. Inference 推论</strong><br>Identify acid/alkali/neutral or name the gas/substance.</div>
+        <div><strong>3. Reason 原因</strong><br>Link to the scientific concept: pH, indicator colour, neutralisation or reaction.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="hots">
+  <div class="container">
+    <div class="section-head">
+      <div class="section-kicker">HOTS / KBAT</div>
+      <h2><span class="en">Structured questions with model answers</span><span class="cn">高阶思维题与参考答案</span></h2>
+    </div>
+
+    <details>
+      <summary>1. Classify solutions P, Q and R from litmus observations. <span class="cn">根据石蕊试纸结果判断 P、Q、R。</span></summary>
+      <div class="answer">
+        <p><strong>P = acid 酸:</strong> blue litmus turns red; red litmus remains red.</p>
+        <p><strong>Q = alkali 碱:</strong> red litmus turns blue; blue litmus remains blue.</p>
+        <p><strong>R = neutral 中性:</strong> both litmus papers remain unchanged.</p>
+      </div>
+    </details>
+
+    <details>
+      <summary>2. Magnesium ribbon is added to hydrochloric acid. What is observed and how is the gas tested? <span class="cn">镁带加入盐酸后有什么现象？怎样检验气体？</span></summary>
+      <div class="answer">
+        <p class="en">Gas bubbles are produced and the magnesium becomes smaller. Place a lighted wooden splint at the mouth of the test tube; a “pop” sound confirms hydrogen gas.</p>
+        <p class="cn">出现气泡，镁带逐渐变小。把点燃的木条放在试管口，若发出“啵”声，证明气体是氢气。</p>
+      </div>
+    </details>
+
+    <details>
+      <summary>3. Why can vinegar help remove a fishy smell? <span class="cn">为什么醋可以帮助去除鱼腥味？</span></summary>
+      <div class="answer">
+        <p class="en">Fishy-smelling compounds are commonly alkaline. Vinegar contains a weak acid that neutralises the alkaline compounds, reducing the smell.</p>
+        <p class="cn">造成鱼腥味的化合物通常呈碱性。醋含弱酸，可中和碱性物质，从而减轻腥味。</p>
+      </div>
+    </details>
+
+    <details>
+      <summary>4. A soil sample produces gas bubbles with baking soda solution but no bubbles with vinegar. What can be concluded? <span class="cn">土壤加小苏打溶液产生气泡，但加醋无气泡，可得出什么结论？</span></summary>
+      <div class="answer">
+        <p class="en">The soil is acidic. The acid in the soil reacts with baking soda and produces carbon dioxide gas. The farmer can add slaked lime to reduce the acidity.</p>
+        <p class="cn">土壤呈酸性。土壤中的酸与小苏打反应，产生二氧化碳气体。农民可加入熟石灰降低酸性。</p>
+      </div>
+    </details>
+
+    <details>
+      <summary>5. In the textbook model, a sting becomes worse after soap and toothpaste are applied. What is a likely explanation? <span class="cn">按课本模型，叮伤处涂肥皂和牙膏后更痛，可能原因是什么？</span></summary>
+      <div class="answer">
+        <p class="en">Soap and toothpaste are alkaline, so the sting substance is likely alkaline too. An acidic substance such as vinegar would be the neutralising opposite in the simplified exam model.</p>
+        <p class="cn">肥皂和牙膏呈碱性，因此叮伤物质可能也呈碱性。按简化的考试模型，可用醋这类酸性物质来中和。</p>
+        <p><em>Exam note / 考试备注: This is textbook reasoning, not real-life medical first-aid guidance.</em></p>
+      </div>
+    </details>
+  </div>
+</section>
+
+<section id="quiz">
+  <div class="container">
+    <div class="section-head">
+      <div class="section-kicker">Final exam practice</div>
+      <h2><span class="en">Interactive mini quiz</span><span class="cn">互动小测验</span></h2>
+      <p class="sub">Choose one answer, then press “Check”. <span class="cn">选择答案后按“检查”。</span></p>
+    </div>
+    <div id="quiz-list"></div>
+    <div class="card quiz-actions" style="display:flex;justify-content:space-between;align-items:center;gap:15px;flex-wrap:wrap">
+      <strong id="score">Score / 分数: 0 / 10</strong>
+      <button class="check-btn" onclick="resetQuiz()">Reset Quiz / 重新作答</button>
+    </div>
+  </div>
+</section>
+
+<section id="flashcards">
+  <div class="container">
+    <div class="section-head">
+      <div class="section-kicker">Fast recall</div>
+      <h2><span class="en">Tap-to-flip flashcards</span><span class="cn">点击翻面的记忆卡</span></h2>
+    </div>
+    <div class="flashcards">
+      <div class="flashcard"><div class="flash-inner"><div class="flash-face flash-front">What is neutral pH?<br><span class="cn">中性 pH 是多少？</span></div><div class="flash-face flash-back">pH 7</div></div></div>
+      <div class="flashcard"><div class="flash-inner"><div class="flash-face flash-front">Acid changes blue litmus to…<br><span class="cn">酸使蓝石蕊变成……</span></div><div class="flash-face flash-back">Red 红色</div></div></div>
+      <div class="flashcard"><div class="flash-inner"><div class="flash-face flash-front">Phenolphthalein in alkali?<br><span class="cn">酚酞遇碱？</span></div><div class="flash-face flash-back">Pink 粉红色</div></div></div>
+      <div class="flashcard"><div class="flash-inner"><div class="flash-face flash-front">Acid + metal produces…<br><span class="cn">酸 + 金属产生……</span></div><div class="flash-face flash-back">Salt + hydrogen<br>盐 + 氢气</div></div></div>
+      <div class="flashcard"><div class="flash-inner"><div class="flash-face flash-front">Neutralisation products?<br><span class="cn">中和反应产物？</span></div><div class="flash-face flash-back">Salt + water<br>盐 + 水</div></div></div>
+      <div class="flashcard"><div class="flash-inner"><div class="flash-face flash-front">Lower acidic pH means…<br><span class="cn">酸的 pH 越低表示……</span></div><div class="flash-face flash-back">Stronger acid<br>酸性越强</div></div></div>
+      <div class="flashcard"><div class="flash-inner"><div class="flash-face flash-front">Treat acidic soil with…<br><span class="cn">处理酸性土壤用……</span></div><div class="flash-face flash-back">Slaked lime<br>熟石灰</div></div></div>
+      <div class="flashcard"><div class="flash-inner"><div class="flash-face flash-front">Gas test for hydrogen?<br><span class="cn">氢气的检验？</span></div><div class="flash-face flash-back">Lighted splint gives a “pop”<br>点燃木条发出“啵”声</div></div></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container grid-2">
+    <div class="card">
+      <h2 style="font-size:1.7rem">Common mistakes <span class="cn">常见错误</span></h2>
+      <ul>
+        <li>Writing “pH 7 is weak acid”. It is <strong>neutral</strong>.<span class="cn">把 pH 7 写成弱酸；正确是中性。</span></li>
+        <li>For acid strength, lower pH means stronger acid.<span class="cn">比较酸性时，pH 越低越强。</span></li>
+        <li>For alkali strength, higher pH means stronger alkali.<span class="cn">比较碱性时，pH 越高越强。</span></li>
+        <li>Do not say “bubbles = oxygen” automatically. Acid + metal gives hydrogen.<span class="cn">不要看到气泡就写氧气；酸与金属产生氢气。</span></li>
+        <li>Observation is not inference: “turns red” is observation; “acidic” is inference.<span class="cn">“变红”是观察；“呈酸性”才是推论。</span></li>
+      </ul>
+    </div>
+    <div class="card checklist">
+      <h2 style="font-size:1.7rem">Revision checklist <span class="cn">复习清单</span></h2>
+      <label><input type="checkbox" data-check="1">I can compare acid and alkali properties. <span class="cn">我会比较酸与碱的性质。</span></label>
+      <label><input type="checkbox" data-check="2">I know all indicator colour changes. <span class="cn">我记得所有指示剂颜色变化。</span></label>
+      <label><input type="checkbox" data-check="3">I can order substances by acid/alkali strength. <span class="cn">我会按酸碱强度排序。</span></label>
+      <label><input type="checkbox" data-check="4">I can explain the role of water. <span class="cn">我会解释水的作用。</span></label>
+      <label><input type="checkbox" data-check="5">I can write neutralisation equations. <span class="cn">我会写中和反应方程式。</span></label>
+      <label><input type="checkbox" data-check="6">I can answer titration calculations. <span class="cn">我会做滴定体积计算。</span></label>
+      <label><input type="checkbox" data-check="7">I can explain daily-life applications. <span class="cn">我会解释日常应用。</span></label>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="container">
+    <strong>Form 2 Science KSSM • Chapter 6: Acid and Alkali</strong><br>
+    <span>Prepared from the uploaded textbook pages for final-exam revision. / 根据上传的课本页面整理。</span>
+  </div>
+</footer>
+
+<script>
+const body = document.body;
+document.querySelectorAll('.lang').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    document.querySelectorAll('.lang').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    body.dataset.lang=btn.dataset.lang;
+  });
+});
+
+const colours = {
+  acid:{phenol:'#f3f3f3',methyl:'#e53935',universal:'#ef5a3c',blueLitmus:'#e53935',redLitmus:'#e53935'},
+  neutral:{phenol:'#f3f3f3',methyl:'#f4c430',universal:'#33a86e',blueLitmus:'#405ac7',redLitmus:'#e53935'},
+  alkali:{phenol:'#f05ba6',methyl:'#f4c430',universal:'#4e62d8',blueLitmus:'#405ac7',redLitmus:'#405ac7'}
+};
+const simText = {
+  acid:'<strong>Acid selected / 已选择酸：</strong> pH less than 7; blue litmus turns red.',
+  neutral:'<strong>Neutral selected / 已选择中性：</strong> pH 7; litmus papers do not change.',
+  alkali:'<strong>Alkali selected / 已选择碱：</strong> pH more than 7; red litmus turns blue.'
+};
+function updateSimulator(kind){
+  document.querySelectorAll('.choice').forEach(b=>b.classList.toggle('selected',b.dataset.kind===kind));
+  document.querySelectorAll('.tube-liquid').forEach(t=>t.style.background=colours[kind][t.dataset.ind]);
+  document.getElementById('sim-text').innerHTML=simText[kind];
+}
+document.querySelectorAll('.choice').forEach(b=>b.addEventListener('click',()=>updateSimulator(b.dataset.kind)));
+updateSimulator('acid');
+
+const quizData = [
+ {q:'What is the pH of pure water? / 纯水的 pH 是多少？',o:['0','5','7','14'],a:2,e:'Pure water is neutral, so its pH is 7. / 纯水呈中性，因此 pH 为 7。'},
+ {q:'Which observation identifies an acid? / 哪个现象可判断为酸？',o:['Red litmus turns blue / 红石蕊变蓝','Blue litmus turns red / 蓝石蕊变红','Phenolphthalein turns pink / 酚酞变粉红','pH is 10 / pH 为10'],a:1,e:'An acid turns blue litmus paper red. / 酸使蓝色石蕊试纸变红。'},
+ {q:'Which is the strongest acid? / 哪一个酸性最强？',o:['pH 2','pH 4','pH 6','pH 7'],a:0,e:'The lower the pH, the stronger the acid. / pH 越低，酸性越强。'},
+ {q:'Phenolphthalein in sodium hydroxide is… / 酚酞加入氢氧化钠后呈……',o:['Colourless / 无色','Green / 绿色','Pink / 粉红色','Red / 红色'],a:2,e:'Phenolphthalein is pink in an alkali. / 酚酞在碱中呈粉红色。'},
+ {q:'What gas is produced when magnesium reacts with dilute hydrochloric acid? / 镁与稀盐酸反应产生什么气体？',o:['Oxygen / 氧气','Carbon dioxide / 二氧化碳','Hydrogen / 氢气','Nitrogen / 氮气'],a:2,e:'Acid + reactive metal → salt + hydrogen. / 酸 + 活泼金属 → 盐 + 氢气。'},
+ {q:'Why does dry hydrogen chloride not change dry litmus? / 为什么干燥氯化氢不使干石蕊变色？',o:['It is neutral / 它是中性','Water is absent / 没有水','Litmus is alkaline / 石蕊呈碱性','It is too cold / 温度太低'],a:1,e:'Water is needed for acidic properties to appear. / 酸性表现需要水。'},
+ {q:'Which substance is suitable for treating acidic soil? / 哪种物质适合处理酸性土壤？',o:['Vinegar / 醋','Lemon juice / 柠檬汁','Slaked lime / 熟石灰','Carbonic acid / 碳酸'],a:2,e:'Slaked lime is alkaline and neutralises acidic soil. / 熟石灰呈碱性，可中和酸性土壤。'},
+ {q:'The products of neutralisation are… / 中和反应的产物是……',o:['Acid + water / 酸和水','Salt + water / 盐和水','Metal + gas / 金属和气体','Alkali + gas / 碱和气体'],a:1,e:'Acid + alkali → salt + water. / 酸 + 碱 → 盐 + 水。'},
+ {q:'What is the advantage of universal indicator over litmus paper? / 通用指示剂比石蕊试纸有什么优点？',o:['It is cheaper / 更便宜','It gives approximate pH and strength / 可显示大约 pH 与强弱','It produces gas / 会产生气体','It neutralises acids / 会中和酸'],a:1,e:'Universal indicator shows a range of colours related to pH. / 通用指示剂用一系列颜色显示大约 pH。'},
+ {q:'Initial burette reading is 1.20 mL and final reading is 24.80 mL. Acid used? / 初读数1.20 mL，终读数24.80 mL，所用酸体积？',o:['23.60 mL','24.80 mL','26.00 mL','1.20 mL'],a:0,e:'24.80 − 1.20 = 23.60 mL.'}
+];
+let answered = new Set();
+function renderQuiz(){
+  const root=document.getElementById('quiz-list');
+  root.innerHTML=quizData.map((item,i)=>`
+    <div class="card quiz-card" id="q${i}">
+      <h3>${i+1}. ${item.q}</h3>
+      <div class="options">
+        ${item.o.map((x,j)=>`<label class="option"><input type="radio" name="q${i}" value="${j}"> ${x}</label>`).join('')}
+      </div>
+      <button class="check-btn" onclick="checkQ(${i})">Check / 检查</button>
+      <span class="feedback" id="f${i}"></span>
+    </div>`).join('');
+}
+function checkQ(i){
+  const chosen=document.querySelector(`input[name="q${i}"]:checked`);
+  const f=document.getElementById(`f${i}`);
+  if(!chosen){f.textContent='Choose an answer first. / 请先选择答案。';f.className='feedback wrong';return}
+  const correct=Number(chosen.value)===quizData[i].a;
+  f.innerHTML=(correct?'✓ Correct. / 正确。 ':'✗ Try again. / 再想一想。 ')+quizData[i].e;
+  f.className='feedback '+(correct?'correct':'wrong');
+  if(correct) answered.add(i); else answered.delete(i);
+  document.getElementById('score').textContent=`Score / 分数: ${answered.size} / ${quizData.length}`;
+}
+function resetQuiz(){answered.clear();renderQuiz();document.getElementById('score').textContent='Score / 分数: 0 / 10';}
+renderQuiz();
+
+document.querySelectorAll('.flashcard').forEach(c=>c.addEventListener('click',()=>c.classList.toggle('flipped')));
+
+document.querySelectorAll('[data-check]').forEach(cb=>{
+  const key='acid-alkali-check-'+cb.dataset.check;
+  cb.checked=localStorage.getItem(key)==='1';
+  cb.addEventListener('change',()=>localStorage.setItem(key,cb.checked?'1':'0'));
+});
+</script>
+</body>
+</html>

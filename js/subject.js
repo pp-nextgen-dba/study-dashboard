@@ -75,7 +75,8 @@ export const scienceData = {
             chinese:"酸与碱",
             status:"Not Started",
             confidence:0,
-            last_updated:"2026-05-20"
+            last_updated:"2026-05-20",
+            resourceUrl: "../science/form2_science_chapter6_acid_alkali_bilingual.html"
         },
 
         {
