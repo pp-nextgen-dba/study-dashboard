@@ -1674,6 +1674,7 @@ export const rekaBentukData = {
             chinese:"机械设计",
             resourceUrl:"../rbt/t4_chapter_mekanikal.html",
             resourceUrl2:"../rbt/form2_rbt_reka_bentuk_mekanikal_trilingual.html",
+            resourceUrl3:"../rbt/Form_2_RBT_Reka_Bentuk_Mekanikal_note3.html",
             status:"Not Started",
             confidence:0,
             last_updated:"2026-05-22"
