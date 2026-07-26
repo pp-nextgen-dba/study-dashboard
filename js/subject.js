@@ -3922,7 +3922,8 @@ export const addMathsData = {
             chinese:"方程组",
             status:"Not Started",
             confidence:0,
-            last_updated:"2026-05-17"
+            last_updated:"2026-05-17",
+            resourceUrl: "../addmaths/form4-chapter3-system-of-equations.html"
         },
 
         {
