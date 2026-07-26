@@ -255,6 +255,7 @@ footer{text-align:center;color:var(--dim);font-size:12.5px;margin-top:80px;paddi
           <path d="M220,120 L110,60"/>
           <path d="M220,120 L90,130"/>
           <path d="M220,120 L110,190"/>
+          <path d="M220,120 L170,235"/>
         </g>
         <g stroke="#4a3a1e" stroke-width="1.5" fill="none">
           <path d="M220,420 L90,370"/>
@@ -284,6 +285,7 @@ footer{text-align:center;color:var(--dim);font-size:12.5px;margin-top:80px;paddi
         <text x="110" y="55" text-anchor="middle" fill="#EDEFFB" font-size="10">ax²+bx+c=0</text>
         <text x="90" y="130" text-anchor="middle" fill="#EDEFFB" font-size="10">factorisation</text>
         <text x="110" y="190" text-anchor="middle" fill="#EDEFFB" font-size="10">quadratic formula</text>
+        <text x="170" y="248" text-anchor="middle" fill="#EDEFFB" font-size="10">graphical method</text>
 
         <!-- discriminant -->
         <circle cx="220" cy="420" r="42" fill="#4a3a1e" stroke="#FFB443" stroke-width="2"/>
@@ -315,8 +317,8 @@ footer{text-align:center;color:var(--dim);font-size:12.5px;margin-top:80px;paddi
   <!-- 2.1 EQUATIONS -->
   <section class="chapter tag-eq eq" id="equations" style="--accent:var(--eq)">
     <div class="chapter-head"><span class="chapter-num">2.1</span><h2 class="en">Quadratic Equations</h2><h2 class="cn">二次方程</h2></div>
-    <p class="chapter-desc en">A quadratic equation has the form ax² + bx + c = 0, where a ≠ 0. Solving it means finding the value(s) of x that make it true — these values are called the roots.</p>
-    <p class="chapter-desc cn">二次方程的一般形式为 ax² + bx + c = 0（a ≠ 0）。解方程就是求出使等式成立的 x 值，这些值称为方程的根。</p>
+    <p class="chapter-desc en">A quadratic equation has the form ax² + bx + c = 0, where a ≠ 0. There are three ways to solve one — factorisation, the quadratic formula, or reading the roots straight off a graph — and all three must agree.</p>
+    <p class="chapter-desc cn">二次方程的一般形式为 ax² + bx + c = 0（a ≠ 0）。求解方法有三种——因式分解、求根公式，或直接从图像上读出根——三种方法所得的根必须一致。</p>
 
     <div class="cards">
       <div class="card"><h4 class="en">General Form</h4><h4 class="cn">一般式</h4>
@@ -333,6 +335,11 @@ footer{text-align:center;color:var(--dim);font-size:12.5px;margin-top:80px;paddi
         <div class="formula">x = (−b ± √(b²−4ac)) / 2a</div>
         <p class="en">Always works, even when factorisation doesn't. Memorise this one exactly.</p>
         <p class="cn">无论能否因式分解都适用，必须准确背熟。</p>
+      </div>
+      <div class="card"><h4 class="en">Graphical Method</h4><h4 class="cn">图解法</h4>
+        <div class="formula">Draw y = ax² + bx + c</div>
+        <p class="en">Plot the curve from a table of values. The roots are exactly where the curve crosses the x-axis (y = 0).</p>
+        <p class="cn">根据数值表画出曲线，方程的根就是曲线与x轴（y = 0）相交之处。</p>
       </div>
     </div>
 
@@ -357,9 +364,83 @@ footer{text-align:center;color:var(--dim);font-size:12.5px;margin-top:80px;paddi
       </div>
     </div>
 
+    <div class="example" style="--accent:var(--eq)">
+      <div class="ex-label en">Worked Example — Graphical Method</div>
+      <div class="ex-label cn">例题 — 图解法</div>
+      <div class="q en">Draw the graph of y = x² − 2x − 3 for −2 ≤ x ≤ 4. Use it to solve (a) x² − 2x − 3 = 0, and (b) x² − 2x − 3 = 2.</div>
+      <div class="q cn">画出 y = x² − 2x − 3（−2 ≤ x ≤ 4）的图像，并利用图像解 (a) x² − 2x − 3 = 0，(b) x² − 2x − 3 = 2。</div>
+      <div class="steps">
+        <span class="en">Step 1 — table of values:</span><span class="cn">第一步 — 列出数值表：</span><br>
+        x&nbsp; : &minus;2 &nbsp;&minus;1&nbsp;&nbsp; 0&nbsp;&nbsp; 1&nbsp;&nbsp; 2&nbsp;&nbsp; 3&nbsp;&nbsp; 4<br>
+        y&nbsp; : &nbsp;5&nbsp;&nbsp;&nbsp; 0&nbsp;&nbsp; &minus;3&nbsp; &minus;4&nbsp; &minus;3&nbsp;&nbsp; 0&nbsp;&nbsp; 5<br>
+        <span class="en">Step 2 — plot the points and join with a smooth curve:</span><br>
+        <span class="cn">第二步 — 描点后用平滑曲线连接：</span>
+      </div>
+      <div style="margin-top:14px;background:rgba(255,255,255,0.02);border:1px dashed var(--line);border-radius:10px;padding:10px;overflow-x:auto;">
+        <svg viewBox="0 0 840 280" xmlns="http://www.w3.org/2000/svg" style="min-width:700px;display:block;margin:0 auto;">
+          <!-- axes -->
+          <line x1="60" y1="20" x2="60" y2="260" stroke="#2B3468" stroke-width="1.5"/>
+          <line x1="60" y1="151" x2="800" y2="151" stroke="#2B3468" stroke-width="1.5"/>
+          <text x="805" y="155" fill="#9AA3C7" font-family="JetBrains Mono" font-size="11">x</text>
+          <text x="45" y="28" fill="#9AA3C7" font-family="JetBrains Mono" font-size="11">y</text>
+
+          <!-- curve: y = x^2 - 2x - 3 -->
+          <path d="M60,42 Q420,434.4 780,42" fill="none" stroke="#45E0C4" stroke-width="3"/>
+
+          <!-- line y = 2 -->
+          <line x1="60" y1="107" x2="780" y2="107" stroke="#B98CF2" stroke-width="2" stroke-dasharray="6 4"/>
+          <text x="790" y="111" fill="#B98CF2" font-family="JetBrains Mono" font-size="11">y=2</text>
+
+          <!-- plotted table points -->
+          <circle cx="60" cy="42" r="4" fill="#EDEFFB"/>
+          <circle cx="180" cy="151" r="4" fill="#EDEFFB"/>
+          <circle cx="300" cy="216" r="4" fill="#EDEFFB"/>
+          <circle cx="420" cy="238" r="4" fill="#EDEFFB"/>
+          <circle cx="540" cy="216" r="4" fill="#EDEFFB"/>
+          <circle cx="660" cy="151" r="4" fill="#EDEFFB"/>
+          <circle cx="780" cy="42" r="4" fill="#EDEFFB"/>
+
+          <!-- roots (x-intercepts) -->
+          <circle cx="180" cy="151" r="6" fill="#4FC3F7"/>
+          <circle cx="660" cy="151" r="6" fill="#4FC3F7"/>
+          <text x="180" y="172" text-anchor="middle" fill="#4FC3F7" font-family="JetBrains Mono" font-size="12">x=&minus;1</text>
+          <text x="660" y="172" text-anchor="middle" fill="#4FC3F7" font-family="JetBrains Mono" font-size="12">x=3</text>
+
+          <!-- intersections with y=2 -->
+          <circle cx="126" cy="107" r="6" fill="#B98CF2"/>
+          <circle cx="714" cy="107" r="6" fill="#B98CF2"/>
+          <text x="126" y="98" text-anchor="middle" fill="#B98CF2" font-family="JetBrains Mono" font-size="11">&minus;1.45</text>
+          <text x="714" y="98" text-anchor="middle" fill="#B98CF2" font-family="JetBrains Mono" font-size="11">3.45</text>
+
+          <!-- x axis tick labels -->
+          <text x="60" y="272" text-anchor="middle" fill="#9AA3C7" font-family="JetBrains Mono" font-size="10">&minus;2</text>
+          <text x="180" y="272" text-anchor="middle" fill="#9AA3C7" font-family="JetBrains Mono" font-size="10">&minus;1</text>
+          <text x="300" y="272" text-anchor="middle" fill="#9AA3C7" font-family="JetBrains Mono" font-size="10">0</text>
+          <text x="420" y="272" text-anchor="middle" fill="#9AA3C7" font-family="JetBrains Mono" font-size="10">1</text>
+          <text x="540" y="272" text-anchor="middle" fill="#9AA3C7" font-family="JetBrains Mono" font-size="10">2</text>
+          <text x="660" y="272" text-anchor="middle" fill="#9AA3C7" font-family="JetBrains Mono" font-size="10">3</text>
+          <text x="780" y="272" text-anchor="middle" fill="#9AA3C7" font-family="JetBrains Mono" font-size="10">4</text>
+        </svg>
+      </div>
+      <div class="steps" style="margin-top:10px;">
+        <span class="en">(a) The curve crosses the x-axis at x = <b>−1</b> and x = <b>3</b> — these are the roots of x² − 2x − 3 = 0.</span><br><br>
+        <span class="cn">(a) 曲线与x轴相交于 x = <b>−1</b> 和 x = <b>3</b> — 这就是 x² − 2x − 3 = 0 的根。</span><br><br>
+        <span class="en">(b) Draw the line y = 2 on the same axes. It cuts the curve at x ≈ <b>−1.45</b> and x ≈ <b>3.45</b> — these are the roots of x² − 2x − 3 = 2.</span><br><br>
+        <span class="cn">(b) 在同一坐标轴上画出直线 y = 2，它与曲线相交于 x ≈ <b>−1.45</b> 和 x ≈ <b>3.45</b> — 这就是 x² − 2x − 3 = 2 的根。</span>
+      </div>
+    </div>
+
+    <div class="caution">
+      <span class="ico">⚠️</span>
+      <div>
+        <span class="en"><b>Common trap:</b> a graphical answer is only as accurate as the graph — hand-drawn graphs are usually only expected to give roots correct to one decimal place. To solve f(x) = k for k ≠ 0, you must draw the extra line y = k; don't just read where the curve meets the x-axis.</span>
+        <span class="cn"><b>常见陷阱：</b>图解法的精确度取决于图像本身——手绘图像通常只需读到一位小数即可。要解 f(x) = k（k ≠ 0），必须额外画出直线 y = k，不能只看曲线与x轴的交点。</span>
+      </div>
+    </div>
+
     <div class="memtip">
-      <span class="en"><b>Memory hook:</b> "Zero on one side, then decide." Always clear the equation to = 0 first, then choose factorisation if it looks clean, or the formula if it doesn't.</span>
-      <span class="cn"><b>记忆口诀：</b>"先移项等于零，再决定用哪招。"先把方程化为等于零，看起来能整除就用因式分解，否则直接套公式。</span>
+      <span class="en"><b>Memory hook:</b> "Zero on one side, then decide." Always clear the equation to = 0 first, then choose factorisation if it looks clean, the formula if it doesn't, or the graph when you're told to draw one.</span>
+      <span class="cn"><b>记忆口诀：</b>"先移项等于零，再决定用哪招。"先把方程化为等于零，看起来能整除就用因式分解，否则直接套公式；题目要求画图时就用图解法。</span>
     </div>
 
     <div class="quiz">
@@ -380,6 +461,15 @@ footer{text-align:center;color:var(--dim);font-size:12.5px;margin-top:80px;paddi
           <button onclick="checkAns(this,'3, 1, -2')">3, 1, -2</button>
           <button onclick="checkAns(this,'3, 1, -2')">1, 3, -2</button>
           <button onclick="checkAns(this,'3, 1, -2')">3, -1, -2</button>
+        </div>
+      </div>
+      <div class="qitem">
+        <div class="qtext">To use the graph of y = x² − 2x − 3 to solve x² − 2x − 3 = 4, which extra line should you draw?</div>
+        <div class="qopts" data-answer="y = 4">
+          <button onclick="checkAns(this,'y = 4')">y = 4</button>
+          <button onclick="checkAns(this,'y = 4')">x = 4</button>
+          <button onclick="checkAns(this,'y = 4')">y = x</button>
+          <button onclick="checkAns(this,'y = 4')">y = −4</button>
         </div>
       </div>
     </div>
