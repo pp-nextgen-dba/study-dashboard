@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quadratic Functions | 二次函数</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Noto+Serif+SC:wght@500;700;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0B1026;
+  --panel:#141A38;
+  --panel2:#1B2350;
+  --line:#2B3468;
+  --eq:#4FC3F7;
+  --eq-dim:#163a4a;
+  --disc:#FFB443;
+  --disc-dim:#4a3a1e;
+  --graph:#45E0C4;
+  --graph-dim:#173a35;
+  --ineq:#B98CF2;
+  --ineq-dim:#31255a;
+  --text:#EDEFFB;
+  --dim:#9AA3C7;
+  --coral:#FF7A6B;
+}
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--text);
+  font-family:'Space Grotesk',sans-serif;
+  line-height:1.6;
+  overflow-x:hidden;
+}
+body[data-lang="cn"] .en{display:none;}
+body[data-lang="en"] .cn{display:none;}
+.cn{font-family:'Noto Serif SC',serif;}
+.mono{font-family:'JetBrains Mono',monospace;}
+
+.bg-grid{
+  position:fixed;inset:0;z-index:0;pointer-events:none;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+  background-size:40px 40px;
+  mask-image:radial-gradient(ellipse at 50% 0%, black 40%, transparent 80%);
+}
+
+.topbar{
+  position:sticky;top:0;z-index:100;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:14px 24px;
+  background:rgba(11,16,38,0.85);
+  backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--line);
+}
+.brand{display:flex;align-items:center;gap:10px;font-weight:700;font-size:15px;letter-spacing:0.3px;}
+.brand .dot{width:8px;height:8px;border-radius:50%;background:var(--eq);box-shadow:0 0 10px var(--eq);}
+.navlinks{display:flex;gap:4px;flex-wrap:wrap;}
+.navlinks a{
+  color:var(--dim);text-decoration:none;font-size:12.5px;padding:6px 10px;border-radius:20px;
+  border:1px solid transparent;white-space:nowrap;
+}
+.navlinks a:hover{border-color:var(--line);color:var(--text);}
+.langtoggle{
+  display:flex;background:var(--panel2);border-radius:20px;padding:3px;border:1px solid var(--line);
+  flex-shrink:0;
+}
+.langtoggle button{
+  border:none;background:transparent;color:var(--dim);padding:6px 14px;border-radius:16px;
+  font-family:inherit;font-size:13px;cursor:pointer;font-weight:600;transition:all .2s;
+}
+.langtoggle button.active{background:var(--eq);color:#03202e;}
+
+main{position:relative;z-index:1;max-width:1080px;margin:0 auto;padding:0 24px 100px;}
+
+.hero{padding:70px 0 40px;text-align:center;}
+.eyebrow{
+  display:inline-block;font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:2px;
+  color:var(--graph);text-transform:uppercase;border:1px solid var(--graph-dim);background:var(--graph-dim);
+  padding:5px 14px;border-radius:20px;margin-bottom:20px;
+}
+.hero h1{
+  font-size:clamp(32px,6vw,58px);margin:0 0 12px;font-weight:700;letter-spacing:-1px;
+  background:linear-gradient(100deg,var(--eq),var(--graph) 50%,var(--ineq));
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+}
+.hero h1.cn{font-weight:900;letter-spacing:2px;}
+.hero p.sub{color:var(--dim);font-size:16px;max-width:640px;margin:0 auto;}
+
+.powerline{
+  margin:50px auto 20px;max-width:920px;
+  background:var(--panel);border:1px solid var(--line);border-radius:20px;padding:30px 20px 20px;
+}
+.powerline svg{width:100%;height:auto;display:block;}
+.pl-caption{text-align:center;color:var(--dim);font-size:13px;margin-top:10px;}
+
+section.chapter{margin-top:70px;scroll-margin-top:90px;}
+.chapter-head{display:flex;align-items:baseline;gap:14px;margin-bottom:6px;}
+.chapter-num{font-family:'JetBrains Mono',monospace;font-size:14px;color:var(--dim);}
+.chapter-head h2{font-size:clamp(24px,4vw,34px);margin:0;font-weight:700;}
+.chapter-desc{color:var(--dim);max-width:640px;margin:8px 0 28px;font-size:14.5px;}
+
+.tag-eq h2{color:var(--eq);}
+.tag-disc h2{color:var(--disc);}
+.tag-graph h2{color:var(--graph);}
+.tag-ineq h2{color:var(--ineq);}
+
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px;margin-bottom:24px;}
+.card{
+  background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:18px 18px 16px;
+  position:relative;overflow:hidden;
+}
+.card::before{content:'';position:absolute;top:0;left:0;width:4px;height:100%;background:var(--accent,var(--eq));}
+.card h4{margin:0 0 10px;font-size:13px;color:var(--dim);text-transform:uppercase;letter-spacing:1px;font-weight:600;}
+.card .formula{
+  font-family:'JetBrains Mono',monospace;font-size:17px;color:var(--text);background:rgba(255,255,255,0.03);
+  padding:10px 12px;border-radius:8px;margin-bottom:8px;border:1px dashed var(--line);
+}
+.card p{margin:8px 0 0;font-size:13.5px;color:var(--dim);}
+
+.eq .card::before{background:var(--eq);}
+.disc .card::before{background:var(--disc);}
+.graph .card::before{background:var(--graph);}
+.ineq .card::before{background:var(--ineq);}
+
+.example{
+  background:var(--panel2);border:1px solid var(--line);border-radius:14px;padding:20px 22px;margin-bottom:16px;
+}
+.example .ex-label{font-size:12px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--accent,var(--eq));margin-bottom:8px;}
+.example .q{font-family:'JetBrains Mono',monospace;font-size:15px;margin-bottom:10px;}
+.example .steps{font-family:'JetBrains Mono',monospace;font-size:14px;color:var(--dim);line-height:2;}
+.example .steps b{color:var(--text);font-weight:700;}
+
+.caution{
+  border:1px solid #5a2b28;background:#2a1614;border-radius:12px;padding:14px 16px;margin:16px 0;
+  font-size:13.5px;color:#ffb3ab;display:flex;gap:10px;align-items:flex-start;
+}
+.caution .ico{font-size:16px;flex-shrink:0;}
+
+.memtip{
+  border:1px solid var(--eq-dim);background:linear-gradient(135deg,var(--eq-dim),transparent);
+  border-radius:12px;padding:14px 16px;margin:16px 0;font-size:13.5px;
+}
+.memtip b{color:var(--eq);}
+.disc .memtip{border-color:var(--disc-dim);background:linear-gradient(135deg,var(--disc-dim),transparent);}
+.disc .memtip b{color:var(--disc);}
+.graph .memtip{border-color:var(--graph-dim);background:linear-gradient(135deg,var(--graph-dim),transparent);}
+.graph .memtip b{color:var(--graph);}
+.ineq .memtip{border-color:var(--ineq-dim);background:linear-gradient(135deg,var(--ineq-dim),transparent);}
+.ineq .memtip b{color:var(--ineq);}
+
+.quiz{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:20px 22px;margin-top:10px;}
+.quiz h4{margin:0 0 14px;font-size:14px;color:var(--dim);text-transform:uppercase;letter-spacing:1px;}
+.qitem{margin-bottom:14px;}
+.qitem .qtext{font-family:'JetBrains Mono',monospace;font-size:14.5px;margin-bottom:8px;}
+.qopts{display:flex;gap:8px;flex-wrap:wrap;}
+.qopts button{
+  font-family:'JetBrains Mono',monospace;background:var(--panel2);border:1px solid var(--line);color:var(--text);
+  padding:7px 14px;border-radius:8px;cursor:pointer;font-size:13.5px;transition:.15s;
+}
+.qopts button:hover{border-color:var(--dim);}
+.qopts button.correct{background:#1c3a2e;border-color:#3fd68a;color:#8ff5bb;}
+.qopts button.wrong{background:#3a1c1c;border-color:#e05555;color:#ff9a9a;}
+
+.mindmap-wrap{background:var(--panel);border:1px solid var(--line);border-radius:20px;padding:20px;overflow-x:auto;}
+.mindmap-wrap svg{display:block;margin:0 auto;min-width:900px;}
+
+footer{text-align:center;color:var(--dim);font-size:12.5px;margin-top:80px;padding-top:24px;border-top:1px solid var(--line);}
+
+@media(max-width:640px){
+  .navlinks{display:none;}
+  .topbar{justify-content:space-between;}
+}
+</style>
+</head>
+<body data-lang="en">
+<div class="bg-grid"></div>
+
+<div class="topbar">
+  <div class="brand"><span class="dot"></span><span class="en">Add Maths · Ch.2</span><span class="cn">附加数学 · 第2章</span></div>
+  <div class="navlinks">
+    <a href="../index.html">&larr; Dashboard</a>
+    <a href="#map"><span class="en">Mind Map</span><span class="cn">思维导图</span></a>
+    <a href="#equations"><span class="en">Equations</span><span class="cn">方程</span></a>
+    <a href="#discriminant"><span class="en">Discriminant</span><span class="cn">判别式</span></a>
+    <a href="#graphs"><span class="en">Graphs</span><span class="cn">图像</span></a>
+    <a href="#inequalities"><span class="en">Inequalities</span><span class="cn">不等式</span></a>
+  </div>
+  <div class="langtoggle">
+    <button id="btn-en" class="active" onclick="setLang('en')">EN</button>
+    <button id="btn-cn" onclick="setLang('cn')">中文</button>
+  </div>
+</div>
+
+<main>
+
+  <!-- HERO -->
+  <div class="hero">
+    <span class="eyebrow">Form 4 · KSSM Add Maths · Chapter 2</span>
+    <h1 class="en">Quadratic Functions</h1>
+    <h1 class="cn">二次函数</h1>
+    <p class="sub en">One curve, four questions: what are its roots, what shape does it draw, where's its lowest/highest point, and where is it positive or negative? Answer those and this chapter is done.</p>
+    <p class="sub cn">同一条曲线，四个问题：它的根是什么、图像长什么样、最低/最高点在哪、在哪个范围为正或为负？把这四个问题弄懂，这一章就掌握了。</p>
+  </div>
+
+  <!-- SIGNATURE PARABOLA DIAGRAM -->
+  <div class="powerline">
+    <svg viewBox="0 0 900 260" xmlns="http://www.w3.org/2000/svg">
+      <!-- axes -->
+      <line x1="60" y1="220" x2="840" y2="220" stroke="#2B3468" stroke-width="1.5"/>
+      <line x1="450" y1="20" x2="450" y2="240" stroke="#2B3468" stroke-width="1.5" stroke-dasharray="4 4"/>
+      <text x="855" y="224" fill="#9AA3C7" font-family="JetBrains Mono" font-size="12">x</text>
+      <text x="452" y="14" fill="#9AA3C7" font-family="JetBrains Mono" font-size="12">axis of symmetry</text>
+
+      <!-- parabola f(x) = a(x-h)^2 + k opening up -->
+      <path d="M170,220 Q450,-10 730,220" fill="none" stroke="#45E0C4" stroke-width="3"/>
+
+      <!-- roots -->
+      <circle cx="270" cy="220" r="5" fill="#4FC3F7"/>
+      <circle cx="630" cy="220" r="5" fill="#4FC3F7"/>
+      <text x="270" y="242" text-anchor="middle" fill="#4FC3F7" font-family="JetBrains Mono" font-size="12">root α</text>
+      <text x="630" y="242" text-anchor="middle" fill="#4FC3F7" font-family="JetBrains Mono" font-size="12">root β</text>
+
+      <!-- vertex / turning point -->
+      <circle cx="450" cy="60" r="6" fill="#FFB443"/>
+      <text x="450" y="42" text-anchor="middle" fill="#FFB443" font-family="JetBrains Mono" font-size="12" font-weight="700">turning point (h, k)</text>
+      <line x1="450" y1="60" x2="450" y2="220" stroke="#FFB443" stroke-width="1" stroke-dasharray="3 3"/>
+
+      <!-- regions -->
+      <text x="150" y="205" fill="#B98CF2" font-family="JetBrains Mono" font-size="11">f(x) &gt; 0</text>
+      <text x="750" y="205" fill="#B98CF2" font-family="JetBrains Mono" font-size="11" text-anchor="end">f(x) &gt; 0</text>
+      <text x="450" y="130" text-anchor="middle" fill="#B98CF2" font-family="JetBrains Mono" font-size="11">f(x) &lt; 0</text>
+    </svg>
+    <p class="pl-caption en"><b style="color:var(--eq)">Roots</b> are where the curve crosses the x-axis, the <b style="color:var(--disc)">turning point</b> is its lowest (or highest) value, and the sign of f(x) flips exactly at the roots — that single picture is the whole chapter.</p>
+    <p class="pl-caption cn"><b style="color:var(--eq)">根</b>是曲线与x轴相交之处，<b style="color:var(--disc)">转折点</b>是它的最低（或最高）值，而 f(x) 的正负恰好在根处发生转变——这一张图就是整章的核心。</p>
+  </div>
+
+  <!-- MIND MAP -->
+  <section class="chapter" id="map">
+    <div class="chapter-head"><span class="chapter-num">MAP</span><h2 class="en">Chapter Memory Map</h2><h2 class="cn">章节思维导图</h2></div>
+    <p class="chapter-desc en">The whole chapter at a glance. Follow the branches from the centre outward.</p>
+    <p class="chapter-desc cn">整章内容一览无遗，从中心向外沿分支阅读。</p>
+    <div class="mindmap-wrap">
+      <svg viewBox="0 0 1000 620" xmlns="http://www.w3.org/2000/svg">
+        <g stroke="#2B3468" stroke-width="2" fill="none">
+          <path d="M500,310 C420,250 320,180 220,120"/>
+          <path d="M500,310 C420,340 320,380 220,420"/>
+          <path d="M500,310 C580,250 680,180 780,120"/>
+          <path d="M500,310 C580,340 680,380 780,420"/>
+        </g>
+        <g stroke="#163a4a" stroke-width="1.5" fill="none">
+          <path d="M220,120 L110,60"/>
+          <path d="M220,120 L90,130"/>
+          <path d="M220,120 L110,190"/>
+        </g>
+        <g stroke="#4a3a1e" stroke-width="1.5" fill="none">
+          <path d="M220,420 L90,370"/>
+          <path d="M220,420 L80,440"/>
+          <path d="M220,420 L100,510"/>
+        </g>
+        <g stroke="#173a35" stroke-width="1.5" fill="none">
+          <path d="M780,120 L900,60"/>
+          <path d="M780,120 L920,140"/>
+          <path d="M780,120 L900,200"/>
+        </g>
+        <g stroke="#31255a" stroke-width="1.5" fill="none">
+          <path d="M780,420 L900,370"/>
+          <path d="M780,420 L920,450"/>
+          <path d="M780,420 L900,520"/>
+        </g>
+
+        <circle cx="500" cy="310" r="70" fill="#141A38" stroke="#EDEFFB" stroke-width="2"/>
+        <text x="500" y="304" text-anchor="middle" fill="#EDEFFB" font-family="Space Grotesk" font-size="14" font-weight="700">Chapter 2</text>
+        <text x="500" y="322" text-anchor="middle" fill="#9AA3C7" font-family="Space Grotesk" font-size="11">Quadratic</text>
+        <text x="500" y="336" text-anchor="middle" fill="#9AA3C7" font-family="Space Grotesk" font-size="11">Functions</text>
+
+        <!-- equations -->
+        <circle cx="220" cy="120" r="42" fill="#163a4a" stroke="#4FC3F7" stroke-width="2"/>
+        <text x="220" y="117" text-anchor="middle" fill="#4FC3F7" font-size="12" font-weight="700">2.1 Quadratic</text>
+        <text x="220" y="130" text-anchor="middle" fill="#4FC3F7" font-size="12" font-weight="700">Equations</text>
+        <text x="110" y="55" text-anchor="middle" fill="#EDEFFB" font-size="10">ax²+bx+c=0</text>
+        <text x="90" y="130" text-anchor="middle" fill="#EDEFFB" font-size="10">factorisation</text>
+        <text x="110" y="190" text-anchor="middle" fill="#EDEFFB" font-size="10">quadratic formula</text>
+
+        <!-- discriminant -->
+        <circle cx="220" cy="420" r="42" fill="#4a3a1e" stroke="#FFB443" stroke-width="2"/>
+        <text x="220" y="417" text-anchor="middle" fill="#FFB443" font-size="12" font-weight="700">2.2 Types of</text>
+        <text x="220" y="430" text-anchor="middle" fill="#FFB443" font-size="12" font-weight="700">Roots</text>
+        <text x="90" y="365" text-anchor="middle" fill="#EDEFFB" font-size="10">b²−4ac &gt; 0 → 2 real</text>
+        <text x="80" y="440" text-anchor="middle" fill="#EDEFFB" font-size="10">b²−4ac = 0 → equal</text>
+        <text x="100" y="505" text-anchor="middle" fill="#EDEFFB" font-size="10">b²−4ac &lt; 0 → no real</text>
+
+        <!-- graphs -->
+        <circle cx="780" cy="120" r="42" fill="#173a35" stroke="#45E0C4" stroke-width="2"/>
+        <text x="780" y="117" text-anchor="middle" fill="#45E0C4" font-size="12" font-weight="700">2.3 Graphs &amp;</text>
+        <text x="780" y="130" text-anchor="middle" fill="#45E0C4" font-size="12" font-weight="700">Turning Points</text>
+        <text x="900" y="55" text-anchor="middle" fill="#EDEFFB" font-size="10">a(x−h)²+k</text>
+        <text x="920" y="135" text-anchor="middle" fill="#EDEFFB" font-size="10">min if a&gt;0, max if a&lt;0</text>
+        <text x="900" y="195" text-anchor="middle" fill="#EDEFFB" font-size="10">axis of symmetry x=h</text>
+
+        <!-- inequalities -->
+        <circle cx="780" cy="420" r="42" fill="#31255a" stroke="#B98CF2" stroke-width="2"/>
+        <text x="780" y="417" text-anchor="middle" fill="#B98CF2" font-size="12" font-weight="700">2.4 Quadratic</text>
+        <text x="780" y="430" text-anchor="middle" fill="#B98CF2" font-size="12" font-weight="700">Inequalities</text>
+        <text x="900" y="365" text-anchor="middle" fill="#EDEFFB" font-size="10">find roots first</text>
+        <text x="920" y="450" text-anchor="middle" fill="#EDEFFB" font-size="10">sketch the shape</text>
+        <text x="900" y="515" text-anchor="middle" fill="#EDEFFB" font-size="10">read off the region</text>
+      </svg>
+    </div>
+  </section>
+
+  <!-- 2.1 EQUATIONS -->
+  <section class="chapter tag-eq eq" id="equations" style="--accent:var(--eq)">
+    <div class="chapter-head"><span class="chapter-num">2.1</span><h2 class="en">Quadratic Equations</h2><h2 class="cn">二次方程</h2></div>
+    <p class="chapter-desc en">A quadratic equation has the form ax² + bx + c = 0, where a ≠ 0. Solving it means finding the value(s) of x that make it true — these values are called the roots.</p>
+    <p class="chapter-desc cn">二次方程的一般形式为 ax² + bx + c = 0（a ≠ 0）。解方程就是求出使等式成立的 x 值，这些值称为方程的根。</p>
+
+    <div class="cards">
+      <div class="card"><h4 class="en">General Form</h4><h4 class="cn">一般式</h4>
+        <div class="formula">ax² + bx + c = 0, a ≠ 0</div>
+        <p class="en">a, b, c are constants. The a ≠ 0 condition is what makes it "quadratic" and not linear.</p>
+        <p class="cn">a、b、c 为常数。a ≠ 0 是"二次"方程区别于一次方程的关键条件。</p>
+      </div>
+      <div class="card"><h4 class="en">Solving by Factorisation</h4><h4 class="cn">因式分解法</h4>
+        <div class="formula">ax²+bx+c = a(x−α)(x−β) = 0</div>
+        <p class="en">Works when the expression factorises neatly — set each bracket to zero.</p>
+        <p class="cn">当表达式能整齐地分解因式时使用——令每个括号分别等于零。</p>
+      </div>
+      <div class="card"><h4 class="en">The Quadratic Formula</h4><h4 class="cn">求根公式</h4>
+        <div class="formula">x = (−b ± √(b²−4ac)) / 2a</div>
+        <p class="en">Always works, even when factorisation doesn't. Memorise this one exactly.</p>
+        <p class="cn">无论能否因式分解都适用，必须准确背熟。</p>
+      </div>
+    </div>
+
+    <div class="caution">
+      <span class="ico">⚠️</span>
+      <div>
+        <span class="en"><b>Common trap:</b> before reading off a, b, c, always rearrange the equation to equal <i>zero</i> first (e.g. 2x² = 5x + 3 → 2x² − 5x − 3 = 0). Plugging in a, b, c from the un-rearranged form gives the wrong roots.</span>
+        <span class="cn"><b>常见陷阱：</b>代入 a、b、c 之前，必须先把方程移项使其等于<i>零</i>（例如 2x² = 5x + 3 → 2x² − 5x − 3 = 0）。若直接用未移项的形式代入，会得到错误的根。</span>
+      </div>
+    </div>
+
+    <div class="example" style="--accent:var(--eq)">
+      <div class="ex-label en">Worked Example</div>
+      <div class="ex-label cn">例题</div>
+      <div class="q en">Solve 2x² − 5x − 3 = 0</div>
+      <div class="q cn">解方程 2x² − 5x − 3 = 0</div>
+      <div class="steps">
+        a=2, b=−5, c=−3<br>
+        x = (5 ± √(25 + 24)) / 4 &nbsp;<b>← substitute into the formula</b><br>
+        x = (5 ± 7) / 4<br>
+        x = <b>3</b> or x = <b>−1/2</b>
+      </div>
+    </div>
+
+    <div class="memtip">
+      <span class="en"><b>Memory hook:</b> "Zero on one side, then decide." Always clear the equation to = 0 first, then choose factorisation if it looks clean, or the formula if it doesn't.</span>
+      <span class="cn"><b>记忆口诀：</b>"先移项等于零，再决定用哪招。"先把方程化为等于零，看起来能整除就用因式分解，否则直接套公式。</span>
+    </div>
+
+    <div class="quiz">
+      <h4 class="en">Quick Check</h4><h4 class="cn">快速自测</h4>
+      <div class="qitem">
+        <div class="qtext">x² − 7x + 12 = 0 → roots are?</div>
+        <div class="qopts" data-answer="3, 4">
+          <button onclick="checkAns(this,'3, 4')">3, 4</button>
+          <button onclick="checkAns(this,'3, 4')">−3, −4</button>
+          <button onclick="checkAns(this,'3, 4')">2, 6</button>
+          <button onclick="checkAns(this,'3, 4')">1, 12</button>
+        </div>
+      </div>
+      <div class="qitem">
+        <div class="qtext">For 3x² + x − 2 = 0, the values of a, b, c are?</div>
+        <div class="qopts" data-answer="3, 1, -2">
+          <button onclick="checkAns(this,'3, 1, -2')">3, 1, 2</button>
+          <button onclick="checkAns(this,'3, 1, -2')">3, 1, -2</button>
+          <button onclick="checkAns(this,'3, 1, -2')">1, 3, -2</button>
+          <button onclick="checkAns(this,'3, 1, -2')">3, -1, -2</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2.2 DISCRIMINANT -->
+  <section class="chapter tag-disc disc" id="discriminant" style="--accent:var(--disc)">
+    <div class="chapter-head"><span class="chapter-num">2.2</span><h2 class="en">Types of Roots &amp; the Discriminant</h2><h2 class="cn">根的类型与判别式</h2></div>
+    <p class="chapter-desc en">You can tell what kind of roots a quadratic has without solving it, just by checking the sign of b² − 4ac — this expression is called the discriminant.</p>
+    <p class="chapter-desc cn">不需要真正解方程，只要检查 b² − 4ac 的正负，就能判断二次方程的根属于哪一种类型——这个表达式称为判别式。</p>
+
+    <div class="cards">
+      <div class="card"><h4 class="en">Two Different Real Roots</h4><h4 class="cn">两个不同实根</h4>
+        <div class="formula">b² − 4ac &gt; 0</div>
+        <p class="en">The curve crosses the x-axis at two distinct points.</p>
+        <p class="cn">曲线与x轴有两个不同的交点。</p>
+      </div>
+      <div class="card"><h4 class="en">Two Equal Real Roots</h4><h4 class="cn">两个相等实根</h4>
+        <div class="formula">b² − 4ac = 0</div>
+        <p class="en">The curve just touches the x-axis at one point (the turning point sits on the axis).</p>
+        <p class="cn">曲线恰好与x轴相切于一点（转折点正好落在x轴上）。</p>
+      </div>
+      <div class="card"><h4 class="en">No Real Roots</h4><h4 class="cn">无实根</h4>
+        <div class="formula">b² − 4ac &lt; 0</div>
+        <p class="en">The curve never touches the x-axis at all.</p>
+        <p class="cn">曲线完全不与x轴相交。</p>
+      </div>
+    </div>
+
+    <div class="caution">
+      <span class="ico">⚠️</span>
+      <div>
+        <span class="en"><b>Common trap:</b> the discriminant is b² − 4ac, not (b − 4ac)² or b² + 4ac. Also, "b² − 4ac ≥ 0" (not just &gt; 0) is the condition often asked for "real roots" — it includes the equal-roots case.</span>
+        <span class="cn"><b>常见陷阱：</b>判别式是 b² − 4ac，不是 (b − 4ac)² 或 b² + 4ac。此外，题目问"有实根"时条件是 b² − 4ac ≥ 0（不只是 &gt; 0），因为它包含相等实根的情况。</span>
+      </div>
+    </div>
+
+    <div class="example" style="--accent:var(--disc)">
+      <div class="ex-label en">Worked Example</div>
+      <div class="ex-label cn">例题</div>
+      <div class="q en">Find the range of values of k for which x² + kx + 9 = 0 has equal roots.</div>
+      <div class="q cn">求 k 的范围，使方程 x² + kx + 9 = 0 有两个相等实根。</div>
+      <div class="steps">
+        Equal roots ⟹ b² − 4ac = 0 &nbsp;<b>← the condition to use</b><br>
+        k² − 4(1)(9) = 0<br>
+        k² = 36<br>
+        k = <b>±6</b>
+      </div>
+    </div>
+
+    <div class="memtip">
+      <span class="en"><b>Memory hook:</b> "Positive splits, zero kisses, negative misses." b²−4ac &gt; 0 → the curve splits the axis at two points; = 0 → it just kisses the axis once; &lt; 0 → it misses the axis entirely.</span>
+      <span class="cn"><b>记忆口诀：</b>"大于零两分，等于零一碰，小于零不相逢。" b²−4ac &gt; 0 → 与x轴相交两点；= 0 → 恰好相切一点；&lt; 0 → 完全不相交。</span>
+    </div>
+
+    <div class="quiz">
+      <h4 class="en">Quick Check</h4><h4 class="cn">快速自测</h4>
+      <div class="qitem">
+        <div class="qtext">x² − 4x + 4 = 0 has what type of roots?</div>
+        <div class="qopts" data-answer="Equal">
+          <button onclick="checkAns(this,'Equal')">Two different</button>
+          <button onclick="checkAns(this,'Equal')">Equal</button>
+          <button onclick="checkAns(this,'Equal')">No real roots</button>
+          <button onclick="checkAns(this,'Equal')">Cannot tell</button>
+        </div>
+      </div>
+      <div class="qitem">
+        <div class="qtext">2x² + 3x + 5 = 0 has what type of roots?</div>
+        <div class="qopts" data-answer="No real roots">
+          <button onclick="checkAns(this,'No real roots')">Two different</button>
+          <button onclick="checkAns(this,'No real roots')">Equal</button>
+          <button onclick="checkAns(this,'No real roots')">No real roots</button>
+          <button onclick="checkAns(this,'No real roots')">Three roots</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2.3 GRAPHS -->
+  <section class="chapter tag-graph graph" id="graphs" style="--accent:var(--graph)">
+    <div class="chapter-head"><span class="chapter-num">2.3</span><h2 class="en">Graphs of Quadratic Functions</h2><h2 class="cn">二次函数的图像</h2></div>
+    <p class="chapter-desc en">Every quadratic function f(x) = ax² + bx + c draws a curve called a parabola. Rewriting it as a(x−h)² + k instantly reveals its turning point and shape — this is "completing the square."</p>
+    <p class="chapter-desc cn">每个二次函数 f(x) = ax² + bx + c 的图像都是一条抛物线。把它改写成 a(x−h)² + k 的形式，就能立刻看出转折点与图像形状——这就是"配方法"。</p>
+
+    <div class="cards">
+      <div class="card"><h4 class="en">Completed-Square Form</h4><h4 class="cn">配方式</h4>
+        <div class="formula">f(x) = a(x − h)² + k</div>
+        <p class="en">Turning point is (h, k). Axis of symmetry is the line x = h.</p>
+        <p class="cn">转折点为 (h, k)，对称轴为直线 x = h。</p>
+      </div>
+      <div class="card"><h4 class="en">Shape from the Sign of a</h4><h4 class="cn">由 a 的正负判断形状</h4>
+        <div class="formula">a &gt; 0 → shape ∪, minimum value k</div>
+        <div class="formula">a &lt; 0 → shape ∩, maximum value k</div>
+        <p class="en">Only the sign of a decides whether the curve opens upward or downward.</p>
+        <p class="cn">只有 a 的正负决定图像开口向上还是向下。</p>
+      </div>
+      <div class="card"><h4 class="en">Completing the Square</h4><h4 class="cn">配方法步骤</h4>
+        <div class="formula">ax²+bx+c = a[(x + b/2a)² − (b/2a)²] + c</div>
+        <p class="en">Factor out a from the x² and x terms, then add/subtract (half the x-coefficient)².</p>
+        <p class="cn">先把 x² 与 x 项提出公因数 a，再加减"x系数一半的平方"来配方。</p>
+      </div>
+    </div>
+
+    <div class="caution">
+      <span class="ico">⚠️</span>
+      <div>
+        <span class="en"><b>Common trap:</b> in f(x) = a(x−h)² + k, the turning point x-coordinate is <i>h</i>, not <i>−h</i> — watch the sign inside the bracket. E.g. f(x)=2(x−2)²−5 has turning point (2, −5), not (−2, −5).</span>
+        <span class="cn"><b>常见陷阱：</b>在 f(x) = a(x−h)² + k 中，转折点的 x 坐标是 <i>h</i>，不是 <i>−h</i>——注意括号内的正负号。例如 f(x)=2(x−2)²−5 的转折点是 (2, −5)，不是 (−2, −5)。</span>
+      </div>
+    </div>
+
+    <div class="example" style="--accent:var(--graph)">
+      <div class="ex-label en">Worked Example</div>
+      <div class="ex-label cn">例题</div>
+      <div class="q en">Express f(x) = 2x² − 8x + 3 in the form a(x−h)² + k, and state its minimum value.</div>
+      <div class="q cn">把 f(x) = 2x² − 8x + 3 化为 a(x−h)² + k 的形式，并求其最小值。</div>
+      <div class="steps">
+        f(x) = 2(x² − 4x) + 3 &nbsp;<b>← factor out a = 2</b><br>
+        = 2[(x − 2)² − 4] + 3 &nbsp;<b>← half of −4 is −2, squared is 4</b><br>
+        = 2(x − 2)² − 8 + 3<br>
+        = <b>2(x − 2)² − 5</b><br>
+        a = 2 &gt; 0 ⟹ minimum value = <b>−5</b> at x = 2
+      </div>
+    </div>
+
+    <div class="memtip">
+      <span class="en"><b>Memory hook:</b> "Smiley face (∪) → lowest point. Frowny face (∩) → highest point." a &gt; 0 smiles upward and has a minimum; a &lt; 0 frowns downward and has a maximum.</span>
+      <span class="cn"><b>记忆口诀：</b>"笑脸（∪）→ 最低点；哭脸（∩）→ 最高点。" a &gt; 0 开口向上如笑脸，有最小值；a &lt; 0 开口向下如哭脸，有最大值。</span>
+    </div>
+
+    <div class="quiz">
+      <h4 class="en">Quick Check</h4><h4 class="cn">快速自测</h4>
+      <div class="qitem">
+        <div class="qtext">f(x) = (x + 3)² − 7 has turning point?</div>
+        <div class="qopts" data-answer="(-3, -7)">
+          <button onclick="checkAns(this,'(-3, -7)')">(3, −7)</button>
+          <button onclick="checkAns(this,'(-3, -7)')">(−3, −7)</button>
+          <button onclick="checkAns(this,'(-3, -7)')">(−3, 7)</button>
+          <button onclick="checkAns(this,'(-3, -7)')">(3, 7)</button>
+        </div>
+      </div>
+      <div class="qitem">
+        <div class="qtext">f(x) = −3(x − 1)² + 4 has a ... value of ...?</div>
+        <div class="qopts" data-answer="maximum, 4">
+          <button onclick="checkAns(this,'maximum, 4')">minimum, 4</button>
+          <button onclick="checkAns(this,'maximum, 4')">maximum, 4</button>
+          <button onclick="checkAns(this,'maximum, 4')">minimum, 1</button>
+          <button onclick="checkAns(this,'maximum, 4')">maximum, 1</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2.4 INEQUALITIES -->
+  <section class="chapter tag-ineq ineq" id="inequalities" style="--accent:var(--ineq)">
+    <div class="chapter-head"><span class="chapter-num">2.4</span><h2 class="en">Quadratic Inequalities</h2><h2 class="cn">二次不等式</h2></div>
+    <p class="chapter-desc en">A quadratic inequality asks: for what values of x is ax² + bx + c positive, or negative? Find the roots, sketch the shape, then read the answer straight off the picture.</p>
+    <p class="chapter-desc cn">二次不等式问的是：x 取哪些值时 ax² + bx + c 为正、或为负？先求出根，画出图像形状，再直接从图上读出答案。</p>
+
+    <div class="cards">
+      <div class="card"><h4 class="en">Step-by-Step Method</h4><h4 class="cn">解题步骤</h4>
+        <div class="formula">1. Find the roots α, β</div>
+        <div class="formula">2. Sketch the ∪ or ∩ shape</div>
+        <div class="formula">3. Read off the region</div>
+        <p class="en">Sketching, not solving algebraically, is the reliable way to avoid sign mistakes.</p>
+        <p class="cn">画草图而非纯代数运算，是避免正负号出错的可靠方法。</p>
+      </div>
+      <div class="card"><h4 class="en">"Between" or "Outside" the Roots</h4><h4 class="cn">"根之间"或"根之外"</h4>
+        <div class="formula">a &gt; 0, f(x) &lt; 0 → α &lt; x &lt; β</div>
+        <div class="formula">a &gt; 0, f(x) &gt; 0 → x &lt; α or x &gt; β</div>
+        <p class="en">For a ∪ shape: below zero happens between the roots, above zero happens outside them.</p>
+        <p class="cn">对于∪形图像：曲线在根之间为负，在根之外为正。</p>
+      </div>
+    </div>
+
+    <div class="caution">
+      <span class="ico">⚠️</span>
+      <div>
+        <span class="en"><b>Common trap:</b> never multiply/divide a quadratic inequality by a negative number without flipping the sign — and never treat (x−α)(x−β) &lt; 0 the same way you'd solve an equation. Sketch it; don't just "cancel" the brackets.</span>
+        <span class="cn"><b>常见陷阱：</b>二次不等式两边乘除负数时必须翻转不等号；(x−α)(x−β) &lt; 0 不能像解方程那样直接"消去"括号——务必画图判断。</span>
+      </div>
+    </div>
+
+    <div class="example" style="--accent:var(--ineq)">
+      <div class="ex-label en">Worked Example</div>
+      <div class="ex-label cn">例题</div>
+      <div class="q en">Solve x² − x − 6 &lt; 0</div>
+      <div class="q cn">解不等式 x² − x − 6 &lt; 0</div>
+      <div class="steps">
+        (x − 3)(x + 2) &lt; 0 &nbsp;<b>← factorise first</b><br>
+        roots: x = 3, x = −2<br>
+        a = 1 &gt; 0 → shape ∪, so f(x) &lt; 0 between the roots<br>
+        <b>−2 &lt; x &lt; 3</b>
+      </div>
+    </div>
+
+    <div class="memtip">
+      <span class="en"><b>Memory hook:</b> "∪ shape: negative in the middle, positive on the outside." Sketch the ∪, mark the two roots on the x-axis, and the answer is just which part of the sketch sits above or below the axis.</span>
+      <span class="cn"><b>记忆口诀：</b>"∪形：中间为负，两侧为正。"画出∪形，把两个根标在x轴上，答案就是草图中哪一段在x轴上方或下方。</span>
+    </div>
+
+    <div class="quiz">
+      <h4 class="en">Quick Check</h4><h4 class="cn">快速自测</h4>
+      <div class="qitem">
+        <div class="qtext">(x − 1)(x − 5) &gt; 0, a &gt; 0 → solution is?</div>
+        <div class="qopts" data-answer="x < 1 or x > 5">
+          <button onclick="checkAns(this,'x < 1 or x > 5')">1 &lt; x &lt; 5</button>
+          <button onclick="checkAns(this,'x < 1 or x > 5')">x &lt; 1 or x &gt; 5</button>
+          <button onclick="checkAns(this,'x < 1 or x > 5')">x &gt; 1</button>
+          <button onclick="checkAns(this,'x < 1 or x > 5')">x &lt; 5</button>
+        </div>
+      </div>
+      <div class="qitem">
+        <div class="qtext">x² &le; 9 → solution is?</div>
+        <div class="qopts" data-answer="-3 <= x <= 3">
+          <button onclick="checkAns(this,'-3 <= x <= 3')">x &le; 3</button>
+          <button onclick="checkAns(this,'-3 <= x <= 3')">x &ge; −3</button>
+          <button onclick="checkAns(this,'-3 <= x <= 3')">−3 &le; x &le; 3</button>
+          <button onclick="checkAns(this,'-3 <= x <= 3')">x &le; −3 or x &ge; 3</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <span class="en">Form 4 Additional Mathematics · Chapter 2 · For revision use</span>
+    <span class="cn">中四附加数学 · 第2章 · 复习专用</span>
+  </footer>
+
+</main>
+
+<script>
+function setLang(lang){
+  document.body.setAttribute('data-lang', lang);
+  document.getElementById('btn-en').classList.toggle('active', lang==='en');
+  document.getElementById('btn-cn').classList.toggle('active', lang==='cn');
+}
+function checkAns(btn, correct){
+  const group = btn.parentElement;
+  const buttons = group.querySelectorAll('button');
+  buttons.forEach(b=>{
+    b.disabled = true;
+    if(b.textContent.trim() === correct){ b.classList.add('correct'); }
+    else if(b === btn){ b.classList.add('wrong'); }
+  });
+}
+</script>
+</body>
+</html>

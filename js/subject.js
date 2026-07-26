@@ -3910,7 +3910,8 @@ export const addMathsData = {
             chinese:"二次函数",
             status:"Not Started",
             confidence:0,
-            last_updated:"2026-05-17"
+            last_updated:"2026-05-17",
+            resourceUrl: "../addmaths/form4-chapter2-quadratic-functions.html"
         },
 
         {
