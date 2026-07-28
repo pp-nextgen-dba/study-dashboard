@@ -3520,9 +3520,10 @@ export const moralData = {
             globalNum: 8,
             chapterNum: 59,
             chapter:"Chapter 8: Perkhidmatan Awam Pemangkin Pembangunan Negara",
+            resourceUrl:"../moral/form2_moral_unit8_public_services_trilingual.html",
             status:"Not Started",
             confidence:0,
-            last_updated:"2026-06-21"
+            last_updated:"2026-07-28"
         },
 
         {
