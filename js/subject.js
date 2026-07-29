@@ -1722,9 +1722,10 @@ export const rekaBentukData = {
             chapterNum: 42,
             chapter:"Reka Bentuk Makanan",
             chinese:"食品设计",
+            resourceUrl:"../rbt/form2_kssm_rbt_reka_bentuk_makanan_trilingual.html",
             status:"Not Started",
             confidence:0,
-            last_updated:"2026-05-22"
+            last_updated:"2026-07-29"
         },
 
         {

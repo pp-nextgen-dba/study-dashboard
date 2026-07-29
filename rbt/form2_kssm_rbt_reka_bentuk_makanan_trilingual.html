@@ -1,0 +1,1158 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Form 2 KSSM RBT Bab 2.6 Reka Bentuk Makanan — nota ulang kaji tiga bahasa, peta minda, teknik menjawab dan kuiz." />
+  <title>Form 2 KSSM RBT — Reka Bentuk Makanan | 三语复习</title>
+  <style>
+    :root{
+      --navy:#0f2d5c;
+      --blue:#2f80ed;
+      --cyan:#19a7ce;
+      --green:#26a269;
+      --lime:#9acb34;
+      --orange:#f59e0b;
+      --red:#ef476f;
+      --purple:#7c3aed;
+      --teal:#0f9f8f;
+      --ink:#203047;
+      --muted:#61708a;
+      --paper:#f7f9fd;
+      --card:#ffffff;
+      --line:#dce5f2;
+      --shadow:0 14px 35px rgba(29,55,90,.12);
+      --radius:22px;
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      color:var(--ink);
+      font-family:Inter, "Noto Sans", "Noto Sans CJK SC", "Microsoft YaHei",
+                  "PingFang SC", Arial, sans-serif;
+      background:
+        radial-gradient(circle at 12% 5%, rgba(47,128,237,.12), transparent 24rem),
+        radial-gradient(circle at 92% 9%, rgba(245,158,11,.12), transparent 22rem),
+        linear-gradient(180deg,#f9fbff 0%,#f5f8fd 55%,#eef4fb 100%);
+      line-height:1.58;
+    }
+
+    #progress{
+      position:fixed;top:0;left:0;height:5px;width:0;
+      z-index:9999;background:linear-gradient(90deg,var(--orange),var(--red),var(--purple));
+    }
+
+    .topbar{
+      position:sticky;top:60px;z-index:1000;
+      background:rgba(15,45,92,.96);
+      backdrop-filter:blur(12px);
+      color:#fff;border-bottom:1px solid rgba(255,255,255,.13);
+    }
+    .topbar-inner{
+      max-width:1280px;margin:auto;padding:10px 20px;
+      display:flex;align-items:center;gap:16px;
+    }
+    .brand{font-weight:900;letter-spacing:.2px;white-space:nowrap}
+    .brand span{color:#ffd166}
+    .navlinks{
+      display:flex;gap:8px;overflow:auto;scrollbar-width:none;
+      flex:1;
+    }
+    .navlinks::-webkit-scrollbar{display:none}
+    .navlinks a{
+      color:#dbe9ff;text-decoration:none;padding:7px 11px;border-radius:999px;
+      font-size:.88rem;white-space:nowrap;border:1px solid transparent;
+    }
+    .navlinks a:hover{background:rgba(255,255,255,.11);border-color:rgba(255,255,255,.12)}
+    .lang-controls{display:flex;gap:5px}
+    .lang-controls button{
+      border:0;border-radius:999px;padding:7px 10px;cursor:pointer;
+      background:#fff;color:var(--navy);font-weight:800;
+    }
+    .lang-controls button.active{background:#ffd166}
+
+    .container{max-width:1280px;margin:auto;padding:24px 18px 64px}
+
+    .hero{
+      position:relative;overflow:hidden;
+      border-radius:32px;
+      padding:44px 44px 38px;
+      color:#fff;
+      background:
+        linear-gradient(135deg,rgba(15,45,92,.98),rgba(47,128,237,.92) 56%,rgba(25,167,206,.88));
+      box-shadow:var(--shadow);
+      min-height:340px;
+      display:grid;grid-template-columns:1.45fr .8fr;gap:28px;align-items:center;
+    }
+    .hero:before,.hero:after{
+      content:"";position:absolute;border-radius:50%;filter:blur(2px);
+      background:rgba(255,255,255,.11)
+    }
+    .hero:before{width:330px;height:330px;right:-70px;top:-120px}
+    .hero:after{width:230px;height:230px;left:-90px;bottom:-130px}
+    .eyebrow{
+      display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.14);
+      border:1px solid rgba(255,255,255,.22);border-radius:999px;padding:8px 13px;
+      font-weight:800;font-size:.92rem;
+    }
+    h1{font-size:clamp(2.3rem,5vw,5.2rem);line-height:1.02;margin:18px 0 12px;letter-spacing:-.04em}
+    .hero-sub{font-size:clamp(1rem,2vw,1.34rem);max-width:830px;color:#eaf4ff}
+    .hero-tags{display:flex;gap:9px;flex-wrap:wrap;margin-top:20px}
+    .hero-tags span{
+      padding:8px 12px;border-radius:999px;background:rgba(255,255,255,.13);
+      border:1px solid rgba(255,255,255,.16);font-weight:800
+    }
+    .food-art{
+      display:grid;grid-template-columns:repeat(3,1fr);gap:13px;position:relative;z-index:2
+    }
+    .food-art div{
+      aspect-ratio:1;border-radius:26px;display:grid;place-items:center;
+      font-size:clamp(2.5rem,5vw,5.2rem);
+      background:linear-gradient(145deg,rgba(255,255,255,.22),rgba(255,255,255,.08));
+      border:1px solid rgba(255,255,255,.22);
+      transform:rotate(var(--r));
+    }
+
+    section{scroll-margin-top:82px;margin-top:28px}
+    .section-card{
+      background:rgba(255,255,255,.92);border:1px solid rgba(220,229,242,.95);
+      border-radius:var(--radius);box-shadow:var(--shadow);padding:28px;
+    }
+    .section-head{display:flex;align-items:center;gap:13px;margin-bottom:20px}
+    .num{
+      width:44px;height:44px;border-radius:14px;display:grid;place-items:center;color:#fff;
+      font-size:1.35rem;font-weight:1000;flex:0 0 auto;
+      background:linear-gradient(145deg,var(--blue),var(--purple));
+      box-shadow:0 8px 18px rgba(47,128,237,.25)
+    }
+    h2{margin:0;font-size:clamp(1.55rem,3vw,2.35rem);line-height:1.15}
+    h3{margin:.2rem 0 .55rem;font-size:1.18rem}
+    .triple-title small{display:block;font-size:.74rem;color:var(--muted);font-weight:700;margin-top:5px}
+    .lead{color:var(--muted);max-width:980px}
+
+    .grid{display:grid;gap:16px}
+    .grid-2{grid-template-columns:repeat(2,minmax(0,1fr))}
+    .grid-3{grid-template-columns:repeat(3,minmax(0,1fr))}
+    .grid-4{grid-template-columns:repeat(4,minmax(0,1fr))}
+    .grid-5{grid-template-columns:repeat(5,minmax(0,1fr))}
+    .grid-6{grid-template-columns:repeat(6,minmax(0,1fr))}
+
+    .mini-card{
+      border:1px solid var(--line);border-radius:18px;padding:18px;background:#fff;
+      transition:.2s ease;position:relative;overflow:hidden
+    }
+    .mini-card:hover{transform:translateY(-3px);box-shadow:0 12px 26px rgba(29,55,90,.11)}
+    .mini-card .icon{font-size:2.1rem;margin-bottom:8px}
+    .mini-card p{margin:.35rem 0;color:var(--muted)}
+    .ms{font-weight:900;color:var(--ink)}
+    .en{color:#35556e}
+    .zh{color:#6f42c1}
+    .lang-line{display:block}
+    body.show-ms .en, body.show-ms .zh{display:none!important}
+    body.show-en .ms, body.show-en .zh{display:none!important}
+    body.show-zh .ms, body.show-zh .en{display:none!important}
+
+    .objective{
+      text-align:center;min-height:178px;display:flex;flex-direction:column;align-items:center;
+      justify-content:flex-start;background:linear-gradient(180deg,#fff,#f8fbff)
+    }
+    .objective .step{
+      width:35px;height:35px;border-radius:50%;display:grid;place-items:center;
+      color:#fff;font-weight:1000;background:var(--purple);margin:-4px auto 8px
+    }
+
+    .definition{
+      border-left:7px solid var(--blue);
+      background:linear-gradient(135deg,#fff,#f4f9ff);
+    }
+
+    .callout{
+      border-radius:18px;padding:17px 18px;background:#fff8dc;border:1px solid #f4d77a;
+      display:flex;gap:12px;align-items:flex-start
+    }
+    .callout strong{color:#7a4a00}
+
+    .aspect{
+      min-height:150px;background:linear-gradient(160deg,#ffffff,#f0fbf7);
+      border-top:5px solid var(--green)
+    }
+    .classify{
+      display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:16px
+    }
+    .classify > div{
+      padding:18px;border-radius:18px;border:1px dashed #98a8bd;background:#fbfdff
+    }
+
+    .importance .mini-card{border-top:5px solid var(--green);background:linear-gradient(180deg,#fff,#f5fff9)}
+    .importance .mini-card:nth-child(2n){border-top-color:var(--orange)}
+    .importance .mini-card:nth-child(3n){border-top-color:var(--purple)}
+
+    .toolcat{border-top:5px solid var(--red);background:linear-gradient(180deg,#fff,#fff8fa)}
+    .toolcat ul{padding-left:18px;margin:9px 0 0}
+    .toolcat li{margin:4px 0}
+    .chip{
+      display:inline-block;border-radius:999px;padding:4px 9px;margin:3px 3px 0 0;
+      background:#eef4ff;color:var(--navy);font-size:.78rem;font-weight:800
+    }
+
+    .element,.principle{text-align:center;min-height:165px}
+    .element{background:linear-gradient(180deg,#fff,#eff9ff);border-bottom:5px solid var(--cyan)}
+    .principle{background:linear-gradient(180deg,#fff,#f8f2ff);border-bottom:5px solid var(--purple)}
+    .bubble-icon{
+      width:66px;height:66px;margin:0 auto 10px;border-radius:23px;
+      display:grid;place-items:center;font-size:2rem;
+      background:linear-gradient(145deg,#fff,#e7f2ff);border:1px solid #d9e9fb
+    }
+
+    .process{
+      counter-reset:process;
+      display:grid;grid-template-columns:repeat(5,1fr);gap:12px
+    }
+    .process .stepbox{
+      counter-increment:process;position:relative;padding:18px;border-radius:18px;
+      border:1px solid var(--line);background:#fff;min-height:155px
+    }
+    .process .stepbox:before{
+      content:counter(process);width:34px;height:34px;border-radius:50%;
+      display:grid;place-items:center;color:#fff;font-weight:1000;
+      background:var(--orange);margin-bottom:8px
+    }
+
+    .sketch-zone{
+      display:grid;grid-template-columns:1fr 1fr;gap:18px;align-items:stretch
+    }
+    .sketch{
+      min-height:370px;border-radius:22px;border:2px dashed #e0a14d;
+      background:
+        linear-gradient(#fff9eb 1px,transparent 1px),
+        linear-gradient(90deg,#fff9eb 1px,transparent 1px),
+        #fffdf8;
+      background-size:22px 22px;
+      position:relative;padding:26px;overflow:hidden
+    }
+    .plate{
+      width:250px;height:105px;border-radius:50%;position:absolute;left:50%;bottom:56px;
+      transform:translateX(-50%);
+      background:radial-gradient(ellipse at center,#fff 0 52%,#d7e1ec 53% 58%,#fff 59%);
+      box-shadow:0 16px 30px rgba(41,57,76,.15)
+    }
+    .cake{
+      width:140px;height:140px;position:absolute;left:50%;bottom:95px;transform:translateX(-50%);
+      border-radius:16px 16px 10px 10px;
+      background:
+        linear-gradient(#7c3e19 0 16%,#f0c27b 17% 31%,#5e2f18 32% 48%,#f8d18b 49% 63%,#6a3419 64% 80%,#f1bd68 81%);
+      box-shadow:inset 0 0 0 5px rgba(255,255,255,.15),0 16px 23px rgba(73,40,20,.2)
+    }
+    .cake:before{
+      content:"🍓";position:absolute;font-size:3.2rem;top:-45px;left:45px;transform:rotate(-8deg)
+    }
+    .cake:after{
+      content:"";position:absolute;width:160px;height:18px;left:-10px;top:-4px;border-radius:50%;
+      background:#4b2412;box-shadow:0 5px 0 #9d5d31
+    }
+    .label{
+      position:absolute;max-width:155px;background:#fff;border:1px solid #f3c06b;
+      border-radius:13px;padding:9px;font-size:.78rem;box-shadow:0 7px 18px rgba(91,61,24,.1)
+    }
+    .l1{left:18px;top:24px}.l2{right:18px;top:28px}.l3{left:25px;bottom:22px}.l4{right:24px;bottom:28px}
+
+    .pack-list{display:grid;grid-template-columns:repeat(7,1fr);gap:10px}
+    .pack-item{text-align:center;padding:12px 8px;background:#f1fbfa;border:1px solid #c7ece8;border-radius:15px}
+    .pack-item b{display:block;font-size:.88rem}
+
+    .factor-list{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+    .check{
+      border-radius:15px;padding:13px 15px;background:#f4fbf6;border:1px solid #cfe8d6;
+      display:flex;gap:9px
+    }
+    .check:before{content:"✓";color:#fff;background:var(--green);width:24px;height:24px;border-radius:50%;display:grid;place-items:center;font-weight:900;flex:0 0 auto}
+
+    .five{
+      display:grid;grid-template-columns:repeat(5,1fr);gap:14px
+    }
+    .five .big{
+      min-height:190px;text-align:center;border-radius:25px;padding:20px 12px;color:#fff;
+      display:flex;flex-direction:column;justify-content:center;
+      box-shadow:0 14px 28px rgba(30,52,76,.13)
+    }
+    .five .big:nth-child(1){background:linear-gradient(145deg,#20a66a,#45c789)}
+    .five .big:nth-child(2){background:linear-gradient(145deg,#f59e0b,#ffc04a)}
+    .five .big:nth-child(3){background:linear-gradient(145deg,#ef476f,#ff7f9d)}
+    .five .big:nth-child(4){background:linear-gradient(145deg,#7c3aed,#a06cff)}
+    .five .big:nth-child(5){background:linear-gradient(145deg,#2584d8,#52aaf0)}
+    .five .big .n{font-size:2.4rem;font-weight:1000}
+    .five .big .emoji{font-size:2.5rem}
+
+    .evaluation .mini-card{border-top:5px solid var(--blue);min-height:210px}
+    .criteria{display:flex;gap:9px;flex-wrap:wrap;margin-top:16px}
+    .criteria span{
+      padding:10px 13px;border-radius:999px;background:#f1f5ff;border:1px solid #d8e2fb;
+      font-weight:900;font-size:.85rem
+    }
+
+    .formula{display:grid;grid-template-columns:repeat(5,1fr);gap:10px}
+    .formula div{
+      border-radius:16px;padding:16px 10px;text-align:center;font-weight:1000;color:#fff;
+      background:linear-gradient(145deg,var(--orange),#f77728)
+    }
+    .formula div:nth-child(2){background:linear-gradient(145deg,var(--blue),var(--cyan))}
+    .formula div:nth-child(3){background:linear-gradient(145deg,var(--green),#67c76c)}
+    .formula div:nth-child(4){background:linear-gradient(145deg,var(--red),#ff7e7e)}
+    .formula div:nth-child(5){background:linear-gradient(145deg,var(--purple),#a966ff)}
+
+    details{
+      border:1px solid var(--line);border-radius:16px;background:#fff;margin:11px 0;overflow:hidden
+    }
+    summary{cursor:pointer;padding:15px 18px;font-weight:900;background:#f7f9fd}
+    details .answer{padding:17px 19px;border-top:1px solid var(--line)}
+
+    .quiz-card{
+      border:1px solid var(--line);border-radius:17px;padding:17px;margin:13px 0;background:#fff
+    }
+    .quiz-options{display:grid;gap:8px;margin-top:12px}
+    .quiz-options button{
+      text-align:left;border:1px solid #d7e0ed;background:#f9fbfe;border-radius:12px;padding:11px;
+      cursor:pointer;font:inherit
+    }
+    .quiz-options button:hover{background:#edf5ff}
+    .quiz-options button.correct{background:#e8f8ee;border-color:#65bd80}
+    .quiz-options button.wrong{background:#fff0f2;border-color:#ef8797}
+    .feedback{font-weight:900;margin-top:9px;min-height:24px}
+
+    .memory-map{
+      position:relative;min-height:650px;border-radius:25px;
+      background:
+        radial-gradient(circle at center,rgba(47,128,237,.12),transparent 22%),
+        linear-gradient(135deg,#fbfdff,#f4f8fd);
+      border:1px solid var(--line);overflow:hidden
+    }
+    .center-node{
+      position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
+      width:190px;height:190px;border-radius:50%;display:grid;place-items:center;text-align:center;
+      padding:20px;background:linear-gradient(145deg,var(--navy),var(--blue));color:#fff;
+      font-size:1.45rem;font-weight:1000;box-shadow:0 17px 36px rgba(32,68,118,.24);z-index:3
+    }
+    .branch{
+      position:absolute;width:260px;min-height:118px;border-radius:20px;padding:15px;
+      background:#fff;border:2px solid var(--c);box-shadow:0 10px 24px rgba(31,54,85,.1);z-index:2
+    }
+    .branch h3{color:var(--c)}
+    .branch ul{margin:5px 0;padding-left:18px;font-size:.9rem}
+    .b1{--c:#2f80ed;left:4%;top:7%}
+    .b2{--c:#26a269;right:4%;top:7%}
+    .b3{--c:#f59e0b;left:2%;top:38%}
+    .b4{--c:#ef476f;right:2%;top:38%}
+    .b5{--c:#7c3aed;left:8%;bottom:5%}
+    .b6{--c:#0f9f8f;right:8%;bottom:5%}
+    .memory-map svg{position:absolute;inset:0;width:100%;height:100%;z-index:1}
+    .memory-map line{stroke:#b7c7dd;stroke-width:4;stroke-linecap:round}
+
+    .vocab{width:100%;border-collapse:collapse;border-radius:16px;overflow:hidden}
+    .vocab th,.vocab td{padding:12px 13px;border-bottom:1px solid var(--line);text-align:left}
+    .vocab th{background:var(--navy);color:#fff}
+    .vocab tr:nth-child(even) td{background:#f8fbff}
+
+    .checklist{
+      columns:2;column-gap:24px
+    }
+    .checklist label{
+      display:block;break-inside:avoid;padding:10px 12px;margin-bottom:8px;border:1px solid var(--line);
+      border-radius:12px;background:#fff;cursor:pointer
+    }
+    .checklist input{transform:scale(1.2);margin-right:8px}
+
+    .footer{
+      margin-top:32px;text-align:center;color:#5b6d85;padding:25px
+    }
+    .print-btn{
+      position:fixed;right:18px;bottom:18px;border:0;border-radius:999px;padding:13px 17px;
+      background:var(--navy);color:#fff;font-weight:900;box-shadow:0 12px 28px rgba(15,45,92,.3);
+      cursor:pointer;z-index:100
+    }
+
+    @media(max-width:1000px){
+      .hero{grid-template-columns:1fr}
+      .food-art{max-width:500px}
+      .grid-6,.grid-5,.grid-4{grid-template-columns:repeat(2,minmax(0,1fr))}
+      .grid-3{grid-template-columns:repeat(2,minmax(0,1fr))}
+      .process,.five{grid-template-columns:repeat(2,minmax(0,1fr))}
+      .pack-list{grid-template-columns:repeat(4,1fr)}
+      .memory-map{min-height:auto;padding:18px;display:grid;grid-template-columns:1fr 1fr;gap:12px}
+      .memory-map svg{display:none}
+      .center-node,.branch{position:static;transform:none;width:auto;height:auto;min-height:0}
+      .center-node{grid-column:1/-1;border-radius:22px}
+    }
+    @media(max-width:680px){
+      .container{padding:15px 10px 54px}
+      .topbar-inner{align-items:flex-start;flex-wrap:wrap;padding:9px 10px}
+      .navlinks{order:3;width:100%}
+      .lang-controls{margin-left:auto}
+      .hero{padding:28px 20px;border-radius:24px}
+      .section-card{padding:20px 14px}
+      .grid-6,.grid-5,.grid-4,.grid-3,.grid-2,.process,.five,.formula,.sketch-zone,.factor-list,.classify{
+        grid-template-columns:1fr
+      }
+      .pack-list{grid-template-columns:repeat(2,1fr)}
+      .memory-map{grid-template-columns:1fr}
+      .center-node{grid-column:auto}
+      .checklist{columns:1}
+      .sketch{min-height:410px}
+      .food-art{grid-template-columns:repeat(3,1fr)}
+      .print-btn{right:10px;bottom:10px}
+    }
+
+    @media print{
+      .topbar,.print-btn,#progress{display:none!important}
+      body{background:#fff}
+      .container{max-width:none;padding:0}
+      .hero,.section-card{box-shadow:none;break-inside:avoid}
+      details .answer{display:block}
+      details{break-inside:avoid}
+    }
+  </style>
+</head>
+
+<body>
+<div id="progress"></div>
+
+<div class="top-nav" style="background:#fff;padding:10px 16px;border-bottom:2px solid #e5e7eb;position:sticky;top:0;z-index:1001">
+  <a class="dashboard-link" href="../index.html" style="display:inline-flex;align-items:center;gap:6px;padding:8px 12px;border-radius:8px;background:#1d4ed8;color:#fff;font-size:13px;font-weight:800;text-decoration:none">&larr; Back to Dashboard</a>
+</div>
+
+<header class="topbar">
+  <div class="topbar-inner">
+    <div class="brand">📘 RBT <span>Form 2</span></div>
+    <nav class="navlinks" aria-label="Main navigation">
+      <a href="#overview">Ringkasan</a>
+      <a href="#takrif">Takrif</a>
+      <a href="#kepentingan">Kepentingan</a>
+      <a href="#alatan">Alatan</a>
+      <a href="#elemen">Elemen & Prinsip</a>
+      <a href="#pembungkusan">Pembungkusan</a>
+      <a href="#penilaian">Penilaian</a>
+      <a href="#exam">Teknik Peperiksaan</a>
+      <a href="#mindmap">Peta Minda</a>
+    </nav>
+    <div class="lang-controls" aria-label="Language controls">
+      <button class="active" data-lang="all">ALL</button>
+      <button data-lang="ms">BM</button>
+      <button data-lang="en">EN</button>
+      <button data-lang="zh">中</button>
+    </div>
+  </div>
+</header>
+
+<main class="container">
+
+  <section class="hero" id="overview">
+    <div>
+      <span class="eyebrow">🍽️ BAB 2 • Aplikasi Teknologi • 2.6</span>
+      <h1>Reka Bentuk Makanan</h1>
+      <div class="hero-sub">
+        <span class="lang-line ms">Nota ulang kaji lengkap untuk persediaan peperiksaan akhir.</span>
+        <span class="lang-line en">Complete revision notes for final examination preparation.</span>
+        <span class="lang-line zh">完整的期末考试复习笔记。</span>
+      </div>
+      <div class="hero-tags">
+        <span>Bahasa Melayu</span><span>English</span><span>中文</span>
+        <span>🧠 Peta Minda</span><span>📝 Teknik Menjawab</span><span>🎯 Kuiz</span>
+      </div>
+    </div>
+    <div class="food-art" aria-hidden="true">
+      <div style="--r:-6deg">🍰</div>
+      <div style="--r:5deg">🥗</div>
+      <div style="--r:-2deg">🍱</div>
+      <div style="--r:4deg">🧁</div>
+      <div style="--r:-4deg">🍜</div>
+      <div style="--r:6deg">📦</div>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-card">
+      <div class="section-head">
+        <div class="num">1</div>
+        <div class="triple-title">
+          <h2>Apa yang akan dipelajari?</h2>
+          <small>What will you learn? • 你将学习什么？</small>
+        </div>
+      </div>
+      <div class="grid grid-6">
+        <div class="mini-card objective"><div class="step">1</div><div class="icon">📖</div><b class="ms">Mentakrifkan reka bentuk makanan</b><span class="en">Define food design</span><span class="zh">定义食品设计</span></div>
+        <div class="mini-card objective"><div class="step">2</div><div class="icon">⭐</div><b class="ms">Menjelaskan kepentingannya</b><span class="en">Explain its importance</span><span class="zh">说明其重要性</span></div>
+        <div class="mini-card objective"><div class="step">3</div><div class="icon">🔪</div><b class="ms">Menggunakan alatan dan perkakasan</b><span class="en">Use tools and equipment</span><span class="zh">应用工具与设备</span></div>
+        <div class="mini-card objective"><div class="step">4</div><div class="icon">✏️</div><b class="ms">Melakar dan menjustifikasikan reka bentuk</b><span class="en">Sketch and justify designs</span><span class="zh">绘制草图并说明</span></div>
+        <div class="mini-card objective"><div class="step">5</div><div class="icon">👨‍🍳</div><b class="ms">Menghasilkan makanan dan pembungkusan</b><span class="en">Produce food and packaging designs</span><span class="zh">制作食品与包装设计</span></div>
+        <div class="mini-card objective"><div class="step">6</div><div class="icon">✅</div><b class="ms">Menilai hasil reka bentuk</b><span class="en">Evaluate the final design</span><span class="zh">评价最终设计</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="takrif">
+    <div class="section-card">
+      <div class="section-head">
+        <div class="num">2</div>
+        <div class="triple-title"><h2>Takrif dan Konsep Asas</h2><small>Definitions and Basic Concepts • 定义与基本概念</small></div>
+      </div>
+
+      <div class="grid grid-3">
+        <article class="mini-card definition">
+          <div class="icon">💡</div>
+          <h3 class="ms">Reka bentuk</h3>
+          <h3 class="en">Design</h3>
+          <h3 class="zh">设计</h3>
+          <p class="ms">Pengetahuan tentang penghasilan idea secara terancang untuk menghasilkan produk yang mempunyai nilai estetika, fungsi, keupayaan, pembuatan dan kebolehpasaran.</p>
+          <p class="en">Planned development of ideas to produce a product with aesthetic value, function, capability, manufacturability and marketability.</p>
+          <p class="zh">有计划地构思并开发产品，使其具备美感、功能、实用性、可制造性和市场价值。</p>
+        </article>
+
+        <article class="mini-card definition">
+          <div class="icon">🥣</div>
+          <h3 class="ms">Makanan</h3><h3 class="en">Food</h3><h3 class="zh">食物</h3>
+          <p class="ms">Bahan yang boleh dimakan dalam bentuk pepejal atau cecair dan dihasilkan daripada haiwan atau tumbuhan. Ciri makanan termasuk tekstur, rupa, rasa, bau dan warna.</p>
+          <p class="en">An edible solid or liquid material from animals or plants. Its characteristics include texture, appearance, taste, smell and colour.</p>
+          <p class="zh">可食用的固体或液体，来源于动物或植物。其特征包括质感、外观、味道、气味和颜色。</p>
+        </article>
+
+        <article class="mini-card definition">
+          <div class="icon">🍽️</div>
+          <h3 class="ms">Reka bentuk makanan</h3><h3 class="en">Food design</h3><h3 class="zh">食品设计</h3>
+          <p class="ms">Aktiviti merealisasikan idea kepada bentuk makanan yang melibatkan inovasi dan kreativiti.</p>
+          <p class="en">The activity of turning ideas into food forms through innovation and creativity.</p>
+          <p class="zh">运用创新与创造力，把构思转化为食品形态的活动。</p>
+        </article>
+      </div>
+
+      <div class="callout" style="margin-top:16px">
+        <div style="font-size:2rem">🧬</div>
+        <div>
+          <strong class="ms">Faktor keperluan pengguna:</strong>
+          <strong class="en">Factors affecting user needs:</strong>
+          <strong class="zh">影响消费者需求的因素：</strong>
+          <div class="ms">fisiologi, agama, budaya dan geografi.</div>
+          <div class="en">physiology, religion, culture and geography.</div>
+          <div class="zh">生理、宗教、文化与地理。</div>
+        </div>
+      </div>
+
+      <h3 style="margin-top:24px">Aspek Reka Bentuk Makanan / Aspects / 食品设计的方面</h3>
+      <div class="grid grid-4">
+        <div class="mini-card aspect"><div class="icon">🏭</div><b class="ms">Proses, kaedah dan ruang</b><b class="en">Process, method and space</b><b class="zh">流程、方法与空间</b><p class="ms">Cara produk diproses, diedarkan dan digunakan.</p><p class="en">How the product is processed, distributed and used.</p><p class="zh">产品如何加工、分配和使用。</p></div>
+        <div class="mini-card aspect"><div class="icon">🎨</div><b class="ms">Estetika, komunikasi dan perwakilan</b><b class="en">Aesthetics, communication and representation</b><b class="zh">美感、沟通与表现</b><p class="ms">Makanan menyampaikan imej dan mesej.</p><p class="en">Food communicates an image and message.</p><p class="zh">食品传达形象与信息。</p></div>
+        <div class="mini-card aspect"><div class="icon">🧰</div><b class="ms">Peralatan dan perkakasan</b><b class="en">Tools and equipment</b><b class="zh">工具与设备</b><p class="ms">Digunakan untuk menyediakan dan mengambil makanan.</p><p class="en">Used to prepare and serve food.</p><p class="zh">用于准备和盛装食品。</p></div>
+        <div class="mini-card aspect"><div class="icon">📣</div><b class="ms">Aktiviti komunikasi</b><b class="en">Communication activities</b><b class="zh">宣传沟通活动</b><p class="ms">Dilaksanakan untuk mempromosikan produk makanan.</p><p class="en">Used to promote food products.</p><p class="zh">用于推广食品产品。</p></div>
+      </div>
+
+      <div class="classify">
+        <div>
+          <h3>🍱 <span class="ms">Susunan makanan dalam pinggan atau bekas</span><span class="en">Arrangement of food on a plate or in a container</span><span class="zh">盘中或容器内的食物摆盘</span></h3>
+          <p class="ms">Contoh: susunan bento, hidangan pencuci mulut dalam gelas, susunan nasi dan lauk.</p>
+          <p class="en">Examples: bento arrangement, layered dessert cups, rice and side dishes.</p>
+          <p class="zh">例子：便当摆盘、杯装分层甜点、米饭与配菜的排列。</p>
+        </div>
+        <div>
+          <h3>🌺 <span class="ms">Reka bentuk pada makanan itu sendiri</span><span class="en">Design on the food itself</span><span class="zh">食物本身的造型</span></h3>
+          <p class="ms">Contoh: ukiran buah, kuih berbentuk bunga, nasi berbentuk watak.</p>
+          <p class="en">Examples: fruit carving, flower-shaped cakes and character-shaped rice.</p>
+          <p class="zh">例子：水果雕刻、花形糕点、人物造型饭团。</p>
+        </div>
+      </div>
+
+      <div class="callout" style="margin-top:16px">
+        <div style="font-size:2rem">🥗</div>
+        <div>
+          <strong class="ms">Lima kumpulan nutrien:</strong>
+          <strong class="en">Five nutrient groups:</strong>
+          <strong class="zh">五大营养类别：</strong>
+          <div>Karbohidrat / Carbohydrate / 碳水化合物 • Protein / 蛋白质 • Lemak / Fat / 脂肪 • Vitamin / 维生素 • Garam mineral / Mineral salts / 矿物盐</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="kepentingan">
+    <div class="section-card importance">
+      <div class="section-head">
+        <div class="num" style="background:linear-gradient(145deg,var(--green),var(--lime))">3</div>
+        <div class="triple-title"><h2>Kepentingan Reka Bentuk Makanan</h2><small>Importance of Food Design • 食品设计的重要性</small></div>
+      </div>
+
+      <div class="grid grid-3">
+        <div class="mini-card"><div class="icon">👥</div><h3 class="ms">Kebebasan memilih kepada pengguna</h3><h3 class="en">Freedom of choice</h3><h3 class="zh">让消费者有更多选择</h3><p class="ms">Perubahan cita rasa dan gaya hidup mewujudkan pelbagai reka bentuk makanan mengikut trend.</p><p class="en">Changing tastes and lifestyles create more food design choices.</p><p class="zh">口味和生活方式的改变带来更多食品设计选择。</p></div>
+        <div class="mini-card"><div class="icon">🎨</div><h3 class="ms">Menzahirkan nilai estetika</h3><h3 class="en">Expresses aesthetic value</h3><h3 class="zh">展现美感</h3><p class="ms">Menambah nilai, kualiti dan potensi pemasaran produk.</p><p class="en">Adds value, quality and marketing potential.</p><p class="zh">提升产品价值、品质和市场潜力。</p></div>
+        <div class="mini-card"><div class="icon">🤝</div><h3 class="ms">Melindungi etika sosial</h3><h3 class="en">Protects social ethics</h3><h3 class="zh">维护社会伦理</h3><p class="ms">Reka bentuk tidak boleh menyentuh sensitiviti kaum, agama dan budaya.</p><p class="en">Designs must respect racial, religious and cultural sensitivities.</p><p class="zh">设计必须尊重族群、宗教和文化敏感性。</p></div>
+        <div class="mini-card"><div class="icon">🏪</div><h3 class="ms">Memberikan faedah kepada pengusaha</h3><h3 class="en">Benefits entrepreneurs</h3><h3 class="zh">让经营者受益</h3><p class="ms">Inovasi membuka peluang perniagaan baharu dan meningkatkan daya saing.</p><p class="en">Innovation creates new business opportunities and competitiveness.</p><p class="zh">创新创造新商机并提升竞争力。</p></div>
+        <div class="mini-card"><div class="icon">🧪</div><h3 class="ms">Pembangunan sains dan teknologi moden</h3><h3 class="en">Develops modern science and technology</h3><h3 class="zh">促进现代科技发展</h3><p class="ms">Perkembangan reka bentuk mendorong penciptaan mesin, alatan dan kaedah baharu.</p><p class="en">Food design encourages new machines, tools and methods.</p><p class="zh">食品设计推动新机器、工具与方法的发明。</p></div>
+        <div class="mini-card"><div class="icon">🌏</div><h3 class="ms">Mempelbagaikan etika budaya</h3><h3 class="en">Promotes cultural diversity</h3><h3 class="zh">展现文化多样性</h3><p class="ms">Makanan tradisional pelbagai kaum dapat diinovasikan dan dipromosikan.</p><p class="en">Traditional foods of different communities can be innovated and promoted.</p><p class="zh">各族传统食品可通过创新来推广。</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="alatan">
+    <div class="section-card">
+      <div class="section-head">
+        <div class="num" style="background:linear-gradient(145deg,var(--red),var(--orange))">4</div>
+        <div class="triple-title"><h2>Alatan dan Perkakasan</h2><small>Tools and Equipment • 工具与设备</small></div>
+      </div>
+      <p class="lead ms">Alatan ialah perkakasan yang digunakan untuk membuat dan menghasilkan makanan. Pilih alatan mengikut fungsi supaya kerja lebih selamat, tepat dan cekap.</p>
+      <p class="lead en">Tools and equipment should be selected according to their function so that work is safe, precise and efficient.</p>
+      <p class="lead zh">工具与设备应按功能选择，以确保操作安全、准确和高效。</p>
+
+      <div class="grid grid-4">
+        <article class="mini-card toolcat">
+          <div class="icon">🔪</div><h3>Alatan Memotong<br><small>Cutting tools • 切割工具</small></h3>
+          <ul>
+            <li><b>Pisau tukang masak:</b> serba guna; mata lebar dan melengkung.</li>
+            <li><b>Pisau bergerigi:</b> roti atau makanan lembut berkulit keras.</li>
+            <li><b>Pisau penyisih:</b> memisahkan daging/ikan daripada tulang.</li>
+            <li><b>Pisau paring:</b> buah, sayur, keju dan bawang.</li>
+            <li><b>Pisau bulan sabit:</b> mencincang herba dan sayur halus.</li>
+            <li><b>Pisau pengupas:</b> membuang kulit buah dan sayur.</li>
+          </ul>
+          <div><span class="chip">Chef’s knife</span><span class="chip">Serrated knife</span><span class="chip">Boning knife</span><span class="chip">Paring knife</span><span class="chip">Mincing knife</span><span class="chip">Peeler</span></div>
+        </article>
+
+        <article class="mini-card toolcat">
+          <div class="icon">🍉</div><h3>Alatan Membentuk & Mengukir<br><small>Shaping & carving • 造型与雕刻</small></h3>
+          <ul>
+            <li><b>Pisau ukir:</b> mengukir buah dan sayur.</li>
+            <li><b>Pisau turning:</b> membentuk, merapi dan membuang kulit.</li>
+            <li><b>Parisian scoop:</b> menghasilkan bentuk bulat.</li>
+            <li><b>Penerap:</b> membentuk doh, ubi, sayur dan buah.</li>
+          </ul>
+          <div><span class="chip">Fruit carving knife</span><span class="chip">Turning knife</span><span class="chip">Parisian scoop</span><span class="chip">Cutter</span></div>
+        </article>
+
+        <article class="mini-card toolcat">
+          <div class="icon">🧁</div><h3>Alatan Menghias<br><small>Decorating tools • 装饰工具</small></h3>
+          <ul>
+            <li>Pisau pelepa / palette knife</li>
+            <li>Redai kek / cake rack</li>
+            <li>Meja pemutar kek / cake turntable</li>
+            <li>Beg aising / icing bag</li>
+            <li>Tiub aising / icing nozzles</li>
+          </ul>
+        </article>
+
+        <article class="mini-card toolcat">
+          <div class="icon">🍽️</div><h3>Alatan Menghidang<br><small>Serving tools • 盛装工具</small></h3>
+          <ul>
+            <li>Pinggan dan mangkuk / plates and bowls</li>
+            <li>Dulang / tray</li>
+            <li>Dulang buluh / bamboo tray</li>
+            <li>Hot plate</li>
+            <li>Gelas atau cawan pencuci mulut / dessert cups</li>
+          </ul>
+        </article>
+      </div>
+
+      <h3 style="margin-top:22px">Perkakasan Elektrik / Electrical Equipment / 电器设备</h3>
+      <div class="grid grid-4">
+        <div class="mini-card"><div class="icon">🥤</div><b>Pengisar pelbagai guna</b><p>Blender / 搅拌机 — mengisar pelbagai makanan.</p></div>
+        <div class="mini-card"><div class="icon">🧃</div><b>Mesin pengisar jus</b><p>Juicer / 榨汁机 — menghasilkan jus buah dan sayur.</p></div>
+        <div class="mini-card"><div class="icon">🍞</div><b>Pengadun roti</b><p>Bread maker / 面包机 — mengadun dan terus membakar roti.</p></div>
+        <div class="mini-card"><div class="icon">🥣</div><b>Mesin mengadun</b><p>Mixer / 搅拌器 — mempercepat adunan kek, roti, mi dan pasta.</p></div>
+        <div class="mini-card"><div class="icon">🍚</div><b>Periuk nasi elektrik</b><p>Rice cooker / 电饭锅 — memasak nasi dengan cepat.</p></div>
+        <div class="mini-card"><div class="icon">♨️</div><b>Ketuhar elektrik</b><p>Toaster oven / 烤箱 — membakar makanan.</p></div>
+        <div class="mini-card"><div class="icon">🥟</div><b>Pengukus elektrik</b><p>Electric steamer / 电蒸锅 — mengukus dengan bersih dan cepat.</p></div>
+        <div class="mini-card"><div class="icon">📡</div><b>Ketuhar gelombang mikro</b><p>Microwave / 微波炉 — memanaskan makanan dengan singkat.</p></div>
+      </div>
+
+      <div class="callout" style="margin-top:16px;background:#fff1e5;border-color:#ffc078">
+        <div style="font-size:2rem">⚠️</div>
+        <div><strong>Keselamatan / Safety / 安全：</strong>
+          <span class="ms">Berhati-hati ketika menggunakan alatan tajam dan simpan di tempat yang selamat.</span>
+          <span class="en">Handle sharp tools carefully and store them safely.</span>
+          <span class="zh">小心使用锋利工具，并妥善存放。</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="elemen">
+    <div class="section-card">
+      <div class="section-head">
+        <div class="num" style="background:linear-gradient(145deg,var(--cyan),var(--blue))">5</div>
+        <div class="triple-title"><h2>Elemen Reka Bentuk</h2><small>Design Elements • 设计元素</small></div>
+      </div>
+
+      <div class="grid grid-4">
+        <div class="mini-card element"><div class="bubble-icon">〰️</div><h3>Garisan / Line / 线条</h3><p class="ms">Pergerakan titik dalam ruang; boleh dua atau tiga dimensi.</p><p class="en">Movement of a point through space.</p><p class="zh">点在空间中的移动，可形成二维或三维线条。</p></div>
+        <div class="mini-card element"><div class="bubble-icon">🔷</div><h3>Rupa / Shape / 平面形状</h3><p class="ms">Elemen dua dimensi yang rata dan dikelilingi garisan, nilai dan warna.</p><p class="en">A flat, two-dimensional enclosed area.</p><p class="zh">由线条、明暗和颜色围成的二维平面。</p></div>
+        <div class="mini-card element"><div class="bubble-icon">🧊</div><h3>Bentuk / Form / 立体形态</h3><p class="ms">Elemen tiga dimensi yang mempunyai tinggi, lebar dan kedalaman.</p><p class="en">A three-dimensional element with height, width and depth.</p><p class="zh">具有高度、宽度与深度的三维形态。</p></div>
+        <div class="mini-card element"><div class="bubble-icon">🎨</div><h3>Warna / Colour / 颜色</h3><p class="ms">Merangkumi hue dan emosi; warna mempengaruhi perhatian dan perasaan.</p><p class="en">Colour includes hue and emotional effect.</p><p class="zh">颜色包含色相，并能影响情绪与注意力。</p></div>
+        <div class="mini-card element"><div class="bubble-icon">◐</div><h3>Nilai / Value / 明暗</h3><p class="ms">Kesan terang atau gelap sesuatu tona atau warna.</p><p class="en">The lightness or darkness of a tone or colour.</p><p class="zh">色调或颜色的明暗程度。</p></div>
+        <div class="mini-card element"><div class="bubble-icon">🪵</div><h3>Tekstur / Texture / 质感</h3><p class="ms">Struktur permukaan yang dapat dirasa, seperti licin atau kasar.</p><p class="en">Surface quality such as smooth or rough.</p><p class="zh">表面结构，如光滑、粗糙、柔软或酥脆。</p></div>
+        <div class="mini-card element"><div class="bubble-icon">⬚</div><h3>Ruang / Space / 空间</h3><p class="ms">Kawasan kosong, jarak atau rongga di sekeliling atau dalam objek.</p><p class="en">Empty area, distance or cavity around or within an object.</p><p class="zh">物体周围或内部的空白、距离或空隙。</p></div>
+        <div class="mini-card element"><div class="bubble-icon">↔️</div><h3>Saiz / Size / 大小</h3><p class="ms">Ukuran atau dimensi objek yang mempengaruhi pilihan pelanggan.</p><p class="en">The dimensions of an object.</p><p class="zh">物体的尺寸，会影响消费者选择。</p></div>
+      </div>
+
+      <div class="section-head" style="margin-top:30px">
+        <div class="num" style="background:linear-gradient(145deg,var(--purple),var(--red))">6</div>
+        <div class="triple-title"><h2>Prinsip Reka Bentuk</h2><small>Design Principles • 设计原则</small></div>
+      </div>
+
+      <div class="grid grid-5">
+        <div class="mini-card principle"><div class="bubble-icon">⚖️</div><h3>Keseimbangan<br><small>Balance • 平衡</small></h3><p class="ms">Kesamaan berat, tarikan dan tumpuan; boleh simetri.</p></div>
+        <div class="mini-card principle"><div class="bubble-icon">☯️</div><h3>Kontras<br><small>Contrast • 对比</small></h3><p class="ms">Elemen berlawanan untuk fokus dan mengelakkan kebosanan.</p></div>
+        <div class="mini-card principle"><div class="bubble-icon">🔁</div><h3>Pengulangan<br><small>Repetition • 重复</small></h3><p class="ms">Penggunaan elemen sama atau serupa secara berulang.</p></div>
+        <div class="mini-card principle"><div class="bubble-icon">▫️</div><h3>Keringkasan<br><small>Simplicity • 简洁</small></h3><p class="ms">Mengekalkan elemen penting dan menolak elemen tidak perlu.</p></div>
+        <div class="mini-card principle"><div class="bubble-icon">➿</div><h3>Pergerakan<br><small>Movement • 动感</small></h3><p class="ms">Aliran yang memimpin pandangan mata melalui reka bentuk.</p></div>
+        <div class="mini-card principle"><div class="bubble-icon">🎯</div><h3>Penekanan<br><small>Emphasis • 强调</small></h3><p class="ms">Menonjolkan unsur utama untuk menarik perhatian.</p></div>
+        <div class="mini-card principle"><div class="bubble-icon">🥧</div><h3>Pembahagian<br><small>Proportion • 比例</small></h3><p class="ms">Hubungan kadar banding antara saiz, nombor, jumlah dan tahap.</p></div>
+        <div class="mini-card principle"><div class="bubble-icon">🔶</div><h3>Kepelbagaian<br><small>Variety • 多样性</small></h3><p class="ms">Penggunaan pelbagai elemen, gaya, kualiti dan idea.</p></div>
+        <div class="mini-card principle"><div class="bubble-icon">🧩</div><h3>Kesatuan<br><small>Unity • 统一</small></h3><p class="ms">Gabungan elemen yang membentuk imej atau konsep lengkap.</p></div>
+        <div class="mini-card principle"><div class="bubble-icon">🎵</div><h3>Harmoni<br><small>Harmony • 和谐</small></h3><p class="ms">Gabungan yang mewujudkan emosi positif, ketenangan dan kegembiraan.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="lakaran">
+    <div class="section-card">
+      <div class="section-head">
+        <div class="num" style="background:linear-gradient(145deg,var(--orange),var(--red))">7</div>
+        <div class="triple-title"><h2>Melakar serta Menjustifikasikan Reka Bentuk</h2><small>Sketching and Justification • 草图与设计说明</small></div>
+      </div>
+
+      <p class="lead ms">Lakaran ialah lukisan awal atau draf yang dihasilkan menggunakan teknik lakaran bebas. Lakaran makanan perlu dibuat berdasarkan tema pelanggan dan dijustifikasikan menggunakan elemen serta prinsip reka bentuk.</p>
+      <p class="lead en">A sketch is an initial freehand drawing. It should follow the customer’s theme and be justified using design elements and principles.</p>
+      <p class="lead zh">草图是自由手绘的初步设计。草图应符合顾客主题，并运用设计元素和原则进行说明。</p>
+
+      <div class="sketch-zone">
+        <div class="sketch">
+          <div class="label l1"><b>Tema / Theme / 主题</b><br>Coklat beri moden<br>Modern berry chocolate<br>现代莓果巧克力</div>
+          <div class="label l2"><b>Warna / Colour / 颜色</b><br>Coklat, merah, hijau<br>Brown, red, green<br>棕、红、绿</div>
+          <div class="label l3"><b>Garisan / Line / 线条</b><br>Garisan sos melengkung<br>Curved sauce lines<br>弧形酱汁线条</div>
+          <div class="label l4"><b>Tekstur / Texture / 质感</b><br>Lembut, rangup, berkrim<br>Soft, crisp, creamy<br>柔软、酥脆、奶油感</div>
+          <div class="plate"></div><div class="cake"></div>
+        </div>
+
+        <div>
+          <h3>Maklumat yang perlu ada pada lakaran / Required Information / 草图必备资料</h3>
+          <div class="factor-list">
+            <div class="check"><span><b>Bahan yang digunakan</b><br><small>Materials • 材料</small></span></div>
+            <div class="check"><span><b>Prinsip reka bentuk</b><br><small>Principles • 设计原则</small></span></div>
+            <div class="check"><span><b>Elemen reka bentuk</b><br><small>Elements • 设计元素</small></span></div>
+            <div class="check"><span><b>Dimensi</b><br><small>Dimensions • 尺寸</small></span></div>
+          </div>
+
+          <div class="callout" style="margin-top:16px">
+            <div style="font-size:2rem">💡</div>
+            <div>
+              <strong>Formula justifikasi / Justification formula / 说明公式</strong>
+              <p class="ms">Nyatakan elemen atau prinsip → terangkan cara digunakan → jelaskan kesannya terhadap reka bentuk.</p>
+              <p class="en">Name the element or principle → explain how it is used → state its effect on the design.</p>
+              <p class="zh">指出设计元素或原则 → 说明如何运用 → 解释对设计产生的效果。</p>
+            </div>
+          </div>
+
+          <details open>
+            <summary>Contoh justifikasi / Example / 示例</summary>
+            <div class="answer">
+              <p class="ms"><b>Prinsip pengulangan</b> digunakan melalui susunan titisan sos yang berulang. Hal ini menjadikan persembahan lebih teratur dan menarik.</p>
+              <p class="en"><b>Repetition</b> is applied through repeated sauce drops, making the presentation more organised and attractive.</p>
+              <p class="zh">通过重复排列酱汁点来运用<b>重复原则</b>，使摆盘更整齐、更有吸引力。</p>
+            </div>
+          </details>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="pembungkusan">
+    <div class="section-card">
+      <div class="section-head">
+        <div class="num" style="background:linear-gradient(145deg,var(--teal),var(--green))">8</div>
+        <div class="triple-title"><h2>Pembungkusan Makanan</h2><small>Food Packaging • 食品包装</small></div>
+      </div>
+
+      <p class="lead ms">Pembungkusan ialah mekanisme yang menggunakan sains dan teknologi untuk memelihara produk bagi tujuan pengedaran, penyimpanan, jualan dan penggunaan. Ia juga melibatkan proses reka bentuk, penilaian dan pemasaran.</p>
+      <p class="lead en">Packaging uses science and technology to protect food during distribution, storage, sale and use. It also involves design, evaluation and marketing.</p>
+      <p class="lead zh">食品包装运用科学与技术，在运输、储存、销售和使用过程中保护产品，也包括设计、评价与营销。</p>
+
+      <h3>Elemen Pembungkusan / Packaging Elements / 包装元素</h3>
+      <div class="pack-list">
+        <div class="pack-item"><div class="icon">⭐</div><b>Jenama</b><small>Brand<br>品牌</small></div>
+        <div class="pack-item"><div class="icon">🔤</div><b>Tipografi</b><small>Typography<br>字体设计</small></div>
+        <div class="pack-item"><div class="icon">🎨</div><b>Warna</b><small>Colour<br>颜色</small></div>
+        <div class="pack-item"><div class="icon">🖼️</div><b>Ilustrasi</b><small>Illustration<br>插图</small></div>
+        <div class="pack-item"><div class="icon">📦</div><b>Reka bentuk</b><small>Design<br>结构设计</small></div>
+        <div class="pack-item"><div class="icon">ℹ️</div><b>Maklumat</b><small>Information<br>资料</small></div>
+        <div class="pack-item"><div class="icon">📏</div><b>Saiz</b><small>Size<br>尺寸</small></div>
+      </div>
+
+      <div class="grid grid-3" style="margin-top:18px">
+        <div class="mini-card"><div class="icon">🏷️</div><h3>Tanda jenama / Brand / 品牌</h3><p class="ms">Nama yang memperkenalkan produk atau perkhidmatan kepada pengguna.</p><p class="en">The name used to identify and introduce a product.</p><p class="zh">用于识别并介绍产品的名称。</p></div>
+        <div class="mini-card"><div class="icon">🔠</div><h3>Tipografi / Typography / 字体设计</h3><p class="ms">Gaya tulisan yang unik membantu pengguna mengingati jenama.</p><p class="en">Distinctive lettering helps consumers remember the brand.</p><p class="zh">独特字体可帮助消费者记住品牌。</p></div>
+        <div class="mini-card"><div class="icon">🌈</div><h3>Warna / Colour / 颜色</h3><p class="ms">Membina identiti, menyampaikan maksud dan membezakan jenis produk.</p><p class="en">Creates identity, conveys meaning and differentiates products.</p><p class="zh">建立产品形象、传达信息并区分产品类别。</p></div>
+        <div class="mini-card"><div class="icon">🐻</div><h3>Ilustrasi / Illustration / 插图</h3><p class="ms">Menggambarkan produk; perlu menarik, unik, sesuai dan tidak terlalu padat.</p><p class="en">Shows the product and should be attractive, unique and uncluttered.</p><p class="zh">用于表现产品，应独特、吸引且不过度拥挤。</p></div>
+        <div class="mini-card"><div class="icon">🧰</div><h3>Reka bentuk / Structure / 结构</h3><p class="ms">Perlu ergonomik, mudah dibawa, selamat digunakan dan mesra alam.</p><p class="en">Should be ergonomic, portable, safe and environmentally friendly.</p><p class="zh">应符合人体工学、便于携带、安全并环保。</p></div>
+        <div class="mini-card"><div class="icon">🧾</div><h3>Maklumat / Information / 资料</h3><p class="ms">Label perlu menyampaikan maklumat penting seperti ramuan, penyimpanan, pengeluar dan tarikh.</p><p class="en">Labels should include ingredients, storage, manufacturer and dates.</p><p class="zh">标签应列出配料、储存方法、生产商和日期等资料。</p></div>
+      </div>
+
+      <h3 style="margin-top:22px">Pertimbangan Penting / Key Considerations / 重要考虑因素</h3>
+      <div class="factor-list">
+        <div class="check"><span><b>Pasaran sasaran dan demografi</b><br><small>Target market and demographics • 目标市场与人口特征</small></span></div>
+        <div class="check"><span><b>Imej atau personaliti produk</b><br><small>Product image or personality • 产品形象与个性</small></span></div>
+        <div class="check"><span><b>Ciri penting produk</b><br><small>Highlight key features • 突出主要特征</small></span></div>
+        <div class="check"><span><b>Warna yang betul dan menarik</b><br><small>Suitable attractive colours • 合适且吸引人的颜色</small></span></div>
+        <div class="check"><span><b>Imej yang membawa maksud tepat</b><br><small>Meaningful image • 能准确传达信息的图像</small></span></div>
+        <div class="check"><span><b>Bahan mesra alam</b><br><small>Eco-friendly materials • 环保材料</small></span></div>
+      </div>
+
+      <div class="callout" style="margin-top:16px;background:#eafbf6;border-color:#91dec5">
+        <div style="font-size:2rem">🌱</div>
+        <div>
+          <strong class="ms">Reka bentuk pembungkusan yang baik:</strong>
+          <strong class="en">Good packaging design:</strong>
+          <strong class="zh">良好的包装设计：</strong>
+          <div class="ms">memelihara kualiti, mengurangkan pembaziran, menarik perhatian dan memudahkan penggunaan.</div>
+          <div class="en">protects quality, reduces waste, attracts attention and makes the product easier to use.</div>
+          <div class="zh">保护品质、减少浪费、吸引消费者，并方便使用。</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="hasilkan">
+    <div class="section-card">
+      <div class="section-head">
+        <div class="num" style="background:linear-gradient(145deg,var(--orange),#ffc857)">9</div>
+        <div class="triple-title"><h2>Menghasilkan Reka Bentuk Makanan</h2><small>Producing Food Design • 制作食品设计</small></div>
+      </div>
+      <p class="lead ms">Reka bentuk makanan yang kreatif dan berkesan terhasil daripada gabungan elemen dan prinsip reka bentuk.</p>
+      <p class="lead en">Creative and effective food design results from combining design elements and principles.</p>
+      <p class="lead zh">有创意且有效的食品设计，来自设计元素与设计原则的结合。</p>
+
+      <div class="five">
+        <div class="big"><div class="n">1</div><div class="emoji">⚖️</div><h3>Keseimbangan</h3><small>Balance • 平衡</small><p>Susunan, warna, bentuk, saiz dan tekstur perlu seimbang.</p></div>
+        <div class="big"><div class="n">2</div><div class="emoji">🔶</div><h3>Bentuk</h3><small>Form • 造型</small><p>Pelbagaikan bentuk dan susunan ketinggian.</p></div>
+        <div class="big"><div class="n">3</div><div class="emoji">🧇</div><h3>Tekstur</h3><small>Texture • 口感与质感</small><p>Gabungkan tekstur secara seimbang, bukan berlebihan.</p></div>
+        <div class="big"><div class="n">4</div><div class="emoji">👅</div><h3>Rasa</h3><small>Taste • 味道</small><p>Gabungan bahan menghasilkan rasa yang unik.</p></div>
+        <div class="big"><div class="n">5</div><div class="emoji">📏</div><h3>Saiz</h3><small>Size • 大小</small><p>Saiz hidangan perlu seimbang dengan pinggan atau bekas.</p></div>
+      </div>
+
+      <h3 style="margin-top:24px">Sebelum menghasilkan reka bentuk / Before Production / 制作前需考虑</h3>
+      <div class="factor-list">
+        <div class="check"><span>Imej atau personaliti reka bentuk: budaya, nilai, elegan atau sofistikated.</span></div>
+        <div class="check"><span>Pilih bahan yang sesuai dengan reka bentuk.</span></div>
+        <div class="check"><span>Pilih warna makanan yang sesuai.</span></div>
+        <div class="check"><span>Elakkan reka bentuk yang melanggar sensitiviti agama dan kaum.</span></div>
+        <div class="check"><span>Pilih saiz yang sesuai untuk keperluan pengguna.</span></div>
+        <div class="check"><span>Gunakan alatan dan bekas menghidang yang sesuai.</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="penilaian">
+    <div class="section-card evaluation">
+      <div class="section-head">
+        <div class="num" style="background:linear-gradient(145deg,var(--blue),var(--teal))">10</div>
+        <div class="triple-title"><h2>Menilai Reka Bentuk Makanan</h2><small>Evaluation • 评价食品设计</small></div>
+      </div>
+
+      <p class="lead ms">Penilaian memastikan reka bentuk memenuhi kehendak pengguna, menarik perhatian dan mempunyai potensi komersial.</p>
+      <p class="lead en">Evaluation ensures that the design satisfies users, attracts attention and has commercial potential.</p>
+      <p class="lead zh">评价可确保设计满足消费者需求、具有吸引力，并拥有商业潜力。</p>
+
+      <h3>Kecenderungan / Trends / 设计倾向</h3>
+      <div class="grid grid-3">
+        <div class="mini-card"><div class="icon">🎨</div><h3>Kreativiti / Creativity / 创意</h3><p class="ms">Idea imaginasi yang menghasilkan reka bentuk, kaedah atau fungsi yang menarik dan unik.</p></div>
+        <div class="mini-card"><div class="icon">🚀</div><h3>Inovasi / Innovation / 创新</h3><p class="ms">Idea yang dipelbagaikan, diubah atau ditambah baik supaya lebih berkesan.</p></div>
+        <div class="mini-card"><div class="icon">💎</div><h3>Keaslian / Originality / 原创性</h3><p class="ms">Idea yang tulen dan tidak meniru produk sedia ada.</p></div>
+      </div>
+
+      <h3 style="margin-top:22px">Tiga Bahagian Utama Penilaian / Three Main Stages / 三个主要评价阶段</h3>
+      <div class="grid grid-3">
+        <div class="mini-card"><div class="icon">💡</div><h3>1. Perkembangan idea</h3><p class="ms">Menilai inovasi, kreativiti dan keaslian lakaran.</p><p class="en">Evaluate innovation, creativity and originality in the idea.</p><p class="zh">评价构思中的创新、创意与原创性。</p></div>
+        <div class="mini-card"><div class="icon">👨‍🍳</div><h3>2. Keupayaan menghasilkan</h3><p class="ms">Menilai penggunaan bahan, alatan dan teknik yang betul.</p><p class="en">Evaluate correct use of materials, tools and techniques.</p><p class="zh">评价材料、工具和技术的正确运用。</p></div>
+        <div class="mini-card"><div class="icon">📋</div><h3>3. Penilaian akhir</h3><p class="ms">Menilai fungsi, estetika, ergonomik, keselamatan dan nilai komersial.</p><p class="en">Evaluate function, aesthetics, ergonomics, safety and commercial value.</p><p class="zh">评价功能、美感、人体工学、安全和商业价值。</p></div>
+      </div>
+
+      <div class="criteria">
+        <span>🎨 Kreativiti / Creativity / 创意</span>
+        <span>🚀 Inovasi / Innovation / 创新</span>
+        <span>💎 Keaslian / Originality / 原创性</span>
+        <span>⚙️ Fungsi / Function / 功能</span>
+        <span>✨ Estetika / Aesthetics / 美感</span>
+        <span>🖐️ Ergonomik / Ergonomics / 人体工学</span>
+        <span>🛡️ Keselamatan / Safety / 安全</span>
+        <span>💰 Nilai komersial / Commercial value / 商业价值</span>
+        <span>🔣 Simbolik / Symbolic value / 象征意义</span>
+      </div>
+    </div>
+  </section>
+
+  <section id="exam">
+    <div class="section-card">
+      <div class="section-head">
+        <div class="num" style="background:linear-gradient(145deg,var(--red),var(--purple))">11</div>
+        <div class="triple-title"><h2>Teknik Menjawab Soalan Peperiksaan</h2><small>Exam Answer Technique • 考试答题技巧</small></div>
+      </div>
+
+      <div class="formula">
+        <div>Fakta<br><small>Point • 要点</small></div>
+        <div>Huraian<br><small>Explanation • 说明</small></div>
+        <div>Contoh<br><small>Example • 例子</small></div>
+        <div>Kesan<br><small>Effect • 影响</small></div>
+        <div>Kesimpulan<br><small>Conclusion • 结论</small></div>
+      </div>
+
+      <div class="callout" style="margin-top:18px;background:#f1f7ff;border-color:#b8d5fb">
+        <div style="font-size:2rem">📝</div>
+        <div>
+          <strong>Ayat rangka / Sentence frame / 答题句型</strong>
+          <p class="ms"><b>Fakta:</b> Salah satu kepentingan... <b>Huraian:</b> Hal ini kerana... <b>Contoh:</b> Contohnya... <b>Kesan:</b> Kesannya... <b>Kesimpulan:</b> Kesimpulannya...</p>
+          <p class="en"><b>Point:</b> One importance is... <b>Explanation:</b> This is because... <b>Example:</b> For example... <b>Effect:</b> As a result... <b>Conclusion:</b> In conclusion...</p>
+          <p class="zh"><b>要点：</b>其中一个重要性是…… <b>说明：</b>这是因为…… <b>例子：</b>例如…… <b>影响：</b>因此…… <b>结论：</b>总而言之……</p>
+        </div>
+      </div>
+
+      <details open>
+        <summary>Contoh Jawapan Lengkap: Kepentingan reka bentuk makanan</summary>
+        <div class="answer">
+          <p class="ms"><b>Fakta:</b> Salah satu kepentingan reka bentuk makanan ialah memberikan kebebasan memilih kepada pengguna. <b>Huraian:</b> Hal ini kerana setiap pengguna mempunyai cita rasa dan gaya hidup yang berbeza. <b>Contoh:</b> Contohnya, makanan tradisional diubah suai dari segi bentuk dan penyajian mengikut trend semasa. <b>Kesan:</b> Kesannya, produk menjadi lebih menarik dan mendapat sambutan pasaran. <b>Kesimpulan:</b> Kesimpulannya, reka bentuk makanan penting untuk memenuhi kehendak pengguna.</p>
+          <p class="en"><b>Point:</b> One importance of food design is to give consumers freedom of choice. <b>Explanation:</b> Consumers have different tastes and lifestyles. <b>Example:</b> Traditional food can be redesigned and presented according to current trends. <b>Effect:</b> The product becomes more attractive and marketable. <b>Conclusion:</b> Food design is important in meeting consumer needs.</p>
+          <p class="zh"><b>要点：</b>食品设计的重要性之一，是让消费者拥有更多选择。<b>说明：</b>因为消费者的口味与生活方式各不相同。<b>例子：</b>传统食品可按照现代趋势改变造型与摆盘。<b>影响：</b>产品会更吸引人，也更有市场。<b>结论：</b>食品设计有助于满足消费者需求。</p>
+        </div>
+      </details>
+
+      <details>
+        <summary>Soalan: Bagaimanakah reka bentuk makanan menyumbang kepada pembangunan sains dan teknologi?</summary>
+        <div class="answer">
+          <p class="ms">Perkembangan reka bentuk makanan mendorong penciptaan mesin, alatan dan teknik penyediaan yang lebih moden. Contohnya, mesin pengadun dan pengukus elektrik mempercepat proses penyediaan makanan. Kesannya, kerja menjadi lebih cekap, bersih dan menjimatkan masa.</p>
+          <p class="en">Food design encourages the invention of modern machines, tools and preparation techniques. Mixers and electric steamers, for example, speed up food preparation and improve efficiency and hygiene.</p>
+          <p class="zh">食品设计的发展促进了现代机器、工具和制作技术的发明。例如搅拌机与电蒸锅可加快制作过程，使工作更高效、更卫生。</p>
+        </div>
+      </details>
+
+      <details>
+        <summary>Soalan: Bagaimanakah Aida boleh meningkatkan jualan donat?</summary>
+        <div class="answer">
+          <p class="ms">Aida boleh menghasilkan donat dalam pelbagai bentuk, warna, saiz dan hiasan mengikut trend serta kehendak pelanggan. Aida juga boleh menggunakan pembungkusan yang menarik dan mesra alam. Kesannya, produk lebih mudah dikenali, menarik perhatian dan berpotensi meningkatkan jualan.</p>
+          <p class="en">Aida can offer donuts in different shapes, colours, sizes and decorations, then use attractive eco-friendly packaging. This strengthens product identity and may increase sales.</p>
+          <p class="zh">Aida 可根据潮流和顾客需求，制作不同形状、颜色、尺寸与装饰的甜甜圈，并采用吸引且环保的包装，以提升产品辨识度和销量。</p>
+        </div>
+      </details>
+
+      <details>
+        <summary>Soalan: Bagaimanakah imej pada pembungkusan menarik minat pembeli?</summary>
+        <div class="answer">
+          <p class="ms">Imej yang jelas dan sesuai dapat menerangkan kandungan produk dengan cepat tanpa teks yang panjang. Imej juga mewujudkan tarikan visual dan membantu pengguna mengenal pasti produk. Kesannya, pengguna lebih berminat untuk membeli.</p>
+          <p class="en">A clear and suitable image communicates the product quickly, creates visual appeal and helps consumers identify it, increasing purchase interest.</p>
+          <p class="zh">清楚且合适的图像能快速传达产品内容，增强视觉吸引力，并帮助消费者识别产品，从而提高购买意愿。</p>
+        </div>
+      </details>
+
+      <details>
+        <summary>Soalan: Nyatakan lima perkara penting semasa menghasilkan reka bentuk makanan.</summary>
+        <div class="answer">
+          <p class="ms">Lima perkara penting ialah keseimbangan, bentuk, tekstur, rasa dan saiz.</p>
+          <p class="en">The five important factors are balance, form, texture, taste and size.</p>
+          <p class="zh">五项重要因素是平衡、造型、质感、味道和大小。</p>
+        </div>
+      </details>
+    </div>
+  </section>
+
+  <section id="quiz">
+    <div class="section-card">
+      <div class="section-head">
+        <div class="num" style="background:linear-gradient(145deg,var(--teal),var(--cyan))">12</div>
+        <div class="triple-title"><h2>Kuiz Pantas</h2><small>Quick Quiz • 快速测验</small></div>
+      </div>
+
+      <div class="quiz-card" data-answer="b">
+        <b>1. Apakah maksud reka bentuk makanan?</b>
+        <div class="quiz-options">
+          <button data-choice="a">A. Aktiviti menjual makanan sahaja</button>
+          <button data-choice="b">B. Aktiviti merealisasikan idea kepada bentuk makanan melalui inovasi dan kreativiti</button>
+          <button data-choice="c">C. Aktiviti memasak tanpa menggunakan alatan</button>
+          <button data-choice="d">D. Aktiviti membungkus makanan sahaja</button>
+        </div><div class="feedback"></div>
+      </div>
+
+      <div class="quiz-card" data-answer="c">
+        <b>2. Alatan manakah digunakan untuk mendapatkan bentuk bulat pada buah atau sayur?</b>
+        <div class="quiz-options">
+          <button data-choice="a">A. Pisau bergerigi</button>
+          <button data-choice="b">B. Pisau tukang masak</button>
+          <button data-choice="c">C. Parisian scoop</button>
+          <button data-choice="d">D. Pisau pelepa</button>
+        </div><div class="feedback"></div>
+      </div>
+
+      <div class="quiz-card" data-answer="a">
+        <b>3. Prinsip manakah menggunakan elemen yang sama secara berulang?</b>
+        <div class="quiz-options">
+          <button data-choice="a">A. Pengulangan</button>
+          <button data-choice="b">B. Kontras</button>
+          <button data-choice="c">C. Keringkasan</button>
+          <button data-choice="d">D. Penekanan</button>
+        </div><div class="feedback"></div>
+      </div>
+
+      <div class="quiz-card" data-answer="d">
+        <b>4. Antara berikut, yang manakah BUKAN kriteria penilaian akhir?</b>
+        <div class="quiz-options">
+          <button data-choice="a">A. Fungsi</button>
+          <button data-choice="b">B. Keselamatan</button>
+          <button data-choice="c">C. Nilai komersial</button>
+          <button data-choice="d">D. Harga buku teks</button>
+        </div><div class="feedback"></div>
+      </div>
+
+      <div class="quiz-card" data-answer="b">
+        <b>5. Pembungkusan yang baik mestilah...</b>
+        <div class="quiz-options">
+          <button data-choice="a">A. berat dan sukar dibawa</button>
+          <button data-choice="b">B. ergonomik, selamat, mudah dibawa dan mesra alam</button>
+          <button data-choice="c">C. menggunakan teks yang sangat panjang</button>
+          <button data-choice="d">D. tidak mempunyai maklumat produk</button>
+        </div><div class="feedback"></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="mindmap">
+    <div class="section-card">
+      <div class="section-head">
+        <div class="num" style="background:linear-gradient(145deg,var(--purple),var(--blue))">13</div>
+        <div class="triple-title"><h2>Peta Minda</h2><small>Memory Map • 思维导图</small></div>
+      </div>
+
+      <div class="memory-map">
+        <svg viewBox="0 0 1000 650" preserveAspectRatio="none" aria-hidden="true">
+          <line x1="500" y1="325" x2="185" y2="120"/>
+          <line x1="500" y1="325" x2="815" y2="120"/>
+          <line x1="500" y1="325" x2="165" y2="320"/>
+          <line x1="500" y1="325" x2="835" y2="320"/>
+          <line x1="500" y1="325" x2="230" y2="545"/>
+          <line x1="500" y1="325" x2="770" y2="545"/>
+        </svg>
+        <div class="center-node">👨‍🍳<br>Reka Bentuk<br>Makanan</div>
+
+        <div class="branch b1"><h3>Takrif / Definition / 定义</h3><ul><li>Reka bentuk</li><li>Makanan</li><li>Reka bentuk makanan</li></ul></div>
+        <div class="branch b2"><h3>Kepentingan / Importance / 重要性</h3><ul><li>Pilihan pengguna</li><li>Estetika & etika</li><li>Pengusaha, teknologi & budaya</li></ul></div>
+        <div class="branch b3"><h3>Alatan & Perkakasan</h3><ul><li>Memotong</li><li>Membentuk & mengukir</li><li>Menghias & menghidang</li><li>Peralatan elektrik</li></ul></div>
+        <div class="branch b4"><h3>Elemen & Prinsip</h3><ul><li>8 elemen reka bentuk</li><li>10 prinsip reka bentuk</li><li>Digunakan dalam justifikasi</li></ul></div>
+        <div class="branch b5"><h3>Lakaran & Pembungkusan</h3><ul><li>Tema dan dimensi</li><li>Jenama, tipografi, warna</li><li>Maklumat & saiz</li><li>Mesra alam</li></ul></div>
+        <div class="branch b6"><h3>Menghasilkan & Menilai</h3><ul><li>Balance, form, texture, taste, size</li><li>Idea → penghasilan → penilaian</li><li>Fungsi, estetika, ergonomik, keselamatan</li></ul></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="vocabulary">
+    <div class="section-card">
+      <div class="section-head">
+        <div class="num" style="background:linear-gradient(145deg,var(--green),var(--cyan))">14</div>
+        <div class="triple-title"><h2>Kosa Kata Penting</h2><small>Key Vocabulary • 重点词汇</small></div>
+      </div>
+
+      <div style="overflow:auto">
+        <table class="vocab">
+          <thead><tr><th>Bahasa Melayu</th><th>English</th><th>中文</th><th>Maksud ringkas</th></tr></thead>
+          <tbody>
+            <tr><td>Potensi</td><td>Potential</td><td>潜力</td><td>Keupayaan untuk berkembang atau berjaya.</td></tr>
+            <tr><td>Trend</td><td>Trend</td><td>趋势</td><td>Gaya atau kecenderungan semasa.</td></tr>
+            <tr><td>Primer</td><td>Primary</td><td>首要的</td><td>Keperluan asas yang sangat penting.</td></tr>
+            <tr><td>Sensitiviti</td><td>Sensitivity</td><td>敏感性</td><td>Perkara yang perlu dihormati dan tidak disentuh secara negatif.</td></tr>
+            <tr><td>Simetri</td><td>Symmetry</td><td>对称</td><td>Dua bahagian yang seimbang atau serupa.</td></tr>
+            <tr><td>Fisiologi</td><td>Physiology</td><td>生理</td><td>Keperluan atau fungsi fizikal tubuh.</td></tr>
+            <tr><td>Psikologi</td><td>Psychology</td><td>心理</td><td>Perasaan dan pemikiran pengguna.</td></tr>
+            <tr><td>Evolusi</td><td>Evolution</td><td>演变</td><td>Perubahan secara berperingkat mengikut masa.</td></tr>
+            <tr><td>Tekstur</td><td>Texture</td><td>质感</td><td>Sifat permukaan atau rasa sentuhan/mulut.</td></tr>
+            <tr><td>Realistik</td><td>Realistic</td><td>逼真</td><td>Kelihatan nyata atau hampir kepada keadaan sebenar.</td></tr>
+            <tr><td>Geografi</td><td>Geography</td><td>地理</td><td>Lokasi dan keadaan tempat yang mempengaruhi keperluan.</td></tr>
+            <tr><td>Ergonomik</td><td>Ergonomic</td><td>人体工学</td><td>Selesa, selamat dan mudah digunakan oleh manusia.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section id="checklist">
+    <div class="section-card">
+      <div class="section-head">
+        <div class="num" style="background:linear-gradient(145deg,var(--orange),var(--green))">15</div>
+        <div class="triple-title"><h2>Senarai Semak Peperiksaan</h2><small>Final Revision Checklist • 期末复习清单</small></div>
+      </div>
+      <div class="checklist">
+        <label><input type="checkbox"> Saya boleh mentakrifkan reka bentuk, makanan dan reka bentuk makanan.</label>
+        <label><input type="checkbox"> Saya boleh menyenaraikan empat aspek reka bentuk makanan.</label>
+        <label><input type="checkbox"> Saya boleh menerangkan enam kepentingan reka bentuk makanan.</label>
+        <label><input type="checkbox"> Saya mengenali fungsi alatan memotong, membentuk, menghias dan menghidang.</label>
+        <label><input type="checkbox"> Saya boleh menyenaraikan lapan elemen reka bentuk.</label>
+        <label><input type="checkbox"> Saya boleh menyenaraikan sepuluh prinsip reka bentuk.</label>
+        <label><input type="checkbox"> Saya boleh membuat justifikasi berdasarkan elemen dan prinsip.</label>
+        <label><input type="checkbox"> Saya mengetahui tujuh elemen pembungkusan makanan.</label>
+        <label><input type="checkbox"> Saya boleh menyatakan faktor penting reka bentuk pembungkusan.</label>
+        <label><input type="checkbox"> Saya mengingati lima faktor: keseimbangan, bentuk, tekstur, rasa dan saiz.</label>
+        <label><input type="checkbox"> Saya memahami tiga tahap penilaian reka bentuk makanan.</label>
+        <label><input type="checkbox"> Saya boleh menulis jawapan Fakta + Huraian + Contoh + Kesan + Kesimpulan.</label>
+      </div>
+    </div>
+  </section>
+
+  <div class="footer">
+    <b>Form 2 KSSM RBT — Bab 2.6 Reka Bentuk Makanan</b><br>
+    <span class="ms">Gunakan halaman ini untuk membaca, mengulang kaji, mencetak dan berlatih menjawab soalan.</span>
+    <span class="en">Use this page to study, revise, print and practise exam answers.</span>
+    <span class="zh">可使用本页面阅读、复习、打印并练习考试作答。</span>
+  </div>
+</main>
+
+<button class="print-btn" onclick="window.print()">🖨️ Cetak / Print</button>
+
+<script>
+  // Reading progress
+  const progress = document.getElementById('progress');
+  addEventListener('scroll', () => {
+    const max = document.documentElement.scrollHeight - innerHeight;
+    progress.style.width = (max > 0 ? (scrollY / max * 100) : 0) + '%';
+  });
+
+  // Language view
+  const buttons = document.querySelectorAll('.lang-controls button');
+  buttons.forEach(btn => btn.addEventListener('click', () => {
+    buttons.forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    document.body.classList.remove('show-ms','show-en','show-zh');
+    const lang = btn.dataset.lang;
+    if (lang !== 'all') document.body.classList.add('show-' + lang);
+  }));
+
+  // Quiz
+  document.querySelectorAll('.quiz-card').forEach(card => {
+    const answer = card.dataset.answer;
+    const feedback = card.querySelector('.feedback');
+    card.querySelectorAll('button').forEach(button => {
+      button.addEventListener('click', () => {
+        card.querySelectorAll('button').forEach(b => b.classList.remove('correct','wrong'));
+        if (button.dataset.choice === answer) {
+          button.classList.add('correct');
+          feedback.textContent = '✅ Betul! / Correct! / 正确！';
+          feedback.style.color = '#21834f';
+        } else {
+          button.classList.add('wrong');
+          card.querySelector(`[data-choice="${answer}"]`).classList.add('correct');
+          feedback.textContent = '❌ Cuba lagi. Jawapan betul telah ditandakan. / Try again. / 再试一次。';
+          feedback.style.color = '#c03952';
+        }
+      });
+    });
+  });
+
+  // Save revision checklist locally
+  const checks = [...document.querySelectorAll('#checklist input[type=checkbox]')];
+  checks.forEach((box, i) => {
+    box.checked = localStorage.getItem('rbt-food-check-' + i) === '1';
+    box.addEventListener('change', () => {
+      localStorage.setItem('rbt-food-check-' + i, box.checked ? '1' : '0');
+    });
+  });
+</script>
+</body>
+</html>
