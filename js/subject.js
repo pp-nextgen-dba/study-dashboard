@@ -1259,6 +1259,7 @@ export const historyData = {
             chapterNum: 30,
             chapter:"Kesultanan Johor Riau",
             chinese:"",
+            resourceUrl:"../history/t2_Sejarah_Bab6_Johor_Riau.html",
             status:"Not Started",
             confidence:0,
             last_updated:"2026-05-22"

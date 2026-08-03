@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sejarah Tingkatan 2 — Bab 6: Kesultanan Johor Riau</title>
+<style>
+:root{
+  --navy:#102a43; --blue:#2878b5; --sky:#dff3ff; --gold:#f4b942;
+  --cream:#fff8e7; --green:#2f855a; --red:#c53030; --purple:#6b46c1;
+  --ink:#1f2937; --muted:#5f6b7a; --card:#ffffff; --bg:#f5f8fc;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:Inter,Segoe UI,Arial,sans-serif;background:var(--bg);color:var(--ink);line-height:1.65}
+header{
+  background:linear-gradient(135deg,#0f2740 0%,#1769aa 55%,#2aa7c9 100%);
+  color:#fff;padding:54px 20px 40px;position:relative;overflow:hidden
+}
+header:after{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:rgba(255,255,255,.08);right:-70px;top:-70px}
+.hero{max-width:1100px;margin:auto;position:relative;z-index:1}
+.badge{display:inline-block;background:var(--gold);color:#3c2b00;padding:6px 12px;border-radius:999px;font-weight:800;font-size:.85rem}
+h1{font-size:clamp(2rem,5vw,4rem);line-height:1.05;margin:.7rem 0}
+.subtitle{max-width:850px;font-size:1.05rem;opacity:.95}
+.controls{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
+button,.btn{
+  border:0;border-radius:12px;padding:11px 15px;font-weight:750;cursor:pointer;
+  background:#fff;color:var(--navy);box-shadow:0 6px 20px rgba(0,0,0,.12)
+}
+button:hover,.btn:hover{transform:translateY(-1px)}
+nav{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.96);backdrop-filter:blur(10px);border-bottom:1px solid #dce6f0}
+nav .wrap{max-width:1100px;margin:auto;display:flex;gap:8px;overflow:auto;padding:10px 16px}
+nav a{white-space:nowrap;text-decoration:none;color:var(--navy);font-weight:750;padding:8px 11px;border-radius:10px}
+nav a:hover{background:var(--sky)}
+main{max-width:1100px;margin:auto;padding:24px 16px 60px}
+section{margin:28px 0}
+.section-title{display:flex;align-items:center;gap:12px;margin-bottom:14px}
+.section-title span{font-size:1.8rem}
+.section-title h2{margin:0;color:var(--navy);font-size:1.75rem}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px}
+.card{background:var(--card);border-radius:18px;padding:18px;box-shadow:0 8px 28px rgba(29,55,83,.08);border:1px solid #e6edf5}
+.card h3{margin-top:0;color:var(--navy)}
+.kicker{font-weight:800;color:var(--blue);text-transform:uppercase;letter-spacing:.06em;font-size:.78rem}
+.tri{display:grid;grid-template-columns:1fr;gap:10px;margin-top:12px}
+.lang{border-left:5px solid var(--blue);background:#f8fbfe;padding:10px 12px;border-radius:10px}
+.lang.en{border-left-color:var(--green)}
+.lang.zh{border-left-color:var(--red)}
+.lang b{display:block;margin-bottom:3px}
+.timeline{position:relative;margin-left:15px;padding-left:24px;border-left:4px solid #9fd1ec}
+.event{position:relative;margin:0 0 18px;background:#fff;padding:14px 16px;border-radius:14px;box-shadow:0 6px 18px rgba(29,55,83,.07)}
+.event:before{content:"";position:absolute;width:14px;height:14px;border-radius:50%;background:var(--gold);left:-33px;top:18px;border:3px solid #fff;box-shadow:0 0 0 2px var(--blue)}
+.year{font-weight:900;color:var(--purple)}
+.memory-wrap{overflow:auto;padding:8px}
+.memory{
+  min-width:900px;display:grid;grid-template-columns:repeat(5,1fr);grid-template-rows:auto auto auto;
+  gap:18px;align-items:center;text-align:center
+}
+.node{padding:14px;border-radius:16px;color:#fff;font-weight:800;box-shadow:0 8px 20px rgba(0,0,0,.12)}
+.center{grid-column:3;grid-row:2;background:linear-gradient(135deg,#102a43,#2878b5);font-size:1.2rem}
+.n1{grid-column:1;grid-row:1;background:#2f855a}.n2{grid-column:2;grid-row:1;background:#6b46c1}
+.n3{grid-column:4;grid-row:1;background:#c05621}.n4{grid-column:5;grid-row:1;background:#c53030}
+.n5{grid-column:1;grid-row:3;background:#3182ce}.n6{grid-column:2;grid-row:3;background:#805ad5}
+.n7{grid-column:4;grid-row:3;background:#d69e2e}.n8{grid-column:5;grid-row:3;background:#2c7a7b}
+.arrow{font-size:2rem;color:#789;align-self:center}
+.callout{background:linear-gradient(120deg,#fff8e7,#fff);border:2px solid #f3d17b;padding:16px;border-radius:16px}
+.exam-table{width:100%;border-collapse:collapse;background:#fff;border-radius:14px;overflow:hidden}
+.exam-table th,.exam-table td{border:1px solid #dce6f0;padding:11px;vertical-align:top}
+.exam-table th{background:#eaf5fc;color:var(--navy);text-align:left}
+.accordion{background:#fff;border-radius:14px;margin-bottom:10px;border:1px solid #e4ebf3}
+.accordion summary{cursor:pointer;font-weight:850;padding:14px 16px;color:var(--navy)}
+.accordion .inside{padding:0 16px 16px}
+.quiz-q{margin-bottom:18px;padding:16px;background:#fff;border-radius:14px;border:1px solid #e2e8f0}
+.option{display:block;margin:8px 0;padding:9px;border-radius:9px;background:#f7fafc}
+.flashcards{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}
+.flash{perspective:1000px;height:170px;cursor:pointer}
+.flash-inner{position:relative;width:100%;height:100%;transition:transform .55s;transform-style:preserve-3d}
+.flash.flipped .flash-inner{transform:rotateY(180deg)}
+.face{position:absolute;inset:0;backface-visibility:hidden;border-radius:16px;padding:16px;display:flex;align-items:center;justify-content:center;text-align:center;box-shadow:0 8px 22px rgba(0,0,0,.1)}
+.front{background:linear-gradient(135deg,#1f5d85,#2aa7c9);color:#fff;font-weight:850}
+.back{background:#fff7d6;color:#4b3b00;transform:rotateY(180deg)}
+.small{font-size:.9rem;color:var(--muted)}
+footer{background:#102a43;color:#d9e8f5;text-align:center;padding:26px}
+.hide-lang .lang.en,.hide-lang .lang.zh{display:none}
+.focus-en .lang:not(.en){display:none}
+.focus-zh .lang:not(.zh){display:none}
+@media (max-width:700px){
+  .exam-table{font-size:.9rem}
+  .memory{min-width:760px}
+}
+@media print{
+  nav,.controls,.quiz-actions{display:none!important}
+  body{background:#fff}
+  .card,.event{box-shadow:none}
+  section{break-inside:avoid}
+}
+</style>
+</head>
+<body>
+<div class="top-nav" style="background:#fff;padding:10px 16px;border-bottom:2px solid #e5e7eb;position:sticky;top:0;z-index:120">
+  <a class="dashboard-link" href="../index.html" style="display:inline-flex;align-items:center;gap:6px;padding:8px 12px;border-radius:8px;background:#1d4ed8;color:#fff;font-size:13px;font-weight:800;text-decoration:none">&larr; Back to Dashboard</a>
+</div>
+<header>
+  <div class="hero">
+    <div class="badge">SEJARAH TINGKATAN 2 • BAB 6</div>
+    <h1>Kesultanan Johor Riau</h1>
+    <p class="subtitle">
+      Nota ulang kaji tiga bahasa, peta ingatan, garis masa, teknik menjawab dan kuiz.
+      Direka untuk membantu murid memahami fakta penting dan mengingatnya dengan cepat.
+    </p>
+    <div class="controls">
+      <button onclick="setLang('all')">🌏 Semua bahasa</button>
+      <button onclick="setLang('ms')">🇲🇾 Bahasa Melayu</button>
+      <button onclick="setLang('en')">🇬🇧 English</button>
+      <button onclick="setLang('zh')">🇨🇳 中文</button>
+      <button onclick="window.print()">🖨️ Cetak / Simpan PDF</button>
+    </div>
+  </div>
+</header>
+
+<nav>
+  <div class="wrap">
+    <a href="#ringkasan">Ringkasan</a>
+    <a href="#pengasasan">Pengasasan</a>
+    <a href="#cabaran">Cabaran</a>
+    <a href="#strategi">Strategi</a>
+    <a href="#gemilang">Kegemilangan</a>
+    <a href="#persuratan">Persuratan</a>
+    <a href="#peta">Peta Ingatan</a>
+    <a href="#teknik">Teknik Menjawab</a>
+    <a href="#kuiz">Kuiz</a>
+  </div>
+</nav>
+
+<main id="content">
+<section id="ringkasan">
+  <div class="section-title"><span>⚡</span><h2>Ringkasan Pantas</h2></div>
+  <div class="grid">
+    <div class="card"><div class="kicker">Asas</div><h3>Warisan Melaka</h3>
+      <div class="tri">
+        <div class="lang ms"><b>BM</b>Kesultanan Johor Riau diasaskan oleh waris Kesultanan Melayu Melaka dan mewarisi sistem pemerintahan, pentadbiran serta wilayah naungannya.</div>
+        <div class="lang en"><b>EN</b>The Johor Riau Sultanate was founded by heirs of the Melaka Sultanate and inherited its government, administration and territories.</div>
+        <div class="lang zh"><b>中</b>柔佛—廖内苏丹国由马六甲苏丹国后裔建立，并继承其统治制度、行政体系与属地。</div>
+      </div>
+    </div>
+    <div class="card"><div class="kicker">Tokoh</div><h3>Raja Ali</h3>
+      <div class="tri">
+        <div class="lang ms"><b>BM</b>Raja Ali, putera Sultan Mahmud Shah dan Tun Fatimah, memakai gelaran Sultan Alauddin Riayat Shah I.</div>
+        <div class="lang en"><b>EN</b>Raja Ali, son of Sultan Mahmud Shah and Tun Fatimah, ruled as Sultan Alauddin Riayat Shah I.</div>
+        <div class="lang zh"><b>中</b>拉惹阿里是苏丹马末沙与敦法蒂玛之子，登基后称阿拉乌丁·利亚雅沙一世。</div>
+      </div>
+    </div>
+    <div class="card"><div class="kicker">Kekuatan</div><h3>Perdagangan & Pelabuhan</h3>
+      <div class="tri">
+        <div class="lang ms"><b>BM</b>Kedudukan strategik, pelabuhan entrepot, kemudahan perdagangan dan sistem naungan menjadikan Johor Riau pusat perdagangan unggul.</div>
+        <div class="lang en"><b>EN</b>Strategic location, entrepot ports, trade facilities and the patronage system made Johor Riau a leading trading centre.</div>
+        <div class="lang zh"><b>中</b>战略位置、转口港、贸易设施与庇护制度，使柔佛—廖内成为卓越商贸中心。</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="pengasasan">
+  <div class="section-title"><span>🏰</span><h2>6.1 Pengasasan Kesultanan Johor Riau</h2></div>
+  <div class="timeline">
+    <div class="event"><span class="year">1528</span><h3>Kota Kara, Pekan Tua</h3>
+      <p><b>Fakta:</b> Sultan Alauddin Riayat Shah I membina pusat pemerintahan di Kota Kara.</p>
+      <p><b>Sebab sesuai:</b> Sungai lebar dan dalam memudahkan kapal keluar masuk; kawasan berbukit menjadi benteng pertahanan.</p>
+    </div>
+    <div class="event"><span class="year">1535</span><h3>Kota Sayong, Sayong Pinang</h3>
+      <p>Kota Kara dimusnahkan Portugis. Baginda berundur ke Kota Sayong.</p>
+      <p><b>Kelebihan:</b> Sungainya sempit, menyebabkan kapal perang musuh sukar melintasinya.</p>
+    </div>
+    <div class="event"><span class="year">1540</span><h3>Kota Batu, Johor Lama</h3>
+      <p>Pusat pemerintahan dipindahkan ke Kota Batu, juga dikenali sebagai Tanjung Batu.</p>
+      <p><b>Kelebihan:</b> Kedudukan strategik di Sungai Johor yang lebar dan dalam memudahkan kapal dagang masuk.</p>
+    </div>
+  </div>
+</section>
+
+<section id="cabaran">
+  <div class="section-title"><span>⚔️</span><h2>Cabaran ke Arah Kegemilangan</h2></div>
+  <div class="grid">
+    <div class="card"><h3>1. Persaingan Johor–Acheh–Portugis</h3>
+      <p>Tiga kuasa bersaing menguasai perdagangan di Selat Melaka. Persaingan ini dikenali sebagai <b>Perang Tiga Segi</b> atau <b>Perang Seratus Tahun</b>.</p>
+      <p>Johor membantu Belanda menewaskan Portugis dan menguasai Melaka pada <b>1641</b>.</p>
+    </div>
+    <div class="card"><h3>2. Perang Johor–Jambi</h3>
+      <p>Johor menuntut wilayah Tungkal daripada Jambi. Krisis dan peperangan berlaku antara <b>1659–1679</b>.</p>
+      <p>Pada Jun 1679, Johor menyerang Jambi; Jambi tewas dan tunduk kepada Johor Riau yang berpusat di Riau.</p>
+    </div>
+    <div class="card"><h3>3. Konflik Pembesar</h3>
+      <p>Konflik berlaku antara Bendahara Tun Habib Abdul Majid dengan Laksamana Tun Abdul Jamil untuk menguasai pemerintahan.</p>
+      <p>Persaingan berakhir apabila Laksamana berundur ke Terengganu dan keturunan Bendahara kembali berpengaruh.</p>
+    </div>
+    <div class="card"><h3>4. Ancaman Raja Kechil</h3>
+      <p>Raja Kechil menyerang Johor pada <b>1718</b>, mendakwa dirinya putera Sultan Mahmud Shah II dan memakai gelaran Sultan Abdul Jalil Rahmat Shah.</p>
+      <p>Raja Sulaiman meminta bantuan Opu Bugis Lima Bersaudara. Raja Kechil kalah pada <b>4 Oktober 1722</b>.</p>
+    </div>
+  </div>
+</section>
+
+<section id="strategi">
+  <div class="section-title"><span>🛡️</span><h2>Strategi Menghadapi Cabaran</h2></div>
+  <details class="accordion" open><summary>1. Pemindahan pusat pemerintahan</summary><div class="inside">
+    <p>Pusat pemerintahan sering dipindahkan mengikut keperluan strategi ketenteraan, pertahanan dan muslihat untuk mengelakkan ancaman Portugis serta Acheh.</p>
+    <p>Semasa pemerintahan Sultan Ibrahim (1677–1685), kegemilangan diteruskan di Kepulauan Riau Lingga yang menjadi pusat baharu.</p>
+  </div></details>
+  <details class="accordion"><summary>2. Membina kota pertahanan</summary><div class="inside">
+    <p>Kota Kara dibina semasa pengasasan kerajaan, terletak di Kuala Sungai Telor.</p>
+    <p>Pagar menggunakan pancang kayu besar setinggi kira-kira <b>40 kaki (12 meter)</b> dan diperkukuh dengan bedil serta meriam.</p>
+  </div></details>
+  <details class="accordion"><summary>3. Menjalinkan hubungan dengan Belanda</summary><div class="inside">
+    <p>Johor menjalin persahabatan dengan Belanda untuk menghadapi Portugis di Melaka dan Acheh.</p>
+    <p>Perjanjian Johor–Belanda ditandatangani pada <b>17 Mei 1608</b> antara Cornelis Matelief de Jonge dan Sultan Alauddin Riayat Shah II di atas kapal <i>Oranje</i>.</p>
+    <p>Johor membantu mengangkut peralatan perang, membina tapak meriam, menggali parit kubu dan menyekat musuh. Portugis di Melaka tewas pada <b>Januari 1641</b>.</p>
+  </div></details>
+</section>
+
+<section id="gemilang">
+  <div class="section-title"><span>🚢</span><h2>6.2 Kegemilangan Kesultanan Johor Riau</h2></div>
+  <div class="grid">
+    <div class="card"><h3>Pusat perdagangan yang unggul</h3>
+      <ul>
+        <li>Pelabuhan Johor Lama, Batu Sawar dan Panchor mudah dimudiki kapal besar.</li>
+        <li>Lokasi di selatan Selat Melaka mengawal laluan pedagang Timur dan Barat.</li>
+        <li>Riau terletak di persimpangan laluan maritim.</li>
+        <li>Pedagang datang dari China, Gujerat, Belanda, Inggeris, Jawa dan Siam.</li>
+        <li>Antara <b>500–600 kapal dagang</b> pelbagai bangsa berlabuh.</li>
+      </ul>
+    </div>
+    <div class="card"><h3>Pusat pengumpulan & pengedaran</h3>
+      <ul>
+        <li>Lada hitam, bijih timah dan emas daripada jajahan serta naungan Johor.</li>
+        <li>Bijih timah dari Klang, Sungai Ujong, Bernam, Bangka dan Sumatera.</li>
+        <li>Lada hitam dari Jambi, emas dari Inderagiri.</li>
+        <li>Barangan tempatan: kelapa kering, kayu gaharu, damar, sagu, pinang, ikan masin, periuk belanga, lilin dan garam.</li>
+        <li>Barangan China: benang emas, sutera putih, tembikar, seramik, kuali besi, teh dan tembaga.</li>
+      </ul>
+    </div>
+    <div class="card"><h3>Pengurusan pelabuhan</h3>
+      <ul>
+        <li>Gudang bawah tanah mengurangkan risiko kebakaran.</li>
+        <li>Pegawai terlatih mengendalikan perdagangan.</li>
+        <li>Syahbandar mengurus jual beli, cukai, ukuran dan berat timbangan.</li>
+        <li>Sistem naungan melindungi pedagang dan memudahkan urusan perdagangan.</li>
+        <li>Orang Laut mengawal pelabuhan, memandu kapal dan menjaga keselamatan perairan.</li>
+        <li>Kemudahan membaiki dan membina kapal disediakan.</li>
+      </ul>
+    </div>
+    <div class="card"><h3>Urusan jual beli</h3>
+      <ul>
+        <li>Perdagangan melalui tukar barang dan mata wang.</li>
+        <li>Mata wang emas: <b>mas</b>; wang perak: <b>kupang</b>; wang timah: <b>katun</b>.</li>
+        <li>Pada akhir abad ke-18, Dolar Sepanyol, Dolar Mexico dan duit Belanda turut digunakan.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="persuratan">
+  <div class="section-title"><span>📜</span><h2>Pusat Persuratan</h2></div>
+  <div class="grid">
+    <div class="card"><h3>Karya Agung</h3>
+      <p><b>Sulalatus Salatin</b> bermaksud <i>Salasilah Raja-Raja / Peraturan Segala Raja-Raja</i>. Naskhah asal dikenali sebagai <i>Hikayat Melayu</i>, disusun dan ditulis semula oleh Tun Seri Lanang pada <b>1612</b>.</p>
+      <p><b>Hikayat Hang Tuah</b> ialah epik kepahlawanan yang menonjolkan ketaatan dan kesetiaan Hang Tuah kepada raja.</p>
+    </div>
+    <div class="card"><h3>Tokoh Persuratan</h3>
+      <p><b>Tun Seri Lanang</b> ialah Tun Muhammad bin Tun Ahmad Paduka Raja, Bendahara Johor pada zaman Sultan Alauddin Riayat Shah II.</p>
+      <p>Beliau menyusun semula <i>Sulalatus Salatin</i> atas titah Raja Abdullah.</p>
+    </div>
+    <div class="card"><h3>Karya Lain</h3>
+      <ul>
+        <li><i>Tajul Salatin / Mahkota Raja-Raja</i> — Bukhari al-Jauhari.</li>
+        <li><i>Tuhfat al-Nafis</i>, <i>Salasilah Melayu dan Bugis</i>, <i>Gurindam Dua Belas</i> — Raja Ali Haji.</li>
+        <li><i>Hikayat Anak Panah Sedasa</i> — Tun Hisap Misai.</li>
+        <li><i>Syair Ungku Puteri</i> — Raja Ahmad.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="peta">
+  <div class="section-title"><span>🧠</span><h2>Peta Ingatan / Memory Map / 记忆图</h2></div>
+  <div class="callout"><b>Kata kunci utama:</b> Warisan Melaka → Cabaran → Strategi → Perdagangan → Pelabuhan → Persuratan.</div>
+  <div class="memory-wrap">
+    <div class="memory">
+      <div class="node n1">Pengasasan<br>1528</div>
+      <div class="node n2">Kota Kara → Sayong → Kota Batu</div>
+      <div class="node n3">Perang Tiga Segi</div>
+      <div class="node n4">Raja Kechil<br>1718–1722</div>
+      <div class="node center">KESULTANAN<br>JOHOR RIAU</div>
+      <div class="node n5">Hubungan Belanda<br>1608 / 1641</div>
+      <div class="node n6">Pelabuhan Entrepot</div>
+      <div class="node n7">Sistem Naungan<br>Syahbandar<br>Orang Laut</div>
+      <div class="node n8">Sulalatus Salatin<br>Tun Seri Lanang</div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="section-title"><span>🃏</span><h2>Kad Imbas</h2></div>
+  <p class="small">Klik kad untuk melihat jawapan.</p>
+  <div class="flashcards">
+    <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="face front">Siapakah pengasas Kesultanan Johor Riau?</div><div class="face back">Raja Ali, bergelar Sultan Alauddin Riayat Shah I.</div></div></div>
+    <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="face front">Apakah Perang Tiga Segi?</div><div class="face back">Persaingan Johor, Acheh dan Portugis untuk menguasai perdagangan Selat Melaka.</div></div></div>
+    <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="face front">Mengapa Kota Sayong lebih selamat?</div><div class="face back">Sungainya sempit, menyukarkan kapal perang musuh melintas.</div></div></div>
+    <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="face front">Siapakah tokoh Sulalatus Salatin?</div><div class="face back">Tun Seri Lanang, yang menyusun dan menulis semula karya itu pada 1612.</div></div></div>
+  </div>
+</section>
+
+<section id="teknik">
+  <div class="section-title"><span>✍️</span><h2>Teknik Menjawab Soalan Peperiksaan</h2></div>
+  <table class="exam-table">
+    <thead><tr><th>Bahagian</th><th>Fungsi</th><th>Contoh jawapan</th></tr></thead>
+    <tbody>
+      <tr><td><b>Fakta</b></td><td>Nyatakan isi utama.</td><td>Johor Riau menjadi pusat perdagangan unggul kerana kedudukannya strategik.</td></tr>
+      <tr><td><b>Huraian</b></td><td>Terangkan bagaimana atau mengapa.</td><td>Pelabuhannya berada di selatan Selat Melaka dan dapat mengawal laluan pedagang Timur dan Barat.</td></tr>
+      <tr><td><b>Contoh</b></td><td>Beri bukti khusus.</td><td>Contohnya, pedagang dari China, Gujerat, Belanda, Inggeris, Jawa dan Siam datang berdagang.</td></tr>
+      <tr><td><b>Kesan</b></td><td>Nyatakan hasil atau akibat.</td><td>Kesannya, Johor Riau berkembang sebagai pelabuhan entrepot dan pusat pengumpulan barangan.</td></tr>
+      <tr><td><b>Kesimpulan</b></td><td>Hubungkan dengan nilai atau iktibar.</td><td>Kesimpulannya, kebijaksanaan pemerintah dan pengurusan yang sistematik penting untuk kemajuan negara.</td></tr>
+    </tbody>
+  </table>
+  <div class="callout" style="margin-top:14px">
+    <b>Formula mudah:</b> F + H + C + K<br>
+    <b>Fakta + Huraian + Contoh + Kesan.</b>
+  </div>
+</section>
+
+<section>
+  <div class="section-title"><span>⭐</span><h2>Soalan KBAT & Jawapan Model</h2></div>
+  <details class="accordion"><summary>Mengapakah pemerintah Johor Riau sering memindahkan pusat pemerintahan?</summary><div class="inside">
+    <p><b>Jawapan model:</b> Pemerintah Johor Riau sering memindahkan pusat pemerintahan untuk mengelakkan serangan musuh dan menyesuaikan kedudukan dengan strategi pertahanan. Contohnya, pusat pemerintahan dipindahkan dari Kota Kara ke Kota Sayong selepas Kota Kara dimusnahkan Portugis. Kota Sayong lebih selamat kerana sungainya sempit dan sukar dilalui kapal perang. Kesannya, kerajaan dapat meneruskan pemerintahan dan mempertahankan kedaulatannya.</p>
+  </div></details>
+  <details class="accordion"><summary>Apakah iktibar daripada kejayaan Johor Riau sebagai pusat perdagangan?</summary><div class="inside">
+    <p><b>Jawapan model:</b> Kita perlu mempunyai kepimpinan yang bijak, sistem pentadbiran yang teratur dan hubungan baik dengan negara lain. Kemudahan pelabuhan, keselamatan perairan dan pengurusan perdagangan yang cekap dapat menarik pedagang. Iktibarnya, pembangunan ekonomi memerlukan perancangan strategik, kestabilan dan kerjasama.</p>
+  </div></details>
+</section>
+
+<section id="kuiz">
+  <div class="section-title"><span>🎯</span><h2>Kuiz Kendiri</h2></div>
+  <form id="quizForm">
+    <div class="quiz-q"><b>1. Siapakah pengasas Kesultanan Johor Riau?</b>
+      <label class="option"><input type="radio" name="q1" value="a"> Tun Seri Lanang</label>
+      <label class="option"><input type="radio" name="q1" value="b"> Raja Ali</label>
+      <label class="option"><input type="radio" name="q1" value="c"> Raja Kechil</label>
+    </div>
+    <div class="quiz-q"><b>2. Kota Kara dibina pada tahun...</b>
+      <label class="option"><input type="radio" name="q2" value="a"> 1528</label>
+      <label class="option"><input type="radio" name="q2" value="b"> 1641</label>
+      <label class="option"><input type="radio" name="q2" value="c"> 1718</label>
+    </div>
+    <div class="quiz-q"><b>3. Apakah fungsi Syahbandar?</b>
+      <label class="option"><input type="radio" name="q3" value="a"> Mengarang karya agung</label>
+      <label class="option"><input type="radio" name="q3" value="b"> Mengurus jual beli, cukai, ukuran dan timbangan</label>
+      <label class="option"><input type="radio" name="q3" value="c"> Menjadi Sultan</label>
+    </div>
+    <div class="quiz-q"><b>4. Siapakah yang menyusun semula Sulalatus Salatin?</b>
+      <label class="option"><input type="radio" name="q4" value="a"> Raja Ali Haji</label>
+      <label class="option"><input type="radio" name="q4" value="b"> Tun Seri Lanang</label>
+      <label class="option"><input type="radio" name="q4" value="c"> Opu Bugis Lima Bersaudara</label>
+    </div>
+    <div class="quiz-actions">
+      <button type="button" onclick="checkQuiz()">Semak markah</button>
+      <span id="score" style="margin-left:12px;font-weight:900"></span>
+    </div>
+  </form>
+</section>
+</main>
+
+<footer>
+  Dibina sebagai bahan ulang kaji Bab 6 Sejarah Tingkatan 2 • Bahasa Melayu • English • 中文
+</footer>
+
+<script>
+function setLang(lang){
+  const c=document.getElementById('content');
+  c.classList.remove('hide-lang','focus-en','focus-zh');
+  if(lang==='ms') c.classList.add('hide-lang');
+  if(lang==='en') c.classList.add('focus-en');
+  if(lang==='zh') c.classList.add('focus-zh');
+}
+function checkQuiz(){
+  const ans={q1:'b',q2:'a',q3:'b',q4:'b'};
+  let score=0;
+  for(const q in ans){
+    const v=document.querySelector('input[name="'+q+'"]:checked');
+    if(v && v.value===ans[q]) score++;
+  }
+  const el=document.getElementById('score');
+  el.textContent='Markah: '+score+'/4 '+(score===4?'🏆 Cemerlang!':score>=3?'👍 Bagus!':'📘 Cuba lagi.');
+}
+</script>
+</body>
+</html>
