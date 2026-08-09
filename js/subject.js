@@ -3571,7 +3571,8 @@ export const moralData = {
             status:"Not Started",
             confidence:0,
             last_updated:"2026-06-21",
-            resourceUrl:"../moral/t2_moral_unit12.html"
+            resourceUrl:"../moral/t2_moral_unit12.html",
+            resourceUrl2:"../moral/t2_Unit12_PersediaanPeperiksaanAkhir.html"
         },
 
         {

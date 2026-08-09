@@ -1,4 +1,4 @@
-const CACHE = "study-dashboard-v31";
+const CACHE = "study-dashboard-v32";
 
 const STATIC_ASSETS = [
     "/index.html",
@@ -80,6 +80,7 @@ const STATIC_ASSETS = [
     "/moral/t2_moral_unit15.html",
     "/moral/t2_Unit15_HakAsasiManusia.html",
     "/moral/t2_moral_unit12.html",
+    "/moral/t2_Unit12_PersediaanPeperiksaanAkhir.html",
     "/moral/t2_moral_unit7_masyarakat_penyayang_trilingual.html",
     "/moral/form2_moral_unit8_public_services_trilingual.html",
     "/story/inertia-growth-notes.html",

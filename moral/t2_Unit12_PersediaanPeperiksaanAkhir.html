@@ -1,0 +1,1070 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Unit 12 · Nota Persediaan Peperiksaan Akhir — Etika dan Undang-undang Siber</title>
+<style>
+  :root{
+    --ink:#1c2a3a;
+    --paper:#f6f1e6;
+    --paper2:#eee6d4;
+    --navy:#1f3a5f;
+    --navy-deep:#142840;
+    --brass:#a8762f;
+    --brass-light:#c99a4f;
+    --rule:#cdbf9e;
+    --fact:#1f5c4a;
+    --explain:#8a4a1f;
+    --value:#5b5390;
+    --good:#3c6e5e;
+    --bad:#9c4a5c;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Iowan Old Style','Songti SC','Noto Serif SC',Georgia,serif;
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+  .zh{font-family:'Songti SC','Noto Serif SC','PingFang SC',serif;}
+  .label{
+    font-family:'Helvetica Neue',Arial,sans-serif;
+    letter-spacing:.12em;
+    text-transform:uppercase;
+    font-size:.68rem;
+    font-weight:600;
+  }
+
+  /* ===== Masthead ===== */
+  .masthead{
+    background:linear-gradient(180deg,var(--navy-deep),var(--navy));
+    color:var(--paper);
+    padding:2.6rem 1.4rem 2rem;
+    position:relative;
+    overflow:hidden;
+    border-bottom:6px solid var(--brass);
+  }
+  .masthead::before{
+    content:"";
+    position:absolute; inset:0;
+    background-image:
+      repeating-linear-gradient(0deg, rgba(255,255,255,.035) 0 1px, transparent 1px 26px);
+    pointer-events:none;
+  }
+  .seal{width:64px;height:64px;margin:0 auto 1rem;position:relative;}
+  .seal svg{width:100%;height:100%;}
+  .mast-eyebrow{text-align:center;color:var(--brass-light);margin-bottom:.5rem;}
+  .mast-unit{
+    text-align:center;font-size:.95rem;color:#cdd9e6;
+    letter-spacing:.18em;text-transform:uppercase;margin-bottom:.3rem;
+  }
+  h1.mast-title{text-align:center;font-size:1.7rem;margin:.2rem 0 .15rem;font-weight:700;letter-spacing:.01em;}
+  .mast-title .zh{display:block;font-size:1.1rem;color:var(--brass-light);margin-top:.35rem;font-weight:500;letter-spacing:.04em;}
+  .mast-title .en{display:block;font-size:.92rem;font-style:italic;color:#cdd9e6;margin-top:.3rem;font-weight:400;}
+  .mast-sub{text-align:center;font-size:.85rem;color:#cdd9e6;margin-top:.9rem;}
+  .mast-sub .zh{display:block;font-size:.78rem;color:var(--brass-light);margin-top:.2rem;}
+  .mast-sub .en{display:block;font-size:.78rem;font-style:italic;color:#9fb0c4;margin-top:.15rem;}
+
+  /* ===== Sticky lang toggle ===== */
+  .langbar{
+    position:sticky; top:0; z-index:50;
+    background:var(--paper2);
+    border-bottom:1px solid var(--rule);
+    padding:.55rem .9rem;
+    display:flex; gap:.4rem; justify-content:center;
+    font-family:'Helvetica Neue',Arial,sans-serif;
+  }
+  .langbar button{
+    border:1px solid var(--rule);background:var(--paper);color:var(--ink);
+    padding:.35rem .85rem;font-size:.75rem;letter-spacing:.06em;
+    border-radius:3px;cursor:pointer;font-weight:600;
+  }
+  .langbar button.active{background:var(--navy);color:var(--paper);border-color:var(--navy);}
+
+  .wrap{max-width:880px;margin:0 auto;padding:0 1.1rem 4rem;}
+  section{margin-top:2.6rem;}
+
+  .section-head{
+    display:flex; align-items:baseline; gap:.6rem;
+    margin-bottom:.9rem;
+    border-bottom:2px solid var(--ink);
+    padding-bottom:.45rem;
+    flex-wrap:wrap;
+  }
+  .section-head .num{
+    font-family:'Helvetica Neue',Arial,sans-serif;font-size:.75rem;font-weight:700;
+    color:var(--brass);border:1px solid var(--brass);border-radius:50%;
+    width:1.5rem;height:1.5rem;display:flex;align-items:center;justify-content:center;flex-shrink:0;
+  }
+  .section-head h2{font-size:1.15rem;margin:0;font-weight:700;}
+  .section-head h2 .zh{display:block;font-size:.78rem;font-weight:400;color:#6b6354;margin-top:.1rem;}
+  .section-head .sub{
+    font-family:'Helvetica Neue',Arial,sans-serif;font-size:.78rem;color:#6b6354;
+    margin-left:auto;white-space:nowrap;font-style:italic;
+  }
+
+  /* ===== Toolkit (formula + linking words) ===== */
+  .toolkit-grid{display:grid;grid-template-columns:1fr 1fr;gap:.9rem;}
+  @media (max-width:620px){.toolkit-grid{grid-template-columns:1fr;}}
+  .toolkit-card{
+    border:1px solid var(--brass);border-radius:8px;background:var(--paper2);
+    padding:.9rem 1rem;
+  }
+  .toolkit-card .thead{
+    font-family:'Helvetica Neue',Arial,sans-serif;font-weight:700;font-size:.78rem;
+    color:var(--brass);letter-spacing:.06em;text-transform:uppercase;margin-bottom:.5rem;
+  }
+  .toolkit-card .formula{
+    font-size:1rem;font-weight:700;color:var(--navy);margin-bottom:.6rem;
+    background:var(--paper);border-radius:6px;padding:.4rem .6rem;text-align:center;
+  }
+  .toolkit-card ul{margin:0;padding-left:1.1rem;font-size:.84rem;}
+  .toolkit-card li{margin-bottom:.4rem;}
+  .toolkit-card li .zh,.toolkit-card li .en{display:block;font-size:.74rem;color:#6b6354;margin-top:.08rem;}
+  .toolkit-card li .en{font-style:italic;color:#8a8270;}
+
+  /* ===== Question-type guide ===== */
+  .qtype-grid{display:grid;grid-template-columns:1fr 1fr;gap:.7rem;}
+  @media (max-width:620px){.qtype-grid{grid-template-columns:1fr;}}
+  .qtype-card{border:1px solid var(--rule);border-radius:8px;background:var(--paper);padding:.75rem .9rem;}
+  .qtype-card .qhead{font-family:'Helvetica Neue',Arial,sans-serif;font-weight:700;font-size:.78rem;color:var(--navy);margin-bottom:.35rem;}
+  .qtype-card .qhead .zh{display:block;font-weight:400;font-size:.72rem;color:#6b6354;margin-top:.1rem;}
+  .qtype-card p{margin:.3rem 0;font-size:.83rem;}
+  .qtype-card .zh{display:block;color:#6b6354;font-size:.74rem;margin-top:.1rem;}
+  .qtype-card .en{display:block;color:#8a8270;font-size:.74rem;font-style:italic;margin-top:.05rem;}
+  .qtype-card .marks-tip{margin-top:.4rem;padding-top:.4rem;border-top:1px dashed var(--rule);font-size:.76rem;color:var(--brass);font-weight:700;font-family:'Helvetica Neue',Arial,sans-serif;}
+
+  /* ===== Fact/Explanation cards ===== */
+  .fh-card{
+    border:1px solid var(--rule);border-radius:8px;overflow:hidden;margin-bottom:.7rem;background:var(--paper);
+  }
+  .fh-card .fh-title{
+    padding:.55rem .85rem;font-family:'Helvetica Neue',Arial,sans-serif;font-weight:700;
+    font-size:.82rem;color:#fff;background:var(--navy);
+  }
+  .fh-card .fh-title .zh{font-weight:500;opacity:.9;font-size:.74rem;display:block;margin-top:.1rem;}
+  .fh-card .fh-title .en{font-weight:400;font-style:italic;opacity:.85;font-size:.74rem;display:block;margin-top:.05rem;}
+  .fh-row{display:flex;gap:.6rem;padding:.55rem .9rem;border-top:1px dashed var(--rule);align-items:flex-start;}
+  .fh-row:first-of-type{border-top:none;}
+  .fh-tag{
+    font-family:'Helvetica Neue',Arial,sans-serif;font-weight:700;color:#fff;
+    border-radius:50%;width:1.5rem;height:1.5rem;flex-shrink:0;
+    display:flex;align-items:center;justify-content:center;font-size:.72rem;
+  }
+  .fh-row.f .fh-tag{background:var(--fact);}
+  .fh-row.h .fh-tag{background:var(--explain);}
+  .fh-text{font-size:.87rem;}
+  .fh-text .zh{display:block;color:#6b6354;font-size:.78rem;margin-top:.2rem;}
+  .fh-text .en{display:block;color:#8a8270;font-size:.78rem;font-style:italic;margin-top:.15rem;}
+
+  /* ===== Grid wrapper for multiple fh-cards ===== */
+  .fh-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:0 .7rem;}
+  .fh-grid .fh-card{margin-bottom:.7rem;}
+
+  /* ===== Value grouping ===== */
+  .group-label{font-family:'Helvetica Neue',Arial,sans-serif;font-weight:700;font-size:.74rem;color:var(--value);text-transform:uppercase;letter-spacing:.06em;margin:1rem 0 .5rem;}
+  .group-label:first-child{margin-top:0;}
+
+  /* ===== Hafalan (memory aid) box ===== */
+  .hafalan-box{
+    background:var(--paper2);border-left:4px solid var(--brass);
+    padding:.7rem .9rem;border-radius:0 6px 6px 0;font-size:.88rem;margin-top:.8rem;
+  }
+  .hafalan-box .lbl{display:block;margin-bottom:.35rem;color:var(--brass);}
+  .hafalan-box .main{font-weight:700;color:var(--navy);}
+  .hafalan-box .zh{display:block;color:#6b6354;font-size:.78rem;margin-top:.25rem;}
+  .hafalan-box .en{display:block;color:#8a8270;font-size:.78rem;font-style:italic;margin-top:.1rem;}
+
+  /* ===== Do / Don't ===== */
+  .dodont-grid{display:grid;grid-template-columns:1fr 1fr;gap:.9rem;}
+  @media (max-width:620px){.dodont-grid{grid-template-columns:1fr;}}
+  .dodont-col .dhead{font-family:'Helvetica Neue',Arial,sans-serif;font-weight:700;font-size:.8rem;margin-bottom:.5rem;text-transform:uppercase;letter-spacing:.05em;}
+  .dodont-col.do .dhead{color:var(--good);}
+  .dodont-col.dont .dhead{color:var(--bad);}
+  .dodont-col .fh-card{border-width:1px;}
+  .dodont-col.do .fh-title{background:var(--good);}
+  .dodont-col.dont .fh-title{background:var(--bad);}
+
+  /* ===== KBAT / formula template box ===== */
+  .kbat-box{
+    border:1px solid var(--navy);border-radius:8px;background:var(--paper2);padding:.9rem 1rem;margin-bottom:.7rem;
+  }
+  .kbat-box .kt-label{font-family:'Helvetica Neue',Arial,sans-serif;font-weight:700;font-size:.75rem;color:var(--navy);text-transform:uppercase;letter-spacing:.06em;margin-bottom:.4rem;}
+  .kbat-box .kt-text{font-size:.88rem;font-style:italic;}
+  .kbat-box .kt-text .zh{display:block;font-style:normal;color:#6b6354;font-size:.78rem;margin-top:.2rem;}
+  .kbat-box .kt-text .en{display:block;color:#8a8270;font-size:.78rem;margin-top:.15rem;}
+  .kbat-box .kt-example{margin-top:.6rem;padding-top:.6rem;border-top:1px dashed var(--rule);font-size:.85rem;font-style:normal;}
+  .kbat-box .kt-example .lbl{font-family:'Helvetica Neue',Arial,sans-serif;font-weight:700;font-size:.7rem;color:var(--brass);text-transform:uppercase;letter-spacing:.05em;display:block;margin-bottom:.25rem;}
+
+  /* ===== Q&A ===== */
+  .qa-block{
+    border:1px solid var(--rule);border-radius:8px;background:var(--paper);padding:.8rem .9rem;margin-bottom:.6rem;
+  }
+  .qa-q{
+    font-family:'Helvetica Neue',Arial,sans-serif;font-weight:700;font-size:.82rem;
+    color:var(--navy);margin-bottom:.3rem;display:flex;flex-wrap:wrap;gap:.4rem;align-items:baseline;
+  }
+  .qa-q .zh,.qa-q .en{display:block;font-weight:500;font-size:.74rem;color:#6b6354;margin-top:.15rem;width:100%;}
+  .qa-q .en{font-style:italic;color:#8a8270;}
+  .qtype-tag{
+    font-family:'Helvetica Neue',Arial,sans-serif;font-weight:700;font-size:.64rem;text-transform:uppercase;letter-spacing:.04em;
+    border-radius:999px;padding:.15rem .55rem;margin-left:auto;flex-shrink:0;
+  }
+  .qtype-tag.list{background:#e6eef7;color:var(--navy);}
+  .qtype-tag.fh{background:#fbeee0;color:var(--explain);}
+  .qa-ans-list{
+    background:var(--paper2);border-radius:6px;padding:.6rem .8rem;font-size:.85rem;margin-top:.4rem;
+  }
+  .qa-ans-list .zh,.qa-ans-list .en{display:block;font-size:.74rem;color:#8a8270;margin-top:.2rem;}
+  .qa-ans-list .en{font-style:italic;}
+  .qa-fh{margin-top:.5rem;border:1px solid var(--rule);border-radius:6px;overflow:hidden;}
+  .qa-fh .fh-row{background:var(--paper2);}
+  .qa-tip{margin-top:.5rem;padding-top:.5rem;border-top:1px dashed var(--rule);font-size:.78rem;color:var(--brass);}
+  .qa-tip .zh,.qa-tip .en{display:block;color:#8a8270;font-size:.72rem;margin-top:.1rem;}
+
+  /* ===== Answer-key tables ===== */
+  .ans-table-wrap{overflow-x:auto;border:1px solid var(--rule);border-radius:8px;}
+  table.ans-table{width:100%;border-collapse:collapse;font-size:.8rem;background:var(--paper);}
+  table.ans-table th{background:var(--navy);color:var(--paper);padding:.5rem .6rem;text-align:left;font-family:'Helvetica Neue',Arial,sans-serif;font-weight:700;font-size:.72rem;text-transform:uppercase;letter-spacing:.04em;}
+  table.ans-table td{padding:.5rem .6rem;border-top:1px solid var(--rule);vertical-align:top;}
+  table.ans-table tr:nth-child(even) td{background:var(--paper2);}
+  .table-title{font-family:'Helvetica Neue',Arial,sans-serif;font-weight:700;font-size:.78rem;color:var(--brass);margin:1rem 0 .5rem;text-transform:uppercase;letter-spacing:.05em;}
+  .table-title:first-child{margin-top:0;}
+
+  /* ===== Checklist ===== */
+  .check-grid{display:flex;flex-direction:column;gap:.5rem;}
+  .check-item{display:flex;gap:.6rem;align-items:flex-start;border:1px solid var(--brass);border-radius:7px;padding:.55rem .75rem;background:var(--paper2);}
+  .check-item .cn{
+    font-family:'Helvetica Neue',Arial,sans-serif;font-weight:700;color:#fff;
+    background:var(--brass);border-radius:50%;width:1.4rem;height:1.4rem;
+    display:flex;align-items:center;justify-content:center;font-size:.72rem;flex-shrink:0;
+  }
+  .check-item .ct{font-size:.85rem;}
+  .check-item .ct .zh{display:block;color:#6b6354;font-size:.76rem;margin-top:.1rem;}
+  .check-item .ct .en{display:block;color:#8a8270;font-size:.76rem;font-style:italic;margin-top:.05rem;}
+
+  /* ===== Golden sentence ===== */
+  .golden-box{
+    background:linear-gradient(135deg,var(--navy),var(--navy-deep));color:var(--paper);
+    border-radius:10px;padding:1.1rem 1.2rem;margin-top:.8rem;
+    box-shadow:0 3px 0 var(--brass);
+  }
+  .golden-box .glabel{font-family:'Helvetica Neue',Arial,sans-serif;font-weight:700;font-size:.72rem;color:var(--brass-light);text-transform:uppercase;letter-spacing:.08em;margin-bottom:.5rem;}
+  .golden-box .gtext{font-size:.92rem;}
+  .golden-box .zh{display:block;color:var(--brass-light);font-size:.82rem;margin-top:.4rem;}
+  .golden-box .en{display:block;color:#cdd9e6;font-size:.8rem;font-style:italic;margin-top:.3rem;}
+
+  .u-list{margin:.7rem 0 0;padding-left:1.2rem;font-size:.88rem;}
+  .u-list li{margin-bottom:.5rem;}
+  .u-list li .zh{display:block;color:#6b6354;font-size:.78rem;margin-top:.1rem;}
+  .u-list li .en{display:block;color:#8a8270;font-size:.78rem;font-style:italic;margin-top:.05rem;}
+
+  footer{
+    text-align:center;margin-top:3rem;padding-top:1.2rem;border-top:1px solid var(--rule);
+    font-family:'Helvetica Neue',Arial,sans-serif;font-size:.72rem;color:#9a9180;
+  }
+
+  body.hide-en .en{display:none !important;}
+  body.hide-zh .zh{display:none !important;}
+</style>
+</head>
+<body>
+
+<div class="top-nav" style="background:#fff;padding:10px 16px;border-bottom:2px solid #e5e7eb;position:sticky;top:0;z-index:120">
+  <a class="dashboard-link" href="../index.html" style="display:inline-flex;align-items:center;gap:6px;padding:8px 12px;border-radius:8px;background:#1d4ed8;color:#fff;font-size:13px;font-weight:800;text-decoration:none">&larr; Back to Dashboard</a>
+</div>
+
+<header class="masthead">
+  <div class="seal">
+    <svg viewBox="0 0 64 64" fill="none">
+      <circle cx="32" cy="32" r="30" stroke="#c99a4f" stroke-width="2"/>
+      <rect x="18" y="24" width="28" height="20" rx="3" stroke="#c99a4f" stroke-width="2"/>
+      <path d="M18 26 L32 36 L46 26" stroke="#c99a4f" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  </div>
+  <div class="mast-eyebrow label">KSSM Moral &middot; Tingkatan 2 / Form 2 / 表 2</div>
+  <div class="mast-unit">Unit 12</div>
+  <h1 class="mast-title">
+    Nota Persediaan Peperiksaan Akhir
+    <span class="zh">期末考试准备笔记</span>
+    <span class="en">Final Exam Preparation Notes</span>
+  </h1>
+  <div class="mast-sub">
+    Etika dan Undang-undang Siber
+    <span class="zh">网络伦理与网络法律</span>
+    <span class="en">Cyber Ethics and Cyber Law</span>
+  </div>
+</header>
+
+<div class="langbar">
+  <button id="btn-en" class="active" onclick="setLang('en')">EN</button>
+  <button id="btn-zh" class="active" onclick="setLang('zh')">中文</button>
+</div>
+
+<div class="wrap">
+
+  <!-- TOOLKIT -->
+  <section style="margin-top:1.6rem;">
+    <div class="section-head">
+      <div class="num">&#128295;</div>
+      <h2>Formula &amp; Kata Penyambung <span class="zh">作答公式与连接词</span></h2>
+      <div class="sub en">Answer Formula &amp; Linking Words</div>
+    </div>
+    <div class="toolkit-grid">
+      <div class="toolkit-card">
+        <div class="thead">Formula Jawapan <span class="en">/ Answer Formula /</span> <span class="zh">作答公式</span></div>
+        <div class="formula">Fakta (F) + Huraian (H) = 2 markah</div>
+        <ul>
+          <li><b>Fakta (F):</b> Isi utama yang menjawab soalan.
+            <span class="en">The main point answering the question.</span>
+            <span class="zh">直接回答问题的主要内容。</span>
+          </li>
+          <li><b>Huraian (H):</b> Sebab, cara, contoh atau kesan fakta tersebut.
+            <span class="en">The reason, method, example or effect.</span>
+            <span class="zh">解释该要点的原因、方法、例子或影响。</span>
+          </li>
+        </ul>
+      </div>
+      <div class="toolkit-card">
+        <div class="thead">Kata Penyambung <span class="en">/ Linking Words /</span> <span class="zh">连接词</span></div>
+        <ul>
+          <li>Hal ini demikian kerana&hellip;
+            <span class="en">This is because&hellip;</span>
+            <span class="zh">这是因为……</span>
+          </li>
+          <li>Contohnya&hellip;
+            <span class="en">For example&hellip;</span>
+            <span class="zh">例如……</span>
+          </li>
+          <li>Kesannya&hellip;
+            <span class="en">As a result&hellip;</span>
+            <span class="zh">结果……</span>
+          </li>
+          <li>Sekali gus&hellip;
+            <span class="en">At the same time&hellip;</span>
+            <span class="zh">同时……</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- PANDUAN JENIS SOALAN -->
+  <section>
+    <div class="section-head">
+      <div class="num">&#128214;</div>
+      <h2>Panduan Menjawab: Kenali Jenis Soalan <span class="zh">作答指南：认清题型</span></h2>
+      <div class="sub en">How to Answer: Know the Question Type</div>
+    </div>
+    <div class="qtype-grid">
+      <div class="qtype-card">
+        <div class="qhead">Nyatakan / Senaraikan <span class="zh">列出 / 说明</span></div>
+        <p>Setiap fakta = 1 markah. <b>Tidak perlu huraian</b> &mdash; senaraikan fakta sahaja.
+          <span class="en">Each fact = 1 mark. No explanation needed &mdash; just list the facts.</span>
+          <span class="zh">每个要点 = 1分。无需说明，只需列出要点。</span>
+        </p>
+        <div class="marks-tip">Jika soalan minta "2 fakta" &rarr; tulis 2 fakta sahaja.</div>
+      </div>
+      <div class="qtype-card">
+        <div class="qhead">Jelaskan / Terangkan / Huraikan <span class="zh">解释 / 说明理由</span></div>
+        <p>Gunakan <b>Fakta + Huraian = 2 markah</b> bagi setiap isi.
+          <span class="en">Use Fact + Explanation = 2 marks for each point.</span>
+          <span class="zh">每个要点使用"要点+说明 = 2分"的格式。</span>
+        </p>
+        <div class="marks-tip">Jika soalan bernilai 4 markah &rarr; tulis 2 pasang Fakta+Huraian.</div>
+      </div>
+      <div class="qtype-card">
+        <div class="qhead">Pada pendapat anda&hellip; (KBAT) <span class="zh">你认为……（高层次思维）</span></div>
+        <p>Gunakan templat: <b>Tindakan + Sebab + Kesan</b>.
+          <span class="en">Use the template: Action + Reason + Effect.</span>
+          <span class="zh">使用模板：行动+原因+影响。</span>
+        </p>
+        <div class="marks-tip">Lihat Bahagian 8 untuk templat penuh.</div>
+      </div>
+      <div class="qtype-card">
+        <div class="qhead">Apakah nilai yang sesuai? <span class="zh">什么价值观合适？</span></div>
+        <p>Nyatakan <b>nama nilai</b>, kemudian satu ayat sokongan yang menunjukkan nilai itu.
+          <span class="en">State the value name, then one supporting sentence showing that value.</span>
+          <span class="zh">说出价值观名称，再用一句话说明该价值观的体现。</span>
+        </p>
+        <div class="marks-tip">Lihat Bahagian 4 untuk senarai nilai Unit 12.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 1. KONSEP ALAM SIBER -->
+  <section>
+    <div class="section-head">
+      <div class="num">1</div>
+      <h2>Konsep Alam Siber <span class="zh">网络空间的概念</span></h2>
+      <div class="sub en">Cyberspace Concept</div>
+    </div>
+    <div class="fh-card">
+      <div class="fh-row f">
+        <div class="fh-tag">F</div>
+        <div class="fh-text">
+          Alam siber merujuk kepada penggunaan laman web, media sosial, Internet, e-mel dan platform digital lain.
+          <span class="en">Cyberspace refers to websites, social media, Internet, email and other digital platforms.</span>
+          <span class="zh">网络空间指网站、社交媒体、互联网、电邮和其他数码平台。</span>
+        </div>
+      </div>
+      <div class="fh-row h">
+        <div class="fh-tag">H</div>
+        <div class="fh-text">
+          Oleh itu, remaja perlu berhemah, rasional dan bertanggungjawab semasa menggunakan alam siber supaya tidak disalahgunakan.
+          <span class="en">Therefore, teenagers must be courteous, rational and responsible when using cyberspace so it is not misused.</span>
+          <span class="zh">因此，青少年使用网络时必须有礼、理性和负责任，以免滥用网络。</span>
+        </div>
+      </div>
+    </div>
+    <div class="hafalan-box">
+      <span class="lbl">Hafalan <span class="en">/ Memory Aid /</span> <span class="zh">记忆法</span></span>
+      <span class="main">Alam Siber = Web + Media Sosial + Internet + E-mel</span>
+      <span class="zh">网络空间 = 网站 + 社交媒体 + 互联网 + 电邮</span>
+    </div>
+  </section>
+
+  <!-- 2. ETIKA SIBER -->
+  <section>
+    <div class="section-head">
+      <div class="num">2</div>
+      <h2>Etika Siber <span class="zh">网络礼仪</span></h2>
+      <div class="sub en">Cyber Ethics</div>
+    </div>
+
+    <div class="fh-card">
+      <div class="fh-title">1. Tidak Memuat Naik Kandungan Tidak Senonoh <span class="zh">不上传不雅内容</span></div>
+      <div class="fh-row f"><div class="fh-tag">F</div><div class="fh-text">Pengguna tidak boleh memuat naik gambar atau komen yang tidak senonoh.<span class="en">Users must not upload indecent photos or comments.</span><span class="zh">用户不能上传不雅的照片或言论。</span></div></div>
+      <div class="fh-row h"><div class="fh-tag">H</div><div class="fh-text">Kandungan sedemikian boleh mencemarkan imej diri dan menyinggung perasaan orang lain yang melihatnya.<span class="en">Such content can tarnish one&rsquo;s image and offend those who see it.</span><span class="zh">这类内容会损害个人形象，并冒犯看到的人。</span></div></div>
+    </div>
+
+    <div class="fh-card">
+      <div class="fh-title">2. Tidak Menghina Orang Lain <span class="zh">不侮辱他人</span></div>
+      <div class="fh-row f"><div class="fh-tag">F</div><div class="fh-text">Pengguna tidak boleh menghina dan memburuk-burukkan orang lain.<span class="en">Users must not insult or badmouth others.</span><span class="zh">用户不能侮辱或诋毁他人。</span></div></div>
+      <div class="fh-row h"><div class="fh-tag">H</div><div class="fh-text">Perbuatan ini boleh menyebabkan pertelingkahan dan menjejaskan hubungan sesama pengguna siber.<span class="en">This can cause quarrels and damage relationships between cyber users.</span><span class="zh">这种行为会引发争执，并破坏网络使用者之间的关系。</span></div></div>
+    </div>
+
+    <div class="fh-card">
+      <div class="fh-title">3. Tidak Menyebarkan Maklumat Palsu <span class="zh">不传播虚假信息</span></div>
+      <div class="fh-row f"><div class="fh-tag">F</div><div class="fh-text">Pengguna tidak boleh menyebarkan maklumat palsu.<span class="en">Users must not spread false information.</span><span class="zh">用户不能传播虚假信息。</span></div></div>
+      <div class="fh-row h"><div class="fh-tag">H</div><div class="fh-text">Maklumat palsu boleh mengelirukan orang ramai dan menimbulkan panik atau salah faham dalam masyarakat.<span class="en">False information can mislead the public and cause panic or misunderstanding in society.</span><span class="zh">虚假信息会误导公众，并在社会上引起恐慌或误会。</span></div></div>
+    </div>
+
+    <div class="fh-card">
+      <div class="fh-title">4. Menggunakan Bahasa yang Sopan <span class="zh">使用文明用语</span></div>
+      <div class="fh-row f"><div class="fh-tag">F</div><div class="fh-text">Pengguna perlu menggunakan bahasa yang sopan semasa berkomunikasi dalam talian.<span class="en">Users must use polite language when communicating online.</span><span class="zh">用户在网上沟通时必须使用文明用语。</span></div></div>
+      <div class="fh-row h"><div class="fh-tag">H</div><div class="fh-text">Bahasa yang sopan mengelakkan konflik dan menunjukkan pengguna sebagai insan yang berhemah tinggi.<span class="en">Polite language avoids conflict and shows the user to be highly courteous.</span><span class="zh">文明用语能避免冲突，并展现使用者有礼的品格。</span></div></div>
+    </div>
+
+    <div class="fh-card">
+      <div class="fh-title">5. Sentiasa Mematuhi Undang-undang Siber <span class="zh">始终遵守网络法律</span></div>
+      <div class="fh-row f"><div class="fh-tag">F</div><div class="fh-text">Pengguna perlu sentiasa mematuhi undang-undang siber.<span class="en">Users must always obey cyber laws.</span><span class="zh">用户必须始终遵守网络法律。</span></div></div>
+      <div class="fh-row h"><div class="fh-tag">H</div><div class="fh-text">Pematuhan ini melindungi pengguna daripada tindakan undang-undang dan menggalakkan penggunaan siber yang selamat.<span class="en">This compliance protects users from legal action and promotes safe cyber use.</span><span class="zh">遵守法律能保护用户免受法律制裁，并促进安全的网络使用。</span></div></div>
+    </div>
+
+    <div class="hafalan-box">
+      <span class="lbl">Hafalan Etika Siber <span class="en">/ Memory Aid /</span> <span class="zh">网络礼仪记忆法</span></span>
+      <span class="main">Naik &ndash; Hina &ndash; Palsu &ndash; Sopan &ndash; Patuh</span>
+      <span class="en">No indecent uploads &ndash; No insults &ndash; No fake news &ndash; Polite language &ndash; Obey laws</span>
+      <span class="zh">不乱传 &ndash; 不侮辱 &ndash; 不造假 &ndash; 用语礼 &ndash; 守法律</span>
+    </div>
+  </section>
+
+  <!-- 3. UNDANG-UNDANG SIBER -->
+  <section>
+    <div class="section-head">
+      <div class="num">3</div>
+      <h2>Undang-undang Siber <span class="zh">网络法律</span></h2>
+      <div class="sub en">Cyber Laws</div>
+    </div>
+
+    <div class="fh-card">
+      <div class="fh-title">Akta Komunikasi dan Multimedia 1998 <span class="zh">1998年通讯与多媒体法令</span></div>
+      <div class="fh-row f"><div class="fh-tag">F</div><div class="fh-text">Akta 588, Seksyen 211, dikenali sebagai Akta Komunikasi dan Multimedia 1998.<span class="en">Act 588, Section 211, known as the Communications and Multimedia Act 1998.</span><span class="zh">第588法令，第211条，称为1998年通讯与多媒体法令。</span></div></div>
+      <div class="fh-row h"><div class="fh-tag">H</div><div class="fh-text">Akta ini menyabitkan kesalahan menyebarkan kandungan lucah, palsu atau mengancam melalui rangkaian komunikasi.<span class="en">This act penalises spreading obscene, false or threatening content through communication networks.</span><span class="zh">该法令惩处通过通讯网络传播淫秽、虚假或具威胁性的内容。</span></div></div>
+    </div>
+
+    <div class="fh-card">
+      <div class="fh-title">Akta Jenayah Komputer 1997 <span class="zh">1997年电脑罪案法令</span></div>
+      <div class="fh-row f"><div class="fh-tag">F</div><div class="fh-text">Akta Jenayah Komputer 1997 turut digubal untuk mengawal alam siber.<span class="en">The Computer Crimes Act 1997 was also enacted to regulate cyberspace.</span><span class="zh">1997年电脑罪案法令也是为管制网络空间而制定的。</span></div></div>
+      <div class="fh-row h"><div class="fh-tag">H</div><div class="fh-text">Akta ini menyabitkan kesalahan akses tanpa kebenaran, penggodaman dan kerosakan data komputer.<span class="en">This act penalises unauthorised access, hacking and damage to computer data.</span><span class="zh">该法令惩处未经授权的访问、黑客入侵和电脑数据破坏行为。</span></div></div>
+    </div>
+
+    <div class="hafalan-box">
+      <span class="lbl">Hafalan Undang-undang <span class="en">/ Memory Aid /</span> <span class="zh">法律记忆法</span></span>
+      <span class="main">&lsquo;98 Komunikasi &ndash; &lsquo;97 Jenayah Komputer</span>
+      <span class="zh">98通讯法 &ndash; 97电脑罪案法</span>
+      <span class="en">Cite these laws for questions on illegal online acts, cyberbullying, hacking or fake news.</span>
+    </div>
+  </section>
+
+  <!-- 4. NILAI MORAL -->
+  <section>
+    <div class="section-head">
+      <div class="num">4</div>
+      <h2>Nilai Moral yang Perlu Diaplikasikan <span class="zh">需要应用的道德价值</span></h2>
+      <div class="sub en">Moral Values to Apply</div>
+    </div>
+
+    <div class="group-label">Kumpulan 1: Nilai Diri <span style="text-transform:none;font-weight:400;">/ Self Values /</span> 自我价值观</div>
+    <div class="fh-grid">
+      <div class="fh-card">
+        <div class="fh-title">Rasional <span class="zh">理性</span></div>
+        <div class="fh-row f"><div class="fh-tag">F</div><div class="fh-text">Pengguna siber mengamalkan nilai rasional.<span class="en">Cyber users practise rationality.</span><span class="zh">网络使用者实践理性的价值观。</span></div></div>
+        <div class="fh-row h"><div class="fh-tag">H</div><div class="fh-text">Mereka berfikir sebelum berkongsi maklumat supaya tidak tersebar berita palsu.<span class="en">They think before sharing information to avoid spreading false news.</span><span class="zh">他们在分享信息前会先思考，以免传播假新闻。</span></div></div>
+      </div>
+      <div class="fh-card">
+        <div class="fh-title">Harga Diri <span class="zh">自尊</span></div>
+        <div class="fh-row f"><div class="fh-tag">F</div><div class="fh-text">Pengguna siber mengamalkan nilai harga diri.<span class="en">Cyber users practise self-respect.</span><span class="zh">网络使用者实践自尊的价值观。</span></div></div>
+        <div class="fh-row h"><div class="fh-tag">H</div><div class="fh-text">Mereka menjaga maruah diri dan tidak mendedahkan maklumat peribadi sewenang-wenangnya.<span class="en">They protect their dignity and do not carelessly expose personal information.</span><span class="zh">他们维护自身尊严，不随意透露个人信息。</span></div></div>
+      </div>
+      <div class="fh-card">
+        <div class="fh-title">Kesederhanaan <span class="zh">节制</span></div>
+        <div class="fh-row f"><div class="fh-tag">F</div><div class="fh-text">Pengguna siber mengamalkan nilai kesederhanaan.<span class="en">Cyber users practise moderation.</span><span class="zh">网络使用者实践节制的价值观。</span></div></div>
+        <div class="fh-row h"><div class="fh-tag">H</div><div class="fh-text">Mereka mengehadkan masa penggunaan Internet supaya tidak menjejaskan kesihatan dan pelajaran.<span class="en">They limit Internet use so it does not affect their health and studies.</span><span class="zh">他们限制上网时间，以免影响健康与学业。</span></div></div>
+      </div>
+    </div>
+
+    <div class="group-label">Kumpulan 2: Nilai Sosial <span style="text-transform:none;font-weight:400;">/ Social Values /</span> 社会价值观</div>
+    <div class="fh-grid">
+      <div class="fh-card">
+        <div class="fh-title">Hormat <span class="zh">尊重</span></div>
+        <div class="fh-row f"><div class="fh-tag">F</div><div class="fh-text">Pengguna siber mengamalkan nilai hormat.<span class="en">Cyber users practise respect.</span><span class="zh">网络使用者实践尊重的价值观。</span></div></div>
+        <div class="fh-row h"><div class="fh-tag">H</div><div class="fh-text">Mereka tidak menghina atau memperlekehkan pengguna siber yang lain.<span class="en">They do not insult or belittle other cyber users.</span><span class="zh">他们不侮辱或轻视其他网络使用者。</span></div></div>
+      </div>
+      <div class="fh-card">
+        <div class="fh-title">Hemah Tinggi <span class="zh">有礼</span></div>
+        <div class="fh-row f"><div class="fh-tag">F</div><div class="fh-text">Pengguna siber mengamalkan nilai hemah tinggi.<span class="en">Cyber users practise courtesy.</span><span class="zh">网络使用者实践有礼的价值观。</span></div></div>
+        <div class="fh-row h"><div class="fh-tag">H</div><div class="fh-text">Mereka menggunakan bahasa yang sopan walaupun berselisih pendapat.<span class="en">They use polite language even when they disagree.</span><span class="zh">即使意见不合，他们仍使用礼貌的语言。</span></div></div>
+      </div>
+      <div class="fh-card">
+        <div class="fh-title">Prihatin <span class="zh">关心</span></div>
+        <div class="fh-row f"><div class="fh-tag">F</div><div class="fh-text">Pengguna siber mengamalkan nilai prihatin.<span class="en">Cyber users practise consideration.</span><span class="zh">网络使用者实践关心的价值观。</span></div></div>
+        <div class="fh-row h"><div class="fh-tag">H</div><div class="fh-text">Mereka berhati-hati agar tindakan mereka di alam siber tidak menyakiti perasaan orang lain.<span class="en">They are careful that their online actions do not hurt others&rsquo; feelings.</span><span class="zh">他们谨慎行事，以免自己的网络行为伤害他人感受。</span></div></div>
+      </div>
+    </div>
+
+    <div class="group-label">Kumpulan 3: Nilai Integriti <span style="text-transform:none;font-weight:400;">/ Integrity Values /</span> 诚信价值观</div>
+    <div class="fh-grid">
+      <div class="fh-card">
+        <div class="fh-title">Bertanggungjawab <span class="zh">负责任</span></div>
+        <div class="fh-row f"><div class="fh-tag">F</div><div class="fh-text">Pengguna siber mengamalkan nilai bertanggungjawab.<span class="en">Cyber users practise responsibility.</span><span class="zh">网络使用者实践负责任的价值观。</span></div></div>
+        <div class="fh-row h"><div class="fh-tag">H</div><div class="fh-text">Mereka memastikan maklumat yang dikongsi adalah benar dan tidak merosakkan orang lain.<span class="en">They ensure the information they share is true and does not harm others.</span><span class="zh">他们确保分享的信息真实，不会伤害他人。</span></div></div>
+      </div>
+      <div class="fh-card">
+        <div class="fh-title">Kejujuran <span class="zh">诚实</span></div>
+        <div class="fh-row f"><div class="fh-tag">F</div><div class="fh-text">Pengguna siber mengamalkan nilai kejujuran.<span class="en">Cyber users practise honesty.</span><span class="zh">网络使用者实践诚实的价值观。</span></div></div>
+        <div class="fh-row h"><div class="fh-tag">H</div><div class="fh-text">Mereka tidak menyebarkan berita palsu walaupun mudah dilakukan di alam siber.<span class="en">They do not spread false news even though it is easy to do online.</span><span class="zh">即使在网络上很容易做到，他们也不传播假新闻。</span></div></div>
+      </div>
+      <div class="fh-card">
+        <div class="fh-title">Patriotisme <span class="zh">爱国</span></div>
+        <div class="fh-row f"><div class="fh-tag">F</div><div class="fh-text">Pengguna siber mengamalkan nilai patriotisme.<span class="en">Cyber users practise patriotism.</span><span class="zh">网络使用者实践爱国的价值观。</span></div></div>
+        <div class="fh-row h"><div class="fh-tag">H</div><div class="fh-text">Mereka mengelakkan tindakan yang boleh menjejaskan nama baik negara di alam siber.<span class="en">They avoid actions that could tarnish the country&rsquo;s good name online.</span><span class="zh">他们避免在网络上做出损害国家声誉的行为。</span></div></div>
+      </div>
+    </div>
+
+    <div class="hafalan-box">
+      <span class="lbl">Hafalan Nilai <span class="en">/ Memory Aid /</span> <span class="zh">价值观记忆法</span></span>
+      <span class="main">3 Diri + 3 Sosial + 3 Integriti = 9 Nilai</span>
+      <span class="zh">3个自我 + 3个社会 + 3个诚信 = 9项价值观</span>
+      <span class="en">Diri: Rasional, Harga Diri, Kesederhanaan &middot; Sosial: Hormat, Hemah Tinggi, Prihatin &middot; Integriti: Bertanggungjawab, Kejujuran, Patriotisme</span>
+    </div>
+  </section>
+
+  <!-- 5. KEPENTINGAN -->
+  <section>
+    <div class="section-head">
+      <div class="num">5</div>
+      <h2>Kepentingan Mematuhi Undang-undang Siber <span class="zh">遵守网络法律的重要性</span></h2>
+      <div class="sub en">Importance of Following Cyber Laws</div>
+    </div>
+
+    <div class="fh-grid">
+      <div class="fh-card">
+        <div class="fh-title">1. Menjadi Pengguna yang Berhemah <span class="zh">成为有礼的使用者</span></div>
+        <div class="fh-row f"><div class="fh-tag">F</div><div class="fh-text">Pematuhan menjadikan seseorang pengguna siber yang berhemah.<span class="en">Compliance makes a person a courteous cyber user.</span><span class="zh">遵守法律使一个人成为有礼的网络使用者。</span></div></div>
+        <div class="fh-row h"><div class="fh-tag">H</div><div class="fh-text">Sikap ini mengelakkan konflik dan menunjukkan tatasusila yang baik semasa berinteraksi dalam talian.<span class="en">This avoids conflict and shows good manners when interacting online.</span><span class="zh">这能避免冲突，并展现良好的网络互动礼节。</span></div></div>
+      </div>
+      <div class="fh-card">
+        <div class="fh-title">2. Maklumat yang Betul dan Tepat <span class="zh">正确准确的资讯</span></div>
+        <div class="fh-row f"><div class="fh-tag">F</div><div class="fh-text">Pematuhan membolehkan pengguna memperoleh maklumat yang betul dan tepat.<span class="en">Compliance allows users to obtain correct and accurate information.</span><span class="zh">遵守法律能让使用者获得正确准确的资讯。</span></div></div>
+        <div class="fh-row h"><div class="fh-tag">H</div><div class="fh-text">Mereka dapat mengelak daripada tertipu oleh maklumat palsu atau mengelirukan.<span class="en">They can avoid being deceived by false or misleading information.</span><span class="zh">他们能避免被虚假或误导性信息所欺骗。</span></div></div>
+      </div>
+      <div class="fh-card">
+        <div class="fh-title">3. Keharmonian Masyarakat <span class="zh">社会和谐</span></div>
+        <div class="fh-row f"><div class="fh-tag">F</div><div class="fh-text">Pematuhan membantu menjaga keharmonian masyarakat.<span class="en">Compliance helps maintain social harmony.</span><span class="zh">遵守法律有助于维护社会和谐。</span></div></div>
+        <div class="fh-row h"><div class="fh-tag">H</div><div class="fh-text">Pertelingkahan akibat salah faham atau fitnah di alam siber dapat dielakkan.<span class="en">Disputes caused by online misunderstanding or slander can be avoided.</span><span class="zh">可避免因网络误会或诽谤引起的纠纷。</span></div></div>
+      </div>
+      <div class="fh-card">
+        <div class="fh-title">4. Persekitaran Siber yang Selamat <span class="zh">安全的网络环境</span></div>
+        <div class="fh-row f"><div class="fh-tag">F</div><div class="fh-text">Pematuhan mewujudkan persekitaran siber yang selamat.<span class="en">Compliance creates a safe cyber environment.</span><span class="zh">遵守法律能营造安全的网络环境。</span></div></div>
+        <div class="fh-row h"><div class="fh-tag">H</div><div class="fh-text">Pengguna dapat berinteraksi tanpa risiko diancam, dibuli atau ditipu.<span class="en">Users can interact without the risk of being threatened, bullied or scammed.</span><span class="zh">使用者能在互动时免于受到威胁、霸凌或欺骗。</span></div></div>
+      </div>
+      <div class="fh-card">
+        <div class="fh-title">5. Urus Niaga Dalam Talian Selamat <span class="zh">安全的线上交易</span></div>
+        <div class="fh-row f"><div class="fh-tag">F</div><div class="fh-text">Pematuhan membolehkan urus niaga dalam talian dilakukan dengan selamat.<span class="en">Compliance allows online transactions to be carried out safely.</span><span class="zh">遵守法律能让线上交易安全进行。</span></div></div>
+        <div class="fh-row h"><div class="fh-tag">H</div><div class="fh-text">Risiko penipuan dan kecurian maklumat kewangan dapat dikurangkan.<span class="en">The risk of fraud and theft of financial information can be reduced.</span><span class="zh">能降低诈骗与财务信息被盗的风险。</span></div></div>
+      </div>
+    </div>
+
+    <div class="hafalan-box">
+      <span class="lbl">Hafalan Kepentingan <span class="en">/ Memory Aid /</span> <span class="zh">重要性记忆法</span></span>
+      <span class="main">Berhemah &ndash; Maklumat &ndash; Harmoni &ndash; Selamat &ndash; Urus Niaga</span>
+      <span class="zh">有礼 &ndash; 资讯 &ndash; 和谐 &ndash; 安全 &ndash; 交易</span>
+    </div>
+  </section>
+
+  <!-- 6. KESAN BURUK -->
+  <section>
+    <div class="section-head">
+      <div class="num">6</div>
+      <h2>Kesan Penggunaan Internet Tidak Beretika <span class="zh">不道德网络行为的后果</span></h2>
+      <div class="sub en">Effects of Unethical Internet Use</div>
+    </div>
+
+    <div class="fh-grid">
+      <div class="fh-card">
+        <div class="fh-title">Konflik <span class="zh">冲突</span></div>
+        <div class="fh-row f"><div class="fh-tag">F</div><div class="fh-text">Penggunaan alam siber secara tidak beretika boleh menimbulkan konflik.<span class="en">Unethical Internet use can cause conflict.</span><span class="zh">不道德的网络使用会引起冲突。</span></div></div>
+        <div class="fh-row h"><div class="fh-tag">H</div><div class="fh-text">Ia menimbulkan perselisihan faham dan perbalahan antara pengguna.<span class="en">It causes misunderstanding and quarrels between users.</span><span class="zh">这会引起使用者之间的误会与争执。</span></div></div>
+      </div>
+      <div class="fh-card">
+        <div class="fh-title">Maruah Diri <span class="zh">个人名誉</span></div>
+        <div class="fh-row f"><div class="fh-tag">F</div><div class="fh-text">Penggunaan alam siber secara tidak beretika boleh menjejaskan maruah diri.<span class="en">It can damage one&rsquo;s own dignity.</span><span class="zh">会损害个人名誉。</span></div></div>
+        <div class="fh-row h"><div class="fh-tag">H</div><div class="fh-text">Kesannya turut melibatkan maruah keluarga dan negara.<span class="en">The effect also extends to the dignity of the family and the country.</span><span class="zh">影响也会波及家庭与国家的名誉。</span></div></div>
+      </div>
+      <div class="fh-card">
+        <div class="fh-title">Maruah Orang Lain <span class="zh">他人名誉</span></div>
+        <div class="fh-row f"><div class="fh-tag">F</div><div class="fh-text">Penggunaan alam siber secara tidak beretika boleh menjatuhkan maruah orang lain.<span class="en">It can damage another person&rsquo;s dignity.</span><span class="zh">会伤害他人的名誉。</span></div></div>
+        <div class="fh-row h"><div class="fh-tag">H</div><div class="fh-text">Mangsa mungkin kehilangan kepercayaan orang ramai akibat fitnah atau penghinaan.<span class="en">The victim may lose the public&rsquo;s trust due to slander or insults.</span><span class="zh">受害者可能因诽谤或侮辱而失去公众的信任。</span></div></div>
+      </div>
+      <div class="fh-card">
+        <div class="fh-title">Perpaduan <span class="zh">团结</span></div>
+        <div class="fh-row f"><div class="fh-tag">F</div><div class="fh-text">Penggunaan alam siber secara tidak beretika boleh menjejaskan perpaduan.<span class="en">It can weaken unity.</span><span class="zh">会破坏团结。</span></div></div>
+        <div class="fh-row h"><div class="fh-tag">H</div><div class="fh-text">Isu perkauman atau fitnah yang tular boleh memecahbelahkan masyarakat.<span class="en">Viral racial issues or slander can divide society.</span><span class="zh">流传的种族课题或诽谤可能分裂社会。</span></div></div>
+      </div>
+      <div class="fh-card">
+        <div class="fh-title">Emosi <span class="zh">情绪</span></div>
+        <div class="fh-row f"><div class="fh-tag">F</div><div class="fh-text">Penggunaan alam siber secara tidak beretika boleh menyebabkan kerisauan dan kemurungan.<span class="en">It can cause worry and depression.</span><span class="zh">会造成焦虑与忧郁。</span></div></div>
+        <div class="fh-row h"><div class="fh-tag">H</div><div class="fh-text">Mangsa buli siber sering mengalami tekanan emosi yang berpanjangan.<span class="en">Cyberbullying victims often experience prolonged emotional stress.</span><span class="zh">网络霸凌受害者往往承受长期的情绪压力。</span></div></div>
+      </div>
+      <div class="fh-card">
+        <div class="fh-title">Pelajaran <span class="zh">学业</span></div>
+        <div class="fh-row f"><div class="fh-tag">F</div><div class="fh-text">Penggunaan Internet yang berlebihan boleh menyebabkan pelajaran terabai.<span class="en">Excessive Internet use may cause studies to be neglected.</span><span class="zh">过度上网会导致学业被荒废。</span></div></div>
+        <div class="fh-row h"><div class="fh-tag">H</div><div class="fh-text">Masa yang sepatutnya digunakan untuk belajar dihabiskan di alam siber.<span class="en">Time that should be used for studying is spent in cyberspace instead.</span><span class="zh">本应用于学习的时间却花在了网络上。</span></div></div>
+      </div>
+    </div>
+
+    <div class="hafalan-box">
+      <span class="lbl">Hafalan Kesan Buruk <span class="en">/ Memory Aid /</span> <span class="zh">后果记忆法</span></span>
+      <span class="main">Konflik &ndash; Imej &ndash; Maruah &ndash; Perpaduan &ndash; Emosi &ndash; Pelajaran</span>
+      <span class="zh">冲突 &ndash; 形象 &ndash; 名誉 &ndash; 团结 &ndash; 情绪 &ndash; 学业</span>
+    </div>
+  </section>
+
+  <!-- 7. AMALAN SELAMAT -->
+  <section>
+    <div class="section-head">
+      <div class="num">7</div>
+      <h2>Amalan Selamat di Alam Siber <span class="zh">网络安全做法</span></h2>
+      <div class="sub en">Safe Cyber Practices</div>
+    </div>
+
+    <div class="dodont-grid">
+      <div class="dodont-col do">
+        <div class="dhead">Buat <span style="text-transform:none;font-weight:400;">/ Do</span></div>
+
+        <div class="fh-card"><div class="fh-title">1. Semak Kesahihan Maklumat</div>
+          <div class="fh-row f"><div class="fh-tag">F</div><div class="fh-text">Semak kesahihan maklumat sebelum berkongsi.<span class="en">Verify information before sharing.</span><span class="zh">分享前先核实信息真实性。</span></div></div>
+          <div class="fh-row h"><div class="fh-tag">H</div><div class="fh-text">Ini mengelakkan penyebaran berita palsu yang boleh mengelirukan orang ramai.<span class="en">This prevents spreading false news that could mislead the public.</span><span class="zh">这能避免传播误导公众的假新闻。</span></div></div>
+        </div>
+        <div class="fh-card"><div class="fh-title">2. Guna Bahasa Sopan</div>
+          <div class="fh-row f"><div class="fh-tag">F</div><div class="fh-text">Gunakan bahasa yang sopan dan berhemah.<span class="en">Use polite and courteous language.</span><span class="zh">使用文明礼貌的用语。</span></div></div>
+          <div class="fh-row h"><div class="fh-tag">H</div><div class="fh-text">Bahasa sopan mengekalkan hubungan baik dan mengelakkan pertelingkahan dalam talian.<span class="en">Polite language maintains good relationships and avoids online quarrels.</span><span class="zh">礼貌用语能维持良好关系，避免网络争执。</span></div></div>
+        </div>
+        <div class="fh-card"><div class="fh-title">3. Berfikir Dahulu</div>
+          <div class="fh-row f"><div class="fh-tag">F</div><div class="fh-text">Berfikir dahulu sebelum memuat naik komen, gambar atau video.<span class="en">Think before posting comments, photos or videos.</span><span class="zh">上传评论、照片或影片前先思考。</span></div></div>
+          <div class="fh-row h"><div class="fh-tag">H</div><div class="fh-text">Kandungan yang tidak difikirkan masak-masak boleh menyinggung perasaan orang lain atau menjejaskan imej diri.<span class="en">Ill-considered content can offend others or damage one&rsquo;s own image.</span><span class="zh">未经深思的内容可能冒犯他人或损害自身形象。</span></div></div>
+        </div>
+        <div class="fh-card"><div class="fh-title">4. Berhati-hati dengan Orang Tidak Dikenali</div>
+          <div class="fh-row f"><div class="fh-tag">F</div><div class="fh-text">Berhati-hati dengan pembuli siber dan orang yang tidak dikenali.<span class="en">Be careful of cyberbullies and strangers.</span><span class="zh">提防网络霸凌者与陌生人。</span></div></div>
+          <div class="fh-row h"><div class="fh-tag">H</div><div class="fh-text">Sikap berhati-hati melindungi diri daripada ancaman, penipuan atau eksploitasi.<span class="en">Caution protects against threats, scams or exploitation.</span><span class="zh">谨慎能保护自己免受威胁、欺骗或利用。</span></div></div>
+        </div>
+        <div class="fh-card"><div class="fh-title">5. Pastikan Laman Web Selamat</div>
+          <div class="fh-row f"><div class="fh-tag">F</div><div class="fh-text">Pastikan laman web selamat: ikon kunci, URL https, bukan hanya http.<span class="en">Ensure the website is secure: lock icon, https URL, not just http.</span><span class="zh">确保网站安全：锁形图标、https网址，而非只有http。</span></div></div>
+          <div class="fh-row h"><div class="fh-tag">H</div><div class="fh-text">Laman web selamat mengurangkan risiko data peribadi dicuri.<span class="en">A secure website reduces the risk of personal data theft.</span><span class="zh">安全网站能降低个人资料被盗的风险。</span></div></div>
+        </div>
+        <div class="fh-card"><div class="fh-title">6. Selidik Kerelevanan Laman Web</div>
+          <div class="fh-row f"><div class="fh-tag">F</div><div class="fh-text">Selidik kerelevanan dan kesahihan laman web.<span class="en">Check the relevance and credibility of the website.</span><span class="zh">查证网站的相关性与可信度。</span></div></div>
+          <div class="fh-row h"><div class="fh-tag">H</div><div class="fh-text">Ini memastikan maklumat yang diperoleh tepat dan boleh dipercayai.<span class="en">This ensures the information obtained is accurate and trustworthy.</span><span class="zh">这能确保所获得的信息准确可靠。</span></div></div>
+        </div>
+        <div class="fh-card" style="margin-bottom:0;"><div class="fh-title">7. Lapor Buli Siber</div>
+          <div class="fh-row f"><div class="fh-tag">F</div><div class="fh-text">Laporkan buli siber kepada ibu bapa, guru atau pihak berkuasa.<span class="en">Report cyberbullying to parents, teachers or authorities.</span><span class="zh">向父母、老师或有关当局举报网络霸凌。</span></div></div>
+          <div class="fh-row h"><div class="fh-tag">H</div><div class="fh-text">Laporan awal membolehkan tindakan diambil sebelum keadaan menjadi lebih serius.<span class="en">Early reporting allows action to be taken before the situation worsens.</span><span class="zh">及早举报能在情况恶化前采取行动。</span></div></div>
+        </div>
+      </div>
+
+      <div class="dodont-col dont">
+        <div class="dhead">Jangan <span style="text-transform:none;font-weight:400;">/ Do Not</span></div>
+
+        <div class="fh-card"><div class="fh-title">1. Jangan Sebarkan Maklumat Palsu</div>
+          <div class="fh-row f"><div class="fh-tag">F</div><div class="fh-text">Jangan sebarkan maklumat palsu atau belum pasti kesahihannya.<span class="en">Do not spread information that is false or unverified.</span><span class="zh">不要传播虚假或未经证实的信息。</span></div></div>
+          <div class="fh-row h"><div class="fh-tag">H</div><div class="fh-text">Penyebaran maklumat palsu boleh menimbulkan fitnah dan perbalahan dalam masyarakat.<span class="en">Spreading false information can cause slander and disputes in society.</span><span class="zh">传播虚假信息可能引起诽谤与社会纷争。</span></div></div>
+        </div>
+        <div class="fh-card"><div class="fh-title">2. Jangan Hina atau Fitnah</div>
+          <div class="fh-row f"><div class="fh-tag">F</div><div class="fh-text">Jangan hina, fitnah, sindir atau buruk-burukkan orang lain.<span class="en">Do not insult, slander, mock or badmouth others.</span><span class="zh">不要侮辱、诽谤、讽刺或诋毁他人。</span></div></div>
+          <div class="fh-row h"><div class="fh-tag">H</div><div class="fh-text">Perbuatan ini boleh menjejaskan maruah mangsa dan membawa kepada tindakan undang-undang.<span class="en">This can damage the victim&rsquo;s dignity and lead to legal action.</span><span class="zh">这会损害受害者的名誉，并可能导致法律行动。</span></div></div>
+        </div>
+        <div class="fh-card"><div class="fh-title">3. Jangan Dedah Maklumat Peribadi</div>
+          <div class="fh-row f"><div class="fh-tag">F</div><div class="fh-text">Jangan dedahkan nombor akaun bank, alamat rumah atau nombor telefon.<span class="en">Do not reveal bank account numbers, home address or phone number.</span><span class="zh">不要透露银行账号、住址或电话号码。</span></div></div>
+          <div class="fh-row h"><div class="fh-tag">H</div><div class="fh-text">Maklumat ini boleh disalahgunakan oleh penjenayah siber untuk penipuan atau kecurian identiti.<span class="en">This information can be misused by cybercriminals for fraud or identity theft.</span><span class="zh">这些信息可能被网络罪犯用于诈骗或身份盗窃。</span></div></div>
+        </div>
+        <div class="fh-card"><div class="fh-title">4. Jangan Muat Naik Kandungan Tidak Bermoral</div>
+          <div class="fh-row f"><div class="fh-tag">F</div><div class="fh-text">Jangan memuat naik gambar/video tidak bermoral.<span class="en">Do not upload immoral photos or videos.</span><span class="zh">不要上传不道德的照片或影片。</span></div></div>
+          <div class="fh-row h"><div class="fh-tag">H</div><div class="fh-text">Kandungan sedemikian boleh mencemarkan imej diri dan melanggar undang-undang siber.<span class="en">Such content can tarnish one&rsquo;s image and break cyber laws.</span><span class="zh">这类内容会损害个人形象，并触犯网络法律。</span></div></div>
+        </div>
+        <div class="fh-card"><div class="fh-title">5. Jangan Beri Maklumat Perbankan</div>
+          <div class="fh-row f"><div class="fh-tag">F</div><div class="fh-text">Jangan beri maklumat perbankan kepada individu tidak dikenali.<span class="en">Do not give banking information to strangers.</span><span class="zh">不要向陌生人提供银行资料。</span></div></div>
+          <div class="fh-row h"><div class="fh-tag">H</div><div class="fh-text">Tindakan ini boleh menyebabkan kerugian wang akibat penipuan dalam talian.<span class="en">This can cause financial loss due to online scams.</span><span class="zh">这可能因网络诈骗而导致金钱损失。</span></div></div>
+        </div>
+        <div class="fh-card"><div class="fh-title">6. Jangan Klik Pautan Mencurigakan</div>
+          <div class="fh-row f"><div class="fh-tag">F</div><div class="fh-text">Jangan klik pautan mencurigakan atau &ldquo;apa sahaja&rdquo;.<span class="en">Do not click suspicious or random links.</span><span class="zh">不要点击可疑或随意的链接。</span></div></div>
+          <div class="fh-row h"><div class="fh-tag">H</div><div class="fh-text">Pautan sedemikian mungkin mengandungi perisian hasad yang boleh mencuri data peribadi.<span class="en">Such links may contain malware that can steal personal data.</span><span class="zh">这类链接可能含有窃取个人数据的恶意软件。</span></div></div>
+        </div>
+        <div class="fh-card" style="margin-bottom:0;"><div class="fh-title">7. Jangan Balas Buli Siber dengan Kemarahan</div>
+          <div class="fh-row f"><div class="fh-tag">F</div><div class="fh-text">Jangan membalas cyberbully dengan kemarahan atau penghinaan.<span class="en">Do not respond to cyberbullies with anger or insults.</span><span class="zh">不要以愤怒或侮辱回应网络霸凌者。</span></div></div>
+          <div class="fh-row h"><div class="fh-tag">H</div><div class="fh-text">Membalas secara agresif boleh memburukkan lagi keadaan dan mencetuskan pertelingkahan berpanjangan.<span class="en">Responding aggressively can worsen the situation and trigger prolonged conflict.</span><span class="zh">激烈回应可能使情况恶化，引发持续的冲突。</span></div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="hafalan-box">
+      <span class="lbl">Hafalan Amalan Selamat <span class="en">/ Memory Aid /</span> <span class="zh">安全做法记忆法</span></span>
+      <span class="main">7 Buat, 7 Jangan &mdash; Semak, Sopan, Fikir, Waspada, Selamat, Selidik, Lapor / Palsu, Hina, Dedah, Bermoral, Bank, Klik, Balas</span>
+      <span class="zh">7个应做，7个不做 &mdash; 核实、礼貌、思考、警惕、安全、查证、举报 / 造假、侮辱、透露、不道德、银行、点击、还击</span>
+    </div>
+  </section>
+
+  <!-- 8. FORMULA JAWAPAN LANJUTAN -->
+  <section>
+    <div class="section-head">
+      <div class="num">8</div>
+      <h2>Templat Jawapan Lanjutan <span class="zh">进阶答题模板</span></h2>
+      <div class="sub en">Advanced Answer Templates</div>
+    </div>
+
+    <div class="kbat-box">
+      <div class="kt-label">Templat Nilai <span style="text-transform:none;font-weight:400;">/ Value Template /</span> 价值观模板</div>
+      <div class="kt-text">
+        Saya mengamalkan nilai [nilai moral] kerana [tindakan baik]. Kesannya, [kesan positif].
+        <span class="en">I practise the value of [moral value] because [good action]. As a result, [positive effect].</span>
+        <span class="zh">我实践[道德价值观]，因为[良好行为]。结果，[正面影响]。</span>
+      </div>
+      <div class="kt-example">
+        <span class="lbl">Contoh Unit 12 <span style="text-transform:none;">/ Unit 12 Example</span></span>
+        Saya mengamalkan nilai rasional kerana saya menyemak kesahihan maklumat sebelum berkongsi di media sosial. Kesannya, saya dapat mengelakkan penyebaran berita palsu dan menjaga keharmonian masyarakat.
+        <span class="en">I practise the value of rationality because I verify information before sharing it on social media. As a result, I can avoid spreading false news and maintain social harmony.</span>
+        <span class="zh">我实践理性的价值观，因为我在社交媒体分享前会先核实信息。结果，我能避免传播假新闻，并维护社会和谐。</span>
+      </div>
+    </div>
+
+    <div class="kbat-box" style="margin-bottom:0;">
+      <div class="kt-label">Templat KBAT <span style="text-transform:none;font-weight:400;">/ KBAT Template /</span> 高层次思维模板</div>
+      <div class="kt-text">
+        Pada pendapat saya, [tindakan] perlu dilakukan kerana [sebab]. Hal ini dapat [kesan positif].
+        <span class="en">In my opinion, [action] should be done because [reason]. This can [positive effect].</span>
+        <span class="zh">我认为，应该采取[行动]，因为[原因]。这能够[正面影响]。</span>
+      </div>
+      <div class="kt-example">
+        <span class="lbl">Contoh <span style="text-transform:none;">/ Example</span></span>
+        Pada pendapat saya, pengguna siber perlu berfikir sebelum berkongsi maklumat kerana maklumat tersebut mungkin palsu. Hal ini dapat mengelakkan fitnah dan perbalahan dalam masyarakat.
+        <span class="en">In my opinion, cyber users should think before sharing information because it might be false. This can prevent slander and disputes in society.</span>
+        <span class="zh">我认为，网络用户在分享信息前应该先思考，因为该信息可能是虚假的。这能够避免社会上的诽谤与纷争。</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 9. Q&A -->
+  <section>
+    <div class="section-head">
+      <div class="num">9</div>
+      <h2>Soalan Lazim dan Contoh Jawapan <span class="zh">常见考题</span></h2>
+      <div class="sub en">Common Exam Questions and Sample Answers</div>
+    </div>
+
+    <div class="qa-block">
+      <div class="qa-q">Mengapakah pengguna tidak harus menularkan sesuatu isu?
+        <span class="qtype-tag fh">Fakta+Huraian</span>
+        <span class="en">Why should users not spread an issue online?</span>
+        <span class="zh">为什么用户不应该散布某个议题？</span>
+      </div>
+      <div class="qa-fh">
+        <div class="fh-row f"><div class="fh-tag">F</div><div class="fh-text">Pengguna tidak harus menularkan sesuatu isu kerana isu tersebut mungkin belum pasti kesahihannya.<span class="en">Users should not spread an issue because it may not be verified.</span><span class="zh">用户不应该散布议题，因为其真实性可能尚未确定。</span></div></div>
+        <div class="fh-row h"><div class="fh-tag">H</div><div class="fh-text">Perbuatan ini boleh menimbulkan fitnah, perselisihan faham serta perbalahan dalam masyarakat.<span class="en">This can cause slander, misunderstanding and disputes in society.</span><span class="zh">这可能引起诽谤、误会和社会纷争。</span></div></div>
+      </div>
+    </div>
+
+    <div class="qa-block">
+      <div class="qa-q">Senaraikan dua isu yang sering ditularkan di alam siber.
+        <span class="qtype-tag list">Senarai · 1 Fakta</span>
+        <span class="en">List two issues that are often spread in cyberspace.</span>
+        <span class="zh">列出两个经常在网络上散布的议题。</span>
+      </div>
+      <div class="qa-ans-list">
+        Contoh jawapan: berita palsu, fitnah, isu perkauman, video tidak bermoral, khabar angin, penipuan dalam talian.
+        <span class="en">Sample answers: fake news, slander, racial issues, immoral videos, rumours, online scams.</span>
+        <span class="zh">参考答案：假新闻、诽谤、种族课题、不道德影片、谣言、网络诈骗。</span>
+      </div>
+      <div class="qa-tip">Tip: soalan "senaraikan" hanya perlu fakta &mdash; tiada huraian diperlukan.<span class="en">Tip: "list" questions need facts only &mdash; no explanation required.</span></div>
+    </div>
+
+    <div class="qa-block">
+      <div class="qa-q">Kesan terhadap individu apabila menularkan isu palsu.
+        <span class="qtype-tag list">Senarai · 1 Fakta</span>
+        <span class="en">Effects on an individual who spreads a false issue.</span>
+        <span class="zh">散布虚假议题对个人的影响。</span>
+      </div>
+      <div class="qa-ans-list">
+        Individu boleh kehilangan kepercayaan orang lain, menjatuhkan maruah diri, dikenakan tindakan undang-undang dan mengalami tekanan emosi.
+        <span class="en">The individual may lose others&rsquo; trust, damage their own dignity, face legal action, and experience emotional stress.</span>
+        <span class="zh">个人可能失去他人的信任、损害自身名誉、面临法律行动，并承受情绪压力。</span>
+      </div>
+    </div>
+
+    <div class="qa-block">
+      <div class="qa-q">Kesan terhadap masyarakat apabila isu palsu ditularkan.
+        <span class="qtype-tag list">Senarai · 1 Fakta</span>
+        <span class="en">Effects on society when a false issue is spread.</span>
+        <span class="zh">虚假议题被散布对社会的影响。</span>
+      </div>
+      <div class="qa-ans-list">
+        Masyarakat boleh berpecah belah, berlaku pergaduhan, keharmonian terjejas dan perpaduan menjadi lemah.
+        <span class="en">Society may become divided, quarrels may occur, harmony is disrupted and unity is weakened.</span>
+        <span class="zh">社会可能分裂、发生纷争、和谐受损，团结力量减弱。</span>
+      </div>
+    </div>
+
+    <div class="qa-block">
+      <div class="qa-q">Tiga tindakan supaya remaja tidak tertipu ketika berkomunikasi di alam siber.
+        <span class="qtype-tag list">Senarai · 1 Fakta</span>
+        <span class="en">Three actions so teenagers are not deceived when communicating online.</span>
+        <span class="zh">青少年在网络上沟通时避免受骗的三种做法。</span>
+      </div>
+      <div class="qa-ans-list">
+        Menyemak identiti kenalan siber, tidak berkongsi maklumat peribadi, tidak mudah mempercayai tawaran mencurigakan, dan meminta nasihat ibu bapa atau guru.
+        <span class="en">Verify the identity of online contacts, do not share personal information, do not easily trust suspicious offers, and seek advice from parents or teachers.</span>
+        <span class="zh">核实网络联系人的身份、不分享个人信息、不轻易相信可疑的提议，并寻求父母或老师的建议。</span>
+      </div>
+    </div>
+
+    <div class="qa-block">
+      <div class="qa-q">Dua kepentingan Internet kepada remaja.
+        <span class="qtype-tag list">Senarai · 1 Fakta</span>
+        <span class="en">Two benefits of the Internet for teenagers.</span>
+        <span class="zh">网络对青少年的两项好处。</span>
+      </div>
+      <div class="qa-ans-list">
+        Internet memudahkan remaja mendapatkan bahan pembelajaran dengan cepat. Selain itu, Internet membolehkan remaja menambah kenalan dan berkomunikasi dengan orang dari pelbagai negara.
+        <span class="en">The Internet makes it easy for teenagers to quickly find learning materials. It also allows teenagers to make new contacts and communicate with people from various countries.</span>
+        <span class="zh">网络能让青少年迅速获取学习资料。此外，网络也能让青少年结交新朋友，并与来自不同国家的人交流。</span>
+      </div>
+    </div>
+
+    <div class="qa-block">
+      <div class="qa-q">Tiga cara remaja menggunakan alam siber.
+        <span class="qtype-tag list">Senarai · 1 Fakta</span>
+        <span class="en">Three ways teenagers use cyberspace.</span>
+        <span class="zh">青少年使用网络空间的三种方式。</span>
+      </div>
+      <div class="qa-ans-list">
+        Mencari bahan pembelajaran, berkomunikasi melalui media sosial atau e-mel, dan mendapatkan hiburan seperti menonton video atau bermain permainan dalam talian secara terkawal.
+        <span class="en">Searching for learning materials, communicating through social media or email, and getting entertainment such as watching videos or playing online games in a controlled manner.</span>
+        <span class="zh">寻找学习资料、通过社交媒体或电邮沟通，以及适度地观看影片或玩网络游戏娱乐。</span>
+      </div>
+    </div>
+
+    <div class="qa-block">
+      <div class="qa-q">Dua kesan remaja terlibat dengan perjudian dalam talian.
+        <span class="qtype-tag list">Senarai · 1 Fakta</span>
+        <span class="en">Two effects of teenagers involved in online gambling.</span>
+        <span class="zh">青少年涉及网络赌博的两项影响。</span>
+      </div>
+      <div class="qa-ans-list">
+        Remaja boleh mengalami kerugian wang dan mengabaikan pelajaran. Mereka juga mungkin terlibat dengan masalah sosial atau melanggar undang-undang.
+        <span class="en">Teenagers may suffer financial loss and neglect their studies. They may also become involved in social problems or break the law.</span>
+        <span class="zh">青少年可能蒙受金钱损失并荒废学业，也可能卷入社会问题或触犯法律。</span>
+      </div>
+    </div>
+
+    <div class="qa-block">
+      <div class="qa-q">Mengapakah kita harus berhemah semasa menggunakan alam siber?
+        <span class="qtype-tag fh">Fakta+Huraian</span>
+        <span class="en">Why must we be courteous when using cyberspace?</span>
+        <span class="zh">为什么我们在使用网络空间时必须有礼貌？</span>
+      </div>
+      <div class="qa-fh">
+        <div class="fh-row f"><div class="fh-tag">F</div><div class="fh-text">Kita harus berhemah semasa menggunakan alam siber.<span class="en">We must be courteous when using cyberspace.</span><span class="zh">我们在使用网络空间时必须有礼貌。</span></div></div>
+        <div class="fh-row h"><div class="fh-tag">H</div><div class="fh-text">Supaya tidak menyinggung perasaan orang lain, tidak menyebarkan maklumat palsu dan dapat mengekalkan keharmonian masyarakat.<span class="en">So as not to offend others&rsquo; feelings, not spread false information, and to maintain social harmony.</span><span class="zh">以免伤害他人感受、传播虚假信息，并能维护社会和谐。</span></div></div>
+      </div>
+      <div class="qa-tip">Nilai berkaitan: hemah tinggi, hormat, rasional, bertanggungjawab.<span class="en">Related values: courtesy, respect, rationality, responsibility.</span><span class="zh">相关价值观：有礼、尊重、理性、负责任。</span></div>
+    </div>
+  </section>
+
+  <!-- 10. PRACTICE ANSWER KEY -->
+  <section>
+    <div class="section-head">
+      <div class="num">10</div>
+      <h2>Skema Jawapan Latihan <span class="zh">练习答案</span></h2>
+      <div class="sub en">Practice Answer Key</div>
+    </div>
+
+    <div class="table-title">Bahagian A: Multiple Choice</div>
+    <div class="ans-table-wrap">
+      <table class="ans-table">
+        <tr><th>Question</th><th>Answer</th><th>Reason</th></tr>
+        <tr><td>1</td><td>A</td><td>Using rude/indecent language is not cyber etiquette.</td></tr>
+        <tr><td>2</td><td>B</td><td>I, III and IV are correct safety practices.</td></tr>
+        <tr><td>3</td><td>B</td><td>Sharing information is not automatically beneficial to oneself.</td></tr>
+        <tr><td>4</td><td>A</td><td>Bank account, home address and phone number should not be shared.</td></tr>
+        <tr><td>5</td><td>D</td><td>All listed points are importance of obeying cyber laws.</td></tr>
+        <tr><td>6</td><td>D</td><td>Badmouthing and scolding cyberbullies are not suitable actions.</td></tr>
+        <tr><td>7</td><td>B</td><td>Clicking anything carelessly is unsafe.</td></tr>
+        <tr><td>8</td><td>A</td><td>Too much Internet use can weaken family relationships.</td></tr>
+        <tr><td>9</td><td>C</td><td>Being slandered usually causes anger.</td></tr>
+        <tr><td>10</td><td>D</td><td>Spreading false information freely is not ethical.</td></tr>
+      </table>
+    </div>
+
+    <div class="table-title">Bahagian B1: Isi Tempat Kosong</div>
+    <div class="ans-table-wrap">
+      <table class="ans-table">
+        <tr><th>Blank</th><th>Answer</th></tr>
+        <tr><td>(a)</td><td>menyebarkan</td></tr>
+        <tr><td>(b)</td><td>hubungan</td></tr>
+        <tr><td>(c)</td><td>kemajuan</td></tr>
+        <tr><td>(d)</td><td>menimbulkan</td></tr>
+        <tr><td>(e)</td><td>mematuhi</td></tr>
+        <tr><td>(f)</td><td>sopan</td></tr>
+        <tr><td>(g)</td><td>pelajaran</td></tr>
+        <tr><td>(h)</td><td>menyindir</td></tr>
+        <tr><td>(i)</td><td>pesalah</td></tr>
+        <tr><td>(j)</td><td>berhemah</td></tr>
+      </table>
+    </div>
+
+    <div class="table-title">Bahagian B2: Betul atau Salah</div>
+    <div class="ans-table-wrap">
+      <table class="ans-table">
+        <tr><th>Item</th><th>Answer</th></tr>
+        <tr><td>(a) Memuat naik video tidak bermoral</td><td>Salah</td></tr>
+        <tr><td>(b) Menyebarkan berita palsu</td><td>Salah</td></tr>
+        <tr><td>(c) Menggunakan bahasa sopan</td><td>Betul</td></tr>
+        <tr><td>(d) Meluahkan marah secara tidak terkawal di alam siber</td><td>Salah</td></tr>
+        <tr><td>(e) Memberikan maklumat perbankan kepada orang tidak dikenali</td><td>Salah</td></tr>
+        <tr><td>(f) Memaklumkan berada seorang diri di rumah</td><td>Salah</td></tr>
+        <tr><td>(g) Mengugut pengguna siber</td><td>Salah</td></tr>
+        <tr><td>(h) Mengedit dan memuat naik gambar rakan sebagai gurauan</td><td>Salah</td></tr>
+      </table>
+    </div>
+
+    <div class="table-title">Bahagian B3: Padankan Perlakuan dengan Nilai</div>
+    <div class="ans-table-wrap">
+      <table class="ans-table">
+        <tr><th>Item</th><th>Nilai</th></tr>
+        <tr><td>(a)</td><td>Tanggungjawab</td></tr>
+        <tr><td>(b)</td><td>Harga diri</td></tr>
+        <tr><td>(c)</td><td>Kesederhanaan</td></tr>
+        <tr><td>(d)</td><td>Tanggungjawab</td></tr>
+        <tr><td>(e)</td><td>Hemah tinggi</td></tr>
+        <tr><td>(f)</td><td>Hemah tinggi</td></tr>
+        <tr><td>(g)</td><td>Tanggungjawab</td></tr>
+        <tr><td>(h)</td><td>Harga diri</td></tr>
+        <tr><td>(i)</td><td>Kesederhanaan</td></tr>
+        <tr><td>(j)</td><td>Patriotisme</td></tr>
+      </table>
+    </div>
+    <p style="font-size:.78rem;color:#8a8270;font-style:italic;margin-top:.6rem;">
+      Note: Some workbook marking schemes may accept close values if the reason is strong. In exams, choose the value that is most directly shown by the action.
+    </p>
+  </section>
+
+  <!-- 11. QUICK REVISION CHECKLIST -->
+  <section>
+    <div class="section-head">
+      <div class="num">11</div>
+      <h2>Senarai Semak Ulang Kaji Pantas <span class="zh">快速复习清单</span></h2>
+      <div class="sub en">Quick Revision Checklist</div>
+    </div>
+    <div class="check-grid">
+      <div class="check-item"><div class="cn">1</div><div class="ct">Ketahui maksud alam siber: laman web, media sosial, Internet, e-mel.<span class="en">Know what cyberspace means: web, social media, Internet, email.</span><span class="zh">了解网络空间的含义：网站、社交媒体、互联网、电邮。</span></div></div>
+      <div class="check-item"><div class="cn">2</div><div class="ct">Hafal 5 etika siber: tiada catatan tidak senonoh, tiada penghinaan, tiada berita palsu, bahasa sopan, patuhi undang-undang.<span class="en">Memorise 5 cyber ethics: no indecent posts, no insults, no fake news, polite language, obey laws.</span><span class="zh">记住5项网络礼仪：不发布不雅内容、不侮辱他人、不传假新闻、用语礼貌、遵守法律。</span></div></div>
+      <div class="check-item"><div class="cn">3</div><div class="ct">Ingat dua undang-undang siber: Akta Komunikasi dan Multimedia 1998; Akta Jenayah Komputer 1997.<span class="en">Remember the two cyber laws: Communications and Multimedia Act 1998; Computer Crimes Act 1997.</span><span class="zh">记住两项网络法律：1998年通讯与多媒体法令；1997年电脑罪案法令。</span></div></div>
+      <div class="check-item"><div class="cn">4</div><div class="ct">Gunakan nilai: Rasional, Bertanggungjawab, Kejujuran, Hormat, Hemah tinggi, Harga diri, Kesederhanaan, Patriotisme, Prihatin.<span class="en">Use values: Rasional, Bertanggungjawab, Kejujuran, Hormat, Hemah tinggi, Harga diri, Kesederhanaan, Patriotisme, Prihatin.</span><span class="zh">运用价值观：理性、负责任、诚实、尊重、有礼、自尊、节制、爱国、关心。</span></div></div>
+      <div class="check-item"><div class="cn">5</div><div class="ct">Jangan kongsi: nombor akaun bank, alamat rumah, nombor telefon, kata laluan, gambar peribadi.<span class="en">Do not share: bank account, home address, phone number, password, private photos.</span><span class="zh">不要分享：银行账号、住址、电话号码、密码、私人照片。</span></div></div>
+      <div class="check-item"><div class="cn">6</div><div class="ct">Internet selamat: semak ikon kunci, https, kerelevanan, kebolehpercayaan sumber.<span class="en">Safe Internet: check lock icon, https, relevance, source reliability.</span><span class="zh">安全上网：检查锁形图标、https、相关性、来源可靠性。</span></div></div>
+      <div class="check-item"><div class="cn">7</div><div class="ct">Tindak balas buli siber: jangan membalas, sekat, simpan bukti, lapor kepada dewasa/pihak berkuasa.<span class="en">Cyberbully response: do not retaliate, block, save evidence, report to adult/authority.</span><span class="zh">应对网络霸凌：不要还击、屏蔽对方、保存证据、向成人或当局举报。</span></div></div>
+      <div class="check-item"><div class="cn">8</div><div class="ct">Untuk soalan Fakta+Huraian, sentiasa sertakan fakta + sebab/kesan; untuk senarai, fakta sahaja.<span class="en">For Fact+Explanation questions, always include fact + reason/effect; for list questions, facts only.</span><span class="zh">对于要点+说明题，务必包含要点+原因/影响；对于列举题，只需列出要点。</span></div></div>
+    </div>
+  </section>
+
+  <!-- 12. RINGKASAN HAFALAN AKHIR -->
+  <section>
+    <div class="section-head">
+      <div class="num">12</div>
+      <h2>Ringkasan Hafalan Akhir <span class="zh">最后记忆总结</span></h2>
+      <div class="sub en">Final Memory Summary</div>
+    </div>
+
+    <div class="hafalan-box">
+      <span class="lbl">&ldquo;4B&rdquo; untuk Alam Siber</span>
+      <ol class="u-list">
+        <li><b>Berhemah</b> &mdash; guna bahasa sopan, jangan hina orang lain.
+          <span class="en">Courteous &mdash; use polite language, do not insult others.</span>
+          <span class="zh">有礼 &mdash; 使用文明用语，不侮辱他人。</span>
+        </li>
+        <li><b>Benar</b> &mdash; semak maklumat sebelum kongsi, jangan sebar berita palsu.
+          <span class="en">Truthful &mdash; verify information before sharing, do not spread fake news.</span>
+          <span class="zh">真实 &mdash; 分享前先核实，不传播假新闻。</span>
+        </li>
+        <li><b>Berhati-hati</b> &mdash; lindungi maklumat peribadi, jangan klik pautan mencurigakan.
+          <span class="en">Careful &mdash; protect personal information, do not click suspicious links.</span>
+          <span class="zh">谨慎 &mdash; 保护个人信息，不点击可疑链接。</span>
+        </li>
+        <li><b>Bertanggungjawab</b> &mdash; patuhi undang-undang siber, laporkan buli siber.
+          <span class="en">Responsible &mdash; obey cyber laws, report cyberbullying.</span>
+          <span class="zh">负责任 &mdash; 遵守网络法律，举报网络霸凌。</span>
+        </li>
+      </ol>
+    </div>
+
+    <div class="golden-box">
+      <div class="glabel">Ayat Emas Peperiksaan <span style="text-transform:none;">/ Golden Exam Sentence /</span> 考试万能句</div>
+      <div class="gtext">
+        Sebagai pengguna siber yang bijak, saya perlu berhemah, jujur dan bertanggungjawab semasa menggunakan alam siber supaya maklumat yang saya kongsi adalah benar, keharmonian masyarakat terpelihara dan diri saya sendiri terlindung daripada sebarang kesan buruk.
+        <span class="en">As a wise cyber user, I must be courteous, honest and responsible when using cyberspace so that the information I share is true, social harmony is preserved, and I am protected from any negative effects.</span>
+        <span class="zh">作为一个明智的网络使用者，我在使用网络时必须有礼、诚实和负责任，以确保我分享的信息真实、维护社会和谐，并保护自己免受任何不良影响。</span>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    KSSM Moral Tingkatan 2 &middot; Unit 12 &middot; Disediakan untuk rujukan pembelajaran peribadi.<br>
+    供个人学习参考使用 &middot; For personal study reference only.
+  </footer>
+
+</div>
+
+<script>
+function setLang(which){
+  const btn = document.getElementById('btn-'+which);
+  btn.classList.toggle('active');
+  const cls = 'hide-' + which;
+  document.body.classList.toggle(cls);
+}
+</script>
+
+</body>
+</html>
