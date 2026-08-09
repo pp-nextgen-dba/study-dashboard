@@ -3514,7 +3514,8 @@ export const moralData = {
             status:"Not Started",
             confidence:0,
             last_updated:"2026-06-21",
-            resourceUrl: "../moral/t2_moral_unit7_masyarakat_penyayang_trilingual.html"
+            resourceUrl: "../moral/t2_moral_unit7_masyarakat_penyayang_trilingual.html",
+            resourceUrl2:"../moral/t2_Unit7_PersediaanPeperiksaanAkhir.html"
         },
 
         {
@@ -3523,6 +3524,7 @@ export const moralData = {
             chapterNum: 59,
             chapter:"Chapter 8: Perkhidmatan Awam Pemangkin Pembangunan Negara",
             resourceUrl:"../moral/form2_moral_unit8_public_services_trilingual.html",
+            resourceUrl2:"../moral/t2_Unit8_PersediaanPeperiksaanAkhir.html",
             status:"Not Started",
             confidence:0,
             last_updated:"2026-07-28"
