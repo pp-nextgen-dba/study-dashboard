@@ -15,7 +15,7 @@ content="width=device-width, initial-scale=1.0">
 <title>Pendidikan Moral Dashboard</title>
 
 <link rel="stylesheet"
-href="../css/style.css?v=39">
+href="../css/style.css?v=40">
 
 <style>
 
@@ -397,7 +397,7 @@ import {
     moralData
 }
 from
-"../js/subject.js?v=23";
+"../js/subject.js?v=24";
 
 import { requireAuth } from "../js/auth.js";
 await requireAuth("../index.html");
@@ -514,6 +514,28 @@ function mergeSeedChapters(subjectData){
                 updatedChapter = {
                     ...updatedChapter,
                     resourceUrl2Label:seedChapter.resourceUrl2Label
+                };
+
+            }
+
+            if(!existingChapter.resourceUrl3 && seedChapter.resourceUrl3){
+
+                changed = true;
+
+                updatedChapter = {
+                    ...updatedChapter,
+                    resourceUrl3:seedChapter.resourceUrl3
+                };
+
+            }
+
+            if(!existingChapter.resourceUrl3Label && seedChapter.resourceUrl3Label){
+
+                changed = true;
+
+                updatedChapter = {
+                    ...updatedChapter,
+                    resourceUrl3Label:seedChapter.resourceUrl3Label
                 };
 
             }
@@ -780,7 +802,8 @@ function render(){
 
             const chapterResource = chapter.resourceUrl
                 ? `<a class="chapter-link" href="${chapter.resourceUrl}">Note 1</a>` +
-                  (chapter.resourceUrl2 ? ` <a class="chapter-link" href="${chapter.resourceUrl2}">${chapter.resourceUrl2Label || "Note 2"}</a>` : "")
+                  (chapter.resourceUrl2 ? ` <a class="chapter-link" href="${chapter.resourceUrl2}">${chapter.resourceUrl2Label || "Note 2"}</a>` : "") +
+                  (chapter.resourceUrl3 ? ` <a class="chapter-link" href="${chapter.resourceUrl3}">${chapter.resourceUrl3Label || "Note 3"}</a>` : "")
                 : "";
 
             card.innerHTML = `

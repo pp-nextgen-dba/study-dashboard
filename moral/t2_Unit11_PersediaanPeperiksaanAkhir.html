@@ -1,0 +1,926 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Unit 11 · Nota Persediaan Peperiksaan Akhir — Adab di Tempat Awam</title>
+<style>
+  :root{
+    --ink:#1c2a3a;
+    --paper:#f6f1e6;
+    --paper2:#eee6d4;
+    --navy:#1f3a5f;
+    --navy-deep:#142840;
+    --brass:#a8762f;
+    --brass-light:#c99a4f;
+    --rule:#cdbf9e;
+    --fact:#1f5c4a;
+    --explain:#8a4a1f;
+    --value:#5b5390;
+    --good:#3c6e5e;
+    --bad:#9c4a5c;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Iowan Old Style','Songti SC','Noto Serif SC',Georgia,serif;
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+  .zh{font-family:'Songti SC','Noto Serif SC','PingFang SC',serif;}
+  .label{
+    font-family:'Helvetica Neue',Arial,sans-serif;
+    letter-spacing:.12em;
+    text-transform:uppercase;
+    font-size:.68rem;
+    font-weight:600;
+  }
+
+  /* ===== Masthead ===== */
+  .masthead{
+    background:linear-gradient(180deg,var(--navy-deep),var(--navy));
+    color:var(--paper);
+    padding:2.6rem 1.4rem 2rem;
+    position:relative;
+    overflow:hidden;
+    border-bottom:6px solid var(--brass);
+  }
+  .masthead::before{
+    content:"";
+    position:absolute; inset:0;
+    background-image:
+      repeating-linear-gradient(0deg, rgba(255,255,255,.035) 0 1px, transparent 1px 26px);
+    pointer-events:none;
+  }
+  .seal{width:64px;height:64px;margin:0 auto 1rem;position:relative;}
+  .seal svg{width:100%;height:100%;}
+  .mast-eyebrow{text-align:center;color:var(--brass-light);margin-bottom:.5rem;}
+  .mast-unit{
+    text-align:center;font-size:.95rem;color:#cdd9e6;
+    letter-spacing:.18em;text-transform:uppercase;margin-bottom:.3rem;
+  }
+  h1.mast-title{text-align:center;font-size:1.7rem;margin:.2rem 0 .15rem;font-weight:700;letter-spacing:.01em;}
+  .mast-title .zh{display:block;font-size:1.1rem;color:var(--brass-light);margin-top:.35rem;font-weight:500;letter-spacing:.04em;}
+  .mast-title .en{display:block;font-size:.92rem;font-style:italic;color:#cdd9e6;margin-top:.3rem;font-weight:400;}
+  .mast-sub{text-align:center;font-size:.85rem;color:#cdd9e6;margin-top:.9rem;}
+  .mast-sub .zh{display:block;font-size:.78rem;color:var(--brass-light);margin-top:.2rem;}
+  .mast-sub .en{display:block;font-size:.78rem;font-style:italic;color:#9fb0c4;margin-top:.15rem;}
+
+  /* ===== Sticky lang toggle ===== */
+  .langbar{
+    position:sticky; top:0; z-index:50;
+    background:var(--paper2);
+    border-bottom:1px solid var(--rule);
+    padding:.55rem .9rem;
+    display:flex; gap:.4rem; justify-content:center;
+    font-family:'Helvetica Neue',Arial,sans-serif;
+  }
+  .langbar button{
+    border:1px solid var(--rule);background:var(--paper);color:var(--ink);
+    padding:.35rem .85rem;font-size:.75rem;letter-spacing:.06em;
+    border-radius:3px;cursor:pointer;font-weight:600;
+  }
+  .langbar button.active{background:var(--navy);color:var(--paper);border-color:var(--navy);}
+
+  .wrap{max-width:880px;margin:0 auto;padding:0 1.1rem 4rem;}
+  section{margin-top:2.6rem;}
+
+  .section-head{
+    display:flex; align-items:baseline; gap:.6rem;
+    margin-bottom:.9rem;
+    border-bottom:2px solid var(--ink);
+    padding-bottom:.45rem;
+    flex-wrap:wrap;
+  }
+  .section-head .num{
+    font-family:'Helvetica Neue',Arial,sans-serif;font-size:.75rem;font-weight:700;
+    color:var(--brass);border:1px solid var(--brass);border-radius:50%;
+    width:1.5rem;height:1.5rem;display:flex;align-items:center;justify-content:center;flex-shrink:0;
+  }
+  .section-head h2{font-size:1.15rem;margin:0;font-weight:700;}
+  .section-head h2 .zh{display:block;font-size:.78rem;font-weight:400;color:#6b6354;margin-top:.1rem;}
+  .section-head .sub{
+    font-family:'Helvetica Neue',Arial,sans-serif;font-size:.78rem;color:#6b6354;
+    margin-left:auto;white-space:nowrap;font-style:italic;
+  }
+
+  /* ===== Toolkit (formula + linking words) ===== */
+  .toolkit-grid{display:grid;grid-template-columns:1fr 1fr;gap:.9rem;}
+  @media (max-width:620px){.toolkit-grid{grid-template-columns:1fr;}}
+  .toolkit-card{
+    border:1px solid var(--brass);border-radius:8px;background:var(--paper2);
+    padding:.9rem 1rem;
+  }
+  .toolkit-card .thead{
+    font-family:'Helvetica Neue',Arial,sans-serif;font-weight:700;font-size:.78rem;
+    color:var(--brass);letter-spacing:.06em;text-transform:uppercase;margin-bottom:.5rem;
+  }
+  .toolkit-card .formula{
+    font-size:1rem;font-weight:700;color:var(--navy);margin-bottom:.6rem;
+    background:var(--paper);border-radius:6px;padding:.4rem .6rem;text-align:center;
+  }
+  .toolkit-card ul{margin:0;padding-left:1.1rem;font-size:.84rem;}
+  .toolkit-card li{margin-bottom:.4rem;}
+  .toolkit-card li .zh,.toolkit-card li .en{display:block;font-size:.74rem;color:#6b6354;margin-top:.08rem;}
+  .toolkit-card li .en{font-style:italic;color:#8a8270;}
+
+  /* ===== Question-type guide ===== */
+  .qtype-grid{display:grid;grid-template-columns:1fr 1fr;gap:.7rem;}
+  @media (max-width:620px){.qtype-grid{grid-template-columns:1fr;}}
+  .qtype-card{border:1px solid var(--rule);border-radius:8px;background:var(--paper);padding:.75rem .9rem;}
+  .qtype-card .qhead{font-family:'Helvetica Neue',Arial,sans-serif;font-weight:700;font-size:.78rem;color:var(--navy);margin-bottom:.35rem;}
+  .qtype-card .qhead .zh{display:block;font-weight:400;font-size:.72rem;color:#6b6354;margin-top:.1rem;}
+  .qtype-card p{margin:.3rem 0;font-size:.83rem;}
+  .qtype-card .zh{display:block;color:#6b6354;font-size:.74rem;margin-top:.1rem;}
+  .qtype-card .en{display:block;color:#8a8270;font-size:.74rem;font-style:italic;margin-top:.05rem;}
+  .qtype-card .marks-tip{margin-top:.4rem;padding-top:.4rem;border-top:1px dashed var(--rule);font-size:.76rem;color:var(--brass);font-weight:700;font-family:'Helvetica Neue',Arial,sans-serif;}
+
+  /* ===== Fact/Explanation cards ===== */
+  .fh-card{
+    border:1px solid var(--rule);border-radius:8px;overflow:hidden;margin-bottom:.7rem;background:var(--paper);
+  }
+  .fh-card .fh-title{
+    padding:.55rem .85rem;font-family:'Helvetica Neue',Arial,sans-serif;font-weight:700;
+    font-size:.82rem;color:#fff;background:var(--navy);
+  }
+  .fh-card .fh-title .zh{font-weight:500;opacity:.9;font-size:.74rem;display:block;margin-top:.1rem;}
+  .fh-card .fh-title .en{font-weight:400;font-style:italic;opacity:.85;font-size:.74rem;display:block;margin-top:.05rem;}
+  .fh-row{display:flex;gap:.6rem;padding:.55rem .9rem;border-top:1px dashed var(--rule);align-items:flex-start;}
+  .fh-row:first-of-type{border-top:none;}
+  .fh-tag{
+    font-family:'Helvetica Neue',Arial,sans-serif;font-weight:700;color:#fff;
+    border-radius:50%;width:1.5rem;height:1.5rem;flex-shrink:0;
+    display:flex;align-items:center;justify-content:center;font-size:.72rem;
+  }
+  .fh-row.f .fh-tag{background:var(--fact);}
+  .fh-row.h .fh-tag{background:var(--explain);}
+  .fh-text{font-size:.87rem;}
+  .fh-text .zh{display:block;color:#6b6354;font-size:.78rem;margin-top:.2rem;}
+  .fh-text .en{display:block;color:#8a8270;font-size:.78rem;font-style:italic;margin-top:.15rem;}
+
+  /* ===== Grid wrapper for multiple fh-cards ===== */
+  .fh-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:0 .7rem;}
+  .fh-grid .fh-card{margin-bottom:.7rem;}
+
+  /* ===== Hafalan (memory aid) box ===== */
+  .hafalan-box{
+    background:var(--paper2);border-left:4px solid var(--brass);
+    padding:.7rem .9rem;border-radius:0 6px 6px 0;font-size:.88rem;margin-top:.8rem;
+  }
+  .hafalan-box .lbl{display:block;margin-bottom:.35rem;color:var(--brass);}
+  .hafalan-box .main{font-weight:700;color:var(--navy);}
+  .hafalan-box .zh{display:block;color:#6b6354;font-size:.78rem;margin-top:.25rem;}
+  .hafalan-box .en{display:block;color:#8a8270;font-size:.78rem;font-style:italic;margin-top:.1rem;}
+
+  /* ===== Do / Don't ===== */
+  .dodont-grid{display:grid;grid-template-columns:1fr 1fr;gap:.9rem;}
+  @media (max-width:620px){.dodont-grid{grid-template-columns:1fr;}}
+  .dodont-col .dhead{font-family:'Helvetica Neue',Arial,sans-serif;font-weight:700;font-size:.8rem;margin-bottom:.5rem;text-transform:uppercase;letter-spacing:.05em;}
+  .dodont-col.do .dhead{color:var(--good);}
+  .dodont-col.dont .dhead{color:var(--bad);}
+  .dodont-col .fh-card{border-width:1px;}
+  .dodont-col.do .fh-title{background:var(--good);}
+  .dodont-col.dont .fh-title{background:var(--bad);}
+
+  /* ===== KBAT / formula template box ===== */
+  .kbat-box{
+    border:1px solid var(--navy);border-radius:8px;background:var(--paper2);padding:.9rem 1rem;margin-bottom:.7rem;
+  }
+  .kbat-box .kt-label{font-family:'Helvetica Neue',Arial,sans-serif;font-weight:700;font-size:.75rem;color:var(--navy);text-transform:uppercase;letter-spacing:.06em;margin-bottom:.4rem;}
+  .kbat-box .kt-text{font-size:.88rem;font-style:italic;}
+  .kbat-box .kt-text .zh{display:block;font-style:normal;color:#6b6354;font-size:.78rem;margin-top:.2rem;}
+  .kbat-box .kt-text .en{display:block;color:#8a8270;font-size:.78rem;margin-top:.15rem;}
+  .kbat-box .kt-example{margin-top:.6rem;padding-top:.6rem;border-top:1px dashed var(--rule);font-size:.85rem;font-style:normal;}
+  .kbat-box .kt-example .lbl{font-family:'Helvetica Neue',Arial,sans-serif;font-weight:700;font-size:.7rem;color:var(--brass);text-transform:uppercase;letter-spacing:.05em;display:block;margin-bottom:.25rem;}
+
+  /* ===== Q&A ===== */
+  .qa-block{
+    border:1px solid var(--rule);border-radius:8px;background:var(--paper);padding:.8rem .9rem;margin-bottom:.6rem;
+  }
+  .qa-q{
+    font-family:'Helvetica Neue',Arial,sans-serif;font-weight:700;font-size:.82rem;
+    color:var(--navy);margin-bottom:.3rem;display:flex;flex-wrap:wrap;gap:.4rem;align-items:baseline;
+  }
+  .qa-q .zh,.qa-q .en{display:block;font-weight:500;font-size:.74rem;color:#6b6354;margin-top:.15rem;width:100%;}
+  .qa-q .en{font-style:italic;color:#8a8270;}
+  .qtype-tag{
+    font-family:'Helvetica Neue',Arial,sans-serif;font-weight:700;font-size:.64rem;text-transform:uppercase;letter-spacing:.04em;
+    border-radius:999px;padding:.15rem .55rem;margin-left:auto;flex-shrink:0;
+  }
+  .qtype-tag.list{background:#e6eef7;color:var(--navy);}
+  .qtype-tag.fh{background:#fbeee0;color:var(--explain);}
+  .qa-ans-list{
+    background:var(--paper2);border-radius:6px;padding:.6rem .8rem;font-size:.85rem;margin-top:.4rem;
+  }
+  .qa-ans-list .zh,.qa-ans-list .en{display:block;font-size:.74rem;color:#8a8270;margin-top:.2rem;}
+  .qa-ans-list .en{font-style:italic;}
+  .qa-fh{margin-top:.5rem;border:1px solid var(--rule);border-radius:6px;overflow:hidden;}
+  .qa-fh .fh-row{background:var(--paper2);}
+  .qa-tip{margin-top:.5rem;padding-top:.5rem;border-top:1px dashed var(--rule);font-size:.78rem;color:var(--brass);}
+  .qa-tip .zh,.qa-tip .en{display:block;color:#8a8270;font-size:.72rem;margin-top:.1rem;}
+
+  /* ===== Answer-key tables ===== */
+  .ans-table-wrap{overflow-x:auto;border:1px solid var(--rule);border-radius:8px;}
+  table.ans-table{width:100%;border-collapse:collapse;font-size:.8rem;background:var(--paper);}
+  table.ans-table th{background:var(--navy);color:var(--paper);padding:.5rem .6rem;text-align:left;font-family:'Helvetica Neue',Arial,sans-serif;font-weight:700;font-size:.72rem;text-transform:uppercase;letter-spacing:.04em;}
+  table.ans-table td{padding:.5rem .6rem;border-top:1px solid var(--rule);vertical-align:top;}
+  table.ans-table tr:nth-child(even) td{background:var(--paper2);}
+  .table-title{font-family:'Helvetica Neue',Arial,sans-serif;font-weight:700;font-size:.78rem;color:var(--brass);margin:1rem 0 .5rem;text-transform:uppercase;letter-spacing:.05em;}
+  .table-title:first-child{margin-top:0;}
+
+  /* ===== Checklist ===== */
+  .check-grid{display:flex;flex-direction:column;gap:.5rem;}
+  .check-item{display:flex;gap:.6rem;align-items:flex-start;border:1px solid var(--brass);border-radius:7px;padding:.55rem .75rem;background:var(--paper2);}
+  .check-item .cn{
+    font-family:'Helvetica Neue',Arial,sans-serif;font-weight:700;color:#fff;
+    background:var(--brass);border-radius:50%;width:1.4rem;height:1.4rem;
+    display:flex;align-items:center;justify-content:center;font-size:.72rem;flex-shrink:0;
+  }
+  .check-item .ct{font-size:.85rem;}
+  .check-item .ct .zh{display:block;color:#6b6354;font-size:.76rem;margin-top:.1rem;}
+  .check-item .ct .en{display:block;color:#8a8270;font-size:.76rem;font-style:italic;margin-top:.05rem;}
+
+  /* ===== Golden sentence ===== */
+  .golden-box{
+    background:linear-gradient(135deg,var(--navy),var(--navy-deep));color:var(--paper);
+    border-radius:10px;padding:1.1rem 1.2rem;margin-top:.8rem;
+    box-shadow:0 3px 0 var(--brass);
+  }
+  .golden-box .glabel{font-family:'Helvetica Neue',Arial,sans-serif;font-weight:700;font-size:.72rem;color:var(--brass-light);text-transform:uppercase;letter-spacing:.08em;margin-bottom:.5rem;}
+  .golden-box .gtext{font-size:.92rem;}
+  .golden-box .zh{display:block;color:var(--brass-light);font-size:.82rem;margin-top:.4rem;}
+  .golden-box .en{display:block;color:#cdd9e6;font-size:.8rem;font-style:italic;margin-top:.3rem;}
+
+  .u-list{margin:.7rem 0 0;padding-left:1.2rem;font-size:.88rem;}
+  .u-list li{margin-bottom:.5rem;}
+  .u-list li .zh{display:block;color:#6b6354;font-size:.78rem;margin-top:.1rem;}
+  .u-list li .en{display:block;color:#8a8270;font-size:.78rem;font-style:italic;margin-top:.05rem;}
+
+  footer{
+    text-align:center;margin-top:3rem;padding-top:1.2rem;border-top:1px solid var(--rule);
+    font-family:'Helvetica Neue',Arial,sans-serif;font-size:.72rem;color:#9a9180;
+  }
+
+  body.hide-en .en{display:none !important;}
+  body.hide-zh .zh{display:none !important;}
+</style>
+</head>
+<body>
+
+<div class="top-nav" style="background:#fff;padding:10px 16px;border-bottom:2px solid #e5e7eb;position:sticky;top:0;z-index:120">
+  <a class="dashboard-link" href="../index.html" style="display:inline-flex;align-items:center;gap:6px;padding:8px 12px;border-radius:8px;background:#1d4ed8;color:#fff;font-size:13px;font-weight:800;text-decoration:none">&larr; Back to Dashboard</a>
+</div>
+
+<header class="masthead">
+  <div class="seal">
+    <svg viewBox="0 0 64 64" fill="none">
+      <circle cx="32" cy="32" r="30" stroke="#c99a4f" stroke-width="2"/>
+      <path d="M20 44 L20 30 L32 20 L44 30 L44 44 Z" stroke="#c99a4f" stroke-width="2" fill="none" stroke-linejoin="round"/>
+      <path d="M26 44 L26 36 L38 36 L38 44" stroke="#c99a4f" stroke-width="2" fill="none"/>
+    </svg>
+  </div>
+  <div class="mast-eyebrow label">KSSM Moral &middot; Tingkatan 2 / Form 2 / 表 2</div>
+  <div class="mast-unit">Unit 11</div>
+  <h1 class="mast-title">
+    Nota Persediaan Peperiksaan Akhir
+    <span class="zh">期末考试准备笔记</span>
+    <span class="en">Final Exam Preparation Notes</span>
+  </h1>
+  <div class="mast-sub">
+    Adab di Tempat Awam Dijaga, Nikmat Hidup Dirasai Bersama
+    <span class="zh">维护公共场所礼仪，共享美好生活</span>
+    <span class="en">Good Manners in Public Places, Shared Enjoyment of Life</span>
+  </div>
+</header>
+
+<div class="langbar">
+  <button id="btn-en" class="active" onclick="setLang('en')">EN</button>
+  <button id="btn-zh" class="active" onclick="setLang('zh')">中文</button>
+</div>
+
+<div class="wrap">
+
+  <!-- TOOLKIT -->
+  <section style="margin-top:1.6rem;">
+    <div class="section-head">
+      <div class="num">&#128295;</div>
+      <h2>Formula &amp; Kata Penyambung <span class="zh">作答公式与连接词</span></h2>
+      <div class="sub en">Answer Formula &amp; Linking Words</div>
+    </div>
+    <div class="toolkit-grid">
+      <div class="toolkit-card">
+        <div class="thead">Formula Jawapan <span class="en">/ Answer Formula /</span> <span class="zh">作答公式</span></div>
+        <div class="formula">Fakta (F) + Huraian (H) = 2 markah</div>
+        <ul>
+          <li><b>Fakta (F):</b> Isi utama yang menjawab soalan.
+            <span class="en">The main point answering the question.</span>
+            <span class="zh">直接回答问题的主要内容。</span>
+          </li>
+          <li><b>Huraian (H):</b> Sebab, cara, contoh atau kesan fakta tersebut.
+            <span class="en">The reason, method, example or effect.</span>
+            <span class="zh">解释该要点的原因、方法、例子或影响。</span>
+          </li>
+        </ul>
+      </div>
+      <div class="toolkit-card">
+        <div class="thead">Kata Penyambung <span class="en">/ Linking Words /</span> <span class="zh">连接词</span></div>
+        <ul>
+          <li>Hal ini demikian kerana&hellip;
+            <span class="en">This is because&hellip;</span>
+            <span class="zh">这是因为……</span>
+          </li>
+          <li>Contohnya&hellip;
+            <span class="en">For example&hellip;</span>
+            <span class="zh">例如……</span>
+          </li>
+          <li>Kesannya&hellip;
+            <span class="en">As a result&hellip;</span>
+            <span class="zh">结果……</span>
+          </li>
+          <li>Sebaliknya&hellip;
+            <span class="en">On the other hand&hellip;</span>
+            <span class="zh">反之……</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- PANDUAN JENIS SOALAN -->
+  <section>
+    <div class="section-head">
+      <div class="num">&#128214;</div>
+      <h2>Panduan Menjawab: Kenali Jenis Soalan <span class="zh">作答指南：认清题型</span></h2>
+      <div class="sub en">How to Answer: Know the Question Type</div>
+    </div>
+    <div class="qtype-grid">
+      <div class="qtype-card">
+        <div class="qhead">Nyatakan / Senaraikan <span class="zh">列出 / 说明</span></div>
+        <p>Setiap fakta = 1 markah. <b>Tidak perlu huraian</b> &mdash; senaraikan fakta sahaja.
+          <span class="en">Each fact = 1 mark. No explanation needed &mdash; just list the facts.</span>
+          <span class="zh">每个要点 = 1分。无需说明，只需列出要点。</span>
+        </p>
+        <div class="marks-tip">Jika soalan minta "3 fakta" &rarr; tulis 3 fakta sahaja.</div>
+      </div>
+      <div class="qtype-card">
+        <div class="qhead">Jelaskan / Terangkan / Huraikan <span class="zh">解释 / 说明理由</span></div>
+        <p>Gunakan <b>Fakta + Huraian = 2 markah</b> bagi setiap isi.
+          <span class="en">Use Fact + Explanation = 2 marks for each point.</span>
+          <span class="zh">每个要点使用"要点+说明"的格式。</span>
+        </p>
+        <div class="marks-tip">Jika soalan bernilai 4 markah &rarr; tulis 2 pasang Fakta+Huraian.</div>
+      </div>
+      <div class="qtype-card">
+        <div class="qhead">Pada pendapat anda&hellip; (KBAT) <span class="zh">你认为……（高层次思维）</span></div>
+        <p>Gunakan templat: <b>Tindakan + Sebab + Kesan</b>.
+          <span class="en">Use the template: Action + Reason + Effect.</span>
+          <span class="zh">使用模板：行动+原因+影响。</span>
+        </p>
+        <div class="marks-tip">Lihat Bahagian 8 untuk templat penuh.</div>
+      </div>
+      <div class="qtype-card">
+        <div class="qhead">Apakah perasaan anda? <span class="zh">你有什么感受？</span></div>
+        <p>Nyatakan <b>perasaan</b> (gembira/bangga/puas hati), kemudian satu sebab yang menyokongnya.
+          <span class="en">State the feeling, then one supporting reason.</span>
+          <span class="zh">说出感受，再用一个理由加以说明。</span>
+        </p>
+        <div class="marks-tip">Lihat Bahagian 9, Soalan 5 untuk contoh.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 1. KONSEP PENTING -->
+  <section>
+    <div class="section-head">
+      <div class="num">1</div>
+      <h2>Konsep Penting <span class="zh">重要概念</span></h2>
+      <div class="sub en">Core Concept</div>
+    </div>
+    <div class="fh-card">
+      <div class="fh-row f">
+        <div class="fh-tag">F</div>
+        <div class="fh-text">
+          Tempat awam ialah tempat orang ramai berkumpul untuk menjalankan sesuatu urusan atau aktiviti.
+          <span class="en">A public place is a place where many people gather to carry out matters or activities.</span>
+          <span class="zh">公共场所是许多人聚集办理事务或进行活动的地方。</span>
+        </div>
+      </div>
+      <div class="fh-row h">
+        <div class="fh-tag">H</div>
+        <div class="fh-text">
+          Oleh itu, semua pihak perlu menjaga adab ketika berada di tempat awam untuk mengekalkan keharmonian bersama.
+          <span class="en">Therefore, everyone must maintain good manners in public places to preserve shared harmony.</span>
+          <span class="zh">因此，所有人在公共场所都必须保持礼貌，以维护共同的和谐。</span>
+        </div>
+      </div>
+    </div>
+    <div class="hafalan-box">
+      <span class="lbl">Hafalan <span class="en">/ Memory Aid /</span> <span class="zh">记忆法</span></span>
+      <span class="main">Tempat Awam = Orang Ramai + Urusan/Aktiviti</span>
+      <span class="zh">公共场所 = 大众 + 事务／活动</span>
+    </div>
+  </section>
+
+  <!-- 2. CONTOH TEMPAT AWAM -->
+  <section>
+    <div class="section-head">
+      <div class="num">2</div>
+      <h2>Contoh Tempat Awam <span class="zh">公共场所例子</span></h2>
+      <div class="sub en">Examples of Public Places</div>
+    </div>
+    <div class="fh-grid">
+      <div class="fh-card"><div class="fh-title">Hospital <span class="zh">医院</span></div>
+        <div class="fh-row f"><div class="fh-tag">F</div><div class="fh-text">Hospital ialah tempat awam.<span class="en">A hospital is a public place.</span><span class="zh">医院是公共场所。</span></div></div>
+        <div class="fh-row h"><div class="fh-tag">H</div><div class="fh-text">Kekal senyap, hormati pesakit dan patuhi peraturan.<span class="en">Keep quiet, respect patients and follow the rules.</span><span class="zh">保持安静，尊重病人，遵守规定。</span></div></div>
+      </div>
+      <div class="fh-card"><div class="fh-title">Stesen Kereta Api <span class="zh">火车站</span></div>
+        <div class="fh-row f"><div class="fh-tag">F</div><div class="fh-text">Stesen kereta api ialah tempat awam.<span class="en">A railway station is a public place.</span><span class="zh">火车站是公共场所。</span></div></div>
+        <div class="fh-row h"><div class="fh-tag">H</div><div class="fh-text">Beratur dengan betul dan jangan menghalang orang lain.<span class="en">Queue properly and do not block others.</span><span class="zh">好好排队，不要阻碍他人。</span></div></div>
+      </div>
+      <div class="fh-card"><div class="fh-title">Perpustakaan <span class="zh">图书馆</span></div>
+        <div class="fh-row f"><div class="fh-tag">F</div><div class="fh-text">Perpustakaan ialah tempat awam.<span class="en">A library is a public place.</span><span class="zh">图书馆是公共场所。</span></div></div>
+        <div class="fh-row h"><div class="fh-tag">H</div><div class="fh-text">Bercakap perlahan dan simpan buku dengan kemas.<span class="en">Speak softly and keep books properly.</span><span class="zh">轻声说话，妥善整理书籍。</span></div></div>
+      </div>
+      <div class="fh-card"><div class="fh-title">Tempat Menunggu Bas <span class="zh">巴士站</span></div>
+        <div class="fh-row f"><div class="fh-tag">F</div><div class="fh-text">Tempat menunggu bas ialah tempat awam.<span class="en">A bus stop is a public place.</span><span class="zh">巴士站是公共场所。</span></div></div>
+        <div class="fh-row h"><div class="fh-tag">H</div><div class="fh-text">Beratur dan utamakan warga emas atau OKU.<span class="en">Queue and give priority to the elderly/disabled.</span><span class="zh">排队并优先照顾长者与残障人士。</span></div></div>
+      </div>
+      <div class="fh-card"><div class="fh-title">Lapangan Terbang <span class="zh">机场</span></div>
+        <div class="fh-row f"><div class="fh-tag">F</div><div class="fh-text">Lapangan terbang ialah tempat awam.<span class="en">An airport is a public place.</span><span class="zh">机场是公共场所。</span></div></div>
+        <div class="fh-row h"><div class="fh-tag">H</div><div class="fh-text">Ikut arahan dan jaga kebersihan kemudahan.<span class="en">Follow instructions and keep facilities clean.</span><span class="zh">遵循指示，保持设施清洁。</span></div></div>
+      </div>
+      <div class="fh-card"><div class="fh-title">Pasar Awam <span class="zh">公共市场</span></div>
+        <div class="fh-row f"><div class="fh-tag">F</div><div class="fh-text">Pasar awam ialah tempat awam.<span class="en">A public market is a public place.</span><span class="zh">公共市场是公共场所。</span></div></div>
+        <div class="fh-row h"><div class="fh-tag">H</div><div class="fh-text">Jangan buang sampah merata-rata dan hormati pembeli lain.<span class="en">Do not litter and respect other shoppers.</span><span class="zh">不乱丢垃圾，尊重其他顾客。</span></div></div>
+      </div>
+      <div class="fh-card"><div class="fh-title">Kawasan Rekreasi <span class="zh">休闲区</span></div>
+        <div class="fh-row f"><div class="fh-tag">F</div><div class="fh-text">Kawasan rekreasi ialah tempat awam.<span class="en">A recreation area is a public place.</span><span class="zh">休闲区是公共场所。</span></div></div>
+        <div class="fh-row h"><div class="fh-tag">H</div><div class="fh-text">Jaga kawasan supaya bersih dan selamat.<span class="en">Keep the area clean and safe.</span><span class="zh">保持该区域清洁与安全。</span></div></div>
+      </div>
+      <div class="fh-card" style="margin-bottom:0;"><div class="fh-title">RTC (Pusat Transformasi Luar Bandar) <span class="zh">乡村转型中心</span></div>
+        <div class="fh-row f"><div class="fh-tag">F</div><div class="fh-text">RTC ialah tempat awam.<span class="en">An RTC is a public place.</span><span class="zh">乡村转型中心是公共场所。</span></div></div>
+        <div class="fh-row h"><div class="fh-tag">H</div><div class="fh-text">Gunakan perkhidmatan dan kemudahan secara bertanggungjawab.<span class="en">Use services and facilities responsibly.</span><span class="zh">负责任地使用服务与设施。</span></div></div>
+      </div>
+    </div>
+    <div class="hafalan-box">
+      <span class="lbl">Hafalan Tempat Awam <span class="en">/ Memory Aid /</span> <span class="zh">场所记忆法</span></span>
+      <span class="main">Hospital &ndash; Stesen &ndash; Perpustakaan &ndash; Bas &ndash; Lapangan Terbang &ndash; Pasar &ndash; Rekreasi &ndash; RTC</span>
+    </div>
+  </section>
+
+  <!-- 3. CARA BERADAB -->
+  <section>
+    <div class="section-head">
+      <div class="num">3</div>
+      <h2>Cara Beradab di Tempat Awam <span class="zh">公共场所礼貌行为</span></h2>
+      <div class="sub en">Good Manners in Public Places</div>
+    </div>
+    <div class="fh-grid">
+      <div class="fh-card"><div class="fh-title">1. Berpakaian Sopan</div>
+        <div class="fh-row f"><div class="fh-tag">F</div><div class="fh-text">Memakai pakaian sopan dan sesuai.<span class="en">Wear proper and appropriate clothing.</span><span class="zh">穿着端庄合适的服装。</span></div></div>
+        <div class="fh-row h"><div class="fh-tag">H</div><div class="fh-text">Menjaga imej diri dan menghormati suasana tempat awam.<span class="en">This protects one&rsquo;s self-image and respects the public setting.</span><span class="zh">维护个人形象，尊重公共场合的氛围。</span></div></div>
+      </div>
+      <div class="fh-card"><div class="fh-title">2. Berkelakuan Sopan</div>
+        <div class="fh-row f"><div class="fh-tag">F</div><div class="fh-text">Berkelakuan sopan di tempat awam.<span class="en">Behave politely in public places.</span><span class="zh">在公共场所举止有礼。</span></div></div>
+        <div class="fh-row h"><div class="fh-tag">H</div><div class="fh-text">Tidak membuat bising, tidak bergaduh dan menjaga tutur kata.<span class="en">Not making noise, not quarrelling, and watching one&rsquo;s speech.</span><span class="zh">不喧哗、不争吵，并注意言辞。</span></div></div>
+      </div>
+      <div class="fh-card"><div class="fh-title">3. Buang Sampah dalam Tong</div>
+        <div class="fh-row f"><div class="fh-tag">F</div><div class="fh-text">Membuang sampah ke dalam tong sampah.<span class="en">Throw rubbish into the bin.</span><span class="zh">把垃圾丢进垃圾桶。</span></div></div>
+        <div class="fh-row h"><div class="fh-tag">H</div><div class="fh-text">Menjaga kebersihan dan keselesaan orang ramai.<span class="en">This maintains cleanliness and public comfort.</span><span class="zh">保持环境清洁，让大众感到舒适。</span></div></div>
+      </div>
+      <div class="fh-card"><div class="fh-title">4. Guna Kemudahan dengan Baik</div>
+        <div class="fh-row f"><div class="fh-tag">F</div><div class="fh-text">Menggunakan kemudahan awam dengan baik.<span class="en">Use public facilities properly.</span><span class="zh">妥善使用公共设施。</span></div></div>
+        <div class="fh-row h"><div class="fh-tag">H</div><div class="fh-text">Tidak merosakkan harta benda awam dan menggunakan kemudahan mengikut keperluan.<span class="en">Not damaging public property and using facilities according to need.</span><span class="zh">不破坏公物，并按需要使用设施。</span></div></div>
+      </div>
+      <div class="fh-card"><div class="fh-title">5. Beri Laluan</div>
+        <div class="fh-row f"><div class="fh-tag">F</div><div class="fh-text">Memberikan laluan kepada orang ramai.<span class="en">Give way to the public.</span><span class="zh">给公众让路。</span></div></div>
+        <div class="fh-row h"><div class="fh-tag">H</div><div class="fh-text">Tidak menghalang laluan dan memberi ruang kepada orang lain.<span class="en">Not blocking the path and giving space to others.</span><span class="zh">不阻塞通道，并给他人空间。</span></div></div>
+      </div>
+      <div class="fh-card" style="margin-bottom:0;"><div class="fh-title">6. Guna Air Ikut Keperluan</div>
+        <div class="fh-row f"><div class="fh-tag">F</div><div class="fh-text">Menggunakan air di tandas mengikut keperluan.<span class="en">Use water in the toilet according to need.</span><span class="zh">如厕时按需要用水。</span></div></div>
+        <div class="fh-row h"><div class="fh-tag">H</div><div class="fh-text">Mengelakkan pembaziran dan menjaga kebersihan tandas awam.<span class="en">This avoids wastage and keeps public toilets clean.</span><span class="zh">避免浪费，并保持公共厕所的清洁。</span></div></div>
+      </div>
+    </div>
+    <div class="hafalan-box">
+      <span class="lbl">Hafalan Cara Beradab <span class="en">/ Memory Aid /</span> <span class="zh">礼貌行为记忆法</span></span>
+      <span class="main">Pakaian &ndash; Kelakuan &ndash; Sampah &ndash; Kemudahan &ndash; Laluan &ndash; Air</span>
+      <span class="zh">穿着 &ndash; 行为 &ndash; 垃圾 &ndash; 设施 &ndash; 通道 &ndash; 用水</span>
+    </div>
+  </section>
+
+  <!-- 4. NILAI MURNI -->
+  <section>
+    <div class="section-head">
+      <div class="num">4</div>
+      <h2>Nilai Murni <span class="zh">道德价值</span></h2>
+      <div class="sub en">Moral Values</div>
+    </div>
+    <div class="fh-grid">
+      <div class="fh-card"><div class="fh-title">Hemah Tinggi <span class="zh">有礼</span></div>
+        <div class="fh-row f"><div class="fh-tag">F</div><div class="fh-text">Pengguna tempat awam mengamalkan nilai hemah tinggi.<span class="en">Public place users practise courtesy.</span><span class="zh">公共场所使用者实践有礼的价值观。</span></div></div>
+        <div class="fh-row h"><div class="fh-tag">H</div><div class="fh-text">Mereka berkelakuan sopan dan menggunakan bahasa yang baik.<span class="en">They behave politely and use good language.</span><span class="zh">他们举止有礼，使用得体的言语。</span></div></div>
+      </div>
+      <div class="fh-card"><div class="fh-title">Kesederhanaan <span class="zh">节制</span></div>
+        <div class="fh-row f"><div class="fh-tag">F</div><div class="fh-text">Pengguna tempat awam mengamalkan nilai kesederhanaan.<span class="en">Public place users practise moderation.</span><span class="zh">公共场所使用者实践节制的价值观。</span></div></div>
+        <div class="fh-row h"><div class="fh-tag">H</div><div class="fh-text">Mereka tidak berlebihan dalam pakaian, percakapan dan tingkah laku.<span class="en">They are not excessive in dress, speech and behaviour.</span><span class="zh">他们在穿着、言谈与行为上不过度。</span></div></div>
+      </div>
+      <div class="fh-card"><div class="fh-title">Harga Diri <span class="zh">自尊</span></div>
+        <div class="fh-row f"><div class="fh-tag">F</div><div class="fh-text">Pengguna tempat awam mengamalkan nilai harga diri.<span class="en">Public place users practise self-respect.</span><span class="zh">公共场所使用者实践自尊的价值观。</span></div></div>
+        <div class="fh-row h"><div class="fh-tag">H</div><div class="fh-text">Mereka menjaga maruah diri dengan berkelakuan beradab.<span class="en">They protect their dignity by behaving courteously.</span><span class="zh">他们以有礼的行为维护自身尊严。</span></div></div>
+      </div>
+      <div class="fh-card"><div class="fh-title">Rasional <span class="zh">理性</span></div>
+        <div class="fh-row f"><div class="fh-tag">F</div><div class="fh-text">Pengguna tempat awam mengamalkan nilai rasional.<span class="en">Public place users practise rationality.</span><span class="zh">公共场所使用者实践理性的价值观。</span></div></div>
+        <div class="fh-row h"><div class="fh-tag">H</div><div class="fh-text">Mereka berfikir sebelum bertindak supaya tidak menyusahkan orang lain.<span class="en">They think before acting so as not to inconvenience others.</span><span class="zh">他们行动前先思考，以免为他人带来不便。</span></div></div>
+      </div>
+      <div class="fh-card"><div class="fh-title">Kebebasan <span class="zh">自由</span></div>
+        <div class="fh-row f"><div class="fh-tag">F</div><div class="fh-text">Pengguna tempat awam mengamalkan nilai kebebasan.<span class="en">Public place users practise freedom.</span><span class="zh">公共场所使用者实践自由的价值观。</span></div></div>
+        <div class="fh-row h"><div class="fh-tag">H</div><div class="fh-text">Mereka menggunakan kebebasan tanpa mengganggu hak orang lain.<span class="en">They exercise freedom without infringing on others&rsquo; rights.</span><span class="zh">他们在行使自由时不侵犯他人的权利。</span></div></div>
+      </div>
+      <div class="fh-card" style="margin-bottom:0;"><div class="fh-title">Bertanggungjawab <span class="zh">负责任</span></div>
+        <div class="fh-row f"><div class="fh-tag">F</div><div class="fh-text">Pengguna tempat awam mengamalkan nilai bertanggungjawab.<span class="en">Public place users practise responsibility.</span><span class="zh">公共场所使用者实践负责任的价值观。</span></div></div>
+        <div class="fh-row h"><div class="fh-tag">H</div><div class="fh-text">Mereka menjaga kemudahan awam dan kebersihan persekitaran.<span class="en">They take care of public facilities and keep the environment clean.</span><span class="zh">他们爱护公共设施，并保持环境清洁。</span></div></div>
+      </div>
+    </div>
+    <div class="hafalan-box">
+      <span class="lbl">Hafalan Nilai <span class="en">/ Memory Aid /</span> <span class="zh">价值观记忆法</span></span>
+      <span class="main">Hemah &ndash; Kesederhanaan &ndash; Harga Diri &ndash; Rasional &ndash; Kebebasan &ndash; Tanggungjawab</span>
+      <span class="zh">有礼 &ndash; 节制 &ndash; 自尊 &ndash; 理性 &ndash; 自由 &ndash; 负责任</span>
+    </div>
+  </section>
+
+  <!-- 5. KEPENTINGAN -->
+  <section>
+    <div class="section-head">
+      <div class="num">5</div>
+      <h2>Kepentingan Beradab di Tempat Awam <span class="zh">在公共场所守礼的重要性</span></h2>
+      <div class="sub en">Importance of Good Manners in Public Places</div>
+    </div>
+    <div class="fh-grid">
+      <div class="fh-card"><div class="fh-title">1. Jimat Kos Penyelenggaraan <span class="zh">节省维修费</span></div>
+        <div class="fh-row f"><div class="fh-tag">F</div><div class="fh-text">Pematuhan menjimatkan kos penyelenggaraan.<span class="en">Compliance saves maintenance cost.</span><span class="zh">遵守礼仪能节省维修费用。</span></div></div>
+        <div class="fh-row h"><div class="fh-tag">H</div><div class="fh-text">Perbelanjaan penyelenggaraan berkurang kerana kemudahan tidak mudah rosak.<span class="en">Maintenance spending is reduced because facilities do not easily break.</span><span class="zh">由于设施不易损坏，维修支出得以减少。</span></div></div>
+      </div>
+      <div class="fh-card"><div class="fh-title">2. Tahan Lama <span class="zh">更耐用</span></div>
+        <div class="fh-row f"><div class="fh-tag">F</div><div class="fh-text">Kemudahan awam dapat digunakan dalam jangka masa yang lama.<span class="en">Public facilities can be used for a long time.</span><span class="zh">公共设施可以使用很长时间。</span></div></div>
+        <div class="fh-row h"><div class="fh-tag">H</div><div class="fh-text">Ini kerana kemudahan tidak cepat rosak apabila dijaga dengan baik oleh pengguna.<span class="en">This is because facilities do not wear out quickly when well cared for.</span><span class="zh">这是因为设施在使用者妥善爱护下不易损坏。</span></div></div>
+      </div>
+      <div class="fh-card"><div class="fh-title">3. Selesa dan Selamat <span class="zh">舒适安全</span></div>
+        <div class="fh-row f"><div class="fh-tag">F</div><div class="fh-text">Kemudahan menjadi selesa dan selamat digunakan oleh semua orang.<span class="en">Facilities become comfortable and safe for everyone to use.</span><span class="zh">设施变得舒适且安全，供所有人使用。</span></div></div>
+        <div class="fh-row h"><div class="fh-tag">H</div><div class="fh-text">Semua pengguna dapat menikmati kemudahan tanpa risiko kecederaan atau ketidakselesaan.<span class="en">All users can enjoy the facilities without risk of injury or discomfort.</span><span class="zh">所有使用者都能享用设施，而不必担心受伤或不适。</span></div></div>
+      </div>
+      <div class="fh-card"><div class="fh-title">4. Imej Negara <span class="zh">国家形象</span></div>
+        <div class="fh-row f"><div class="fh-tag">F</div><div class="fh-text">Sikap beradab meningkatkan imej negara, terutama kepada pelawat dan pelancong.<span class="en">Courteous behaviour improves the country&rsquo;s image, especially to visitors and tourists.</span><span class="zh">有礼貌的行为能提升国家形象，尤其是在访客与游客眼中。</span></div></div>
+        <div class="fh-row h"><div class="fh-tag">H</div><div class="fh-text">Pelawat asing akan mendapat gambaran positif tentang budaya dan disiplin rakyat tempatan.<span class="en">Foreign visitors get a positive impression of the local people&rsquo;s culture and discipline.</span><span class="zh">外国访客会对当地人民的文化与纪律留下正面印象。</span></div></div>
+      </div>
+      <div class="fh-card"><div class="fh-title">5. Melatih Disiplin <span class="zh">培养纪律</span></div>
+        <div class="fh-row f"><div class="fh-tag">F</div><div class="fh-text">Beradab di tempat awam melatih diri berdisiplin dan mematuhi peraturan.<span class="en">Being courteous in public trains discipline and rule-following.</span><span class="zh">在公共场所守礼能培养纪律与遵守规则的习惯。</span></div></div>
+        <div class="fh-row h"><div class="fh-tag">H</div><div class="fh-text">Disiplin ini turut terbawa-bawa dalam kehidupan seharian dan tempat kerja.<span class="en">This discipline also carries over into daily life and the workplace.</span><span class="zh">这种纪律也会延续到日常生活与职场中。</span></div></div>
+      </div>
+      <div class="fh-card" style="margin-bottom:0;"><div class="fh-title">6. Keharmonian <span class="zh">和谐</span></div>
+        <div class="fh-row f"><div class="fh-tag">F</div><div class="fh-text">Amalan beradab mengelakkan perselisihan dan mengekalkan keharmonian masyarakat.<span class="en">Courteous practices avoid disputes and maintain social harmony.</span><span class="zh">有礼貌的行为能避免纠纷，维护社会和谐。</span></div></div>
+        <div class="fh-row h"><div class="fh-tag">H</div><div class="fh-text">Masyarakat dapat hidup dengan aman tanpa pertengkaran akibat sikap tidak bertimbang rasa.<span class="en">Society can live peacefully without quarrels caused by inconsiderate behaviour.</span><span class="zh">社会能够和睦相处，不因欠缺体谅而发生争执。</span></div></div>
+      </div>
+    </div>
+    <div class="hafalan-box">
+      <span class="lbl">Hafalan Kepentingan <span class="en">/ Memory Aid /</span> <span class="zh">重要性记忆法</span></span>
+      <span class="main">Kos &ndash; Tahan Lama &ndash; Selesa &ndash; Imej &ndash; Disiplin &ndash; Harmoni</span>
+      <span class="zh">费用 &ndash; 耐用 &ndash; 舒适 &ndash; 形象 &ndash; 纪律 &ndash; 和谐</span>
+    </div>
+  </section>
+
+  <!-- 6. AMALAN BERADAB VS TIDAK BERADAB -->
+  <section>
+    <div class="section-head">
+      <div class="num">6</div>
+      <h2>Amalan Beradab vs Tidak Beradab <span class="zh">好行为与坏行为比较</span></h2>
+      <div class="sub en">Good Manners vs Bad Manners</div>
+    </div>
+
+    <div class="dodont-grid">
+      <div class="dodont-col do">
+        <div class="dhead">Beradab <span style="text-transform:none;font-weight:400;">/ Good Manners</span></div>
+
+        <div class="fh-card"><div class="fh-title">1. Guna Harta Awam dengan Baik</div>
+          <div class="fh-row f"><div class="fh-tag">F</div><div class="fh-text">Menggunakan harta benda awam dengan baik.<span class="en">Use public property properly.</span><span class="zh">妥善使用公共财物。</span></div></div>
+          <div class="fh-row h"><div class="fh-tag">H</div><div class="fh-text">Kemudahan kekal dalam keadaan baik untuk kegunaan semua orang.<span class="en">The facility stays in good condition for everyone&rsquo;s use.</span><span class="zh">设施能保持良好状态，供大家使用。</span></div></div>
+        </div>
+        <div class="fh-card"><div class="fh-title">2. Guna Tong Sampah</div>
+          <div class="fh-row f"><div class="fh-tag">F</div><div class="fh-text">Menggunakan tong sampah yang disediakan.<span class="en">Use the rubbish bins provided.</span><span class="zh">使用提供的垃圾桶。</span></div></div>
+          <div class="fh-row h"><div class="fh-tag">H</div><div class="fh-text">Kawasan awam kekal bersih dan selesa untuk semua pengguna.<span class="en">The public area stays clean and comfortable for all users.</span><span class="zh">公共区域能保持清洁舒适，供大家使用。</span></div></div>
+        </div>
+        <div class="fh-card"><div class="fh-title">3. Jaga Adab dan Kelakuan</div>
+          <div class="fh-row f"><div class="fh-tag">F</div><div class="fh-text">Menjaga adab dan kelakuan di tempat awam.<span class="en">Maintain good manners and behaviour in public places.</span><span class="zh">在公共场所保持礼貌与良好行为。</span></div></div>
+          <div class="fh-row h"><div class="fh-tag">H</div><div class="fh-text">Suasana tempat awam menjadi lebih tenang dan selesa untuk semua.<span class="en">The atmosphere becomes calmer and more comfortable for everyone.</span><span class="zh">公共场所的氛围会变得更宁静舒适。</span></div></div>
+        </div>
+        <div class="fh-card"><div class="fh-title">4. Guna Air Ikut Keperluan</div>
+          <div class="fh-row f"><div class="fh-tag">F</div><div class="fh-text">Menggunakan air di tandas mengikut keperluan.<span class="en">Use water in the toilet according to need.</span><span class="zh">如厕时按需要用水。</span></div></div>
+          <div class="fh-row h"><div class="fh-tag">H</div><div class="fh-text">Mengelakkan pembaziran air dan menjaga kebersihan tandas awam.<span class="en">This avoids water wastage and keeps public toilets clean.</span><span class="zh">这能避免浪费水资源，并保持公厕清洁。</span></div></div>
+        </div>
+        <div class="fh-card"><div class="fh-title">5. Beri Laluan kepada Orang Ramai</div>
+          <div class="fh-row f"><div class="fh-tag">F</div><div class="fh-text">Memberikan laluan kepada orang ramai.<span class="en">Give way to the public.</span><span class="zh">给公众让路。</span></div></div>
+          <div class="fh-row h"><div class="fh-tag">H</div><div class="fh-text">Pergerakan orang ramai menjadi lebih lancar dan tidak tersekat.<span class="en">Public movement becomes smoother and unobstructed.</span><span class="zh">这能让大众的通行更加顺畅，不受阻碍。</span></div></div>
+        </div>
+        <div class="fh-card" style="margin-bottom:0;"><div class="fh-title">6. Beratur dan Patuh Peraturan</div>
+          <div class="fh-row f"><div class="fh-tag">F</div><div class="fh-text">Beratur dan mematuhi peraturan.<span class="en">Queue and follow the rules.</span><span class="zh">排队并遵守规则。</span></div></div>
+          <div class="fh-row h"><div class="fh-tag">H</div><div class="fh-text">Urusan di tempat awam dapat dijalankan dengan teratur dan adil kepada semua.<span class="en">Matters can be conducted in an orderly and fair way for everyone.</span><span class="zh">公共场所的事务能有条不紊、公平地进行。</span></div></div>
+        </div>
+      </div>
+
+      <div class="dodont-col dont">
+        <div class="dhead">Tidak Beradab <span style="text-transform:none;font-weight:400;">/ Bad Manners</span></div>
+
+        <div class="fh-card"><div class="fh-title">1. Vandalisme</div>
+          <div class="fh-row f"><div class="fh-tag">F</div><div class="fh-text">Merosakkan harta benda awam atau melakukan vandalisme.<span class="en">Damaging public property or vandalising.</span><span class="zh">破坏公物或从事破坏行为。</span></div></div>
+          <div class="fh-row h"><div class="fh-tag">H</div><div class="fh-text">Kerosakan ini melibatkan kos pembaikan yang tinggi dibayar oleh wang awam.<span class="en">This damage involves high repair costs paid for by public funds.</span><span class="zh">这类损坏需要高昂的维修费用，由公共资金承担。</span></div></div>
+        </div>
+        <div class="fh-card"><div class="fh-title">2. Buang Sampah Merata</div>
+          <div class="fh-row f"><div class="fh-tag">F</div><div class="fh-text">Membuang sampah di merata-rata tempat.<span class="en">Littering everywhere.</span><span class="zh">随处乱丢垃圾。</span></div></div>
+          <div class="fh-row h"><div class="fh-tag">H</div><div class="fh-text">Sampah yang bertaburan boleh mencemarkan alam sekitar dan menyebabkan penyakit.<span class="en">Scattered rubbish can pollute the environment and cause disease.</span><span class="zh">散落的垃圾会污染环境，并可能引发疾病。</span></div></div>
+        </div>
+        <div class="fh-card"><div class="fh-title">3. Pergaulan Bebas</div>
+          <div class="fh-row f"><div class="fh-tag">F</div><div class="fh-text">Bergaul bebas antara lelaki dan perempuan tanpa batasan.<span class="en">Mixing freely between males and females without limits.</span><span class="zh">男女之间毫无节制地自由交往。</span></div></div>
+          <div class="fh-row h"><div class="fh-tag">H</div><div class="fh-text">Pergaulan tanpa batas boleh menjejaskan imej diri dan bercanggah dengan norma masyarakat.<span class="en">Unrestrained mixing can damage one&rsquo;s image and go against social norms.</span><span class="zh">缺乏分寸的交往可能损害个人形象，并违背社会规范。</span></div></div>
+        </div>
+        <div class="fh-card"><div class="fh-title">4. Pili Air Tidak Ditutup</div>
+          <div class="fh-row f"><div class="fh-tag">F</div><div class="fh-text">Membiarkan pili air tidak ditutup selepas digunakan.<span class="en">Leaving taps running after use.</span><span class="zh">使用后不关水龙头。</span></div></div>
+          <div class="fh-row h"><div class="fh-tag">H</div><div class="fh-text">Air yang membazir merugikan kerajaan dan boleh menyebabkan kekurangan bekalan air.<span class="en">Wasted water is costly to the government and can cause water shortages.</span><span class="zh">浪费水资源会使政府蒙受损失，并可能导致供水短缺。</span></div></div>
+        </div>
+        <div class="fh-card"><div class="fh-title">5. Halang Laluan</div>
+          <div class="fh-row f"><div class="fh-tag">F</div><div class="fh-text">Menghalang laluan orang ramai.<span class="en">Blocking the public&rsquo;s path.</span><span class="zh">阻挡大众的通道。</span></div></div>
+          <div class="fh-row h"><div class="fh-tag">H</div><div class="fh-text">Perbuatan ini menyukarkan pergerakan dan boleh mencetuskan pertengkaran.<span class="en">This makes movement difficult and can trigger quarrels.</span><span class="zh">这会造成通行困难，并可能引发争执。</span></div></div>
+        </div>
+        <div class="fh-card" style="margin-bottom:0;"><div class="fh-title">6. Buat Bising</div>
+          <div class="fh-row f"><div class="fh-tag">F</div><div class="fh-text">Membuat bising di hospital, perpustakaan atau tempat menunggu.<span class="en">Making noise in hospitals, libraries or waiting areas.</span><span class="zh">在医院、图书馆或候车处喧哗。</span></div></div>
+          <div class="fh-row h"><div class="fh-tag">H</div><div class="fh-text">Kebisingan mengganggu ketenangan orang lain yang berada di tempat tersebut.<span class="en">Noise disturbs the peace of others present at the location.</span><span class="zh">噪音会打扰在场其他人的安宁。</span></div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="hafalan-box">
+      <span class="lbl">Hafalan Perbandingan <span class="en">/ Memory Aid /</span> <span class="zh">比较记忆法</span></span>
+      <span class="main">Beradab: Harta, Sampah, Adab, Air, Laluan, Beratur &mdash; Tidak Beradab: Vandal, Sampah, Gaul, Pili, Halang, Bising</span>
+    </div>
+  </section>
+
+  <!-- 7. FORMULA JAWAPAN -->
+  <section>
+    <div class="section-head">
+      <div class="num">7</div>
+      <h2>Formula Jawapan Peperiksaan <span class="zh">答题公式</span></h2>
+      <div class="sub en">Exam Answer Formula</div>
+    </div>
+
+    <div class="kbat-box">
+      <div class="kt-label">Formula Asas <span style="text-transform:none;font-weight:400;">/ Basic Formula</span></div>
+      <div class="kt-text">
+        Saya mengamalkan nilai [nilai moral] kerana [amalan beradab di tempat awam]. Kesannya, [kesan positif].
+        <span class="en">I practise the value of [moral value] because [good manner in public]. As a result, [positive effect].</span>
+        <span class="zh">我实践[道德价值观]，因为[公共场所的良好行为]。结果，[正面影响]。</span>
+      </div>
+      <div class="kt-example">
+        <span class="lbl">Contoh Unit 11 <span style="text-transform:none;">/ Unit 11 Example</span></span>
+        Saya mengamalkan nilai bertanggungjawab kerana saya membuang sampah ke dalam tong sampah di kawasan rekreasi. Kesannya, tempat awam menjadi bersih, selesa dan selamat digunakan.
+        <span class="en">I practise the value of responsibility because I throw rubbish into the bin at the recreation area. As a result, the public place becomes clean, comfortable and safe to use.</span>
+        <span class="zh">我实践负责任的价值观，因为我在休闲区把垃圾丢进垃圾桶。结果，公共场所变得干净、舒适且安全。</span>
+      </div>
+    </div>
+
+    <div class="kbat-box" style="margin-bottom:0;">
+      <div class="kt-label">Formula KBAT <span style="text-transform:none;font-weight:400;">/ KBAT Formula</span></div>
+      <div class="kt-text">
+        Pada pendapat saya, [tindakan] perlu dilakukan kerana [sebab]. Hal ini dapat [kesan positif kepada masyarakat/negara].
+        <span class="en">In my opinion, [action] should be done because [reason]. This can [positive effect on society/country].</span>
+        <span class="zh">我认为，应该采取[行动]，因为[原因]。这能够[对社会／国家的正面影响]。</span>
+      </div>
+      <div class="kt-example">
+        <span class="lbl">Contoh <span style="text-transform:none;">/ Example</span></span>
+        Pada pendapat saya, masyarakat perlu menggunakan kemudahan awam dengan baik kerana kemudahan tersebut dikongsi oleh semua orang. Hal ini dapat menjimatkan kos penyelenggaraan dan mengekalkan keharmonian masyarakat.
+        <span class="en">In my opinion, society should use public facilities properly because they are shared by everyone. This can save maintenance costs and maintain social harmony.</span>
+        <span class="zh">我认为，社会大众应该妥善使用公共设施，因为这些设施是大家共享的。这能够节省维修费用，并维护社会和谐。</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8. Q&A -->
+  <section>
+    <div class="section-head">
+      <div class="num">8</div>
+      <h2>Soalan Lazim dan Contoh Jawapan <span class="zh">常见考题</span></h2>
+      <div class="sub en">Common Exam Questions and Sample Answers</div>
+    </div>
+
+    <div class="qa-block">
+      <div class="qa-q">Nyatakan tempat-tempat awam.
+        <span class="qtype-tag list">Senarai · 1 Fakta</span>
+        <span class="en">State the public places.</span>
+        <span class="zh">说出公共场所。</span>
+      </div>
+      <div class="qa-ans-list">
+        Hospital, perpustakaan, lapangan terbang, pasar awam, stesen kereta api, tempat menunggu bas, kawasan rekreasi dan Pusat Transformasi Luar Bandar.
+        <span class="en">Hospital, library, airport, public market, railway station, bus stop, recreation area and Rural Transformation Centre.</span>
+        <span class="zh">医院、图书馆、机场、公共市场、火车站、巴士站、休闲区和乡村转型中心。</span>
+      </div>
+      <div class="qa-tip">Tip: soalan "nyatakan" hanya perlu fakta &mdash; tiada huraian diperlukan.<span class="en">Tip: "state" questions need facts only &mdash; no explanation required.</span></div>
+    </div>
+
+    <div class="qa-block">
+      <div class="qa-q">Terangkan cara beradab di tempat awam.
+        <span class="qtype-tag list">Senarai · 1 Fakta</span>
+        <span class="en">Explain the ways to be courteous in public places.</span>
+        <span class="zh">解释在公共场所应有的礼貌行为。</span>
+      </div>
+      <div class="qa-ans-list">
+        Memakai pakaian sopan dan sesuai, membuang sampah ke dalam tong sampah, menggunakan kemudahan awam dengan baik, berkelakuan sopan dan memberikan laluan kepada orang ramai.
+        <span class="en">Wear proper clothing, throw rubbish into the bin, use public facilities properly, behave politely, and give way to the public.</span>
+        <span class="zh">穿着得体、把垃圾丢进垃圾桶、妥善使用公共设施、举止有礼、给公众让路。</span>
+      </div>
+      <div class="qa-tip">Tip: soalan ini bernilai markah senarai; untuk versi Fakta+Huraian penuh, rujuk Bahagian 3.<span class="en">Tip: this is a listing-mark question; for the full Fact+Explanation version, see Section 3.</span></div>
+    </div>
+
+    <div class="qa-block">
+      <div class="qa-q">Senaraikan kepentingan beradab di tempat awam.
+        <span class="qtype-tag list">Senarai · 1 Fakta</span>
+        <span class="en">List the importance of good manners in public places.</span>
+        <span class="zh">列出在公共场所守礼的重要性。</span>
+      </div>
+      <div class="qa-ans-list">
+        Menjimatkan kos penyelenggaraan, kemudahan awam tahan lama, kemudahan selesa dan selamat digunakan, meningkatkan imej negara serta melatih diri berdisiplin dan mematuhi peraturan.
+        <span class="en">Saves maintenance cost, facilities last longer, facilities are comfortable and safe, improves the country&rsquo;s image, and trains discipline and rule-following.</span>
+        <span class="zh">节省维修费用、设施更耐用、设施舒适安全、提升国家形象、培养纪律与守规习惯。</span>
+      </div>
+    </div>
+
+    <div class="qa-block">
+      <div class="qa-q">Hubung kait amalan beradab dan tidak beradab dengan keharmonian masyarakat.
+        <span class="qtype-tag fh">Fakta+Huraian</span>
+        <span class="en">Relate courteous and discourteous behaviour to social harmony.</span>
+        <span class="zh">将有礼与不礼貌行为与社会和谐联系起来。</span>
+      </div>
+      <div class="qa-fh">
+        <div class="fh-row f"><div class="fh-tag">F</div><div class="fh-text">Amalan beradab seperti menjaga kebersihan dan tidak merosakkan kemudahan awam dapat mewujudkan suasana yang selesa serta harmoni.<span class="en">Courteous practices such as keeping cleanliness and not damaging public facilities create a comfortable and harmonious atmosphere.</span><span class="zh">保持清洁、不破坏公共设施等有礼行为能营造舒适和谐的氛围。</span></div></div>
+        <div class="fh-row h"><div class="fh-tag">H</div><div class="fh-text">Sebaliknya, amalan tidak beradab seperti vandalisme dan membuang sampah merata-rata boleh menimbulkan rasa tidak puas hati dan mengganggu keselesaan orang ramai.<span class="en">Conversely, discourteous practices such as vandalism and littering can cause dissatisfaction and disturb public comfort.</span><span class="zh">反之，破坏公物、乱丢垃圾等不礼貌行为则会引起不满，并影响大众的舒适感。</span></div></div>
+      </div>
+    </div>
+
+    <div class="qa-block">
+      <div class="qa-q">Apakah perasaan anda apabila melaksanakan tanggungjawab membersihkan tempat awam? Mengapa?
+        <span class="qtype-tag fh">Fakta+Huraian</span>
+        <span class="en">How do you feel when carrying out the responsibility of cleaning public places? Why?</span>
+        <span class="zh">当你履行清理公共场所的责任时，你有什么感受？为什么？</span>
+      </div>
+      <div class="qa-fh">
+        <div class="fh-row f"><div class="fh-tag">F</div><div class="fh-text">Saya berasa gembira dan bangga kerana dapat membantu menjaga kebersihan tempat awam.<span class="en">I feel happy and proud to be able to help keep public places clean.</span><span class="zh">我感到开心与自豪，因为能协助维护公共场所的清洁。</span></div></div>
+        <div class="fh-row h"><div class="fh-tag">H</div><div class="fh-text">Hal ini menjadikan kawasan tersebut lebih selesa, selamat dan dapat digunakan oleh orang ramai.<span class="en">This makes the area more comfortable, safe and usable by the public.</span><span class="zh">这能让该区域更加舒适、安全，并可供大众使用。</span></div></div>
+      </div>
+    </div>
+
+    <div class="qa-block">
+      <div class="qa-q">Kesan apabila seseorang membuang sampah di tempat awam.
+        <span class="qtype-tag list">Senarai · 1 Fakta</span>
+        <span class="en">Effects when someone litters in a public place.</span>
+        <span class="zh">在公共场所乱丢垃圾的影响。</span>
+      </div>
+      <div class="qa-ans-list">
+        Tempat awam menjadi kotor, berbau busuk dan tidak selesa. Perbuatan itu juga boleh menyebabkan penyakit, mencemarkan imej negara dan meningkatkan kos pembersihan.
+        <span class="en">The public place becomes dirty, smelly and uncomfortable. It can also cause disease, tarnish the country&rsquo;s image, and increase cleaning costs.</span>
+        <span class="zh">公共场所会变得肮脏、有异味且令人不适。这也可能导致疾病、损害国家形象，并增加清洁费用。</span>
+      </div>
+    </div>
+
+    <div class="qa-block">
+      <div class="qa-q">Huraikan langkah untuk mengurangkan pencemaran di tempat awam.
+        <span class="qtype-tag list">Senarai · 1 Fakta</span>
+        <span class="en">Explain steps to reduce pollution in public places.</span>
+        <span class="zh">说明减少公共场所污染的措施。</span>
+      </div>
+      <div class="qa-ans-list">
+        Masyarakat perlu membuang sampah ke dalam tong sampah, mengadakan gotong-royong, memasang papan tanda larangan membuang sampah, menyediakan tong sampah yang mencukupi, mendidik orang ramai tentang kebersihan dan melaporkan perbuatan vandalisme atau pencemaran kepada pihak berkuasa.
+        <span class="en">Society should throw rubbish into bins, organise community clean-ups, put up no-littering signs, provide enough bins, educate the public on cleanliness, and report vandalism or pollution to the authorities.</span>
+        <span class="zh">社会大众应将垃圾丢进垃圾桶、举办清洁运动、设立禁止乱丢垃圾的告示牌、提供足够的垃圾桶、教育大众保持清洁，并向当局举报破坏或污染行为。</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 9. PRACTICE ANSWER KEY -->
+  <section>
+    <div class="section-head">
+      <div class="num">9</div>
+      <h2>Skema Jawapan Latihan <span class="zh">练习答案</span></h2>
+      <div class="sub en">Practice Answer Key</div>
+    </div>
+
+    <div class="table-title">DSKP Q1: Padankan Tempat Awam</div>
+    <div class="ans-table-wrap">
+      <table class="ans-table">
+        <tr><th>Item</th><th>Answer</th></tr>
+        <tr><td>(a) Gambar bangunan pasar / kawasan awam</td><td>Pasar awam</td></tr>
+        <tr><td>(b) Gambar bangunan hospital</td><td>Hospital</td></tr>
+        <tr><td>(c) Gambar kapal terbang / terminal</td><td>Lapangan terbang</td></tr>
+        <tr><td>(d) Gambar ruang membaca / rak buku</td><td>Perpustakaan</td></tr>
+      </table>
+    </div>
+
+    <div class="table-title">DSKP Q2: Cara Beradab (Isi Tempat Kosong)</div>
+    <div class="ans-table-wrap">
+      <table class="ans-table">
+        <tr><th>Item</th><th>Answer</th></tr>
+        <tr><td>(a) Memakai pakaian ___</td><td>sopan dan sesuai</td></tr>
+        <tr><td>(b) Membuang sampah ke dalam ___</td><td>tong sampah</td></tr>
+        <tr><td>(c) Menggunakan kemudahan awam dengan ___</td><td>baik</td></tr>
+      </table>
+    </div>
+
+    <div class="table-title">DSKP Q3: Kepentingan Beradab</div>
+    <div class="qa-ans-list" style="margin-top:0;">
+      Pilih mana-mana tiga: menjimatkan kos penyelenggaraan; kemudahan awam boleh digunakan lama; kemudahan selesa dan selamat digunakan; meningkatkan imej negara; melatih diri berdisiplin dan mematuhi peraturan.
+      <span class="en">Choose any three: saves maintenance cost; facilities last longer; facilities are comfortable and safe; improves the country&rsquo;s image; trains discipline and rule-following.</span>
+    </div>
+
+    <div class="table-title">DSKP Q4: Hasil Perbincangan</div>
+    <div class="qa-ans-list" style="margin-top:0;">
+      Amalan beradab seperti menggunakan tong sampah, menjaga kemudahan awam dan memberi laluan kepada orang ramai dapat mengekalkan keharmonian masyarakat. Amalan tidak beradab seperti vandalisme, membuang sampah merata-rata dan menghalang laluan orang ramai akan menimbulkan ketidakselesaan, pergaduhan dan imej buruk kepada masyarakat.
+    </div>
+
+    <div class="table-title">DSKP Q5: Berdasarkan Gambar Gotong-royong</div>
+    <div class="qa-ans-list" style="margin-top:0;">
+      <b>(a)</b> Saya berasa gembira dan bangga kerana dapat melaksanakan tanggungjawab menjaga kebersihan tempat awam.<br>
+      <b>(b)</b> Kesan membuang sampah di tempat awam: kawasan menjadi kotor, berbau busuk, mengundang penyakit, menyusahkan orang ramai dan mencemarkan imej masyarakat.<br>
+      <b>(c)</b> Langkah mengurangkan pencemaran: buang sampah ke dalam tong sampah, mengadakan gotong-royong, menyediakan tong sampah mencukupi, memasang papan tanda, memberi pendidikan kebersihan dan melaporkan pencemaran kepada pihak berkuasa.
+    </div>
+  </section>
+
+  <!-- 10. QUICK REVISION CHECKLIST -->
+  <section>
+    <div class="section-head">
+      <div class="num">10</div>
+      <h2>Senarai Semak Ulang Kaji Pantas <span class="zh">快速复习清单</span></h2>
+      <div class="sub en">Quick Revision Checklist</div>
+    </div>
+    <div class="check-grid">
+      <div class="check-item"><div class="cn">1</div><div class="ct">Hafal definisi: tempat awam = tempat orang ramai berkumpul untuk menjalankan aktiviti.<span class="en">Memorise definition: public place = place where many people gather for activities.</span><span class="zh">记住定义：公共场所 = 许多人聚集进行活动的地方。</span></div></div>
+      <div class="check-item"><div class="cn">2</div><div class="ct">Ketahui tempat awam: hospital, perpustakaan, lapangan terbang, pasar, stesen, tempat menunggu bas, kawasan rekreasi.<span class="en">Know public places: hospital, library, airport, market, station, bus stop, recreation area.</span><span class="zh">了解公共场所：医院、图书馆、机场、市场、车站、巴士站、休闲区。</span></div></div>
+      <div class="check-item"><div class="cn">3</div><div class="ct">Adab baik: berpakaian sopan, buang sampah dalam tong sampah, gunakan kemudahan dengan baik.<span class="en">Good manners: dress properly, throw rubbish into bin, use facilities well.</span><span class="zh">良好行为：穿着得体、把垃圾丢进垃圾桶、妥善使用设施。</span></div></div>
+      <div class="check-item"><div class="cn">4</div><div class="ct">Adab buruk: vandalisme, membuang sampah merata-rata, membazir air, menghalang orang lain.<span class="en">Bad manners: vandalism, littering, wasting water, blocking others.</span><span class="zh">不良行为：破坏公物、乱丢垃圾、浪费水、阻碍他人。</span></div></div>
+      <div class="check-item"><div class="cn">5</div><div class="ct">Kepentingan: menjimatkan kos penyelenggaraan, kemudahan tahan lama, selamat, selesa, imej baik.<span class="en">Importance: save maintenance cost, facilities last longer, safe, comfortable, good image.</span><span class="zh">重要性：节省维修费、设施更耐用、安全、舒适、良好形象。</span></div></div>
+      <div class="check-item"><div class="cn">6</div><div class="ct">Nilai: hemah tinggi, kesederhanaan, harga diri, rasional, kebebasan, bertanggungjawab.<span class="en">Values: hemah tinggi, kesederhanaan, harga diri, rasional, kebebasan, bertanggungjawab.</span><span class="zh">价值观：有礼、节制、自尊、理性、自由、负责任。</span></div></div>
+      <div class="check-item"><div class="cn">7</div><div class="ct">Soalan perasaan: gembira, bangga, puas hati + sebab.<span class="en">Feelings question: gembira, bangga, puas hati + reason.</span><span class="zh">感受题：开心、自豪、满足 + 原因。</span></div></div>
+      <div class="check-item"><div class="cn">8</div><div class="ct">Untuk soalan Fakta+Huraian, sentiasa sertakan fakta + sebab/kesan; untuk senarai, fakta sahaja.<span class="en">For Fact+Explanation questions, always include fact + reason/effect; for list questions, facts only.</span><span class="zh">对于要点+说明题，务必包含要点+原因/影响；对于列举题，只需列出要点。</span></div></div>
+    </div>
+  </section>
+
+  <!-- 11. RINGKASAN HAFALAN AKHIR -->
+  <section>
+    <div class="section-head">
+      <div class="num">11</div>
+      <h2>Ringkasan Hafalan Akhir <span class="zh">最后记忆总结</span></h2>
+      <div class="sub en">Final Memory Summary</div>
+    </div>
+
+    <div class="hafalan-box">
+      <span class="lbl">&ldquo;3P&rdquo; untuk Adab di Tempat Awam</span>
+      <ol class="u-list">
+        <li><b>Pakaian &amp; Perlakuan</b> &mdash; berpakaian sopan, berkelakuan baik, jangan bising.
+          <span class="en">Dress &amp; Behaviour &mdash; dress properly, behave well, do not make noise.</span>
+          <span class="zh">穿着与行为 &mdash; 穿着得体，行为良好，不喧哗。</span>
+        </li>
+        <li><b>Penjagaan</b> &mdash; guna kemudahan dengan baik, buang sampah dalam tong, jangan rosakkan harta awam.
+          <span class="en">Care &mdash; use facilities well, use bins, do not damage public property.</span>
+          <span class="zh">爱护 &mdash; 妥善使用设施，垃圾入桶，不破坏公物。</span>
+        </li>
+        <li><b>Pertimbangan</b> &mdash; beri laluan, beratur, jangan halang orang lain.
+          <span class="en">Consideration &mdash; give way, queue, do not block others.</span>
+          <span class="zh">体谅 &mdash; 让路，排队，不阻碍他人。</span>
+        </li>
+      </ol>
+    </div>
+
+    <div class="golden-box">
+      <div class="glabel">Ayat Emas Peperiksaan <span style="text-transform:none;">/ Golden Exam Sentence /</span> 考试万能句</div>
+      <div class="gtext">
+        Sebagai ahli masyarakat yang bertanggungjawab, saya perlu menjaga adab di tempat awam dengan berkelakuan sopan, menjaga kebersihan dan menghormati orang lain supaya kemudahan awam dapat digunakan dalam jangka masa yang lama dan keharmonian masyarakat terpelihara.
+        <span class="en">As a responsible member of society, I must maintain good manners in public places by behaving politely, keeping the surroundings clean and respecting others, so that public facilities can be used for a long time and social harmony is preserved.</span>
+        <span class="zh">作为社会中负责任的一员，我必须在公共场所保持礼貌、维护环境清洁并尊重他人，以便公共设施能够长期使用，并维护社会和谐。</span>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    KSSM Moral Tingkatan 2 &middot; Unit 11 &middot; Disediakan untuk rujukan pembelajaran peribadi.<br>
+    供个人学习参考使用 &middot; For personal study reference only.
+  </footer>
+
+</div>
+
+<script>
+function setLang(which){
+  const btn = document.getElementById('btn-'+which);
+  btn.classList.toggle('active');
+  const cls = 'hide-' + which;
+  document.body.classList.toggle(cls);
+}
+</script>
+
+</body>
+</html>
