@@ -1,0 +1,796 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Unit 13 · Nota Persediaan Peperiksaan Akhir — Keselamatan Jalan Raya</title>
+<style>
+  :root{
+    --ink:#1c2a3a;
+    --paper:#f6f1e6;
+    --paper2:#eee6d4;
+    --navy:#1f3a5f;
+    --navy-deep:#142840;
+    --brass:#a8762f;
+    --brass-light:#c99a4f;
+    --rule:#cdbf9e;
+    --fact:#1f5c4a;
+    --explain:#8a4a1f;
+    --law:#7a2a3a;
+    --value:#5b5390;
+    --good:#3c6e5e;
+    --warn:#a8762f;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Iowan Old Style','Songti SC','Noto Serif SC',Georgia,serif;
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+  .zh{font-family:'Songti SC','Noto Serif SC','PingFang SC',serif;}
+  .label{
+    font-family:'Helvetica Neue',Arial,sans-serif;
+    letter-spacing:.12em;
+    text-transform:uppercase;
+    font-size:.68rem;
+    font-weight:600;
+  }
+
+  /* ===== Masthead ===== */
+  .masthead{
+    background:linear-gradient(180deg,var(--navy-deep),var(--navy));
+    color:var(--paper);
+    padding:2.6rem 1.4rem 2rem;
+    position:relative;
+    overflow:hidden;
+    border-bottom:6px solid var(--brass);
+  }
+  .masthead::before{
+    content:"";
+    position:absolute; inset:0;
+    background-image:
+      repeating-linear-gradient(0deg, rgba(255,255,255,.035) 0 1px, transparent 1px 26px);
+    pointer-events:none;
+  }
+  .seal{width:64px;height:64px;margin:0 auto 1rem;position:relative;}
+  .seal svg{width:100%;height:100%;}
+  .mast-eyebrow{text-align:center;color:var(--brass-light);margin-bottom:.5rem;}
+  .mast-unit{
+    text-align:center;font-size:.95rem;color:#cdd9e6;
+    letter-spacing:.18em;text-transform:uppercase;margin-bottom:.3rem;
+  }
+  h1.mast-title{text-align:center;font-size:1.7rem;margin:.2rem 0 .15rem;font-weight:700;letter-spacing:.01em;}
+  .mast-title .zh{display:block;font-size:1.1rem;color:var(--brass-light);margin-top:.35rem;font-weight:500;letter-spacing:.04em;}
+  .mast-title .en{display:block;font-size:.92rem;font-style:italic;color:#cdd9e6;margin-top:.3rem;font-weight:400;}
+  .mast-sub{text-align:center;font-size:.85rem;color:#cdd9e6;margin-top:.9rem;}
+  .mast-sub .zh{display:block;font-size:.78rem;color:var(--brass-light);margin-top:.2rem;}
+  .mast-sub .en{display:block;font-size:.78rem;font-style:italic;color:#9fb0c4;margin-top:.15rem;}
+
+  /* ===== Sticky lang toggle ===== */
+  .langbar{
+    position:sticky; top:0; z-index:50;
+    background:var(--paper2);
+    border-bottom:1px solid var(--rule);
+    padding:.55rem .9rem;
+    display:flex; gap:.4rem; justify-content:center;
+    font-family:'Helvetica Neue',Arial,sans-serif;
+  }
+  .langbar button{
+    border:1px solid var(--rule);background:var(--paper);color:var(--ink);
+    padding:.35rem .85rem;font-size:.75rem;letter-spacing:.06em;
+    border-radius:3px;cursor:pointer;font-weight:600;
+  }
+  .langbar button.active{background:var(--navy);color:var(--paper);border-color:var(--navy);}
+
+  .wrap{max-width:880px;margin:0 auto;padding:0 1.1rem 4rem;}
+  section{margin-top:2.6rem;}
+
+  .section-head{
+    display:flex; align-items:baseline; gap:.6rem;
+    margin-bottom:.9rem;
+    border-bottom:2px solid var(--ink);
+    padding-bottom:.45rem;
+    flex-wrap:wrap;
+  }
+  .section-head .num{
+    font-family:'Helvetica Neue',Arial,sans-serif;font-size:.75rem;font-weight:700;
+    color:var(--brass);border:1px solid var(--brass);border-radius:50%;
+    width:1.5rem;height:1.5rem;display:flex;align-items:center;justify-content:center;flex-shrink:0;
+  }
+  .section-head h2{font-size:1.15rem;margin:0;font-weight:700;}
+  .section-head h2 .zh{display:block;font-size:.78rem;font-weight:400;color:#6b6354;margin-top:.1rem;}
+  .section-head .sub{
+    font-family:'Helvetica Neue',Arial,sans-serif;font-size:.78rem;color:#6b6354;
+    margin-left:auto;white-space:nowrap;font-style:italic;
+  }
+
+  /* ===== Toolkit (formula + linking words) ===== */
+  .toolkit-grid{display:grid;grid-template-columns:1fr 1fr;gap:.9rem;}
+  @media (max-width:620px){.toolkit-grid{grid-template-columns:1fr;}}
+  .toolkit-card{
+    border:1px solid var(--brass);border-radius:8px;background:var(--paper2);
+    padding:.9rem 1rem;
+  }
+  .toolkit-card .thead{
+    font-family:'Helvetica Neue',Arial,sans-serif;font-weight:700;font-size:.78rem;
+    color:var(--brass);letter-spacing:.06em;text-transform:uppercase;margin-bottom:.5rem;
+  }
+  .toolkit-card .formula{
+    font-size:1rem;font-weight:700;color:var(--navy);margin-bottom:.6rem;
+    background:var(--paper);border-radius:6px;padding:.4rem .6rem;text-align:center;
+  }
+  .toolkit-card ul{margin:0;padding-left:1.1rem;font-size:.84rem;}
+  .toolkit-card li{margin-bottom:.4rem;}
+  .toolkit-card li .zh,.toolkit-card li .en{display:block;font-size:.74rem;color:#6b6354;margin-top:.08rem;}
+  .toolkit-card li .en{font-style:italic;color:#8a8270;}
+
+  /* ===== Fact/Explanation cards ===== */
+  .fh-card{
+    border:1px solid var(--rule);border-radius:8px;overflow:hidden;margin-bottom:.7rem;background:var(--paper);
+  }
+  .fh-card .fh-title{
+    padding:.55rem .85rem;font-family:'Helvetica Neue',Arial,sans-serif;font-weight:700;
+    font-size:.82rem;color:#fff;background:var(--navy);
+  }
+  .fh-card .fh-title .zh{font-weight:500;opacity:.9;font-size:.74rem;display:block;margin-top:.1rem;}
+  .fh-card .fh-title .en{font-weight:400;font-style:italic;opacity:.85;font-size:.74rem;display:block;margin-top:.05rem;}
+  .fh-row{display:flex;gap:.6rem;padding:.55rem .9rem;border-top:1px dashed var(--rule);align-items:flex-start;}
+  .fh-row:first-of-type{border-top:none;}
+  .fh-tag{
+    font-family:'Helvetica Neue',Arial,sans-serif;font-weight:700;color:#fff;
+    border-radius:50%;width:1.5rem;height:1.5rem;flex-shrink:0;
+    display:flex;align-items:center;justify-content:center;font-size:.72rem;
+  }
+  .fh-row.f .fh-tag{background:var(--fact);}
+  .fh-row.h .fh-tag{background:var(--explain);}
+  .fh-text{font-size:.87rem;}
+  .fh-text .zh{display:block;color:#6b6354;font-size:.78rem;margin-top:.2rem;}
+  .fh-text .en{display:block;color:#8a8270;font-size:.78rem;font-style:italic;margin-top:.15rem;}
+
+  /* ===== Compare box ===== */
+  .compare-grid{display:grid;grid-template-columns:1fr 1fr;gap:.6rem;margin-top:.7rem;}
+  @media (max-width:560px){.compare-grid{grid-template-columns:1fr;}}
+  .compare-item{border:1px solid var(--rule);border-radius:8px;padding:.7rem .8rem;background:var(--paper);font-size:.84rem;}
+  .compare-item .chead{font-weight:700;color:var(--navy);margin-bottom:.3rem;font-family:'Helvetica Neue',Arial,sans-serif;font-size:.78rem;text-transform:uppercase;letter-spacing:.04em;}
+  .compare-item .zh{display:block;color:#6b6354;font-size:.76rem;margin-top:.1rem;}
+  .compare-item .en{display:block;color:#8a8270;font-size:.76rem;font-style:italic;margin-top:.05rem;}
+
+  /* ===== Hafalan (memory aid) box ===== */
+  .hafalan-box{
+    background:var(--paper2);border-left:4px solid var(--brass);
+    padding:.7rem .9rem;border-radius:0 6px 6px 0;font-size:.88rem;margin-top:.8rem;
+  }
+  .hafalan-box .label{display:block;margin-bottom:.35rem;color:var(--brass);}
+  .hafalan-box .main{font-weight:700;color:var(--navy);}
+  .hafalan-box .zh{display:block;color:#6b6354;font-size:.78rem;margin-top:.25rem;}
+  .hafalan-box .en{display:block;color:#8a8270;font-size:.78rem;font-style:italic;margin-top:.1rem;}
+
+  /* ===== Importance / feeling grid ===== */
+  .imp-grid{display:grid;grid-template-columns:1fr 1fr;gap:.6rem;}
+  @media (max-width:560px){.imp-grid{grid-template-columns:1fr;}}
+
+  /* ===== Values chips ===== */
+  .values-row{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:.3rem;}
+  .value-chip{
+    border:1px solid var(--value);color:var(--value);border-radius:999px;
+    padding:.3rem .8rem;font-size:.78rem;font-family:'Helvetica Neue',Arial,sans-serif;font-weight:600;
+  }
+  .value-chip .zh{margin-left:.3rem;opacity:.75;font-weight:400;}
+
+  /* ===== KBAT template box ===== */
+  .kbat-box{
+    border:1px solid var(--navy);border-radius:8px;background:var(--paper2);padding:.9rem 1rem;
+  }
+  .kbat-box .kt-label{font-family:'Helvetica Neue',Arial,sans-serif;font-weight:700;font-size:.75rem;color:var(--navy);text-transform:uppercase;letter-spacing:.06em;margin-bottom:.4rem;}
+  .kbat-box .kt-text{font-size:.88rem;font-style:italic;}
+  .kbat-box .kt-text .zh{display:block;font-style:normal;color:#6b6354;font-size:.78rem;margin-top:.2rem;}
+  .kbat-box .kt-text .en{display:block;color:#8a8270;font-size:.78rem;margin-top:.15rem;}
+
+  /* ===== Golden sentence ===== */
+  .golden-box{
+    background:linear-gradient(135deg,var(--navy),var(--navy-deep));color:var(--paper);
+    border-radius:10px;padding:1.1rem 1.2rem;margin-top:.8rem;
+    box-shadow:0 3px 0 var(--brass);
+  }
+  .golden-box .glabel{font-family:'Helvetica Neue',Arial,sans-serif;font-weight:700;font-size:.72rem;color:var(--brass-light);text-transform:uppercase;letter-spacing:.08em;margin-bottom:.5rem;}
+  .golden-box .gtext{font-size:.92rem;}
+  .golden-box .zh{display:block;color:var(--brass-light);font-size:.82rem;margin-top:.4rem;}
+  .golden-box .en{display:block;color:#cdd9e6;font-size:.8rem;font-style:italic;margin-top:.3rem;}
+
+  .u-list{margin:.7rem 0 0;padding-left:1.2rem;font-size:.88rem;}
+  .u-list li{margin-bottom:.5rem;}
+  .u-list li .zh{display:block;color:#6b6354;font-size:.78rem;margin-top:.1rem;}
+  .u-list li .en{display:block;color:#8a8270;font-size:.78rem;font-style:italic;margin-top:.05rem;}
+
+  footer{
+    text-align:center;margin-top:3rem;padding-top:1.2rem;border-top:1px solid var(--rule);
+    font-family:'Helvetica Neue',Arial,sans-serif;font-size:.72rem;color:#9a9180;
+  }
+
+  body.hide-en .en{display:none !important;}
+  body.hide-zh .zh{display:none !important;}
+</style>
+</head>
+<body>
+
+<div class="top-nav" style="background:#fff;padding:10px 16px;border-bottom:2px solid #e5e7eb;position:sticky;top:0;z-index:120">
+  <a class="dashboard-link" href="../index.html" style="display:inline-flex;align-items:center;gap:6px;padding:8px 12px;border-radius:8px;background:#1d4ed8;color:#fff;font-size:13px;font-weight:800;text-decoration:none">&larr; Back to Dashboard</a>
+</div>
+
+<header class="masthead">
+  <div class="seal">
+    <svg viewBox="0 0 64 64" fill="none">
+      <circle cx="32" cy="32" r="30" stroke="#c99a4f" stroke-width="2"/>
+      <path d="M32 12 L48 20 V32 C48 42 41 49 32 52 C23 49 16 42 16 32 V20 Z" stroke="#c99a4f" stroke-width="2" fill="none"/>
+      <path d="M24 32 L29 38 L40 25" stroke="#c99a4f" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  </div>
+  <div class="mast-eyebrow label">KSSM Moral &middot; Tingkatan 2 / Form 2 / 表 2</div>
+  <div class="mast-unit">Unit 13</div>
+  <h1 class="mast-title">
+    Nota Persediaan Peperiksaan Akhir
+    <span class="zh">期末考试准备笔记</span>
+    <span class="en">Final Exam Preparation Notes</span>
+  </h1>
+  <div class="mast-sub">
+    Keselamatan di Jalan Raya Tanggungjawab Bersama
+    <span class="zh">道路安全，人人有责</span>
+    <span class="en">Road Safety Is a Shared Responsibility</span>
+  </div>
+</header>
+
+<div class="langbar">
+  <button id="btn-en" class="active" onclick="setLang('en')">EN</button>
+  <button id="btn-zh" class="active" onclick="setLang('zh')">中文</button>
+</div>
+
+<div class="wrap">
+
+  <!-- TOOLKIT: FORMULA + LINKING WORDS -->
+  <section>
+    <div class="section-head">
+      <div class="num">&#128295;</div>
+      <h2>Formula &amp; Kata Penyambung <span class="zh">作答公式与连接词</span></h2>
+      <div class="sub en">Answer Formula &amp; Linking Words</div>
+    </div>
+    <div class="toolkit-grid">
+      <div class="toolkit-card">
+        <div class="thead">Formula Jawapan <span class="en">/ Answer Formula /</span> <span class="zh">作答公式</span></div>
+        <div class="formula">Fakta + Huraian = 2 markah</div>
+        <ul>
+          <li><b>Fakta (F):</b> Isi utama yang menjawab soalan.
+            <span class="en">The main point answering the question.</span>
+            <span class="zh">直接回答问题的主要内容。</span>
+          </li>
+          <li><b>Huraian (H):</b> Sebab, cara, contoh atau kesan fakta tersebut.
+            <span class="en">The reason, method, example or effect.</span>
+            <span class="zh">解释该要点的原因、方法、例子或影响。</span>
+          </li>
+        </ul>
+      </div>
+      <div class="toolkit-card">
+        <div class="thead">Kata Penyambung <span class="en">/ Linking Words /</span> <span class="zh">连接词</span></div>
+        <ul>
+          <li>Hal ini demikian kerana&hellip;
+            <span class="en">This is because&hellip;</span>
+            <span class="zh">这是因为……</span>
+          </li>
+          <li>Contohnya&hellip;
+            <span class="en">For example&hellip;</span>
+            <span class="zh">例如……</span>
+          </li>
+          <li>Kesannya&hellip;
+            <span class="en">As a result&hellip;</span>
+            <span class="zh">结果……</span>
+          </li>
+          <li>Supaya&hellip;
+            <span class="en">So that&hellip;</span>
+            <span class="zh">以便……</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- 1. KONSEP UTAMA -->
+  <section>
+    <div class="section-head">
+      <div class="num">1</div>
+      <h2>Konsep Utama <span class="zh">主要概念</span></h2>
+      <div class="sub en">Main Concept</div>
+    </div>
+    <div class="fh-card">
+      <div class="fh-row f">
+        <div class="fh-tag">F</div>
+        <div class="fh-text">
+          Peraturan dan undang-undang jalan raya diwujudkan untuk menjaga kepentingan semua pengguna jalan raya.
+          <span class="en">Road rules and laws are created to protect the interests of all road users.</span>
+          <span class="zh">交通规则与交通法律是为了保障所有道路使用者的利益。</span>
+        </div>
+      </div>
+      <div class="fh-row h">
+        <div class="fh-tag">H</div>
+        <div class="fh-text">
+          Semua pengguna perlu mematuhinya supaya kemalangan dapat dielakkan dan keselamatan bersama terjamin.
+          <span class="en">Everyone must obey them so that accidents can be prevented and public safety can be protected.</span>
+          <span class="zh">所有道路使用者都必须遵守，以避免交通事故并保障共同安全。</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. PERATURAN DAN UNDANG-UNDANG JALAN RAYA -->
+  <section>
+    <div class="section-head">
+      <div class="num">2</div>
+      <h2>Peraturan dan Undang-undang Jalan Raya <span class="zh">交通规则与交通法律</span></h2>
+      <div class="sub en">Road Rules and Road Laws</div>
+    </div>
+
+    <div class="fh-card">
+      <div class="fh-title">A. Maksud Peraturan Jalan Raya <span class="zh">交通规则的含义</span><span class="en">Meaning of Road Rules</span></div>
+      <div class="fh-row f">
+        <div class="fh-tag">F</div>
+        <div class="fh-text">
+          Peraturan jalan raya ialah amalan keselamatan yang perlu diamalkan oleh pengguna jalan raya.
+          <span class="en">Road rules are safety practices that road users should follow.</span>
+          <span class="zh">交通规则是道路使用者应该遵守的安全行为。</span>
+        </div>
+      </div>
+      <div class="fh-row h">
+        <div class="fh-tag">H</div>
+        <div class="fh-text">
+          Amalan tersebut meningkatkan kesedaran dan membantu pengguna menggunakan jalan raya dengan selamat.
+          <span class="en">These practices increase awareness and help people use roads safely.</span>
+          <span class="zh">这些行为能够提高安全意识，并帮助人们安全地使用道路。</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="fh-card">
+      <div class="fh-title">B. Maksud Undang-undang Jalan Raya <span class="zh">交通法律的含义</span><span class="en">Meaning of Road Laws</span></div>
+      <div class="fh-row f">
+        <div class="fh-tag">F</div>
+        <div class="fh-text">
+          Undang-undang jalan raya ialah akta yang mewajibkan pengguna melakukan atau menghindari sesuatu perbuatan.
+          <span class="en">Road laws are laws requiring road users to perform or avoid particular actions.</span>
+          <span class="zh">交通法律是规定道路使用者必须做或禁止做某些行为的法律。</span>
+        </div>
+      </div>
+      <div class="fh-row h">
+        <div class="fh-tag">H</div>
+        <div class="fh-text">
+          Pengguna yang melanggar undang-undang boleh dikenakan hukuman oleh pihak berkuasa.
+          <span class="en">Road users who break these laws can be punished by the authorities.</span>
+          <span class="zh">违反交通法律的道路使用者可能受到执法单位的处罚。</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="compare-grid">
+      <div class="compare-item">
+        <div class="chead">Peraturan <span class="en">Rules</span> <span class="zh">规则</span></div>
+        Amalan keselamatan.
+        <span class="en">Safety practices.</span>
+        <span class="zh">安全行为。</span>
+      </div>
+      <div class="compare-item">
+        <div class="chead">Undang-undang <span class="en">Laws</span> <span class="zh">法律</span></div>
+        Wajib dipatuhi; pelanggar boleh dihukum.
+        <span class="en">Compulsory; offenders may be punished.</span>
+        <span class="zh">必须遵守；违法者可能受罚。</span>
+      </div>
+    </div>
+
+    <div class="hafalan-box">
+      <span class="label">Hafalan <span class="en">/ Memory Aid /</span> <span class="zh">记忆法</span></span>
+      <span class="main">Peraturan = Amalan &nbsp;|&nbsp; Undang-undang = Wajib + Hukuman</span>
+      <span class="zh">规则 = 安全行为；法律 = 强制 + 处罚</span>
+    </div>
+  </section>
+
+  <!-- 3. CONTOH PERATURAN JALAN RAYA -->
+  <section>
+    <div class="section-head">
+      <div class="num">3</div>
+      <h2>Contoh Peraturan Jalan Raya <span class="zh">交通规则的例子</span></h2>
+      <div class="sub en">Examples of Road Rules</div>
+    </div>
+
+    <div class="fh-card">
+      <div class="fh-title">Peraturan 1: Tidak Menunggang Basikal Secara Beriringan <span class="zh">规则一：不要并排骑自行车</span><span class="en">Do Not Cycle Side by Side</span></div>
+      <div class="fh-row f"><div class="fh-tag">F</div><div class="fh-text">
+        Penunggang basikal tidak boleh menunggang secara beriringan.
+        <span class="en">Cyclists should not cycle side by side.</span>
+        <span class="zh">骑自行车者不应该并排骑行。</span>
+      </div></div>
+      <div class="fh-row h"><div class="fh-tag">H</div><div class="fh-text">
+        Perbuatan tersebut menghalang laluan kenderaan lain dan meningkatkan risiko kemalangan.
+        <span class="en">Doing so blocks other vehicles and increases the risk of an accident.</span>
+        <span class="zh">这种行为会阻碍其他车辆，并增加交通事故的风险。</span>
+      </div></div>
+    </div>
+
+    <div class="fh-card">
+      <div class="fh-title">Peraturan 2: Memakai Pakaian Cerah pada Waktu Malam <span class="zh">规则二：夜间穿亮色衣服</span><span class="en">Wear Bright Clothing at Night</span></div>
+      <div class="fh-row f"><div class="fh-tag">F</div><div class="fh-text">
+        Pejalan kaki dan penunggang basikal perlu memakai pakaian cerah atau bersinar pada waktu malam.
+        <span class="en">Pedestrians and cyclists should wear bright or reflective clothing at night.</span>
+        <span class="zh">行人和骑自行车者在夜间应该穿亮色或反光衣服。</span>
+      </div></div>
+      <div class="fh-row h"><div class="fh-tag">H</div><div class="fh-text">
+        Pakaian tersebut membolehkan pemandu melihat mereka dengan jelas dan mengelakkan pelanggaran.
+        <span class="en">This makes them more visible to drivers and helps prevent collisions.</span>
+        <span class="zh">这能让驾驶者清楚看见他们，从而避免碰撞。</span>
+      </div></div>
+    </div>
+
+    <div class="fh-card">
+      <div class="fh-title">Peraturan 3: Tidak Mencelah Antara Kenderaan <span class="zh">规则三：不要在车辆之间穿行</span><span class="en">Do Not Weave Between Vehicles</span></div>
+      <div class="fh-row f"><div class="fh-tag">F</div><div class="fh-text">
+        Pengguna jalan raya perlu mengelakkan perbuatan mencelah di antara kenderaan.
+        <span class="en">Road users should avoid weaving between vehicles.</span>
+        <span class="zh">道路使用者应该避免在车辆之间穿行。</span>
+      </div></div>
+      <div class="fh-row h"><div class="fh-tag">H</div><div class="fh-text">
+        Pemandu mungkin tidak sempat melihat atau memberhentikan kenderaan lalu menyebabkan kemalangan.
+        <span class="en">Drivers may not see them or stop in time, which could cause an accident.</span>
+        <span class="zh">驾驶者可能无法及时看见或停车，从而造成交通事故。</span>
+      </div></div>
+    </div>
+
+    <div class="fh-card">
+      <div class="fh-title">Peraturan 4: Melihat Kiri, Kanan dan Kiri <span class="zh">规则四：过马路前看左、右、左</span><span class="en">Look Left, Right and Left</span></div>
+      <div class="fh-row f"><div class="fh-tag">F</div><div class="fh-text">
+        Pejalan kaki perlu melihat kiri, kanan dan kiri sebelum melintas.
+        <span class="en">Pedestrians should look left, right and left before crossing.</span>
+        <span class="zh">行人在过马路前应该先看左、右、左。</span>
+      </div></div>
+      <div class="fh-row h"><div class="fh-tag">H</div><div class="fh-text">
+        Tindakan ini memastikan tiada kenderaan sedang menghampiri sebelum mereka melintas dengan selamat.
+        <span class="en">This ensures that no vehicle is approaching before they cross safely.</span>
+        <span class="zh">这样可以确定没有车辆驶近，然后才安全过马路。</span>
+      </div></div>
+    </div>
+
+    <div class="fh-card">
+      <div class="fh-title">Peraturan 5: Menggunakan Jejantas <span class="zh">规则五：使用行人天桥</span><span class="en">Use a Pedestrian Bridge</span></div>
+      <div class="fh-row f"><div class="fh-tag">F</div><div class="fh-text">
+        Pejalan kaki perlu menggunakan jejantas ketika melintas jalan yang sibuk.
+        <span class="en">Pedestrians should use a pedestrian bridge when crossing a busy road.</span>
+        <span class="zh">行人穿越繁忙道路时应该使用行人天桥。</span>
+      </div></div>
+      <div class="fh-row h"><div class="fh-tag">H</div><div class="fh-text">
+        Jejantas memisahkan pejalan kaki daripada kenderaan dan mengurangkan risiko dilanggar.
+        <span class="en">It separates pedestrians from vehicles and reduces the risk of being hit.</span>
+        <span class="zh">行人天桥能把行人与车辆分开，降低被车辆撞倒的风险。</span>
+      </div></div>
+    </div>
+
+    <div class="fh-card">
+      <div class="fh-title">Peraturan 6: Mematuhi Lampu Isyarat <span class="zh">规则六：遵守交通信号灯</span><span class="en">Obey Traffic Lights</span></div>
+      <div class="fh-row f"><div class="fh-tag">F</div><div class="fh-text">
+        Semua pengguna jalan raya perlu mematuhi lampu isyarat.
+        <span class="en">All road users must obey traffic lights.</span>
+        <span class="zh">所有道路使用者都必须遵守交通信号灯。</span>
+      </div></div>
+      <div class="fh-row h"><div class="fh-tag">H</div><div class="fh-text">
+        Pergerakan kenderaan dan pejalan kaki menjadi lebih teratur serta kemalangan dapat dielakkan.
+        <span class="en">Traffic and pedestrian movement becomes more orderly, helping prevent accidents.</span>
+        <span class="zh">车辆和行人的移动会更有秩序，并能避免交通事故。</span>
+      </div></div>
+    </div>
+  </section>
+
+  <!-- 4. CONTOH UNDANG-UNDANG JALAN RAYA -->
+  <section>
+    <div class="section-head">
+      <div class="num">4</div>
+      <h2>Contoh Undang-undang Jalan Raya <span class="zh">交通法律的例子</span></h2>
+      <div class="sub en">Examples of Road Laws</div>
+    </div>
+
+    <div class="fh-card">
+      <div class="fh-title">Undang-undang 1: Mempunyai Lesen Memandu <span class="zh">法律一：持有驾驶执照</span><span class="en">Possess a Driving Licence</span></div>
+      <div class="fh-row f"><div class="fh-tag">F</div><div class="fh-text">
+        Seseorang mesti mempunyai lesen memandu yang sah sebelum memandu.
+        <span class="en">A person must possess a valid driving licence before driving.</span>
+        <span class="zh">一个人在驾驶前必须持有有效的驾驶执照。</span>
+      </div></div>
+      <div class="fh-row h"><div class="fh-tag">H</div><div class="fh-text">
+        Lesen membuktikan bahawa pemandu telah mendapat latihan dan layak mengendalikan kenderaan.
+        <span class="en">A licence proves that the driver has received training and is qualified to operate a vehicle.</span>
+        <span class="zh">驾驶执照证明驾驶者接受过训练，并具备驾驶车辆的资格。</span>
+      </div></div>
+    </div>
+
+    <div class="fh-card">
+      <div class="fh-title">Undang-undang 2: Mematuhi Had Laju <span class="zh">法律二：遵守速度限制</span><span class="en">Obey the Speed Limit</span></div>
+      <div class="fh-row f"><div class="fh-tag">F</div><div class="fh-text">
+        Pemandu mesti mematuhi had laju yang ditetapkan.
+        <span class="en">Drivers must obey the prescribed speed limit.</span>
+        <span class="zh">驾驶者必须遵守规定的速度限制。</span>
+      </div></div>
+      <div class="fh-row h"><div class="fh-tag">H</div><div class="fh-text">
+        Kelajuan terkawal memberikan masa yang mencukupi untuk membrek dan mengelakkan kemalangan serius.
+        <span class="en">Controlled speed provides enough time to brake and prevent serious accidents.</span>
+        <span class="zh">受控制的车速能让驾驶者有足够时间刹车，并避免严重事故。</span>
+      </div></div>
+    </div>
+
+    <div class="fh-card">
+      <div class="fh-title">Undang-undang 3: Tidak Menggunakan Telefon Semasa Memandu <span class="zh">法律三：驾驶时不使用手机</span><span class="en">Do Not Use a Phone While Driving</span></div>
+      <div class="fh-row f"><div class="fh-tag">F</div><div class="fh-text">
+        Pemandu tidak boleh menggunakan telefon bimbit semasa memandu.
+        <span class="en">Drivers must not use mobile phones while driving.</span>
+        <span class="zh">驾驶者在驾驶时不能使用手机。</span>
+      </div></div>
+      <div class="fh-row h"><div class="fh-tag">H</div><div class="fh-text">
+        Penggunaan telefon mengganggu tumpuan dan boleh menyebabkan pemandu gagal mengawal kenderaan.
+        <span class="en">Phone use causes distraction and may result in the driver losing control of the vehicle.</span>
+        <span class="zh">使用手机会分散注意力，并可能导致驾驶者失去对车辆的控制。</span>
+      </div></div>
+    </div>
+  </section>
+
+  <!-- 5. KEPENTINGAN -->
+  <section>
+    <div class="section-head">
+      <div class="num">5</div>
+      <h2>Kepentingan Mematuhi Peraturan dan Undang-undang <span class="zh">遵守交通规则与法律的重要性</span></h2>
+      <div class="sub en">Importance of Obeying Road Rules and Laws</div>
+    </div>
+
+    <div class="imp-grid">
+      <div class="fh-card" style="margin-bottom:0;">
+        <div class="fh-title">1. Mengelakkan Kemalangan <span class="zh">避免交通事故</span><span class="en">Prevent Accidents</span></div>
+        <div class="fh-row f"><div class="fh-tag">F</div><div class="fh-text">Pematuhan dapat mengelakkan kemalangan jalan raya.<span class="en">Obedience can prevent road accidents.</span><span class="zh">遵守规则能够避免交通事故。</span></div></div>
+        <div class="fh-row h"><div class="fh-tag">H</div><div class="fh-text">Pengguna yang berdisiplin tidak melakukan tindakan berbahaya seperti memandu laju atau melanggar lampu isyarat.<span class="en">Disciplined users avoid dangerous actions such as speeding or running traffic lights.</span><span class="zh">有纪律的道路使用者不会超速或闯红灯等危险行为。</span></div></div>
+      </div>
+      <div class="fh-card" style="margin-bottom:0;">
+        <div class="fh-title">2. Mengelakkan Kehilangan Nyawa dan Harta Benda <span class="zh">避免生命和财物损失</span><span class="en">Prevent Loss of Life and Property</span></div>
+        <div class="fh-row f"><div class="fh-tag">F</div><div class="fh-text">Pematuhan dapat mengelakkan kehilangan nyawa dan harta benda.<span class="en">Obedience prevents the loss of lives and property.</span><span class="zh">遵守规则能够避免生命和财物损失。</span></div></div>
+        <div class="fh-row h"><div class="fh-tag">H</div><div class="fh-text">Risiko kecederaan, kematian dan kerosakan kenderaan dapat dikurangkan.<span class="en">It reduces the risk of injury, death and damage to vehicles.</span><span class="zh">这可以降低受伤、死亡和车辆损坏的风险。</span></div></div>
+      </div>
+      <div class="fh-card" style="margin-bottom:0;">
+        <div class="fh-title">3. Menjadikan Jalan Raya Selamat <span class="zh">使道路更加安全</span><span class="en">Make Roads Safer</span></div>
+        <div class="fh-row f"><div class="fh-tag">F</div><div class="fh-text">Pematuhan menjadikan jalan raya selamat untuk semua pengguna.<span class="en">Obedience makes roads safe for all users.</span><span class="zh">遵守规则能使道路对所有使用者更加安全。</span></div></div>
+        <div class="fh-row h"><div class="fh-tag">H</div><div class="fh-text">Setiap pengguna dapat bergerak dengan teratur tanpa membahayakan diri dan orang lain.<span class="en">Everyone can travel in an orderly manner without endangering themselves or others.</span><span class="zh">每个人都能有秩序地使用道路，而不会危害自己或他人。</span></div></div>
+      </div>
+      <div class="fh-card" style="margin-bottom:0;">
+        <div class="fh-title">4. Mengurangkan Kesesakan <span class="zh">减少交通堵塞</span><span class="en">Reduce Traffic Congestion</span></div>
+        <div class="fh-row f"><div class="fh-tag">F</div><div class="fh-text">Pematuhan dapat mengurangkan kesesakan jalan raya.<span class="en">Obedience can reduce traffic congestion.</span><span class="zh">遵守规则能够减少交通堵塞。</span></div></div>
+        <div class="fh-row h"><div class="fh-tag">H</div><div class="fh-text">Pengguna yang mengikut lorong dan lampu isyarat membantu memastikan aliran trafik berjalan lancar.<span class="en">Users who follow lanes and traffic lights help traffic flow smoothly.</span><span class="zh">遵守车道和交通信号灯能让交通更加顺畅。</span></div></div>
+      </div>
+      <div class="fh-card" style="margin-bottom:0;">
+        <div class="fh-title">5. Mengurangkan Beban Kerajaan <span class="zh">减轻政府负担</span><span class="en">Reduce the Government&rsquo;s Burden</span></div>
+        <div class="fh-row f"><div class="fh-tag">F</div><div class="fh-text">Pematuhan dapat mengurangkan beban kewangan kerajaan.<span class="en">Obedience can reduce the government&rsquo;s financial burden.</span><span class="zh">遵守规则能够减轻政府的财政负担。</span></div></div>
+        <div class="fh-row h"><div class="fh-tag">H</div><div class="fh-text">Kerajaan tidak perlu mengeluarkan perbelanjaan yang tinggi untuk membaiki kemudahan yang rosak akibat kemalangan.<span class="en">The government will not need to spend large amounts repairing facilities damaged in accidents.</span><span class="zh">政府无须花费大量资金修复因交通事故而损坏的设施。</span></div></div>
+      </div>
+      <div class="fh-card" style="margin-bottom:0;">
+        <div class="fh-title">6. Meningkatkan Imej Negara <span class="zh">提升国家形象</span><span class="en">Improve the Country&rsquo;s Image</span></div>
+        <div class="fh-row f"><div class="fh-tag">F</div><div class="fh-text">Pengguna jalan raya yang berdisiplin dapat meningkatkan imej negara.<span class="en">Disciplined road users can improve the country&rsquo;s image.</span><span class="zh">有纪律的道路使用者能够提升国家形象。</span></div></div>
+        <div class="fh-row h"><div class="fh-tag">H</div><div class="fh-text">Masyarakat yang beradab dan mematuhi undang-undang memberikan gambaran positif kepada pelancong.<span class="en">A courteous and law-abiding society creates a positive impression on tourists.</span><span class="zh">文明守法的社会能够给游客留下良好的印象。</span></div></div>
+      </div>
+    </div>
+
+    <div class="hafalan-box">
+      <span class="label">Hafalan Kepentingan <span class="en">/ Memory Aid /</span> <span class="zh">重要性记忆法</span></span>
+      <span class="main">Kemalangan &ndash; Nyawa &ndash; Selamat &ndash; Sesak &ndash; Kerajaan &ndash; Imej</span>
+      <span class="en">Accidents &ndash; Lives &ndash; Safety &ndash; Congestion &ndash; Government &ndash; Image</span>
+      <span class="zh">事故 &ndash; 生命 &ndash; 安全 &ndash; 堵塞 &ndash; 政府 &ndash; 形象</span>
+    </div>
+  </section>
+
+  <!-- 6. PERANAN SETIAP PIHAK -->
+  <section>
+    <div class="section-head">
+      <div class="num">6</div>
+      <h2>Peranan Setiap Pihak <span class="zh">各方的责任</span></h2>
+      <div class="sub en">Responsibilities of Different Parties</div>
+    </div>
+
+    <div class="fh-card">
+      <div class="fh-title">Pihak 1: Murid <span class="zh">责任方一：学生</span><span class="en">Students</span></div>
+      <div class="fh-row f"><div class="fh-tag">F</div><div class="fh-text">Murid perlu menggunakan jejantas dan melihat kiri, kanan dan kiri sebelum melintas.<span class="en">Students should use pedestrian bridges and look left, right and left before crossing.</span><span class="zh">学生应该使用行人天桥，并在过马路前看左、右、左。</span></div></div>
+      <div class="fh-row h"><div class="fh-tag">H</div><div class="fh-text">Langkah tersebut mengurangkan risiko murid dilanggar oleh kenderaan.<span class="en">These steps reduce the risk of students being hit by vehicles.</span><span class="zh">这些措施能够降低学生被车辆撞倒的风险。</span></div></div>
+    </div>
+
+    <div class="fh-card">
+      <div class="fh-title">Pihak 2: Ibu Bapa <span class="zh">责任方二：父母</span><span class="en">Parents</span></div>
+      <div class="fh-row f"><div class="fh-tag">F</div><div class="fh-text">Ibu bapa perlu menjadi contoh pemandu yang baik dan mendidik anak tentang keselamatan jalan raya.<span class="en">Parents should be good driving role models and educate their children about road safety.</span><span class="zh">父母应该成为良好驾驶者的榜样，并教导孩子道路安全知识。</span></div></div>
+      <div class="fh-row h"><div class="fh-tag">H</div><div class="fh-text">Anak-anak akan mencontohi sikap berdisiplin seperti mematuhi had laju dan tidak menggunakan telefon ketika memandu.<span class="en">Children will imitate disciplined behaviour such as obeying speed limits and not using phones while driving.</span><span class="zh">孩子会模仿遵守限速和驾驶时不使用手机等有纪律的行为。</span></div></div>
+    </div>
+
+    <div class="fh-card">
+      <div class="fh-title">Pihak 3: Sekolah <span class="zh">责任方三：学校</span><span class="en">Schools</span></div>
+      <div class="fh-row f"><div class="fh-tag">F</div><div class="fh-text">Sekolah perlu mengadakan ceramah dan menubuhkan Kelab Keselamatan Jalan Raya.<span class="en">Schools should organise talks and establish road-safety clubs.</span><span class="zh">学校应该举办道路安全讲座，并成立道路安全学会。</span></div></div>
+      <div class="fh-row h"><div class="fh-tag">H</div><div class="fh-text">Aktiviti tersebut dapat meningkatkan pengetahuan dan kesedaran murid tentang penggunaan jalan raya yang selamat.<span class="en">These activities increase students&rsquo; knowledge and awareness of safe road use.</span><span class="zh">这些活动能够提高学生安全使用道路的知识和意识。</span></div></div>
+    </div>
+
+    <div class="fh-card">
+      <div class="fh-title">Pihak 4: Jabatan Pengangkutan Jalan (JPJ) <span class="zh">责任方四：陆路交通局</span><span class="en">Road Transport Department</span></div>
+      <div class="fh-row f"><div class="fh-tag">F</div><div class="fh-text">JPJ perlu menguatkuasakan undang-undang dan mengadakan kempen kesedaran.<span class="en">The Road Transport Department should enforce laws and conduct awareness campaigns.</span><span class="zh">陆路交通局应该执行交通法律并举办醒觉运动。</span></div></div>
+      <div class="fh-row h"><div class="fh-tag">H</div><div class="fh-text">Penguatkuasaan dan pendidikan dapat meningkatkan pematuhan serta mengurangkan kesalahan jalan raya.<span class="en">Enforcement and education can improve compliance and reduce traffic offences.</span><span class="zh">执法和教育能够提高守法意识，并减少交通违法行为。</span></div></div>
+    </div>
+
+    <div class="fh-card">
+      <div class="fh-title">Pihak 5: Polis Trafik <span class="zh">责任方五：交通警察</span><span class="en">Traffic Police</span></div>
+      <div class="fh-row f"><div class="fh-tag">F</div><div class="fh-text">Polis trafik perlu meningkatkan rondaan dan mengawal lalu lintas.<span class="en">Traffic police should increase patrols and control traffic.</span><span class="zh">交通警察应该加强巡逻并指挥交通。</span></div></div>
+      <div class="fh-row h"><div class="fh-tag">H</div><div class="fh-text">Kehadiran polis dapat mencegah kesalahan jalan raya dan memastikan perjalanan lebih lancar.<span class="en">Police presence can prevent traffic offences and ensure smoother traffic flow.</span><span class="zh">警察的出现能够防止交通违法行为，并确保交通更加顺畅。</span></div></div>
+    </div>
+
+    <div class="hafalan-box">
+      <span class="label">Hafalan Pihak <span class="en">/ Memory Aid /</span> <span class="zh">责任方记忆法</span></span>
+      <span class="main">Murid &ndash; Ibu Bapa &ndash; Sekolah &ndash; JPJ &ndash; Polis</span>
+      <span class="en">Students &ndash; Parents &ndash; School &ndash; JPJ &ndash; Police</span>
+      <span class="zh">学生 &ndash; 父母 &ndash; 学校 &ndash; 陆交局 &ndash; 交警</span>
+    </div>
+  </section>
+
+  <!-- 7. NILAI MORAL -->
+  <section>
+    <div class="section-head">
+      <div class="num">7</div>
+      <h2>Nilai Moral <span class="zh">道德价值观</span></h2>
+      <div class="sub en">Moral Values</div>
+    </div>
+
+    <div class="values-row">
+      <span class="value-chip">Bertanggungjawab <span class="zh">负责任</span></span>
+      <span class="value-chip">Hormat <span class="zh">尊重</span></span>
+      <span class="value-chip">Toleransi <span class="zh">宽容</span></span>
+      <span class="value-chip">Kasih Sayang <span class="zh">关爱</span></span>
+      <span class="value-chip">Rasional <span class="zh">理性</span></span>
+      <span class="value-chip">Disiplin <span class="zh">纪律</span></span>
+    </div>
+
+    <div class="imp-grid" style="margin-top:.9rem;">
+      <div class="fh-card" style="margin-bottom:0;">
+        <div class="fh-title">Nilai 1: Bertanggungjawab <span class="zh">价值观一：负责任</span><span class="en">Responsibility</span></div>
+        <div class="fh-row f"><div class="fh-tag">F</div><div class="fh-text">Pengguna jalan raya mengamalkan nilai bertanggungjawab.<span class="en">Road users practise responsibility.</span><span class="zh">道路使用者实践负责任的价值观。</span></div></div>
+        <div class="fh-row h"><div class="fh-tag">H</div><div class="fh-text">Mereka menjaga keselamatan diri dan orang lain dengan mematuhi peraturan jalan raya.<span class="en">They protect themselves and others by obeying road rules.</span><span class="zh">他们通过遵守交通规则来保护自己和他人的安全。</span></div></div>
+      </div>
+      <div class="fh-card" style="margin-bottom:0;">
+        <div class="fh-title">Nilai 2: Hormat <span class="zh">价值观二：尊重</span><span class="en">Respect</span></div>
+        <div class="fh-row f"><div class="fh-tag">F</div><div class="fh-text">Pengguna jalan raya mengamalkan nilai hormat.<span class="en">Road users practise respect.</span><span class="zh">道路使用者实践尊重的价值观。</span></div></div>
+        <div class="fh-row h"><div class="fh-tag">H</div><div class="fh-text">Mereka menghormati peraturan serta hak pengguna jalan raya yang lain.<span class="en">They respect road rules and the rights of other road users.</span><span class="zh">他们尊重交通规则以及其他道路使用者的权利。</span></div></div>
+      </div>
+      <div class="fh-card" style="margin-bottom:0;">
+        <div class="fh-title">Nilai 3: Toleransi <span class="zh">价值观三：宽容</span><span class="en">Tolerance</span></div>
+        <div class="fh-row f"><div class="fh-tag">F</div><div class="fh-text">Pengguna jalan raya mengamalkan nilai toleransi.<span class="en">Road users practise tolerance.</span><span class="zh">道路使用者实践宽容的价值观。</span></div></div>
+        <div class="fh-row h"><div class="fh-tag">H</div><div class="fh-text">Mereka bertolak ansur dan memberikan laluan kepada pengguna lain.<span class="en">They are considerate and give way to other road users.</span><span class="zh">他们会互相礼让，并让其他道路使用者先行。</span></div></div>
+      </div>
+      <div class="fh-card" style="margin-bottom:0;">
+        <div class="fh-title">Nilai 4: Kasih Sayang <span class="zh">价值观四：关爱</span><span class="en">Love</span></div>
+        <div class="fh-row f"><div class="fh-tag">F</div><div class="fh-text">Pengguna jalan raya mengamalkan nilai kasih sayang.<span class="en">Road users practise love and care.</span><span class="zh">道路使用者实践关爱的价值观。</span></div></div>
+        <div class="fh-row h"><div class="fh-tag">H</div><div class="fh-text">Mereka menghargai nyawa sendiri, keluarga dan pengguna jalan raya yang lain.<span class="en">They value their own lives and the lives of their families and other road users.</span><span class="zh">他们珍惜自己、家人以及其他道路使用者的生命。</span></div></div>
+      </div>
+      <div class="fh-card" style="margin-bottom:0;">
+        <div class="fh-title">Nilai 5: Rasional <span class="zh">价值观五：理性</span><span class="en">Rationality</span></div>
+        <div class="fh-row f"><div class="fh-tag">F</div><div class="fh-text">Pengguna jalan raya mengamalkan nilai rasional.<span class="en">Road users practise rationality.</span><span class="zh">道路使用者实践理性的价值观。</span></div></div>
+        <div class="fh-row h"><div class="fh-tag">H</div><div class="fh-text">Mereka mempertimbangkan kesan tindakan sebelum bertindak di jalan raya.<span class="en">They consider the consequences before taking action on the road.</span><span class="zh">他们在道路上采取行动前会先考虑后果。</span></div></div>
+      </div>
+      <div class="fh-card" style="margin-bottom:0;">
+        <div class="fh-title">Nilai 6: Disiplin <span class="zh">价值观六：纪律</span><span class="en">Discipline</span></div>
+        <div class="fh-row f"><div class="fh-tag">F</div><div class="fh-text">Pengguna jalan raya mengamalkan sikap berdisiplin.<span class="en">Road users practise discipline.</span><span class="zh">道路使用者实践有纪律的态度。</span></div></div>
+        <div class="fh-row h"><div class="fh-tag">H</div><div class="fh-text">Mereka tetap mematuhi peraturan dan undang-undang walaupun tiada pengawasan.<span class="en">They obey rules and laws consistently even when no authority is watching.</span><span class="zh">即使没有执法人员监督，他们仍然遵守交通规则与法律。</span></div></div>
+      </div>
+    </div>
+
+    <div class="hafalan-box">
+      <span class="label">Hafalan Nilai <span class="en">/ Memory Aid /</span> <span class="zh">价值观记忆法</span></span>
+      <span class="main">Be&ndash;Hor&ndash;To&ndash;Ka&ndash;Ra&ndash;Di</span>
+      <span class="en">Bertanggungjawab &ndash; Hormat &ndash; Toleransi &ndash; Kasih Sayang &ndash; Rasional &ndash; Disiplin</span>
+    </div>
+  </section>
+
+  <!-- 8. PERASAAN -->
+  <section>
+    <div class="section-head">
+      <div class="num">8</div>
+      <h2>Perasaan Apabila Mematuhi Peraturan <span class="zh">遵守交通规则时的感受</span></h2>
+      <div class="sub en">Feelings When Obeying Road Rules</div>
+    </div>
+
+    <div class="fh-card">
+      <div class="fh-title">Gembira <span class="zh">开心</span><span class="en">Happy</span></div>
+      <div class="fh-row f"><div class="fh-tag">F</div><div class="fh-text">Saya berasa gembira apabila semua pengguna mematuhi peraturan jalan raya.<span class="en">I feel happy when everyone obeys road rules.</span><span class="zh">当所有人都遵守交通规则时，我感到开心。</span></div></div>
+      <div class="fh-row h"><div class="fh-tag">H</div><div class="fh-text">Hal ini demikian kerana kemalangan dapat dielakkan dan semua pengguna dapat tiba dengan selamat.<span class="en">This is because accidents can be prevented and everyone can arrive safely.</span><span class="zh">这是因为交通事故可以避免，所有人都能安全抵达目的地。</span></div></div>
+    </div>
+
+    <div class="fh-card">
+      <div class="fh-title">Selamat <span class="zh">安全</span><span class="en">Safe</span></div>
+      <div class="fh-row f"><div class="fh-tag">F</div><div class="fh-text">Saya berasa selamat apabila menggunakan jalan raya.<span class="en">I feel safe when using the road.</span><span class="zh">使用道路时，我感到安全。</span></div></div>
+      <div class="fh-row h"><div class="fh-tag">H</div><div class="fh-text">Pengguna yang berdisiplin tidak melakukan tindakan yang membahayakan orang lain.<span class="en">Disciplined road users do not perform actions that endanger others.</span><span class="zh">有纪律的道路使用者不会做出危害他人的行为。</span></div></div>
+    </div>
+
+    <div class="fh-card">
+      <div class="fh-title">Bangga <span class="zh">自豪</span><span class="en">Proud</span></div>
+      <div class="fh-row f"><div class="fh-tag">F</div><div class="fh-text">Saya berasa bangga menjadi pengguna jalan raya yang berdisiplin.<span class="en">I feel proud to be a disciplined road user.</span><span class="zh">我为自己成为有纪律的道路使用者而感到自豪。</span></div></div>
+      <div class="fh-row h"><div class="fh-tag">H</div><div class="fh-text">Saya dapat menjaga keselamatan diri dan menjadi contoh yang baik kepada orang lain.<span class="en">I can protect myself and set a good example for others.</span><span class="zh">我能够保护自己的安全，并成为他人的好榜样。</span></div></div>
+    </div>
+  </section>
+
+  <!-- 9. TEMPLATE JAWAPAN KBAT -->
+  <section>
+    <div class="section-head">
+      <div class="num">9</div>
+      <h2>Template Jawapan KBAT <span class="zh">高层次思维题作答模板</span></h2>
+      <div class="sub en">HOTS Answer Templates</div>
+    </div>
+
+    <div class="kbat-box">
+      <div class="kt-label">Template Tindakan <span style="text-transform:none;font-weight:400;">/ Action Template /</span> 行动题模板</div>
+      <div class="kt-text">
+        Pada pendapat saya, [pihak] perlu [fakta/tindakan]. Hal ini demikian kerana [huraian/sebab]. Kesannya, [kesan positif].
+        <span class="en">In my opinion, [party] should [fact/action]. This is because [explanation/reason]. As a result, [positive effect].</span>
+        <span class="zh">我认为，[有关方面] 应该 [要点／行动]。这是因为 [说明／原因]。结果，[正面影响]。</span>
+      </div>
+    </div>
+
+    <div class="fh-card" style="margin-top:.9rem;">
+      <div class="fh-title">Contoh <span class="zh">例子</span><span class="en">Example</span></div>
+      <div class="fh-row f"><div class="fh-tag">F</div><div class="fh-text">Pihak sekolah perlu mengadakan ceramah keselamatan jalan raya.<span class="en">Schools should organise road-safety talks.</span><span class="zh">学校应该举办道路安全讲座。</span></div></div>
+      <div class="fh-row h"><div class="fh-tag">H</div><div class="fh-text">Ceramah dapat meningkatkan pengetahuan murid tentang cara menggunakan jalan raya dengan selamat.<span class="en">Talks can increase students&rsquo; knowledge about using roads safely.</span><span class="zh">讲座能够提高学生安全使用道路的知识。</span></div></div>
+      <div class="fh-row h"><div class="fh-tag" style="background:var(--good);">K</div><div class="fh-text">Kesan: Risiko kemalangan dalam kalangan murid dapat dikurangkan.<span class="en">Effect: The risk of accidents among students can be reduced.</span><span class="zh">影响： 学生发生交通事故的风险可以降低。</span></div></div>
+    </div>
+  </section>
+
+  <!-- 10. RINGKASAN HAFALAN AKHIR -->
+  <section>
+    <div class="section-head">
+      <div class="num">10</div>
+      <h2>Ringkasan Hafalan Akhir <span class="zh">最后记忆总结</span></h2>
+      <div class="sub en">Final Memory Summary</div>
+    </div>
+
+    <div class="hafalan-box">
+      <span class="label">"3U" untuk Keselamatan Jalan Raya</span>
+      <ol class="u-list">
+        <li><b>Undang-undang</b> &mdash; patuhi lesen, had laju dan larangan telefon.
+          <span class="en">Laws &mdash; obey licensing, speed limits and phone restrictions.</span>
+          <span class="zh">法律 &mdash; 遵守驾照、限速和禁止使用手机的规定。</span>
+        </li>
+        <li><b>Utamakan keselamatan</b> &mdash; jejantas, lampu isyarat dan lihat kiri-kanan-kiri.
+          <span class="en">Prioritise safety &mdash; use bridges, obey signals and look left-right-left.</span>
+          <span class="zh">安全优先 &mdash; 使用天桥、遵守信号灯、先看左-右-左。</span>
+        </li>
+        <li><b>Usaha bersama</b> &mdash; murid, ibu bapa, sekolah, JPJ dan polis.
+          <span class="en">Shared effort &mdash; students, parents, schools, JPJ and police.</span>
+          <span class="zh">共同努力 &mdash; 学生、父母、学校、陆交局和交警。</span>
+        </li>
+      </ol>
+    </div>
+
+    <div class="golden-box">
+      <div class="glabel">Ayat Emas Peperiksaan <span style="text-transform:none;">/ Golden Exam Sentence /</span> 考试万能句</div>
+      <div class="gtext">
+        Semua pengguna jalan raya perlu bersikap bertanggungjawab dan mematuhi peraturan serta undang-undang supaya kemalangan dapat dielakkan, nyawa dilindungi dan keselamatan bersama terjamin.
+        <span class="en">All road users must act responsibly and obey road rules and laws so that accidents can be prevented, lives protected and public safety ensured.</span>
+        <span class="zh">所有道路使用者都必须负责任地遵守交通规则与法律，以避免交通事故、保护生命并保障共同安全。</span>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    KSSM Moral Tingkatan 2 &middot; Unit 13 &middot; Disediakan untuk rujukan pembelajaran peribadi.<br>
+    供个人学习参考使用 &middot; For personal study reference only.
+  </footer>
+
+</div>
+
+<script>
+function setLang(which){
+  const btn = document.getElementById('btn-'+which);
+  btn.classList.toggle('active');
+  const cls = 'hide-' + which;
+  document.body.classList.toggle(cls);
+}
+</script>
+
+</body>
+</html>
