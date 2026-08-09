@@ -3515,7 +3515,8 @@ export const moralData = {
             confidence:0,
             last_updated:"2026-06-21",
             resourceUrl: "../moral/t2_moral_unit7_masyarakat_penyayang_trilingual.html",
-            resourceUrl2:"../moral/t2_Unit7_PersediaanPeperiksaanAkhir.html"
+            resourceUrl2:"../moral/t2_Unit7_PersediaanPeperiksaanAkhir.html",
+            resourceUrl2Label:"Note 2 (Fakta+Huraian)"
         },
 
         {
@@ -3525,6 +3526,7 @@ export const moralData = {
             chapter:"Chapter 8: Perkhidmatan Awam Pemangkin Pembangunan Negara",
             resourceUrl:"../moral/form2_moral_unit8_public_services_trilingual.html",
             resourceUrl2:"../moral/t2_Unit8_PersediaanPeperiksaanAkhir.html",
+            resourceUrl2Label:"Note 2 (Fakta+Huraian)",
             status:"Not Started",
             confidence:0,
             last_updated:"2026-07-28"
@@ -3539,7 +3541,8 @@ export const moralData = {
             confidence:0,
             last_updated:"2026-06-21",
             resourceUrl:"../moral/t2_moral_unit9.html",
-            resourceUrl2:"../moral/t2_Unit9_PersediaanPeperiksaanAkhir.html"
+            resourceUrl2:"../moral/t2_Unit9_PersediaanPeperiksaanAkhir.html",
+            resourceUrl2Label:"Note 2 (Fakta+Huraian)"
         },
 
         {
@@ -3548,6 +3551,7 @@ export const moralData = {
             chapterNum: 61,
             chapter:"Chapter 10: Gaya Hidup Sihat dan Selamat Menjamin Keharmonian Bersama",
             resourceUrl2:"../moral/t2_Unit10_PersediaanPeperiksaanAkhir.html",
+            resourceUrl2Label:"Note 2 (Fakta+Huraian)",
             status:"Not Started",
             confidence:0,
             last_updated:"2026-06-21",

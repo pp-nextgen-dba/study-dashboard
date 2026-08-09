@@ -1,4 +1,4 @@
-const CACHE = "study-dashboard-v37";
+const CACHE = "study-dashboard-v38";
 
 const STATIC_ASSETS = [
     "/index.html",
