@@ -1,4 +1,4 @@
-const CACHE = "study-dashboard-v35";
+const CACHE = "study-dashboard-v36";
 
 const STATIC_ASSETS = [
     "/index.html",
@@ -70,6 +70,7 @@ const STATIC_ASSETS = [
     "/science/t2_science_chapter11_stars_and_galaxies_bilingual.html",
     "/science/form2_science_chapter6_acid_alkali_bilingual.html",
     "/moral/t2_moral_unit14.html",
+    "/moral/t2_Unit14_PersediaanPeperiksaanAkhir.html",
     "/moral/t2_Unit14_KonflikIdentitiDiri.html",
     "/moral/t2_moral_unit13.html",
     "/moral/t2_Unit13_PersediaanPeperiksaanAkhir.html",
@@ -81,6 +82,7 @@ const STATIC_ASSETS = [
     "/moral/t2_moral_unit9.html",
     "/moral/t2_Unit9_PersediaanPeperiksaanAkhir.html",
     "/moral/t2_moral_unit15.html",
+    "/moral/t2_Unit15_PersediaanPeperiksaanAkhir.html",
     "/moral/t2_Unit15_HakAsasiManusia.html",
     "/moral/t2_moral_unit12.html",
     "/moral/t2_Unit12_PersediaanPeperiksaanAkhir.html",

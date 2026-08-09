@@ -3602,7 +3602,9 @@ export const moralData = {
             confidence:0,
             last_updated:"2026-06-21",
             resourceUrl:"../moral/t2_moral_unit14.html",
-            resourceUrl2:"../moral/t2_Unit14_KonflikIdentitiDiri.html"
+            resourceUrl2:"../moral/t2_Unit14_KonflikIdentitiDiri.html",
+            resourceUrl3:"../moral/t2_Unit14_PersediaanPeperiksaanAkhir.html",
+            resourceUrl3Label:"Note 3 (Fakta+Huraian)"
         },
 
         {
@@ -3614,7 +3616,9 @@ export const moralData = {
             confidence:0,
             last_updated:"2026-06-21",
             resourceUrl:"../moral/t2_moral_unit15.html",
-            resourceUrl2:"../moral/t2_Unit15_HakAsasiManusia.html"
+            resourceUrl2:"../moral/t2_Unit15_HakAsasiManusia.html",
+            resourceUrl3:"../moral/t2_Unit15_PersediaanPeperiksaanAkhir.html",
+            resourceUrl3Label:"Note 3 (Fakta+Huraian)"
         },
 
         {
