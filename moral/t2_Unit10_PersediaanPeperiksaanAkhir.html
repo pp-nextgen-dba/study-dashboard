@@ -1,0 +1,800 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Unit 10 · Nota Persediaan Peperiksaan Akhir — Gaya Hidup Sihat dan Selamat</title>
+<style>
+  :root{
+    --ink:#1c2a3a;
+    --paper:#f6f1e6;
+    --paper2:#eee6d4;
+    --navy:#1f3a5f;
+    --navy-deep:#142840;
+    --brass:#a8762f;
+    --brass-light:#c99a4f;
+    --rule:#cdbf9e;
+    --fact:#1f5c4a;
+    --explain:#8a4a1f;
+    --value:#5b5390;
+    --good:#3c6e5e;
+    --bad:#9c4a5c;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Iowan Old Style','Songti SC','Noto Serif SC',Georgia,serif;
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+  .zh{font-family:'Songti SC','Noto Serif SC','PingFang SC',serif;}
+  .label{
+    font-family:'Helvetica Neue',Arial,sans-serif;
+    letter-spacing:.12em;
+    text-transform:uppercase;
+    font-size:.68rem;
+    font-weight:600;
+  }
+  .masthead{
+    background:linear-gradient(180deg,var(--navy-deep),var(--navy));
+    color:var(--paper);
+    padding:2.6rem 1.4rem 2rem;
+    position:relative;
+    overflow:hidden;
+    border-bottom:6px solid var(--brass);
+  }
+  .masthead::before{
+    content:"";
+    position:absolute; inset:0;
+    background-image:
+      repeating-linear-gradient(0deg, rgba(255,255,255,.035) 0 1px, transparent 1px 26px);
+    pointer-events:none;
+  }
+  .seal{width:64px;height:64px;margin:0 auto 1rem;position:relative;}
+  .seal svg{width:100%;height:100%;}
+  .mast-eyebrow{text-align:center;color:var(--brass-light);margin-bottom:.5rem;}
+  .mast-unit{
+    text-align:center;font-size:.95rem;color:#cdd9e6;
+    letter-spacing:.18em;text-transform:uppercase;margin-bottom:.3rem;
+  }
+  h1.mast-title{text-align:center;font-size:1.7rem;margin:.2rem 0 .15rem;font-weight:700;letter-spacing:.01em;}
+  .mast-title .zh{display:block;font-size:1.1rem;color:var(--brass-light);margin-top:.35rem;font-weight:500;letter-spacing:.04em;}
+  .mast-title .en{display:block;font-size:.92rem;font-style:italic;color:#cdd9e6;margin-top:.3rem;font-weight:400;}
+  .mast-sub{text-align:center;font-size:.85rem;color:#cdd9e6;margin-top:.9rem;}
+  .mast-sub .zh{display:block;font-size:.78rem;color:var(--brass-light);margin-top:.2rem;}
+  .mast-sub .en{display:block;font-size:.78rem;font-style:italic;color:#9fb0c4;margin-top:.15rem;}
+  .langbar{
+    position:sticky; top:0; z-index:50;
+    background:var(--paper2);
+    border-bottom:1px solid var(--rule);
+    padding:.55rem .9rem;
+    display:flex; gap:.4rem; justify-content:center;
+    font-family:'Helvetica Neue',Arial,sans-serif;
+  }
+  .langbar button{
+    border:1px solid var(--rule);background:var(--paper);color:var(--ink);
+    padding:.35rem .85rem;font-size:.75rem;letter-spacing:.06em;
+    border-radius:3px;cursor:pointer;font-weight:600;
+  }
+  .langbar button.active{background:var(--navy);color:var(--paper);border-color:var(--navy);}
+  .wrap{max-width:880px;margin:0 auto;padding:0 1.1rem 4rem;}
+  section{margin-top:2.6rem;}
+  .section-head{
+    display:flex; align-items:baseline; gap:.6rem;
+    margin-bottom:.9rem;
+    border-bottom:2px solid var(--ink);
+    padding-bottom:.45rem;
+    flex-wrap:wrap;
+  }
+  .section-head .num{
+    font-family:'Helvetica Neue',Arial,sans-serif;font-size:.75rem;font-weight:700;
+    color:var(--brass);border:1px solid var(--brass);border-radius:50%;
+    width:1.5rem;height:1.5rem;display:flex;align-items:center;justify-content:center;flex-shrink:0;
+  }
+  .section-head h2{font-size:1.15rem;margin:0;font-weight:700;}
+  .section-head h2 .zh{display:block;font-size:.78rem;font-weight:400;color:#6b6354;margin-top:.1rem;}
+  .section-head .sub{
+    font-family:'Helvetica Neue',Arial,sans-serif;font-size:.78rem;color:#6b6354;
+    margin-left:auto;white-space:nowrap;font-style:italic;
+  }
+  .toolkit-grid{display:grid;grid-template-columns:1fr 1fr;gap:.9rem;}
+  @media (max-width:620px){.toolkit-grid{grid-template-columns:1fr;}}
+  .toolkit-card{
+    border:1px solid var(--brass);border-radius:8px;background:var(--paper2);
+    padding:.9rem 1rem;
+  }
+  .toolkit-card .thead{
+    font-family:'Helvetica Neue',Arial,sans-serif;font-weight:700;font-size:.78rem;
+    color:var(--brass);letter-spacing:.06em;text-transform:uppercase;margin-bottom:.5rem;
+  }
+  .toolkit-card .formula{
+    font-size:1rem;font-weight:700;color:var(--navy);margin-bottom:.6rem;
+    background:var(--paper);border-radius:6px;padding:.4rem .6rem;text-align:center;
+  }
+  .toolkit-card ul{margin:0;padding-left:1.1rem;font-size:.84rem;}
+  .toolkit-card li{margin-bottom:.4rem;}
+  .toolkit-card li .zh,.toolkit-card li .en{display:block;font-size:.74rem;color:#6b6354;margin-top:.08rem;}
+  .toolkit-card li .en{font-style:italic;color:#8a8270;}
+  .qtype-grid{display:grid;grid-template-columns:1fr 1fr;gap:.7rem;}
+  @media (max-width:620px){.qtype-grid{grid-template-columns:1fr;}}
+  .qtype-card{border:1px solid var(--rule);border-radius:8px;background:var(--paper);padding:.75rem .9rem;}
+  .qtype-card .qhead{font-family:'Helvetica Neue',Arial,sans-serif;font-weight:700;font-size:.78rem;color:var(--navy);margin-bottom:.35rem;}
+  .qtype-card .qhead .zh{display:block;font-weight:400;font-size:.72rem;color:#6b6354;margin-top:.1rem;}
+  .qtype-card p{margin:.3rem 0;font-size:.83rem;}
+  .qtype-card .zh{display:block;color:#6b6354;font-size:.74rem;margin-top:.1rem;}
+  .qtype-card .en{display:block;color:#8a8270;font-size:.74rem;font-style:italic;margin-top:.05rem;}
+  .qtype-card .marks-tip{margin-top:.4rem;padding-top:.4rem;border-top:1px dashed var(--rule);font-size:.76rem;color:var(--brass);font-weight:700;font-family:'Helvetica Neue',Arial,sans-serif;}
+  .fh-card{
+    border:1px solid var(--rule);border-radius:8px;overflow:hidden;margin-bottom:.7rem;background:var(--paper);
+  }
+  .fh-card .fh-title{
+    padding:.55rem .85rem;font-family:'Helvetica Neue',Arial,sans-serif;font-weight:700;
+    font-size:.82rem;color:#fff;background:var(--navy);
+  }
+  .fh-card .fh-title .zh{font-weight:500;opacity:.9;font-size:.74rem;display:block;margin-top:.1rem;}
+  .fh-card .fh-title .en{font-weight:400;font-style:italic;opacity:.85;font-size:.74rem;display:block;margin-top:.05rem;}
+  .fh-row{display:flex;gap:.6rem;padding:.55rem .9rem;border-top:1px dashed var(--rule);align-items:flex-start;}
+  .fh-row:first-of-type{border-top:none;}
+  .fh-tag{
+    font-family:'Helvetica Neue',Arial,sans-serif;font-weight:700;color:#fff;
+    border-radius:50%;width:1.5rem;height:1.5rem;flex-shrink:0;
+    display:flex;align-items:center;justify-content:center;font-size:.72rem;
+  }
+  .fh-row.f .fh-tag{background:var(--fact);}
+  .fh-row.h .fh-tag{background:var(--explain);}
+  .fh-text{font-size:.87rem;}
+  .fh-text .zh{display:block;color:#6b6354;font-size:.78rem;margin-top:.2rem;}
+  .fh-text .en{display:block;color:#8a8270;font-size:.78rem;font-style:italic;margin-top:.15rem;}
+  .fh-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:0 .7rem;}
+  .fh-grid .fh-card{margin-bottom:.7rem;}
+  .hafalan-box{
+    background:var(--paper2);border-left:4px solid var(--brass);
+    padding:.7rem .9rem;border-radius:0 6px 6px 0;font-size:.88rem;margin-top:.8rem;
+  }
+  .hafalan-box .lbl{display:block;margin-bottom:.35rem;color:var(--brass);}
+  .hafalan-box .main{font-weight:700;color:var(--navy);}
+  .hafalan-box .zh{display:block;color:#6b6354;font-size:.78rem;margin-top:.25rem;}
+  .hafalan-box .en{display:block;color:#8a8270;font-size:.78rem;font-style:italic;margin-top:.1rem;}
+  .kbat-box{
+    border:1px solid var(--navy);border-radius:8px;background:var(--paper2);padding:.9rem 1rem;margin-bottom:.7rem;
+  }
+  .kbat-box .kt-label{font-family:'Helvetica Neue',Arial,sans-serif;font-weight:700;font-size:.75rem;color:var(--navy);text-transform:uppercase;letter-spacing:.06em;margin-bottom:.4rem;}
+  .kbat-box .kt-text{font-size:.88rem;font-style:italic;}
+  .kbat-box .kt-text .zh{display:block;font-style:normal;color:#6b6354;font-size:.78rem;margin-top:.2rem;}
+  .kbat-box .kt-text .en{display:block;color:#8a8270;font-size:.78rem;margin-top:.15rem;}
+  .kbat-box .kt-example{margin-top:.6rem;padding-top:.6rem;border-top:1px dashed var(--rule);font-size:.85rem;font-style:normal;}
+  .kbat-box .kt-example .lbl{font-family:'Helvetica Neue',Arial,sans-serif;font-weight:700;font-size:.7rem;color:var(--brass);text-transform:uppercase;letter-spacing:.05em;display:block;margin-bottom:.25rem;}
+  .qa-block{
+    border:1px solid var(--rule);border-radius:8px;background:var(--paper);padding:.8rem .9rem;margin-bottom:.6rem;
+  }
+  .qa-q{
+    font-family:'Helvetica Neue',Arial,sans-serif;font-weight:700;font-size:.82rem;
+    color:var(--navy);margin-bottom:.3rem;display:flex;flex-wrap:wrap;gap:.4rem;align-items:baseline;
+  }
+  .qa-q .zh,.qa-q .en{display:block;font-weight:500;font-size:.74rem;color:#6b6354;margin-top:.15rem;width:100%;}
+  .qa-q .en{font-style:italic;color:#8a8270;}
+  .qtype-tag{
+    font-family:'Helvetica Neue',Arial,sans-serif;font-weight:700;font-size:.64rem;text-transform:uppercase;letter-spacing:.04em;
+    border-radius:999px;padding:.15rem .55rem;margin-left:auto;flex-shrink:0;
+  }
+  .qtype-tag.list{background:#e6eef7;color:var(--navy);}
+  .qtype-tag.fh{background:#fbeee0;color:var(--explain);}
+  .qa-ans-list{
+    background:var(--paper2);border-radius:6px;padding:.6rem .8rem;font-size:.85rem;margin-top:.4rem;
+  }
+  .qa-ans-list .zh,.qa-ans-list .en{display:block;font-size:.74rem;color:#8a8270;margin-top:.2rem;}
+  .qa-ans-list .en{font-style:italic;}
+  .qa-fh{margin-top:.5rem;border:1px solid var(--rule);border-radius:6px;overflow:hidden;}
+  .qa-fh .fh-row{background:var(--paper2);}
+  .qa-tip{margin-top:.5rem;padding-top:.5rem;border-top:1px dashed var(--rule);font-size:.78rem;color:var(--brass);}
+  .qa-tip .zh,.qa-tip .en{display:block;color:#8a8270;font-size:.72rem;margin-top:.1rem;}
+  .ans-table-wrap{overflow-x:auto;border:1px solid var(--rule);border-radius:8px;}
+  table.ans-table{width:100%;border-collapse:collapse;font-size:.8rem;background:var(--paper);}
+  table.ans-table th{background:var(--navy);color:var(--paper);padding:.5rem .6rem;text-align:left;font-family:'Helvetica Neue',Arial,sans-serif;font-weight:700;font-size:.72rem;text-transform:uppercase;letter-spacing:.04em;}
+  table.ans-table td{padding:.5rem .6rem;border-top:1px solid var(--rule);vertical-align:top;}
+  table.ans-table tr:nth-child(even) td{background:var(--paper2);}
+  .table-title{font-family:'Helvetica Neue',Arial,sans-serif;font-weight:700;font-size:.78rem;color:var(--brass);margin:1rem 0 .5rem;text-transform:uppercase;letter-spacing:.05em;}
+  .table-title:first-child{margin-top:0;}
+  .check-grid{display:flex;flex-direction:column;gap:.5rem;}
+  .check-item{display:flex;gap:.6rem;align-items:flex-start;border:1px solid var(--brass);border-radius:7px;padding:.55rem .75rem;background:var(--paper2);}
+  .check-item .cn{
+    font-family:'Helvetica Neue',Arial,sans-serif;font-weight:700;color:#fff;
+    background:var(--brass);border-radius:50%;width:1.4rem;height:1.4rem;
+    display:flex;align-items:center;justify-content:center;font-size:.72rem;flex-shrink:0;
+  }
+  .check-item .ct{font-size:.85rem;}
+  .check-item .ct .zh{display:block;color:#6b6354;font-size:.76rem;margin-top:.1rem;}
+  .check-item .ct .en{display:block;color:#8a8270;font-size:.76rem;font-style:italic;margin-top:.05rem;}
+  .golden-box{
+    background:linear-gradient(135deg,var(--navy),var(--navy-deep));color:var(--paper);
+    border-radius:10px;padding:1.1rem 1.2rem;margin-top:.8rem;
+    box-shadow:0 3px 0 var(--brass);
+  }
+  .golden-box .glabel{font-family:'Helvetica Neue',Arial,sans-serif;font-weight:700;font-size:.72rem;color:var(--brass-light);text-transform:uppercase;letter-spacing:.08em;margin-bottom:.5rem;}
+  .golden-box .gtext{font-size:.92rem;}
+  .golden-box .zh{display:block;color:var(--brass-light);font-size:.82rem;margin-top:.4rem;}
+  .golden-box .en{display:block;color:#cdd9e6;font-size:.8rem;font-style:italic;margin-top:.3rem;}
+  .u-list{margin:.7rem 0 0;padding-left:1.2rem;font-size:.88rem;}
+  .u-list li{margin-bottom:.5rem;}
+  .u-list li .zh{display:block;color:#6b6354;font-size:.78rem;margin-top:.1rem;}
+  .u-list li .en{display:block;color:#8a8270;font-size:.78rem;font-style:italic;margin-top:.05rem;}
+  footer{
+    text-align:center;margin-top:3rem;padding-top:1.2rem;border-top:1px solid var(--rule);
+    font-family:'Helvetica Neue',Arial,sans-serif;font-size:.72rem;color:#9a9180;
+  }
+  body.hide-en .en{display:none !important;}
+  body.hide-zh .zh{display:none !important;}
+</style>
+</head>
+<body>
+
+<div class="top-nav" style="background:#fff;padding:10px 16px;border-bottom:2px solid #e5e7eb;position:sticky;top:0;z-index:120">
+  <a class="dashboard-link" href="../index.html" style="display:inline-flex;align-items:center;gap:6px;padding:8px 12px;border-radius:8px;background:#1d4ed8;color:#fff;font-size:13px;font-weight:800;text-decoration:none">&larr; Back to Dashboard</a>
+</div>
+
+<header class="masthead">
+  <div class="seal">
+    <svg viewBox="0 0 64 64" fill="none">
+      <circle cx="32" cy="32" r="30" stroke="#c99a4f" stroke-width="2"/>
+      <path d="M32 14 V50 M20 22 L44 22 M18 32 L46 32 M20 42 L44 42" stroke="#c99a4f" stroke-width="2" stroke-linecap="round"/>
+      <circle cx="32" cy="32" r="6" stroke="#c99a4f" stroke-width="2" fill="none"/>
+    </svg>
+  </div>
+  <div class="mast-eyebrow label">KSSM Moral &middot; Tingkatan 2 / Form 2 / 表 2</div>
+  <div class="mast-unit">Unit 10</div>
+  <h1 class="mast-title">
+    Nota Persediaan Peperiksaan Akhir
+    <span class="zh">期末考试准备笔记</span>
+    <span class="en">Final Exam Preparation Notes</span>
+  </h1>
+  <div class="mast-sub">
+    Gaya Hidup Sihat dan Selamat Menjamin Keharmonian Bersama
+    <span class="zh">健康与安全生活方式促进共同和谐</span>
+    <span class="en">Healthy and Safe Lifestyle Builds Personal and Social Harmony</span>
+  </div>
+</header>
+
+<div class="langbar">
+  <button id="btn-en" class="active" onclick="setLang('en')">EN</button>
+  <button id="btn-zh" class="active" onclick="setLang('zh')">中文</button>
+</div>
+
+<div class="wrap">
+
+  <!-- TOOLKIT -->
+  <section style="margin-top:1.6rem;">
+    <div class="section-head">
+      <div class="num">&#128295;</div>
+      <h2>Formula &amp; Kata Penyambung <span class="zh">作答公式与连接词</span></h2>
+      <div class="sub en">Answer Formula &amp; Linking Words</div>
+    </div>
+    <div class="toolkit-grid">
+      <div class="toolkit-card">
+        <div class="thead">Formula Jawapan <span class="en">/ Answer Formula /</span> <span class="zh">作答公式</span></div>
+        <div class="formula">Fakta (F) + Huraian (H) = 2 markah</div>
+        <ul>
+          <li><b>Fakta (F):</b> Isi utama yang menjawab soalan.
+            <span class="en">The main point answering the question.</span>
+            <span class="zh">直接回答问题的主要内容。</span>
+          </li>
+          <li><b>Huraian (H):</b> Sebab, cara, contoh atau kesan fakta tersebut.
+            <span class="en">The reason, method, example or effect.</span>
+            <span class="zh">解释该要点的原因、方法、例子或影响。</span>
+          </li>
+        </ul>
+      </div>
+      <div class="toolkit-card">
+        <div class="thead">Kata Penyambung <span class="en">/ Linking Words /</span> <span class="zh">连接词</span></div>
+        <ul>
+          <li>Hal ini demikian kerana&hellip;
+            <span class="en">This is because&hellip;</span>
+            <span class="zh">这是因为……</span>
+          </li>
+          <li>Contohnya&hellip;
+            <span class="en">For example&hellip;</span>
+            <span class="zh">例如……</span>
+          </li>
+          <li>Kesannya&hellip;
+            <span class="en">As a result&hellip;</span>
+            <span class="zh">结果……</span>
+          </li>
+          <li>Di samping itu&hellip;
+            <span class="en">Besides that&hellip;</span>
+            <span class="zh">除此之外……</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- PANDUAN JENIS SOALAN -->
+  <section>
+    <div class="section-head">
+      <div class="num">&#128214;</div>
+      <h2>Panduan Menjawab: Kenali Jenis Soalan <span class="zh">作答指南：认清题型</span></h2>
+      <div class="sub en">How to Answer: Know the Question Type</div>
+    </div>
+    <div class="qtype-grid">
+      <div class="qtype-card">
+        <div class="qhead">Nyatakan / Padankan <span class="zh">列出 / 配对</span></div>
+        <p>Setiap fakta = 1 markah. <b>Tidak perlu huraian.</b>
+          <span class="en">Each fact = 1 mark. No explanation needed.</span>
+          <span class="zh">每个要点 = 1分，无需说明。</span>
+        </p>
+        <div class="marks-tip">Untuk padanan/definisi: jawab dengan tepat sahaja.</div>
+      </div>
+      <div class="qtype-card">
+        <div class="qhead">Jelaskan / Terangkan / Huraikan <span class="zh">解释 / 说明理由</span></div>
+        <p>Gunakan <b>Fakta + Huraian = 2 markah</b> bagi setiap isi.
+          <span class="en">Use Fact + Explanation = 2 marks for each point.</span>
+          <span class="zh">每个要点使用"要点+说明"的格式。</span>
+        </p>
+        <div class="marks-tip">Jika soalan bernilai 4 markah &rarr; tulis 2 pasang Fakta+Huraian.</div>
+      </div>
+      <div class="qtype-card">
+        <div class="qhead">Pada pendapat anda&hellip; (KBAT) <span class="zh">你认为……（高层次思维）</span></div>
+        <p>Gunakan templat: <b>Amalan + Sebab + Kesan</b>.
+          <span class="en">Use the template: Practice + Reason + Effect.</span>
+          <span class="zh">使用模板：习惯+原因+影响。</span>
+        </p>
+        <div class="marks-tip">Lihat Bahagian 6 untuk templat penuh.</div>
+      </div>
+      <div class="qtype-card">
+        <div class="qhead">Apakah perasaan anda? <span class="zh">你有什么感受？</span></div>
+        <p>Nyatakan <b>perasaan</b> (gembira/bangga/yakin), kemudian satu sebab yang menyokongnya.
+          <span class="en">State the feeling, then one supporting reason.</span>
+          <span class="zh">说出感受，再用一个理由加以说明。</span>
+        </p>
+        <div class="marks-tip">Lihat Bahagian 7, Soalan 5 untuk contoh.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 1. KONSEP PENTING -->
+  <section>
+    <div class="section-head">
+      <div class="num">1</div>
+      <h2>Konsep Penting <span class="zh">重要概念</span></h2>
+      <div class="sub en">Core Concept</div>
+    </div>
+    <div class="fh-card">
+      <div class="fh-row f">
+        <div class="fh-tag">F</div>
+        <div class="fh-text">
+          Gaya hidup sihat ialah amalan masyarakat yang mengutamakan penjagaan kesihatan badan serta pencegahan penyakit.
+          <span class="en">A healthy lifestyle is a community practice that prioritises body health care and disease prevention.</span>
+          <span class="zh">健康生活方式是重视身体健康护理和预防疾病的社会实践。</span>
+        </div>
+      </div>
+      <div class="fh-row h">
+        <div class="fh-tag">H</div>
+        <div class="fh-text">
+          Oleh itu, remaja perlu mengaitkan amalan ini dengan disiplin diri, keselamatan, kesejahteraan keluarga, keharmonian sosial dan pencegahan penyakit.
+          <span class="en">Therefore, teenagers should connect this practice with self-discipline, safety, family wellbeing, social harmony and disease prevention.</span>
+          <span class="zh">因此，青少年应将这种做法与自律、安全、家庭福祉、社会和谐及疾病预防联系起来。</span>
+        </div>
+      </div>
+    </div>
+    <div class="hafalan-box">
+      <span class="lbl">Hafalan <span class="en">/ Memory Aid /</span> <span class="zh">记忆法</span></span>
+      <span class="main">Sihat = Jaga Badan + Cegah Penyakit</span>
+      <span class="zh">健康 = 照顾身体 + 预防疾病</span>
+    </div>
+  </section>
+
+  <!-- 2. NILAI MURNI -->
+  <section>
+    <div class="section-head">
+      <div class="num">2</div>
+      <h2>Nilai Murni <span class="zh">道德价值</span></h2>
+      <div class="sub en">Moral Values</div>
+    </div>
+    <div class="fh-grid">
+      <div class="fh-card"><div class="fh-title">Harga Diri <span class="zh">自尊</span></div>
+        <div class="fh-row f"><div class="fh-tag">F</div><div class="fh-text">Individu mengamalkan nilai harga diri.<span class="en">Individuals practise self-respect.</span><span class="zh">个人实践自尊的价值观。</span></div></div>
+        <div class="fh-row h"><div class="fh-tag">H</div><div class="fh-text">Mereka menjaga kesihatan dan maruah diri dengan gaya hidup yang sihat.<span class="en">They protect their health and dignity through a healthy lifestyle.</span><span class="zh">他们通过健康的生活方式维护健康与尊严。</span></div></div>
+      </div>
+      <div class="fh-card"><div class="fh-title">Kerajinan <span class="zh">勤劳</span></div>
+        <div class="fh-row f"><div class="fh-tag">F</div><div class="fh-text">Individu mengamalkan nilai kerajinan.<span class="en">Individuals practise diligence.</span><span class="zh">个人实践勤劳的价值观。</span></div></div>
+        <div class="fh-row h"><div class="fh-tag">H</div><div class="fh-text">Mereka rajin bersenam dan menjaga kebersihan diri serta persekitaran.<span class="en">They diligently exercise and maintain personal and environmental hygiene.</span><span class="zh">他们勤于运动，并保持个人与环境的卫生。</span></div></div>
+      </div>
+      <div class="fh-card"><div class="fh-title">Bertanggungjawab <span class="zh">负责任</span></div>
+        <div class="fh-row f"><div class="fh-tag">F</div><div class="fh-text">Individu mengamalkan nilai bertanggungjawab.<span class="en">Individuals practise responsibility.</span><span class="zh">个人实践负责任的价值观。</span></div></div>
+        <div class="fh-row h"><div class="fh-tag">H</div><div class="fh-text">Mereka bertanggungjawab menjaga kesihatan dan keselamatan diri sendiri.<span class="en">They take responsibility for their own health and safety.</span><span class="zh">他们对自己的健康与安全负责。</span></div></div>
+      </div>
+      <div class="fh-card"><div class="fh-title">Berdikari <span class="zh">自立</span></div>
+        <div class="fh-row f"><div class="fh-tag">F</div><div class="fh-text">Individu mengamalkan nilai berdikari.<span class="en">Individuals practise independence.</span><span class="zh">个人实践自立的价值观。</span></div></div>
+        <div class="fh-row h"><div class="fh-tag">H</div><div class="fh-text">Mereka mampu mengurus diri dan jadual harian dengan baik tanpa bergantung kepada orang lain.<span class="en">They can manage themselves and their daily schedule well without depending on others.</span><span class="zh">他们能够独立管理自己与日常作息，不依赖他人。</span></div></div>
+      </div>
+      <div class="fh-card"><div class="fh-title">Kesederhanaan <span class="zh">节制</span></div>
+        <div class="fh-row f"><div class="fh-tag">F</div><div class="fh-text">Individu mengamalkan nilai kesederhanaan.<span class="en">Individuals practise moderation.</span><span class="zh">个人实践节制的价值观。</span></div></div>
+        <div class="fh-row h"><div class="fh-tag">H</div><div class="fh-text">Mereka tidak berlebihan dalam makan, hiburan atau penggunaan gajet.<span class="en">They are not excessive in eating, entertainment or gadget use.</span><span class="zh">他们在饮食、娱乐和电子产品使用上不过度。</span></div></div>
+      </div>
+      <div class="fh-card" style="margin-bottom:0;"><div class="fh-title">Rasional <span class="zh">理性</span></div>
+        <div class="fh-row f"><div class="fh-tag">F</div><div class="fh-text">Individu mengamalkan nilai rasional.<span class="en">Individuals practise rationality.</span><span class="zh">个人实践理性的价值观。</span></div></div>
+        <div class="fh-row h"><div class="fh-tag">H</div><div class="fh-text">Mereka berfikir sebelum memilih makanan, aktiviti dan pergaulan.<span class="en">They think before choosing food, activities and friendships.</span><span class="zh">他们在选择饮食、活动和交友前会先思考。</span></div></div>
+      </div>
+    </div>
+    <div class="hafalan-box">
+      <span class="lbl">Hafalan Nilai <span class="en">/ Memory Aid /</span> <span class="zh">价值观记忆法</span></span>
+      <span class="main">Harga Diri &ndash; Kerajinan &ndash; Tanggungjawab &ndash; Berdikari &ndash; Sederhana &ndash; Rasional</span>
+    </div>
+  </section>
+
+  <!-- 3. AKTIVITI DAN AMALAN -->
+  <section>
+    <div class="section-head">
+      <div class="num">3</div>
+      <h2>Aktiviti dan Amalan Gaya Hidup Sihat <span class="zh">健康安全生活习惯</span></h2>
+      <div class="sub en">Healthy Lifestyle Activities and Practices</div>
+    </div>
+    <div class="fh-grid">
+      <div class="fh-card"><div class="fh-title">1. Pemeriksaan Kesihatan</div>
+        <div class="fh-row f"><div class="fh-tag">F</div><div class="fh-text">Membuat pemeriksaan kesihatan.<span class="en">Have health check-ups.</span><span class="zh">定期体检。</span></div></div>
+        <div class="fh-row h"><div class="fh-tag">H</div><div class="fh-text">Mengesan penyakit lebih awal dan mendapatkan rawatan segera.<span class="en">This detects diseases earlier and allows for prompt treatment.</span><span class="zh">及早发现疾病，并及时接受治疗。</span></div></div>
+      </div>
+      <div class="fh-card"><div class="fh-title">2. Makanan Seimbang</div>
+        <div class="fh-row f"><div class="fh-tag">F</div><div class="fh-text">Makan makanan seimbang.<span class="en">Eat a balanced diet.</span><span class="zh">均衡饮食。</span></div></div>
+        <div class="fh-row h"><div class="fh-tag">H</div><div class="fh-text">Membekalkan nutrien yang cukup dan mengelakkan obesiti.<span class="en">This supplies sufficient nutrients and prevents obesity.</span><span class="zh">获得足够营养，并避免肥胖。</span></div></div>
+      </div>
+      <div class="fh-card"><div class="fh-title">3. Kebersihan Diri</div>
+        <div class="fh-row f"><div class="fh-tag">F</div><div class="fh-text">Menjaga kebersihan diri.<span class="en">Maintain personal hygiene.</span><span class="zh">保持个人卫生。</span></div></div>
+        <div class="fh-row h"><div class="fh-tag">H</div><div class="fh-text">Mengelakkan penyakit berjangkit dan bau badan.<span class="en">This prevents infectious diseases and body odour.</span><span class="zh">预防传染病与体臭。</span></div></div>
+      </div>
+      <div class="fh-card"><div class="fh-title">4. Kebersihan Persekitaran</div>
+        <div class="fh-row f"><div class="fh-tag">F</div><div class="fh-text">Menjaga kebersihan persekitaran.<span class="en">Maintain a clean environment.</span><span class="zh">保持环境清洁。</span></div></div>
+        <div class="fh-row h"><div class="fh-tag">H</div><div class="fh-text">Mewujudkan kawasan yang bersih, selamat dan selesa.<span class="en">This creates a clean, safe and comfortable area.</span><span class="zh">营造干净、安全、舒适的环境。</span></div></div>
+      </div>
+      <div class="fh-card"><div class="fh-title">5. Bebas Bahan Terlarang</div>
+        <div class="fh-row f"><div class="fh-tag">F</div><div class="fh-text">Bebas daripada penggunaan bahan terlarang.<span class="en">Stay free from prohibited substances.</span><span class="zh">远离违禁物质。</span></div></div>
+        <div class="fh-row h"><div class="fh-tag">H</div><div class="fh-text">Mengelakkan ketagihan, masalah sosial dan kerosakan kesihatan.<span class="en">This avoids addiction, social problems and health damage.</span><span class="zh">避免成瘾、社会问题与健康损害。</span></div></div>
+      </div>
+      <div class="fh-card"><div class="fh-title">6. Ibadat dan Meditasi</div>
+        <div class="fh-row f"><div class="fh-tag">F</div><div class="fh-text">Mengamalkan ibadat dan meditasi.<span class="en">Practise religious devotion and meditation.</span><span class="zh">进行宗教实践或冥想。</span></div></div>
+        <div class="fh-row h"><div class="fh-tag">H</div><div class="fh-text">Menjadikan jiwa lebih tenang dan mengurangkan tekanan.<span class="en">This calms the mind and reduces stress.</span><span class="zh">使内心更平静，并减轻压力。</span></div></div>
+      </div>
+      <div class="fh-card"><div class="fh-title">7. Fikiran Positif</div>
+        <div class="fh-row f"><div class="fh-tag">F</div><div class="fh-text">Sentiasa berfikiran positif.<span class="en">Always think positively.</span><span class="zh">保持积极思维。</span></div></div>
+        <div class="fh-row h"><div class="fh-tag">H</div><div class="fh-text">Membina emosi yang stabil dan hubungan baik dengan orang lain.<span class="en">This builds stable emotions and good relationships with others.</span><span class="zh">建立稳定的情绪和良好的人际关系。</span></div></div>
+      </div>
+      <div class="fh-card"><div class="fh-title">8. Rehat Cukup</div>
+        <div class="fh-row f"><div class="fh-tag">F</div><div class="fh-text">Mendapatkan rehat yang cukup.<span class="en">Get enough rest.</span><span class="zh">获得足够休息。</span></div></div>
+        <div class="fh-row h"><div class="fh-tag">H</div><div class="fh-text">Membantu badan pulih dan minda lebih fokus.<span class="en">This helps the body recover and the mind stay more focused.</span><span class="zh">帮助身体恢复，并让思维更专注。</span></div></div>
+      </div>
+      <div class="fh-card" style="margin-bottom:0;"><div class="fh-title">9. Aktiviti Senaman</div>
+        <div class="fh-row f"><div class="fh-tag">F</div><div class="fh-text">Melakukan aktiviti senaman.<span class="en">Exercise regularly.</span><span class="zh">定期运动。</span></div></div>
+        <div class="fh-row h"><div class="fh-tag">H</div><div class="fh-text">Menguatkan badan, meningkatkan stamina dan mengurangkan stres.<span class="en">This strengthens the body, increases stamina and reduces stress.</span><span class="zh">强健体魄、提升耐力，并减轻压力。</span></div></div>
+      </div>
+    </div>
+    <div class="hafalan-box">
+      <span class="lbl">Hafalan Amalan <span class="en">/ Memory Aid /</span> <span class="zh">习惯记忆法</span></span>
+      <span class="main">Periksa &ndash; Makan &ndash; Bersih &ndash; Persekitaran &ndash; Elak &ndash; Ibadat &ndash; Positif &ndash; Rehat &ndash; Senaman</span>
+    </div>
+  </section>
+
+  <!-- 4. KESAN KEPADA DIRI -->
+  <section>
+    <div class="section-head">
+      <div class="num">4</div>
+      <h2>Kesan kepada Diri <span class="zh">对个人的影响</span></h2>
+      <div class="sub en">Effects on Self</div>
+    </div>
+    <div class="fh-grid">
+      <div class="fh-card"><div class="fh-title">Minda Cerdas <span class="zh">头脑清晰</span></div>
+        <div class="fh-row f"><div class="fh-tag">F</div><div class="fh-text">Amalan gaya hidup sihat menghasilkan minda yang cerdas.<span class="en">A healthy lifestyle produces a sharp mind.</span><span class="zh">健康的生活方式能带来清晰的头脑。</span></div></div>
+        <div class="fh-row h"><div class="fh-tag">H</div><div class="fh-text">Individu menjadi lebih fokus ketika belajar atau bekerja.<span class="en">The individual becomes more focused when studying or working.</span><span class="zh">个人在学习或工作时更能专注。</span></div></div>
+      </div>
+      <div class="fh-card"><div class="fh-title">Tubuh Sihat <span class="zh">身体健康</span></div>
+        <div class="fh-row f"><div class="fh-tag">F</div><div class="fh-text">Amalan gaya hidup sihat menghasilkan tubuh yang sihat.<span class="en">A healthy lifestyle produces a healthy body.</span><span class="zh">健康的生活方式能带来健康的身体。</span></div></div>
+        <div class="fh-row h"><div class="fh-tag">H</div><div class="fh-text">Individu memiliki tubuh badan yang sihat dan bertenaga.<span class="en">The individual has a healthy and energetic body.</span><span class="zh">个人拥有健康且充满活力的身体。</span></div></div>
+      </div>
+      <div class="fh-card"><div class="fh-title">Kurang Stres <span class="zh">压力减少</span></div>
+        <div class="fh-row f"><div class="fh-tag">F</div><div class="fh-text">Amalan gaya hidup sihat mengurangkan stres.<span class="en">A healthy lifestyle reduces stress.</span><span class="zh">健康的生活方式能减轻压力。</span></div></div>
+        <div class="fh-row h"><div class="fh-tag">H</div><div class="fh-text">Tekanan berkurang melalui rehat, senaman dan pemikiran positif.<span class="en">Stress is reduced through rest, exercise and positive thinking.</span><span class="zh">通过休息、运动和积极思维减轻压力。</span></div></div>
+      </div>
+      <div class="fh-card" style="margin-bottom:0;"><div class="fh-title">Bebas Masalah Sosial <span class="zh">远离社会问题</span></div>
+        <div class="fh-row f"><div class="fh-tag">F</div><div class="fh-text">Amalan gaya hidup sihat membebaskan diri daripada masalah sosial.<span class="en">A healthy lifestyle frees a person from social problems.</span><span class="zh">健康的生活方式能使人远离社会问题。</span></div></div>
+        <div class="fh-row h"><div class="fh-tag">H</div><div class="fh-text">Individu menjauhi bahan terlarang, pergaulan negatif dan tabiat buruk.<span class="en">The individual stays away from prohibited substances, negative company and bad habits.</span><span class="zh">个人远离违禁物质、不良交往与坏习惯。</span></div></div>
+      </div>
+    </div>
+    <div class="hafalan-box">
+      <span class="lbl">Hafalan Kesan Diri <span class="en">/ Memory Aid /</span> <span class="zh">个人影响记忆法</span></span>
+      <span class="main">Minda &ndash; Tubuh &ndash; Stres &ndash; Sosial</span>
+    </div>
+  </section>
+
+  <!-- 5. KESAN KEPADA MASYARAKAT -->
+  <section>
+    <div class="section-head">
+      <div class="num">5</div>
+      <h2>Kesan kepada Masyarakat <span class="zh">对社会的影响</span></h2>
+      <div class="sub en">Effects on Society</div>
+    </div>
+    <div class="fh-grid">
+      <div class="fh-card"><div class="fh-title">Masyarakat Produktif <span class="zh">更有生产力</span></div>
+        <div class="fh-row f"><div class="fh-tag">F</div><div class="fh-text">Amalan gaya hidup sihat melahirkan masyarakat produktif.<span class="en">A healthy lifestyle produces a productive society.</span><span class="zh">健康的生活方式能塑造有生产力的社会。</span></div></div>
+        <div class="fh-row h"><div class="fh-tag">H</div><div class="fh-text">Anggota masyarakat menjadi lebih produktif dan aktif.<span class="en">Members of society become more productive and active.</span><span class="zh">社会成员变得更有生产力和积极。</span></div></div>
+      </div>
+      <div class="fh-card"><div class="fh-title">Bersatu Padu <span class="zh">团结</span></div>
+        <div class="fh-row f"><div class="fh-tag">F</div><div class="fh-text">Amalan gaya hidup sihat melahirkan masyarakat yang bersatu padu.<span class="en">A healthy lifestyle produces a united society.</span><span class="zh">健康的生活方式能塑造团结的社会。</span></div></div>
+        <div class="fh-row h"><div class="fh-tag">H</div><div class="fh-text">Anggota masyarakat menjadi lebih bersatu padu dan bekerjasama.<span class="en">Members of society become more united and cooperative.</span><span class="zh">社会成员变得更团结、更合作。</span></div></div>
+      </div>
+      <div class="fh-card"><div class="fh-title">Persekitaran Bersih <span class="zh">环境清洁</span></div>
+        <div class="fh-row f"><div class="fh-tag">F</div><div class="fh-text">Amalan gaya hidup sihat mewujudkan persekitaran bersih.<span class="en">A healthy lifestyle creates a clean environment.</span><span class="zh">健康的生活方式能营造清洁的环境。</span></div></div>
+        <div class="fh-row h"><div class="fh-tag">H</div><div class="fh-text">Kawasan menjadi bersih dan selamat untuk semua.<span class="en">The area becomes clean and safe for everyone.</span><span class="zh">该区域变得干净且对所有人安全。</span></div></div>
+      </div>
+      <div class="fh-card"><div class="fh-title">Kurang Masalah Sosial <span class="zh">社会问题减少</span></div>
+        <div class="fh-row f"><div class="fh-tag">F</div><div class="fh-text">Amalan gaya hidup sihat mengurangkan masalah sosial.<span class="en">A healthy lifestyle reduces social problems.</span><span class="zh">健康的生活方式能减少社会问题。</span></div></div>
+        <div class="fh-row h"><div class="fh-tag">H</div><div class="fh-text">Masalah seperti penyalahgunaan dadah dan gejala negatif berkurang.<span class="en">Issues such as drug abuse and negative behaviour decrease.</span><span class="zh">药物滥用等负面问题得以减少。</span></div></div>
+      </div>
+      <div class="fh-card"><div class="fh-title">Masyarakat Sihat <span class="zh">更健康</span></div>
+        <div class="fh-row f"><div class="fh-tag">F</div><div class="fh-text">Amalan gaya hidup sihat melahirkan masyarakat yang sihat.<span class="en">A healthy lifestyle produces a healthy society.</span><span class="zh">健康的生活方式能塑造健康的社会。</span></div></div>
+        <div class="fh-row h"><div class="fh-tag">H</div><div class="fh-text">Anggota masyarakat menjadi lebih sihat secara keseluruhan.<span class="en">Members of society become healthier overall.</span><span class="zh">社会成员整体上更加健康。</span></div></div>
+      </div>
+      <div class="fh-card" style="margin-bottom:0;"><div class="fh-title">Keharmonian <span class="zh">和谐</span></div>
+        <div class="fh-row f"><div class="fh-tag">F</div><div class="fh-text">Amalan gaya hidup sihat meningkatkan keharmonian.<span class="en">A healthy lifestyle improves harmony.</span><span class="zh">健康的生活方式能提升和谐。</span></div></div>
+        <div class="fh-row h"><div class="fh-tag">H</div><div class="fh-text">Hubungan keluarga dan masyarakat menjadi lebih harmoni.<span class="en">Family and community relationships become more harmonious.</span><span class="zh">家庭与社会关系变得更加和谐。</span></div></div>
+      </div>
+    </div>
+    <div class="hafalan-box">
+      <span class="lbl">Hafalan Kesan Masyarakat <span class="en">/ Memory Aid /</span> <span class="zh">社会影响记忆法</span></span>
+      <span class="main">Produktif &ndash; Bersatu &ndash; Bersih &ndash; Kurang Masalah &ndash; Sihat &ndash; Harmoni</span>
+    </div>
+  </section>
+
+  <!-- 6. FORMULA JAWAPAN -->
+  <section>
+    <div class="section-head">
+      <div class="num">6</div>
+      <h2>Formula Jawapan Peperiksaan <span class="zh">答题公式</span></h2>
+      <div class="sub en">Exam Answer Formula</div>
+    </div>
+    <div class="kbat-box">
+      <div class="kt-label">Formula Asas <span style="text-transform:none;font-weight:400;">/ Basic Formula</span></div>
+      <div class="kt-text">
+        Saya mengamalkan nilai [nilai moral] kerana [amalan gaya hidup sihat]. Kesannya, [kesan positif].
+        <span class="en">I practise the value of [moral value] because [healthy lifestyle practice]. As a result, [positive effect].</span>
+        <span class="zh">我实践[道德价值观]，因为[健康生活习惯]。结果，[正面影响]。</span>
+      </div>
+      <div class="kt-example">
+        <span class="lbl">Contoh Unit 10 <span style="text-transform:none;">/ Unit 10 Example</span></span>
+        Saya mengamalkan nilai bertanggungjawab kerana saya makan makanan seimbang dan melakukan senaman secara berkala. Kesannya, tubuh badan saya menjadi sihat dan minda saya lebih cerdas.
+        <span class="en">I practise the value of responsibility because I eat a balanced diet and exercise regularly. As a result, my body becomes healthy and my mind sharper.</span>
+        <span class="zh">我实践负责任的价值观，因为我均衡饮食并定期运动。结果，我的身体变得健康，头脑也更清晰。</span>
+      </div>
+    </div>
+    <div class="kbat-box" style="margin-bottom:0;">
+      <div class="kt-label">Formula KBAT <span style="text-transform:none;font-weight:400;">/ KBAT Formula</span></div>
+      <div class="kt-text">
+        Pada pendapat saya, [amalan] perlu dilakukan kerana [sebab]. Hal ini dapat [kesan positif kepada diri/keluarga/masyarakat].
+        <span class="en">In my opinion, [practice] should be done because [reason]. This can [positive effect on self/family/society].</span>
+        <span class="zh">我认为，应该[采取某习惯]，因为[原因]。这能够[对个人／家庭／社会的正面影响]。</span>
+      </div>
+      <div class="kt-example">
+        <span class="lbl">Contoh <span style="text-transform:none;">/ Example</span></span>
+        Pada pendapat saya, remaja perlu menjauhi bahan terlarang kerana bahan tersebut boleh merosakkan kesihatan dan masa depan. Hal ini dapat mengelakkan masalah sosial dan menjamin kesejahteraan hidup.
+        <span class="en">In my opinion, teenagers should stay away from prohibited substances because they can damage health and the future. This can prevent social problems and ensure life wellbeing.</span>
+        <span class="zh">我认为，青少年应该远离违禁物质，因为这些物质会损害健康与前途。这能够避免社会问题，并保障生活福祉。</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7. Q&A -->
+  <section>
+    <div class="section-head">
+      <div class="num">7</div>
+      <h2>Soalan Lazim dan Contoh Jawapan <span class="zh">常见考题</span></h2>
+      <div class="sub en">Common Exam Questions and Sample Answers</div>
+    </div>
+
+    <div class="qa-block">
+      <div class="qa-q">Padankan definisi gaya hidup sihat.
+        <span class="qtype-tag list">Senarai · 1 Fakta</span>
+        <span class="en">Match the definition of a healthy lifestyle.</span>
+        <span class="zh">配对健康生活方式的定义。</span>
+      </div>
+      <div class="qa-ans-list">
+        Gaya hidup sihat ialah amalan masyarakat yang mengutamakan penjagaan kesihatan badan serta pencegahan penyakit.
+        <span class="en">A healthy lifestyle is a community practice that prioritises body health care and disease prevention.</span>
+      </div>
+    </div>
+
+    <div class="qa-block">
+      <div class="qa-q">Terangkan empat aktiviti gaya hidup sihat dan selamat.
+        <span class="qtype-tag list">Senarai · 1 Fakta</span>
+        <span class="en">Explain four healthy and safe lifestyle activities.</span>
+        <span class="zh">解释四项健康与安全的生活活动。</span>
+      </div>
+      <div class="qa-ans-list">
+        Makan makanan seimbang untuk mendapatkan nutrien yang cukup. Melakukan senaman untuk menguatkan badan. Mendapatkan rehat yang cukup supaya minda lebih fokus. Menjaga kebersihan diri dan persekitaran untuk mengelakkan penyakit.
+      </div>
+      <div class="qa-tip">Tip: soalan ini bernilai markah senarai; untuk versi Fakta+Huraian penuh, rujuk Bahagian 3.<span class="en">Tip: this is a listing-mark question; for the full Fact+Explanation version, see Section 3.</span></div>
+    </div>
+
+    <div class="qa-block">
+      <div class="qa-q">Nyatakan kesan amalan gaya hidup sihat kepada masyarakat.
+        <span class="qtype-tag list">Senarai · 1 Fakta</span>
+        <span class="en">State the effects of a healthy lifestyle on society.</span>
+        <span class="zh">说出健康生活方式对社会的影响。</span>
+      </div>
+      <div class="qa-ans-list">
+        Melahirkan masyarakat yang sihat, produktif, bersatu padu dan bekerjasama. Selain itu, amalan ini dapat mengurangkan masalah sosial serta mewujudkan persekitaran yang bersih dan selamat.
+      </div>
+    </div>
+
+    <div class="qa-block">
+      <div class="qa-q">Hubung kait amalan gaya hidup sihat dengan kesejahteraan hidup.
+        <span class="qtype-tag fh">Fakta+Huraian</span>
+        <span class="en">Relate a healthy lifestyle to life wellbeing.</span>
+        <span class="zh">将健康的生活方式与生活福祉联系起来。</span>
+      </div>
+      <div class="qa-fh">
+        <div class="fh-row f"><div class="fh-tag">F</div><div class="fh-text">Amalan seperti makan makanan seimbang, bersenam dan mendapat rehat yang cukup menjadikan badan sihat dan minda cerdas.<span class="en">Practices such as eating a balanced diet, exercising and getting enough rest make the body healthy and the mind sharp.</span><span class="zh">均衡饮食、运动和充足休息等习惯能使身体健康、头脑清晰。</span></div></div>
+        <div class="fh-row h"><div class="fh-tag">H</div><div class="fh-text">Apabila diri sihat, seseorang dapat belajar atau bekerja dengan baik serta hidup lebih sejahtera bersama keluarga dan masyarakat.<span class="en">When one is healthy, they can study or work well and live a more fulfilling life with family and society.</span><span class="zh">身体健康时，一个人能更好地学习或工作，并与家人和社会过上更幸福的生活。</span></div></div>
+      </div>
+    </div>
+
+    <div class="qa-block">
+      <div class="qa-q">Apakah perasaan anda apabila mengamalkan gaya hidup sihat dan selamat?
+        <span class="qtype-tag fh">Fakta+Huraian</span>
+        <span class="en">How do you feel when practising a healthy and safe lifestyle?</span>
+        <span class="zh">当你实践健康与安全的生活方式时，你有什么感受？</span>
+      </div>
+      <div class="qa-fh">
+        <div class="fh-row f"><div class="fh-tag">F</div><div class="fh-text">Saya berasa gembira dan bangga apabila mengamalkan gaya hidup sihat dan selamat.<span class="en">I feel happy and proud when I practise a healthy and safe lifestyle.</span><span class="zh">我在实践健康与安全的生活方式时，感到开心与自豪。</span></div></div>
+        <div class="fh-row h"><div class="fh-tag">H</div><div class="fh-text">Saya juga berasa lebih yakin kerana tubuh badan saya sihat, minda lebih cerdas dan saya dapat mengelakkan masalah sosial.<span class="en">I also feel more confident because my body is healthy, my mind is sharper, and I can avoid social problems.</span><span class="zh">我也感到更有自信，因为我的身体健康、头脑更清晰，并能避免社会问题。</span></div></div>
+      </div>
+    </div>
+
+    <div class="qa-block">
+      <div class="qa-q">Nyatakan amalan untuk bebas daripada masalah sosial.
+        <span class="qtype-tag list">Senarai · 1 Fakta</span>
+        <span class="en">State practices to stay free from social problems.</span>
+        <span class="zh">说出远离社会问题的做法。</span>
+      </div>
+      <div class="qa-ans-list">
+        Menjauhi penggunaan bahan terlarang, memilih rakan yang baik, mengisi masa lapang dengan aktiviti berfaedah, berfikiran positif dan mengamalkan ibadat atau meditasi.
+      </div>
+    </div>
+
+    <div class="qa-block">
+      <div class="qa-q">Bina jadual aktiviti gaya hidup sihat dan selamat.
+        <span class="qtype-tag list">Senarai · 1 Fakta</span>
+        <span class="en">Draw up a schedule of healthy and safe lifestyle activities.</span>
+        <span class="zh">制定健康与安全生活方式的时间表。</span>
+      </div>
+      <div class="qa-ans-list">
+        Contoh: 6.30 pagi bangun dan membersihkan diri; 7.00 pagi sarapan seimbang; 8.00 pagi belajar; 5.00 petang bersenam; 7.00 malam makan malam seimbang; 8.00 malam ulang kaji; 9.30 malam meditasi/ibadat dan persediaan tidur; 10.00 malam tidur secukupnya.
+      </div>
+    </div>
+  </section>
+
+  <!-- 8. PRACTICE ANSWER KEY -->
+  <section>
+    <div class="section-head">
+      <div class="num">8</div>
+      <h2>Skema Jawapan Latihan <span class="zh">练习答案</span></h2>
+      <div class="sub en">Practice Answer Key</div>
+    </div>
+
+    <div class="table-title">DSKP Q1: Definisi Gaya Hidup Sihat</div>
+    <div class="qa-ans-list" style="margin-top:0;">
+      Padankan dengan: <b>Amalan masyarakat yang mengutamakan penjagaan kesihatan badan serta pencegahan penyakit.</b>
+    </div>
+
+    <div class="table-title">DSKP Q2: Aktiviti Gaya Hidup Sihat dan Selamat</div>
+    <div class="qa-ans-list" style="margin-top:0;">
+      Mana-mana empat jawapan sesuai: membuat pemeriksaan kesihatan, makan makanan seimbang, menjaga kebersihan diri, menjaga kebersihan persekitaran, bebas daripada penggunaan bahan terlarang, amalan ibadat dan meditasi, sentiasa berfikiran positif, mendapat rehat yang cukup, melakukan aktiviti senaman.
+    </div>
+
+    <div class="table-title">DSKP Q3: Kesan kepada Masyarakat</div>
+    <div class="qa-ans-list" style="margin-top:0;">
+      Melahirkan anggota masyarakat yang lebih produktif; melahirkan masyarakat yang bersatu padu dan bekerjasama; mewujudkan persekitaran yang bersih dan selamat; mengurangkan masalah sosial; melahirkan anggota masyarakat yang sihat.
+    </div>
+
+    <div class="table-title">DSKP Q4: Hasil Perbincangan</div>
+    <div class="qa-ans-list" style="margin-top:0;">
+      Amalan gaya hidup sihat seperti bersenam, makan makanan seimbang, menjaga kebersihan dan mendapat rehat yang cukup dapat meningkatkan kesihatan diri. Apabila masyarakat sihat, mereka lebih produktif, kurang mengalami stres dan dapat hidup dalam suasana bersih, selamat serta harmoni.
+    </div>
+
+    <div class="table-title">DSKP Q5: Contoh Jadual Aktiviti Harian</div>
+    <div class="ans-table-wrap">
+      <table class="ans-table">
+        <tr><th>Masa</th><th>Aktiviti</th><th>Tujuan</th></tr>
+        <tr><td>6.30 pagi</td><td>Bangun tidur dan membersihkan diri</td><td>Menjaga kebersihan diri</td></tr>
+        <tr><td>7.00 pagi</td><td>Sarapan makanan seimbang</td><td>Membekalkan tenaga</td></tr>
+        <tr><td>8.00 pagi &ndash; 1.00 petang</td><td>Belajar di sekolah</td><td>Meningkatkan ilmu</td></tr>
+        <tr><td>1.30 petang</td><td>Makan tengah hari seimbang</td><td>Menjaga kesihatan badan</td></tr>
+        <tr><td>3.00 petang</td><td>Rehat secukupnya</td><td>Mengurangkan keletihan</td></tr>
+        <tr><td>5.00 petang</td><td>Bersenam / beriadah</td><td>Menguatkan badan dan mengurangkan stres</td></tr>
+        <tr><td>7.00 malam</td><td>Makan malam bersama keluarga</td><td>Mengeratkan hubungan keluarga</td></tr>
+        <tr><td>8.00 malam</td><td>Ulang kaji pelajaran</td><td>Mempunyai minda yang cerdas</td></tr>
+        <tr><td>9.30 malam</td><td>Ibadat / meditasi / persediaan tidur</td><td>Menenangkan fikiran</td></tr>
+        <tr><td>10.00 malam</td><td>Tidur</td><td>Mendapat rehat yang cukup</td></tr>
+      </table>
+    </div>
+  </section>
+
+  <!-- 9. QUICK REVISION CHECKLIST -->
+  <section>
+    <div class="section-head">
+      <div class="num">9</div>
+      <h2>Senarai Semak Ulang Kaji Pantas <span class="zh">快速复习清单</span></h2>
+      <div class="sub en">Quick Revision Checklist</div>
+    </div>
+    <div class="check-grid">
+      <div class="check-item"><div class="cn">1</div><div class="ct">Hafal definisi: penjagaan kesihatan + pencegahan penyakit.<span class="en">Memorise definition: health care + disease prevention.</span><span class="zh">记住定义：健康护理 + 疾病预防。</span></div></div>
+      <div class="check-item"><div class="cn">2</div><div class="ct">Ketahui nilai: harga diri, kerajinan, bertanggungjawab, berdikari, kesederhanaan.<span class="en">Know values: harga diri, kerajinan, bertanggungjawab, berdikari, kesederhanaan.</span><span class="zh">了解价值观：自尊、勤劳、负责任、自立、节制。</span></div></div>
+      <div class="check-item"><div class="cn">3</div><div class="ct">Aktiviti: pemeriksaan kesihatan, senaman, makanan seimbang, kebersihan, rehat cukup.<span class="en">Activities: health check, exercise, balanced diet, hygiene, enough rest.</span><span class="zh">活动：体检、运动、均衡饮食、卫生、充足休息。</span></div></div>
+      <div class="check-item"><div class="cn">4</div><div class="ct">Elakkan: bahan terlarang, penggunaan gajet berlebihan, rakan negatif.<span class="en">Avoid: prohibited substances, excessive gadget use, negative friends.</span><span class="zh">避免：违禁物质、过度使用电子产品、不良朋友。</span></div></div>
+      <div class="check-item"><div class="cn">5</div><div class="ct">Kesan kepada diri: minda cerdas, tubuh sihat, kurang stres, bebas masalah sosial.<span class="en">Effects on self: smart mind, healthy body, less stress, free from social problems.</span><span class="zh">对个人的影响：头脑清晰、身体健康、压力减少、远离社会问题。</span></div></div>
+      <div class="check-item"><div class="cn">6</div><div class="ct">Kesan kepada masyarakat: produktif, bersatu padu, bersih dan selamat, kurang masalah sosial.<span class="en">Effects on society: productive, united, clean and safe, fewer social problems.</span><span class="zh">对社会的影响：更有生产力、团结、清洁安全、社会问题减少。</span></div></div>
+      <div class="check-item"><div class="cn">7</div><div class="ct">Soalan perasaan: gembira, bangga, yakin + sebab.<span class="en">Feelings question: gembira, bangga, yakin + reason.</span><span class="zh">感受题：开心、自豪、自信 + 原因。</span></div></div>
+      <div class="check-item"><div class="cn">8</div><div class="ct">Untuk soalan Fakta+Huraian, sentiasa sertakan fakta + sebab/kesan; untuk senarai, fakta sahaja.<span class="en">For Fact+Explanation questions, always include fact + reason/effect; for list questions, facts only.</span><span class="zh">对于要点+说明题，务必包含要点+原因/影响；对于列举题，只需列出要点。</span></div></div>
+    </div>
+  </section>
+
+  <!-- 10. RINGKASAN HAFALAN AKHIR -->
+  <section>
+    <div class="section-head">
+      <div class="num">10</div>
+      <h2>Ringkasan Hafalan Akhir <span class="zh">最后记忆总结</span></h2>
+      <div class="sub en">Final Memory Summary</div>
+    </div>
+
+    <div class="hafalan-box">
+      <span class="lbl">&ldquo;5S&rdquo; untuk Gaya Hidup Sihat</span>
+      <ol class="u-list">
+        <li><b>Senaman</b> &mdash; bersenam secara berkala untuk kekuatan dan stamina.
+          <span class="en">Exercise &mdash; exercise regularly for strength and stamina.</span>
+          <span class="zh">运动 &mdash; 定期运动以增强体力与耐力。</span>
+        </li>
+        <li><b>Seimbang</b> &mdash; makan makanan seimbang dan berehat secukupnya.
+          <span class="en">Balance &mdash; eat a balanced diet and rest enough.</span>
+          <span class="zh">均衡 &mdash; 均衡饮食并充分休息。</span>
+        </li>
+        <li><b>Sihat (Kebersihan)</b> &mdash; jaga kebersihan diri dan persekitaran.
+          <span class="en">Hygiene &mdash; maintain personal and environmental cleanliness.</span>
+          <span class="zh">卫生 &mdash; 保持个人与环境的清洁。</span>
+        </li>
+        <li><b>Selamat</b> &mdash; jauhi bahan terlarang dan pergaulan negatif.
+          <span class="en">Safety &mdash; stay away from prohibited substances and negative company.</span>
+          <span class="zh">安全 &mdash; 远离违禁物质与不良交往。</span>
+        </li>
+        <li><b>Stabil (Emosi)</b> &mdash; berfikiran positif, amalkan ibadat/meditasi.
+          <span class="en">Stability &mdash; think positively, practise devotion/meditation.</span>
+          <span class="zh">稳定 &mdash; 保持积极思维，进行宗教实践或冥想。</span>
+        </li>
+      </ol>
+    </div>
+
+    <div class="golden-box">
+      <div class="glabel">Ayat Emas Peperiksaan <span style="text-transform:none;">/ Golden Exam Sentence /</span> 考试万能句</div>
+      <div class="gtext">
+        Sebagai remaja yang bertanggungjawab, saya perlu mengamalkan gaya hidup sihat dan selamat dengan makan makanan seimbang, bersenam, berehat secukupnya dan menjauhi bahan terlarang supaya diri saya sihat, keluarga sejahtera dan masyarakat harmoni.
+        <span class="en">As a responsible teenager, I must practise a healthy and safe lifestyle by eating a balanced diet, exercising, resting enough and staying away from prohibited substances, so that I stay healthy, my family thrives and society remains harmonious.</span>
+        <span class="zh">作为一名负责任的青少年，我必须通过均衡饮食、运动、充足休息和远离违禁物质来实践健康与安全的生活方式，以便自己保持健康、家庭幸福、社会和谐。</span>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    KSSM Moral Tingkatan 2 &middot; Unit 10 &middot; Disediakan untuk rujukan pembelajaran peribadi.<br>
+    供个人学习参考使用 &middot; For personal study reference only.
+  </footer>
+
+</div>
+
+<script>
+function setLang(which){
+  const btn = document.getElementById('btn-'+which);
+  btn.classList.toggle('active');
+  const cls = 'hide-' + which;
+  document.body.classList.toggle(cls);
+}
+</script>
+
+</body>
+</html>

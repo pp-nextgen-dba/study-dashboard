@@ -3536,7 +3536,8 @@ export const moralData = {
             status:"Not Started",
             confidence:0,
             last_updated:"2026-06-21",
-            resourceUrl:"../moral/t2_moral_unit9.html"
+            resourceUrl:"../moral/t2_moral_unit9.html",
+            resourceUrl2:"../moral/t2_Unit9_PersediaanPeperiksaanAkhir.html"
         },
 
         {
@@ -3544,6 +3545,7 @@ export const moralData = {
             globalNum: 10,
             chapterNum: 61,
             chapter:"Chapter 10: Gaya Hidup Sihat dan Selamat Menjamin Keharmonian Bersama",
+            resourceUrl2:"../moral/t2_Unit10_PersediaanPeperiksaanAkhir.html",
             status:"Not Started",
             confidence:0,
             last_updated:"2026-06-21",

@@ -1,4 +1,4 @@
-const CACHE = "study-dashboard-v33";
+const CACHE = "study-dashboard-v34";
 
 const STATIC_ASSETS = [
     "/index.html",
@@ -77,7 +77,9 @@ const STATIC_ASSETS = [
     "/moral/t2_unit11-kssm_adab-tempat-awam.html",
     "/moral/t2_Unit11_PersediaanPeperiksaanAkhir.html",
     "/moral/t2_moral_unit10.html",
+    "/moral/t2_Unit10_PersediaanPeperiksaanAkhir.html",
     "/moral/t2_moral_unit9.html",
+    "/moral/t2_Unit9_PersediaanPeperiksaanAkhir.html",
     "/moral/t2_moral_unit15.html",
     "/moral/t2_Unit15_HakAsasiManusia.html",
     "/moral/t2_moral_unit12.html",
