@@ -15,7 +15,7 @@ content="width=device-width, initial-scale=1.0">
 <title>Science Dashboard</title>
 
 <link rel="stylesheet"
-href="../css/style.css?v=41">
+href="../css/style.css?v=42">
 
 <style>
 
@@ -397,7 +397,7 @@ import {
     scienceData
 }
 from
-"../js/subject.js?v=26";
+"../js/subject.js?v=27";
 
 import { requireAuth } from "../js/auth.js";
 await requireAuth("../index.html");
@@ -450,7 +450,7 @@ function syncSeedData(subjectData){
 
             let updatedChapter = existingChapter;
 
-            if(!existingChapter.resourceUrl && seedChapter.resourceUrl){
+            if(seedChapter.resourceUrl && existingChapter.resourceUrl !== seedChapter.resourceUrl){
 
                 changed = true;
 
@@ -461,7 +461,7 @@ function syncSeedData(subjectData){
 
             }
 
-            if(!existingChapter.resourceUrl2 && seedChapter.resourceUrl2){
+            if(seedChapter.resourceUrl2 && existingChapter.resourceUrl2 !== seedChapter.resourceUrl2){
 
                 changed = true;
 
@@ -472,7 +472,7 @@ function syncSeedData(subjectData){
 
             }
 
-            if(!existingChapter.resourceUrl3 && seedChapter.resourceUrl3){
+            if(seedChapter.resourceUrl3 && existingChapter.resourceUrl3 !== seedChapter.resourceUrl3){
 
                 changed = true;
 
