@@ -1,4 +1,4 @@
-const CACHE = "study-dashboard-v39";
+const CACHE = "study-dashboard-v40";
 
 const STATIC_ASSETS = [
     "/index.html",
@@ -69,7 +69,7 @@ const STATIC_ASSETS = [
     "/science/form2_science_chapter12_solar_system_bilingual.html",
     "/science/t2_science_chapter11_stars_and_galaxies_bilingual.html",
     "/science/form2_science_chapter6_acid_alkali_bilingual.html",
-    "/science/t2_science_chapter_5_water_and_solution_revision.html",
+    "/science/t2_science_chapter_5_water_solution_bilingual_EN_ZH.html",
     "/moral/t2_moral_unit14.html",
     "/moral/t2_Unit14_PersediaanPeperiksaanAkhir.html",
     "/moral/t2_Unit14_KonflikIdentitiDiri.html",

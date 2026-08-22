@@ -65,7 +65,7 @@ export const scienceData = {
             status:"Not Started",
             confidence:0,
             last_updated:"2026-05-20",
-            resourceUrl: "../science/t2_science_chapter_5_water_and_solution_revision.html"
+            resourceUrl: "../science/t2_science_chapter_5_water_solution_bilingual_EN_ZH.html"
         },
 
         {
