@@ -64,7 +64,8 @@ export const scienceData = {
             chinese:"水与溶液",
             status:"Not Started",
             confidence:0,
-            last_updated:"2026-05-20"
+            last_updated:"2026-05-20",
+            resourceUrl: "../science/t2_science_chapter_5_water_and_solution_revision.html"
         },
 
         {
