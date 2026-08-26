@@ -15,7 +15,7 @@ content="width=device-width, initial-scale=1.0">
 <title>Seni Dashboard</title>
 
 <link rel="stylesheet"
-href="../css/style.css?v=30">
+href="../css/style.css?v=31">
 
 <style>
 
@@ -346,7 +346,7 @@ import {
     seniData
 }
 from
-"../js/subject.js?v=15";
+"../js/subject.js?v=16";
 
 import { requireAuth } from "../js/auth.js";
 await requireAuth("../index.html");
@@ -364,6 +364,67 @@ let data =
 
 
 // =========================================================
+// SYNC
+// =========================================================
+
+function syncSeedData(subjectData){
+
+    let changed = false;
+
+    const seedByKey =
+        new Map(
+            seniData.chapters.map(seedChapter => [
+                `${seedChapter.form}|${seedChapter.chapter}`,
+                seedChapter
+            ])
+        );
+
+    subjectData.chapters =
+        subjectData.chapters.map(existingChapter => {
+
+            const seedChapter =
+                seedByKey.get(
+                    `${existingChapter.form}|${existingChapter.chapter}`
+                );
+
+            if(!seedChapter){
+                return existingChapter;
+            }
+
+            let updatedChapter = existingChapter;
+
+            if(existingChapter.globalNum===undefined && seedChapter.globalNum!==undefined){
+
+                changed = true;
+
+                updatedChapter = {
+                    ...updatedChapter,
+                    globalNum:seedChapter.globalNum
+                };
+
+            }
+
+            if(existingChapter.chapterNum===undefined && seedChapter.chapterNum!==undefined){
+
+                changed = true;
+
+                updatedChapter = {
+                    ...updatedChapter,
+                    chapterNum:seedChapter.chapterNum
+                };
+
+            }
+
+            return updatedChapter;
+
+        });
+
+    return changed;
+
+}
+
+
+// =========================================================
 // LOAD
 // =========================================================
 
@@ -375,6 +436,13 @@ async function loadData(){
     if(snap.exists()){
 
         data = snap.data();
+
+        if(syncSeedData(data)){
+
+            data.last_saved = new Date().toISOString();
+            await setDoc(docRef,data);
+
+        }
 
     }else{
 

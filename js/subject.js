@@ -3925,6 +3925,303 @@ export const mathsData = {
             status:"Not Started",
             confidence:0,
             last_updated:"2026-05-17"
+        },
+
+        {
+            form:"T3",
+            globalNum: 14,
+            chapterNum: 76,
+            chapter:"Indices",
+            chinese:"指数",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-17"
+        },
+
+        {
+            form:"T3",
+            globalNum: 15,
+            chapterNum: 77,
+            chapter:"Standard Form",
+            chinese:"标准形式",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-17"
+        },
+
+        {
+            form:"T3",
+            globalNum: 16,
+            chapterNum: 78,
+            chapter:"Consumer Investment",
+            chinese:"消费数学：投资",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-17"
+        },
+
+        {
+            form:"T3",
+            globalNum: 17,
+            chapterNum: 79,
+            chapter:"Scale Drawings",
+            chinese:"比例绘图",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-17"
+        },
+
+        {
+            form:"T3",
+            globalNum: 18,
+            chapterNum: 80,
+            chapter:"Trigonometric Ratios",
+            chinese:"三角比",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-17"
+        },
+
+        {
+            form:"T3",
+            globalNum: 19,
+            chapterNum: 81,
+            chapter:"Angles & Tangents of Circles",
+            chinese:"圆的角与切线",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-17"
+        },
+
+        {
+            form:"T3",
+            globalNum: 20,
+            chapterNum: 82,
+            chapter:"Plans & Elevations",
+            chinese:"平面图与立体图",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-17"
+        },
+
+        {
+            form:"T3",
+            globalNum: 21,
+            chapterNum: 83,
+            chapter:"Loci in 2 Dimensions",
+            chinese:"二维轨迹",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-17"
+        },
+
+        {
+            form:"T3",
+            globalNum: 22,
+            chapterNum: 84,
+            chapter:"Straight Lines",
+            chinese:"直线",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-17"
+        },
+
+        {
+            form:"T4",
+            globalNum: 23,
+            chapterNum: 85,
+            chapter:"Quadratic Functions",
+            chinese:"二次函数",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-17"
+        },
+
+        {
+            form:"T4",
+            globalNum: 24,
+            chapterNum: 86,
+            chapter:"Bases",
+            chinese:"数制",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-17"
+        },
+
+        {
+            form:"T4",
+            globalNum: 25,
+            chapterNum: 87,
+            chapter:"Logical Reasoning",
+            chinese:"逻辑推理",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-17"
+        },
+
+        {
+            form:"T4",
+            globalNum: 26,
+            chapterNum: 88,
+            chapter:"Sets",
+            chinese:"集合",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-17"
+        },
+
+        {
+            form:"T4",
+            globalNum: 27,
+            chapterNum: 89,
+            chapter:"Graph Networks",
+            chinese:"图论网络",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-17"
+        },
+
+        {
+            form:"T4",
+            globalNum: 28,
+            chapterNum: 90,
+            chapter:"Linear Inequalities",
+            chinese:"线性不等式",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-17"
+        },
+
+        {
+            form:"T4",
+            globalNum: 29,
+            chapterNum: 91,
+            chapter:"Motion Graphs",
+            chinese:"运动图像",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-17"
+        },
+
+        {
+            form:"T4",
+            globalNum: 30,
+            chapterNum: 92,
+            chapter:"Ungrouped Data",
+            chinese:"未分组数据",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-17"
+        },
+
+        {
+            form:"T4",
+            globalNum: 31,
+            chapterNum: 93,
+            chapter:"Probability",
+            chinese:"概率",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-17"
+        },
+
+        {
+            form:"T4",
+            globalNum: 32,
+            chapterNum: 94,
+            chapter:"Consumer Financial Management",
+            chinese:"消费数学：财务管理",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-17"
+        },
+
+        {
+            form:"T5",
+            globalNum: 33,
+            chapterNum: 95,
+            chapter:"Variation",
+            chinese:"变分",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-17"
+        },
+
+        {
+            form:"T5",
+            globalNum: 34,
+            chapterNum: 96,
+            chapter:"Matrices",
+            chinese:"矩阵",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-17"
+        },
+
+        {
+            form:"T5",
+            globalNum: 35,
+            chapterNum: 97,
+            chapter:"Consumer Insurance",
+            chinese:"消费数学：保险",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-17"
+        },
+
+        {
+            form:"T5",
+            globalNum: 36,
+            chapterNum: 98,
+            chapter:"Consumer Tax",
+            chinese:"消费数学：税务",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-17"
+        },
+
+        {
+            form:"T5",
+            globalNum: 37,
+            chapterNum: 99,
+            chapter:"Congruency",
+            chinese:"全等",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-17"
+        },
+
+        {
+            form:"T5",
+            globalNum: 38,
+            chapterNum: 100,
+            chapter:"Ratios & Trigonometric Functions",
+            chinese:"比率与三角函数",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-17"
+        },
+
+        {
+            form:"T5",
+            globalNum: 39,
+            chapterNum: 101,
+            chapter:"Grouped Data",
+            chinese:"分组数据",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-17"
+        },
+
+        {
+            form:"T5",
+            globalNum: 40,
+            chapterNum: 102,
+            chapter:"Mathematical Modelling",
+            chinese:"数学建模",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-05-17"
         }
 
     ]

@@ -16,7 +16,7 @@ content="width=device-width, initial-scale=1.0">
 <title>Maths Progress Dashboard</title>
 
 <link rel="stylesheet"
-href="../css/style.css?v=30">
+href="../css/style.css?v=31">
 
 <style>
 
@@ -451,7 +451,7 @@ import {
     mathsData
 }
 from
-"../js/subject.js?v=15";
+"../js/subject.js?v=16";
 
 import { requireAuth } from "../js/auth.js";
 await requireAuth("../index.html");
@@ -571,6 +571,120 @@ const chapterConcepts = {
 
 
 // =========================================================
+// SYNC
+// =========================================================
+
+function normalizeForm(form){
+
+    const match = /^Form\s*(\d+)$/i.exec(form || "");
+
+    return match ? `T${match[1]}` : form;
+
+}
+
+function syncSeedData(subjectData){
+
+    let changed = false;
+
+    const seedByKey =
+        new Map(
+            mathsData.chapters.map(seedChapter => [
+                `${seedChapter.form}|${seedChapter.chapter}`,
+                seedChapter
+            ])
+        );
+
+    subjectData.chapters =
+        subjectData.chapters.map(existingChapter => {
+
+            const normalizedForm =
+                normalizeForm(existingChapter.form);
+
+            const seedChapter =
+                seedByKey.get(`${normalizedForm}|${existingChapter.chapter}`);
+
+            if(!seedChapter){
+                return existingChapter;
+            }
+
+            let updatedChapter = existingChapter;
+
+            if(existingChapter.form !== seedChapter.form){
+
+                changed = true;
+
+                updatedChapter = {
+                    ...updatedChapter,
+                    form:seedChapter.form
+                };
+
+            }
+
+            if(existingChapter.globalNum===undefined && seedChapter.globalNum!==undefined){
+
+                changed = true;
+
+                updatedChapter = {
+                    ...updatedChapter,
+                    globalNum:seedChapter.globalNum
+                };
+
+            }
+
+            if(existingChapter.chapterNum===undefined && seedChapter.chapterNum!==undefined){
+
+                changed = true;
+
+                updatedChapter = {
+                    ...updatedChapter,
+                    chapterNum:seedChapter.chapterNum
+                };
+
+            }
+
+            if(existingChapter.confidence===undefined && seedChapter.confidence!==undefined){
+
+                changed = true;
+
+                updatedChapter = {
+                    ...updatedChapter,
+                    confidence:seedChapter.confidence
+                };
+
+            }
+
+            if(existingChapter.last_updated===undefined && seedChapter.last_updated!==undefined){
+
+                changed = true;
+
+                updatedChapter = {
+                    ...updatedChapter,
+                    last_updated:seedChapter.last_updated
+                };
+
+            }
+
+            if(!existingChapter.chinese && seedChapter.chinese){
+
+                changed = true;
+
+                updatedChapter = {
+                    ...updatedChapter,
+                    chinese:seedChapter.chinese
+                };
+
+            }
+
+            return updatedChapter;
+
+        });
+
+    return changed;
+
+}
+
+
+// =========================================================
 // LOAD
 // =========================================================
 
@@ -582,6 +696,13 @@ async function loadData(){
     if(snap.exists()){
 
         data = snap.data();
+
+        if(syncSeedData(data)){
+
+            data.last_saved = new Date().toISOString();
+            await setDoc(docRef,data);
+
+        }
 
     }else{
 
