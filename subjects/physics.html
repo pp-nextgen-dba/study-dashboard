@@ -15,7 +15,7 @@ content="width=device-width, initial-scale=1.0">
 <title>Physics Dashboard</title>
 
 <link rel="stylesheet"
-href="../css/style.css?v=30">
+href="../css/style.css?v=31">
 
 <style>
 
@@ -397,7 +397,7 @@ import {
     physicsData
 }
 from
-"../js/subject.js?v=15";
+"../js/subject.js?v=16";
 
 import { requireAuth } from "../js/auth.js";
 await requireAuth("../index.html");
@@ -431,7 +431,14 @@ function addMissingChineseLabels(subjectData){
         new Map(
             physicsData.chapters.map(chapter => [
                 `${chapter.form}|${chapter.chapter}`,
-                {chinese: chapter.chinese, resourceUrl: chapter.resourceUrl}
+                {
+                    chinese: chapter.chinese,
+                    resourceUrl: chapter.resourceUrl,
+                    globalNum: chapter.globalNum,
+                    chapterNum: chapter.chapterNum,
+                    confidence: chapter.confidence,
+                    last_updated: chapter.last_updated
+                }
             ])
         );
 
@@ -452,6 +459,26 @@ function addMissingChineseLabels(subjectData){
 
             if(!chapter.resourceUrl && fallback?.resourceUrl){
                 update.resourceUrl = fallback.resourceUrl;
+                changed = true;
+            }
+
+            if(chapter.globalNum===undefined && fallback?.globalNum!==undefined){
+                update.globalNum = fallback.globalNum;
+                changed = true;
+            }
+
+            if(chapter.chapterNum===undefined && fallback?.chapterNum!==undefined){
+                update.chapterNum = fallback.chapterNum;
+                changed = true;
+            }
+
+            if(chapter.confidence===undefined && fallback?.confidence!==undefined){
+                update.confidence = fallback.confidence;
+                changed = true;
+            }
+
+            if(chapter.last_updated===undefined && fallback?.last_updated!==undefined){
+                update.last_updated = fallback.last_updated;
                 changed = true;
             }
 

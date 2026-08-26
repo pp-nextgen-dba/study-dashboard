@@ -15,7 +15,7 @@ content="width=device-width, initial-scale=1.0">
 <title>Additional Maths Dashboard</title>
 
 <link rel="stylesheet"
-href="../css/style.css?v=33">
+href="../css/style.css?v=34">
 
 <style>
 
@@ -391,7 +391,7 @@ import {
     addMathsData
 }
 from
-"../js/subject.js?v=18";
+"../js/subject.js?v=19";
 
 import { requireAuth } from "../js/auth.js";
 await requireAuth("../index.html");
@@ -453,6 +453,21 @@ async function addMissingChineseLabels(){
         }
         if(seed.chinese && !ch.chinese){
             ch.chinese = seed.chinese;
+        }
+        if(seed.chapter && ch.chapter !== seed.chapter){
+            ch.chapter = seed.chapter;
+        }
+        if(seed.globalNum!==undefined && ch.globalNum===undefined){
+            ch.globalNum = seed.globalNum;
+        }
+        if(seed.chapterNum!==undefined && ch.chapterNum===undefined){
+            ch.chapterNum = seed.chapterNum;
+        }
+        if(seed.confidence!==undefined && ch.confidence===undefined){
+            ch.confidence = seed.confidence;
+        }
+        if(seed.last_updated!==undefined && ch.last_updated===undefined){
+            ch.last_updated = seed.last_updated;
         }
     });
 
