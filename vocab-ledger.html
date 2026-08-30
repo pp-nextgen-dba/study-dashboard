@@ -290,10 +290,19 @@
 
 </div>
 
-<script>
+<script type="module">
+import { db } from "./js/firebase.js";
+import {
+    doc,
+    onSnapshot,
+    setDoc
+}
+from
+"https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
 const STAGES = [1, 3, 7, 14, 30, 60]; // days between reviews
 const MASTER_STAGE = STAGES.length - 1;
-const STORAGE_KEY = 'vocab:entries';
+const vocabRef = doc(db, "vocabLedger", "entries");
 
 // Seed words — Claude appends new words here as they come up in chat.
 // On load, any seed not already in storage is merged in as a fresh entry.
@@ -340,27 +349,9 @@ function hideStorageBanner(){
   if(b) b.classList.remove('show');
 }
 
-async function loadEntries(){
-  if(typeof window.storage === 'undefined'){
-    showStorageBanner('window.storage is not available in this context');
-    entries = {};
-    mergeSeed();
-    return;
-  }
-  try{
-    const res = await window.storage.get(STORAGE_KEY, false);
-    entries = res && res.value ? JSON.parse(res.value) : {};
-    hideStorageBanner();
-  }catch(e){
-    // Key may simply not exist yet on first-ever run — that's normal, not an error.
-    entries = {};
-  }
-  mergeSeed();
-  await saveEntries();
-}
-
 function mergeSeed(){
   const t = todayStr();
+  let changed = false;
   SEED.forEach(s => {
     const key = s.word.toLowerCase();
     if(!entries[key]){
@@ -373,22 +364,16 @@ function mergeSeed(){
         stage: 0,
         reviewCount: 0
       };
+      changed = true;
     }
   });
+  return changed;
 }
 
 async function saveEntries(){
-  if(typeof window.storage === 'undefined'){
-    showStorageBanner('window.storage is not available in this context');
-    return;
-  }
   try{
-    const result = await window.storage.set(STORAGE_KEY, JSON.stringify(entries), false);
-    if(!result){
-      showStorageBanner('storage.set returned no result');
-    } else {
-      hideStorageBanner();
-    }
+    await setDoc(vocabRef, { words: entries });
+    hideStorageBanner();
   }catch(e){
     showStorageBanner(e);
   }
@@ -698,10 +683,25 @@ async function addWord(){
   render();
 }
 
-(async function init(){
-  await loadEntries();
+// Module scripts don't leak declarations to `window`, but the inline onclick/oninput/onchange
+// attributes above need these on `window` to resolve.
+Object.assign(window, {
+  render, setFilter, setCategoryFilter, autoCategorizeAll,
+  showMore, toggleDetail, revealAnswer, grade, speakWord,
+  addWord, exportWords
+});
+
+onSnapshot(vocabRef, async (snapshot) => {
+  entries = snapshot.exists() && snapshot.data().words ? snapshot.data().words : {};
+  hideStorageBanner();
+  const changed = mergeSeed();
+  if(changed){
+    await saveEntries();
+  }
   render();
-})();
+}, error => {
+  showStorageBanner(error);
+});
 </script>
 </body>
 </html>
