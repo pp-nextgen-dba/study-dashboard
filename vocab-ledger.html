@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vocab Ledger</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Noto+Sans+SC:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#0F1B22;
+    --ink-2:#152631;
+    --row:#1B3040;
+    --row-hover:#22384A;
+    --parchment:#EDE7D9;
+    --parchment-dim:#B9C4C4;
+    --amber:#E3A857;
+    --sage:#7FA88F;
+    --rust:#C4643A;
+    --hair:#2C4757;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{
+    background:var(--ink);
+    color:var(--parchment);
+    font-family:'Inter',sans-serif;
+    min-height:100vh;
+    padding:32px 16px 80px;
+  }
+  .zh{font-family:'Noto Sans SC','Inter',sans-serif;}
+  .wrap{max-width:760px; margin:0 auto;}
+
+  header{margin-bottom:28px;}
+  .eyebrow{
+    font-family:'JetBrains Mono',monospace;
+    font-size:11px;
+    letter-spacing:0.08em;
+    color:var(--sage);
+    text-transform:uppercase;
+    margin-bottom:10px;
+    opacity:0.85;
+  }
+  h1{
+    font-family:'Fraunces',serif;
+    font-weight:600;
+    font-size:38px;
+    letter-spacing:-0.01em;
+    margin-bottom:6px;
+  }
+  .subtitle{color:var(--parchment-dim); font-size:14px;}
+
+  .stats{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:10px;
+    margin:24px 0 28px;
+  }
+  .stat{
+    background:var(--ink-2);
+    border:1px solid var(--hair);
+    border-radius:10px;
+    padding:14px 12px;
+  }
+  .stat .num{font-family:'Fraunces',serif; font-size:26px; font-weight:600;}
+  .stat .label{font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:0.05em; color:var(--parchment-dim); text-transform:uppercase; margin-top:2px;}
+  .stat.due .num{color:var(--amber);}
+  .stat.new .num{color:var(--rust);}
+  .stat.mastered .num{color:var(--sage);}
+
+  section{margin-bottom:34px;}
+  .section-head{
+    display:flex; align-items:baseline; justify-content:space-between;
+    border-bottom:1px solid var(--hair);
+    padding-bottom:8px; margin-bottom:14px;
+  }
+  .section-title{font-family:'Fraunces',serif; font-size:20px; font-weight:600;}
+  .section-note{font-family:'JetBrains Mono',monospace; font-size:11px; color:var(--parchment-dim);}
+
+  /* Recap / quiz card */
+  .recap-empty{
+    background:var(--ink-2); border:1px dashed var(--hair); border-radius:12px;
+    padding:28px; text-align:center; color:var(--parchment-dim); font-size:14px;
+  }
+  .quiz-card{
+    background:var(--row);
+    border:1px solid var(--hair);
+    border-radius:14px;
+    padding:26px;
+    position:relative;
+    overflow:hidden;
+  }
+  .quiz-card::before{
+    content:"";
+    position:absolute; left:0; top:0; bottom:0; width:4px;
+    background:var(--amber);
+  }
+  .quiz-progress{font-family:'JetBrains Mono',monospace; font-size:11px; color:var(--parchment-dim); margin-bottom:14px;}
+  .quiz-word{font-family:'Fraunces',serif; font-size:32px; font-weight:600; margin-bottom:6px;}
+  .quiz-hint{font-size:13px; color:var(--parchment-dim); margin-bottom:18px;}
+  .reveal-btn{
+    background:transparent; border:1px solid var(--sage); color:var(--sage);
+    font-family:'JetBrains Mono',monospace; font-size:12px; letter-spacing:0.03em;
+    padding:9px 16px; border-radius:8px; cursor:pointer;
+  }
+  .reveal-btn:hover{background:var(--sage); color:var(--ink);}
+  .answer{margin-top:18px; padding-top:18px; border-top:1px dashed var(--hair); display:none;}
+  .answer.show{display:block;}
+  .answer .zh-word{font-size:20px; margin-bottom:8px;}
+  .answer .example{font-style:italic; color:var(--parchment-dim); font-size:14px; line-height:1.5;}
+  .grade-row{display:flex; gap:8px; margin-top:20px;}
+  .grade-btn{
+    flex:1; padding:10px 8px; border-radius:8px; border:1px solid var(--hair);
+    background:var(--ink-2); color:var(--parchment); cursor:pointer;
+    font-family:'Inter',sans-serif; font-size:13px; font-weight:500;
+    display:flex; flex-direction:column; align-items:center; gap:2px;
+  }
+  .grade-btn small{font-family:'JetBrains Mono',monospace; font-size:10px; color:var(--parchment-dim);}
+  .grade-btn.again:hover{border-color:var(--rust); color:var(--rust);}
+  .grade-btn.good:hover{border-color:var(--amber); color:var(--amber);}
+  .grade-btn.easy:hover{border-color:var(--sage); color:var(--sage);}
+
+  /* index rows */
+  .col-head{
+    display:grid; grid-template-columns:1.4fr 1fr 0.9fr 0.7fr;
+    font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:0.05em;
+    text-transform:uppercase; color:var(--parchment-dim); padding:0 14px 8px;
+  }
+  .vocab-row{
+    display:grid; grid-template-columns:1.4fr 1fr 0.9fr 0.7fr;
+    align-items:center;
+    background:var(--ink-2);
+    border:1px solid var(--hair);
+    border-left:3px solid var(--hair);
+    border-radius:8px;
+    padding:12px 14px;
+    margin-bottom:6px;
+    cursor:pointer;
+    transition:background 0.15s;
+  }
+  .vocab-row:hover{background:var(--row-hover);}
+  .vocab-row.status-due{border-left-color:var(--amber);}
+  .vocab-row.status-new{border-left-color:var(--rust);}
+  .vocab-row.status-mastered{border-left-color:var(--sage);}
+  .vr-word{font-weight:600; font-size:14.5px;}
+  .vr-zh{color:var(--parchment-dim); font-size:13px;}
+  .vr-status{font-family:'JetBrains Mono',monospace; font-size:10.5px; text-transform:uppercase; letter-spacing:0.04em;}
+  .vr-status.status-due{color:var(--amber);}
+  .vr-status.status-new{color:var(--rust);}
+  .vr-status.status-mastered{color:var(--sage);}
+  .vr-status.status-scheduled{color:var(--parchment-dim);}
+  .vr-next{font-family:'JetBrains Mono',monospace; font-size:11.5px; color:var(--parchment-dim); text-align:right;}
+  .vr-detail{grid-column:1/-1; margin-top:10px; padding-top:10px; border-top:1px dashed var(--hair); font-size:13px; color:var(--parchment-dim); font-style:italic; display:none;}
+  .vr-detail.show{display:block;}
+
+  /* add word */
+  .add-form{
+    background:var(--ink-2); border:1px solid var(--hair); border-radius:12px; padding:18px;
+    display:grid; gap:10px;
+  }
+  .add-form input{
+    background:var(--ink); border:1px solid var(--hair); border-radius:7px;
+    padding:10px 12px; color:var(--parchment); font-family:'Inter',sans-serif; font-size:14px;
+  }
+  .add-form input::placeholder{color:var(--parchment-dim); opacity:0.6;}
+  .add-form button{
+    background:var(--sage); color:var(--ink); border:none; border-radius:7px;
+    padding:11px; font-weight:600; font-size:14px; cursor:pointer; font-family:'Inter',sans-serif;
+  }
+  .add-form button:hover{opacity:0.9;}
+  .add-msg{font-family:'JetBrains Mono',monospace; font-size:11px; color:var(--sage); min-height:14px;}
+
+  .empty-note{color:var(--parchment-dim); font-size:13px; padding:6px 2px;}
+
+  .ledger-controls{display:flex; gap:8px; margin-bottom:12px; flex-wrap:wrap;}
+  .search-input{
+    flex:1; min-width:160px;
+    background:var(--ink-2); border:1px solid var(--hair); border-radius:8px;
+    padding:9px 12px; color:var(--parchment); font-family:'Inter',sans-serif; font-size:13px;
+  }
+  .search-input::placeholder{color:var(--parchment-dim); opacity:0.6;}
+  .filter-tabs{display:flex; gap:6px;}
+  .filter-tab{
+    background:var(--ink-2); border:1px solid var(--hair); color:var(--parchment-dim);
+    font-family:'JetBrains Mono',monospace; font-size:11px; text-transform:uppercase;
+    padding:8px 10px; border-radius:8px; cursor:pointer;
+  }
+  .filter-tab.active{background:var(--sage); color:var(--ink); border-color:var(--sage); font-weight:600;}
+  .cat-badge{
+    display:inline-block; font-family:'JetBrains Mono',monospace; font-size:9.5px;
+    text-transform:uppercase; letter-spacing:0.04em; color:var(--parchment-dim);
+    border:1px solid var(--hair); border-radius:5px; padding:2px 6px; margin-top:4px;
+  }
+  .speak-btn{
+    background:transparent; border:1px solid var(--hair); color:var(--parchment-dim);
+    border-radius:50%; width:34px; height:34px; cursor:pointer; font-size:16px;
+    display:inline-flex; align-items:center; justify-content:center;
+    vertical-align:middle; margin-left:8px; flex-shrink:0;
+  }
+  .speak-btn:hover{border-color:var(--sage); color:var(--sage);}
+  .speak-btn.small{width:26px; height:26px; font-size:13px; margin-left:6px;}
+  .quiz-word-row{display:flex; align-items:center; gap:4px;}
+
+  .storage-banner{
+    background:#3A1F1F; border:1px solid var(--rust); color:#F0C9B8;
+    border-radius:8px; padding:10px 14px; font-size:13px; margin-bottom:18px;
+    display:none;
+  }
+  .storage-banner.show{display:block;}
+
+  @media (max-width:520px){
+    .stats{grid-template-columns:repeat(2,1fr);}
+    .col-head{display:none;}
+    .vocab-row{grid-template-columns:1fr auto;}
+    .vr-zh, .vr-next{display:none;}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <div class="eyebrow" id="dateEyebrow">-- select * from vocab where next_review &lt;= today()</div>
+    <h1>Vocab Ledger</h1>
+    <div class="subtitle">Every word you drop in chat lands here. Review each night, retention compounds.</div>
+  </header>
+
+  <div class="storage-banner" id="storageBanner">Saving isn't working right now — words added this session may not persist after you close this tab. Try reopening the ledger; if this keeps showing, let Paul know the exact error text below.</div>
+
+  <div class="stats">
+    <div class="stat due"><div class="num" id="statDue">0</div><div class="label">Due tonight</div></div>
+    <div class="stat new"><div class="num" id="statNew">0</div><div class="label">New today</div></div>
+    <div class="stat mastered"><div class="num" id="statMastered">0</div><div class="label">Mastered</div></div>
+    <div class="stat"><div class="num" id="statTotal">0</div><div class="label">Total words</div></div>
+  </div>
+
+  <section>
+    <div class="section-head">
+      <div class="section-title">Tonight's recap</div>
+      <div class="section-note" id="recapProgress"></div>
+    </div>
+    <div id="recapZone"></div>
+  </section>
+
+  <section>
+    <div class="section-head">
+      <div class="section-title">Full ledger</div>
+      <div class="section-note">tap a row to expand</div>
+    </div>
+    <div class="ledger-controls">
+      <input id="searchBox" class="search-input" placeholder="Search word or 中文..." oninput="render()">
+      <select id="categorySelect" class="search-input" style="flex:0 0 140px;" onchange="setCategoryFilter(this.value)">
+        <option value="all">All categories</option>
+      </select>
+      <div class="filter-tabs">
+        <button class="filter-tab active" data-filter="all" onclick="setFilter('all')">All</button>
+        <button class="filter-tab" data-filter="due" onclick="setFilter('due')">Due</button>
+        <button class="filter-tab" data-filter="new" onclick="setFilter('new')">New</button>
+        <button class="filter-tab" data-filter="mastered" onclick="setFilter('mastered')">Mastered</button>
+      </div>
+    </div>
+    <button class="reveal-btn" id="autoCatBtn" onclick="autoCategorizeAll()" style="margin-bottom:12px;">Auto-categorize uncategorized words</button>
+    <div class="col-head">
+      <div>Word</div><div>中文</div><div>Status</div><div style="text-align:right">Next sync</div>
+    </div>
+    <div id="ledgerZone"></div>
+    <button class="reveal-btn" id="showMoreBtn" onclick="showMore()" style="display:none; margin-top:10px; width:100%;">Show more</button>
+  </section>
+
+  <section>
+    <div class="section-head">
+      <div class="section-title">Add a word</div>
+      <div class="section-note">for anything you meet outside chat</div>
+    </div>
+    <div class="add-form">
+      <input id="inWord" placeholder="English word or phrase">
+      <input id="inZh" placeholder="中文释义 (Chinese meaning)">
+      <input id="inExample" placeholder="Example sentence">
+      <button onclick="addWord()">Add to ledger</button>
+      <div class="add-msg" id="addMsg"></div>
+    </div>
+  </section>
+  <section>
+    <div class="section-head">
+      <div class="section-title">Backup / export</div>
+      <div class="section-note">copy this, paste to Claude to reseed</div>
+    </div>
+    <button class="reveal-btn" onclick="exportWords()" style="margin-bottom:10px;">Export word list</button>
+    <textarea id="exportZone" readonly style="display:none; width:100%; min-height:120px; background:var(--ink-2); border:1px solid var(--hair); border-radius:8px; color:var(--parchment); font-family:'JetBrains Mono',monospace; font-size:12px; padding:12px;"></textarea>
+  </section>
+
+</div>
+
+<script>
+const STAGES = [1, 3, 7, 14, 30, 60]; // days between reviews
+const MASTER_STAGE = STAGES.length - 1;
+const STORAGE_KEY = 'vocab:entries';
+
+// Seed words — Claude appends new words here as they come up in chat.
+// On load, any seed not already in storage is merged in as a fresh entry.
+const SEED = [
+  { word: "meticulous", zh: "一丝不苟的，细致的", example: "She reviewed the migration script in a meticulous way before running it in production." },
+  { word: "ambiguous", zh: "模棱两可的，含糊的", example: "The requirement was ambiguous about whether to use CREATE VIEW or CREATE ANY VIEW." },
+  { word: "resilient", zh: "有韧性的，能快速恢复的", example: "A resilient backup strategy should survive a single disk failure without data loss." },
+  { word: "articulation", zh: "清晰的表达；表述", example: "His articulation of the root cause made the incident report easy for the team to follow." },
+  { word: "extraordinary", zh: "非凡的，卓越的", example: "The DBA team's response to the outage was extraordinary given the tight timeline." },
+  { word: "illuminated", zh: "照亮的；阐明的", example: "The execution plan illuminated exactly where the query was losing parallel degree." },
+  { word: "钟摆 (zhōng bǎi)", zh: "pendulum", example: "老式座钟的钟摆稳定地左右摆动。" },
+  { word: "洞见 (dòng jiàn)", zh: "insight", example: "他对系统瓶颈的洞见帮助团队少走了很多弯路。" },
+  { word: "emerging", zh: "新兴的，正在出现的", example: "AI-assisted query tuning is an emerging area even for experienced DBAs to keep up with." }
+];
+
+let entries = {};
+
+function todayStr(){
+  const d = new Date();
+  return d.toISOString().slice(0,10);
+}
+function addDays(dateStr, n){
+  const d = new Date(dateStr + 'T00:00:00');
+  d.setDate(d.getDate() + n);
+  return d.toISOString().slice(0,10);
+}
+function fmtNice(dateStr){
+  const d = new Date(dateStr + 'T00:00:00');
+  return d.toLocaleDateString('en-US', {month:'short', day:'numeric'});
+}
+
+function showStorageBanner(err){
+  console.error('Vocab Ledger storage error:', err);
+  const b = document.getElementById('storageBanner');
+  if(b) b.classList.add('show');
+}
+function hideStorageBanner(){
+  const b = document.getElementById('storageBanner');
+  if(b) b.classList.remove('show');
+}
+
+async function loadEntries(){
+  if(typeof window.storage === 'undefined'){
+    showStorageBanner('window.storage is not available in this context');
+    entries = {};
+    mergeSeed();
+    return;
+  }
+  try{
+    const res = await window.storage.get(STORAGE_KEY, false);
+    entries = res && res.value ? JSON.parse(res.value) : {};
+    hideStorageBanner();
+  }catch(e){
+    // Key may simply not exist yet on first-ever run — that's normal, not an error.
+    entries = {};
+  }
+  mergeSeed();
+  await saveEntries();
+}
+
+function mergeSeed(){
+  const t = todayStr();
+  SEED.forEach(s => {
+    const key = s.word.toLowerCase();
+    if(!entries[key]){
+      entries[key] = {
+        word: s.word,
+        zh: s.zh,
+        example: s.example,
+        dateAdded: t,
+        nextReview: t,
+        stage: 0,
+        reviewCount: 0
+      };
+    }
+  });
+}
+
+async function saveEntries(){
+  if(typeof window.storage === 'undefined'){
+    showStorageBanner('window.storage is not available in this context');
+    return;
+  }
+  try{
+    const result = await window.storage.set(STORAGE_KEY, JSON.stringify(entries), false);
+    if(!result){
+      showStorageBanner('storage.set returned no result');
+    } else {
+      hideStorageBanner();
+    }
+  }catch(e){
+    showStorageBanner(e);
+  }
+}
+
+function statusOf(entry){
+  const t = todayStr();
+  if(entry.stage >= MASTER_STAGE && entry.reviewCount > MASTER_STAGE) return 'mastered';
+  if(entry.nextReview <= t) return entry.reviewCount === 0 ? 'new' : 'due';
+  return 'scheduled';
+}
+
+function render(){
+  const list = Object.values(entries).sort((a,b) => a.nextReview.localeCompare(b.nextReview));
+  const t = todayStr();
+
+  const due = list.filter(e => statusOf(e) === 'due' || statusOf(e) === 'new');
+  const mastered = list.filter(e => statusOf(e) === 'mastered');
+  const newToday = list.filter(e => e.dateAdded === t);
+
+  document.getElementById('statDue').textContent = due.length;
+  document.getElementById('statNew').textContent = newToday.length;
+  document.getElementById('statMastered').textContent = mastered.length;
+  document.getElementById('statTotal').textContent = list.length;
+
+  const eyebrow = document.getElementById('dateEyebrow');
+  eyebrow.textContent = `-- ${t} · ${due.length} row(s) matched`;
+
+  renderRecap(due);
+  renderLedger(list);
+}
+
+// --- Recap / quiz flow ---
+let quizQueue = [];
+let quizIndex = 0;
+
+function renderRecap(dueList){
+  quizQueue = dueList.map(e => e.word.toLowerCase());
+  quizIndex = 0;
+  document.getElementById('recapProgress').textContent = quizQueue.length ? `1 / ${quizQueue.length}` : '';
+  showQuizCard();
+}
+
+function showQuizCard(){
+  const zone = document.getElementById('recapZone');
+  if(quizQueue.length === 0){
+    zone.innerHTML = `<div class="recap-empty">Nothing due right now. Come back tonight, or add a word below.</div>`;
+    return;
+  }
+  if(quizIndex >= quizQueue.length){
+    zone.innerHTML = `<div class="recap-empty">Recap complete for now — ${quizQueue.length} word(s) reviewed. Nicely done.</div>`;
+    document.getElementById('recapProgress').textContent = 'done';
+    return;
+  }
+  const key = quizQueue[quizIndex];
+  const e = entries[key];
+  document.getElementById('recapProgress').textContent = `${quizIndex+1} / ${quizQueue.length}`;
+  zone.innerHTML = `
+    <div class="quiz-card">
+      <div class="quiz-progress">stage ${e.stage} · reviewed ${e.reviewCount}×</div>
+      <div class="quiz-word-row">
+        <div class="quiz-word">${escapeHtml(e.word)}</div>
+        <button class="speak-btn" onclick="speakWord('${escapeHtml(e.word).replace(/'/g, "\\'")}', event)" title="Pronounce">🔊</button>
+      </div>
+      <div class="quiz-hint">Try to recall the meaning before revealing.</div>
+      <button class="reveal-btn" id="revealBtn" onclick="revealAnswer()">Reveal</button>
+      <div class="answer" id="answerZone">
+        <div class="zh-word zh">${escapeHtml(e.zh)}</div>
+        <div class="example">${escapeHtml(e.example)}</div>
+        <div class="grade-row">
+          <button class="grade-btn again" onclick="grade('again')">Again<small>reset</small></button>
+          <button class="grade-btn good" onclick="grade('good')">Good<small>+1 stage</small></button>
+          <button class="grade-btn easy" onclick="grade('easy')">Easy<small>+2 stages</small></button>
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+function revealAnswer(){
+  document.getElementById('answerZone').classList.add('show');
+  document.getElementById('revealBtn').style.display = 'none';
+}
+
+async function grade(result){
+  const key = quizQueue[quizIndex];
+  const e = entries[key];
+  if(result === 'again'){
+    e.stage = 0;
+  } else if(result === 'good'){
+    e.stage = Math.min(e.stage + 1, MASTER_STAGE);
+  } else if(result === 'easy'){
+    e.stage = Math.min(e.stage + 2, MASTER_STAGE);
+  }
+  e.reviewCount += 1;
+  e.nextReview = addDays(todayStr(), STAGES[e.stage]);
+  await saveEntries();
+  quizIndex += 1;
+  showQuizCard();
+  renderLedger(Object.values(entries).sort((a,b) => a.nextReview.localeCompare(b.nextReview)));
+  document.getElementById('statDue').textContent = quizQueue.length - quizIndex;
+}
+
+// --- Ledger table (with search/filter/pagination for scale) ---
+let currentFilter = 'all';
+let currentCategory = 'all';
+let visibleCount = 50;
+
+const CATEGORIES = ['Business','Technology','Academic','Daily Life','Emotion','Science','Other'];
+
+function setFilter(f){
+  currentFilter = f;
+  visibleCount = 50;
+  document.querySelectorAll('.filter-tab').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.filter === f);
+  });
+  render();
+}
+
+function setCategoryFilter(c){
+  currentCategory = c;
+  visibleCount = 50;
+  render();
+}
+
+function populateCategoryDropdown(list){
+  const sel = document.getElementById('categorySelect');
+  const present = new Set(list.map(e => e.category).filter(Boolean));
+  const current = sel.value || 'all';
+  sel.innerHTML = '<option value="all">All categories</option>' +
+    CATEGORIES.filter(c => present.has(c)).map(c => `<option value="${c}">${c}</option>`).join('');
+  sel.value = present.has(current) || current === 'all' ? current : 'all';
+}
+
+function renderLedger(list){
+  const zone = document.getElementById('ledgerZone');
+  const moreBtn = document.getElementById('showMoreBtn');
+  const q = (document.getElementById('searchBox')?.value || '').trim().toLowerCase();
+
+  populateCategoryDropdown(list);
+
+  let filtered = list.filter(e => {
+    const status = statusOf(e);
+    const matchesFilter = currentFilter === 'all' || status === currentFilter ||
+      (currentFilter === 'due' && status === 'new');
+    const matchesCategory = currentCategory === 'all' || e.category === currentCategory;
+    const matchesSearch = !q || e.word.toLowerCase().includes(q) || (e.zh || '').includes(q);
+    return matchesFilter && matchesCategory && matchesSearch;
+  });
+
+  if(filtered.length === 0){
+    zone.innerHTML = `<div class="empty-note">${list.length === 0 ? 'No words yet — add one below to get started.' : 'No matches.'}</div>`;
+    moreBtn.style.display = 'none';
+    return;
+  }
+
+  const shown = filtered.slice(0, visibleCount);
+  zone.innerHTML = shown.map((e) => {
+    const status = statusOf(e);
+    const safeId = e.word.replace(/[^a-zA-Z0-9]/g, '_');
+    return `
+      <div class="vocab-row status-${status}" onclick="toggleDetail('${safeId}')">
+        <div class="vr-word">${escapeHtml(e.word)}<button class="speak-btn small" onclick="speakWord('${escapeHtml(e.word).replace(/'/g, "\\'")}', event)" title="Pronounce">🔊</button>${e.category ? `<br><span class="cat-badge">${escapeHtml(e.category)}</span>` : ''}</div>
+        <div class="vr-zh zh">${escapeHtml(e.zh)}</div>
+        <div class="vr-status status-${status}">${status}</div>
+        <div class="vr-next">${status === 'mastered' ? '—' : fmtNice(e.nextReview)}</div>
+        <div class="vr-detail" id="detail-${safeId}">${escapeHtml(e.example)}</div>
+      </div>
+    `;
+  }).join('');
+
+  if(filtered.length > visibleCount){
+    moreBtn.style.display = 'block';
+    moreBtn.textContent = `Show more (${filtered.length - visibleCount} remaining)`;
+  } else {
+    moreBtn.style.display = 'none';
+  }
+}
+
+function showMore(){
+  visibleCount += 50;
+  renderLedger(Object.values(entries).sort((a,b) => a.nextReview.localeCompare(b.nextReview)));
+}
+
+function toggleDetail(id){
+  const d = document.getElementById(`detail-${id}`);
+  if(d) d.classList.toggle('show');
+}
+
+// --- Auto-categorization via Claude API ---
+async function categorizeWords(wordList){
+  // wordList: array of {word, zh, example}
+  const prompt = `Classify each English vocabulary word into exactly one category from this fixed list: ${CATEGORIES.join(', ')}.
+Return ONLY a JSON array of strings (the category for each word, same order, no other text), e.g. ["Business","Technology"].
+
+Words:
+${wordList.map((w,i) => `${i+1}. ${w.word} — ${w.zh} — "${w.example}"`).join('\n')}`;
+
+  const response = await fetch("https://api.anthropic.com/v1/messages", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      model: "claude-sonnet-4-6",
+      max_tokens: 1000,
+      messages: [{ role: "user", content: prompt }]
+    })
+  });
+  const data = await response.json();
+  const text = (data.content || []).map(b => b.text || '').join('');
+  const clean = text.replace(/```json|```/g, '').trim();
+  return JSON.parse(clean);
+}
+
+async function autoCategorizeAll(){
+  const btn = document.getElementById('autoCatBtn');
+  const uncategorized = Object.values(entries).filter(e => !e.category);
+  if(uncategorized.length === 0){
+    btn.textContent = 'All words already categorized';
+    setTimeout(() => btn.textContent = 'Auto-categorize uncategorized words', 2000);
+    return;
+  }
+  btn.textContent = `Categorizing ${uncategorized.length} word(s)...`;
+  btn.disabled = true;
+  try{
+    const cats = await categorizeWords(uncategorized);
+    uncategorized.forEach((e, i) => {
+      const key = e.word.toLowerCase();
+      if(entries[key] && cats[i]) entries[key].category = CATEGORIES.includes(cats[i]) ? cats[i] : 'Other';
+    });
+    await saveEntries();
+    btn.textContent = `Categorized ${uncategorized.length} word(s)`;
+  }catch(e){
+    console.error('categorization failed', e);
+    btn.textContent = 'Categorization failed — try again';
+  }
+  btn.disabled = false;
+  setTimeout(() => btn.textContent = 'Auto-categorize uncategorized words', 2500);
+  render();
+}
+
+function escapeHtml(str){
+  const div = document.createElement('div');
+  div.textContent = str || '';
+  return div.innerHTML;
+}
+
+// --- Pronunciation via built-in speech synthesis (no API, no storage needed) ---
+function containsChinese(str){
+  return /[\u4e00-\u9fff]/.test(str);
+}
+
+function speakWord(rawText, event){
+  if(event) event.stopPropagation();
+  if(!('speechSynthesis' in window)){
+    return;
+  }
+  // Strip pinyin/parenthetical annotations like "钟摆 (zhōng bǎi)" down to the spoken text
+  const isChinese = containsChinese(rawText);
+  const spoken = isChinese ? rawText.replace(/\(.*?\)/g, '').trim() : rawText;
+  const utter = new SpeechSynthesisUtterance(spoken);
+  utter.lang = isChinese ? 'zh-CN' : 'en-US';
+  utter.rate = 0.9;
+  window.speechSynthesis.cancel();
+  window.speechSynthesis.speak(utter);
+}
+
+function exportWords(){
+  const list = Object.values(entries).sort((a,b) => a.word.localeCompare(b.word));
+  const lines = list.map(e => `${e.word} | ${e.zh} | ${e.example}`);
+  const zone = document.getElementById('exportZone');
+  zone.value = lines.join('\n');
+  zone.style.display = 'block';
+  zone.select();
+}
+
+async function addWord(){
+  const word = document.getElementById('inWord').value.trim();
+  const zh = document.getElementById('inZh').value.trim();
+  const example = document.getElementById('inExample').value.trim();
+  const msg = document.getElementById('addMsg');
+  if(!word){
+    msg.textContent = 'Enter a word first.';
+    msg.style.color = 'var(--rust)';
+    return;
+  }
+  const key = word.toLowerCase();
+  const t = todayStr();
+  entries[key] = {
+    word, zh: zh || '—', example: example || '',
+    dateAdded: t, nextReview: t, stage: 0, reviewCount: 0
+  };
+  await saveEntries();
+  document.getElementById('inWord').value = '';
+  document.getElementById('inZh').value = '';
+  document.getElementById('inExample').value = '';
+  msg.style.color = 'var(--sage)';
+  msg.textContent = `Added "${word}" — categorizing...`;
+  render();
+  try{
+    const cats = await categorizeWords([entries[key]]);
+    if(entries[key] && cats[0]) entries[key].category = CATEGORIES.includes(cats[0]) ? cats[0] : 'Other';
+    await saveEntries();
+    msg.textContent = `Added "${word}" — scheduled for tonight (${entries[key].category}).`;
+  }catch(e){
+    msg.textContent = `Added "${word}" — scheduled for tonight.`;
+  }
+  render();
+}
+
+(async function init(){
+  await loadEntries();
+  render();
+})();
+</script>
+</body>
+</html>
