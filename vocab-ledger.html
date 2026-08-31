@@ -260,7 +260,6 @@
         <button class="filter-tab" data-filter="mastered" onclick="setFilter('mastered')">Mastered</button>
       </div>
     </div>
-    <button class="reveal-btn" id="autoCatBtn" onclick="autoCategorizeAll()" style="margin-bottom:12px;">Auto-categorize uncategorized words</button>
     <div class="col-head">
       <div>Word</div><div>中文</div><div>Status</div><div style="text-align:right">Next sync</div><div style="text-align:right">Added</div>
     </div>
@@ -277,6 +276,9 @@
       <input id="inWord" placeholder="English word or phrase">
       <input id="inZh" placeholder="中文释义 (Chinese meaning)">
       <input id="inExample" placeholder="Example sentence">
+      <select id="inCategory" class="search-input">
+        <option value="">No category</option>
+      </select>
       <button onclick="addWord()">Add to ledger</button>
       <div class="add-msg" id="addMsg"></div>
     </div>
@@ -495,6 +497,12 @@ let visibleCount = 50;
 
 const CATEGORIES = ['Business','Technology','Academic','Daily Life','Emotion','Science','Other'];
 
+function populateAddCategorySelect(){
+  const sel = document.getElementById('inCategory');
+  sel.innerHTML = '<option value="">No category</option>' +
+    CATEGORIES.map(c => `<option value="${c}">${c}</option>`).join('');
+}
+
 function setFilter(f){
   currentFilter = f;
   visibleCount = 50;
@@ -575,57 +583,6 @@ function toggleDetail(id){
   if(d) d.classList.toggle('show');
 }
 
-// --- Auto-categorization via Claude API ---
-async function categorizeWords(wordList){
-  // wordList: array of {word, zh, example}
-  const prompt = `Classify each English vocabulary word into exactly one category from this fixed list: ${CATEGORIES.join(', ')}.
-Return ONLY a JSON array of strings (the category for each word, same order, no other text), e.g. ["Business","Technology"].
-
-Words:
-${wordList.map((w,i) => `${i+1}. ${w.word} — ${w.zh} — "${w.example}"`).join('\n')}`;
-
-  const response = await fetch("https://api.anthropic.com/v1/messages", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      model: "claude-sonnet-4-6",
-      max_tokens: 1000,
-      messages: [{ role: "user", content: prompt }]
-    })
-  });
-  const data = await response.json();
-  const text = (data.content || []).map(b => b.text || '').join('');
-  const clean = text.replace(/```json|```/g, '').trim();
-  return JSON.parse(clean);
-}
-
-async function autoCategorizeAll(){
-  const btn = document.getElementById('autoCatBtn');
-  const uncategorized = Object.values(entries).filter(e => !e.category);
-  if(uncategorized.length === 0){
-    btn.textContent = 'All words already categorized';
-    setTimeout(() => btn.textContent = 'Auto-categorize uncategorized words', 2000);
-    return;
-  }
-  btn.textContent = `Categorizing ${uncategorized.length} word(s)...`;
-  btn.disabled = true;
-  try{
-    const cats = await categorizeWords(uncategorized);
-    uncategorized.forEach((e, i) => {
-      const key = e.word.toLowerCase();
-      if(entries[key] && cats[i]) entries[key].category = CATEGORIES.includes(cats[i]) ? cats[i] : 'Other';
-    });
-    await saveEntries();
-    btn.textContent = `Categorized ${uncategorized.length} word(s)`;
-  }catch(e){
-    console.error('categorization failed', e);
-    btn.textContent = 'Categorization failed — try again';
-  }
-  btn.disabled = false;
-  setTimeout(() => btn.textContent = 'Auto-categorize uncategorized words', 2500);
-  render();
-}
-
 function escapeHtml(str){
   const div = document.createElement('div');
   div.textContent = str || '';
@@ -665,6 +622,7 @@ async function addWord(){
   const word = document.getElementById('inWord').value.trim();
   const zh = document.getElementById('inZh').value.trim();
   const example = document.getElementById('inExample').value.trim();
+  const category = document.getElementById('inCategory').value;
   const msg = document.getElementById('addMsg');
   if(!word){
     msg.textContent = 'Enter a word first.';
@@ -677,31 +635,26 @@ async function addWord(){
     word, zh: zh || '—', example: example || '',
     dateAdded: t, addedAt: new Date().toISOString(), nextReview: t, stage: 0, reviewCount: 0
   };
+  if(category) entries[key].category = category;
   await saveEntries();
   document.getElementById('inWord').value = '';
   document.getElementById('inZh').value = '';
   document.getElementById('inExample').value = '';
+  document.getElementById('inCategory').value = '';
   msg.style.color = 'var(--sage)';
-  msg.textContent = `Added "${word}" — categorizing...`;
-  render();
-  try{
-    const cats = await categorizeWords([entries[key]]);
-    if(entries[key] && cats[0]) entries[key].category = CATEGORIES.includes(cats[0]) ? cats[0] : 'Other';
-    await saveEntries();
-    msg.textContent = `Added "${word}" — scheduled for tonight (${entries[key].category}).`;
-  }catch(e){
-    msg.textContent = `Added "${word}" — scheduled for tonight.`;
-  }
+  msg.textContent = `Added "${word}" — scheduled for tonight${category ? ` (${category})` : ''}.`;
   render();
 }
 
 // Module scripts don't leak declarations to `window`, but the inline onclick/oninput/onchange
 // attributes above need these on `window` to resolve.
 Object.assign(window, {
-  render, setFilter, setCategoryFilter, autoCategorizeAll,
+  render, setFilter, setCategoryFilter,
   showMore, toggleDetail, revealAnswer, grade, speakWord,
   addWord, exportWords
 });
+
+populateAddCategorySelect();
 
 onSnapshot(vocabRef, async (snapshot) => {
   entries = snapshot.exists() && snapshot.data().words ? snapshot.data().words : {};
