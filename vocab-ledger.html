@@ -121,12 +121,12 @@
 
   /* index rows */
   .col-head{
-    display:grid; grid-template-columns:1.4fr 1fr 0.9fr 0.7fr;
+    display:grid; grid-template-columns:1.4fr 1fr 0.9fr 0.7fr 0.9fr;
     font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:0.05em;
     text-transform:uppercase; color:var(--parchment-dim); padding:0 14px 8px;
   }
   .vocab-row{
-    display:grid; grid-template-columns:1.4fr 1fr 0.9fr 0.7fr;
+    display:grid; grid-template-columns:1.4fr 1fr 0.9fr 0.7fr 0.9fr;
     align-items:center;
     background:var(--ink-2);
     border:1px solid var(--hair);
@@ -149,6 +149,7 @@
   .vr-status.status-mastered{color:var(--sage);}
   .vr-status.status-scheduled{color:var(--parchment-dim);}
   .vr-next{font-family:'JetBrains Mono',monospace; font-size:11.5px; color:var(--parchment-dim); text-align:right;}
+  .vr-added-col{font-family:'JetBrains Mono',monospace; font-size:11.5px; color:var(--parchment-dim); text-align:right;}
   .vr-detail{grid-column:1/-1; margin-top:10px; padding-top:10px; border-top:1px dashed var(--hair); font-size:13px; color:var(--parchment-dim); font-style:italic; display:none;}
   .vr-detail.show{display:block;}
   .vr-added{font-family:'JetBrains Mono',monospace; font-size:11px; color:var(--parchment-dim); margin-top:6px; font-style:normal;}
@@ -212,7 +213,7 @@
     .stats{grid-template-columns:repeat(2,1fr);}
     .col-head{display:none;}
     .vocab-row{grid-template-columns:1fr auto;}
-    .vr-zh, .vr-next{display:none;}
+    .vr-zh, .vr-next, .vr-added-col{display:none;}
   }
 </style>
 </head>
@@ -261,7 +262,7 @@
     </div>
     <button class="reveal-btn" id="autoCatBtn" onclick="autoCategorizeAll()" style="margin-bottom:12px;">Auto-categorize uncategorized words</button>
     <div class="col-head">
-      <div>Word</div><div>中文</div><div>Status</div><div style="text-align:right">Next sync</div>
+      <div>Word</div><div>中文</div><div>Status</div><div style="text-align:right">Next sync</div><div style="text-align:right">Added</div>
     </div>
     <div id="ledgerZone"></div>
     <button class="reveal-btn" id="showMoreBtn" onclick="showMore()" style="display:none; margin-top:10px; width:100%;">Show more</button>
@@ -342,6 +343,10 @@ function fmtNice(dateStr){
 function fmtDateTime(isoStr){
   const d = new Date(isoStr);
   return d.toLocaleString('en-US', {month:'short', day:'numeric', year:'numeric', hour:'numeric', minute:'2-digit'});
+}
+function fmtAdded(e){
+  // addedAt (full timestamp) is preferred; older entries only have the date-only dateAdded.
+  return e.addedAt ? fmtNice(e.addedAt.slice(0,10)) : fmtNice(e.dateAdded);
 }
 
 function showStorageBanner(err){
@@ -546,6 +551,7 @@ function renderLedger(list){
         <div class="vr-zh zh">${escapeHtml(e.zh)}</div>
         <div class="vr-status status-${status}">${status}</div>
         <div class="vr-next">${status === 'mastered' ? '—' : fmtNice(e.nextReview)}</div>
+        <div class="vr-added-col">${fmtAdded(e)}</div>
         <div class="vr-detail" id="detail-${safeId}">${escapeHtml(e.example)}${e.addedAt ? `<div class="vr-added">Added ${fmtDateTime(e.addedAt)}</div>` : ''}</div>
       </div>
     `;
