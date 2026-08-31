@@ -19,10 +19,10 @@ Steps to perform:
    - If `zh` is missing: if `word` is English, translate it to Chinese; if `word` is itself Chinese, write the English gloss instead (this field is "Chinese meaning (or English gloss)").
    - If `example` is missing: write one natural sentence that uses the word correctly. Match the existing ledger's tone where it fits — most current examples are drawn from Paul's world as an Oracle/PostgreSQL DBA (incident response, scripting, backups, query tuning). Don't force a DBA angle onto a word that doesn't naturally fit one — use an ordinary general-purpose sentence instead.
 4. Assign a category for this word from this fixed list: `Business`, `Technology`, `Academic`, `Daily Life`, `Emotion`, `Science`, `Other`. Base it on the word's meaning and the example sentence's content (e.g. DBA/incident-response examples → Technology; workplace habits → Business; feelings/motivation → Emotion; everyday routines → Daily Life). Use `Other` only when nothing else genuinely fits.
-5. Run: `python add_vocab.py "<word>" "<zh>" "<example>" "<category>"` in the current directory (this repo root, where vocab-ledger.html lives).
+5. Run: `python add_vocab.py "<word>" "<zh>" "<example>" "<category>"` in the current directory (this repo root, where vocab-ledger-paul.html lives).
 6. If the script reports success, run:
-   - `git add vocab-ledger.html`
+   - `git add vocab-ledger-paul.html`
    - `git commit -m "Add vocab: <word>"`
    - `git push`
 7. Report back concisely: the word added, which fields (if any) you filled in yourself, the assigned category, and confirm it was pushed. Do not show the raw git output unless something failed.
-8. If the script fails (e.g. vocab-ledger.html or add_vocab.py not found in the current directory), tell the user clearly what's missing rather than guessing a fix.
+8. If the script fails (e.g. vocab-ledger-paul.html or add_vocab.py not found in the current directory), tell the user clearly what's missing rather than guessing a fix.
