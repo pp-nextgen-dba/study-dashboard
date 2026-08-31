@@ -4684,6 +4684,17 @@ export const motivationBooksData = {
             confidence:0,
             last_updated:"2026-07-06",
             resourceUrl:"../story/difficult-people-field-guide.html"
+        },
+
+        {
+            form:"Motivation",
+            globalNum: 3,
+            chapterNum: 3,
+            chapter:"Story 3: Tao Te Ching (Chapters 1-6)",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-08-27",
+            resourceUrl:"../story/tao-te-ching-chapters-1-6.html"
         }]
 
 };

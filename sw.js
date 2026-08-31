@@ -1,4 +1,4 @@
-const CACHE = "study-dashboard-v44";
+const CACHE = "study-dashboard-v45";
 
 const STATIC_ASSETS = [
     "/index.html",
@@ -92,7 +92,8 @@ const STATIC_ASSETS = [
     "/moral/form2_moral_unit8_public_services_trilingual.html",
     "/moral/t2_Unit8_PersediaanPeperiksaanAkhir.html",
     "/story/inertia-growth-notes.html",
-    "/story/difficult-people-field-guide.html"
+    "/story/difficult-people-field-guide.html",
+    "/story/tao-te-ching-chapters-1-6.html"
 ];
 
 self.addEventListener("install", event => {
