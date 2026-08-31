@@ -151,6 +151,7 @@
   .vr-next{font-family:'JetBrains Mono',monospace; font-size:11.5px; color:var(--parchment-dim); text-align:right;}
   .vr-detail{grid-column:1/-1; margin-top:10px; padding-top:10px; border-top:1px dashed var(--hair); font-size:13px; color:var(--parchment-dim); font-style:italic; display:none;}
   .vr-detail.show{display:block;}
+  .vr-added{font-family:'JetBrains Mono',monospace; font-size:11px; color:var(--parchment-dim); margin-top:6px; font-style:normal;}
 
   /* add word */
   .add-form{
@@ -338,6 +339,10 @@ function fmtNice(dateStr){
   const d = new Date(dateStr + 'T00:00:00');
   return d.toLocaleDateString('en-US', {month:'short', day:'numeric'});
 }
+function fmtDateTime(isoStr){
+  const d = new Date(isoStr);
+  return d.toLocaleString('en-US', {month:'short', day:'numeric', year:'numeric', hour:'numeric', minute:'2-digit'});
+}
 
 function showStorageBanner(err){
   console.error('Vocab Ledger storage error:', err);
@@ -360,6 +365,7 @@ function mergeSeed(){
         zh: s.zh,
         example: s.example,
         dateAdded: t,
+        addedAt: new Date().toISOString(),
         nextReview: t,
         stage: 0,
         reviewCount: 0
@@ -540,7 +546,7 @@ function renderLedger(list){
         <div class="vr-zh zh">${escapeHtml(e.zh)}</div>
         <div class="vr-status status-${status}">${status}</div>
         <div class="vr-next">${status === 'mastered' ? '—' : fmtNice(e.nextReview)}</div>
-        <div class="vr-detail" id="detail-${safeId}">${escapeHtml(e.example)}</div>
+        <div class="vr-detail" id="detail-${safeId}">${escapeHtml(e.example)}${e.addedAt ? `<div class="vr-added">Added ${fmtDateTime(e.addedAt)}</div>` : ''}</div>
       </div>
     `;
   }).join('');
@@ -663,7 +669,7 @@ async function addWord(){
   const t = todayStr();
   entries[key] = {
     word, zh: zh || '—', example: example || '',
-    dateAdded: t, nextReview: t, stage: 0, reviewCount: 0
+    dateAdded: t, addedAt: new Date().toISOString(), nextReview: t, stage: 0, reviewCount: 0
   };
   await saveEntries();
   document.getElementById('inWord').value = '';
