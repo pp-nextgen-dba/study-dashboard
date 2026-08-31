@@ -7,9 +7,9 @@ Add a vocabulary word to the ledger using the arguments provided: $ARGUMENTS
 The arguments are up to three pipe-separated values, in this order: English word (or Chinese word), Chinese meaning (or English gloss), example sentence. Anything missing or left blank between separators is yours to fill in — the user only has to supply what they already know.
 
 Example invocations:
-- `/add-vocab diligent | 勤奋的 | A diligent DBA checks the alert logs every morning.` (all three given — use as-is)
-- `/add-vocab diligent` (word only — you supply the meaning and example)
-- `/add-vocab diligent | 勤奋的` (word + meaning — you write the example)
+- `/add-vocab-paul diligent | 勤奋的 | A diligent DBA checks the alert logs every morning.` (all three given — use as-is)
+- `/add-vocab-paul diligent` (word only — you supply the meaning and example)
+- `/add-vocab-paul diligent | 勤奋的` (word + meaning — you write the example)
 
 Steps to perform:
 
