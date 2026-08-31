@@ -1,16 +1,16 @@
 #!/usr/bin/env python3
 """
-add_vocab.py — Append a word to the Vocab Ledger's SEED list in vocab-ledger-paul.html.
+add_vocab_skl.py — Append a word to the Vocab Ledger's SEED list in vocab-ledger-skl.html.
 
 Usage:
-    python add_vocab.py "word" "中文释义" "Example sentence." ["Category"]
+    python add_vocab_skl.py "word" "中文释义" "Example sentence." ["Category"]
 
 Category is optional and must be one of: Business, Technology, Academic,
-Daily Life, Emotion, Science, Other (matches CATEGORIES in vocab-ledger-paul.html).
+Daily Life, Emotion, Science, Other (matches CATEGORIES in vocab-ledger-skl.html).
 
-Run this from inside your study-dashboard repo (where vocab-ledger-paul.html lives).
+Run this from inside your study-dashboard repo (where vocab-ledger-skl.html lives).
 After running, commit and push as usual:
-    git add vocab-ledger-paul.html
+    git add vocab-ledger-skl.html
     git commit -m "Add vocab: <word>"
     git push
 """
@@ -19,7 +19,7 @@ import sys
 import re
 from pathlib import Path
 
-LEDGER_FILE = Path("vocab-ledger-paul.html")
+LEDGER_FILE = Path("vocab-ledger-skl.html")
 
 
 def escape_js_string(s: str) -> str:
@@ -31,7 +31,7 @@ CATEGORIES = {"Business", "Technology", "Academic", "Daily Life", "Emotion", "Sc
 
 def main():
     if len(sys.argv) not in (4, 5):
-        print('Usage: python add_vocab.py "word" "中文释义" "Example sentence." ["Category"]')
+        print('Usage: python add_vocab_skl.py "word" "中文释义" "Example sentence." ["Category"]')
         sys.exit(1)
 
     word, zh, example = sys.argv[1], sys.argv[2], sys.argv[3]
@@ -58,7 +58,7 @@ def main():
     pattern = re.compile(r"(const SEED = \[\n(?:.*\n)*?)(\];)")
     match = pattern.search(content)
     if not match:
-        print("Error: could not find the SEED array in vocab-ledger-paul.html.")
+        print("Error: could not find the SEED array in vocab-ledger-skl.html.")
         sys.exit(1)
 
     body = match.group(1)
