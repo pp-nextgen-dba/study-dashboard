@@ -378,6 +378,7 @@ function mergeSeed(){
         stage: 0,
         reviewCount: 0
       };
+      if(s.category) entries[key].category = s.category;
       changed = true;
     }
   });
