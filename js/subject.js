@@ -1663,6 +1663,7 @@ export const rekaBentukData = {
             chapterNum: 37,
             chapter:"Teknologi Pembuatan",
             chinese:"制造技术",
+            resourceUrl:"../rbt/KSSM_Form2_RBT_Teknologi_Pembuatan_Final_Exam.html",
             status:"Not Started",
             confidence:0,
             last_updated:"2026-05-22"
