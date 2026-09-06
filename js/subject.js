@@ -2616,6 +2616,19 @@ export const chineseData = {
         },
 
         {
+            form:"T2",
+            globalNum: 62,
+            chapterCode:"zh_037",
+            chapterNum: 58,
+            chapter:"古诗14",
+            chinese:"《池上二绝·其一》（白居易）",
+            resourceUrl:"../chinese/t2-古诗-池上二绝·其一.html",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-09-06"
+        },
+
+        {
             form:"T3",
             globalNum: 10,
             chapterCode:"zh_010",
