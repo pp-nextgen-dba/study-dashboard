@@ -2564,6 +2564,19 @@ export const chineseData = {
         },
 
         {
+            form:"T2",
+            globalNum: 58,
+            chapterCode:"zh_033",
+            chapterNum: 54,
+            chapter:"古诗10",
+            chinese:"《长歌行》（汉乐府）",
+            resourceUrl:"../chinese/t2-古诗10-长歌行-exam_prep.html",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-09-06"
+        },
+
+        {
             form:"T3",
             globalNum: 10,
             chapterCode:"zh_010",
