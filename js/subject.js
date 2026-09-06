@@ -2558,6 +2558,7 @@ export const chineseData = {
             chapter:"古诗9",
             chinese:"《暮江吟》（白居易）",
             resourceUrl:"../chinese/zh_032.html",
+            resourceUrl2:"../chinese/t2-古诗-暮江吟.html",
             status:"Not Started",
             confidence:0,
             last_updated:"2026-07-27"

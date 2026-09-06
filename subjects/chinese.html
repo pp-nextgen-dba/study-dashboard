@@ -15,7 +15,7 @@ content="width=device-width, initial-scale=1.0">
 <title>Chinese Dashboard</title>
 
 <link rel="stylesheet"
-href="../css/style.css?v=37">
+href="../css/style.css?v=38">
 
 <style>
 
@@ -397,7 +397,7 @@ import {
     chineseData
 }
 from
-"../js/subject.js?v=22";
+"../js/subject.js?v=23";
 
 import { requireAuth } from "../js/auth.js";
 await requireAuth("../index.html");
@@ -431,7 +431,7 @@ function addMissingChineseLabels(subjectData){
         new Map(
             chineseData.chapters.map(chapter => [
                 `${chapter.form}|${chapter.chapter}`,
-                {chinese:chapter.chinese, chapterCode:chapter.chapterCode, resourceUrl:chapter.resourceUrl}
+                {chinese:chapter.chinese, chapterCode:chapter.chapterCode, resourceUrl:chapter.resourceUrl, resourceUrl2:chapter.resourceUrl2}
             ])
         );
 
@@ -457,6 +457,11 @@ function addMissingChineseLabels(subjectData){
 
             if(!chapter.resourceUrl && fallback?.resourceUrl){
                 update.resourceUrl = fallback.resourceUrl;
+                changed = true;
+            }
+
+            if(!chapter.resourceUrl2 && fallback?.resourceUrl2){
+                update.resourceUrl2 = fallback.resourceUrl2;
                 changed = true;
             }
 
@@ -717,7 +722,8 @@ function render(){
                     : "";
 
             const chapterResource = chapter.resourceUrl
-                ? `<a class="chapter-link" href="${chapter.resourceUrl}">Note 1</a>`
+                ? `<a class="chapter-link" href="${chapter.resourceUrl}">Note 1</a>` +
+                  (chapter.resourceUrl2 ? ` <a class="chapter-link" href="${chapter.resourceUrl2}">Note 2</a>` : "")
                 : "";
 
             card.innerHTML = `

@@ -1,4 +1,4 @@
-const CACHE = "study-dashboard-v51";
+const CACHE = "study-dashboard-v52";
 
 const STATIC_ASSETS = [
     "/index.html",
@@ -61,6 +61,7 @@ const STATIC_ASSETS = [
     "/chinese/t2-古诗-渔歌子.html",
     "/chinese/t2-古诗-过零丁洋.html",
     "/chinese/t2-古诗-池上二绝·其一.html",
+    "/chinese/t2-古诗-暮江吟.html",
     "/science/form2_science_chapter9_heat.html",
     "/science/t2_Chapter7-Electricity-Magnetism.html",
     "/science/t2_science_chapter7_note2.html",
