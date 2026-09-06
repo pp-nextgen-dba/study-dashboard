@@ -4695,6 +4695,17 @@ export const motivationBooksData = {
             confidence:0,
             last_updated:"2026-08-27",
             resourceUrl:"../story/tao-te-ching-chapters-1-6.html"
+        },
+
+        {
+            form:"Motivation",
+            globalNum: 4,
+            chapterNum: 4,
+            chapter:"Story 4: Atomic Habits (Chapter 1)",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-09-06",
+            resourceUrl:"../story/atomic-habits-ch1.html"
         }]
 
 };

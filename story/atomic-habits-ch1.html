@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>原子习惯 · 第一章 完整回顾</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#EEF1EF;
+    --paper-2:#E4E9E6;
+    --grid:#CDD7D3;
+    --ink:#16202A;
+    --ink-soft:#4A5560;
+    --ice:#3E7CB1;
+    --ice-soft:#E3EEF6;
+    --ember:#E2622B;
+    --ember-soft:#FBE7DC;
+    --jade:#4C7A5D;
+    --jade-soft:#E4EEE7;
+    --rust:#8B4A44;
+    --rust-soft:#F2E3E1;
+    --gold:#B5891F;
+    --gold-soft:#F3ECD9;
+    --serif:'Noto Serif SC', serif;
+    --sans:'Inter', 'PingFang SC', sans-serif;
+    --maxw:760px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:
+      repeating-linear-gradient(0deg, transparent, transparent 27px, var(--grid) 28px),
+      repeating-linear-gradient(90deg, transparent, transparent 27px, var(--grid) 28px),
+      var(--paper);
+    background-attachment:fixed;
+    color:var(--ink);
+    font-family:var(--sans);
+    line-height:1.7;
+    -webkit-font-smoothing:antialiased;
+  }
+  .en{
+    font-family:var(--sans);
+    color:var(--ink-soft);
+    font-size:0.78rem;
+    letter-spacing:.01em;
+    display:block;
+    margin-top:2px;
+  }
+  h1,h2,h3{font-family:var(--serif); margin:0; color:var(--ink);}
+  p{margin:0 0 1em 0;}
+  a{color:inherit;}
+
+  /* ---- top bar ---- */
+  .topbar{
+    position:sticky; top:0; z-index:50;
+    background:rgba(238,241,239,.88);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--grid);
+    padding:14px 24px;
+    display:flex; justify-content:space-between; align-items:baseline;
+  }
+  .topbar .mark{font-family:var(--serif); font-weight:700; font-size:1.05rem;}
+  .topbar .mark .en{display:inline; margin:0 0 0 8px; font-size:.72rem;}
+  .topbar nav a{
+    font-size:.82rem; color:var(--ink-soft); text-decoration:none; margin-left:18px;
+    border-bottom:1px solid transparent; padding-bottom:2px;
+  }
+  .topbar nav a:hover{border-color:var(--ember); color:var(--ink);}
+
+  section{max-width:var(--maxw); margin:0 auto; padding:64px 24px;}
+  .wide{max-width:920px;}
+
+  /* ---- hero ---- */
+  .hero{padding-top:56px; padding-bottom:40px;}
+  .hero .eyebrow{
+    font-size:.85rem; color:var(--ink-soft); margin-bottom:10px;
+  }
+  .hero h1{font-size:2.35rem; font-weight:900; line-height:1.35;}
+  .hero .en-title{font-size:1.05rem; margin-top:8px; color:var(--ink-soft); font-style:italic;}
+  .hero .lede{margin-top:22px; font-size:1.02rem; color:var(--ink-soft); max-width:56ch;}
+
+  .growth-panel{
+    margin-top:40px; border:1px solid var(--grid); background:#fff;
+    border-radius:2px; padding:28px 20px 20px;
+  }
+  .growth-labels{display:flex; justify-content:space-between; margin-bottom:6px;}
+  .growth-labels div{font-size:.8rem; color:var(--ink-soft);}
+  .growth-numbers{display:flex; justify-content:space-between; margin-top:14px;}
+  .gn{}
+  .gn .num{font-family:var(--serif); font-weight:900; font-size:2rem;}
+  .gn.up .num{color:var(--jade);}
+  .gn.down .num{color:var(--rust);}
+  .gn .cap{font-size:.78rem; color:var(--ink-soft); margin-top:2px;}
+
+  /* ---- section headers ---- */
+  .sec-head{display:flex; gap:16px; align-items:baseline; margin-bottom:28px;}
+  .sec-num{
+    font-family:var(--serif); font-weight:900; font-size:2.4rem; color:var(--grid);
+    line-height:1; -webkit-text-stroke:1px var(--ink-soft);
+  }
+  .sec-head h2{font-size:1.5rem;}
+
+  /* ---- cards: two habits ---- */
+  .duo{display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:24px;}
+  @media(max-width:600px){.duo{grid-template-columns:1fr;}}
+  .card{border:1px solid var(--grid); background:#fff; padding:20px; border-radius:2px;}
+  .card.jade{border-left:4px solid var(--jade); background:var(--jade-soft);}
+  .card.rust{border-left:4px solid var(--rust); background:var(--rust-soft);}
+  .card h3{font-size:1.05rem; margin-bottom:8px;}
+  .card p{font-size:.92rem; color:var(--ink-soft); margin:0;}
+
+  blockquote{
+    margin:24px 0; padding:16px 20px; border-left:3px solid var(--gold);
+    background:var(--gold-soft); font-family:var(--serif); font-size:1.02rem;
+  }
+
+  /* ---- thermometer ---- */
+  .thermo-wrap{display:flex; gap:28px; align-items:center; margin:32px 0; flex-wrap:wrap;}
+  .thermo{width:70px; height:220px; position:relative;}
+  .thermo svg{width:100%; height:100%; display:block;}
+  .thermo-fill{transition:height 1.4s cubic-bezier(.2,.8,.2,1), fill 1.4s ease;}
+  .thermo-text{flex:1; min-width:220px;}
+  .thermo-text .temp{font-family:var(--serif); font-weight:900; font-size:1.6rem;}
+  .thermo-text .temp.hot{color:var(--ember);}
+  .thermo-text .temp.cold{color:var(--ice);}
+
+  .stage{
+    display:flex; gap:14px; margin:18px 0; padding:16px; border:1px dashed var(--grid);
+  }
+  .stage .tag{
+    flex-shrink:0; font-size:.72rem; color:#fff; background:var(--ice); padding:3px 8px;
+    height:fit-content; border-radius:2px; font-weight:600;
+  }
+
+  /* ---- 4 problems (real sequence) ---- */
+  .problem{
+    display:flex; gap:18px; padding:18px 0; border-bottom:1px solid var(--grid);
+  }
+  .problem:last-child{border-bottom:none;}
+  .problem .pnum{
+    font-family:var(--serif); font-weight:900; font-size:1.6rem; color:var(--ember);
+    width:34px; flex-shrink:0;
+  }
+  .problem h3{font-size:1.02rem; margin-bottom:6px;}
+  .problem p{font-size:.92rem; color:var(--ink-soft); margin:0;}
+
+  /* ---- formula box ---- */
+  .formula{
+    margin:28px 0; padding:26px 22px; text-align:center; background:var(--ink);
+    color:var(--paper); border-radius:2px;
+  }
+  .formula .expr{font-family:var(--serif); font-size:1.3rem; font-weight:700;}
+  .formula .expr .op{color:var(--ember);}
+  .formula .sub{font-size:.78rem; opacity:.7; margin-top:8px;}
+
+  /* ---- gold quotes ---- */
+  .quotes{display:grid; grid-template-columns:1fr 1fr; gap:14px;}
+  @media(max-width:600px){.quotes{grid-template-columns:1fr;}}
+  .qcard{
+    border:1px solid var(--gold); background:var(--gold-soft); padding:18px;
+    font-family:var(--serif); font-size:.95rem; border-radius:2px;
+  }
+
+  /* ---- mind map ---- */
+  .mindmap-section{max-width:960px;}
+  .mm-wrap{border:1px solid var(--grid); background:#fff; border-radius:2px; padding:8px; overflow-x:auto;}
+  .mm-wrap svg{width:100%; height:auto; min-width:640px; display:block;}
+  .mm-legend{display:flex; flex-wrap:wrap; gap:14px; margin-top:14px; font-size:.78rem; color:var(--ink-soft);}
+  .mm-legend span{display:inline-flex; align-items:center; gap:6px;}
+  .mm-legend i{width:10px; height:10px; border-radius:50%; display:inline-block;}
+
+  /* ---- footer summary ---- */
+  .summary-band{
+    background:var(--ember); color:#fff; text-align:left;
+  }
+  .summary-band .inner{max-width:var(--maxw); margin:0 auto; padding:56px 24px;}
+  .summary-band h2{color:#fff; font-size:1.15rem; margin-bottom:14px;}
+  .summary-band p{font-family:var(--serif); font-size:1.25rem; line-height:1.7;}
+  .summary-band .en{color:rgba(255,255,255,.75); margin-top:10px;}
+
+  footer.pagefoot{
+    text-align:center; padding:26px; font-size:.75rem; color:var(--ink-soft);
+  }
+
+  /* ---- reveal on scroll ---- */
+  .reveal{opacity:0; transform:translateY(14px); transition:opacity .6s ease, transform .6s ease;}
+  .reveal.in{opacity:1; transform:none;}
+
+  @media(prefers-reduced-motion: reduce){
+    .reveal{opacity:1; transform:none; transition:none;}
+    .thermo-fill{transition:none;}
+  }
+</style>
+</head>
+<body>
+
+<div class="top-nav" style="background:#fff;padding:10px 16px;border-bottom:2px solid #e5e7eb">
+  <a class="dashboard-link" href="../index.html" style="display:inline-flex;align-items:center;gap:6px;padding:8px 12px;border-radius:8px;background:#1d4ed8;color:#fff;font-size:13px;font-weight:800;text-decoration:none">&larr; Back to Dashboard</a>
+</div>
+
+<div class="topbar">
+  <div class="mark">原子习惯 · 第一章<span class="en">Atomic Habits — Ch.1</span></div>
+  <nav>
+    <a href="#compound">复利</a>
+    <a href="#valley">停滞期</a>
+    <a href="#goals">目标</a>
+    <a href="#atomic">原子习惯</a>
+    <a href="#mindmap">思维导图</a>
+  </nav>
+</div>
+
+<section class="hero">
+  <div class="eyebrow">读书笔记 · 完整回顾</div>
+  <h1 class="reveal">习惯的复利效应<br>别盯目标，专注系统</h1>
+  <div class="en-title reveal">The Compound Effect of Habits — Focus on Systems, Not Goals</div>
+  <p class="lede reveal">习惯的力量不在单次行动，而在持续累积。就像利息一样，时间越久，效果越显著——无论方向是好是坏。</p>
+
+  <div class="growth-panel reveal">
+    <div class="growth-labels">
+      <div>一年（365天）之后</div>
+      <div class="en">After 365 days</div>
+    </div>
+    <svg viewBox="0 0 640 180" width="100%" height="140" preserveAspectRatio="none">
+      <line x1="0" y1="160" x2="640" y2="160" stroke="var(--grid)" stroke-width="1"/>
+      <path d="M0,150 C160,145 300,120 420,60 C500,20 560,8 640,4" fill="none" stroke="#4C7A5D" stroke-width="3"/>
+      <path d="M0,150 C160,155 320,158 460,159.4 C540,159.8 600,160 640,160" fill="none" stroke="#8B4A44" stroke-width="3"/>
+    </svg>
+    <div class="growth-numbers">
+      <div class="gn up">
+        <div class="num">37.78×</div>
+        <div class="cap">每天进步 1% · 1.01³⁶⁵</div>
+      </div>
+      <div class="gn down">
+        <div class="num">0.03×</div>
+        <div class="cap">每天退步 1% · 0.99³⁶⁵</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="compound">
+  <div class="sec-head reveal"><span class="sec-num">一</span><h2>习惯的复利：双刃剑<span class="en">The Double-Edged Sword of Compounding</span></h2></div>
+
+  <div class="duo reveal">
+    <div class="card jade">
+      <h3>好习惯是盟友</h3>
+      <p>每天 1% 进步，复利带来惊人成长；知识、生产力、人际关系都会正向叠加。</p>
+    </div>
+    <div class="card rust">
+      <h3>坏习惯是敌人</h3>
+      <p>每天 1% 退步，长期会被负面循环拖垮；压力、自卑、怨恨会不断累积放大。</p>
+    </div>
+  </div>
+
+  <blockquote class="reveal">关键认知：习惯的力量不在单次行动，而在持续累积——像复利一样，时间越久效果越显著。</blockquote>
+</section>
+
+<section id="valley">
+  <div class="sec-head reveal"><span class="sec-num">二</span><h2>为什么建立习惯这么难？<span class="en">The Valley of Disappointment</span></h2></div>
+
+  <p class="reveal">「失望之谷」与「停滞期」——前期努力看似无效，其实是能量在积蓄。</p>
+
+  <div class="thermo-wrap reveal">
+    <div class="thermo">
+      <svg viewBox="0 0 70 220">
+        <rect x="26" y="10" width="18" height="170" rx="9" fill="none" stroke="var(--ink-soft)" stroke-width="2"/>
+        <circle cx="35" cy="195" r="18" fill="none" stroke="var(--ink-soft)" stroke-width="2"/>
+        <clipPath id="tclip"><rect x="26" y="10" width="18" height="170" rx="9"/></clipPath>
+        <g clip-path="url(#tclip)">
+          <rect id="thermoFill" class="thermo-fill" x="26" y="176" width="18" height="200" fill="#3E7CB1"/>
+        </g>
+        <circle cx="35" cy="195" r="14" fill="#3E7CB1" id="thermoBulb" class="thermo-fill"/>
+      </svg>
+    </div>
+    <div class="thermo-text">
+      <div class="temp cold" id="thermoTemp">25℃</div>
+      <p style="margin-top:6px;">从 25℃ 加温到 31℃，冰毫无变化；32℃ 瞬间融化。<br>前期努力看似无效，是因为能量在积蓄，临界点一到就会爆发。</p>
+    </div>
+  </div>
+
+  <div class="stage reveal">
+    <div class="tag">失望之谷</div>
+    <p style="margin:0;">努力很久看不到成果，容易放弃；其实成果不是消失，而是被储存、累积在看不见的地方。</p>
+  </div>
+  <div class="stage reveal">
+    <div class="tag">停滞期</div>
+    <p style="margin:0;">突破前的低谷不是失败，是必经过程；挺过停滞期，才会迎来跃迁。</p>
+  </div>
+
+  <blockquote class="reveal">石匠的启示：不是最后一锤劈开石头，而是前面的每一次敲击共同造就了结果。</blockquote>
+</section>
+
+<section id="goals">
+  <div class="sec-head reveal"><span class="sec-num">三</span><h2>目标的四大问题<span class="en">Four Problems with Goals</span></h2></div>
+  <p class="reveal">为什么要专注系统而非目标？</p>
+
+  <div class="reveal">
+    <div class="problem">
+      <div class="pnum">1</div>
+      <div><h3>赢家输家目标相同</h3><p>大家都想赢，目标无法区分成败；真正决定结果的是系统。</p></div>
+    </div>
+    <div class="problem">
+      <div class="pnum">2</div>
+      <div><h3>目标达成只是短暂改变</h3><p>目标解决的是「结果」，系统解决的是「过程」；只改目标不改系统，旧问题很快会复萌。</p></div>
+    </div>
+    <div class="problem">
+      <div class="pnum">3</div>
+      <div><h3>目标限制你的快乐</h3><p>把快乐寄托在「达成目标」上，会永远延后满足；专注系统、爱上过程，当下就能获得成就感。</p></div>
+    </div>
+    <div class="problem">
+      <div class="pnum">4</div>
+      <div><h3>目标与长期进步互相矛盾</h3><p>目标达成后动力容易消失，出现「溜溜球效应」；系统是持续运转的机制，能带来长期稳定的进步。</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="atomic">
+  <div class="sec-head reveal"><span class="sec-num">四</span><h2>原子习惯：微小但强大<span class="en">Atomic Habits: Tiny but Powerful</span></h2></div>
+
+  <p class="reveal">原子 = 微小、基础、关键；原子习惯就是微小的、能融入系统的日常小习惯，像原子构成分子，小习惯堆叠出大成果。</p>
+  <blockquote class="reveal">核心主旨：不要追求卓越的成果，要追求卓越的系统；好的系统会自动带来好的结果。</blockquote>
+
+  <div class="formula reveal">
+    <div class="expr">1% 进步 <span class="op">×</span> 持续复利 <span class="op">=</span> 爆发式成长</div>
+    <div class="sub">Small gains × consistent compounding = exponential growth (and the reverse is equally true)</div>
+  </div>
+</section>
+
+<section id="quotes">
+  <div class="sec-head reveal"><span class="sec-num">五</span><h2>本章金句<span class="en">Key Quotes</span></h2></div>
+  <div class="quotes reveal">
+    <div class="qcard">目标是你想要达成的成果；系统是你达成成果的过程。</div>
+    <div class="qcard">每天进步1%，一年后是37倍；每天退步1%，一年后趋近于零。</div>
+    <div class="qcard">不要盯着目标，要专注于系统；目标决定方向，系统决定能否抵达。</div>
+    <div class="qcard">成果姗姗来迟，不是努力白费，而是复利在积蓄力量。</div>
+  </div>
+</section>
+
+<section id="mindmap" class="mindmap-section">
+  <div class="sec-head reveal"><h2>第一章思维导图<span class="en">Chapter 1 Mind Map</span></h2></div>
+  <div class="mm-wrap reveal">
+    <svg viewBox="0 0 900 760" xmlns="http://www.w3.org/2000/svg" font-family="Inter, PingFang SC, sans-serif">
+      <!-- connectors -->
+      <g fill="none" stroke-width="2">
+        <path d="M450,320 C420,220 400,140 380,60" stroke="#4C7A5D"/>
+        <path d="M480,320 C560,240 630,260 675,258" stroke="#3E7CB1"/>
+        <path d="M470,380 C540,470 590,530 600,548" stroke="#E2622B"/>
+        <path d="M430,380 C370,470 320,530 300,548" stroke="#B5891F"/>
+        <path d="M420,320 C360,240 280,255 210,262" stroke="#8B4A44"/>
+
+        <path d="M380,60 C355,50 330,42 316,36" stroke="#4C7A5D" stroke-dasharray="3,4"/>
+        <path d="M380,60 C405,48 585,40 606,32" stroke="#4C7A5D" stroke-dasharray="3,4"/>
+
+        <path d="M675,258 C750,215 815,182 828,176" stroke="#3E7CB1" stroke-dasharray="3,4"/>
+        <path d="M675,258 C740,300 820,335 836,340" stroke="#3E7CB1" stroke-dasharray="3,4"/>
+
+        <path d="M600,548 C670,600 730,650 738,658" stroke="#E2622B" stroke-dasharray="3,4"/>
+        <path d="M600,548 C580,610 562,668 558,678" stroke="#E2622B" stroke-dasharray="3,4"/>
+
+        <path d="M300,548 C325,610 340,668 342,678" stroke="#B5891F" stroke-dasharray="3,4"/>
+        <path d="M300,548 C230,608 172,652 162,660" stroke="#B5891F" stroke-dasharray="3,4"/>
+
+        <path d="M210,262 C140,300 78,332 62,340" stroke="#8B4A44" stroke-dasharray="3,4"/>
+        <path d="M210,262 C150,225 88,185 72,178" stroke="#8B4A44" stroke-dasharray="3,4"/>
+      </g>
+
+      <!-- center node -->
+      <circle cx="450" cy="350" r="72" fill="#16202A"/>
+      <text x="450" y="343" text-anchor="middle" fill="#EEF1EF" font-size="17" font-weight="700" font-family="'Noto Serif SC', serif">原子习惯</text>
+      <text x="450" y="365" text-anchor="middle" fill="#EEF1EF" font-size="12">第一章</text>
+
+      <!-- branch nodes -->
+      <g font-size="13" font-weight="600" fill="#fff">
+        <rect x="300" y="34" width="160" height="34" rx="4" fill="#4C7A5D"/>
+        <text x="380" y="56" text-anchor="middle">一 · 复利双刃剑</text>
+
+        <rect x="595" y="238" width="160" height="34" rx="4" fill="#3E7CB1"/>
+        <text x="675" y="260" text-anchor="middle">二 · 失望之谷</text>
+
+        <rect x="520" y="530" width="160" height="34" rx="4" fill="#E2622B"/>
+        <text x="600" y="552" text-anchor="middle">三 · 目标四问题</text>
+
+        <rect x="220" y="530" width="160" height="34" rx="4" fill="#B5891F"/>
+        <text x="300" y="552" text-anchor="middle">四 · 原子习惯</text>
+
+        <rect x="130" y="244" width="160" height="34" rx="4" fill="#8B4A44"/>
+        <text x="210" y="266" text-anchor="middle">五 · 金句总结</text>
+      </g>
+
+      <!-- leaves -->
+      <g font-size="11.5" fill="#16202A">
+        <rect x="240" y="18" width="150" height="30" rx="3" fill="#E4EEE7" stroke="#4C7A5D"/>
+        <text x="315" y="37" text-anchor="middle">好习惯 = 盟友 (1%↑)</text>
+
+        <rect x="530" y="16" width="152" height="30" rx="3" fill="#E4EEE7" stroke="#4C7A5D"/>
+        <text x="606" y="35" text-anchor="middle">坏习惯 = 敌人 (1%↓)</text>
+
+        <rect x="752" y="160" width="152" height="30" rx="3" fill="#E3EEF6" stroke="#3E7CB1"/>
+        <text x="828" y="179" text-anchor="middle">冰块比喻 25→32℃</text>
+
+        <rect x="760" y="324" width="152" height="30" rx="3" fill="#E3EEF6" stroke="#3E7CB1"/>
+        <text x="836" y="343" text-anchor="middle">石匠的最后一锤</text>
+
+        <rect x="662" y="642" width="152" height="30" rx="3" fill="#FBE7DC" stroke="#E2622B"/>
+        <text x="738" y="661" text-anchor="middle">系统 ≠ 目标</text>
+
+        <rect x="484" y="662" width="150" height="30" rx="3" fill="#FBE7DC" stroke="#E2622B"/>
+        <text x="559" y="681" text-anchor="middle">溜溜球效应</text>
+
+        <rect x="268" y="662" width="150" height="30" rx="3" fill="#F3ECD9" stroke="#B5891F"/>
+        <text x="343" y="681" text-anchor="middle">公式：1% × 复利</text>
+
+        <rect x="88" y="644" width="150" height="30" rx="3" fill="#F3ECD9" stroke="#B5891F"/>
+        <text x="163" y="663" text-anchor="middle">微小行动堆叠</text>
+
+        <rect x="0" y="324" width="150" height="30" rx="3" fill="#F2E3E1" stroke="#8B4A44"/>
+        <text x="75" y="343" text-anchor="middle">37倍 vs 趋近于零</text>
+
+        <rect x="0" y="162" width="150" height="30" rx="3" fill="#F2E3E1" stroke="#8B4A44"/>
+        <text x="75" y="181" text-anchor="middle">爱上过程，专注当下</text>
+      </g>
+    </svg>
+  </div>
+  <div class="mm-legend">
+    <span><i style="background:#4C7A5D"></i>复利双刃剑</span>
+    <span><i style="background:#3E7CB1"></i>失望之谷</span>
+    <span><i style="background:#E2622B"></i>目标四问题</span>
+    <span><i style="background:#B5891F"></i>原子习惯</span>
+    <span><i style="background:#8B4A44"></i>金句总结</span>
+  </div>
+</section>
+
+<div class="summary-band">
+  <div class="inner">
+    <h2>本章一句话总结<span class="en" style="display:block; margin-top:2px;">One-Sentence Summary</span></h2>
+    <p>习惯是复利，微小行动乘以时间就是力量；别用目标困住自己，打造能持续运转的系统，进步会自然发生。</p>
+    <div class="en">Habits compound — small actions times time equal power. Don't trap yourself with goals; build a system that keeps running, and progress follows naturally.</div>
+  </div>
+</div>
+
+<footer class="pagefoot">《原子习惯》第一章 读书笔记 · 完整回顾</footer>
+
+<script>
+  // single orchestrated reveal on scroll
+  const revealEls = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
+    });
+  }, {threshold:0.15});
+  revealEls.forEach(el=>io.observe(el));
+
+  // thermometer: animate 25C -> 32C once the section is in view
+  const thermoSection = document.getElementById('valley');
+  const fillRect = document.getElementById('thermoFill');
+  const bulb = document.getElementById('thermoBulb');
+  const tempLabel = document.getElementById('thermoTemp');
+  let thermoDone = false;
+
+  function setThermo(temp){
+    // map 20C -> full (y=176,h=0) .. 32C -> empty column filled (y=10,h=166)
+    const minT=20, maxT=32;
+    const pct = Math.min(1, Math.max(0, (temp-minT)/(maxT-minT)));
+    const fullHeight = 166;
+    const h = fullHeight*pct;
+    const y = 176 - h;
+    fillRect.setAttribute('y', y);
+    fillRect.setAttribute('height', h+20); // extend into bulb area visually
+    const color = temp>=32 ? '#E2622B' : '#3E7CB1';
+    fillRect.setAttribute('fill', color);
+    bulb.setAttribute('fill', color);
+    tempLabel.textContent = temp + '℃';
+    tempLabel.className = 'temp ' + (temp>=32?'hot':'cold');
+  }
+  setThermo(25);
+
+  const thermoIO = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting && !thermoDone){
+        thermoDone = true;
+        let t = 25;
+        const step = ()=>{
+          t += 1;
+          setThermo(t);
+          if(t<32) requestAnimationFrame(()=>setTimeout(step, 260));
+        };
+        setTimeout(step, 300);
+        thermoIO.disconnect();
+      }
+    });
+  }, {threshold:0.4});
+  thermoIO.observe(thermoSection);
+</script>
+
+</body>
+</html>
