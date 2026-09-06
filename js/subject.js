@@ -2603,6 +2603,19 @@ export const chineseData = {
         },
 
         {
+            form:"T2",
+            globalNum: 61,
+            chapterCode:"zh_036",
+            chapterNum: 57,
+            chapter:"古诗13",
+            chinese:"《过零丁洋》（文天祥）",
+            resourceUrl:"../chinese/t2-古诗-过零丁洋.html",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-09-06"
+        },
+
+        {
             form:"T3",
             globalNum: 10,
             chapterCode:"zh_010",
