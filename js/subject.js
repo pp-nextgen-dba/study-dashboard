@@ -2590,6 +2590,19 @@ export const chineseData = {
         },
 
         {
+            form:"T2",
+            globalNum: 60,
+            chapterCode:"zh_035",
+            chapterNum: 56,
+            chapter:"古诗12",
+            chinese:"《渔歌子》（张志和）",
+            resourceUrl:"../chinese/t2-古诗-渔歌子.html",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-09-06"
+        },
+
+        {
             form:"T3",
             globalNum: 10,
             chapterCode:"zh_010",
