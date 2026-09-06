@@ -2577,6 +2577,19 @@ export const chineseData = {
         },
 
         {
+            form:"T2",
+            globalNum: 59,
+            chapterCode:"zh_034",
+            chapterNum: 55,
+            chapter:"古诗11",
+            chinese:"《论诗五首·其二》（赵翼）",
+            resourceUrl:"../chinese/t2-古诗11论诗五首其二.html",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-09-06"
+        },
+
+        {
             form:"T3",
             globalNum: 10,
             chapterCode:"zh_010",
