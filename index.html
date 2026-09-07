@@ -104,12 +104,13 @@ href="css/style.css">
                     return {x:cx + sx * scale, y:cy + sy * scale * 0.62, z:sz};
                 }
 
-                function draw(){
-                    const w = canvas.width, h = canvas.height;
-                    ctx.clearRect(0, 0, w, h);
+                const spheres = [
+                    {cxFactor:0.14, speed:0.006, dir:1},
+                    {cxFactor:0.86, speed:0.0048, dir:-1}
+                ];
 
-                    const cx = w * 0.82, cy = h * 0.5, R = Math.min(w, h) * 0.32;
-                    const proj = pts.map(function(p){ return project(p, angle, cx, cy, R); });
+                function drawSphere(cx, cy, R, rot){
+                    const proj = pts.map(function(p){ return project(p, rot, cx, cy, R); });
 
                     ctx.lineWidth = 1 * dpr;
                     for(let i = 0; i < proj.length; i++){
@@ -140,6 +141,16 @@ href="css/style.css">
                         ctx.fill();
                     }
                     ctx.shadowBlur = 0;
+                }
+
+                function draw(){
+                    const w = canvas.width, h = canvas.height;
+                    ctx.clearRect(0, 0, w, h);
+
+                    const cy = h * 0.5, R = Math.min(w, h) * 0.26;
+                    for(const s of spheres){
+                        drawSphere(w * s.cxFactor, cy, R, angle * s.dir * (s.speed / 0.006));
+                    }
 
                     angle += 0.006;
                     requestAnimationFrame(draw);
