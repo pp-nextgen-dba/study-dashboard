@@ -36,6 +36,10 @@ href="css/style.css">
 
     <header>
 
+        <canvas class="hero-canvas" id="heroSphere"></canvas>
+
+        <div class="hero-content">
+
         <h1>
             📘 Learning Progress Dashboard
         </h1>
@@ -47,6 +51,8 @@ href="css/style.css">
         <p class="dashboard-version" id="dashboardVersion">
             Version: main-2026-05-30.1
         </p>
+
+        </div>
         <script>
             (function(){
                 const now = new Date();
@@ -60,6 +66,87 @@ href="css/style.css">
             })();
         </script>
 
+        <script>
+            (function(){
+                const canvas = document.getElementById("heroSphere");
+                if(!canvas || !canvas.getContext){ return; }
+                if(window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches){ return; }
+
+                const ctx = canvas.getContext("2d");
+                const dpr = Math.min(window.devicePixelRatio || 1, 2);
+
+                function resize(){
+                    const rect = canvas.parentElement.getBoundingClientRect();
+                    canvas.width = rect.width * dpr;
+                    canvas.height = rect.height * dpr;
+                    canvas.style.width = rect.width + "px";
+                    canvas.style.height = rect.height + "px";
+                }
+                resize();
+                window.addEventListener("resize", resize);
+
+                const N = 46;
+                const pts = [];
+                for(let i = 0; i < N; i++){
+                    const phi = Math.acos(-1 + (2 * i) / N);
+                    const theta = Math.sqrt(N * Math.PI) * phi;
+                    pts.push({phi:phi, theta:theta});
+                }
+
+                let angle = 0;
+
+                function project(p, rot, cx, cy, R){
+                    const t = p.theta + rot;
+                    const sx = R * Math.sin(p.phi) * Math.cos(t);
+                    const sy = R * Math.cos(p.phi);
+                    const sz = R * Math.sin(p.phi) * Math.sin(t);
+                    const scale = (R * 2.9) / (R * 2.9 - sz);
+                    return {x:cx + sx * scale, y:cy + sy * scale * 0.62, z:sz};
+                }
+
+                function draw(){
+                    const w = canvas.width, h = canvas.height;
+                    ctx.clearRect(0, 0, w, h);
+
+                    const cx = w * 0.82, cy = h * 0.5, R = Math.min(w, h) * 0.32;
+                    const proj = pts.map(function(p){ return project(p, angle, cx, cy, R); });
+
+                    ctx.lineWidth = 1 * dpr;
+                    for(let i = 0; i < proj.length; i++){
+                        for(let j = i + 1; j < proj.length; j++){
+                            const a = proj[i], b = proj[j];
+                            const d = Math.hypot(a.x - b.x, a.y - b.y);
+                            if(d < R * 0.55){
+                                const depth = (a.z + b.z) / (2 * R);
+                                const alpha = Math.max(0, 0.22 + depth * 0.22);
+                                ctx.strokeStyle = "rgba(90,170,255," + alpha + ")";
+                                ctx.beginPath();
+                                ctx.moveTo(a.x, a.y);
+                                ctx.lineTo(b.x, b.y);
+                                ctx.stroke();
+                            }
+                        }
+                    }
+
+                    proj.sort(function(a, b){ return a.z - b.z; });
+                    for(const p of proj){
+                        const depth = (p.z + R) / (2 * R);
+                        const r = (1.6 + depth * 2.2) * dpr;
+                        ctx.beginPath();
+                        ctx.fillStyle = "rgba(140,200,255," + (0.35 + depth * 0.65) + ")";
+                        ctx.shadowColor = "rgba(120,190,255,0.9)";
+                        ctx.shadowBlur = (6 + depth * 8) * dpr;
+                        ctx.arc(p.x, p.y, r, 0, Math.PI * 2);
+                        ctx.fill();
+                    }
+                    ctx.shadowBlur = 0;
+
+                    angle += 0.006;
+                    requestAnimationFrame(draw);
+                }
+                draw();
+            })();
+        </script>
 
     </header>
 
