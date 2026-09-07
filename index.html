@@ -85,12 +85,17 @@ href="css/style.css">
                 resize();
                 window.addEventListener("resize", resize);
 
-                const N = 46;
-                const pts = [];
-                for(let i = 0; i < N; i++){
-                    const phi = Math.acos(-1 + (2 * i) / N);
-                    const theta = Math.sqrt(N * Math.PI) * phi;
-                    pts.push({phi:phi, theta:theta});
+                const LAT_RINGS = 9;
+                const LONG_STEPS = 16;
+                const rings = [];
+                for(let i = 0; i < LAT_RINGS; i++){
+                    const phi = (i / (LAT_RINGS - 1)) * Math.PI;
+                    const ring = [];
+                    for(let j = 0; j < LONG_STEPS; j++){
+                        const theta = (j / LONG_STEPS) * Math.PI * 2;
+                        ring.push({phi:phi, theta:theta});
+                    }
+                    rings.push(ring);
                 }
 
                 let angle = 0;
@@ -110,33 +115,44 @@ href="css/style.css">
                 ];
 
                 function drawSphere(cx, cy, R, rot, colors){
-                    const proj = pts.map(function(p){ return project(p, rot, cx, cy, R); });
+                    const projRings = rings.map(function(ring){
+                        return ring.map(function(p){ return project(p, rot, cx, cy, R); });
+                    });
 
                     ctx.lineWidth = 1 * dpr;
-                    for(let i = 0; i < proj.length; i++){
-                        for(let j = i + 1; j < proj.length; j++){
-                            const a = proj[i], b = proj[j];
-                            const d = Math.hypot(a.x - b.x, a.y - b.y);
-                            if(d < R * 0.55){
-                                const depth = (a.z + b.z) / (2 * R);
-                                const alpha = Math.max(0, 0.22 + depth * 0.22);
-                                ctx.strokeStyle = "rgba(" + colors.line + "," + alpha + ")";
-                                ctx.beginPath();
-                                ctx.moveTo(a.x, a.y);
-                                ctx.lineTo(b.x, b.y);
-                                ctx.stroke();
-                            }
+
+                    function strokeLine(a, b){
+                        const depth = (a.z + b.z) / (2 * R);
+                        const alpha = Math.max(0, 0.16 + depth * 0.22);
+                        ctx.strokeStyle = "rgba(" + colors.line + "," + alpha + ")";
+                        ctx.beginPath();
+                        ctx.moveTo(a.x, a.y);
+                        ctx.lineTo(b.x, b.y);
+                        ctx.stroke();
+                    }
+
+                    for(let j = 0; j < LONG_STEPS; j++){
+                        for(let i = 0; i < LAT_RINGS - 1; i++){
+                            strokeLine(projRings[i][j], projRings[i + 1][j]);
                         }
                     }
 
-                    proj.sort(function(a, b){ return a.z - b.z; });
-                    for(const p of proj){
+                    for(let i = 1; i < LAT_RINGS - 1; i++){
+                        for(let j = 0; j < LONG_STEPS; j++){
+                            strokeLine(projRings[i][j], projRings[i][(j + 1) % LONG_STEPS]);
+                        }
+                    }
+
+                    const allPts = [];
+                    for(const ring of projRings){ for(const p of ring){ allPts.push(p); } }
+                    allPts.sort(function(a, b){ return a.z - b.z; });
+                    for(const p of allPts){
                         const depth = (p.z + R) / (2 * R);
-                        const r = (1.6 + depth * 2.2) * dpr;
+                        const r = (1.1 + depth * 1.6) * dpr;
                         ctx.beginPath();
-                        ctx.fillStyle = "rgba(" + colors.node + "," + (0.35 + depth * 0.65) + ")";
-                        ctx.shadowColor = "rgba(" + colors.glow + ",0.9)";
-                        ctx.shadowBlur = (6 + depth * 8) * dpr;
+                        ctx.fillStyle = "rgba(" + colors.node + "," + (0.3 + depth * 0.6) + ")";
+                        ctx.shadowColor = "rgba(" + colors.glow + ",0.85)";
+                        ctx.shadowBlur = (4 + depth * 6) * dpr;
                         ctx.arc(p.x, p.y, r, 0, Math.PI * 2);
                         ctx.fill();
                     }
