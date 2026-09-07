@@ -105,11 +105,11 @@ href="css/style.css">
                 }
 
                 const spheres = [
-                    {cxFactor:0.14, speed:0.006, dir:1},
-                    {cxFactor:0.86, speed:0.0048, dir:-1}
+                    {cxFactor:0.14, speed:0.006, dir:1, line:"255,193,66", node:"255,215,110", glow:"255,190,70"},
+                    {cxFactor:0.86, speed:0.0048, dir:-1, line:"90,170,255", node:"140,200,255", glow:"120,190,255"}
                 ];
 
-                function drawSphere(cx, cy, R, rot){
+                function drawSphere(cx, cy, R, rot, colors){
                     const proj = pts.map(function(p){ return project(p, rot, cx, cy, R); });
 
                     ctx.lineWidth = 1 * dpr;
@@ -120,7 +120,7 @@ href="css/style.css">
                             if(d < R * 0.55){
                                 const depth = (a.z + b.z) / (2 * R);
                                 const alpha = Math.max(0, 0.22 + depth * 0.22);
-                                ctx.strokeStyle = "rgba(255,193,66," + alpha + ")";
+                                ctx.strokeStyle = "rgba(" + colors.line + "," + alpha + ")";
                                 ctx.beginPath();
                                 ctx.moveTo(a.x, a.y);
                                 ctx.lineTo(b.x, b.y);
@@ -134,8 +134,8 @@ href="css/style.css">
                         const depth = (p.z + R) / (2 * R);
                         const r = (1.6 + depth * 2.2) * dpr;
                         ctx.beginPath();
-                        ctx.fillStyle = "rgba(255,215,110," + (0.35 + depth * 0.65) + ")";
-                        ctx.shadowColor = "rgba(255,190,70,0.9)";
+                        ctx.fillStyle = "rgba(" + colors.node + "," + (0.35 + depth * 0.65) + ")";
+                        ctx.shadowColor = "rgba(" + colors.glow + ",0.9)";
                         ctx.shadowBlur = (6 + depth * 8) * dpr;
                         ctx.arc(p.x, p.y, r, 0, Math.PI * 2);
                         ctx.fill();
@@ -147,9 +147,9 @@ href="css/style.css">
                     const w = canvas.width, h = canvas.height;
                     ctx.clearRect(0, 0, w, h);
 
-                    const cy = h * 0.5, R = Math.min(w, h) * 0.26;
+                    const cy = h * 0.5, R = Math.min(w * 0.085, h * 0.36);
                     for(const s of spheres){
-                        drawSphere(w * s.cxFactor, cy, R, angle * s.dir * (s.speed / 0.006));
+                        drawSphere(w * s.cxFactor, cy, R, angle * s.dir * (s.speed / 0.006), s);
                     }
 
                     angle += 0.006;
