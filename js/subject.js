@@ -3381,6 +3381,18 @@ export const malayData = {
         },
 
         {
+            form:"Literature",
+            globalNum: 56,
+            chapterCode:"my_056",
+            chapter:"Drama: Mahkamah",
+            chinese:"戏剧：法庭",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-09-08",
+            resourceUrl:"../malay/t2-drama-mahkamah.html"
+        },
+
+        {
             form:"SPM Practice",
             globalNum: 45,
             chapterCode:"my_045",

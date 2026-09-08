@@ -257,6 +257,18 @@ body{
     font-weight:bold;
 }
 
+.chapter-link{
+    display:inline-block;
+    margin-top:10px;
+    color:#1d4ed8;
+    font-size:14px;
+    text-decoration:none;
+}
+
+.chapter-link:hover{
+    text-decoration:underline;
+}
+
 /* ===================================================== */
 /* MOBILE */
 /* ===================================================== */
@@ -385,7 +397,7 @@ import {
     malayData
 }
 from
-"../js/subject.js?v=15";
+"../js/subject.js?v=16";
 
 import { requireAuth } from "../js/auth.js";
 await requireAuth("../index.html");
@@ -729,6 +741,11 @@ function render(){
                     ? `<div class="chapter-cn">${chapter.chinese}</div>`
                     : "";
 
+            const chapterResource =
+                chapter.resourceUrl
+                    ? `<a class="chapter-link" href="${chapter.resourceUrl}">Open notes</a>`
+                    : "";
+
             card.innerHTML = `
 
                 <div class="chapter-top">
@@ -748,6 +765,8 @@ function render(){
 
                         ${chapterSubtitle}
 
+                        ${chapterResource}
+
                     </div>
 
                 </div>
@@ -758,7 +777,11 @@ function render(){
 
             card.addEventListener(
                 "click",
-                async ()=>{
+                async (e)=>{
+
+                    if(e.target.closest(".chapter-link")){
+                        return;
+                    }
 
                     chapter.status =
                         nextStatus(

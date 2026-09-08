@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mahkamah — Form 2 KSSM | Tri-Language Exam Master</title>
+<style>
+:root{--bg:#07111f;--panel:#0e1b2d;--panel2:#12243a;--text:#edf6ff;--muted:#a9bed2;--accent:#66e3c4;--accent2:#79a8ff;--warn:#ffd166;--danger:#ff7b8a;--ok:#83e28e;--line:#27405c}
+*{box-sizing:border-box} html{scroll-behavior:smooth}
+body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI","Noto Sans","Noto Sans SC",Arial,sans-serif;background:linear-gradient(180deg,#06101d,#0a1625 35%,#07111f);color:var(--text);line-height:1.62}
+.wrap{max-width:1120px;margin:auto;padding:18px}
+.hero{padding:36px 24px;border:1px solid var(--line);border-radius:26px;background:radial-gradient(circle at top right,#173e5d 0,#10253b 30%,#0d1b2d 72%);box-shadow:0 20px 60px #0005}
+.badge{display:inline-block;padding:6px 11px;border-radius:999px;background:#16334a;color:#9ff2dd;font-weight:800;font-size:.82rem}
+h1{font-size:clamp(2rem,6vw,4.2rem);line-height:1.02;margin:14px 0 8px} h2{margin-top:0;font-size:1.65rem} h3{margin-bottom:6px}
+.sub{color:var(--muted);max-width:850px}
+.toolbar{display:flex;gap:8px;flex-wrap:wrap;margin-top:20px}
+button,.btn{border:1px solid #34506d;background:#12263c;color:#eef7ff;padding:10px 14px;border-radius:12px;font-weight:800;cursor:pointer}
+button:hover,.btn:hover{border-color:var(--accent);transform:translateY(-1px)}
+.primary{background:var(--accent);color:#06231b;border-color:var(--accent)}
+nav{position:sticky;top:0;z-index:10;margin:14px 0;padding:9px;background:#07111fdd;backdrop-filter:blur(12px);border:1px solid var(--line);border-radius:16px;display:flex;gap:7px;overflow:auto}
+nav a{white-space:nowrap;color:#cfe2f3;text-decoration:none;padding:8px 10px;border-radius:9px;font-weight:700;font-size:.9rem}
+nav a:hover{background:#132a42;color:white}
+.grid{display:grid;grid-template-columns:repeat(12,1fr);gap:14px}.card{grid-column:span 12;background:linear-gradient(180deg,var(--panel),#0b1828);border:1px solid var(--line);border-radius:20px;padding:20px;box-shadow:0 10px 35px #0002}
+@media(min-width:760px){.half{grid-column:span 6}.third{grid-column:span 4}.two3{grid-column:span 8}.one3{grid-column:span 4}}
+.lang{display:grid;gap:8px;margin:12px 0}.lang>div{padding:12px 14px;border-radius:12px;background:#0a1727;border-left:4px solid var(--accent2)}.lang .zh{border-left-color:var(--warn)}.lang .en{border-left-color:var(--accent)}
+.tag{display:inline-block;font-size:.76rem;padding:4px 8px;border-radius:999px;background:#17314b;color:#cfe4f6;margin:2px}
+.must{border:1px solid #6d5a25;background:linear-gradient(180deg,#2a2414,#161b20)} .must h2{color:var(--warn)}
+.flow{display:flex;gap:7px;align-items:center;flex-wrap:wrap}.step{padding:9px 11px;background:#142a42;border-radius:10px;font-weight:800}.arrow{color:var(--warn);font-weight:900}
+table{width:100%;border-collapse:collapse;display:block;overflow:auto}th,td{text-align:left;padding:11px;border-bottom:1px solid var(--line);vertical-align:top}th{color:#9ff2dd}
+.exam{background:#0a1e25;border:1px solid #245a55;border-radius:14px;padding:14px}.formula{font-size:1.12rem;font-weight:900;color:#9ff2dd}
+details{background:#0a1727;border:1px solid var(--line);border-radius:13px;padding:11px 14px;margin:9px 0}summary{cursor:pointer;font-weight:850}
+.flash{min-height:210px;display:flex;flex-direction:column;justify-content:center;text-align:center;background:linear-gradient(135deg,#112943,#173b4a);border-radius:18px;padding:20px;border:1px solid #38617c}.flash .q{font-size:1.35rem;font-weight:900}.flash .a{display:none;margin-top:15px;color:#dffcf5}.flash.show .a{display:block}
+.quiz label{display:block;padding:9px 10px;border:1px solid var(--line);border-radius:10px;margin:7px 0;cursor:pointer}.result{font-weight:900;margin-top:10px}
+.small{font-size:.88rem;color:var(--muted)} .key{color:var(--warn);font-weight:900}.ok{color:var(--ok)}.bad{color:var(--danger)}
+.progress{height:10px;background:#0a1727;border-radius:999px;overflow:hidden;border:1px solid var(--line)}.progress i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--accent2),var(--accent))}
+.checks label{display:block;margin:7px 0}.footer{color:#8fa9be;text-align:center;padding:28px 5px}
+@media print{body{background:white;color:#111}.hero,.card{background:white;color:#111;box-shadow:none;border-color:#ccc}nav,.toolbar,.quiz button,.flash button{display:none}.sub,.small{color:#444}.lang>div,details,.exam{background:#fff;color:#111;border-color:#bbb}.must{background:#fff}.must h2,.key{color:#7a5600}}
+</style>
+</head>
+<body>
+<div class="top-nav" style="background:#fff;padding:10px 16px;border-bottom:2px solid #e5e7eb">
+  <a class="dashboard-link" href="../index.html" style="display:inline-flex;align-items:center;gap:6px;padding:8px 12px;border-radius:8px;background:#1d4ed8;color:#fff;font-size:13px;font-weight:800;text-decoration:none">&larr; Back to Dashboard</a>
+</div>
+<main class="wrap">
+<section class="hero">
+<span class="badge">KSSM FORM 2 • BAHASA MELAYU • KOMSAS</span>
+<h1>MAHKAMAH <span style="color:#66e3c4">⚖</span></h1>
+<p class="sub"><b>Tri-Language Exam Master</b> — Bahasa Melayu 🇲🇾 · 中文 🇨🇳 · English 🇬🇧. Designed to move from <b>understand → recall → prove → write</b>, so the student does not merely reread notes.</p>
+<div class="toolbar"><button class="primary" onclick="document.querySelector('#must').scrollIntoView()">🔥 Wajib Hafal</button><button onclick="document.querySelector('#flashcards').scrollIntoView()">🧠 Flashcards</button><button onclick="document.querySelector('#quiz').scrollIntoView()">✍️ Self-Test</button><button onclick="window.print()">🖨 Print / PDF</button></div>
+</section>
+
+<nav><a href="#story">Story</a><a href="#must">Wajib Hafal</a><a href="#tema">Tema</a><a href="#plot">Plot</a><a href="#watak">Watak</a><a href="#latar">Latar</a><a href="#nilai">Nilai</a><a href="#bahasa">Gaya Bahasa</a><a href="#exam">Exam Formula</a><a href="#flashcards">Flashcards</a><a href="#quiz">Quiz</a><a href="#plan">7-Day Plan</a></nav>
+
+<div class="grid">
+<section id="story" class="card two3"><h2>🎬 60-Second Story / Cerita 60 Saat / 60秒故事</h2>
+<div class="lang"><div><b>🇲🇾 BM:</b> Drama ini mengisahkan dua kes di mahkamah. Bulat bin Leper dituduh menyebabkan kematian Mek Teh selepas wanita itu terpijak kulit pisang. Bulat sebenarnya membuang kulit pisang ke dalam tong sampah; seekor kambing menyebabkan kulit itu tercampak ke jalan. Hakim akhirnya membebaskan Bulat. Kes kedua melibatkan Akinomoto yang dituduh mencuri beruk subsidi. Selepas pertuduhan diterangkan dalam bahasa Melayu, dia mengaku bersalah dan dikenakan hukuman menjaga ibu serta anak beruk.</div>
+<div class="zh"><b>🇨🇳 中文:</b> 故事有两个法庭案件。Bulat 被控导致 Mek Teh 因踩到香蕉皮而死亡，但他其实把香蕉皮丢进垃圾桶，是山羊把它弄到路上，因此最后获判无罪。第二案中，Akinomoto 被控偷政府补贴的猴子；指控用马来语解释后，他认罪，并被判照顾母猴和小猴。</div>
+<div class="en"><b>🇬🇧 English:</b> Two cases are heard in court. Bulat is accused after Mek Teh dies from a fall involving a banana peel, but he had disposed of it properly and a goat caused it to reach the road; he is acquitted. Akinomoto is accused of stealing a subsidised monkey, understands the charge after it is explained in Malay, admits guilt, and is ordered to care for the mother and baby monkey.</div></div>
+</section>
+<section class="card one3"><h2>🧩 Story Hook</h2><p class="small">Recall this chain before anything else.</p>
+<div class="flow"><span class="step">🍌 Pisang</span><span class="arrow">→</span><span class="step">🗑 Tong</span><span class="arrow">→</span><span class="step">🐐 Kambing</span><span class="arrow">→</span><span class="step">👵 Mek Teh</span><span class="arrow">→</span><span class="step">⚖ Bebas</span></div>
+<hr style="border-color:#27405c"><div class="flow"><span class="step">Akinomoto</span><span class="arrow">→</span><span class="step">🐒 Beruk</span><span class="arrow">→</span><span class="step">🇲🇾 BM</span><span class="arrow">→</span><span class="step">Mengaku salah</span></div></section>
+
+<section id="must" class="card must"><h2>🔥 Wajib Hafal / 必背 / Must Memorise</h2>
+<p><b>Do not memorise the whole chapter first.</b> Lock these anchors into memory, then attach evidence.</p>
+<table><tr><th>Anchor</th><th>🇲🇾 Bahasa Melayu</th><th>🇨🇳 中文</th><th>🇬🇧 English</th></tr>
+<tr><td>Tema</td><td><b>Keadilan dan kebenaran ketika membuat sesuatu keputusan.</b></td><td>作决定时坚持公平与真相</td><td>Justice and truth in making decisions</td></tr>
+<tr><td>Persoalan 1</td><td>Kemiskinan menghalang seseorang mengupah peguam.</td><td>贫穷使人无法聘请律师</td><td>Poverty can prevent someone from hiring a lawyer</td></tr>
+<tr><td>Persoalan 2</td><td>Keadilan mesti ditegakkan.</td><td>必须维护正义</td><td>Justice must be upheld</td></tr>
+<tr><td>Persoalan 3</td><td>Denda dikenakan terhadap pihak yang bersalah.</td><td>犯错者应受处罚</td><td>Wrongdoers are punished</td></tr>
+<tr><td>Persoalan 4</td><td>Isu penggunaan bahasa Melayu di mahkamah.</td><td>法庭使用马来语的问题</td><td>Use of Malay in court</td></tr>
+<tr><td>Plot</td><td>Permulaan → Perkembangan → Klimaks → Peleraian</td><td>开始 → 发展 → 高潮 → 结局</td><td>Beginning → Development → Climax → Resolution</td></tr>
+<tr><td>Nilai utama</td><td>Keadilan · Tanggungjawab · Ketegasan · Keyakinan · Rasional</td><td>公正 · 责任 · 坚定 · 信心 · 理性</td><td>Justice · Responsibility · Firmness · Confidence · Rationality</td></tr>
+<tr><td>Latar utama</td><td>Mahkamah · Taman Gagak Putih · Stor JKK Ulu Dungun</td><td>法庭 · Gagak Putih公园 · JKK Ulu Dungun仓库</td><td>Court · Taman Gagak Putih · JKK Ulu Dungun store</td></tr></table>
+</section>
+
+<section id="tema" class="card half"><h2>🎯 Tema & Persoalan</h2>
+<div class="exam"><div class="formula">TEMA = idea paling besar / 核心主题 / central idea</div><p><b>Exam sentence:</b> Tema drama <i>Mahkamah</i> ialah <span class="key">keadilan dan kebenaran ketika membuat sesuatu keputusan</span>.</p></div>
+<h3>Persoalan = smaller issues / 次主题</h3>
+<details><summary>Kemiskinan / 贫穷 / Poverty</summary><p><b>Bukti:</b> Bulat bin Leper miskin dan tidak mampu mengupah peguam; peguam bela disediakan untuk membelanya.</p></details>
+<details><summary>Keadilan / 正义 / Justice</summary><p><b>Bukti:</b> Peguam bela bersungguh-sungguh mengemukakan hujah untuk membebaskan Bulat daripada pertuduhan.</p></details>
+<details><summary>Bahasa Melayu / 马来语 / Malay language</summary><p><b>Bukti:</b> Pertuduhan Akinomoto perlu dihuraikan dalam bahasa Melayu supaya difahami.</p></details>
+<details><summary>Denda / 处罚 / Punishment</summary><p><b>Bukti:</b> Akinomoto dikenakan hukuman selepas mengaku bersalah.</p></details>
+</section>
+
+<section id="plot" class="card half"><h2>📈 Plot — 4P Memory Rule</h2>
+<p class="small"><b>4P:</b> Permulaan → Perkembangan → (Klimaks) → Peleraian. Recall the event, not a paragraph.</p>
+<p><span class="tag">1 Permulaan</span> Bulat masuk mahkamah, pertuduhan dibaca, dia tidak mengaku bersalah.</p>
+<p><span class="tag">2 Perkembangan</span> Pisang → tong sampah → kambing → kulit pisang → Mek Teh jatuh; hujah kedua-dua pihak; Bulat dibebaskan.</p>
+<p><span class="tag">3 Klimaks</span> Akinomoto dituduh mencuri beruk subsidi; berlaku kekeliruan bahasa; penjelasan BM membolehkannya memahami pertuduhan.</p>
+<p><span class="tag">4 Peleraian</span> Akinomoto mengaku salah dan diperintah menjaga ibu beruk serta anaknya sehingga akil baligh.</p>
+</section>
+
+<section id="watak" class="card"><h2>👥 Watak & Perwatakan — Trait + Evidence</h2>
+<table><tr><th>Watak</th><th>Sifat 🇲🇾 / 中文 / English</th><th>Bukti untuk peperiksaan</th></tr>
+<tr><td><b>Hakim</b></td><td>Adil dan saksama 公平公正 Fair; tegas 坚定 Firm; intelektual 知识分子 Intellectual; pandai bergurau 幽默 Humorous</td><td>Meneliti hujah sebelum membuat keputusan; membebaskan Bulat apabila kes tidak dapat dikaitkan dengannya.</td></tr>
+<tr><td><b>Peguam bela</b></td><td>Rasional 理性 Rational; yakin 自信 Confident; simpati 同情 Compassionate; tegas 坚定 Firm</td><td>Sanggup memberi khidmat guaman percuma kepada Bulat yang miskin dan berhujah bersungguh-sungguh.</td></tr>
+<tr><td><b>Pendakwa raya</b></td><td>Tegas 坚定 Firm; bertanggungjawab 负责 Responsible; intelektual 知识分子 Intellectual</td><td>Membaca pertuduhan dan mengemukakan hujah bagi pihak pendakwaan.</td></tr>
+<tr><td><b>Bulat bin Leper</b></td><td>Bertanggungjawab 负责任 Responsible; berani 勇敢 Brave; tetap pendirian 坚持立场 Firm in his stand; berbudi bahasa 有礼 Polite</td><td>Membuang kulit pisang ke dalam tong sampah dan tetap menegaskan bahawa dirinya tidak bersalah.</td></tr>
+<tr><td><b>Akinomoto</b></td><td>Prihatin 关心 Caring; jujur 诚实 Honest</td><td>Mengaku bersalah setelah memahami pertuduhan dan mengambil berat keadaan ibu beruk yang hamil.</td></tr></table>
+</section>
+
+<section id="latar" class="card half"><h2>🗺 Latar — TMM</h2><p><b>TMM = Tempat · Masa · Masyarakat</b></p>
+<h3>Tempat 地点 Place</h3><p>⚖ <b>Mahkamah</b> — sidang perbicaraan<br>🌳 <b>Taman Gagak Putih</b> — peristiwa Bulat/Mek Teh<br>🏬 <b>Stor JKK Ulu Dungun</b> — tempat beruk subsidi dicuri</p>
+<h3>Masa 时间 Time</h3><p>🌅 Waktu pagi · 📅 10 Januari 1988 · 📅 20 Mac 1988 · ⏱ 1 minit · ⏱ 2 minit</p>
+<h3>Masyarakat 社会 Social setting</h3><p>Intelektual · miskin · baik hati · prihatin terhadap haiwan · tetap pendirian.</p></section>
+
+<section id="nilai" class="card half"><h2>💎 Nilai ↔ Pengajaran</h2>
+<p><b>Shortcut:</b> Nilai is a quality. Pengajaran turns it into <span class="key">Kita hendaklah / Kita mestilah…</span></p>
+<table><tr><th>Nilai</th><th>Pengajaran exam-ready</th></tr>
+<tr><td>Tanggungjawab<br>责任 · Responsibility</td><td>Kita mestilah <b>bertanggungjawab</b> menjaga kebersihan alam sekitar.</td></tr>
+<tr><td>Rasional<br>理性 · Rationality</td><td>Kita hendaklah <b>bersikap rasional</b> ketika menjalankan tugas.</td></tr>
+<tr><td>Simpati<br>同情 · Sympathy</td><td>Kita hendaklah <b>bersimpati terhadap golongan miskin</b>.</td></tr>
+<tr><td>Keberanian<br>勇气 · Courage</td><td>Kita mestilah <b>berani jika berada pada pihak yang benar</b>.</td></tr>
+<tr><td>Keprihatinan<br>关怀 · Concern</td><td>Kita hendaklah <b>prihatin terhadap haiwan</b> di sekeliling kita.</td></tr>
+<tr><td>Bahasa kebangsaan<br>国语 · National language</td><td>Kita mestilah <b>menghormati bahasa Melayu sebagai bahasa kebangsaan</b>, terutama dalam urusan rasmi.</td></tr></table>
+</section>
+
+<section id="bahasa" class="card"><h2>🗣 Gaya Bahasa & Teknik Plot</h2>
+<div class="grid"><div class="half"><h3>Gaya Bahasa</h3><p><b>Diksi</b> 用词 Word choice — hakim, pendakwa raya, peguam bela, tertuduh, pertuduhan.</p><p><b>Bahasa Inggeris</b> 英语 English usage — used during the language-confusion scene.</p><p><b>Sinkope</b> 口语缩略 Shortened speech — <i>tak</i> (tidak), <i>nak</i> (hendak), <i>tau</i> (tahu).</p><p><b>Repetisi</b> 重复 Repetition — words/phrases repeated for emphasis.</p></div><div class="half"><h3>Teknik Plot</h3><p><b>Dialog</b> 对话 Dialogue — conversation between characters.</p><p><b>Pemerian</b> 叙述/描写 Description — stage/action description explaining what characters do.</p></div></div>
+</section>
+
+<section id="exam" class="card"><h2>🏆 Exam Writing Formula — IHC</h2>
+<div class="exam"><div class="formula">ISI → HURAIAN → CONTOH/BUKTI</div><p>🇨🇳 要点 → 解释 → 故事证据 &nbsp; | &nbsp; 🇬🇧 Point → Explanation → Evidence</p></div>
+<h3>Model: Watak dan perwatakan</h3><p><b>Soalan:</b> Nyatakan satu perwatakan Bulat bin Leper berserta contoh.</p>
+<p><b>Jawapan:</b> Bulat bin Leper seorang yang <span class="key">bertanggungjawab</span>. <span class="key">Contohnya</span>, dia membuang kulit pisang ke dalam tong sampah yang disediakan oleh pihak berwajib.</p>
+<h3>Model: Nilai</h3><p><b>Jawapan:</b> Salah satu nilai dalam drama <i>Mahkamah</i> ialah <span class="key">simpati</span>. Contohnya, peguam bela sanggup memberikan khidmat guaman secara percuma kepada Bulat bin Leper yang miskin.</p>
+<h3>Model: Pengajaran</h3><p><b>Jawapan:</b> Kita mestilah <span class="key">menghormati bahasa Melayu sebagai bahasa kebangsaan</span>, terutamanya dalam urusan rasmi. Contohnya, hakim meminta pendakwa raya menghuraikan pertuduhan Akinomoto dalam bahasa Melayu.</p>
+</section>
+
+<section id="flashcards" class="card half"><h2>🧠 Active Recall Flashcards</h2><p class="small">Say the answer aloud BEFORE revealing it.</p>
+<div class="flash" id="fc"><div class="q" id="fq"></div><div class="a" id="fa"></div></div>
+<div class="toolbar"><button onclick="reveal()">Reveal / 显示</button><button class="primary" onclick="nextCard()">Next →</button></div></section>
+
+<section class="card half"><h2>🔁 Memory System</h2>
+<p><b>1. Understand:</b> read the 60-second story in Chinese/English once.</p>
+<p><b>2. Recall in BM:</b> close the notes and say the five anchors aloud.</p>
+<p><b>3. Attach evidence:</b> every <i>watak/nilai/persoalan</i> must have one event.</p>
+<p><b>4. Write:</b> use IHC — Isi + Huraian + Contoh.</p>
+<p><b>5. Spaced review:</b> revisit after <span class="key">1 day → 3 days → 7 days → 14 days</span>.</p>
+<div class="progress"><i id="prog"></i></div><p class="small" id="progText">Revision checklist: 0%</p>
+<div class="checks"><label><input type="checkbox" onchange="updateProgress()"> I can tell the whole story without notes.</label><label><input type="checkbox" onchange="updateProgress()"> I know the theme + 4 issues.</label><label><input type="checkbox" onchange="updateProgress()"> I know the 4 plot stages.</label><label><input type="checkbox" onchange="updateProgress()"> I can give trait + evidence for 4 characters.</label><label><input type="checkbox" onchange="updateProgress()"> I can write 3 IHC answers in Malay.</label></div>
+</section>
+
+<section id="quiz" class="card"><h2>✍️ Mini Exam — No Peeking</h2>
+<div class="quiz">
+<p><b>1.</b> Apakah tema drama <i>Mahkamah</i>?</p>
+<label><input type="radio" name="q1" value="0"> Kehidupan masyarakat miskin</label><label><input type="radio" name="q1" value="1"> Keadilan dan kebenaran ketika membuat sesuatu keputusan</label><label><input type="radio" name="q1" value="0"> Kasih sayang terhadap haiwan</label>
+<p><b>2.</b> Mengapakah Bulat dianggap bertanggungjawab?</p>
+<label><input type="radio" name="q2" value="1"> Dia membuang kulit pisang ke dalam tong sampah.</label><label><input type="radio" name="q2" value="0"> Dia memberi makan kambing.</label><label><input type="radio" name="q2" value="0"> Dia menjadi peguam.</label>
+<p><b>3.</b> Apakah urutan plot yang betul?</p>
+<label><input type="radio" name="q3" value="0"> Klimaks → Permulaan → Peleraian → Perkembangan</label><label><input type="radio" name="q3" value="1"> Permulaan → Perkembangan → Klimaks → Peleraian</label>
+<p><b>4.</b> Apakah latar tempat kes Akinomoto berkaitan pencurian beruk?</p>
+<label><input type="radio" name="q4" value="0"> Taman Gagak Putih</label><label><input type="radio" name="q4" value="1"> Stor JKK Ulu Dungun</label>
+<button class="primary" onclick="grade()">Check Score</button><div class="result" id="result"></div></div>
+</section>
+
+<section id="plan" class="card"><h2>📅 7-Day Exam Preparation Plan</h2>
+<table><tr><th>Day</th><th>15–20 minute task</th><th>Goal</th></tr>
+<tr><td>1</td><td>Read 60-second story in 3 languages; retell in BM using Pisang→Tong→Kambing→Mek Teh.</td><td>Understand story</td></tr>
+<tr><td>2</td><td>Theme + 4 persoalan; say each with one evidence event.</td><td>Meaning + evidence</td></tr>
+<tr><td>3</td><td>Plot 4 stages + TMM latar.</td><td>Structure</td></tr>
+<tr><td>4</td><td>Characters: Hakim, Peguam Bela, Bulat, Akinomoto. Trait + evidence.</td><td>Character questions</td></tr>
+<tr><td>5</td><td>Nilai ↔ Pengajaran; transform 5 values into “Kita hendaklah/mestilah…” sentences.</td><td>Flexible answers</td></tr>
+<tr><td>6</td><td>Write 5 IHC answers without notes; correct using this page.</td><td>Exam writing</td></tr>
+<tr><td>7</td><td>Do flashcards + mini exam; retell everything from a blank sheet.</td><td>Retrieval under pressure</td></tr></table>
+<p class="small"><b>Parent tip:</b> ask questions; do not reread answers to him. If he gets one wrong, show the answer briefly, hide it, and ask again a few minutes later.</p>
+</section>
+
+<section class="card"><h2>📚 Court Vocabulary / 法庭词汇</h2>
+<table><tr><th>BM</th><th>中文</th><th>English</th></tr>
+<tr><td>Mahkamah</td><td>法庭</td><td>Court</td></tr><tr><td>Hakim</td><td>法官</td><td>Judge</td></tr><tr><td>Pendakwa raya</td><td>检察官</td><td>Public prosecutor</td></tr><tr><td>Peguam bela</td><td>辩护律师</td><td>Defence lawyer</td></tr><tr><td>Tertuduh</td><td>被告</td><td>Accused</td></tr><tr><td>Pertuduhan</td><td>指控</td><td>Charge</td></tr><tr><td>Mengaku bersalah</td><td>认罪</td><td>Admit/plead guilty</td></tr><tr><td>Tidak bersalah</td><td>无罪</td><td>Not guilty</td></tr><tr><td>Hujah</td><td>论点</td><td>Argument</td></tr><tr><td>Bukti</td><td>证据</td><td>Evidence</td></tr><tr><td>Keadilan</td><td>正义 / 公正</td><td>Justice</td></tr></table>
+</section>
+</div>
+<div class="footer">Mahkamah — Awang Abdullah • Form 2 KSSM • Tri-Language Revision Page<br><span class="small">Primary content consolidated from the photographed textbook/revision pages supplied for study.</span></div>
+</main>
+<script>
+const cards=[
+["Apakah tema drama Mahkamah?","Keadilan dan kebenaran ketika membuat sesuatu keputusan.<br>中文：作决定时坚持公平与真相。<br>English: Justice and truth in making decisions."],
+["4 peringkat binaan plot?","Permulaan → Perkembangan → Klimaks → Peleraian"],
+["Mengapa Bulat bertanggungjawab?","Dia membuang kulit pisang ke dalam tong sampah.<br>He disposed of the banana peel properly.<br>他把香蕉皮丢进垃圾桶。"],
+["3 latar tempat utama?","Mahkamah · Taman Gagak Putih · Stor JKK Ulu Dungun"],
+["Peguam bela: satu sifat + bukti?","Simpati/baik hati — sanggup memberikan khidmat guaman percuma kepada Bulat yang miskin."],
+["Apa beza nilai dengan pengajaran?","Nilai = sifat/quality. Pengajaran = lesson, usually written as “Kita hendaklah / Kita mestilah…”"],
+["Apakah teknik menjawab soalan huraian?","IHC = Isi → Huraian → Contoh/Bukti."],
+["Mengapa bahasa Melayu penting dalam kes Akinomoto?","Selepas pertuduhan dihuraikan dalam bahasa Melayu, Akinomoto dapat memahaminya dan mengaku bersalah."]
+];let ci=0;
+function renderCard(){document.getElementById('fc').classList.remove('show');document.getElementById('fq').innerHTML=cards[ci][0];document.getElementById('fa').innerHTML=cards[ci][1]}
+function reveal(){document.getElementById('fc').classList.add('show')}
+function nextCard(){ci=(ci+1)%cards.length;renderCard()}
+function grade(){let s=0;for(let i=1;i<=4;i++){let x=document.querySelector('input[name=q'+i+']:checked');if(x)s+=Number(x.value)}let r=document.getElementById('result');r.innerHTML=s===4?'<span class="ok">4/4 — Excellent. Now explain each answer aloud in BM.</span>':'Score: '+s+'/4. Review only the items you missed, then retry.'}
+function updateProgress(){let a=[...document.querySelectorAll('.checks input')],n=a.filter(x=>x.checked).length,p=Math.round(n/a.length*100);document.getElementById('prog').style.width=p+'%';document.getElementById('progText').textContent='Revision checklist: '+p+'%'}
+renderCard();
+</script></body></html>
