@@ -3401,7 +3401,7 @@ export const malayData = {
             status:"Not Started",
             confidence:0,
             last_updated:"2026-09-09",
-            resourceUrl:"../malay/t2-cerpen-menuai_emas.html"
+            resourceUrl:"../malay/t2-cerpen-menuai_emas_v2.html"
         },
 
         {
