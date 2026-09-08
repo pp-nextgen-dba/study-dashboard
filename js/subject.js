@@ -3393,6 +3393,18 @@ export const malayData = {
         },
 
         {
+            form:"Literature",
+            globalNum: 57,
+            chapterCode:"my_057",
+            chapter:"Cerpen: Menuai Emas",
+            chinese:"短篇小说：收获黄金",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-09-09",
+            resourceUrl:"../malay/t2-cerpen-menuai_emas.html"
+        },
+
+        {
             form:"SPM Practice",
             globalNum: 45,
             chapterCode:"my_045",

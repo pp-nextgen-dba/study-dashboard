@@ -1,4 +1,4 @@
-const CACHE = "study-dashboard-v61";
+const CACHE = "study-dashboard-v62";
 
 const STATIC_ASSETS = [
     "/index.html",
@@ -40,6 +40,7 @@ const STATIC_ASSETS = [
     "/history/t2_chapter10.html",
     "/history/t2_Sejarah_Bab6_Johor_Riau.html",
     "/malay/t2-drama-mahkamah.html",
+    "/malay/t2-cerpen-menuai_emas.html",
     "/rbt/KSSM_Form2_RBT_Teknologi_Pembuatan_Final_Exam.html",
     "/rbt/t2_akuaponik.html",
     "/rbt/t2_elektronik.html",

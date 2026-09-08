@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="ms">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Menuai Emas — KSSM Form 2 Tri-Language Exam Master</title>
+<style>
+:root{--bg:#07111d;--card:#0d1b2b;--card2:#11243a;--line:#29445f;--txt:#eef7ff;--muted:#aac0d4;--gold:#ffd166;--green:#69e1b8;--blue:#79a9ff;--red:#ff8492}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:linear-gradient(#06101b,#0a1726 35%,#07111d);color:var(--txt);font:16px/1.62 Inter,system-ui,-apple-system,"Segoe UI","Noto Sans","Noto Sans SC",Arial,sans-serif}
+main{max-width:1150px;margin:auto;padding:18px}.hero{border:1px solid var(--line);border-radius:28px;padding:38px 26px;background:radial-gradient(circle at 90% 5%,#51451a,#173049 32%,#0d1b2b 70%);box-shadow:0 22px 70px #0005}.badge,.pill{display:inline-block;border-radius:999px;padding:5px 10px;background:#18344d;color:#b8f8e5;font-weight:800;font-size:.8rem}.pill{margin:2px;color:#dbeaff}h1{font-size:clamp(2.3rem,7vw,4.7rem);line-height:1;margin:14px 0 9px}h2{margin-top:0}h3{margin-bottom:6px}.gold{color:var(--gold)}.muted{color:var(--muted)}.tools{display:flex;gap:8px;flex-wrap:wrap;margin-top:18px}button{cursor:pointer;border:1px solid #3b5b77;border-radius:11px;padding:10px 13px;background:#132a42;color:white;font-weight:850}.primary{background:var(--green);color:#06231a;border-color:var(--green)}
+nav{position:sticky;top:0;z-index:9;display:flex;overflow:auto;gap:6px;padding:9px;margin:14px 0;background:#07111de8;border:1px solid var(--line);border-radius:15px;backdrop-filter:blur(10px)}nav a{white-space:nowrap;color:#d3e5f4;text-decoration:none;padding:7px 9px;border-radius:9px;font-weight:750;font-size:.88rem}nav a:hover{background:#16314b}
+.grid{display:grid;grid-template-columns:repeat(12,1fr);gap:14px}.card{grid-column:span 12;border:1px solid var(--line);border-radius:20px;padding:20px;background:linear-gradient(180deg,var(--card),#0a1725);box-shadow:0 10px 35px #0002}@media(min-width:780px){.half{grid-column:span 6}.third{grid-column:span 4}.two{grid-column:span 8}.one{grid-column:span 4}}
+.lang{display:grid;gap:8px}.lang div{padding:12px 14px;background:#091625;border-radius:12px;border-left:4px solid var(--green)}.lang .zh{border-left-color:var(--gold)}.lang .en{border-left-color:var(--blue)}
+.memory{background:linear-gradient(180deg,#292311,#131a21);border-color:#6a5825}.chain{display:flex;gap:7px;align-items:center;flex-wrap:wrap}.node{padding:9px 11px;background:#142a41;border-radius:10px;font-weight:900}.arr{color:var(--gold);font-weight:900}
+table{width:100%;border-collapse:collapse;display:block;overflow:auto}th,td{padding:11px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}th{color:#a5f1da}.formula{padding:15px;border:1px solid #2f675d;background:#0b2025;border-radius:14px;font-weight:900;color:#a8f5df}
+details{border:1px solid var(--line);background:#091625;border-radius:12px;padding:10px 13px;margin:8px 0}summary{font-weight:850;cursor:pointer}.exam{color:var(--gold);font-weight:900}.small{font-size:.88rem;color:var(--muted)}
+.flash{min-height:230px;display:flex;justify-content:center;align-items:center;flex-direction:column;text-align:center;border-radius:18px;padding:20px;background:linear-gradient(135deg,#132d47,#174339);border:1px solid #3b6b69}.fq{font-size:1.35rem;font-weight:900}.fa{display:none;margin-top:15px}.flash.show .fa{display:block}
+.quiz label{display:block;padding:9px;border:1px solid var(--line);border-radius:9px;margin:6px 0}.ok{color:#7de39b}.progress{height:10px;background:#091625;border:1px solid var(--line);border-radius:99px;overflow:hidden}.progress i{display:block;width:0;height:100%;background:linear-gradient(90deg,var(--blue),var(--green))}.checks label{display:block;margin:7px 0}
+@media print{body,.hero,.card{background:white;color:#111}.hero,.card{box-shadow:none;border-color:#ccc}nav,.tools,.quiz button{display:none}.muted,.small{color:#444}.lang div,details,.formula{background:white;color:#111;border-color:#bbb}.gold,.exam{color:#795800}}
+</style></head>
+<body>
+<div class="top-nav" style="background:#fff;padding:10px 16px;border-bottom:2px solid #e5e7eb">
+  <a class="dashboard-link" href="../index.html" style="display:inline-flex;align-items:center;gap:6px;padding:8px 12px;border-radius:8px;background:#1d4ed8;color:#fff;font-size:13px;font-weight:800;text-decoration:none">&larr; Back to Dashboard</a>
+</div>
+<main>
+<section class="hero"><span class="badge">KSSM FORM 2 • CERPEN • KOMSAS</span>
+<h1>🌾 <span class="gold">MENUAI EMAS</span></h1>
+<p><b>Salina Ibrahim</b> · Tri-Language Exam Master 🇲🇾 🇨🇳 🇬🇧</p>
+<p class="muted">Understand → connect the story → recall keywords → attach evidence → write exam answers.</p>
+<div class="tools"><button class="primary" onclick="go('wajib')">🔥 Wajib Hafal</button><button onclick="go('flash')">🧠 Flashcards</button><button onclick="go('quiz')">✍️ Mini Exam</button><button onclick="window.print()">🖨 Print / PDF</button></div></section>
+<nav><a href="#story">Story</a><a href="#wajib">Wajib Hafal</a><a href="#tema">Tema</a><a href="#plot">Plot</a><a href="#watak">Watak</a><a href="#latar">Latar</a><a href="#nilai">Nilai</a><a href="#bahasa">Gaya Bahasa</a><a href="#exam">Exam</a><a href="#flash">Flashcards</a><a href="#quiz">Quiz</a><a href="#plan">7-Day Plan</a></nav>
+
+<div class="grid">
+<section id="story" class="card two"><h2>🎬 Cerita 90 Saat / 90秒故事 / 90-Second Story</h2>
+<div class="lang">
+<div><b>🇲🇾 BM:</b> Alif, seorang graduan ekonomi, memilih menjadi petani moden dan berusaha memajukan penanaman padi di kampungnya. Dia mahu mempertahankan tanah sawah keluarga walaupun Abang Man dan kebanyakan pemilik tanah mahu menjual sawah kepada syarikat perumahan. Alif menerima sindiran dan tentangan, tetapi terus sabar, berdoa dan mencari ilmu serta menggunakan teknologi moden. Selepas projek perumahan dibatalkan, Alif mendapat persetujuan pemilik tanah untuk membangunkan estet padi. Akhirnya, projek seluas <b>58.609 hektar</b> yang melibatkan <b>15 orang tuan tanah</b> membuahkan hasil. Usahanya benar-benar “menuai emas”.</div>
+<div class="zh"><b>🇨🇳 中文:</b> Alif 是经济学大学毕业生，却选择成为现代农民。他坚持保留家里的稻田，而 Abang Man 和多数地主想把土地卖给房地产公司。虽然受到嘲讽和反对，他仍保持耐心、祈祷、学习农业知识并采用现代科技。住宅计划取消后，他获得地主同意建立稻米农场。最终，<b>58.609公顷、15名地主</b>参与的稻田计划成功，他的努力终于“收获黄金”。</div>
+<div class="en"><b>🇬🇧 English:</b> Alif, an economics graduate, chooses modern farming. He resists selling his family paddy land even though Abang Man and most landowners favour a housing project. Despite ridicule and opposition, he remains patient, seeks knowledge, prays and applies modern agricultural technology. When the housing project is cancelled, he obtains the owners' consent to create a paddy estate. The <b>58.609-hectare project involving 15 landowners</b> succeeds—his work finally lets him “reap gold”.</div></div>
+</section>
+<section class="card one memory"><h2>🧠 ONE Story Chain</h2><p class="small">If he remembers this, he can rebuild most answers.</p>
+<div class="chain"><span class="node">🎓 Alif</span><span class="arr">→</span><span class="node">🌾 Sawah</span><span class="arr">→</span><span class="node">🏠 Projek rumah</span><span class="arr">→</span><span class="node">⚔️ Tentangan</span><span class="arr">→</span><span class="node">🙏 Sabar + ilmu</span><span class="arr">→</span><span class="node">🚜 Teknologi</span><span class="arr">→</span><span class="node">🤝 15 pemilik</span><span class="arr">→</span><span class="node">🌾 58.609 ha</span><span class="arr">→</span><span class="node">🏆 Menuai emas</span></div></section>
+
+<section id="wajib" class="card memory"><h2>🔥 Wajib Hafal / 必背 / Must Memorise</h2>
+<table><tr><th>Topik</th><th>🇲🇾 Bahasa Melayu</th><th>🇨🇳 中文</th><th>🇬🇧 English</th></tr>
+<tr><td>Tema</td><td><b>Kemajuan dalam bidang pertanian, iaitu penanaman padi.</b></td><td>农业进步，尤其是稻米种植</td><td>Progress in agriculture, particularly paddy cultivation</td></tr>
+<tr><td>Konflik</td><td>Tanah sawah ↔ projek perumahan</td><td>稻田 ↔ 房地产开发</td><td>Paddy land ↔ housing development</td></tr>
+<tr><td>Kunci Alif</td><td>Berilmu · sabar · yakin · gigih · berani · positif</td><td>有知识 · 耐心 · 自信 · 坚毅 · 勇敢 · 积极</td><td>Knowledgeable · patient · confident · persistent · brave · positive</td></tr>
+<tr><td>Plot</td><td>Permulaan → Perkembangan → Klimaks → Peleraian</td><td>开始 → 发展 → 高潮 → 结局</td><td>Beginning → Development → Climax → Resolution</td></tr>
+<tr><td>Teknik plot</td><td>Dialog · Pemerian · Imbas kembali</td><td>对话 · 描写 · 倒叙</td><td>Dialogue · Description · Flashback</td></tr>
+<tr><td>Fakta akhir</td><td><b>58.609 hektar + 15 orang tuan tanah</b></td><td>58.609公顷 + 15名地主</td><td>58.609 hectares + 15 landowners</td></tr>
+<tr><td>Simbol “emas”</td><td>Padi yang menguning + hasil/kejayaan daripada berbudi kepada tanah</td><td>金黄稻谷 + 耕耘土地所得的成果与成功</td><td>Golden paddy + the success/reward of working the land</td></tr></table></section>
+
+<section id="tema" class="card half"><h2>🎯 Tema & Persoalan</h2>
+<div class="formula">TEMA = Kemajuan dalam bidang pertanian, iaitu penanaman padi.</div>
+<p class="small">Tema is the umbrella. Persoalan are the smaller issues under it.</p>
+<details><summary>1. Penjualan tanah sawah untuk projek perumahan</summary><p>Abang Man dan pemilik sawah mahu menjual tanah mereka kepada syarikat perumahan.</p></details>
+<details><summary>2. Pertanian boleh membawa kemajuan ekonomi</summary><p>Alif membuktikan penanaman padi dengan teknologi moden boleh memberikan hasil.</p></details>
+<details><summary>3. Ilmu + kegigihan + ketekunan + doa + kesabaran → kejayaan</summary><p>Alif terus yakin, berdoa, bersabar dan bekerja keras.</p></details>
+<details><summary>4. Graduan universiti tidak semestinya makan gaji</summary><p>Alif lulusan ekonomi tetapi memilih bekerja sendiri sebagai petani moden.</p></details>
+<details><summary>5. Golongan muda kurang berminat dalam pertanian</summary><p>Ramai anak muda kampung bekerja di bandar dan tidak mahu mengusahakan sawah keluarga.</p></details>
+<details><summary>6. Muafakat membawa berkat</summary><p>Alif, Tuk Ketua dan pemilik sawah bekerjasama memajukan penanaman padi dengan teknologi moden.</p></details></section>
+
+<section id="plot" class="card half"><h2>📈 Binaan Plot — 4P</h2>
+<p><span class="pill">1 Permulaan</span> Awal pagi di sawah. Alif teringat kata-kata abah tentang padi kuning seperti emas dan ajaran emak tentang syukur, sabar dan reda. Tuk Ketua menyapanya.</p>
+<p><span class="pill">2 Perkembangan</span> Imbas kembali pertelingkahan dengan pemilik sawah. Alif enggan menjual tanah untuk perumahan; Abang Man menyindirnya. Alif juga teringat nasihat pegawai pertanian supaya tidak memandang rendah bidang pertanian.</p>
+<p><span class="pill">3 Klimaks</span> Abang Man dan jiran datang menyerang rumah serta menyalahkan Alif atas pembatalan projek perumahan. Alif menjelaskan dia hanya berdoa dan meminta kebenaran menggunakan sawah mereka sebagai estet padi.</p>
+<p><span class="pill">4 Peleraian</span> Estet padi <b>58.609 hektar</b> dengan <b>15 pemilik</b> berjaya dan sawah menguning. Alif menunggu masa untuk “menuai emas”.</p></section>
+
+<section id="watak" class="card"><h2>👤 Watak Utama: ALIF — “SYUKUR” Memory Code</h2>
+<p><b>S</b>abar · <b>Y</b>akin · <b>U</b>saha gigih · berani <b>K</b>ekalkan tanah · l<b>U</b>lusan universiti · petani mode<b>R</b>n</p>
+<table><tr><th>Perwatakan</th><th>中文 / English</th><th>Bukti peperiksaan</th></tr>
+<tr><td>Berwawasan tinggi</td><td>有远见 / Visionary</td><td>Berazam memajukan penanaman padi menggunakan teknologi moden.</td></tr>
+<tr><td>Sabar, reda & bersyukur</td><td>耐心、接受、感恩 / Patient, accepting, grateful</td><td>Tetap tabah menghadapi tentangan dan bersyukur apabila usahanya berhasil.</td></tr>
+<tr><td>Berani</td><td>勇敢 / Brave</td><td>Berani mempertahankan tanah milik keluarganya.</td></tr>
+<tr><td>Yakin</td><td>自信 / Confident</td><td>Yakin dia mampu mengusahakan estet padi di kampung.</td></tr>
+<tr><td>Positif & optimistik</td><td>积极乐观 / Positive & optimistic</td><td>Tidak memandang pertanian sebagai pekerjaan rendah; percaya teknologi boleh memajukannya.</td></tr>
+<tr><td>Menghormati ibu bapa</td><td>尊敬父母 / Respects parents</td><td>Mengingati dan berpegang pada didikan serta nasihat ibu bapanya.</td></tr>
+<tr><td>Petani moden</td><td>现代农民 / Modern farmer</td><td>Menggunakan ilmu, teknologi moden dan kaedah terancang.</td></tr></table></section>
+
+<section id="latar" class="card half"><h2>🗺 Latar — TMM</h2>
+<h3>📍 Tempat 地点 Place</h3><p><b>Petak bendang</b> — Alif bertemu Tuk Ketua.<br><b>Anjung rumah Mak Wan</b> — perbincangan pemilik tanah.<br><b>Petak sawah di Seberang Perak</b> — Alif mendapatkan pengalaman dan maklumat pertanian.</p>
+<h3>⏰ Masa 时间 Time</h3><p><b>Awal pagi</b> — Alif di sawah.<br><b>Setahun yang lalu</b> — peristiwa perbincangan/konflik tanah.</p></section>
+
+<section class="card half"><h2>👨‍🌾 Latar Masyarakat — 7 Types</h2>
+<p>🌾 <b>Petani</b> — Alif dan penduduk menjalankan penanaman padi.</p>
+<p>🎓 <b>Berilmu</b> — Alif graduan ekonomi.</p>
+<p>🚀 <b>Berazam tinggi</b> — Alif mahu memodenkan pertanian.</p>
+<p>⚡ <b>Agresif</b> — Abang Man bercakap kasar kerana isu tanah.</p>
+<p>🤲 <b>Berhemah tinggi</b> — pegawai pertanian berkongsi maklumat dan semangat.</p>
+<p>☀️ <b>Positif</b> — emak Alif mendidiknya bersyukur, sabar dan reda.</p>
+<p>🧭 <b>Kepemimpinan</b> — Tuk Ketua menyokong usaha Alif.</p></section>
+
+<section id="nilai" class="card"><h2>💎 Nilai → Bukti → Pengajaran</h2>
+<table><tr><th>Nilai</th><th>Bukti ringkas</th><th>Pengajaran exam-ready</th></tr>
+<tr><td>Keyakinan 自信 Confidence</td><td>Alif yakin mampu mengusahakan estet padi.</td><td>Kita hendaklah <b>yakin dengan kebolehan diri</b>.</td></tr>
+<tr><td>Ketabahan 坚韧 Perseverance</td><td>Alif tabah menghadapi tentangan.</td><td>Kita hendaklah <b>tabah menghadapi dugaan dan cabaran</b>.</td></tr>
+<tr><td>Kegigihan 坚持 Persistence</td><td>Alif mencari pengalaman dan maklumat.</td><td>Kita hendaklah <b>gigih berusaha mendapatkan ilmu atau pengalaman</b>.</td></tr>
+<tr><td>Keberanian 勇气 Courage</td><td>Alif mempertahankan tanah keluarga.</td><td>Kita mestilah <b>berani mempertahankan hak milik keluarga</b>.</td></tr>
+<tr><td>Kerjasama 合作 Cooperation</td><td>Pemilik tanah bekerjasama menjayakan estet padi.</td><td>Kita hendaklah <b>memberikan kerjasama untuk manfaat bersama</b>.</td></tr>
+<tr><td>Berhemah tinggi 高尚品德 Good conduct</td><td>Pegawai pertanian berkongsi ilmu dan semangat.</td><td>Kita hendaklah <b>berkongsi ilmu dan memberi semangat kepada orang lain</b>.</td></tr>
+<tr><td>Berdikari 独立 Independent</td><td>Alif memilih bekerja sendiri walaupun graduan.</td><td>Kita harus berani <b>berdikari dan mencipta peluang sendiri</b>.</td></tr>
+<tr><td>Kesyukuran 感恩 Gratitude</td><td>Alif bersyukur atas hasil usahanya.</td><td>Kita hendaklah <b>sentiasa bersyukur atas nikmat</b>.</td></tr>
+<tr><td>Kepemimpinan 领导 Leadership</td><td>Tuk Ketua mengendalikan kerenah penduduk.</td><td>Pemimpin mestilah mempunyai <b>sifat kepemimpinan yang baik</b>.</td></tr></table></section>
+
+<section id="bahasa" class="card"><h2>🗣 Teknik Plot & Gaya Bahasa</h2>
+<div class="grid"><div class="half"><h3>Teknik Plot</h3><p><b>Dialog 对话 Dialogue</b> — percakapan watak.</p><p><b>Pemerian 描写 Description</b> — pengarang menerangkan aksi, suasana atau keadaan.</p><p><b>Imbas kembali 倒叙 Flashback</b> — Alif mengingat perbualan dengan abah serta konflik setahun lalu.</p></div>
+<div class="half"><h3>Gaya Bahasa</h3><p><b>Diksi</b> — istilah pertanian seperti <i>varieti, hektar, uji kaji, siput gondang emas</i>.</p><p><b>Bahasa Arab</b> — <i>Alhamdulillah, Insya-Allah, Allah</i>.</p><p><b>Metafora</b> — <i>pita ingatan, mata layu, pisau kata-kata, ufuk batin</i>.</p><p><b>Simile</b> — penggunaan <i>seperti, bagaikan, semacam</i>; contoh penting: <b>“Kuningnya seperti emas”</b>.</p><p><b>Personifikasi</b> — benda/idea diberikan sifat manusia.</p><p><b>Peribahasa</b> — <i>tersenyum-senyum kambing</i>.</p><p><b>Sinkope</b> — bentuk ringkas percakapan seperti <i>tak</i>.</p></div></div></section>
+
+<section id="exam" class="card"><h2>🏆 Formula Jawapan Peperiksaan — IBC</h2>
+<div class="formula">ISI → BUKTI → CONTOH AYAT LENGKAP</div>
+<p class="muted">For KOMSAS, knowing the keyword is not enough. Attach a story event.</p>
+<h3>Contoh 1 — Perwatakan</h3><p><b>Alif seorang yang berani.</b> Contohnya, Alif berani mempertahankan tanah milik keluarganya daripada dijual untuk projek perumahan.</p>
+<h3>Contoh 2 — Nilai</h3><p>Nilai <b>kegigihan</b> terdapat dalam cerpen ini. Contohnya, Alif gigih mendapatkan pengalaman dan maklumat tentang cara mengendalikan estet padi.</p>
+<h3>Contoh 3 — Persoalan</h3><p>Persoalan <b>muafakat membawa berkat</b>. Contohnya, Alif, Tuk Ketua dan pemilik sawah bekerjasama memajukan penanaman padi menggunakan teknologi moden.</p>
+<h3>Contoh 4 — Pengajaran</h3><p>Kita hendaklah <b>yakin dengan kebolehan diri</b>. Contohnya, Alif yakin bahawa dia mampu mengusahakan sebuah estet padi di kampungnya.</p></section>
+
+<section id="flash" class="card half"><h2>🧠 Active Recall Flashcards</h2><p class="small">Answer aloud in BM before pressing Reveal.</p><div id="fc" class="flash"><div id="fq" class="fq"></div><div id="fa" class="fa"></div></div><div class="tools"><button onclick="reveal()">Reveal / 显示</button><button class="primary" onclick="next()">Next →</button></div></section>
+
+<section class="card half"><h2>🔁 How to Memorise</h2>
+<p><b>Step 1 — 中文/English:</b> understand the story once.</p><p><b>Step 2 — BM:</b> say the story chain without looking.</p><p><b>Step 3:</b> memorise <b>keyword + one evidence</b>, never keyword alone.</p><p><b>Step 4:</b> write 3 IBC answers from memory.</p><p><b>Step 5:</b> repeat after <span class="exam">1 → 3 → 7 → 14 days</span>.</p>
+<div class="progress"><i id="bar"></i></div><p id="pt" class="small">Mastery checklist: 0%</p><div class="checks">
+<label><input type="checkbox" onchange="progress()"> I can retell the story in BM.</label><label><input type="checkbox" onchange="progress()"> I know Tema + 6 Persoalan.</label><label><input type="checkbox" onchange="progress()"> I know all 4 plot stages.</label><label><input type="checkbox" onchange="progress()"> I can give 5 Alif traits + evidence.</label><label><input type="checkbox" onchange="progress()"> I can answer Nilai/Pengajaran with evidence.</label></div></section>
+
+<section id="quiz" class="card"><h2>✍️ Mini Exam</h2><div class="quiz">
+<p><b>1. Tema utama?</b></p><label><input type="radio" name="q1" value="1"> Kemajuan dalam bidang pertanian, iaitu penanaman padi.</label><label><input type="radio" name="q1" value="0"> Pembangunan perumahan di kampung.</label>
+<p><b>2. Alif berkelulusan dalam bidang?</b></p><label><input type="radio" name="q2" value="1"> Ekonomi</label><label><input type="radio" name="q2" value="0"> Pertanian</label>
+<p><b>3. Teknik apabila Alif mengingat peristiwa setahun lalu?</b></p><label><input type="radio" name="q3" value="0"> Pemerian</label><label><input type="radio" name="q3" value="1"> Imbas kembali</label>
+<p><b>4. Projek estet padi melibatkan?</b></p><label><input type="radio" name="q4" value="1"> 58.609 hektar dan 15 orang tuan tanah</label><label><input type="radio" name="q4" value="0"> 15 hektar dan 58 orang tuan tanah</label>
+<p><b>5. Siapa menyokong usaha Alif dan mempunyai nilai kepemimpinan?</b></p><label><input type="radio" name="q5" value="1"> Tuk Ketua</label><label><input type="radio" name="q5" value="0"> Abang Man</label>
+<button class="primary" onclick="grade()">Check Score</button><p id="score"></p></div></section>
+
+<section id="plan" class="card"><h2>📅 7-Day Exam Plan — 15–20 min/day</h2>
+<table><tr><th>Hari</th><th>Fokus</th><th>Active recall</th></tr>
+<tr><td>1</td><td>Sinopsis + story chain</td><td>Tutup halaman dan ceritakan semula dalam BM.</td></tr>
+<tr><td>2</td><td>Tema + 6 persoalan</td><td>Setiap persoalan mesti ada 1 bukti.</td></tr>
+<tr><td>3</td><td>4 binaan plot + 3 teknik plot</td><td>Lukis 4 kotak plot dari ingatan.</td></tr>
+<tr><td>4</td><td>Alif + latar TMM</td><td>Sebut 5 sifat Alif dan bukti.</td></tr>
+<tr><td>5</td><td>Nilai + pengajaran</td><td>Tukar nilai kepada ayat “Kita hendaklah…”</td></tr>
+<tr><td>6</td><td>Gaya bahasa</td><td>Kenal pasti metafora/simile/personifikasi/sinkope.</td></tr>
+<tr><td>7</td><td>Mock exam</td><td>Tulis 5 jawapan IBC tanpa nota, kemudian semak.</td></tr></table>
+<p class="small"><b>Parent method:</b> Ask “Apa buktinya?” after every answer. This trains the exact link he needs in KOMSAS: <b>concept → textual event/evidence</b>.</p></section>
+</div>
+<p class="muted" style="text-align:center;padding:24px">Menuai Emas — Salina Ibrahim · KSSM Form 2 · Tri-Language Exam Revision</p>
+</main>
+<script>
+const C=[
+["Apakah tema cerpen Menuai Emas?","Kemajuan dalam bidang pertanian, iaitu penanaman padi.<br>农业进步，尤其是稻米种植。<br>Progress in agriculture, particularly paddy cultivation."],
+["Apakah konflik utama yang mudah diingati?","Tanah sawah untuk pertanian ↔ tanah dijual bagi projek perumahan."],
+["4 binaan plot?","Permulaan → Perkembangan → Klimaks → Peleraian."],
+["3 teknik plot penting?","Dialog → Pemerian → Imbas kembali."],
+["Satu bukti Alif berani?","Alif berani mempertahankan tanah milik keluarganya."],
+["Satu bukti Alif yakin?","Dia yakin mampu mengusahakan sebuah estet padi di kampungnya."],
+["Fakta nombor di peleraian?","58.609 hektar + 15 orang tuan tanah."],
+["Apa maksud 'menuai emas' dalam cerita?","Padi yang menguning seperti emas dan kejayaan/hasil daripada usaha berbudi kepada tanah."],
+["Di manakah Alif mendapatkan pengalaman pertanian?","Petak-petak sawah di Seberang Perak."],
+["Siapakah watak yang agresif terhadap Alif?","Abang Man."],
+["Tema soalan pengajaran: keyakinan?","Kita hendaklah yakin dengan kebolehan diri dalam melakukan sesuatu perkara."]
+];let i=0;function draw(){fc.classList.remove("show");fq.innerHTML=C[i][0];fa.innerHTML=C[i][1]}function reveal(){fc.classList.add("show")}function next(){i=(i+1)%C.length;draw()}function go(x){document.getElementById(x).scrollIntoView()}function grade(){let s=0;for(let j=1;j<=5;j++){let e=document.querySelector('input[name=q'+j+']:checked');if(e)s+=e?+e.value:0}score.innerHTML=s==5?'<span class="ok"><b>5/5 Excellent!</b> Now explain WHY each answer is correct in BM.</span>':'<b>'+s+'/5.</b> Review only the wrong topics, hide the notes, then try again.'}function progress(){let a=[...document.querySelectorAll(".checks input")],n=a.filter(x=>x.checked).length,p=Math.round(n/a.length*100);bar.style.width=p+"%";pt.innerText="Mastery checklist: "+p+"%"}draw();
+</script></body></html>
