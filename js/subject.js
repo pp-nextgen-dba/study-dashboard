@@ -3405,6 +3405,18 @@ export const malayData = {
         },
 
         {
+            form:"Literature",
+            globalNum: 58,
+            chapterCode:"my_058",
+            chapter:"Cerpen: Talia dan Raksasa Qadqad",
+            chinese:"短篇小说：Talia 与 Qadqad 巨兽",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-09-09",
+            resourceUrl:"../malay/t2-cerpen-talia_dan_raksasa_qadqad_exam.html"
+        },
+
+        {
             form:"SPM Practice",
             globalNum: 45,
             chapterCode:"my_045",
