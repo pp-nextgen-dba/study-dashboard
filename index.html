@@ -1043,7 +1043,8 @@ if(examCards){
             document.createElement("div");
 
         card.className =
-            "exam-card";
+            "exam-card" +
+            (diffDays >= 0 && diffDays <= 30 ? " urgent" : "");
 
         card.innerHTML = `
 
@@ -1065,7 +1066,7 @@ if(examCards){
 
 </script>
 
-<script type="module" src="js/dashboard.js?v=20"></script>
+<script type="module" src="js/dashboard.js?v=21"></script>
 
 <script>
 if ("serviceWorker" in navigator) {
@@ -1104,6 +1105,22 @@ if ("serviceWorker" in navigator) {
         document.querySelectorAll(
             ".exam-card, .subject-card, .strategy-item, .daily-entry-section"
         );
+
+    // Tilt exam/subject cards toward the cursor on hover.
+    if(!reduceMotion){
+        document.querySelectorAll(".exam-card, .subject-card").forEach(card => {
+            card.addEventListener("mousemove", e => {
+                const r = card.getBoundingClientRect();
+                const x = (e.clientX - r.left) / r.width - 0.5;
+                const y = (e.clientY - r.top) / r.height - 0.5;
+                card.style.transform =
+                    `perspective(500px) rotateX(${(-y * 6).toFixed(2)}deg) rotateY(${(x * 6).toFixed(2)}deg) translateY(-3px)`;
+            });
+            card.addEventListener("mouseleave", () => {
+                card.style.transform = "";
+            });
+        });
+    }
 
     if(reduceMotion || !("IntersectionObserver" in window)){
         revealTargets.forEach(el => el.classList.add("in-view"));

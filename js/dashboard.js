@@ -195,6 +195,15 @@ function updateSubjectProgress(
         progressBar.style.width =
             percent + "%";
 
+        const card =
+            progressBar.closest(".subject-card");
+
+        if(card){
+
+            card.style.setProperty("--pct", percent);
+
+        }
+
     }
 
     if(progressText){
