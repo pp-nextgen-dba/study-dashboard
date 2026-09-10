@@ -23,7 +23,7 @@ href="css/style.css">
 
 </head>
 
-<body>
+<body class="dash-home">
 
 <div id="appContent">
 
@@ -232,13 +232,13 @@ href="css/style.css">
 
     <section class="subject-section">
 
-        <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:12px; margin-bottom:16px;">
+        <div class="section-toolbar">
 
-            <h2 style="margin:0;">
+            <h2>
                 📚 Subject Study Progress
             </h2>
 
-            <button id="exportBtn" style="padding:8px 16px; background:#0d6efd; color:#fff; border:none; border-radius:6px; cursor:pointer; font-size:14px;">
+            <button id="exportBtn" class="btn-accent">
                 ⬇ Export Progress
             </button>
 
@@ -577,9 +577,9 @@ href="css/style.css">
 
     <section class="subject-section">
 
-        <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:12px; margin-bottom:16px;">
+        <div class="section-toolbar">
 
-            <h2 style="margin:0;">
+            <h2>
                 🎯 Beyond Academics
             </h2>
 
@@ -701,7 +701,7 @@ href="css/style.css">
 
     <h2>
         🧠 Recommended Study Strategy
-        <br><span style="font-size:0.85em;color:#666">推荐学习策略</span>
+        <br><span class="zh-sub">推荐学习策略</span>
     </h2>
 
     <div class="strategy-box">
@@ -710,14 +710,14 @@ href="css/style.css">
 
             <h3>
                 📅 Study Consistently Instead of Rushing
-                <br><span style="font-size:0.85em;color:#666">持续学习而不是匆忙学习</span>
+                <br><span class="zh-sub">持续学习而不是匆忙学习</span>
             </h3>
 
             <p>
                 Small daily progress is much more powerful than last-minute intensive studying.
                 Studying consistently helps the brain build long-term memory naturally.
                 Aim for steady improvement every week rather than sudden short-term memorization.
-                <br><span style="font-size:0.9em;color:#666">小的日常进步比临时抱佛脚的学习要强大得多。持续学习帮助大脑自然地建立长期记忆。每周争取稳定进步，而不是突然的短期记忆。</span>
+                <br><span class="zh-line">小的日常进步比临时抱佛脚的学习要强大得多。持续学习帮助大脑自然地建立长期记忆。每周争取稳定进步，而不是突然的短期记忆。</span>
             </p>
 
             <ul>
@@ -734,13 +734,13 @@ href="css/style.css">
 
             <h3>
                 🍅 Use Pomodoro Method
-                <br><span style="font-size:0.85em;color:#666">使用番茄工作法</span>
+                <br><span class="zh-sub">使用番茄工作法</span>
             </h3>
 
             <p>
                 The Pomodoro Method improves focus and reduces mental fatigue.
                 Study in short focused sessions followed by short breaks.
-                <br><span style="font-size:0.9em;color:#666">番茄工作法提高专注力并减少精神疲劳。在短暂的专注学习后进行短暂休息。</span>
+                <br><span class="zh-line">番茄工作法提高专注力并减少精神疲劳。在短暂的专注学习后进行短暂休息。</span>
             </p>
 
             <ul>
@@ -769,13 +769,13 @@ href="css/style.css">
 
             <h3>
                 🧠 Apply Active Recall
-                <br><span style="font-size:0.85em;color:#666">应用积极回忆</span>
+                <br><span class="zh-sub">应用积极回忆</span>
             </h3>
 
             <p>
                 Active Recall means forcing the brain to remember information without looking at notes.
                 This is one of the most effective learning methods scientifically.
-                <br><span style="font-size:0.9em;color:#666">积极回忆意味着强迫大脑在不查看笔记的情况下记住信息。这在科学上是最有效的学习方法之一。</span>
+                <br><span class="zh-line">积极回忆意味着强迫大脑在不查看笔记的情况下记住信息。这在科学上是最有效的学习方法之一。</span>
             </p>
 
             <ul>
@@ -806,13 +806,13 @@ href="css/style.css">
 
             <h3>
                 🔁 Revise Weak Chapters More Frequently
-                <br><span style="font-size:0.85em;color:#666">更频繁地复习薄弱章节</span>
+                <br><span class="zh-sub">更频繁地复习薄弱章节</span>
             </h3>
 
             <p>
                 Weak chapters should receive higher revision frequency.
                 Strong chapters only require maintenance revision.
-                <br><span style="font-size:0.9em;color:#666">薄弱章节应该获得更高的复习频率。强章节只需要维护复习。</span>
+                <br><span class="zh-line">薄弱章节应该获得更高的复习频率。强章节只需要维护复习。</span>
             </p>
 
             <ul>
@@ -846,13 +846,13 @@ href="css/style.css">
 
             <h3>
                 📊 Track Confidence Honestly
-                <br><span style="font-size:0.85em;color:#666">诚实地追踪信心</span>
+                <br><span class="zh-sub">诚实地追踪信心</span>
             </h3>
 
             <p>
                 Confidence tracking helps identify actual understanding level.
                 Honest self-evaluation is critical for long-term improvement.
-                <br><span style="font-size:0.9em;color:#666">信心追踪有助于识别实际理解水平。诚实的自我评估对长期改进至关重要。</span>
+                <br><span class="zh-line">信心追踪有助于识别实际理解水平。诚实的自我评估对长期改进至关重要。</span>
             </p>
 
             <ul>
@@ -1049,8 +1049,8 @@ if(examCards){
 
             <h3>${exam.name}</h3>
 
-            <div class="days">
-                ${diffDays}
+            <div class="days" data-target="${diffDays}">
+                0
             </div>
 
             <p>Days Remaining</p>
@@ -1071,6 +1071,65 @@ if(examCards){
 if ("serviceWorker" in navigator) {
     navigator.serviceWorker.register("/sw.js");
 }
+</script>
+
+<script>
+(function(){
+    const reduceMotion =
+        window.matchMedia &&
+        window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    // Count up the exam countdown numbers from 0 to their target.
+    document.querySelectorAll(".days[data-target]").forEach(el => {
+        const target = parseInt(el.getAttribute("data-target"), 10) || 0;
+        if(reduceMotion){
+            el.textContent = target;
+            return;
+        }
+        const duration = 700;
+        const start = performance.now();
+        function tick(now){
+            const progress = Math.min((now - start) / duration, 1);
+            const eased = 1 - Math.pow(1 - progress, 3);
+            el.textContent = Math.round(target * eased);
+            if(progress < 1){
+                requestAnimationFrame(tick);
+            }
+        }
+        requestAnimationFrame(tick);
+    });
+
+    // Fade/slide cards in as they scroll into view.
+    const revealTargets =
+        document.querySelectorAll(
+            ".exam-card, .subject-card, .strategy-item, .daily-entry-section"
+        );
+
+    if(reduceMotion || !("IntersectionObserver" in window)){
+        revealTargets.forEach(el => el.classList.add("in-view"));
+        return;
+    }
+
+    const byParent = new Map();
+    revealTargets.forEach(el => {
+        const key = el.parentElement;
+        const i = byParent.get(key) || 0;
+        el.classList.add("reveal");
+        el.style.transitionDelay = Math.min(i * 40, 240) + "ms";
+        byParent.set(key, i + 1);
+    });
+
+    const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            if(entry.isIntersecting){
+                entry.target.classList.add("in-view");
+                observer.unobserve(entry.target);
+            }
+        });
+    }, {threshold:0.15, rootMargin:"0px 0px -40px 0px"});
+
+    revealTargets.forEach(el => observer.observe(el));
+})();
 </script>
 
 </div> <!-- /appContent -->
