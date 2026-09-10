@@ -397,7 +397,7 @@ import {
     malayData
 }
 from
-"../js/subject.js?v=20";
+"../js/subject.js?v=21";
 
 import { requireAuth } from "../js/auth.js";
 await requireAuth("../index.html");
@@ -482,7 +482,8 @@ function mergeSeedChapters(subjectData){
                 existingChapter.chapter !== seedChapter.chapter ||
                 existingChapter.chinese !== seedChapter.chinese ||
                 existingChapter.chapterCode !== seedChapter.chapterCode ||
-                (seedChapter.resourceUrl && existingChapter.resourceUrl !== seedChapter.resourceUrl)
+                (seedChapter.resourceUrl && existingChapter.resourceUrl !== seedChapter.resourceUrl) ||
+                (seedChapter.resourceUrl2 && existingChapter.resourceUrl2 !== seedChapter.resourceUrl2)
             ){
 
                 changed = true;
@@ -493,7 +494,9 @@ function mergeSeedChapters(subjectData){
                     chinese:seedChapter.chinese,
                     chapterCode:seedChapter.chapterCode,
                     ...(seedChapter.resourceUrl
-                        ? {resourceUrl:seedChapter.resourceUrl} : {})
+                        ? {resourceUrl:seedChapter.resourceUrl} : {}),
+                    ...(seedChapter.resourceUrl2
+                        ? {resourceUrl2:seedChapter.resourceUrl2} : {})
                 };
 
             }
@@ -743,7 +746,8 @@ function render(){
 
             const chapterResource =
                 chapter.resourceUrl
-                    ? `<a class="chapter-link" href="${chapter.resourceUrl}">Open notes</a>`
+                    ? `<a class="chapter-link" href="${chapter.resourceUrl}">${chapter.resourceUrl2 ? "Note 1" : "Open notes"}</a>` +
+                      (chapter.resourceUrl2 ? ` <a class="chapter-link" href="${chapter.resourceUrl2}">Note 2</a>` : "")
                     : "";
 
             card.innerHTML = `
