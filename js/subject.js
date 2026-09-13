@@ -3439,7 +3439,7 @@ export const malayData = {
             confidence:0,
             last_updated:"2026-09-13",
             resourceUrl:"../malay/t2-sajak-pada_sekuntum_mawar_note1.html",
-            resourceUrl2:"../malay/t2-sajak-pada_sekuntum_mawar_kssm_form2_trilingual_exam_master.html"
+            resourceUrl2:"../malay/t2-sajak-pada_sekuntum_mawar_note2.png"
         },
 
         {
