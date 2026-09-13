@@ -3430,6 +3430,18 @@ export const malayData = {
         },
 
         {
+            form:"Literature",
+            globalNum: 60,
+            chapterCode:"my_060",
+            chapter:"Sajak: Pada Sekuntum Mawar",
+            chinese:"现代诗：一朵玫瑰",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-09-13",
+            resourceUrl:"../malay/t2-sajak-pada_sekuntum_mawar_note1.html"
+        },
+
+        {
             form:"SPM Practice",
             globalNum: 45,
             chapterCode:"my_045",
