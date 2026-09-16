@@ -3443,6 +3443,18 @@ export const malayData = {
         },
 
         {
+            form:"Literature",
+            globalNum: 61,
+            chapterCode:"my_061",
+            chapter:"Sajak: Kucari Damai di Sini",
+            chinese:"现代诗：我在此寻找和平",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-09-16",
+            resourceUrl:"../malay/t2-sajak-kucari_damai_di_sini.html"
+        },
+
+        {
             form:"SPM Practice",
             globalNum: 45,
             chapterCode:"my_045",
