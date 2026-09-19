@@ -3339,6 +3339,18 @@ export const malayData = {
 
         {
             form:"Literature",
+            globalNum: 63,
+            chapterCode:"my_063",
+            chapter:"Pantun: Kasih Sayang",
+            chinese:"班顿诗：亲情与关爱",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-09-19",
+            resourceUrl:"../malay/t2-pantun_kasih_sayang_trilingual_exam.html"
+        },
+
+        {
+            form:"Literature",
             globalNum: 40,
             chapterCode:"my_040",
             chapter:"Gurindam",
