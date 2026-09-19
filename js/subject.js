@@ -3327,6 +3327,18 @@ export const malayData = {
 
         {
             form:"Literature",
+            globalNum: 62,
+            chapterCode:"my_062",
+            chapter:"Pantun: Nasihat",
+            chinese:"班顿诗：劝告",
+            status:"Not Started",
+            confidence:0,
+            last_updated:"2026-09-19",
+            resourceUrl:"../malay/t2-pantun-nasihat_trilingual_exam.html"
+        },
+
+        {
+            form:"Literature",
             globalNum: 40,
             chapterCode:"my_040",
             chapter:"Gurindam",
