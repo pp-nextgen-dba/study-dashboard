@@ -180,9 +180,10 @@ export const scienceData = {
             chapterNum: 1,
             chapter:"Stimuli and Responses",
             chinese:"刺激与反应",
+            resourceUrl:"../science/Form3_Science_Chapter1_Complete_Bilingual_v1_1.html",
             status:"Not Started",
             confidence:0,
-            last_updated:"2026-05-20"
+            last_updated:"2026-10-18"
         },
 
         {
