@@ -192,9 +192,10 @@ export const scienceData = {
             chapterNum: 2,
             chapter:"Respiration",
             chinese:"呼吸作用",
+            resourceUrl:"../science/t3_chapter2_respiration_study.html",
             status:"Not Started",
             confidence:0,
-            last_updated:"2026-05-20"
+            last_updated:"2026-10-18"
         },
 
         {
