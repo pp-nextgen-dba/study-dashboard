@@ -204,9 +204,10 @@ export const scienceData = {
             chapterNum: 3,
             chapter:"Transportation",
             chinese:"运输系统",
+            resourceUrl:"../science/Form3_Science_Chapter3_Transportation.html",
             status:"Not Started",
             confidence:0,
-            last_updated:"2026-05-20"
+            last_updated:"2026-10-20"
         },
 
         {
