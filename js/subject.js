@@ -216,9 +216,10 @@ export const scienceData = {
             chapterNum: 4,
             chapter:"Reactivity of Metals",
             chinese:"金属的反应性",
+            resourceUrl:"../science/Form3_Science_Chapter4_Reactivity_of_Metals_v1_0.html",
             status:"Not Started",
             confidence:0,
-            last_updated:"2026-05-20"
+            last_updated:"2026-11-05"
         },
 
         {
