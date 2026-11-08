@@ -276,9 +276,10 @@ export const scienceData = {
             chapterNum: 9,
             chapter:"Space Weather",
             chinese:"太空气候",
+            resourceUrl:"../science/Form3_Science_Chapter9_Space_Weather_EN_ZH_v1.0.html",
             status:"Not Started",
             confidence:0,
-            last_updated:"2026-05-20"
+            last_updated:"2026-11-08"
         },
 
         {
