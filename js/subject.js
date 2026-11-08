@@ -252,9 +252,10 @@ export const scienceData = {
             chapterNum: 7,
             chapter:"Energy and Power",
             chinese:"能量与功率",
+            resourceUrl:"../science/form3_science_ch7_energy_power_v1.html",
             status:"Not Started",
             confidence:0,
-            last_updated:"2026-05-20"
+            last_updated:"2026-11-08"
         },
 
         {
@@ -263,9 +264,10 @@ export const scienceData = {
             chapterNum: 8,
             chapter:"Radioactivity",
             chinese:"放射性",
+            resourceUrl:"../science/Form3_Science_Chapter8_Radioactivity_Bilingual.html",
             status:"Not Started",
             confidence:0,
-            last_updated:"2026-05-20"
+            last_updated:"2026-11-08"
         },
 
         {

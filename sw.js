@@ -1,4 +1,4 @@
-const CACHE = "study-dashboard-v80";
+const CACHE = "study-dashboard-v81";
 
 const STATIC_ASSETS = [
     "index.html",
@@ -80,6 +80,8 @@ const STATIC_ASSETS = [
     "science/Form3_Science_Chapter4_Reactivity_of_Metals_v1_0.html",
     "science/Form3_Science_Chapter5_Thermochemistry_v1_0.html",
     "science/Form3_Science_Chapter6_Bilingual_Guide_v1_0.html",
+    "science/form3_science_ch7_energy_power_v1.html",
+    "science/Form3_Science_Chapter8_Radioactivity_Bilingual.html",
     "science/form2_science_chapter9_heat.html",
     "science/t2_Chapter7-Electricity-Magnetism.html",
     "science/t2_science_chapter7_note2.html",
