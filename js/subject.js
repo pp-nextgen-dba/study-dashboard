@@ -228,9 +228,10 @@ export const scienceData = {
             chapterNum: 5,
             chapter:"Thermochemistry",
             chinese:"热化学",
+            resourceUrl:"../science/Form3_Science_Chapter5_Thermochemistry_v1_0.html",
             status:"Not Started",
             confidence:0,
-            last_updated:"2026-05-20"
+            last_updated:"2026-11-08"
         },
 
         {
@@ -239,9 +240,10 @@ export const scienceData = {
             chapterNum: 6,
             chapter:"Electricity and Magnetism",
             chinese:"电与磁",
+            resourceUrl:"../science/Form3_Science_Chapter6_Bilingual_Guide_v1_0.html",
             status:"Not Started",
             confidence:0,
-            last_updated:"2026-05-20"
+            last_updated:"2026-11-08"
         },
 
         {
