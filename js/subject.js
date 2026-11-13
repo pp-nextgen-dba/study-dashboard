@@ -312,9 +312,10 @@ export const biologyData = {
             chapterNum: 1,
             chapter:"Intro to Biology and Laboratory Rules",
             chinese:"生物学导论与实验室规则",
+            resourceUrl:"../biology/Form4_Biology_Chapter1_Bilingual.html",
             status:"Not Started",
             confidence:0,
-            last_updated:"2026-05-20"
+            last_updated:"2026-11-13"
         },
 
         {
@@ -323,9 +324,10 @@ export const biologyData = {
             chapterNum: 2,
             chapter:"Cell Biology and Organisation",
             chinese:"细胞生物学与组织",
+            resourceUrl:"../biology/Form4_Biology_Chapter2_Bilingual.html",
             status:"Not Started",
             confidence:0,
-            last_updated:"2026-05-20"
+            last_updated:"2026-11-13"
         },
 
         {
@@ -334,9 +336,10 @@ export const biologyData = {
             chapterNum: 3,
             chapter:"Movement of Substances across the Plasma Membrane",
             chinese:"物质穿越细胞膜",
+            resourceUrl:"../biology/Form4_Biology_Chapter3_Bilingual.html",
             status:"Not Started",
             confidence:0,
-            last_updated:"2026-05-20"
+            last_updated:"2026-11-13"
         },
 
         {
